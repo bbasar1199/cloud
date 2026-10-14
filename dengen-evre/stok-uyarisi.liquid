@@ -18,7 +18,7 @@
 -%}
 {%- if v.inventory_management == 'shopify' and v.inventory_policy == 'deny' and adet > 0 and adet <= esik -%}
   <div class="dgn-stk" data-dgn-stk role="status">
-    <p class="dgn-stk__t"><span class="dgn-stk__dot" aria-hidden="true"></span>Stoklarımız tükeniyor: son <strong>{{ adet }} şişe</strong> kaldı</p>
+    <p class="dgn-stk__t"><span class="dgn-stk__dot" aria-hidden="true"></span><span>Stoklarımız tükeniyor: son <strong>{{ adet }} şişe</strong> kaldı</span></p>
     <span class="dgn-stk__bar" aria-hidden="true"><i style="width:{{ doluluk }}%"></i></span>
   </div>
 

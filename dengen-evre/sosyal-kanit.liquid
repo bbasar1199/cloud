@@ -1,0 +1,37 @@
+{%- comment -%}
+  DENGEN · "Son 7 günde X sipariş" rozeti
+  Aşağıdaki "son_7_gun_siparis" sayısını Shopify > Analizler > Siparişler (son 7 gün)
+  ekranındaki gerçek sayıyla değiştir. Haftada bir güncelle. 0 yazarsan rozet gizlenir.
+  Kullanım: Ürün sayfası > Bölüm ekle > "Özel Liquid" > yapıştır. Rozet kendini
+  "Stokta · Hemen kargoya hazır" satırının üstüne taşır.
+{%- endcomment -%}
+{%- liquid
+  assign son_7_gun_siparis = 0
+-%}
+{%- if son_7_gun_siparis > 0 -%}
+  <div class="dgn-sk" data-dgn-sk>
+    <span class="dgn-sk__ic" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+    </span>
+    <p class="dgn-sk__t">Son 7 günde <strong>{{ son_7_gun_siparis }} sipariş</strong> verildi</p>
+  </div>
+
+  <style>
+    .dgn-sk{display:inline-flex;align-items:center;gap:10px;margin:14px 0 0;padding:8px 14px 8px 8px;border-radius:999px;background:var(--nane,#E8FFF6);color:var(--g,#1C6047)}
+    .dgn-sk__ic{flex:none;width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+    .dgn-sk__ic svg{width:16px;height:16px;fill:currentColor;stroke:none}
+    .dgn-sk__t{margin:0;font-size:14px;font-weight:600;line-height:1.3}
+    .dgn-sk__t strong{font-weight:800}
+  </style>
+
+  <script>
+    (function () {
+      var el = document.querySelector('[data-dgn-sk]');
+      var hedef = document.querySelector('.pu-st');
+      if (el && hedef && !el.getAttribute('data-ready')) {
+        el.setAttribute('data-ready', '1');
+        hedef.insertAdjacentElement('beforebegin', el);
+      }
+    })();
+  </script>
+{%- endif -%}
