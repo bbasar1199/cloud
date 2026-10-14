@@ -1,0 +1,207 @@
+{%- comment -%}
+  DENGEN · Dokunmalı bitki haritası
+  Kullanım: Tema düzenleyici > Ürün sayfası > Bölüm ekle > "Özel Liquid" > bu kodun tamamını yapıştır.
+  Renkler temadaki değişkenlerden gelir (--g, --nane, --ln, --krem, --hd); tema renkleri değişirse bu bölüm de değişir.
+{%- endcomment -%}
+<div class="dgn-hm" data-dgn-hm>
+  <svg class="dgn-hm__sprite" aria-hidden="true" focusable="false">
+    <symbol id="dgn-hm-karayilan" viewBox="0 0 32 32"><path d="M16 17V7"/><path d="M16 12C13.2 8.4 9.4 7.8 6.8 9.2c1.6 3.2 5.4 4.4 9.2 2.8"/><path d="M16 12c2.8-3.6 6.6-4.2 9.2-2.8-1.6 3.2-5.4 4.4-9.2 2.8"/><path d="M16 7c-1.4-1.6-1.4-3.2 0-4.4 1.4 1.2 1.4 2.8 0 4.4"/><path d="M11 17h10" stroke-dasharray="1.5 2.5"/><path d="M16 17v3.5c0 2.4-1.4 4.6-3.6 6.4M16 20c1.8 1.2 3.4 3.4 3.8 6.6M16 19c-1.8.2-3.4 1-4.6 2.4M16 22.5c1.4.6 2.4 1.6 3 2.8"/></symbol>
+    <symbol id="dgn-hm-adacayi" viewBox="0 0 32 32"><path d="M7.5 24.5C7 14.5 13.2 6.8 25.5 6.5c.4 11.8-7 18.6-18 18z"/><path d="M5 27 21 11"/><path d="M11.6 20.4l-.6-4.6M11.6 20.4l4.6.4M15.2 16.8l-.3-4.6M15.2 16.8l4.6.3"/></symbol>
+    <symbol id="dgn-hm-melisa" viewBox="0 0 32 32"><path d="M16 27C8.6 22.4 6.4 14.6 9 8.6 10.8 5.4 13.6 4 16 4s5.2 1.4 7 4.6c2.6 6 .4 13.8-7 18.4z"/><path d="M16 27V8"/><path d="M16 21l-4.2-3.2M16 21l4.2-3.2M16 15l-3.6-3M16 15l3.6-3"/></symbol>
+    <symbol id="dgn-hm-serbetciotu" viewBox="0 0 32 32"><path d="M16 3v3.5"/><path d="M16 6.5c3-2.4 6.2-2.6 8.5-1.6-1.4 2.4-4.6 3.4-8.5 3"/><path d="M16 8.5c-5 1.8-7 5.8-7 9.8 0 5.6 3.8 9.6 7 11.2 3.2-1.6 7-5.6 7-11.2 0-4-2-8-7-9.8z"/><path d="M9.4 14.6c3.2 1.5 10 1.5 13.2 0M9.2 19.6c3.4 1.7 10.2 1.7 13.6 0M10.8 24.4c2.8 1.5 7.6 1.5 10.4 0"/></symbol>
+    <symbol id="dgn-hm-hayit" viewBox="0 0 32 32"><path d="M16 3v8"/><path d="M16 6c2.6-2 5.2-2.3 7.2-1.5-1.4 2.4-4.1 3.4-7.2 3"/><circle cx="16" cy="14.4" r="3"/><circle cx="11" cy="20" r="3"/><circle cx="21" cy="20" r="3"/><circle cx="16" cy="25.6" r="3"/></symbol>
+    <symbol id="dgn-hm-magnezyum" viewBox="0 0 32 32"><path d="M16 3.5l10.8 6.25v12.5L16 28.5 5.2 22.25V9.75z"/><text x="16" y="19.6" text-anchor="middle" font-size="10" font-weight="700" fill="currentColor" stroke="none">Mg</text></symbol>
+    <symbol id="dgn-hm-b6" viewBox="0 0 32 32"><path d="M16 3.5c-4 5.6-8 10-8 15.6a8 8 0 0 0 16 0c0-5.6-4-10-8-15.6z"/><text x="16" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="currentColor" stroke="none">B6</text></symbol>
+  </svg>
+
+  <div class="dgn-hm__in">
+    <div class="dgn-hm__head">
+      <p class="dgn-hm__eyebrow">İÇİNDE NE VAR?</p>
+      <h2 class="dgn-hm__title">7 bileşen, tek şişe.</h2>
+      <p class="dgn-hm__sub">Bir bileşene dokun, ne işe yaradığını gör.</p>
+    </div>
+
+    <div class="dgn-hm__grid">
+      <div class="dgn-hm__stage">
+        <div class="dgn-hm__ring" aria-hidden="true"></div>
+        <img class="dgn-hm__bottle" src="{{ 'dengen-sise.webp' | asset_url }}" alt="Dengen Evre damla şişesi" width="360" height="1080" loading="lazy">
+        <div class="dgn-hm__nodes" role="group" aria-label="Bileşenler">
+          <button type="button" class="dgn-hm__node dgn-hm__node--up is-on" style="--i:0" aria-pressed="true"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-karayilan"/></svg></span><span class="dgn-hm__lbl">Karayılan otu</span></button>
+          <button type="button" class="dgn-hm__node dgn-hm__node--up" style="--i:1" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-adacayi"/></svg></span><span class="dgn-hm__lbl">Adaçayı</span></button>
+          <button type="button" class="dgn-hm__node" style="--i:2" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-melisa"/></svg></span><span class="dgn-hm__lbl">Melisa</span></button>
+          <button type="button" class="dgn-hm__node" style="--i:3" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-serbetciotu"/></svg></span><span class="dgn-hm__lbl">Şerbetçiotu</span></button>
+          <button type="button" class="dgn-hm__node" style="--i:4" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-hayit"/></svg></span><span class="dgn-hm__lbl">Hayıt</span></button>
+          <button type="button" class="dgn-hm__node" style="--i:5" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-magnezyum"/></svg></span><span class="dgn-hm__lbl">Magnezyum</span></button>
+          <button type="button" class="dgn-hm__node dgn-hm__node--up" style="--i:6" aria-pressed="false"><span class="dgn-hm__dot"><svg><use href="#dgn-hm-b6"/></svg></span><span class="dgn-hm__lbl">B6 vitamini</span></button>
+        </div>
+      </div>
+
+      <div class="dgn-hm__side">
+        <div class="dgn-hm__cards" aria-live="polite">
+          <article class="dgn-hm__card is-on">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-karayilan"/></svg></span><div><h3 class="dgn-hm__cn">Karayılan otu</h3><p class="dgn-hm__cl">Black Cohosh · Actaea racemosa</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Sıcak basması</li><li>Kök</li><li>Günde 40 mg</li></ul>
+            <p class="dgn-hm__cd">Kuzey Amerika kökenli bir bitkidir. Menopoz döneminde görülen sıcak basması, gece terlemesi, uyku sorunları ve ruh hali değişimleri için kullanılır.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-adacayi"/></svg></span><div><h3 class="dgn-hm__cn">Adaçayı</h3><p class="dgn-hm__cl">Salvia officinalis</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Sıcak basması</li><li>Yaprak</li><li>Günde 100 mg</li></ul>
+            <p class="dgn-hm__cd">Menopoz döneminde sık yaşanan sıcak basması ve gece terlemesi için kullanılır. 160'tan fazla polifenol içerir.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-melisa"/></svg></span><div><h3 class="dgn-hm__cn">Melisa (oğul otu)</h3><p class="dgn-hm__cl">Melissa officinalis</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Sakin akşamlar</li><li>Yaprak</li><li>Günde 100 mg</li></ul>
+            <p class="dgn-hm__cd">Sakinleştirici özelliğiyle bilinir. Gerginliği hafifletmek ve uykuya dalmayı kolaylaştırmak için geleneksel olarak kullanılır.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-serbetciotu"/></svg></span><div><h3 class="dgn-hm__cn">Şerbetçiotu</h3><p class="dgn-hm__cl">Humulus lupulus</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Uyku düzeni</li><li>Çiçek</li><li>Günde 100 mg</li></ul>
+            <p class="dgn-hm__cd">Doğal bir sakinleştirici olarak bilinir; uyku düzenini desteklemek için kullanılır.</p>
+            <p class="dgn-hm__note">Doğal olarak fitoöstrojen içerir. Hormona duyarlı bir rahatsızlık geçmişin varsa kullanma.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-hayit"/></svg></span><div><h3 class="dgn-hm__cn">Hayıt</h3><p class="dgn-hm__cl">Vitex agnus-castus</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Hormonal dönemler</li><li>Meyve</li><li>Günde 40 mg</li></ul>
+            <p class="dgn-hm__cd">Akdeniz kökenli bir bitkidir. Kadınlarda hormonal dönemlere bağlı şikâyetlerde yüzyıllardır tercih edilir.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-magnezyum"/></svg></span><div><h3 class="dgn-hm__cn">Magnezyum</h3><p class="dgn-hm__cl">Mineral</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Kas ve sinir sistemi</li><li>Günde 50 mg</li><li>BRD %13</li></ul>
+            <p class="dgn-hm__cd">Vücutta kas ve sinir sisteminin çalışmasında ve enerji üretiminde görev alan bir mineraldir.</p>
+          </article>
+          <article class="dgn-hm__card">
+            <div class="dgn-hm__ch"><span class="dgn-hm__ci"><svg><use href="#dgn-hm-b6"/></svg></span><div><h3 class="dgn-hm__cn">B6 vitamini</h3><p class="dgn-hm__cl">Piridoksin</p></div></div>
+            <ul class="dgn-hm__tags"><li class="dgn-hm__tag--on">Enerji</li><li>Günde 2 mg</li><li>BRD %143</li></ul>
+            <p class="dgn-hm__cd">Yorgunluk ve bitkinliğin azalmasına, hormonal aktivitenin düzenlenmesine ve sinir sisteminin normal işleyişine katkıda bulunur.</p>
+          </article>
+        </div>
+
+        <div class="dgn-hm__nav">
+          <button type="button" class="dgn-hm__arw" data-dgn-prev aria-label="Önceki bileşen"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="dgn-hm__count" data-dgn-count>1 / 7</span>
+          <button type="button" class="dgn-hm__arw" data-dgn-next aria-label="Sonraki bileşen"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+
+        <a class="dgn-hm__cta" href="#satin-al">Paketini seç</a>
+        <p class="dgn-hm__foot">Miktarlar günlük 30 damla içindir. Takviye edici gıdadır, ilaç değildir.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dgn-hm{--hm-g:var(--g,#1C6047);--hm-nane:var(--nane,#E8FFF6);--hm-ln:var(--ln,#DCE6E1);--hm-ink:var(--ink,#141414);--hm-mu:var(--mu,#4D5550);--hm-bg:var(--krem,#FFFAF4);--hm-n:52px;--hm-r:36%;background:var(--hm-bg);color:var(--hm-ink);padding:56px 16px;overflow:hidden}
+  .dgn-hm *,.dgn-hm *::before,.dgn-hm *::after{box-sizing:border-box}
+  .dgn-hm__sprite{position:absolute;width:0;height:0;overflow:hidden}
+  .dgn-hm svg{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .dgn-hm__in{max-width:1100px;margin:0 auto}
+  .dgn-hm__head{text-align:center;margin:0 auto 28px;max-width:560px}
+  .dgn-hm__eyebrow{margin:0 0 10px;font:800 13px/1 var(--hd,inherit);letter-spacing:.12em;color:var(--hm-g)}
+  .dgn-hm__title{margin:0;font-family:var(--hd,inherit);font-weight:800;font-size:clamp(28px,6.4vw,44px);line-height:1.08;letter-spacing:-.02em;color:var(--hm-g)}
+  .dgn-hm__sub{margin:12px 0 0;font-size:16px;line-height:1.5;color:var(--hm-mu)}
+  .dgn-hm__grid{display:grid;gap:24px;align-items:center}
+
+  .dgn-hm__stage{position:relative;width:100%;max-width:480px;margin:0 auto;aspect-ratio:1/1}
+  .dgn-hm__ring{position:absolute;left:50%;top:50%;width:calc(var(--hm-r)*2);height:calc(var(--hm-r)*2);transform:translate(-50%,-50%);border:1.5px dashed var(--hm-ln);border-radius:50%}
+  .dgn-hm__ring::before{content:"";position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,var(--hm-nane) 0%,rgba(255,255,255,0) 70%)}
+  .dgn-hm__bottle{position:absolute;left:50%;top:50%;height:50%;width:auto;max-width:none;transform:translate(-50%,-50%);filter:drop-shadow(0 14px 18px rgba(20,40,31,.18));pointer-events:none}
+
+  .dgn-hm button{-webkit-appearance:none;appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .dgn-hm__node{--a:calc(var(--i)*51.4286deg - 90deg);position:absolute;left:calc(50% + cos(var(--a))*var(--hm-r));top:calc(50% + sin(var(--a))*var(--hm-r));width:var(--hm-n);height:var(--hm-n);margin:calc(var(--hm-n)/-2) 0 0 calc(var(--hm-n)/-2);border-radius:50%}
+  .dgn-hm__dot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:1.5px solid var(--hm-ln);color:var(--hm-g);box-shadow:0 4px 12px rgba(20,40,31,.08);transition:background .25s,color .25s,border-color .25s,transform .25s}
+  .dgn-hm__dot svg{width:58%;height:58%}
+  .dgn-hm__lbl{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);width:96px;text-align:center;font-size:12px;font-weight:700;line-height:1.2;color:var(--hm-ink)}
+  .dgn-hm__node--up .dgn-hm__lbl{top:auto;bottom:calc(100% + 6px)}
+  .dgn-hm__node:hover .dgn-hm__dot{border-color:var(--hm-g)}
+  .dgn-hm__node.is-on .dgn-hm__dot{background:var(--hm-g);border-color:var(--hm-g);color:#fff;transform:scale(1.08)}
+  .dgn-hm__node.is-on .dgn-hm__dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--hm-g);opacity:0;animation:dgn-hm-pulse 2.2s ease-out infinite}
+  .dgn-hm__node.is-on .dgn-hm__lbl{color:var(--hm-g)}
+  .dgn-hm__node:focus-visible{outline:none}
+  .dgn-hm__node:focus-visible .dgn-hm__dot{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--hm-g)}
+  @keyframes dgn-hm-pulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+
+  .dgn-hm__side{width:100%;max-width:520px;margin:0 auto}
+  .dgn-hm__cards{display:grid}
+  .dgn-hm__card{grid-area:1/1;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .28s,transform .28s,visibility 0s .28s;background:#fff;border:1px solid var(--hm-ln);border-radius:20px;padding:22px 20px;box-shadow:0 10px 30px rgba(20,40,31,.06)}
+  .dgn-hm__card.is-on{visibility:visible;opacity:1;transform:none;transition:opacity .28s,transform .28s}
+  .dgn-hm__ch{display:flex;align-items:center;gap:14px}
+  .dgn-hm__ci{flex:none;width:52px;height:52px;border-radius:50%;background:var(--hm-nane);color:var(--hm-g);display:flex;align-items:center;justify-content:center}
+  .dgn-hm__ci svg{width:30px;height:30px}
+  .dgn-hm__cn{margin:0;font-family:var(--hd,inherit);font-size:20px;font-weight:800;line-height:1.2;letter-spacing:-.01em;color:var(--hm-ink)}
+  .dgn-hm__cl{margin:3px 0 0;font-size:14px;font-style:italic;color:var(--hm-mu)}
+  .dgn-hm__tags{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .dgn-hm__tags li{margin:0;padding:6px 12px;border-radius:999px;background:#F4F6F5;font-size:13px;font-weight:600;line-height:1.2;color:var(--hm-mu)}
+  .dgn-hm__tags .dgn-hm__tag--on{background:var(--hm-nane);color:var(--hm-g)}
+  .dgn-hm__cd{margin:14px 0 0;font-size:16px;line-height:1.6;color:var(--hm-ink)}
+  .dgn-hm__note{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:#FFF6E8;font-size:13px;line-height:1.45;color:#6B4A12}
+
+  .dgn-hm__nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
+  .dgn-hm__arw{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--hm-ln)!important;background:#fff!important;color:var(--hm-g)!important;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+  .dgn-hm__arw:hover{border-color:var(--hm-g)!important}
+  .dgn-hm__arw svg{width:20px;height:20px;stroke-width:2}
+  .dgn-hm__arw:focus-visible{outline:2px solid var(--hm-g);outline-offset:2px}
+  .dgn-hm__count{min-width:48px;text-align:center;font-size:14px;font-weight:700;color:var(--hm-mu);font-variant-numeric:tabular-nums}
+  .dgn-hm__cta{display:flex;align-items:center;justify-content:center;min-height:54px;margin-top:20px;padding:0 24px;border-radius:999px;background:var(--hm-g);color:#fff!important;font-size:16px;font-weight:800;letter-spacing:.01em;text-decoration:none!important;transition:filter .2s}
+  .dgn-hm__cta:hover{filter:brightness(1.08)}
+  .dgn-hm__cta:focus-visible{outline:2px solid var(--hm-g);outline-offset:3px}
+  .dgn-hm__foot{margin:12px 0 0;text-align:center;font-size:12px;line-height:1.4;color:var(--hm-mu)}
+
+  @media (min-width:900px){
+    .dgn-hm{padding:88px 24px;--hm-n:64px}
+    .dgn-hm__head{margin-bottom:40px}
+    .dgn-hm__grid{grid-template-columns:1fr 1fr;gap:56px}
+    .dgn-hm__lbl{font-size:13px;width:110px}
+    .dgn-hm__card{padding:28px}
+    .dgn-hm__cn{font-size:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .dgn-hm__node.is-on .dgn-hm__dot::after{animation:none}
+    .dgn-hm__card,.dgn-hm__card.is-on,.dgn-hm__dot{transition:none}
+  }
+</style>
+
+<script>
+  (function () {
+    function init(root) {
+      if (root.getAttribute('data-ready')) return;
+      root.setAttribute('data-ready', '1');
+      var nodes = [].slice.call(root.querySelectorAll('.dgn-hm__node'));
+      var cards = [].slice.call(root.querySelectorAll('.dgn-hm__card'));
+      var count = root.querySelector('[data-dgn-count]');
+      var cur = 0;
+
+      // Eski tarayıcılar CSS sin()/cos() bilmiyorsa halkayı burada diz.
+      if (!(window.CSS && CSS.supports && CSS.supports('top', 'calc(1px * sin(1deg))'))) {
+        nodes.forEach(function (n, k) {
+          var a = (k * 360 / nodes.length - 90) * Math.PI / 180;
+          n.style.left = (50 + Math.cos(a) * 36).toFixed(2) + '%';
+          n.style.top = (50 + Math.sin(a) * 36).toFixed(2) + '%';
+        });
+      }
+
+      function show(i, focus) {
+        cur = (i + nodes.length) % nodes.length;
+        nodes.forEach(function (n, k) {
+          n.classList.toggle('is-on', k === cur);
+          n.setAttribute('aria-pressed', k === cur ? 'true' : 'false');
+        });
+        cards.forEach(function (c, k) { c.classList.toggle('is-on', k === cur); });
+        if (count) count.textContent = (cur + 1) + ' / ' + nodes.length;
+        if (focus) nodes[cur].focus();
+      }
+
+      nodes.forEach(function (n, k) {
+        n.addEventListener('click', function () { show(k); });
+        n.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); show(cur + 1, true); }
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(cur - 1, true); }
+        });
+      });
+      var prev = root.querySelector('[data-dgn-prev]');
+      var next = root.querySelector('[data-dgn-next]');
+      if (prev) prev.addEventListener('click', function () { show(cur - 1); });
+      if (next) next.addEventListener('click', function () { show(cur + 1); });
+    }
+    [].forEach.call(document.querySelectorAll('[data-dgn-hm]'), init);
+  })();
+</script>
