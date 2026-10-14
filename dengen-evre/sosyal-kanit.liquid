@@ -3,7 +3,7 @@
   Aşağıdaki "son_7_gun_siparis" sayısını Shopify > Analizler > Siparişler (son 7 gün)
   ekranındaki gerçek sayıyla değiştir. Haftada bir güncelle. 0 yazarsan rozet gizlenir.
   Kullanım: Ürün sayfası > Bölüm ekle > "Özel Liquid" > yapıştır. Rozet kendini
-  "Stokta · Hemen kargoya hazır" satırının üstüne taşır.
+  "Dengen Evre" başlığının hemen altına taşır.
 {%- endcomment -%}
 {%- liquid
   assign son_7_gun_siparis = 0
@@ -17,21 +17,22 @@
   </div>
 
   <style>
-    .dgn-sk{display:inline-flex;align-items:center;gap:10px;margin:14px 0 0;padding:8px 14px 8px 8px;border-radius:999px;background:var(--nane,#E8FFF6);color:var(--g,#1C6047)}
-    .dgn-sk__ic{flex:none;width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
-    .dgn-sk__ic svg{width:16px;height:16px;fill:currentColor;stroke:none}
-    .dgn-sk__t{margin:0;font-size:14px;font-weight:600;line-height:1.3}
+    .dgn-sk{display:flex;align-items:center;gap:8px;width:fit-content;max-width:100%;margin:8px 0 2px;padding:5px 12px 5px 5px;border-radius:999px;background:var(--nane,#E8FFF6);color:var(--g,#1C6047)}
+    .dgn-sk__ic{flex:none;width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+    .dgn-sk__ic svg{width:14px;height:14px;fill:currentColor;stroke:none}
+    .dgn-sk__t{margin:0;font-size:13px;font-weight:600;line-height:1.3}
     .dgn-sk__t strong{font-weight:800}
   </style>
 
   <script>
     (function () {
       var el = document.querySelector('[data-dgn-sk]');
-      var hedef = document.querySelector('.pu-st');
-      if (el && hedef && !el.getAttribute('data-ready')) {
-        el.setAttribute('data-ready', '1');
-        hedef.insertAdjacentElement('beforebegin', el);
-      }
+      if (!el || el.getAttribute('data-ready')) return;
+      el.setAttribute('data-ready', '1');
+      var baslik = document.querySelector('.pu-ad');
+      var stok = document.querySelector('.pu-st');
+      if (baslik) baslik.insertAdjacentElement('afterend', el);
+      else if (stok) stok.insertAdjacentElement('beforebegin', el);
     })();
   </script>
 {%- endif -%}
