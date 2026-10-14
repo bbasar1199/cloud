@@ -101,13 +101,13 @@
   .dgn-hm__sub{margin:12px 0 0;font-size:16px;line-height:1.5;color:var(--hm-mu)}
   .dgn-hm__grid{display:grid;gap:24px;align-items:center}
 
-  .dgn-hm__stage{position:relative;width:100%;max-width:480px;margin:0 auto;aspect-ratio:1/1}
+  .dgn-hm__stage{position:relative;width:100%;max-width:480px;margin:14px auto 0;aspect-ratio:1/1}
   .dgn-hm__ring{position:absolute;left:50%;top:50%;width:calc(var(--hm-r)*2);height:calc(var(--hm-r)*2);transform:translate(-50%,-50%);border:1.5px dashed var(--hm-ln);border-radius:50%}
   .dgn-hm__ring::before{content:"";position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,var(--hm-nane) 0%,rgba(255,255,255,0) 70%)}
   .dgn-hm__bottle{position:absolute;left:50%;top:50%;height:50%;width:auto;max-width:none;transform:translate(-50%,-50%);filter:drop-shadow(0 14px 18px rgba(20,40,31,.18));pointer-events:none}
 
   .dgn-hm button{-webkit-appearance:none;appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .dgn-hm__node{--a:calc(var(--i)*51.4286deg - 90deg);position:absolute;left:calc(50% + cos(var(--a))*var(--hm-r));top:calc(50% + sin(var(--a))*var(--hm-r));width:var(--hm-n);height:var(--hm-n);margin:calc(var(--hm-n)/-2) 0 0 calc(var(--hm-n)/-2);border-radius:50%}
+  .dgn-hm .dgn-hm__node{--a:calc(var(--i)*51.4286deg - 90deg);position:absolute;left:calc(50% + cos(var(--a))*var(--hm-r));top:calc(50% + sin(var(--a))*var(--hm-r));width:var(--hm-n);height:var(--hm-n);margin:calc(var(--hm-n)/-2) 0 0 calc(var(--hm-n)/-2);border-radius:50%}
   .dgn-hm__dot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:1.5px solid var(--hm-ln);color:var(--hm-g);box-shadow:0 4px 12px rgba(20,40,31,.08);transition:background .25s,color .25s,border-color .25s,transform .25s}
   .dgn-hm__dot svg{width:58%;height:58%}
   .dgn-hm__lbl{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);width:96px;text-align:center;font-size:12px;font-weight:700;line-height:1.2;color:var(--hm-ink)}
