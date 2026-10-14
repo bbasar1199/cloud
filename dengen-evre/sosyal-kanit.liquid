@@ -26,8 +26,10 @@
 
   <script>
     (function () {
-      var el = document.querySelector('[data-dgn-sk]');
-      if (!el || el.getAttribute('data-ready')) return;
+      var el = document.querySelector('[data-dgn-sk]:not([data-ready])');
+      if (!el) return;
+      // Tema düzenleyici bölümü yeniden yüklediğinde eski kopyayı kaldır.
+      [].forEach.call(document.querySelectorAll('[data-dgn-sk][data-ready]'), function (eski) { eski.remove(); });
       el.setAttribute('data-ready', '1');
       var baslik = document.querySelector('.pu-ad');
       var stok = document.querySelector('.pu-st');
