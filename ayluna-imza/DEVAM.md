@@ -34,6 +34,10 @@ Bu klasör, Ayluna (ayluna.shop) için yeniden tasarlanan LunaDream ürün sayfa
 3. Masaüstü düzeni (öncelikli): solda yapışkan galeri, sağda satın alma kutusu; diğer bölümler geniş ızgara. Bölümler şimdilik 430px sütunda.
 4. Gerçek müşteri videosu gelirse hikâyelere video karesi eklemek.
 
+## Yeni iskelet denemesi (17 Ekim 2026)
+- `onizleme/iskelet.html`: canlı sitenin işe yarayan mantığı (uyku rutini vaadi, sosyal kanıt, garanti, kolay kullanım, SSS) + bilgi veren özellik bölümü, tuşlar, Tavşanlı/Uzay Kaşifi karşılaştırması, masaüstü düzeni (solda yapışkan galeri). Onaylanırsa index ve Shopify bölümlerine taşınacak.
+- Canlı sitede düzeltilmesi gerekenler: 90 gün iade (gerçeği 30), sahte aciliyet (35 kişi bakıyor, 3 günde 399 adet), yorum sayısı çelişkisi (2467/63), "Tükendi" + "Sepete ekle" birlikte.
+
 ## Son durum (17 Ekim 2026)
 - Ödeme: kartla öde varsayılan (%5), kapıda ikinci; teslimat adımları otomatik tarihli. Fayda ve Kapanış bölümleri eklendi.
 - Videolar: `onizleme/v/` (kaynak `araclar/remotion/`, `npm run video`).
