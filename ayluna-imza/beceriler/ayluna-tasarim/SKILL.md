@@ -45,6 +45,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - sosyal kanıt
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
+- **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → puan/Stokta → LunaDream → fiyat → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
+- **Baskı unsurları istenir** (sayaç, stok, dün satılan) ama yalnız gerçek veriyle; veri yoksa gizlenir.
+- **Disk görselleri:** mağaza afişinden kesilmiş yüksek çözünürlüklü diskler; unicorn ve 2025 kutuda yok.
   - Biçim (kullanıcı seçimi): 2×2 beyaz kart. Lacivert ikon kutusu + amber ikon; sağ üstte ürüne özgü küçük canlı gösterge; altında başlık ve tek cümle. Koyu ya da amber dolu kart yok; kullanıcı renkli kartları "boğucu" buldu.
   - Açık zeminde amber yazı okunmaz: küçük etiketler `#A05A1C`.
   - 2×2 kart: ikon, başlık, tek cümle ve ürüne özgü küçük animasyon (nefes alan hale, yelpaze diskler, dolan pil, ses dalgası).

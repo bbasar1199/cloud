@@ -5,6 +5,8 @@ const [src, out, stateJson, clipFrom, clipH] = process.argv.slice(2);
 const P = path.dirname(src), MAG = fs.existsSync(path.join(P, 'magaza')) ? path.resolve(P, 'magaza') : path.resolve(P, '../magaza');
 const F = path.resolve(__dirname, '../onizleme/f') + '/';
 const blobMap = { e02351b3be4a1c555c5d760d0bbda723:'m-kiz', '0033dfea6282c5bc479c385213661c00':'m-erkek', '211acb76d908e8ed6d4f5fcddc987893':'ld0','652e1893a0ae33a24ee0e3d53edab757':'ld1',ec0a99ef7b8839a12ab7e6aa4282f7da:'ld2','35f6b0090fd4e65b22f48d111fe61905':'ld3',a08890007843d79d94bfffc397a3d0ac:'ld4',d4efe7e83c74524ece75e962161f7fff:'ld5',fd0a28089115b8aa3de9bcb92a65a8e2:'ld6','3ddd8b8b95f040d436d5d0ea350924b8':'ld7','98db755893dbcebe192c69e73ae5afff':'ld8'};
+// Tuvale sonradan yüklenen görseller (ör. canvas/diskler): blob id → magaza'ya göre yol
+if (fs.existsSync(path.join(__dirname, 'blob-yerel.json'))) Object.assign(blobMap, JSON.parse(fs.readFileSync(path.join(__dirname, 'blob-yerel.json'), 'utf8')));
 let html = fs.readFileSync(src, 'utf8');
 const css = (html.match(/<style>([\s\S]*?)<\/style>/) || [])[1];
 const body = html.split('</helmet>')[1].split('</x-dc>')[0];

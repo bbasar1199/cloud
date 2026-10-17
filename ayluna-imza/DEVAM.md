@@ -131,6 +131,29 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Canlı temada yapılacak: ana fotoğraf parmakla kaydırılır (scroll-snap) ve sayaç güncellenir; seçili küçük resim görünür alana kayar; diskler ekrandan çıkınca durur (IntersectionObserver); puan Loox'tan gelir, veri yoksa gizlenir.
 - Uygulanmadı: yapışkan buton ilk ekranda. Kural: ana buton ekrandan çıkınca açılır.
 
+## Tur 9 · Videolar, yorum duvarı, baskı unsurları (17 Ekim, gece)
+- Kullanıcı:
+  - robot da ninnili; model seçimi Sihirli'nin altına
+  - diskler daha kaliteli
+  - odada profesyonel görseller
+  - yorum ve video bölümleri
+  - üst kısım ve görseller tek parça
+  - baskılayıcılar artsın
+- Yapılanlar (`luna_bplus.py`):
+  - **Üst:** logo bandı fotoğrafın üstünde; sahne 420px; galeri 9 kare (3 oda sahnesi + 6 afiş).
+  - **Diskler:** 11 disk mağaza afişinden yeniden kesildi (`araclar/disk/disk_kes.py` → `canvas/diskler/`, tuvale asset olarak yüklendi; id'ler `araclar/blob-yerel.json`). Unicorn/2025 yok.
+  - **Sıra:** fiyat → kampanya sayacı → Sihirli → Model → Paket → stok/dün satırları → butonlar.
+  - **Erkek:** "Robot · ninnili"; Sihirli kartı "Ninnili robot / Uyku öncesi ninni çalar."
+  - **Videolar:** satın alma kutusunun altında, 4 kart; kapaklar mevcut görsellerden, `[video]` yer tutucu.
+  - **Yorum duvarı:** puan + yıldız, 5 müşteri fotoğrafı, konu çipleri, kaydırmalı beyaz kartlar (5 gerçek yorum), "Satın aldı" işareti.
+- Canlıda bağlanacak veriler:
+  - kampanya bitiş tarihi (ayar)
+  - stok eşiği (ayar; Shopify envanteri)
+  - dünkü sipariş sayısı (Shopify Flow → ürün metafield'i)
+  - videolar (blok başına Shopify videosu)
+  - Loox puanı ve yorumları
+- Sorulacak: robot modelinde Bluetooth var mı? Videolar hangileri (dosyalar)? Kampanya bitiş tarihi?
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
