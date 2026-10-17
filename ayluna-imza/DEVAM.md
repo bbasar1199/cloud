@@ -280,6 +280,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - robotta ninninin nasıl çaldığı
   - Bir gece görselleri (HF_TOKEN)
 
+## Tur 14 · Eleştirmen değişiklikleri geri alındı (17 Ekim, gece)
+- Kullanıcı: Tur 13'teki kendi isteklerini (2'li varsayılan + kız/erkek seçimi, daha küçük ve az yazı, iç içe olmayan düzen) istedi. Eleştirmen için yapılanları geri aldırdı.
+- `luna_bplus.py`, `1cef207` (Tur 13 ara) sürümüne döndü. Tur 13 ve 13b'deki eleştirmen değişiklikleri yok.
+- Model kartı yalnız Kız / Erkek. 2 Adet seçilince paketin altında "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]" (durum `l1`, `l2`; boşsa model kartındaki seçim). 2'li paket görseli ve yapışkan çubuk ("2 Kız", "2 Erkek", "Kız + Erkek") seçime göre değişir.
+- Kural: eleştirmen önerileri kullanıcı seçmeden toplu uygulanmaz.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
