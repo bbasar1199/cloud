@@ -87,6 +87,23 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - animasyon ikonun içinde
   - tekrar budandı ("Bir gece" yeni cümleler, 3 yorum)
 
+## Tur 7 · Sihirli Özellikler sakinleşti (17 Ekim, gece)
+- Kullanıcı: "Görsel kısmını diğeri gibi yapalım ama emoji benefit kısmını biraz daha iyileştirelim; renkler vesaire çok boğuyor."
+- 3 varyant (`araclar/tuval-uret/sihirli_varyant.py`, tuvalde x=2350–3290, y=2260):
+  - V1 Sade beyaz: 6/10
+  - V2 Tek vurgu: 4/10
+  - V3 Liste: 8/10, seçildi
+- Eleştirmenin düzeltmeleri sayfaya işlendi (`luna_bplus.py`):
+  - ikon kutusu krem, amber yalnız hareket eden parçada
+  - gösterge sütunu 72px, diskler 34px
+  - açıklamalar 15px
+  - etiket `#A05A1C`
+  - gölge yok
+  - pil opacity ile söner
+  - Erkek satırı "Tavanda uzay"
+- Önizleme hatası düzeltildi: `.pg` üstüne dolgu verilirse sayfa 422px oluyordu. Dolgu iç `div`'e verilir.
+- Açık: "hayal" bandındaki müşteri fotoğrafının paylaşım izni.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.

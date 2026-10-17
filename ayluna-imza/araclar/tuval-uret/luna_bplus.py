@@ -28,34 +28,39 @@ CSS = r""".pg{background:#F6F1E9}
 .mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#EFE6D8}
 .mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 62%}
 .msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Sihirli Özellikler: 48px dolu, iki tonlu ikon; animasyon ikonun içinde (yalnız transform/opacity). Kullanıcı isteği: sonsuz ama yavaş; canlıda yalnız ekrandayken oynar. */
-.sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.oz{position:relative;min-height:136px;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:6px;background:#FFFDF9;border:1.5px solid #E3D8C7;color:#1A2142;text-decoration:none}
-.oz.koyu{background:#1A2142;border-color:#1A2142;color:#FFFDF9}
-.oz.amber{background:#F2A65A;border-color:#F2A65A;color:#1A2142}
-.oz b{font-size:16px;font-weight:700;line-height:1.2;margin-top:4px}
-.oz span.t{font-size:13px;line-height:1.4;opacity:.85}
-.ik{position:relative;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:visible}
-.ik svg{position:relative;z-index:1;width:30px;height:30px}
-.ik.ay{background:#2B3463}
-.ik.ay .hale{position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.7),rgba(242,166,90,0) 62%);animation:nefes 4.5s ease-in-out infinite}
-@keyframes nefes{0%,100%{transform:scale(.8);opacity:.45}50%{transform:scale(1.15);opacity:1}}
-.ik.disk{background:#F3E9DA}
-.ik.disk img{position:absolute;left:9px;top:9px;width:30px;height:30px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFDF9;transform-origin:50% 140%;animation:yel 5s ease-in-out infinite alternate}
-.ik.disk img:nth-child(1){--r:-28deg}.ik.disk img:nth-child(2){--r:0deg}.ik.disk img:nth-child(3){--r:28deg}
+/* Sihirli Özellikler (Tur 7, V3 Liste + eleştirmen düzeltmeleri): tek açık panel, 4 satır, gölge yok, 1px çizgi.
+   İkon krem kutuda lacivert çizgi; amber yalnız hareket eden parçada (ışık). Döngüler yavaş, yalnız transform/opacity.
+   Canlıda satır ekrana girince 150 ms arayla başlar (IntersectionObserver), ekrandan çıkınca durur. */
+.sih{margin-top:14px;border-radius:22px;background:#FFFDF9;border:1px solid #E3D8C7;overflow:hidden}
+.sat{display:grid;grid-template-columns:44px minmax(0,1fr) 72px;gap:12px;align-items:center;min-height:84px;padding:12px 14px;border-bottom:1px solid #EDE3D3;color:#1A2142;text-decoration:none}
+.sat:last-child{border-bottom:0}
+.sat .ik{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#F3E9DA;color:#1A2142}
+.sat .ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sat b{display:block;font-size:16px;font-weight:700;line-height:1.25}
+.sat .t{display:block;font-size:15px;line-height:1.4;color:#5C6078;margin-top:2px}
+.sat .t u{color:#A05A1C;text-underline-offset:3px}
+.yer{position:relative;height:48px;display:grid;place-items:center}
+@keyframes nefes{0%,100%{transform:scale(.8);opacity:.45}50%{transform:scale(1.12);opacity:1}}
+.isik{position:relative;width:48px;height:48px;display:grid;place-items:center}
+.isik::before{content:"";position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,0) 64%);animation:nefes 4.5s ease-in-out infinite}
+.isik svg{position:relative;width:24px;height:24px}
 @keyframes yel{from{transform:rotate(0)}to{transform:rotate(var(--r))}}
-.ik.nota{background:#1A2142}
-.ik.nota .halka{position:absolute;inset:0;border-radius:14px;border:2px solid #1A2142;animation:yay 2.4s ease-out infinite}
-.ik.nota .halka:nth-child(2){animation-delay:1.2s}
-@keyframes yay{from{transform:scale(1);opacity:.7}to{transform:scale(1.55);opacity:0}}
-.ik.robot{background:#1A2142}
-.ik.robot .yor{position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(26,33,66,.45);animation:don 7s linear infinite}
-.ik.robot .yor::after{content:"";position:absolute;left:50%;top:-4px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#1A2142}
+.yelpaze{position:relative;width:72px;height:40px}
+.yelpaze img{position:absolute;top:2px;width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #FFFDF9;box-shadow:0 0 0 1px #E3D8C7;transform-origin:50% 130%;animation:yel 5s ease-in-out infinite alternate}
+.yelpaze img:nth-child(1){right:38px;--r:-12deg}.yelpaze img:nth-child(2){right:19px;--r:0deg;animation-delay:-1.6s}.yelpaze img:nth-child(3){right:0;--r:12deg;animation-delay:-3.2s}
+@keyframes ses{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.dalga{display:flex;align-items:flex-end;gap:4px;height:26px}
+.dalga i{display:block;width:4px;height:26px;border-radius:2px;background:#E59A4C;transform-origin:50% 100%;animation:ses 2.4s ease-in-out infinite}
+.dalga i:nth-child(2){animation-delay:-.4s}.dalga i:nth-child(3){animation-delay:-.8s}.dalga i:nth-child(4){animation-delay:-1.2s}.dalga i:nth-child(5){animation-delay:-1.6s}
 @keyframes don{to{transform:rotate(360deg)}}
-.ik.pil{background:#2B3463}
-.ik.pil .dolum{transform-box:fill-box;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
-@keyframes sarj{0%{transform:scaleX(.15)}70%,100%{transform:scaleX(1)}}
-.hayal{display:grid;grid-template-columns:minmax(0,1fr) 120px;margin-top:10px;border-radius:20px;overflow:hidden;background:#1A2142;color:#FFFDF9}
+.yorunge{position:relative;width:30px;height:30px;border-radius:50%;border:1px dashed #C9BFAE;animation:don 8s linear infinite}
+.yorunge::after{content:"";position:absolute;left:50%;top:-4px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#E59A4C}
+/* Pil: dolar, dolu bekler, opacity ile söner; başa sıçrama görünmez */
+@keyframes sarj{0%{transform:scaleX(.15);opacity:0}8%{opacity:1}70%{transform:scaleX(1)}90%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.pil{position:relative;width:46px;height:22px;border:1.6px solid #1A2142;border-radius:6px;padding:2px}
+.pil::after{content:"";position:absolute;right:-5px;top:6px;width:3px;height:7px;border-radius:0 2px 2px 0;background:#1A2142}
+.pil i{display:block;width:100%;height:100%;border-radius:3px;background:#F2A65A;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
+.hayal{display:grid;grid-template-columns:minmax(0,1fr) 120px;margin-top:10px;border-radius:20px;overflow:hidden;background:#F3E9DA;color:#1A2142}
 .hayal img{width:100%;height:100%;min-height:112px;object-fit:cover;display:block}
 /* Paket (canlı sitedeki biçim) */
 .pk{position:relative;display:block;width:100%;padding:0;border:1.5px solid #E3D8C7;border-radius:20px;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
@@ -89,7 +94,7 @@ CSS = r""".pg{background:#F6F1E9}
 .guven span+span::before{content:"·";margin-right:14px;color:#E59A4C}
 /* Bölümler */
 .bolum{padding-top:52px}
-.ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#E59A4C}
+.ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
 .gece{background:#1A2142;color:#EDE5D8;padding:44px 0 46px;margin-top:52px}
 .an{position:relative;flex:0 0 270px;height:420px;border-radius:24px;overflow:hidden;background:#0C1027;scroll-snap-align:start}
 .an img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -150,17 +155,17 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       </sc-for>
     </div>
 
-    <!-- Sihirli Özellikler (yeri canlıdaki gibi: model seçiminden sonra) -->
+    <!-- Sihirli Özellikler (yeri canlıdaki gibi: model seçiminden sonra). Tur 7: V3 Liste, açık panel -->
     <p class="ust-yazi" style="margin-top: 30px">Sihirli özellikler</p>
     <h2 class="h2" style="font-size: 26px">Uyku vakti savaş değil,<br>minik bir masal<span class="n">.</span></h2>
     <div class="sih">
-      <div class="oz koyu"><span class="ik ay" aria-hidden="true"><span class="hale"></span><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path><circle cx="18" cy="5" r="1.3" fill="#FFFDF9"></circle></svg></span><b>Mışıl mışıl uykular</b><span class="t">Yumuşacık ışık, huzurlu bir geçiş.</span></div>
-      <a class="oz" href="#diskler"><span class="ik disk" aria-hidden="true"><img src="/_blob/336d1995fe82f1e73d526c0e2697677e" alt=""><img src="/_blob/2c6f33b11e553e39fd315693c5cf692b" alt=""><img src="/_blob/6e25420625a6a34858578ba9e632cda7" alt=""></span><b>6 + 6 masal</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
-      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz amber"><span class="ik nota" aria-hidden="true"><span class="halka"></span><span class="halka"></span><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11" fill="none" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path><circle cx="6.5" cy="17" r="2.8" fill="#F2A65A"></circle><circle cx="16.5" cy="15" r="2.8" fill="#FFFDF9"></circle></svg></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></div></sc-if>
-      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz amber"><span class="ik robot" aria-hidden="true"><span class="yor"></span><svg viewBox="0 0 24 24"><path d="M12 2.5v3" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path><rect x="4.5" y="5.5" width="15" height="11" rx="3.5" fill="#FFFDF9"></rect><circle cx="9.5" cy="11" r="1.6" fill="#1A2142"></circle><circle cx="14.5" cy="11" r="1.6" fill="#1A2142"></circle><path d="M8 20l1.5-3.5M16 20l-1.5-3.5" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path></svg></span><b>Uzay Kaşifi</b><span class="t">Robot projektör, tavanda uzay.</span></div></sc-if>
-      <div class="oz koyu"><span class="ik pil" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2.5" fill="none" stroke="#FFFDF9" stroke-width="1.8"></rect><rect class="dolum" x="4.5" y="9" width="12" height="6" rx="1.2" fill="#F2A65A"></rect><path d="M21 10.5v3" stroke="#FFFDF9" stroke-width="2" stroke-linecap="round"></path></svg></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></div>
+      <div class="sat"><span class="ik" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span><span><b>Mışıl mışıl uykular</b><span class="t">Odayı loş, sıcak bir ışıkla aydınlatır.</span></span><span class="yer" aria-hidden="true"><span class="isik"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></span></span></div>
+      <a class="sat" href="#diskler"><span class="ik" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></span><span class="yer" aria-hidden="true"><span class="yelpaze"><img src="/_blob/336d1995fe82f1e73d526c0e2697677e" alt=""><img src="/_blob/2c6f33b11e553e39fd315693c5cf692b" alt=""><img src="/_blob/6e25420625a6a34858578ba9e632cda7" alt=""></span></span></a>
+      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="sat"><span class="ik" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></span><span class="yer" aria-hidden="true"><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span></div></sc-if>
+      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="sat"><span class="ik" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3"></path><rect x="5" y="6" width="14" height="10" rx="3"></rect><circle cx="9.5" cy="11" r="1.2"></circle><circle cx="14.5" cy="11" r="1.2"></circle><path d="M8 19l1.5-3M16 19l-1.5-3"></path></svg></span><span><b>Tavanda uzay</b><span class="t">Uzay Kaşifi robot, tavana uzay yansıtır.</span></span><span class="yer" aria-hidden="true"><span class="yorunge"></span></span></div></sc-if>
+      <div class="sat"><span class="ik" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></span><span class="yer" aria-hidden="true"><span class="pil"><i></i></span></span></div>
     </div>
-    <div class="hayal"><div style="padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px"><b style="font-size: 16px; line-height: 1.3">Çocuğunun hayalleri artık odasında.</b><span style="font-size: 13px; color: #B9BED6">Işığı yak, o gülümsemeyi izle.</span></div><img src="/_blob/b9e869a37734e184ce3a88695b4ec64a" alt="Müşteri fotoğrafı"></div>
+    <div class="hayal"><div style="padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px"><b style="font-size: 16px; line-height: 1.3">Çocuğunun hayalleri artık odasında.</b><span style="font-size: 15px; color: #5C6078">Işığı yak, o gülümsemeyi izle.</span></div><img src="/_blob/b9e869a37734e184ce3a88695b4ec64a" alt="Müşteri fotoğrafı"></div>
     <!-- Müşteri fotoğrafı: paylaşım izni teyit edilecek -->
 
     <div class="etiket" style="margin-top: 28px"><span>Paket</span><span style="font-weight: 600">Kampanya · [tarih aralığı]</span></div>
@@ -189,7 +194,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Bir gece, beş an -->
   <section class="gece">
-    <div class="px"><p class="ust-yazi">Nasıl kullanılır</p><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
+    <div class="px"><p class="ust-yazi" style="color: #F2A65A">Nasıl kullanılır</p><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 18px 16px 0">
       <!-- Canlıda: kısa sessiz döngü videolar (onizleme/v/), yalnız ekrandayken oynar -->
       <sc-for list="{{moments}}" as="a" hint-placeholder-count="5">

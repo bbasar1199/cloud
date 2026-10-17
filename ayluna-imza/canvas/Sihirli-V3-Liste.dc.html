@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Sihirli Özellikler · V3 Liste</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+
+@keyframes nefes{0%,100%{transform:scale(.85);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+@keyframes yel{from{transform:rotate(0)}to{transform:rotate(var(--r))}}
+@keyframes ses{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes don{to{transform:rotate(360deg)}}
+@keyframes sarj{0%{transform:scaleX(.15)}70%,100%{transform:scaleX(1)}}
+.hale{position:absolute;right:-24px;top:-24px;width:112px;height:112px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.38),rgba(242,166,90,0) 65%);animation:nefes 4.5s ease-in-out infinite}
+.yelpaze{position:absolute;right:12px;top:14px;width:76px;height:42px}
+.yelpaze img{position:absolute;top:0;width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #FFFDF9;box-shadow:0 2px 6px rgba(26,33,66,.18);transform-origin:50% 130%;animation:yel 5s ease-in-out infinite alternate}
+.yelpaze img:nth-child(1){right:36px;--r:-12deg}.yelpaze img:nth-child(2){right:18px;--r:0deg;animation-delay:-1.6s}.yelpaze img:nth-child(3){right:0;--r:12deg;animation-delay:-3.2s}
+.dalga{display:flex;align-items:flex-end;gap:3px;height:20px}
+.dalga i{display:block;width:4px;height:20px;border-radius:2px;background:#E59A4C;transform-origin:50% 100%;animation:ses 2.4s ease-in-out infinite}
+.dalga i:nth-child(2){animation-delay:-.4s}.dalga i:nth-child(3){animation-delay:-.8s}.dalga i:nth-child(4){animation-delay:-1.2s}.dalga i:nth-child(5){animation-delay:-1.6s}
+.yorunge{position:relative;width:24px;height:24px;border-radius:50%;border:1px dashed #C9BFAE;animation:don 8s linear infinite}
+.yorunge::after{content:"";position:absolute;left:50%;top:-3px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#E59A4C}
+.pil{position:relative;width:44px;height:20px;border:1.6px solid #1A2142;border-radius:6px;padding:2px}
+.pil::after{content:"";position:absolute;right:-5px;top:5px;width:3px;height:7px;border-radius:0 2px 2px 0;background:#1A2142}
+.pil i{display:block;width:100%;height:100%;border-radius:3px;background:#F2A65A;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
+.ik{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none;position:relative;z-index:1}
+.ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hayal{display:grid;grid-template-columns:minmax(0,1fr) 112px;margin-top:10px;border-radius:20px;overflow:hidden;background:#F3E9DA;color:#1A2142}
+.hayal img{width:100%;height:100%;min-height:104px;object-fit:cover;display:block}
+.cipm{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:999px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;font-size:14px;font-weight:600;color:#1A2142;cursor:pointer}
+.cipm.on{border-color:#1A2142}
+.panel{margin-top:14px;border-radius:22px;background:#FFFDF9;border:1px solid #EDE3D3;box-shadow:0 10px 26px rgba(26,33,66,.06);overflow:hidden}
+.sat{position:relative;display:grid;grid-template-columns:42px minmax(0,1fr) 56px;gap:12px;align-items:center;min-height:76px;padding:12px 14px;color:#1A2142}
+.sat+.sat,.panel sc-if + .sat{border-top:1px solid #EDE3D3}
+.sat b{display:block;font-size:15px;font-weight:700;line-height:1.25}
+.sat span.t{display:block;font-size:13px;color:#5C6078;line-height:1.4;margin-top:2px}
+.sat .yer{position:relative;height:42px;display:grid;place-items:center}
+.sat .hale{right:-6px;top:-14px;width:70px;height:70px}
+.sat .yelpaze{position:relative;right:auto;top:auto;width:56px;height:30px}
+.sat .yelpaze img{width:28px;height:28px}
+.sat .yelpaze img:nth-child(1){right:24px}.sat .yelpaze img:nth-child(2){right:12px}
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg"><div style="padding: 24px 16px 28px">
+  <div style="display: flex; gap: 8px; margin-bottom: 18px"><sc-for list="{{mods}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}">{{m.n}}</button></sc-for></div><p style="margin: 0 0 6px; font-size: 13px; font-weight: 700; color: #E59A4C">Sihirli özellikler</p>
+    <h2 class="h2" style="font-size: 26px">Uyku vakti savaş değil,<br>minik bir masal<span style="color: #E59A4C">.</span></h2><div class="panel"><div class="sat"><span class="ik" style="background: #1A2142; color: #F2A65A" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span><span><b>Mışıl mışıl uykular</b><span class="t">Yumuşacık ışık, huzurlu bir geçiş.</span></span><span class="yer" aria-hidden="true"><span class="hale"></span></span></div><div class="sat"><span class="ik" style="background: #1A2142; color: #F2A65A" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span><b>+6 hediye disk</b><span class="t">Her gece yeni bir masal; siparişe dahil.</span></span><span class="yer" aria-hidden="true"><span class="yelpaze"><img src="/_blob/336d1995fe82f1e73d526c0e2697677e" alt=""><img src="/_blob/2c6f33b11e553e39fd315693c5cf692b" alt=""><img src="/_blob/6e25420625a6a34858578ba9e632cda7" alt=""></span></span></div><sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="sat"><span class="ik" style="background: #1A2142; color: #F2A65A" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></span><span class="yer" aria-hidden="true"><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span></div></sc-if><sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="sat"><span class="ik" style="background: #1A2142; color: #F2A65A" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3"></path><rect x="5" y="6" width="14" height="10" rx="3"></rect><circle cx="9.5" cy="11" r="1.2"></circle><circle cx="14.5" cy="11" r="1.2"></circle><path d="M8 19l1.5-3M16 19l-1.5-3"></path></svg></span><span><b>Uzay Kaşifi</b><span class="t">Robot projektör, tavanda uzay.</span></span><span class="yer" aria-hidden="true"><span class="yorunge"></span></span></div></sc-if><div class="sat"><span class="ik" style="background: #1A2142; color: #F2A65A" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></span><span class="yer" aria-hidden="true"><span class="pil"><i></i></span></span></div></div><div class="hayal"><div style="padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px"><b style="font-size: 15.5px; line-height: 1.3">Çocuğunun hayalleri artık odasında.</b><span style="font-size: 13px; color: #5C6078">Işığı yak, o gülümsemeyi izle.</span></div><img src="/_blob/652e1893a0ae33a24ee0e3d53edab757" alt="Müşteri paylaşımı"></div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":600}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { model: 'kiz' }; }
+  renderVals() {
+    var self = this, S = this.state;
+    return {
+      kiz: S.model === 'kiz', erkek: S.model !== 'kiz',
+      mods: [{ id: 'kiz', n: 'Kız modeli' }, { id: 'erkek', n: 'Erkek modeli' }].map(function (m) { var on = S.model === m.id; return { n: m.n, on: on ? 'true' : 'false', cls: on ? 'cipm on' : 'cipm', pick: function () { self.setState({ model: m.id }); } }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -45,6 +45,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - sosyal kanıt
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
+  - Biçim: tek açık panel, 4 satır (krem ikon kutusu · başlık + tek cümle · sağda küçük canlı gösterge). Koyu ya da amber dolu kart yok; amber yalnız hareket eden parçada. Kullanıcı renkli kartları "boğucu" buldu.
+  - Açık zeminde amber yazı okunmaz: küçük etiketler `#A05A1C`.
   - 2×2 kart: ikon, başlık, tek cümle ve ürüne özgü küçük animasyon (nefes alan hale, yelpaze diskler, dolan pil, ses dalgası).
   - Yeri model seçiminden sonra.
   - Uydurma ya da teyitsiz madde yok ("+10.000 Mutlu Anne", "21 ışık modu").

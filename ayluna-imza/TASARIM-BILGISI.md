@@ -126,7 +126,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
   - İmza an yeniden seçilecek ("Işığı kapat" çıkarıldı, 17 Ekim).
   - Yeni sonsuz döngü eklenmez. `prefers-reduced-motion` desteklenir.
-  - **İstisna (kullanıcı isteği, 17 Ekim):** "Sihirli Özellikler" ikonlarındaki yavaş döngüler (hale 4,5 sn, yelpaze 5 sn, nota halkası 2,4 sn, yörünge 7 sn, pil 3,8 sn). Canlıda yalnız ekrandayken oynar (IntersectionObserver).
+  - **İstisna (kullanıcı isteği, 17 Ekim):** "Sihirli Özellikler" ikonlarındaki yavaş döngüler (ışık halesi 4,5 sn, disk yelpazesi 5 sn, ses çubukları 2,4 sn, yörünge 8 sn, pil 3,8 sn; pil başa sıçramaz, opacity ile söner). Canlıda satır ekrana girince 150 ms arayla başlar, ekrandan çıkınca durur (IntersectionObserver).
 - **İkon:** ince çizgili SVG, emoji yok.
 
 **Main'in bilinen kusurları** (taşırken düzelt):
@@ -264,6 +264,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Basit emojiler, sıkıcı tasarımlar hâlâ devam ediyor" | Tasarım sıkıcı bulunuyor. Sade şablon görünümü yetmez; karakterli, akılda kalan görsel dil gerekir. Yön seçimi yeniden açık. |
 | 17 Eki | "B+ ile devam et, ama emoji benefit olmalı; önceden animasyonlu bir benefit yapmıştık, ürünün 4 özelliğini gösteriyordu" | **Seçilen yön: B+ Gece Postası.** "İkonlu fayda yok" kuralı daraltıldı: **durağan** emoji ya da ikon listesi istenmiyor. "Ayluna Yeni Tasarım" tuvali I yönündeki **animasyonlu "Sihirli Özellikler"** bloğu isteniyor. Bu blok 2×2 kart: ikon kutusu, başlık, tek cümle ve ürüne özgü küçük animasyon (nefes alan hale, yelpaze diskler, dolan pil…). Yeri canlıdaki gibi model seçiminden sonra. Uydurma madde ("+10.000 Mutlu Anne") ve teyitsiz madde ("21 ışık modu") konmaz. |
 | 17 Eki | "Şu anki kapıda ödeme ve bundle şeklimi koru" | **Canlı sitedeki yapı korunur.** Paket: alt alta "1 Adet / 2 Adet" kartları, ürün küçük resmi, % indirim, fiyat ve eski fiyat, altta "+6 Tane Ücretsiz Hediye Disk" şeridi, 2 Adet'te "En Çok Tercih Edilen" kurdelesi. Altında iki ayrı buton: "Güvenli Ödeme İle Al" (online) ve "Kapıda Ödeme ile Sipariş Ver" (uygulamanın açılır formu). Ödeme seçici kartları kullanılmaz. |
+| 17 Eki | "Görsel kısmını diğeri gibi yapalım ama emoji benefit kısmını biraz daha iyileştirelim; renkler vesaire çok boğuyor" | **Sihirli Özellikler sakin olur.** Koyu ve amber dolu kartlar yok. Tek açık panel, 4 satır: krem ikon kutusu (lacivert çizgi) · başlık + tek cümle (15px) · sağda 72px canlı gösterge. **Amber yalnız hareket eden parçada** (ışık). Gölge yok, 1px çizgi. Açık zeminde amber etiket okunmuyor: etiket rengi `#A05A1C`. Disk satırı "6 + 6 masal diski"; Erkek satırı özellik anlatır ("Tavanda uzay"). Altındaki "hayal" bandı da açık (krem). |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
