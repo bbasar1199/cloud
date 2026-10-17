@@ -39,7 +39,7 @@ button{font:inherit;color:inherit}
 .duyuru{background:var(--gece2);color:var(--gMetin);font-size:12px;text-align:center;padding:8px 12px;letter-spacing:.01em}
 .ust{position:absolute;inset:0 0 auto 0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px;color:#FFFDF9}
 .ust button,.ust a.ikon{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;cursor:pointer;text-decoration:none}
-.logo{display:flex;align-items:center;gap:7px;text-decoration:none}
+.logo{display:flex;align-items:center;gap:7px;min-height:44px;text-decoration:none}
 .logo span{font-family:"Young Serif",serif;font-size:21px;line-height:1}
 
 /* ===== Sahne: ışığı kapat ===== */
@@ -61,7 +61,7 @@ button{font:inherit;color:inherit}
 
 /* ===== Levha (alttan açılan sayfa) ===== */
 .levha{position:relative;z-index:3;margin-top:-30px;background:var(--krem);border-radius:28px 28px 0 0;padding-top:12px}
-.tutamak{display:block;width:40px;height:4px;border-radius:4px;background:#D9CDB9;margin:0 auto 16px}
+.tutamak{display:block;width:40px;height:4px;border-radius:4px;background:#D9CDB9;margin:0 auto 6px}
 .puan{display:flex;justify-content:space-between;align-items:center;font-size:13px}
 .yildiz{color:var(--amber2);letter-spacing:1.5px}
 /* Odak: başlık köşeli parantezlerin içine odaklanır */
@@ -80,14 +80,14 @@ button{font:inherit;color:inherit}
 .rozet{font-size:12.5px;font-weight:600;color:#8A4A12;background:#F9DFC4;padding:2px 9px;border-radius:999px}
 
 /* Bento */
-.bento{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:118px 118px auto;gap:10px;margin-top:20px}
+.bento{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto 118px 118px;gap:10px;margin-top:18px}
 .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
 .b.foto{grid-row:span 2;padding:0;border:0;background:var(--gece2);color:#FFFDF9}
 .b.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .b.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 40%,rgba(12,16,39,.85))}
 .b.foto .y{z-index:1}
 .b.foto .y{position:absolute;left:14px;bottom:12px;right:14px}
-.b.genis{grid-column:span 2;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--lac);border-color:var(--lac);color:var(--gMetin);font-size:12.5px;font-weight:600}
+.b.genis{grid-column:span 2;grid-row:1;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--lac);border-color:var(--lac);color:var(--gMetin);font-size:12.5px;font-weight:600}
 .b.genis span{display:inline-flex;align-items:center;gap:6px}
 .b .deger{display:block;font-family:"Young Serif",serif;font-size:30px;line-height:1}
 .b .acik{display:block;font-size:12.5px;color:var(--soluk);margin-top:6px;line-height:1.3}
@@ -148,6 +148,7 @@ button{font:inherit;color:inherit}
 .kaydir .dolgu{position:absolute;inset:0;background:var(--amber);transform-origin:left;transform:scaleX(0)}
 .kaydir .iz{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-left:56px;font-weight:600;font-size:15.5px;pointer-events:none}
 .kaydir .iz i{font-style:normal;opacity:.75;margin-left:6px;font-weight:400}
+.kaydir.tam .iz{padding:0 68px 0 20px;color:var(--lac)}
 .kaydir .top{position:absolute;left:5px;top:5px;width:54px;height:54px;border-radius:50%;border:0;background:var(--amber);color:var(--lac);display:grid;place-items:center;cursor:grab;z-index:2;transition:transform .35s var(--e)}
 .kaydir.surukle .top{transition:none;cursor:grabbing}
 .kaydir .ipucu{animation:ipucu 2.4s var(--e) 1.6s 2}
@@ -173,9 +174,9 @@ button{font:inherit;color:inherit}
 .alinti-buyuk::before{content:"\201C";position:absolute;left:-4px;top:-46px;font-size:96px;line-height:1;color:var(--amber)}
 .alinti-buyuk figcaption{margin-top:12px;font-family:"Onest",sans-serif;font-size:13px;color:var(--soluk)}
 .cipler{display:flex;gap:8px;overflow-x:auto;margin:22px -18px 0;padding:0 18px}
-.cip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid #DDD2C1;background:transparent;cursor:pointer;font-size:14px}
+.cip{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #DDD2C1;background:transparent;cursor:pointer;font-size:14px}
 .cip[aria-pressed=true]{background:var(--lac);border-color:var(--lac);color:#FFFDF9}
-.deste{position:relative;height:250px;margin-top:22px;touch-action:pan-y}
+.deste{position:relative;height:212px;margin-top:22px;touch-action:pan-y}
 .not{position:absolute;inset:0;background:var(--yuzey);border:1px solid var(--cizgi);border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 30px -24px rgba(26,33,66,.45);transition:transform .5s var(--e),opacity .5s var(--e)}
 .not blockquote{margin:0;font-family:"Young Serif",serif;font-size:21px;line-height:1.3}
 .not .alt{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--soluk)}
@@ -198,7 +199,7 @@ button{font:inherit;color:inherit}
 .acik-kutu .parca{opacity:1;transform:none}
 .k-lamba{left:50%;top:22px;width:136px;height:176px;margin-left:-68px;border-radius:18px;overflow:hidden}
 .k-lamba img{width:100%;height:100%;object-fit:cover}
-.k-disk{width:40px;height:40px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px rgba(255,253,249,.15)}
+.k-disk{width:38px;height:38px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px rgba(255,253,249,.15)}
 .k-disk img{width:100%;height:100%;object-fit:cover}
 .k-yazi{font-size:12px;color:var(--gSoluk)}
 .k-yazi.a{color:var(--amber);font-weight:600}
@@ -224,14 +225,14 @@ button{font:inherit;color:inherit}
 .tavan .eski{opacity:0;transform:scale(.8)}
 .disk-ad{margin-top:16px;font-family:"Young Serif",serif;font-size:24px}
 .disk-sayi{font-size:12.5px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
-.sahne3d{position:relative;height:150px;margin-top:20px;perspective:900px;touch-action:pan-y;cursor:grab}
+.sahne3d{position:relative;height:148px;margin-top:20px;perspective:900px;touch-action:pan-y;cursor:grab}
 .halka{position:absolute;left:50%;top:40px;width:0;height:0;transform-style:preserve-3d;transition:transform .7s var(--e)}
 .surukleniyor .halka{transition:none}
 .halka button{position:absolute;left:-34px;top:-34px;width:68px;height:68px;border-radius:50%;overflow:hidden;border:0;padding:0;cursor:pointer;backface-visibility:hidden;box-shadow:0 10px 20px -10px rgba(0,0,0,.8)}
 .halka button img{width:100%;height:100%;object-fit:cover}
 .halka button.on{box-shadow:0 0 0 3px var(--amber),0 10px 20px -10px rgba(0,0,0,.8)}
-.halka-ok{position:absolute;top:22px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,237,227,.25);background:rgba(12,16,39,.4);color:#FFFDF9;display:grid;place-items:center;cursor:pointer;z-index:5}
-.halka-ok.l{left:12px}.halka-ok.r{right:12px}
+.halka-ok{position:absolute;top:96px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,237,227,.25);background:rgba(12,16,39,.4);color:#FFFDF9;display:grid;place-items:center;cursor:pointer;z-index:5}
+.halka-ok.l{left:calc(50% - 54px)}.halka-ok.r{right:calc(50% - 54px)}
 
 /* Bir gece: eğik makaralar */
 .makaralar{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px calc(50% - 125px) 8px;perspective:1000px}
@@ -282,11 +283,11 @@ button{font:inherit;color:inherit}
 .tepeler .ay{position:absolute;left:62%;top:calc(120px - var(--p,1) * 96px);width:46px;height:46px}
 .tepeler .t1{transform:translateY(calc((1 - var(--p,1)) * 30px))}
 .tepeler .t2{transform:translateY(calc((1 - var(--p,1)) * 60px))}
-.dev{margin:0;padding:0 0 .12em 2px;overflow:hidden;font-family:"Young Serif",serif;font-weight:400;font-size:29vw;line-height:.8;letter-spacing:-.05em;white-space:nowrap;color:var(--gMetin);background:#0A0D20}
+.dev{margin:0;padding:.02em 0 .2em 2px;overflow:hidden;font-family:"Young Serif",serif;font-weight:400;font-size:29vw;line-height:.9;letter-spacing:-.05em;white-space:nowrap;color:var(--gMetin);background:#0A0D20}
 @media(min-width:430px){.dev{font-size:124px}}
 .dev span{display:inline-block;transform:translateY(calc((1 - var(--p,1)) * 60%))}
-.linkler{display:flex;flex-wrap:wrap;gap:4px 18px;padding:22px 18px 6px;font-size:13px;background:#0A0D20}
-.linkler a{text-decoration:none;padding:6px 0;color:var(--gSoluk)}
+.linkler{display:flex;flex-wrap:wrap;gap:0 18px;padding:22px 18px 6px;font-size:13px;background:#0A0D20}
+.linkler a{text-decoration:none;padding:12px 0;color:var(--gSoluk)}
 .telif{margin:0;padding:6px 18px 110px;font-size:12px;color:#7D84A6;background:#0A0D20}
 
 /* Yapışkan çubuk */
@@ -324,11 +325,11 @@ button{font:inherit;color:inherit}
     <div class="kare" data-kare="3"><img src="g/tavan.jpg" alt="Tavana yansıyan masal"></div>
     <button class="anahtar" id="anahtar" aria-pressed="false"><span class="yuva"><span class="top"></span></span><span id="anahtarYazi">Işığı kapat</span></button>
     <span class="saat" id="saat" aria-hidden="true">19:30</span>
-    <div class="kucuk" role="tablist" aria-label="Görseller">
-      <button class="on" data-git="0" aria-label="Odada"><img src="g/kiz-gece.jpg" alt=""></button>
-      <button data-git="1" aria-label="Kendi dünyasında"><img id="dunyaMini" src="g/kiz-dunya.jpg" alt=""></button>
-      <button data-git="2" aria-label="Elde"><img id="eldeMini" src="g/elde.jpg" alt=""></button>
-      <button data-git="3" aria-label="Tavanda"><img src="g/tavan.jpg" alt=""></button>
+    <div class="kucuk" role="group" aria-label="Görseller">
+      <button class="on" data-git="0" aria-label="Odada" aria-pressed="true"><img src="g/kiz-gece.jpg" alt=""></button>
+      <button data-git="1" aria-label="Kendi dünyasında" aria-pressed="false"><img id="dunyaMini" src="g/kiz-dunya.jpg" alt=""></button>
+      <button data-git="2" aria-label="Elde" aria-pressed="false"><img id="eldeMini" src="g/elde.jpg" alt=""></button>
+      <button data-git="3" aria-label="Tavanda" aria-pressed="false"><img src="g/tavan.jpg" alt=""></button>
     </div>
   </section>
 
@@ -337,7 +338,7 @@ button{font:inherit;color:inherit}
     <span class="tutamak" aria-hidden="true"></span>
     <div class="px">
       <div class="puan">
-        <a href="#yorumlar" style="text-decoration:none"><span class="yildiz" aria-hidden="true">★★★★★</span> <b>4,7</b> <span class="soluk">· 62 yorum</span></a>
+        <a href="#yorumlar" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;min-height:44px"><span class="yildiz" aria-hidden="true">★★★★★</span> <b>4,7</b> <span class="soluk">· 62 yorum</span></a>
         <span style="font-weight:600;color:#2E6B4F;font-size:12.5px">Stokta</span>
       </div>
       <h1 class="odak" aria-label="LunaDream"><span class="p l" aria-hidden="true"></span><span aria-hidden="true" id="baslik"></span><span class="p r" aria-hidden="true"></span></h1>
@@ -398,7 +399,7 @@ button{font:inherit;color:inherit}
   <!-- ===== YORUMLAR: not destesi ===== -->
   <section class="bolum px" id="yorumlar">
     <h2 class="h2">Anneler<br>ne diyor</h2>
-    <figure class="alinti-buyuk" style="margin-top:64px">Reklamında nasıl ise aynısı, hatta daha iyisi.<figcaption>Abdülkerim T. · Satın aldı · ★ 4,7 ortalama, 62 yorum</figcaption></figure>
+    <figure class="alinti-buyuk" style="margin-top:58px">Reklamında nasıl ise aynısı, hatta daha iyisi.<figcaption>Abdülkerim T. · Satın aldı · ★ 4,7 ortalama, 62 yorum</figcaption></figure>
     <div class="cipler kaydirma" id="cipler"></div>
     <div class="deste" id="deste"></div>
     <div class="deste-alt"><span id="desteSira">1 / 4</span><span class="oklar"><button class="ok" id="desteGeri" aria-label="Önceki yorum"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M15 5l-7 7 7 7"/></svg></button><button class="ok dolu" id="desteIleri" aria-label="Sonraki yorum"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M9 5l7 7-7 7"/></svg></button></span></div>
@@ -414,8 +415,8 @@ button{font:inherit;color:inherit}
       <span class="kapak"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg><b>LunaDream</b><small>Dokun, aç</small></span>
       <span class="parca k-lamba" style="transition-delay:0ms"><img id="kutuLamba" src="g/elde.jpg" alt=""></span>
       <span id="kutuDiskler"></span>
-      <span class="parca k-yazi" style="left:16px;top:288px" data-gecikme="840">6 masal diski</span>
-      <span class="parca k-yazi a" style="left:196px;top:288px" data-gecikme="840">+6 hediye disk</span>
+      <span class="parca k-yazi" style="left:14px;top:284px" data-gecikme="840">6 masal diski</span>
+      <span class="parca k-yazi a" style="left:182px;top:284px" data-gecikme="840">+6 hediye disk</span>
       <span class="parca k-alt" data-gecikme="900"><span id="kutuKablo">USB şarj kablosu</span><span>Boyut [X] cm · Pil [X] saat</span></span>
     </button>
   </section>
@@ -531,7 +532,7 @@ button{font:inherit;color:inherit}
   function tween(hedef,sure){ cancelAnimationFrame(raf); if(azHareket){p=hedef;sahneCiz();return;} var bas=p,t0=0; (function adim(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/sure), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; p=bas+(hedef-bas)*e; sahneCiz(); if(k<1)raf=requestAnimationFrame(adim); })(performance.now()); }
   setTimeout(function(){tween(1,2600);},1000);
   $('#anahtar').addEventListener('click',function(){tween(p>.5?0:1,2000);});
-  function kareGit(i){ $$('.kare').forEach(function(k){k.classList.toggle('on',+k.dataset.kare===i);}); $$('.kucuk button').forEach(function(x){x.classList.toggle('on',+x.dataset.git===i);}); $('#anahtar').style.display=i===0?'':'none'; $('#saat').style.display=i===0?'':'none'; }
+  function kareGit(i){ $$('.kare').forEach(function(k){k.classList.toggle('on',+k.dataset.kare===i);}); $$('.kucuk button').forEach(function(x){x.classList.toggle('on',+x.dataset.git===i);x.setAttribute('aria-pressed',+x.dataset.git===i);}); $('#anahtar').style.display=i===0?'':'none'; $('#saat').style.display=i===0?'':'none'; }
   $$('.kucuk button').forEach(function(x){x.addEventListener('click',function(){kareGit(+x.dataset.git);});});
 
   /* ---------- Model ---------- */
@@ -557,7 +558,7 @@ button{font:inherit;color:inherit}
   }
   $$('.paket').forEach(function(x){x.addEventListener('click',function(){S.paket=+x.dataset.paket;fiyatUygula();});});
   $('#ekle').addEventListener('click',function(){S.ekle=!S.ekle;fiyatUygula();});
-  $('#kardesBtn').addEventListener('click',function(){S.paket=2;fiyatUygula();formAc();});
+  $('#kardesBtn').addEventListener('click',function(e){S.paket=2;fiyatUygula();siparisAc(e);});
 
   /* ---------- Geri sayım (ayın son günü 23:59:59) ---------- */
   var AY=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
@@ -581,19 +582,20 @@ button{font:inherit;color:inherit}
 
   /* ---------- Kaydırarak sipariş ---------- */
   var kz=$('#kaydir'), top=$('#kaydirTop'), dolgu=$('#dolgu'), surX=null, max=0, dx=0;
-  function formAc(){ $('#form').classList.add('acik'); top.style.transform='translateX('+(kz.clientWidth-64)+'px)'; dolgu.style.transform='scaleX(1)'; $('#izYazi').innerHTML='Bilgilerini yaz, siparişin hazır'; setTimeout(function(){var a=$('#ad'); a&&a.focus({preventScroll:true});},450); }
+  function formAc(){ $('#form').classList.add('acik'); top.style.transform='translateX('+(kz.clientWidth-64)+'px)'; dolgu.style.transform='scaleX(1)'; kz.classList.add('tam'); $('#izYazi').innerHTML='Son adım: bilgilerini yaz'; setTimeout(function(){var a=$('#ad'); a&&a.focus({preventScroll:true});},450); }
   top.addEventListener('pointerdown',function(e){surX=e.clientX;max=kz.clientWidth-64;kz.classList.add('surukle');top.classList.remove('ipucu');top.setPointerCapture(e.pointerId);});
   top.addEventListener('pointermove',function(e){if(surX===null)return;dx=Math.max(0,Math.min(max,e.clientX-surX));top.style.transform='translateX('+dx+'px)';dolgu.style.transform='scaleX('+(dx/max)+')';});
   function birak(){ if(surX===null)return; kz.classList.remove('surukle'); var tam=dx>max*.6, tik=dx<6; surX=null; if(tam||tik){formAc();} else {top.style.transform='';dolgu.style.transform='scaleX(0)';} dx=0; }
   top.addEventListener('pointerup',birak); top.addEventListener('pointercancel',birak);
   kz.addEventListener('click',function(e){ if(e.target===kz) formAc(); });
-  $('#yapisBtn').addEventListener('click',function(){formAc();});
+  function siparisAc(e){ if(e)e.preventDefault(); formAc(); var y=kz.getBoundingClientRect().top+scrollY-90; scrollTo({top:y,behavior:azHareket?'auto':'smooth'}); }
+  $('#yapisBtn').addEventListener('click',siparisAc);
 
   /* ---------- Yorum destesi ---------- */
   var REV=[{k:'Uyku',n:'Burak G.',q:'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.'},{k:'Hediye',n:'Handan B.',q:'Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.'},{k:'Kalite',n:'Sevcan Z.',q:'2 tane aldık, gayet sağlam geldi. Paketlenmesi de güzeldi.'},{k:'Kalite',n:'Mehmet C.',q:'Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.'}];
   var konu='Tümü', ri=0, mesgul=false;
   function liste(){return REV.filter(function(r){return konu==='Tümü'||r.k===konu;});}
-  function cipCiz(){ $('#cipler').innerHTML=['Tümü','Uyku','Hediye','Kalite'].map(function(c){var n=c==='Tümü'?REV.length:REV.filter(function(r){return r.k===c;}).length;return '<button class="cip" aria-pressed="'+(c===konu)+'" data-c="'+c+'">'+c+' '+n+'</button>';}).join(''); $$('#cipler .cip').forEach(function(x){x.addEventListener('click',function(){konu=x.dataset.c;ri=0;cipCiz();desteCiz();});}); }
+  function cipCiz(){ $('#cipler').innerHTML=['Tümü','Uyku','Hediye','Kalite'].map(function(c){var n=c==='Tümü'?REV.length:REV.filter(function(r){return r.k===c;}).length;return '<button class="cip" aria-pressed="'+(c===konu)+'" data-c="'+c+'">'+c+'</button>';}).join(''); $$('#cipler .cip').forEach(function(x){x.addEventListener('click',function(){konu=x.dataset.c;ri=0;cipCiz();desteCiz();});}); }
   function desteCiz(){
     var L=liste(), d=$('#deste'); d.innerHTML='';
     var kac=Math.min(3,L.length);
@@ -609,7 +611,7 @@ button{font:inherit;color:inherit}
 
   /* ---------- Kutuyu aç ---------- */
   var kd=$('#kutuDiskler'), html='';
-  for(var i=0;i<12;i++){ var sol=i<6?(16+i*28):(196+(i-6)*28), gec=i<6?(120+i*60):(480+(i-6)*60);
+  for(var i=0;i<12;i++){ var sol=i<6?(14+i*24):(182+(i-6)*24), gec=i<6?(120+i*60):(480+(i-6)*60);
     html+='<span class="parca k-disk" data-gecikme="'+gec+'" style="left:'+sol+'px;top:236px;transform-origin:center"><img src="g/disk'+(i+1)+'.jpg" alt=""></span>'; }
   kd.innerHTML=html;
   var kutu=$('#kutu');
@@ -664,8 +666,12 @@ button{font:inherit;color:inherit}
   addEventListener('scroll',function(){requestAnimationFrame(motor);},{passive:true}); addEventListener('resize',motor);
 
   /* ---------- Yapışkan çubuk ---------- */
-  var io=new IntersectionObserver(function(es){ var e=es[0]; $('#yapis').classList.toggle('on',!e.isIntersecting && e.boundingClientRect.top<0); },{threshold:0});
-  io.observe(kz);
+  /* Ana buton yukarıda kaybolunca açılır; form ya da kapanış butonu ekrandayken çekilir (üst üste binmesin) */
+  var gor={kaydir:true,form:false,kardesBtn:false}, kzUstte=false;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ gor[e.target.id]=e.isIntersecting; if(e.target.id==='kaydir') kzUstte=e.boundingClientRect.top<0; });
+    var formGorunur=gor.form && $('#form').classList.contains('acik');
+    $('#yapis').classList.toggle('on',!gor.kaydir && kzUstte && !formGorunur && !gor.kardesBtn); },{threshold:0});
+  io.observe(kz); io.observe($('#form')); io.observe($('#kardesBtn'));
 
   /* ---------- İller ---------- */
   'Adana Adıyaman Afyonkarahisar Ağrı Aksaray Amasya Ankara Antalya Ardahan Artvin Aydın Balıkesir Bartın Batman Bayburt Bilecik Bingöl Bitlis Bolu Burdur Bursa Çanakkale Çankırı Çorum Denizli Diyarbakır Düzce Edirne Elazığ Erzincan Erzurum Eskişehir Gaziantep Giresun Gümüşhane Hakkari Hatay Iğdır Isparta İstanbul İzmir Kahramanmaraş Karabük Karaman Kars Kastamonu Kayseri Kilis Kırıkkale Kırklareli Kırşehir Kocaeli Konya Kütahya Malatya Manisa Mardin Mersin Muğla Muş Nevşehir Niğde Ordu Osmaniye Rize Sakarya Samsun Şanlıurfa Siirt Sinop Sivas Şırnak Tekirdağ Tokat Trabzon Tunceli Uşak Van Yalova Yozgat Zonguldak'.split(' ').forEach(function(il){var o=document.createElement('option');o.textContent=il;$('#il').appendChild(o);});
