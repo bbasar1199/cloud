@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Yön B · Gece Postası</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.pg{background:#F6F1E9}
+.ust{display:flex;justify-content:space-between;align-items:center;height:56px;background:#1A2142;color:#FFFDF9}
+.galeri{position:relative;height:410px;background:#1A2142;overflow:hidden}
+.galeri img.ana{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
+.sayac{position:absolute;left:16px;bottom:14px;font-family:"Young Serif",Georgia,serif;font-size:44px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
+.sayac small{font-size:20px;color:#FFFDF9;opacity:.8}
+.kucuk{flex:none;width:58px;height:58px;padding:0;border-radius:12px;border:3px solid transparent;background:#232B55;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.kucuk.on{border-color:#F2A65A;transform:translateY(-3px)}
+.kucuk img{width:100%;height:100%;object-fit:cover;display:block}
+.bant{background:#1A2142;padding:12px 0 18px}
+.dev{font-family:"Young Serif",Georgia,serif;font-size:62px;line-height:.86;letter-spacing:-.045em;margin:0;color:#1A2142}
+.dev span{color:#E59A4C}
+.etiket>span:first-child{color:#766B5B}
+.mkart{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:2px solid #1A2142;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:background .25s,color .25s}
+.mkart.on{background:#1A2142;color:#FFFDF9}
+.mkart.on .msub{color:#B9BED6}
+.mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#F4C9B8}
+.mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 62%}
+.msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk{position:relative;display:block;width:100%;padding:0;border:2px solid #1A2142;border-radius:20px;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;overflow:visible;transition:background .25s,color .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.pk.on{background:#1A2142;color:#FFFDF9}
+.pk:active{transform:scale(.985)}
+.pk-ust{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:12px;align-items:center;padding:16px 14px 14px}
+.pk-foto{position:relative;width:70px;height:60px}
+.pk-foto img{position:absolute;left:0;top:0;width:56px;height:56px;border-radius:50%;object-fit:cover;background:#F4C9B8;border:2px solid #FFFDF9}
+.pk .pk-ust{border-radius:18px 18px 0 0}
+.pk-foto img.iki{left:16px;top:4px}
+.pk-ad{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.pk-sub{font-size:13px;opacity:.75;margin-top:2px}
+.pk-fiyat{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.pk.on .pk-fiyat{color:#F2A65A}
+.pk-eski{font-size:13px;opacity:.65;margin-top:3px}
+.pk-hediye{display:block;padding:10px 14px;font-size:14px;font-weight:700;background:#F4C9B8;color:#1A2142;border-radius:0 0 18px 18px}
+.pk.on .pk-hediye{background:#F2A65A}
+.kurdele{position:absolute;right:14px;top:-14px;z-index:1;padding:4px 12px;border-radius:10px;background:#E59A4C;color:#1A2142;font-size:12px;font-weight:700;letter-spacing:.02em;border:2px solid #1A2142}
+.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:18px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38}
+.btn-on:active{transform:translateY(3px);box-shadow:0 3px 0 #C97F38}
+.btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:14px;border:0;border-radius:20px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer}
+.bnot{margin:8px 0 0;text-align:center;font-size:13px;color:#5C6078}
+.yol{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.yol li{padding:12px 8px;border-radius:14px;background:#FFFDF9;border:2px solid #1A2142;display:flex;flex-direction:column;gap:2px}
+.yol li:last-child{background:#F4C9B8}
+.yol b{font-size:16px;font-weight:700}
+.yol span{font-size:12.5px;color:#3A3F5A}
+.poster{border-radius:24px;padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+.poster b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:46px;line-height:.9;letter-spacing:-.03em}
+.poster span{font-size:15px;line-height:1.35}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg" style="padding-bottom: 36px">
+  <header class="px ust"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h11"></path></svg><span style="display: flex; align-items: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 22px">Ayluna</span></span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></header>
+  <section class="galeri" aria-label="LunaDream fotoğrafları">
+    <sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img class="ana" src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}"></sc-for>
+    <span class="sayac">{{gNo}}<small> / {{gCount}}</small></span>
+  </section>
+  <div class="bant">
+    <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 0 16px">
+      <sc-for list="{{gal}}" as="f" hint-placeholder-count="7"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""></button></sc-for>
+    </div>
+  </div>
+
+  <div class="px" style="padding-top: 22px">
+    <a href="#yorumlar" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; text-decoration: none; color: #5C6078"><span style="color: #E59A4C">★★★★★</span><b style="color: #1A2142">{{rating}}</b> · {{reviews}} yorum</a>
+    <h1 class="dev" style="margin-top: 10px">Luna<br>Dream<span>.</span></h1>
+    <p style="margin: 10px 0 0; font-size: 17px; font-weight: 600">Tavana masal yansıtan gece lambası.</p>
+    <div class="etiket" style="margin-top: 22px"><span>Model</span><b>{{modelName}}</b></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+        <sc-for list="{{models}}" as="m" hint-placeholder-count="2">
+          <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="foto"><img src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 14px; font-weight: 600">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
+        </sc-for>
+      </div>
+    <div class="etiket" style="margin-top: 22px"><span>Paket</span><span style="font-weight: 700">Sınırlı süreli teklif</span></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px">
+        <sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
+          <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}">
+            <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En Çok Tercih Edilen</span></sc-if>
+            <span class="pk-ust">
+              <span class="pk-foto"><img src="/_blob/e02351b3be4a1c555c5d760d0bbda723" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img class="iki" src="/_blob/e02351b3be4a1c555c5d760d0bbda723" alt=""></sc-if></span>
+              <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b class="pk-ad">{{b.t}}</b><span class="pk-sub">{{b.sub}}</span></span>
+              <span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; font-variant-numeric: tabular-nums"><b class="pk-fiyat">{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s class="pk-eski">{{b.old}}</s></sc-if><sc-if value="{{b.hasUnit}}" hint-placeholder-val="{{false}}"><span class="pk-eski" style="text-decoration: none">{{b.unit}}</span></sc-if></span>
+            </span>
+            <span class="pk-hediye">+ 6 Tane Ücretsiz Hediye Disk</span>
+          </button>
+        </sc-for>
+      </div>
+    <button class="btn-on" type="button">{{onLabel}}</button>
+      <p class="bnot">{{onNote}}</p>
+      <!-- Canlıda kapıda ödeme uygulamasının formunu açar (uygulama korunur). -->
+      <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+      <p class="bnot">{{kpNote}}</p>
+    <ol class="yol" aria-label="Siparişten teslime">
+        <li><b>Bugün</b><span>Siparişin alındı</span></li>
+        <li><b>{{kargo}}</b><span>Kargoda</span></li>
+        <li><b>{{teslim}}</b><span>Kapında</span></li>
+      </ol>
+  </div>
+
+  <!-- Fayda: ikon yok; poster gibi büyük kelime + tek cümle, renk blokları -->
+  <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; padding: 40px 16px 0; scroll-snap-type: x mandatory">
+    <div class="poster" style="flex: 0 0 250px; background: #1A2142; color: #FFFDF9; scroll-snap-align: start"><b style="color: #F2A65A">6 + 6</b><span>Altı masal diski kutuda, altısı hediye. Her disk tavana başka bir masal.</span></div>
+    <div class="poster" style="flex: 0 0 250px; background: #F4C9B8; color: #1A2142; scroll-snap-align: start"><b>Ninni</b><span>Kız modelinde telefonundan bağlan, ninni lambadan çalsın.</span></div>
+    <div class="poster" style="flex: 0 0 250px; background: #F2A65A; color: #1A2142; scroll-snap-align: start"><b>Şarjlı</b><span>Kablo yok. Komodinden yatağın yanına taşı, sabah şarja tak.</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2 }; }
+  renderVals() {
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    var self = this, S = this.state, B = '/_blob/';
+    // Galeri = Shopify ana ürün medyası. "Elif K." kartı ve yorum kolajı (mevzuat) hariç tutuldu.
+    var G = [
+      { id: '211acb76d908e8ed6d4f5fcddc987893', n: 'Masalsı gece ışığı' }, { id: 'ec0a99ef7b8839a12ab7e6aa4282f7da', n: 'Temalar' },
+      { id: '652e1893a0ae33a24ee0e3d53edab757', n: 'Müşteri' }, { id: 'a08890007843d79d94bfffc397a3d0ac', n: 'Gece modu' },
+      { id: 'd4efe7e83c74524ece75e962161f7fff', n: 'Deniz altı' }, { id: '3ddd8b8b95f040d436d5d0ea350924b8', n: 'Hediye' },
+      { id: '98db755893dbcebe192c69e73ae5afff', n: 'Uzay Kaşifi' }
+    ];
+    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kucuk on' : 'kucuk', pick: function () { self.setState({ g: i }); } }; });
+    var kiz = S.model === 'kiz';
+    var models = [
+      { id: 'kiz', n: 'Kız', sub: 'Tavşanlı · ninnili', src: B + 'e02351b3be4a1c555c5d760d0bbda723' },
+      { id: 'erkek', n: 'Erkek', sub: 'Robot · ninnisiz', src: B + '0033dfea6282c5bc479c385213661c00' }
+    ].map(function (m) { var on = S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, on: on ? 'true' : 'false', cls: on ? 'mkart on' : 'mkart', pick: function () { self.setState({ model: m.id }); } }; });
+    // Paket: canlı sitedeki biçim. 1 Adet'te üstü çizili ₺1.999 (son 10 günde uygulandı, kullanıcı teyidi).
+    // 2 Adet'te ₺3.998 gösterilmez (2'li paket bu fiyattan hiç satılmadıysa mevzuat riski); yerine birim fiyat.
+    var P1 = 1699.99, P2 = 2749.99, C1 = 1999;
+    var paket = [
+      { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', rib: false, imgs: 1 },
+      { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(P2 / 2), sub: '2 tekliden %' + Math.round((1 - P2 / (2 * P1)) * 100) + ' az', rib: true, imgs: 2 }
+    ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.imgs === 2, on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
+    var total = S.adet === 2 ? P2 : P1, ucret = 80, online = Math.round(total * 0.95 * 100) / 100, kapida = total + ucret;
+    var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
+    var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+    var vals = {
+      gal: gal, gNo: S.g + 1, gCount: G.length, models: models, paket: paket,
+      modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi',
+      onLabel: 'Güvenli Ödeme İle Al · ' + TL(online, true),
+      onNote: 'Kartla %5 indirim · kapıda ödemeye göre ' + TL(kapida - online, true) + ' az',
+      kpNote: 'Kapıda ödeme ücreti ₺80 · toplam ' + TL(kapida, true),
+      kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim, kiz: kiz, erkek: !kiz,
+      rating: '4,7', reviews: 62, starPct: 94
+    };
+
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

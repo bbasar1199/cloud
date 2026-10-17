@@ -53,8 +53,29 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - `Fikir6-HediyeMi`: hediye anahtarı
 - Theme Check yerelde kurulabilir: `npm i @shopify/theme-check-node` (scratchpad'e), sonra `node node_modules/@shopify/theme-check-node/dist/cli.js <tema-klasörü>`.
 
+## Tur 5 · "sıkıcı" geri bildirimi (17 Ekim, gece)
+- Kullanıcı:
+  - ikonlu ya da emojili fayda yok
+  - model kartları idare eder
+  - galeri ana ürün fotoğrafları olacak
+  - "Işığı kapat" yok
+  - tasarım hâlâ sıkıcı
+  - canlı sitedeki kapıda ödeme ve paket yapısı korunacak
+- Canlı sayfa Playwright ile görüldü (`araclar/canli-sayfa.js`).
+  - Paket: alt alta 1/2 Adet kartları, "+6 Tane Ücretsiz Hediye Disk", "En Çok Tercih Edilen".
+  - Butonlar: "Güvenli Ödeme İle Al" ve "Kapıda Ödeme ile Sipariş Ver".
+  - Kapıda ödeme formu uygulamadan geliyor ve **₺80 ücret** ekliyor.
+- Tuvale 4 pano eklendi, Main'in sağında (x=1880):
+  - B+ (eleştirmenin önerisi)
+  - A Masal Kitabı
+  - B Gece Postası
+  - C Yörünge
+- Eleştirmen puanları: B 8, A 5, C 5. A ve C'de kemer/daire kırpması poster yazılarını kesiyor.
+- Üretim betikleri `araclar/tuval-uret/` altında. `python3 yonler.py`, ardından `python3 bplus.py`.
+- Uyarı: galerideki "Temalar" posterinde unicorn diski görünüyor (kutudan çıkmıyorsa 2 şikâyet var).
+
 ## Sıradaki işler (17 Ekim, güncel)
-1. Kullanıcıdan v2 ve 3 fikir için onay al.
+1. Kullanıcı Tur 5'ten yön seçsin (öneri B+). Seçilen yönle tam ürün sayfası, sonra sıfırdan tema.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
 2. Fiyat ve mevzuat soruları: son 10 günün fiyatı, Kasım zammı, iade metni (`TASARIM-BILGISI.md` §11).
 3. Kullanıcıdan teyitler: ölçü, pil, yaş, teslim, varyant yapısı, kapıda ödeme seçicisi.
