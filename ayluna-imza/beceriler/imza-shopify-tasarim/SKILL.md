@@ -116,6 +116,17 @@ Ana sayfa da aynı mantıkla: süsten değil satış akışından başla.
 - Videolar `preload="none"`; yalnız ekrandayken oynar. İkinci (gece) görsel `lazy`.
 - Liquid yazmadan önce `shopify-liquid` becerisinin `search_docs` betiğiyle doküman ara; teslimden önce `validate` ile doğrula.
 - Kontrastı ölç, tahmin etme. Krem zeminde küçük bej/kahve etiketler 4,5:1'in altında kalıyor (Ayluna'da #8A7F6E 3,5:1 çıktı).
+- **Türkiye mevzuatı** (1 Ağustos 2026'dan beri, Ticari Reklam Yönetmeliği değişikliği, Resmî Gazete 1 Temmuz 2026 / 33297):
+  - Üstü çizili önceki fiyat = indirimden önceki 10 gün içinde aynı kanaldaki en düşük fiyat. Kampanya başlangıç ve bitiş tarihi yazılır.
+  - Fiyat sabitse `compare_at_price` boş bırakılır.
+  - Miktar ya da işlem şartlı indirimler (paket, kartla öde) de bu kurala tabi.
+  - Satın alımı doğrulanamayan yorum yayımlanamaz; olumsuz yorum gizlenemez.
+  - Yasal 14 günlük cayma hakkı markaya özel avantaj gibi sunulamaz.
+  - Satıcı unvanı, MERSİS, adres, KEP, e-posta ve telefon ana sayfada ve İletişim'de bulunur.
+- Instagram ve Facebook uygulama içi tarayıcısı: otomatik video, Apple/Google Pay ve `100vh` güvenilmez çalışıyor.
+  - Sayfa videosuz da satmalı.
+  - Sahnede `svh`, yapışkan çubukta `env(safe-area-inset-bottom)`.
+- Horizon'da özel satın alma öğeleri en güvenli yeri: `blocks/` altında tema bloğu olarak `_product-details` içi. `product-information` çatallanmaz. App blokları için şemaya `@app` eklenir.
 - Sayfa vaadi kutudan çıkanla birebir aynı olmalı; fazla vaat = iade/red. Bilinmeyen değer yer tutucu kalır ([adet], [X saat]).
 - Shopify'ın dönüşüm oranı COD form siparişlerini saymaz. Gerçek ölçü: sipariş ÷ oturum + Meta Purchase olayı; başarı = teslim edilen ciro (dönüşüm, sepet, iade/red birlikte).
 - Bir bölümün yüksekliği değişirse altındaki her şey kayar: görsel/animasyon zamanlamasını sayfa kilitlendikten sonra yap.

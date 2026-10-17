@@ -216,12 +216,67 @@ Kodda bir not var: "Sihirli Özellikler (yeri korunur)". Canlı sitedeki bu böl
 - Ay atlası (çok ürünlü ana sayfa için)
 
 ## 7. Dürüstlük ve mevzuat
-`ogrenme/arastirma.md`'de kaynaklarıyla. Özet:
-- Uydurma sayı, isim, yorum yok. Puan ve sayı Loox'tan; veri yoksa blok gizlenir, sabit "62" gösterilmez.
-- Aciliyet yalnız gerçek kurala bağlı: ay sonu zammı (gerçekten varsa), gerçek stok eşiği, Flow'dan gelen "dün satılan". "X kişi bakıyor" yok.
+Kaynaklar `ogrenme/arastirma.md`'de (51 açılmış kaynak). Bu bir bilgi notu, avukat görüşü değil; ✓ işaretliler Resmî Gazete metninden doğrulandı.
+
+**Temel kurallar:**
+- Uydurma sayı, isim ve yorum yok. Puan ve sayı Loox'tan gelir; veri yoksa blok gizlenir, sabit "62" gösterilmez.
+- Aciliyet yalnız gerçek kurala bağlıdır: ay sonu zammı (gerçekten varsa), gerçek stok eşiği, Flow'dan gelen "dün satılan". "X kişi bakıyor" yok.
 - Elle girilen sayı tarih taşır, eskiyince gizlenir.
-- Sağlık iddiası ve teyitsiz teknik rakam yok.
-- Sayfa vaadi = kutu içeriği.
+- Sağlık iddiası ve teyitsiz teknik rakam yok. Sayfa vaadi = kutu içeriği.
+
+**İndirim gösterimi (Ticari Reklam Yönetmeliği m.14, 1 Ağustos 2026 değişikliği):**
+- ✓ "Önceki fiyat" artık indirim başlangıcından önceki **10 gün** içinde uygulanan en düşük fiyat (eskiden 30 gündü).
+- ✓ Önceki fiyat yalnız o kanalda belirlenir. Trendyol'daki fiyat ayluna.shop'taki indirime referans olamaz.
+- ✓ Şartlı indirimler de bu maddeye tabi (belirli miktar, tutar ya da işlem şartına bağlı olanlar). "Kartla öde %5" ve "2 lamba kazancı" bu kapsama girebilir.
+- Üstü çizili fiyat gösteriliyorsa önceki fiyat, kampanyanın başlangıç ve bitiş tarihi, sınırlı stoksa adet de yazılır. İspat satıcıdadır. Ceza aralığı 99.339 – 39.916.524 TL.
+- **Main'e etkisi:**
+  - ₺1.999,00 son 10 günde ayluna.shop'ta gerçekten uygulanmadıysa üstü çizili gösterilemez.
+  - ₺3.998,00 (2 × ₺1.999) 2'li paketin gerçek bir önceki fiyatı değil. Daha güvenli ifade: "2 ayrı almaya göre ₺649,99 daha az".
+  - Ay sonu zammı varsa "Ekim fiyatı bitiyor" yanına yeni fiyat yazılır: "1 Kasım'dan itibaren ₺X".
+  - %5 ve paket kazancı için hukukçu teyidi alınmalı.
+
+**İade ve cayma (Mesafeli Sözleşmeler Yönetmeliği):**
+- Yasal cayma 14 gün, teslimle başlar. Ödeme 14 gün içinde iade edilir; satıcının kargosuyla dönüş ücretsizdir.
+- Yasal hakkı Ayluna'ya özel avantaj gibi sunmak haksız uygulamadır (Ek A/9).
+- Önerilen metin: "30 gün iade: ilk 14 gün yasal cayma hakkın, Ayluna bunu 30 güne uzatır." 15–30. günlerin koşulu ve kargoyu kimin ödediği yazılır.
+
+**Yorumlar (m.28/B, 1 Ağustos 2026):**
+- ✓ Satın alımı doğrulanamayan yerden gelen yorum yayımlanamaz.
+- Olumlu ve olumsuz yorumlar ayrım yapılmadan en az 1 yıl yayımlanır, objektif sıralama kullanılır.
+- Tedarikçi ya da başka ürünün yorumu taşınamaz. Yalnız olumlu yoruma hediye verilemez.
+- Ağustos 2026'da olumsuz yorumu gizleyen bir firmaya 2,17 milyon TL ceza verildi.
+- PDP'ye not: "Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır, tümü yayımlanır."
+
+**Sayaç ve aciliyet:**
+- Sahte "kısa süre" iddiası her durumda yasaktır (Ek A/7).
+- Sayaç herkese aynı sabit tarihi göstermeli, **İstanbul saatine** göre çalışmalı ve oturumla sıfırlanmamalı. Şu an cihaz saatine göre çalışıyor; düzeltilecek.
+- Önceden seçili ücretli ek yasaktır. "Birlikte al" kutusu boş başlamalı; şu an öyle.
+- Kapıda ödemeyi gizlemek ya da zorlaştırmak karanlık tasarım riskidir. Kart varsayılan olabilir, ama iki seçenek eşit görünür kalır.
+
+**Satıcı kimliği:**
+- Ticaret unvanı, MERSİS, merkez adresi, KEP, e-posta ve telefon ana sayfada ve "İletişim"te bulunmalı.
+- Fiyat KDV dahil gösterilir. Kapıda ödeme ücreti varsa baştan yazılır.
+- Yayından önce `[Firma unvanı]`, `[numara]` ve ETBİS yer tutucuları dolmalı.
+
+**Kart:**
+- Kart için ek ücret alınamaz (5464 m.17). Online karta indirim ise aykırı görünmüyor.
+- Kapıda kartla ödemeden, kapıda nakitten fazla ücret alınmaz.
+
+**AI görsel:**
+- AI ile üretilmiş anne-çocuk görselleri gerçek müşteri deneyimi gibi sunulamaz.
+- Flow görselleri "ürün sahnesi"dir; "müşteri" etiketi taşıyamaz.
+
+**Araştırmanın tasarım önerileri:**
+- Galeride küçük resim şeridi (Main'de var). Sekme yerine dikey açılır bölümler.
+- Birim fiyat ve tahmini teslim tarihi (Main'de var). Teslim aralığı 5–7 günden geniş olmamalı.
+- Puan dağılımı çubukları ve filtreleri (Main'de yok). Olumsuz yorumlara görünür yanıt.
+- Gövde yazısı en az 16px; büyükanneler için 17–18px daha iyi. Dokunma alanı 48px (Shopify önerisi).
+- Taksit: tekli sepetlerin %98,9'u tek çekim; 2'li pakette (2.500–5.000 TL) %43,9'u 2–3 taksit seçiyor. "3 taksit" satırı yalnız 2'li pakette anlamlı. Toplam, taksit sayısı ve tutar birlikte yazılır.
+- Instagram uygulama içi tarayıcıda otomatik video, Apple/Google Pay ve 100vh güvenilmez çalışıyor.
+  - Sayfa videosuz da satmalı.
+  - Sahnede `svh` kullanılır, yapışkan çubukta `env(safe-area-inset-bottom)`.
+  - Gerçek cihazda Instagram içinden denenir.
+- Horizon'da özel öğelerin en güvenli yeri `blocks/` altında tema bloğu olarak `_product-details` içi. `product-information` çatallanmaz, böylece tema güncellemesi kolay kalır. Bugünkü yöntem ayrı bölüm + özel şablon; karar §12'de.
 
 ## 8. Shopify teknik kuralları
 - **Kaynak gerçek:** bölümler Main.dc'den türetilir. Şu an derleyici CSS'i `iskelet.html`'den alıyor (`araclar/shopify-derle.py:16`). Main'e geçince değiştirilmeli.
@@ -264,7 +319,32 @@ Kodda bir not var: "Sihirli Özellikler (yeri korunur)". Canlı sitedeki bu böl
   - Not: galerideki mağaza posterlerinde yazı var. Kural "yazısız kısım kırpılır" diyor; galeri için yazısız kareler tercih edilmeli.
 - Tuval: https://claude.ai/artifact/CHmRtH4tjbapGmPtuQGsTH. Yayın kuralları `DEVAM.md`'de.
 
-## 10. Açık kararlar (kullanıcıya sorulacak)
+## 10. Çalışma ortamı ve eklentiler (17 Ekim, "5 eklenti" rehberinden)
+Rehberdeki 5 eklentinin işlevini bu bulut ortamına uyarladım:
+
+| Eklenti | Ne yapıyor | Burada | Karar |
+|---|---|---|---|
+| Omniroute | Limit dolunca başka yapay zekâ sağlayıcılarına geçiyor | Bulut oturumunda model değiştirilemiyor. Mağaza ve müşteri verisi üçüncü taraflara gider. | Kurulmadı |
+| Claude Mem | Oturumlar arası hafıza | Konteyner her oturumda silinir; yerel hafıza kaybolur. Hafıza depoda tutulur: `CLAUDE.md`, `DEVAM.md`, bu dosya. | Depo hafızasıyla karşılandı |
+| Headroom | Bağlamı kırpıp token tasarrufu | Oturum bağlamı kendiliğinden özetliyor. Büyük okumalar alt ajanlara veriliyor. | Gerek yok |
+| Claude Code setup | Depoyu tarayıp eksik hook, beceri, MCP ve ajanı öneriyor | Anthropic'in resmi eklentisi, katalogda var. Yöntemi uygulandı: `ayluna-imza/CLAUDE.md`, `.claude/agents/ayluna-elestirmen.md`. | Uygulandı, kurulum önerildi |
+| Task Observer | Düzeltmeleri izleyip becerileri yeniden yazıyor | Bulutta arka plan izleyici yok. Aynı iş "Düzeltme günlüğü" kuralıyla yapılıyor (§11). | Kuralla karşılandı |
+
+Sonraki adım önerileri (kullanıcı isterse):
+- Bir hook: `shopify-kaynak/*.liquid` değişince `shopify-derle.py` kendiliğinden çalışsın.
+- `shopify/*.txt` elle düzenlenmesin; bu dosyalar derleyicinin çıktısı.
+- `CLAUDE.md` ve `.claude/agents/` ana dala da alınsın. Yeni oturum başlarken kendiliğinden yüklenirler.
+
+## 11. Düzeltme günlüğü (öğrenme döngüsü)
+Kullanıcı bir şeyi düzeltince buraya bir satır eklenir: tarih · ne dedi · çıkan kural. Kalıcı kural `beceriler/`'e de işlenir.
+
+| Tarih | Kullanıcı ne dedi | Çıkan kural |
+|---|---|---|
+| 17 Eki | "Kendini tasarımda inanılmaz seviyeye getir, tüm dosyaları ve eğitimleri öğren" (daha önce de söylemiş) | Her oturum `TASARIM-BILGISI.md` ile başlar. Öğrenilen her şey depoya yazılır, sohbette kalmaz. |
+| 17 Eki | Fayda listesi, sayaç, stok, "dün satılan" atılmasın | Tanıdık kalıp korunur, inceltilir, gerçek veriye bağlanır. |
+| 17 Eki | Ödemede öncelik online (%5), kapıda ikinci | Kartla öde varsayılan; bütün CTA'lar seçimi taşır. |
+
+## 12. Açık kararlar (kullanıcıya sorulacak)
 1. Main'de "dün satılan" ve stok satırı yok, ama 17 Ekim notu bunları istiyor. Eklensin mi? Önerim: Stokta noktasının yanına ince tek satır. Yalnız gerçek veri varsa görünsün.
 2. 16:00 kargo kesimi Main'de duruyor ama teyitsiz; RAPOR'a göre kaldırılmıştı. Teyit mi, kaldırma mı?
 3. Brif 1/2/3 paket istiyor, Main'de yalnız 1 ve 2 lamba var. 3'lü eklensin mi?
@@ -272,3 +352,11 @@ Kodda bir not var: "Sihirli Özellikler (yeri korunur)". Canlı sitedeki bu böl
 5. Alt CTA'lar (Bir gece kartı, kapanış) her zaman "Kapıda öde" ve indirimsiz fiyat diyor. Ödeme seçimine bağlansın mı? Önerim: evet.
 6. Kargo logolarında PTT kalsın mı? İade verisine göre önerim: hayır.
 7. Üst kampanya bandı: Main'de yok, Shopify'da var. Sayaç şeridiyle birlikte sayfada iki kez çıkıyor. Hangisi kalsın?
+8. Üstü çizili ₺1.999,00 son 10 günde ayluna.shop'ta gerçekten uygulandı mı?
+   - Evet: kampanya tarihleri yazılır.
+   - Hayır: üstü çizili fiyat kaldırılır ve "1 Kasım'dan itibaren ₺X" gibi gerçek zam bilgisi verilir.
+   - 2'li pakette ₺3.998,00 yerine "2 ayrı almaya göre ₺649,99 daha az" önerilir.
+9. "Kartla %5" ve paket kazancı için hukukçu teyidi alınsın mı? Şartlı indirim artık m.14 kapsamında.
+10. İade metni "14 gün yasal + 16 gün Ayluna" diye açılsın mı? 15–30. günlerde kargoyu kim ödüyor?
+11. Yapı: bugünkü gibi ayrı bölüm + özel şablon mu, yoksa Horizon'un ürün bloğu içinde tema bloğu mu? Tema bloğu güncellemeye daha dayanıklı.
+12. 2'li pakette "3 taksit" satırı gösterilsin mi? Ödeme sağlayıcısının taksit sınırı teyit edilmeli.

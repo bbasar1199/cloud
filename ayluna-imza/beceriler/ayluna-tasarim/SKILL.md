@@ -21,7 +21,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Tema kodu kopyala-yapıştır `.txt` dosyası olarak verilir. Zip, index ve rehber yalnız istenirse.
 - Önce mobil (390px), sonra masaüstü.
 - Beğenilen bölüm silinmez, geliştirilir.
-- **Her bölüm kararı önce eleştirmen ajana denetletilir.** Ajan kullanıcıyı taklit eder; kişilik tanımı `TASARIM-BILGISI.md` §1a'da. Ajanın en beğendiği 3 fikir kullanıcıya ayrı ayrı gösterilir.
+- **Her bölüm kararı önce eleştirmen ajana denetletilir.** Ajan kullanıcıyı taklit eder. Depoda hazır tanımı var: `.claude/agents/ayluna-elestirmen.md`; kişilik `TASARIM-BILGISI.md` §1a'da. Ajanın en beğendiği 3 fikir kullanıcıya ayrı ayrı gösterilir.
+- **Öğrenme döngüsü:** kullanıcı bir şeyi düzeltince aynı turda `TASARIM-BILGISI.md` → "Düzeltme günlüğü"ne yazılır. Kalıcıysa bu beceriye de işlenir. Aynı düzeltme ikinci kez gelmemeli.
+- **Hafıza depodadır:** bulut konteyneri her oturumda silinir. Karar ve öğrenilenler commit'lenip dala gönderilir.
 - Her değişiklikten sonra telefon genişliğinde ekran görüntüsü alıp bakılır (`araclar/ekran-goruntusu.js`, `araclar/dc-onizle.js`).
 - Kararlar `DEVAM.md`'ye ve tuval notuna yazılır. Kullanıcı yorum bırakmıyor; iz yalnız orada kalır.
 
@@ -122,7 +124,15 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - elle girilen sayı tarih taşır, eskiyince gizlenir
 - "X kişi bakıyor", sahte geri sayım ve uydurma satış adedi yok.
 - Sağlık iddiası ve teyitsiz teknik rakam yok. Sayfa vaadi kutuyla birebir aynı olur.
-- Mevzuat ayrıntısı `ayluna-imza/ogrenme/arastirma.md`'de.
+- **Mevzuat** (1 Ağustos 2026 değişikliği, Resmî Gazete'den doğrulandı):
+  - Üstü çizili "önceki fiyat" = indirimden önceki **10 gün** içinde aynı kanalda uygulanan en düşük fiyat. Kampanya tarihleri yazılır.
+  - Şartlı indirimler de bu kurala tabi: kartla %5, paket kazancı.
+  - Satın alımı doğrulanamayan yorum yayımlanamaz. Olumsuz yorum gizlenemez.
+- Yasal cayma 14 gündür. "30 gün iade" = 14 yasal + 16 Ayluna; yasal hak özel avantaj gibi sunulmaz.
+- Sayaç İstanbul saatine göre, herkese aynı sabit tarihi gösterir; oturumla sıfırlanmaz.
+- Kapıda ödeme gizlenmez. Ücretli ek önceden seçilmez.
+- AI görseli "müşteri" diye sunulmaz.
+- Ayrıntı: `ayluna-imza/ogrenme/arastirma.md` ve `TASARIM-BILGISI.md` §7.
 
 ## Görsel
 - Ürün asla sıfırdan üretilmez. Gerçek fotoğraf referans alınır, sahne ve ışık değişir.
