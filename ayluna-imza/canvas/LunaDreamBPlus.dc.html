@@ -51,7 +51,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
 /* Yazı ölçeği (Tur 11, kullanıcı: "yazı bazı yerlerde çok büyük, düzensiz"):
    başlık 1: 44 (yalnız LunaDream) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün) · kart başlığı: 18–20
    gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Bölüm etiketi tek stil: 13px kalın, #A05A1C, büyük harf yok. */
-.h2{font-size:26px;line-height:1.12}
+.pg{font-size:15px}
+.h2{font-size:22px;line-height:1.15}
 .etiket{font-size:13px}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
 .duyuru{display:flex;justify-content:center;align-items:center;gap:10px;height:36px;background:#F2A65A;color:#1A2142;font-size:13px;font-weight:600}
@@ -65,10 +66,13 @@ a{color:#1A2142}a:hover{color:#2B3463}
 }
 .guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#2E6B4F}
 .guven-ust span+span::before{content:"·";margin-right:10px;color:#9AA79F}
+.ikili{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;font-weight:600;color:#5C6078}
+.cip2{display:inline-flex;align-items:center;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.cip2.on{border-color:#1A2142;box-shadow:inset 0 0 0 1px #1A2142}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D9CDB9;line-height:1}
 .yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
-.dev{font-family:"Young Serif",Georgia,serif;font-size:32px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
+.dev{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
 .dev span,.h2 span.n{color:#E59A4C}
 .mkart{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .mkart:active,.pk:active,.cip:active{transform:scale(.985)}
@@ -81,13 +85,13 @@ a{color:#1A2142}a:hover{color:#2B3463}
    Her kartta üst satır: solda ikon, sağda ürüne özgü küçük canlı gösterge; altında başlık ve tek cümle.
    Döngüler yavaş, yalnız transform/opacity. Canlıda kart ekrana girince 150 ms arayla başlar (IntersectionObserver). */
 .sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.oz{position:relative;isolation:isolate;overflow:hidden;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1px solid #EDE3D3;box-shadow:0 10px 26px rgba(26,33,66,.06);color:#1A2142;text-decoration:none}
+.oz{position:relative;isolation:isolate;overflow:hidden;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1px solid #EDE3D3;color:#1A2142;text-decoration:none}
 .oz-ust{display:flex;align-items:center;justify-content:space-between;gap:8px;height:48px;margin-bottom:2px}
 .oz .ik{position:relative;width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center;background:#1A2142;color:#F2A65A}
 .oz .ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .oz .ik.yan::before{content:"";position:absolute;inset:-22px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.7),rgba(242,166,90,0) 66%);animation:nefes 4.5s ease-in-out infinite}
-.oz b{font-size:16px;font-weight:700;line-height:1.25}
-.oz .t{font-size:15px;line-height:1.4;color:#5C6078;text-wrap:balance}
+.oz b{font-size:15px;font-weight:700;line-height:1.25}
+.oz .t{font-size:14px;line-height:1.4;color:#5C6078;text-wrap:balance}
 .oz .t u{color:#A05A1C;text-underline-offset:3px;white-space:nowrap}
 @keyframes nefes{0%,100%{transform:scale(.8);opacity:.45}50%{transform:scale(1.12);opacity:1}}
 @keyframes yel{from{transform:rotate(0)}to{transform:rotate(var(--r))}}
@@ -112,24 +116,24 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.55);transform-origin:50% 60%}
 .lamba.iki{left:26px}
 .pk.on .lamba{border-color:#1A2142}
-.pk-ad{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.pk-ad{font-size:17px;font-weight:700;letter-spacing:-.02em}
 .pk-sub{font-size:13px;opacity:.75;margin-top:2px}
-.pk-fiyat{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.pk-fiyat{font-size:18px;font-weight:700;letter-spacing:-.02em}
 .pk.on .pk-fiyat{color:#F2A65A}
 .pk-eski{font-size:13px;opacity:.7;margin-top:3px}
-.pk-hediye{display:block;padding:10px 14px;font-size:15px;font-weight:700;background:#F3E9DA;color:#8A4A12;border-radius:0 0 18.5px 18.5px}
+.pk-hediye{display:block;padding:9px 14px;font-size:14px;font-weight:700;background:#F3E9DA;color:#8A4A12;border-radius:0 0 18.5px 18.5px}
 .pk.on .pk-hediye{background:#F2A65A;color:#1A2142}
 .kurdele{position:absolute;right:14px;top:-13px;z-index:1;padding:3px 12px;border-radius:999px;background:#F2A65A;color:#1A2142;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #F6F1E9}
-.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
+.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
-.btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .bnot{margin:7px 0 0;text-align:center;font-size:13px;color:#5C6078}
 .yol{position:relative;list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:13px;border-top:1.5px dashed #C9BFAE}
 .yol li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
 .yol li::before{content:"";width:26px;height:26px;border-radius:50%;background:#F6F1E9;border:1.5px solid #1A2142;margin-bottom:6px;box-shadow:inset 0 0 0 5px #F6F1E9,inset 0 0 0 13px #E3D8C7}
 .yol li:first-child::before{box-shadow:inset 0 0 0 5px #F6F1E9,inset 0 0 0 13px #F2A65A}
-.yol b{font-size:15px;font-weight:700}
+.yol b{font-size:14px;font-weight:700}
 .yol span{font-size:13px;color:#5C6078}
 .guven{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:12px 0;border-top:1px solid #E3D8C7;border-bottom:1px solid #E3D8C7;font-size:13px;font-weight:600}
 .guven span+span::before{content:"·";margin-right:14px;color:#E59A4C}
@@ -139,22 +143,22 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .gece{background:#1A2142;color:#EDE5D8;padding:32px 0 34px;margin-top:36px;border-radius:28px}
 .an{position:relative;flex:0 0 240px;height:320px;border-radius:24px;overflow:hidden;background:#0C1027;scroll-snap-align:start}
 .an img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.an .saat{position:absolute;left:16px;top:14px;font-family:"Young Serif",Georgia,serif;font-size:40px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
+.an .saat{position:absolute;left:16px;top:14px;font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
 .an .alt2{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px}
-.cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
+.cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cip.on{background:#1A2142;color:#FFFDF9}
-.tavan{position:relative;height:300px;border-radius:24px;overflow:hidden;background:radial-gradient(120% 90% at 50% 30%,#232B55 0%,#141A36 60%,#0C1027 100%)}
+.tavan{position:relative;height:280px;overflow:hidden;background:radial-gradient(70% 70% at 50% 45%,#232B55 0%,rgba(26,33,66,0) 100%)}
 .yansima{position:absolute;left:50%;top:42%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.92);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
 .yansima.on{opacity:.92;transform:none}
 .yansima img{width:100%;height:100%;object-fit:cover;display:block}
-.dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:64px;min-height:88px;flex:none}
+.dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:64px;min-height:60px;flex:none}
 .dbtn img{width:54px;height:54px;border-radius:50%;object-fit:cover;outline:2px solid transparent;outline-offset:3px;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
 .dbtn.on{color:#FFFDF9;font-weight:600}
 .dbtn.on img{outline-color:#F2A65A;transform:translateY(-4px)}
-.otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;padding:20px;border-radius:24px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:56px;line-height:.85;letter-spacing:-.04em;color:#E59A4C}
+.otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:4px 0;color:#1A2142}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:40px;line-height:.85;letter-spacing:-.03em;color:#E59A4C}
 .sss{border-bottom:1.5px solid #E3D8C7}
-.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:16px;cursor:pointer}
+.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
 .sss .arti{width:32px;height:32px;border-radius:50%;background:#1A2142;color:#FFFDF9;display:grid;place-items:center;flex:none;transition:transform .2s}
 .sss[open] .arti{transform:rotate(45deg)}
@@ -164,7 +168,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yapis{position:sticky;bottom:0;z-index:5;margin-top:-76px;height:76px;padding:0 12px;background:#1A2142;display:flex;align-items:center;gap:10px;border-radius:20px 20px 0 0}
 /* Baskı unsurları (Tur 9, kullanıcı: "baskılayıcıları arttıralım"): yalnız gerçek veriyle, veri yoksa gizlenir.
    Sayaç: kampanya bitiş tarihi (tema ayarı). Stok: Shopify envanteri eşik altındaysa. Dün: Shopify Flow'un yazdığı metafield. */
-.canli{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:#1A2142}
+.canli{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#1A2142}
 .canli li{display:flex;align-items:center;gap:10px}
 @keyframes nabiz{0%,100%{opacity:1}50%{opacity:.3}}
 .canli i{flex:none;width:8px;height:8px;border-radius:50%;animation:nabiz 1.8s ease-in-out 3}
@@ -175,15 +179,15 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .vid-oyna{position:absolute;left:50%;top:42%;z-index:1;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,249,.94);box-shadow:0 6px 16px rgba(12,16,39,.35)}
 .vid-oyna svg{width:22px;height:22px;fill:#1A2142;margin-left:3px}
 .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
-.vid-alt b{font-size:15px}
+.vid-alt b{font-size:14px}
 .vid-alt span{font-size:13px;color:#D9DCEB}
 .vid-etiket{position:absolute;left:10px;top:10px;z-index:1;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(12,16,39,.6)}
 /* Yorum duvarı: müşteri fotoğrafları + konu çipleri + kaydırmalı yorum kartları (metinler Loox'tan birebir) */
 .mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#EDE3D3;cursor:pointer}
 .mf img{width:100%;height:100%;object-fit:cover;display:block}
 .yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
-.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:36px;line-height:.6;color:#E59A4C;height:20px}
-.yk2 q{font-family:"Young Serif",Georgia,serif;font-size:18px;line-height:1.3;quotes:none;flex:1}
+.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#E59A4C;height:20px}
+.yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
 .yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2E6B4F}
 .yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F3E9DA;color:#5C5245}
@@ -196,7 +200,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><b>{{cdShort}}</b></div>
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
-    <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 20px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
+    <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
     <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
     <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
@@ -215,23 +219,23 @@ a{color:#1A2142}a:hover{color:#2B3463}
       <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2E6B4F"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #3B8A63"></span>Stokta</span>
     </div>
     <h1 class="dev">LunaDream<span>.</span></h1>
-    <p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 22px; letter-spacing: -.01em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span class="indirim">%{{pct}} indirim</span></p>
+    <p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 20px; letter-spacing: -.01em">{{p1}}</b><s style="font-size: 14px; color: #5C6078">{{c1}}</s><span class="indirim">%{{pct}} indirim</span></p>
     <p class="guven-ust"><span>Ücretsiz kargo</span><span>30 gün iade</span><span>Güvenli ödeme</span></p>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
     <div class="sih">
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">Odayı loş, sıcak bir ışıkla aydınlatır.</span></div>
+      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">Loş, sıcak gece ışığı.</span></div>
       <a class="oz" href="#diskler"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span class="yelpaze"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""></span></span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
-      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></div></sc-if>
-      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninnili robot</b><span class="t">Uyku öncesi ninni çalar.</span></div></sc-if>
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></div>
+      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, çalsın.</span></div></sc-if>
+      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninnili robot</b><span class="t">Ninni çalar.</span></div></sc-if>
+      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarjlı, her odaya taşı.</span></div>
     </div>
 
     <div class="etiket" style="margin-top: 24px"><span>Model</span></div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
       <sc-for list="{{models}}" as="m" hint-placeholder-count="2">
-        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="foto"><img src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 15px; font-weight: 700">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
+        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="foto"><img src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 14px; font-weight: 700">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
       </sc-for>
     </div>
 
@@ -241,19 +245,19 @@ a{color:#1A2142}a:hover{color:#2B3463}
         <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}">
           <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if>
           <span class="pk-ust">
-            <span class="pk-foto"><span class="lamba"><img src="{{modelSrc}}" alt=""></span><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="lamba iki"><img src="{{modelSrc}}" alt=""></span></sc-if></span>
+            <span class="pk-foto"><span class="lamba"><img src="{{b.src1}}" alt=""></span><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="lamba iki"><img src="{{b.src2}}" alt=""></span></sc-if></span>
             <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b class="pk-ad">{{b.t}}</b><span class="pk-sub">{{b.sub}}</span></span>
             <span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; font-variant-numeric: tabular-nums"><b class="pk-fiyat">{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s class="pk-eski">{{b.old}}</s></sc-if><sc-if value="{{b.hasUnit}}" hint-placeholder-val="{{false}}"><span class="pk-eski">{{b.unit}}</span></sc-if></span>
           </span>
-          <span class="pk-hediye">+ 6 Tane Ücretsiz Hediye Disk</span>
+          <span class="pk-hediye">+6 hediye disk</span>
         </button>
       </sc-for>
     </div>
 
+    <sc-if value="{{ikiliAcik}}" hint-placeholder-val="{{true}}"><div class="ikili" role="group" aria-label="İki lambanın modeli"><span>İki lamba:</span><sc-for list="{{ikiliSec}}" as="o" hint-placeholder-count="2"><button class="{{o.cls}}" onClick="{{o.pick}}" aria-pressed="{{o.on}}">{{o.n}}</button></sc-for></div></sc-if>
     <!-- Stok: Shopify envanteri eşiğin (tema ayarı) altındaysa görünür. Dün: Shopify Flow her gece metafield'e yazar; sayı yoksa ya da 3'ten azsa satır gizli. -->
     <ul class="canli">
-      <li><i style="background: #E59A4C"></i><span>Stokta son <b>[X]</b> adet</span></li>
-      <li><i style="background: #3B8A63"></i><span>Dün <b>[X]</b> aile sipariş verdi</span></li>
+      <li><i style="background: #E59A4C"></i><span>Stokta son <b>[X]</b> adet · dün <b>[X]</b> aile aldı</span></li>
     </ul>
     <button class="btn-on" type="button">{{onLabel}}</button>
     <p class="bnot">{{onNote}}</p>
@@ -265,7 +269,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
   <section class="bolum gir" id="videolar">
-    <div class="px"><p class="ust-yazi">Videolar</p><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
+    <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
       <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
@@ -274,9 +278,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
   <section id="yorumlar" class="bolum gir">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 40px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span></span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
-    <p class="px" style="margin: 18px 0 0; font-size: 13px; font-weight: 700; color: #766B5B">Müşteri fotoğrafları</p>
-    <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 8px 16px 0">
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span></span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
       <sc-for list="{{mfoto}}" as="f" hint-placeholder-count="5"><button class="mf" type="button" aria-label="Müşteri fotoğrafını büyüt"><img src="{{f.src}}" alt="{{f.alt}}"></button></sc-for>
     </div>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
@@ -294,11 +297,11 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- Bir gece, beş an -->
   <section class="gece gir">
-    <div class="px"><p class="ust-yazi" style="color: #F2A65A">Nasıl kullanılır</p><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
+    <div class="px"><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 18px 16px 0">
       <!-- Canlıda: kısa sessiz döngü videolar (onizleme/v/), yalnız ekrandayken oynar -->
       <sc-for list="{{moments}}" as="a" hint-placeholder-count="5">
-        <article class="an"><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12,16,39,.88) 0%, rgba(12,16,39,0) 55%)"></span><span class="saat">{{a.t}}</span><span class="alt2"><b style="font-size: 18px; color: #FFFDF9">{{a.title}}</b><span style="font-size: 15px; color: #B9BED6">{{a.text}}</span></span></article>
+        <article class="an"><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12,16,39,.88) 0%, rgba(12,16,39,0) 55%)"></span><span class="saat">{{a.t}}</span><span class="alt2"><b style="font-size: 16px; color: #FFFDF9">{{a.title}}</b><span style="font-size: 14px; color: #B9BED6">{{a.text}}</span></span></article>
       </sc-for>
       <span aria-hidden="true" style="flex: 0 0 4px"></span>
     </div>
@@ -306,16 +309,16 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- Diskler: tavana yansıt -->
   <section class="gece gir" id="diskler">
-    <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 15px; color: #B9BED6">Diski seç, desenini gör.</p></div>
+    <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
       <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>
-      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Disk</span><b class="ser" style="font-size: 20px; font-weight: 400">{{discName}}</b></span>
+      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Disk</span><b class="ser" style="font-size: 18px; font-weight: 400">{{discName}}</b></span>
     </div></div>
     <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 14px 16px 0">
-      <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini tavanda göster"><img src="{{d.src}}" alt=""><span>{{d.n}}</span></button></sc-for>
+      <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for>
     </div>
-    <p class="px" style="margin: 10px 0 0; font-size: 13px; color: #B9BED6">[Hangi 6 diskin kutuda, hangisinin hediye olduğu teyit edilecek.]</p>
+    <!-- Teyit: hangi 6 disk kutuda, hangi 6 hediye; hediyeler işaretlenecek -->
   </section>
 
   <!-- Kutuda ne var -->
@@ -323,7 +326,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <h2 class="h2">Kutudan ne çıkıyor<span class="n">.</span></h2>
     <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 16px">
       <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #EDE3D3"><img src="/_blob/54f170c0696110348e309338400f7cc7" alt="Elde tutulan LunaDream" style="width: 100%; height: 100%; object-fit: cover"></div>
-      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 15px">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
         <li><b>1</b> {{boxModel}}</li><li><b>6</b> masal diski</li><li><b>+6</b> hediye disk</li><li><b>1</b> USB şarj kablosu</li>
         <li style="color: #5C6078; font-size: 13px; padding-top: 6px; border-top: 1px dashed #D9CDB9">Boyut [X] cm · Pil [X] saat</li>
       </ul>
@@ -332,14 +335,14 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- 30 gün iade -->
   <section class="px bolum gir">
-    <div class="otuz"><b class="say">30</b><span style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 18px; line-height: 1.2">gün içinde iade</b><span style="font-size: 15px; line-height: 1.4">İlk 14 gün yasal cayma hakkın; Ayluna bunu 30 güne uzatır.</span></span></div>
+    <div class="otuz"><b class="say">30</b><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px; line-height: 1.2">gün içinde iade</b><span style="font-size: 14px; color: #5C6078">Yasal 14 günü 30 güne uzattık.</span></span></div>
   </section>
 
   <!-- SSS -->
   <section class="px bolum gir">
     <h2 class="h2">Merak edilenler<span class="n">.</span></h2>
     <div style="margin-top: 14px; border-top: 1.5px solid #E3D8C7">
-      <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p style="margin: 0 0 16px; font-size: 15px; color: #3A3F5A">{{f.a}}</p></details></sc-for>
+      <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p style="margin: 0 0 16px; font-size: 14px; color: #3A3F5A">{{f.a}}</p></details></sc-for>
     </div>
   </section>
 
@@ -348,7 +351,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4">
-        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #EDE3D3; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #F2A65A; color: #1A2142; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 15px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 15px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
+        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #EDE3D3; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #F2A65A; color: #1A2142; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
       </sc-for>
     </div>
   </section>
@@ -358,9 +361,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <div class="px">
       <h2 class="h2" style="color: #FFFDF9">İlk geceyi<br>birlikte izleyin<span class="n">.</span></h2>
       <button class="btn-on" type="button" style="margin-top: 16px">{{onLabel}}</button>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 15px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
-      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F3E9DA"><span class="ser" aria-hidden="true" style="font-size: 72px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
+      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F3E9DA"><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
       <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); font-size: 12px; color: #8E94B3">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
   </footer>
@@ -368,14 +371,14 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #EFE6D8"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 18px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 4px 0 #C97F38">Satın al</button>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6150}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, topic: 'Tümü', disc: 1, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, ikili: 'ayni', topic: 'Tümü', disc: 1, now: Date.now() }; }
   componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }
   componentWillUnmount() { clearInterval(this.iv); }
   renderVals() {
@@ -408,10 +411,13 @@ class Component extends DCLogic {
     ].map(function (m) { var on = S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, on: on ? 'true' : 'false', cls: on ? 'mkart on' : 'mkart', pick: function () { self.setState({ model: m.id }); } }; });
     // Paket: canlı sitedeki biçim. 1 Adet'te ₺1.999 (son 10 günde uygulandı, kullanıcı teyidi). 2 Adet'te birim fiyat.
     var P1 = 1699.99, P2 = 2749.99, C1 = 1999;
+    // 2'li paket: iki lamba aynı model ya da 1 Kız + 1 Erkek (canlıda sepete iki ayrı varyant eklenir)
+    var ikili = S.ikili === 'karisik' ? [KIZ, ERKEK] : (kiz ? [KIZ, KIZ] : [ERKEK, ERKEK]), ikiliSrc = ikili;
+    var ikiliSec = [{ id: 'ayni', n: kiz ? '2 Kız' : '2 Erkek' }, { id: 'karisik', n: '1 Kız + 1 Erkek' }].map(function (o) { var on = (S.ikili || 'ayni') === o.id; return { n: o.n, on: on ? 'true' : 'false', cls: on ? 'cip2 on' : 'cip2', pick: function () { self.setState({ ikili: o.id }); } }; });
     var paket = [
       { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', rib: false },
       { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(P2 / 2), sub: TL(2 * P1 - P2, true) + ' tasarruf', rib: true }
-    ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
+    ].map(function (b) { var on = S.adet === b.n; return { src1: b.n === 2 ? ikiliSrc[0] : (kiz ? KIZ : ERKEK), src2: ikiliSrc[1], t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
     var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, kapida = total + 80;
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
@@ -494,11 +500,11 @@ class Component extends DCLogic {
     ];
     return {
       gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KIZ : ERKEK,
-      kiz: kiz, erkek: !kiz, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      kiz: kiz, erkek: !kiz, paket: paket, ikiliSec: ikiliSec, ikiliAcik: S.adet === 2, adetName: S.adet === 2 ? (S.ikili === 'karisik' ? '1 Kız + 1 Erkek' : '2 Adet') : '1 Adet',
       onLabel: 'Güvenli Ödeme İle Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
-      onNote: 'Kartla %5 indirim · kapıda ödemeye göre ' + TL(kapida - online, true) + ' az',
-      kpNote: 'Kapıda ödeme ücreti ₺80 · toplam ' + TL(kapida, true),
+      onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
+      kpNote: '+₺80 kapıda ödeme ücreti · ' + TL(kapida, true),
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
