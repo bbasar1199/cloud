@@ -122,6 +122,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - "Işığı aç" anahtarı ve saat konmadı (17 Ekim kararı).
 - Kullanıcı tuvalde alt başlığı ve "hayal" bandını sildi; üreticiye işlendi. Pano yüksekliği 6100.
 - "Stokta" canlıda Shopify stok bilgisinden gelir; stok yoksa görünmez.
+- Eleştirmen 7/10. Uygulananlar:
+  - "Temalar" afişi galeriden çıktı. Kutuda olmayan diskler gösteriyor (unicorn, 2025); afiş düzelince geri gelir.
+  - iç disk kalktı; iki disk alttaki karanlık bantta, ekran kenarına yarı taşar
+  - şerit sağda solar, sayaç zemini dolu
+  - tutamak ve `border-color` geçişi kalktı
+  - tuvalde fotoğrafın sol/sağ yarısına dokununca önceki/sonraki
+- Canlı temada yapılacak: ana fotoğraf parmakla kaydırılır (scroll-snap) ve sayaç güncellenir; seçili küçük resim görünür alana kayar; diskler ekrandan çıkınca durur (IntersectionObserver); puan Loox'tan gelir, veri yoksa gizlenir.
+- Uygulanmadı: yapışkan buton ilk ekranda. Kural: ana buton ekrandan çıkınca açılır.
 
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
