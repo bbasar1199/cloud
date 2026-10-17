@@ -152,7 +152,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - dünkü sipariş sayısı (Shopify Flow → ürün metafield'i)
   - videolar (blok başına Shopify videosu)
   - Loox puanı ve yorumları
-- Sorulacak: robot modelinde Bluetooth var mı? Videolar hangileri (dosyalar)? Kampanya bitiş tarihi?
+- Eleştirmen sonrası düzeltmeler:
+  - SSS "Erkek modelinde hoparlör yoktur" yerine "İki modelde de ninni var"; robotta Bluetooth [teyit] (yer tutucu)
+  - stok satırı "Stokta son [X] adet"
+  - dün satırı 3'ten azsa gizli
+  - yapışkan çubuk "2 Adet · kartla" + "14 gün kaldı"
+  - sayaç şeridi "Kampanya 31 Ekim'de bitiyor" (tarih yazılır; yayında varsayılan kapalı)
+  - yazılı afişler logo bandının altından başlar; oda sahneleri bandın altına uzanır
+  - disk önizlemesinde "Tavanda" yerine "Disk"
+  - 2. video kapağı altyazısız kare
+  - konu çipi kontrastı yükseltildi
+- Canlıda yapılacak:
+  - Loox puan dağılımı eklenecek
+  - "Satın aldı" etiketi yalnız doğrulanmış yorumda
+  - video yoksa Videolar bölümü gizlenir
+  - her disk için karanlık odada çekilmiş gerçek tavan fotoğrafı istenecek
+- Sorulacak: robotta Bluetooth var mı, ninni dahili mi? Videolar hangileri (dosyalar)? Kampanya bitiş tarihi?
 
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.

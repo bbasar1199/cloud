@@ -88,7 +88,7 @@ Her oturumda `DEVAM.md`'den sonra bunu oku. Ayrıntı ve kaynaklar `ogrenme/` kl
 
 **Ürün gerçekleri:**
 - 1 lamba ₺1.699,99, 2 lamba ₺2.749,99.
-- Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, **hoparlörsüz**.
+- Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, **ninnili** (kullanıcı, 17 Eki; eski "hoparlörsüz" bilgisi geçersiz). Robotta Bluetooth olup olmadığı teyit edilmedi.
 - Kutuda 6 disk + 6 hediye disk. Brif şikâyeti: "12 disk yazıyor, 6 geliyor". Bu yüzden her yerde "6 + 6 hediye" yazılır, çıplak "12 disk" yazılmaz.
 - Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan gelir.

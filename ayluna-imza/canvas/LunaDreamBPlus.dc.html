@@ -32,12 +32,12 @@ a{color:#1A2142}a:hover{color:#2B3463}
 /* Sahne (Tur 8, kullanıcı: "görsel kısmı Main'deki gibi, ama bizim ürün görsellerimiz"): gece laciverti zemin, üstte logo,
    kare ürün fotoğrafı kırpılmadan tam genişlik, alt kenarı geceye karışır; diskler fotoğrafın kenarlarında yavaşça süzülür;
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
-.sahne{position:relative;height:420px;background:#0C1027;overflow:hidden;color:#FFFDF9}
+.sahne{position:relative;height:476px;background:#0C1027;overflow:hidden;color:#FFFDF9}
 .sahne header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;text-shadow:0 1px 8px rgba(12,16,39,.5)}
-.sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:390px}
+.sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:446px}
 .sahne .gec{position:absolute;top:0;bottom:0;width:50%;z-index:1;padding:0;border:0;background:transparent;cursor:pointer}
-.sahne .kare-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
-.sahne .kare-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 75%,rgba(12,16,39,.97) 84.5%,#0C1027 87.5%);pointer-events:none}
+.sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
+.sahne .kare-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 78%,rgba(12,16,39,.97) 86.5%,#0C1027 89%);pointer-events:none}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
 .yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
@@ -171,16 +171,16 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yk2 q{font-family:"Young Serif",Georgia,serif;font-size:18px;line-height:1.3;quotes:none;flex:1}
 .yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px}
 .yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;color:#2E6B4F}
-.yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F3E9DA;color:#766B5B}
+.yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F3E9DA;color:#5C5245}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
 @media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
 </style>
 </helmet>
 <div class="pg" style="padding-bottom: 0">
-  <!-- Sahne: logo bandı fotoğrafın üstünde (tek parça). Önce profesyonel oda sahneleri, sonra mağaza afişleri (kare, kırpılmadan) -->
+  <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 22px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
-    <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
+    <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
     <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
     <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
     <div class="seritler">
@@ -199,7 +199,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     </div>
     <h1 class="dev">LunaDream<span>.</span></h1>
     <p style="margin: 12px 0 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 24px; letter-spacing: -.02em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span style="font-size: 14px; font-weight: 600; color: #2E6B4F">kartla {{p1on}}</span></p>
-    <!-- Kampanya sayacı: bitiş tarihi tema ayarından (yoksa gizli). Tuvalde ay sonuna sayar. -->
+    <!-- Kampanya sayacı: bitiş tarihi tema ayarından; varsayılan kapalı (zam/kampanya kararı gelince açılır). Tuvalde ay sonuna sayar. -->
     <div class="sayac2" role="timer" aria-label="{{cdAria}}"><span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cdLine}}</span></span><b>{{cdShort}}</b></div>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
@@ -235,9 +235,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
       </sc-for>
     </div>
 
-    <!-- Stok: Shopify envanteri eşiğin altındaysa görünür. Dün: Shopify Flow her gece metafield'e yazar; yoksa satır gizli. -->
+    <!-- Stok: Shopify envanteri eşiğin (tema ayarı) altındaysa görünür. Dün: Shopify Flow her gece metafield'e yazar; sayı yoksa ya da 3'ten azsa satır gizli. -->
     <ul class="canli">
-      <li><i style="background: #E59A4C"></i><span>Stok azalıyor: bu fiyattan son <b>[X]</b> adet</span></li>
+      <li><i style="background: #E59A4C"></i><span>Stokta son <b>[X]</b> adet</span></li>
       <li><i style="background: #3B8A63"></i><span>Dün <b>[X]</b> aile sipariş verdi</span></li>
     </ul>
     <button class="btn-on" type="button">{{onLabel}}</button>
@@ -249,7 +249,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <p class="guven"><span>Ücretsiz kargo</span><span>30 gün iade</span><span>Güvenli ödeme</span></p>
   </section>
 
-  <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun ilk karesi). Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
+  <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
   <section class="bolum" id="videolar">
     <div class="px"><p class="ust-yazi">Videolar</p><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
@@ -270,7 +270,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     </div>
   </section>
 
-  <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). Fotoğraflar Loox foto yorumlarından. -->
+  <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
   <section id="yorumlar" class="bolum">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 52px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span></span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <p class="px" style="margin: 18px 0 0; font-size: 13px; font-weight: 700; color: #766B5B">Müşteri fotoğrafları</p>
@@ -296,7 +296,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
       <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>
-      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Tavanda</span><b class="ser" style="font-size: 22px; font-weight: 400">{{discName}}</b></span>
+      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Disk</span><b class="ser" style="font-size: 22px; font-weight: 400">{{discName}}</b></span>
     </div></div>
     <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 14px 16px 0">
       <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini tavanda göster"><img src="{{d.src}}" alt=""><span>{{d.n}}</span></button></sc-for>
@@ -354,12 +354,12 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #EFE6D8"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><span style="display: flex; align-items: baseline; gap: 6px"><b style="font-size: 17px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">kartla</span></span><span style="font-size: 12px; color: #F2A65A">Kampanya · {{cdTiny}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 17px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 4px 0 #C97F38">Satın al</button>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6700}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6750}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, topic: 'Tümü', disc: 1, now: Date.now() }; }
   componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }
@@ -370,9 +370,9 @@ class Component extends DCLogic {
     // Galeri = Shopify ana ürün medyası ("Elif K." kartı ve yorum kolajı mevzuat gereği hariç)
     // Galeri: önce profesyonel oda sahneleri (gerçek üründen Flow ile; ürün değiştirilmedi), sonra Shopify'daki ana ürün afişleri
     var G = [
-      { id: '34462d69c62584aeefaca4cff769f3b5', n: 'Gece çocuk odası, LunaDream tavana ay ve yıldız yansıtıyor', pos: '50% 55%' },
-      { id: '05d7f0466966800b2be9e851b9ada476', n: 'Gündüz çocuk odası, komodinde LunaDream', pos: '62% 66%' },
-      { id: 'd0c41725fb735b5851374f373ff814f3', n: 'Gece yanan LunaDream', pos: '50% 50%' },
+      { id: '34462d69c62584aeefaca4cff769f3b5', n: 'Gece çocuk odası, LunaDream tavana ay ve yıldız yansıtıyor', pos: '50% 55%', oda: true },
+      { id: '05d7f0466966800b2be9e851b9ada476', n: 'Gündüz çocuk odası, komodinde LunaDream', pos: '62% 66%', oda: true },
+      { id: 'd0c41725fb735b5851374f373ff814f3', n: 'Gece yanan LunaDream', pos: '50% 50%', oda: true },
       { id: '211acb76d908e8ed6d4f5fcddc987893', n: 'Masalsı gece ışığı', pos: '50% 50%' },
       // 'Temalar' afişi (ec0a99…) çıkarıldı: kutuda olmayan diskler (unicorn, 2025) gösteriyor; afiş düzelince geri gelir
       { id: '652e1893a0ae33a24ee0e3d53edab757', n: 'Müşteri paylaşımı: çocuk odasında LunaDream', pos: '50% 50%' },
@@ -381,11 +381,11 @@ class Component extends DCLogic {
       { id: '3ddd8b8b95f040d436d5d0ea350924b8', n: 'Hediye', pos: '50% 50%' },
       { id: '98db755893dbcebe192c69e73ae5afff', n: 'Uzay Kaşifi', pos: '50% 50%' }
     ];
-    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kare on' : 'kare', pick: function () { self.setState({ g: i }); } }; });
+    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kare on' : 'kare', pick: function () { self.setState({ g: i }); } }; });
     // Süzülen hediye diskleri: fotoğrafın kenarında, yavaş (7 sn), yalnız transform
     var tiles = [
-      { id: '19a4ad9f9e772d41f459a81c0db97441', x: -16, y: 276, s: 46, r: -12, d: 0 },
-      { id: 'eee41a0261197a47220148f75a138195', x: 364, y: 288, s: 38, r: 8, d: -2.3 }
+      { id: '19a4ad9f9e772d41f459a81c0db97441', x: -16, y: 330, s: 46, r: -12, d: 0 },
+      { id: 'eee41a0261197a47220148f75a138195', x: 364, y: 340, s: 38, r: 8, d: -2.3 }
     ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d }; });
     var kiz = S.model === 'kiz';
     var KIZ = B + 'e02351b3be4a1c555c5d760d0bbda723', ERKEK = B + '0033dfea6282c5bc479c385213661c00';
@@ -420,14 +420,16 @@ class Component extends DCLogic {
     var end = new Date(simdi.getFullYear(), mo + 1, 0, 23, 59, 59, 999), diff = Math.max(0, end.getTime() - simdi.getTime());
     var dd = Math.floor(diff / 86400000), hh = Math.floor(diff / 3600000) % 24, mi = Math.floor(diff / 60000) % 60, ss = Math.floor(diff / 1000) % 60;
     var calLeft = end.getDate() - simdi.getDate() + 1;
-    var cdLine = calLeft <= 3 ? (calLeft === 1 ? 'Son gün: ' : 'Son ' + calLeft + ' gün: ') + AYT[mo] + ' kampanyası' : AYT[mo] + ' kampanyası bitiyor';
+    var AYDA = ["Ocak'ta", "Şubat'ta", "Mart'ta", "Nisan'da", "Mayıs'ta", "Haziran'da", "Temmuz'da", "Ağustos'ta", "Eylül'de", "Ekim'de", "Kasım'da", "Aralık'ta"];
+    var bitis = end.getDate() + ' ' + AYDA[mo];
+    var cdLine = calLeft <= 3 ? (calLeft === 1 ? 'Son gün: ' : 'Son ' + calLeft + ' gün: ') + bitis + ' bitiyor' : 'Kampanya ' + bitis + ' bitiyor';
     var cdShort = (dd > 0 ? dd + 'g ' : '') + IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
-    var cdTiny = (dd > 0 ? dd + 'g ' : '') + IKI(hh) + 'sa ' + IKI(mi) + 'dk';
+    var cdTiny = dd > 0 ? dd + ' gün kaldı' : IKI(hh) + 'sa ' + IKI(mi) + 'dk kaldı';
     var cdAria = 'Kampanyanın bitmesine ' + dd + ' gün ' + hh + ' saat ' + mi + ' dakika';
     // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
     var vids = [
       { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '34462d69c62584aeefaca4cff769f3b5', pos: '50% 50%' },
-      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '652e1893a0ae33a24ee0e3d53edab757', pos: '50% 50%' },
+      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + 'e11f41ebd04fb544a2dcfc3fc03a9c26', pos: '50% 40%' },
       { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + '966c145d86bf4b972aa27d983118b8f7', pos: '50% 45%' },
       { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + 'a08519c97197df401382b43ca8425d43', pos: '50% 50%' }
     ];
@@ -471,7 +473,7 @@ class Component extends DCLogic {
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
     var faq = [
-      { q: 'Bluetooth hoparlör hangi modelde?', a: 'Yalnızca Kız (tavşanlı) modelinde. Erkek (Uzay Kaşifi) modelinde hoparlör yoktur.' },
+      { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. Kız (tavşanlı) modeli telefona Bluetooth ile bağlanır. Erkek (robot) modelde ninni [dahili mi, Bluetooth mu: teyit edilecek].' },
       { q: 'Kaç yaş için uygun?', a: '[yaş] yaş ve üzeri çocuklar için uygundur.' },
       { q: 'Kargo ne zaman gelir?', a: 'Siparişin 1 iş gününde kargoya verilir, Türkiye geneline 3–7 günde ulaşır.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Kartla öderken %5 indirim alırsın; kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
