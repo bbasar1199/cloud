@@ -202,6 +202,7 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
   - Kapına ne gelir? (seçime göre kutu sayısı ve içerik)
   - Ay tutamakları (eleştirmen 4/10)
 - **Reddedilen (Tur 16):** bölümleri hikâye karelerine toplamak ("çok kısaltmışız").
+- **Denemede (Tur 18, D panosu):** "Oda ve Tavan". Yönü ve kararları ajanlar verdi (`ogrenme/tur18/karar.md`): Literata ve Atkinson Hyperlegible Next, bant iskeleti, kubbe kenarlı "Disk tavana açılır", saatle koyulaşan Bir gece. Kullanıcı kararı bekleniyor.
 
 ## 7. Mevzuat ve dürüstlük (8 kural; kaynaklar `ogrenme/arastirma.md`)
 1. ✓ Üstü çizili önceki fiyat = indirimden önceki **10 gün** içinde ayluna.shop'ta uygulanan en düşük fiyat. Kampanya tarihleri yazılır, ispat satıcıdadır. Fiyat sabitse `compare_at_price` boş kalır. Kaynak: Resmî Gazete 1 Temmuz 2026 / 33297, yürürlük 1 Ağustos 2026.

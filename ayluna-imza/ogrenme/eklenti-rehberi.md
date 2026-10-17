@@ -79,3 +79,20 @@ Sonuç: Her tasarım turunda ikisi birlikte, paralel çalışır.
 - design-review, panoda görünmeyen ama canlıda çıkacak bir hatayı ölçerek buldu. Kaydırınca giriş hareketi yaprağı yarı saydam yapıyordu; panoda `.pg{overflow:hidden}` hareketi durduruyor. Aynı turda kontrast oranlarını tek tek hesapladı (hepsi AA) ve odak sırasını saydı (76 durak).
 - Eleştirmen yine iskelet ve zevk tarafını gördü: ay tutamağı süs, levha soğuk, 30 gün zayıf. design-review bunları görmedi.
 - İş bölümü doğrulandı: teknik bulgular sorulmadan düzeltilir, zevk önerileri kullanıcıya gider.
+
+## Üçüncü test: Tur 18, sıfırdan tasarım (17 Ekim 2026)
+Kullanıcı "her şeyi yeni ajanlar karar versin" dedi.
+
+**Süreç** (belgeler `ogrenme/tur18/`):
+1. Ortak brif yazıldı.
+2. Üç becerinin her biri bir yön ajanında çalıştı. Elle çağrılan beceriler (frontend-design, Impeccable, Taste) ajanın okuduğu yöntem dosyası olarak kullanıldı.
+3. Eleştirmen yönlerden birini seçti ve karar belgesi yazdı.
+4. Ben kurdum.
+5. design-review ve eleştirmen paralel denetledi.
+6. Bulgular işlendi.
+
+**Gözlemler:**
+- Üç yön birbirinden gerçekten farklı çıktı: yorgan, oda ve tavan, duvar ve tavan. Üçü de kendi becerisinin "AI kalıbı" uyarısıyla krem ve serifi bıraktı.
+- Eleştirmen seçerken kullanıcı geçmişini (§10) kullandı; Eylül'de reddedilen pembe/Baloo çizgisine yakın olan B'yi eledi.
+- design-review iki engel buldu: `overflow:hidden` yapışkan çubuğu ve view() hareketini öldürüyordu, ilk ekranda güven satırı çubuğun altında kalıyordu. Ayrıca CSS özgüllüğü yüzünden buton kalınlığının ezildiğini ölçerek buldu.
+- Kalıcı ders: sayfa kapsayıcısında `overflow:clip` kullanılır. Düğme sıfırlaması `:where()` ile yazılır, yoksa bileşen kurallarını ezer.

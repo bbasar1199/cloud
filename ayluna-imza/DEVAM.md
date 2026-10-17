@@ -390,6 +390,63 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - **Arşiv:** diğer 26 pano ve eski başlıklar. Hiçbiri silinmedi.
 - Yeni pano eklerken `boards` girdisine `"page": "guncel"` ya da `"arsiv"` yazılır. Sayfa yazılmazsa pano ilk sayfaya (Güncel) düşer.
 
+## Tur 18 · D "Oda ve Tavan": sıfırdan, kararları ajanlar verdi (17 Ekim, gece)
+- Kullanıcı: "Yeni, sıfırdan bir tasarım yap. Her şeyi yeni ajanlar karar versin. Yepyeni bir düzen, mükemmel bir çıktı."
+- **Süreç** (belgeler `ogrenme/tur18/`):
+  1. Ortak brif yazıldı. Değişmezler: kurallar, gerçek veri, kullanıcı düzeltmeleri. Serbest: düzen, yazı, renk, imza an.
+  2. Üç yön ajanı ayrı becerilerle plan yazdı:
+     - A "Oda ve Tavan": Anthropic frontend-design
+     - B "Yorgan": Impeccable
+     - C "Duvar ve Tavan": Taste ve make-interfaces-feel-better
+  3. Eleştirmen karar verdi: A 8, C 7, B 5. Kazanan A; C'den üç parça alındı:
+     - amber sayaç şeridi
+     - saatle koyulaşan Bir gece satırları
+     - ay evreli teslim çizelgesi
+     Karar belgesi: `ogrenme/tur18/karar.md`.
+  4. Kurulum: `araclar/tuval-uret/luna_d.py` → `canvas/LunaDreamD.dc.html`. B+'dan bağımsız, sıfırdan.
+  5. design-review ve eleştirmen paralel denetledi. Bulguların hepsi işlendi; kullanıcı bu turda kararı ajanlara bıraktı.
+- **D'nin dili:**
+  - Renkler: Gece #1A2142, Lamba #F2A65A, Kehribar #9A561B, Çarşaf #FFF8F0, Işıklı duvar #F8E8DA, Sis #5C6078.
+    - Krem #F6F1E9 ve Young Serif bırakıldı ("krem + serif" yapay zekâ kalıbı).
+  - Yazı: Literata 500 başlıklarda, Atkinson Hyperlegible Next 400/700 gövdede (büyükanne için okunaklı).
+  - İskelet: her bölüm kenardan kenara bir bant. Bant içinde 8/16/24, bantlar arasında 64 ve ton değişimi.
+  - Köşe: kontrol 14, medya 20, daire. Hap ve gölge yok.
+  - İmza an "Disk tavana açılır":
+    - kubbe kenarlı Diskler bandında
+    - desen lambanın (seçili modelin arka planı temizlenmiş kesimi) tepesinden 250px yansımaya açılır
+    - ilk kez sahne ekrana girerken oynar
+  - Bölüm sırası:
+    1. sayaç şeridi
+    2. gece galerisi
+    3. ad ve fiyat
+    4. Sihirli (2×2 pencere)
+    5. satın al
+    6. Diskler (imza an)
+    7. Kapına ne gelir
+    8. Videolar
+    9. Yorumlar
+    10. Bir gece, beş an
+    11. 30 gün
+    12. SSS
+    13. Odanın geri kalanı
+    14. Alt bilgi
+- **Denetimden düzeltilenler:**
+  - `.pg{overflow:hidden}` yerine `clip`: yapışkan çubuk ve kaydırınca giriş hareketi canlıda çalışır.
+  - Yapışkan çubuk fiyat bandı ekrandan çıkınca gelir. İlk ekranda (390×664) güven satırı 624px'te biter, örtülmez.
+  - Buton yazıları 700 oldu (`:where(.pg) button`).
+  - İki lamba aynı modele gelince model kartı da döner.
+  - Ölçek dışı köşe, boşluk ve yazı değerleri düzeltildi.
+  - "2 ayrı almaya göre ₺649,99 daha az" yazıldı.
+  - Video kapaklarına "[video]" etiketi kondu.
+  - Yinelenen görseller değişti: 21:00 yatak başı, galeri 3. görsel Erkek gündüz.
+  - Duvar bir ton koyulaştı.
+  - Disk odağı ile seçimi ayrıldı; ekran okuyucu metinleri düzeltildi.
+- Tuvalde Güncel sayfası: B+ (x=0), C2 (x=470), D (x=940). Sürüm 59.
+- **Açık sorular:**
+  - Kutuda 12 disk var, sayfada 11 disk görseli var. 12. disk hangisi?
+  - Gerçek tavan fotoğrafları yok.
+  - 4,7 / 62 Loox teyidi bekliyor.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
