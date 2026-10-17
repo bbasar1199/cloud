@@ -103,6 +103,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Erkek satırı "Tavanda uzay"
 - Önizleme hatası düzeltildi: `.pg` üstüne dolgu verilirse sayfa 422px oluyordu. Dolgu iç `div`'e verilir.
 - Açık: "hayal" bandındaki müşteri fotoğrafının paylaşım izni.
+- **Sonra kullanıcı V1'i seçti** ("Sihirli V1 iyi gibi"). Sayfadaki blok V1'e döndü (`luna_bplus.py`):
+  - 2×2 beyaz kart, lacivert ikon kutusu + amber ikon
+  - gösterge her kartta sağ üstte
+  - ay halesi ikon kutusunun arkasında
+  - 15px açıklama, `text-wrap: balance`
+  - "6 + 6 masal diski · Diskleri gör", Erkek'te "Tavanda uzay"
+  - Eleştirmenin V3 için önerdiği renk ve yazı düzeltmeleri V1'e uygulandı.
 
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
