@@ -1,0 +1,85 @@
+{%- comment -%}
+  Ayluna · Kendi dünyasında: kaydırınca çerçeve yakınlaşarak açılır, diskler farklı hızlarda süzülür.
+  Yalnız transform kullanır. Disk blokları sırayla 4 sabit konuma yerleşir.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign konumlar = 'left:22px;top:150px;width:70px;height:70px|right:20px;top:330px;width:62px;height:62px|left:70px;top:60px;width:30px;height:30px;opacity:.8|right:96px;top:110px;width:26px;height:26px;opacity:.8' | split: '|'
+  assign hizlar = '1.2|1.6|.5|.4' | split: '|'
+  assign donler = '10|-12|6|-6' | split: '|'
+-%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .px{padding-inline:18px}
+#ay-{{ section.id }} .h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1;letter-spacing:-.025em;margin:0;text-wrap:balance}
+#ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
+#ay-{{ section.id }} .model{flex:0 0 74%;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--gece2);height:200px;text-align:left;transition:transform .45s var(--e),opacity .45s var(--e)}
+#ay-{{ section.id }} .model img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .model::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 45%,rgba(12,16,39,.82))}
+#ay-{{ section.id }} .model .y{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#FFFDF9}
+#ay-{{ section.id }} .model .y b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:22px;line-height:1.1}
+#ay-{{ section.id }} .model .y span{font-size:12.5px;color:#D9DDF0}
+#ay-{{ section.id }} .model[aria-pressed=false]{opacity:.62;transform:scale(.96)}
+#ay-{{ section.id }} .dunya{position:relative;height:620px;overflow:hidden;background:var(--gece2)}
+#ay-{{ section.id }} .dunya .cerceve{position:absolute;inset:0;transform:scale(calc(.86 + var(--p,1) * .14));border-radius:calc((1 - var(--p,1)) * 120px);overflow:hidden;will-change:transform}
+#ay-{{ section.id }} .dunya .cerceve img{width:100%;height:100%;object-fit:cover;transform:scale(calc(1.14 - var(--p,1) * .14))}
+#ay-{{ section.id }} .dunya .ucan{position:absolute;border-radius:50%;overflow:hidden;box-shadow:0 18px 26px -12px rgba(0,0,0,.7);will-change:transform}
+#ay-{{ section.id }} .dunya .ucan img{width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .dunya .y{position:absolute;left:18px;right:18px;bottom:30px;z-index:3}
+#ay-{{ section.id }} .dunya::after{content:"";position:absolute;inset:auto 0 0 0;height:260px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));pointer-events:none;z-index:2}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--gece)}
+{% endstyle %}
+<div id="ay-{{ section.id }}" data-erkek="{% if s.resim_erkek != blank %}{{ s.resim_erkek | image_url: width: 1080 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="dunya" aria-label="{{ s.baslik | escape }}">
+      <div class="cerceve">{%- if s.resim_kiz != blank -%}<img class="ay-dunya" src="{{ s.resim_kiz | image_url: width: 1080 }}" srcset="{{ s.resim_kiz | image_url: width: 430 }} 430w, {{ s.resim_kiz | image_url: width: 720 }} 720w, {{ s.resim_kiz | image_url: width: 1080 }} 1080w" sizes="(min-width: 430px) 430px, 100vw" alt="{{ s.resim_kiz.alt | escape }}" loading="lazy" width="{{ s.resim_kiz.width }}" height="{{ s.resim_kiz.height }}">{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+      {%- for b in section.blocks limit: 4 -%}
+        <span class="ucan" data-hiz="{{ hizlar[forloop.index0] }}" data-don="{{ donler[forloop.index0] }}" style="{{ konumlar[forloop.index0] }}" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 160 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
+      {%- endfor -%}
+      <div class="y"><h2 class="h2" style="color:#FFFDF9">{{ s.baslik | escape | newline_to_br }}</h2></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var el=kok.querySelector('.dunya'), ucan=[].slice.call(kok.querySelectorAll('.ucan')), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false;
+  function motor(){ bekliyor=false; var vh=innerHeight, r=el.getBoundingClientRect(); if(r.bottom<-200||r.top>vh+200) return;
+    var pr=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height*.6))); if(az) pr=1; el.style.setProperty('--p',pr.toFixed(3));
+    ucan.forEach(function(u){ var h=+u.dataset.hiz, d=+u.dataset.don; u.style.transform='translateY('+((.5-pr)*140*h)+'px) rotate('+((pr-.5)*2*d)+'deg)'; }); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); addEventListener('resize',motor); motor();
+  var im=kok.querySelector('.ay-dunya'), ilk=im&&im.getAttribute('src');
+  function model(m){ if(im&&kok.dataset.erkek){ im.removeAttribute('srcset'); im.src=m==='erkek'?kok.dataset.erkek:ilk; } }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kendi dünyası",
+  "tag": "section",
+  "class": "ayluna-dunya",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Her disk,\nbaşka bir gece." },
+    { "type": "image_picker", "id": "resim_kiz", "label": "Görsel (kız / varsayılan)" },
+    { "type": "image_picker", "id": "resim_erkek", "label": "Görsel (erkek)" }
+  ],
+  "blocks": [
+    { "type": "disk", "name": "Süzülen disk", "limit": 4, "settings": [ { "type": "image_picker", "id": "resim", "label": "Disk görseli" } ] }
+  ],
+  "presets": [ { "name": "Ayluna · Kendi dünyası", "blocks": [ {"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"} ] } ]
+}
+{% endschema %}

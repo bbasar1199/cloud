@@ -1,0 +1,40 @@
+{%- comment -%} Ayluna · Odanın diğer ışıkları: seçilen ürünler, fiyatlar ürün verisinden {%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+#BOLUM .urun s{font-size:12px;color:#7D84A6;margin-left:6px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="px" style="padding:52px 18px {{ s.alt_bosluk }}px" aria-label="{{ s.baslik | escape }}">
+      <h2 class="ser" style="margin:0;font-size:26px;color:#FFFDF9">{{ s.baslik }}</h2>
+      <div class="raf kaydirma">
+        {%- for u in s.urunler -%}
+        <a class="urun" href="{{ u.url }}">
+          {%- if u.featured_image != blank -%}<img src="{{ u.featured_image | image_url: width: 300 }}" alt="{{ u.featured_image.alt | default: u.title | escape }}" width="150" height="150" loading="lazy">{%- endif -%}
+          <b>{{ u.title }}</b>
+          <span>{% if u.price_varies %}{{ u.price_min | money }}'den{% else %}{{ u.price | money }}{% endif %}{% if s.eski_goster and u.compare_at_price > u.price %}<s>{{ u.compare_at_price | money }}</s>{% endif %}</span>
+        </a>
+        {%- else -%}
+          <p class="soluk" style="margin:16px 0 0">Tema düzenleyiciden ürün seç.</p>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ayluna · Diğer ışıklar",
+  "tag": "section",
+  "class": "ayluna-diger-isiklar",
+  "settings": [
+    { "type": "text", "id": "baslik", "label": "Başlık", "default": "Odanın diğer ışıkları" },
+    { "type": "product_list", "id": "urunler", "label": "Ürünler", "limit": 8 },
+    { "type": "checkbox", "id": "eski_goster", "label": "Karşılaştırma fiyatını göster", "default": false },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 80, "step": 8, "unit": "px", "default": 8 }
+  ],
+  "presets": [ { "name": "Ayluna · Diğer ışıklar" } ]
+}
+{% endschema %}

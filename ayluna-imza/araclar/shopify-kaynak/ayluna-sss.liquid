@@ -1,0 +1,63 @@
+{%- comment -%} Ayluna · Sorular: dönen iade mührü + itiraz kıran sorular {%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+#BOLUM .sss p,#BOLUM .sss .ay-cevap{margin:0 0 18px;color:var(--gSoluk);font-size:14.5px}
+#BOLUM .sss .ay-cevap p{margin:0 0 8px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="px" style="padding-top:48px;padding-bottom:{{ s.alt_bosluk }}px">
+      <h2 class="h2" style="color:#FFFDF9">{{ s.baslik }}</h2>
+      {%- if s.muhur_goster -%}
+      <div class="muhur">
+        <span class="m"><b>{{ s.muhur_sayi }}</b><svg viewBox="0 0 120 120" width="96" height="96" aria-hidden="true"><defs><path id="ay-muhur-{{ section.id }}" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text font-family="Onest,sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.2" fill="#F2A65A"><textPath href="#ay-muhur-{{ section.id }}">{{ s.muhur_yazi }}</textPath></text></svg></span>
+        <p style="margin:0;font-size:15px;line-height:1.4">{{ s.muhur_metin }}</p>
+      </div>
+      {%- endif -%}
+      <div class="sss">
+        {%- for b in section.blocks -%}
+        <details {{ b.shopify_attributes }}><summary>{{ b.settings.soru }}<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ay-cevap">{{ b.settings.cevap }}</div></details>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var m=kok.querySelector('.muhur'), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false; if(!m) return;
+  function motor(){ bekliyor=false; var vh=innerHeight, r=m.getBoundingClientRect(), pr=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height*.6))); if(az) pr=.5; m.style.setProperty('--p',pr.toFixed(3)); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); motor();
+  document.addEventListener('shopify:block:select',function(e){ if(kok.contains(e.target)) e.target.open=true; });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Sorular",
+  "tag": "section",
+  "class": "ayluna-sss",
+  "settings": [
+    { "type": "text", "id": "baslik", "label": "Başlık", "default": "Sorular" },
+    { "type": "checkbox", "id": "muhur_goster", "label": "İade mührünü göster", "default": true },
+    { "type": "text", "id": "muhur_sayi", "label": "Mühür sayısı", "default": "30" },
+    { "type": "text", "id": "muhur_yazi", "label": "Mühür çevre yazısı", "default": "30 GÜN İADE · ÖNCE GÖR SONRA ÖDE · " },
+    { "type": "text", "id": "muhur_metin", "label": "Mühür yanı metin", "default": "Önce görürsün, sonra ödersin. Beğenmezsen 30 gün içinde geri gönder." },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 80, "step": 8, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    { "type": "soru", "name": "Soru", "settings": [
+      { "type": "text", "id": "soru", "label": "Soru", "default": "Kapıda ödeme nasıl oluyor?" },
+      { "type": "richtext", "id": "cevap", "label": "Cevap", "default": "<p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p>" }
+    ] }
+  ],
+  "presets": [ { "name": "Ayluna · Sorular", "blocks": [
+    { "type": "soru", "settings": { "soru": "Hoparlör hangi modelde?", "cevap": "<p>Yalnızca Tavşanlı (kız) modelde Bluetooth ninni hoparlörü var. Uzay Kaşifi hoparlörsüz.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kapıda ödeme nasıl oluyor?", "cevap": "<p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kaç günde gelir?", "cevap": "<p>Hafta içi 16:00'ya kadar verilen sipariş aynı gün kargoda. Teslimat genelde [X] iş günü.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kaç yaş için uygun?", "cevap": "<p>[Yaş aralığı mağaza tarafından eklenecek]</p>" } }
+  ] } ]
+}
+{% endschema %}

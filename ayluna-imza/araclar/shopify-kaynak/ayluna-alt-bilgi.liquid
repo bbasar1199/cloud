@@ -1,0 +1,48 @@
+{%- comment -%} Ayluna · Alt bilgi: tepeler, doğan ay, taşan dev marka yazısı, menü bağlantıları {%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:#0A0D20;color:var(--gMetin)}
+#BOLUM .telif{padding-bottom:{{ s.alt_bosluk }}px}
+#BOLUM .telif p{margin:0}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <footer class="alt-bilgi">
+      <div class="tepeler" aria-hidden="true">
+        <svg class="ay" viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"/></svg>
+        <svg class="t1" viewBox="0 0 430 160" preserveAspectRatio="none" style="height:150px"><path d="M0 90 C60 50 120 60 180 80 S300 40 430 70 V160 H0Z" fill="#1A2142"/></svg>
+        <svg class="t2" viewBox="0 0 430 120" preserveAspectRatio="none" style="height:110px"><path d="M0 70 C80 30 150 90 230 60 S360 30 430 55 V120 H0Z" fill="#141A36"/></svg>
+        <svg viewBox="0 0 430 60" preserveAspectRatio="none" style="height:50px"><path d="M0 30 C90 10 200 40 300 22 S400 14 430 20 V60 H0Z" fill="#0A0D20"/></svg>
+      </div>
+      <p class="dev" aria-label="{{ s.dev_yazi | escape }}">{%- assign harfler = s.dev_yazi | split: '' -%}{%- for h in harfler -%}<span>{{ h }}</span>{%- endfor -%}</p>
+      {%- if s.menu != blank -%}
+      <nav class="linkler" aria-label="Alt bağlantılar">{%- for l in s.menu.links -%}<a href="{{ l.url }}">{{ l.title }}</a>{%- endfor -%}</nav>
+      {%- endif -%}
+      <div class="telif">{{ s.telif }}</div>
+    </footer>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var el=kok.querySelector('.alt-bilgi'), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false;
+  function motor(){ bekliyor=false; var vh=innerHeight, r=el.getBoundingClientRect(), pr=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height*.6))); if(az) pr=1; el.style.setProperty('--p',pr.toFixed(3)); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); addEventListener('resize',motor); motor();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Alt bilgi",
+  "tag": "section",
+  "class": "ayluna-alt-bilgi",
+  "settings": [
+    { "type": "text", "id": "dev_yazi", "label": "Dev yazı", "default": "Ayluna" },
+    { "type": "link_list", "id": "menu", "label": "Menü", "default": "footer" },
+    { "type": "richtext", "id": "telif", "label": "Alt satır", "default": "<p>WhatsApp [numara] · [Firma unvanı] · ETBİS [QR] · © 2026 Ayluna</p>" },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk (yapışkan çubuk için)", "min": 16, "max": 120, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "presets": [ { "name": "Ayluna · Alt bilgi" } ]
+}
+{% endschema %}

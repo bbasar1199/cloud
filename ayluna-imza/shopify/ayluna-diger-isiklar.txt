@@ -1,0 +1,65 @@
+{%- comment -%} Ayluna · Odanın diğer ışıkları: seçilen ürünler, fiyatlar ürün verisinden {%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .ser{font-family:"Young Serif",Georgia,serif;font-weight:400;letter-spacing:-.02em}
+#ay-{{ section.id }} .px{padding-inline:18px}
+#ay-{{ section.id }} .soluk{color:var(--soluk)}
+#ay-{{ section.id }} .h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1;letter-spacing:-.025em;margin:0;text-wrap:balance}
+#ay-{{ section.id }} .kaydirma{scrollbar-width:none}
+#ay-{{ section.id }} .kaydirma::-webkit-scrollbar{display:none}
+#ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
+#ay-{{ section.id }} .raf{display:flex;gap:12px;overflow-x:auto;margin:20px -18px 0;padding:0 18px}
+#ay-{{ section.id }} .urun{flex:0 0 150px;text-decoration:none}
+#ay-{{ section.id }} .urun img{width:150px;height:150px;border-radius:16px;object-fit:cover}
+#ay-{{ section.id }} .urun b{display:block;margin-top:8px;font-size:13.5px;font-weight:600;line-height:1.3;color:#FFFDF9}
+#ay-{{ section.id }} .urun span{font-size:13px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}
+#ay-{{ section.id }} .urun s{font-size:12px;color:#7D84A6;margin-left:6px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="px" style="padding:52px 18px {{ s.alt_bosluk }}px" aria-label="{{ s.baslik | escape }}">
+      <h2 class="ser" style="margin:0;font-size:26px;color:#FFFDF9">{{ s.baslik }}</h2>
+      <div class="raf kaydirma">
+        {%- for u in s.urunler -%}
+        <a class="urun" href="{{ u.url }}">
+          {%- if u.featured_image != blank -%}<img src="{{ u.featured_image | image_url: width: 300 }}" alt="{{ u.featured_image.alt | default: u.title | escape }}" width="150" height="150" loading="lazy">{%- endif -%}
+          <b>{{ u.title }}</b>
+          <span>{% if u.price_varies %}{{ u.price_min | money }}'den{% else %}{{ u.price | money }}{% endif %}{% if s.eski_goster and u.compare_at_price > u.price %}<s>{{ u.compare_at_price | money }}</s>{% endif %}</span>
+        </a>
+        {%- else -%}
+          <p class="soluk" style="margin:16px 0 0">Tema düzenleyiciden ürün seç.</p>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ayluna · Diğer ışıklar",
+  "tag": "section",
+  "class": "ayluna-diger-isiklar",
+  "settings": [
+    { "type": "text", "id": "baslik", "label": "Başlık", "default": "Odanın diğer ışıkları" },
+    { "type": "product_list", "id": "urunler", "label": "Ürünler", "limit": 8 },
+    { "type": "checkbox", "id": "eski_goster", "label": "Karşılaştırma fiyatını göster", "default": false },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 80, "step": 8, "unit": "px", "default": 8 }
+  ],
+  "presets": [ { "name": "Ayluna · Diğer ışıklar" } ]
+}
+{% endschema %}

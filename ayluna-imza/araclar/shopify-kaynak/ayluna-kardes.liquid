@@ -1,0 +1,79 @@
+{%- comment -%}
+  Ayluna · Kardeşin gecesi (kapanış): kaydırınca öbür modelin odası gündüzden geceye geçer, iki satır yer değiştirir.
+  Buton fiyatı, adet fiyatı ve kazanç; "paket değeri" ile eşleşen varyanttan otomatik hesaplanır.
+  Butona basınca Sipariş bölümünde o paket seçilir ve sayfa siparişe kayar (ayluna:paket).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign urun = product
+  if s.urun != blank
+    assign urun = s.urun
+  endif
+  assign pv = urun.selected_or_first_available_variant
+  for v in urun.variants
+    if s.paket_degeri != blank and v.options contains s.paket_degeri
+      assign pv = v
+      break
+    endif
+  endfor
+  assign kazanc = pv.compare_at_price | minus: pv.price
+-%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+#BOLUM .kardes{margin-top:{{ s.ust_bosluk }}px}
+{% endstyle %}
+<div id="ay-{{ section.id }}"
+  data-kiz-gunduz="{% if s.kiz_gunduz != blank %}{{ s.kiz_gunduz | image_url: width: 1080 }}{% endif %}" data-kiz-gece="{% if s.kiz_gece != blank %}{{ s.kiz_gece | image_url: width: 1080 }}{% endif %}"
+  data-erkek-gunduz="{% if s.erkek_gunduz != blank %}{{ s.erkek_gunduz | image_url: width: 1080 }}{% endif %}" data-erkek-gece="{% if s.erkek_gece != blank %}{{ s.erkek_gece | image_url: width: 1080 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="kardes" aria-label="{{ s.satir1 | escape }}">
+      {%- comment -%} Varsayılan model kız olduğundan kapanışta erkek odası görünür {%- endcomment -%}
+      {%- if s.erkek_gunduz != blank -%}<img class="ay-g" src="{{ s.erkek_gunduz | image_url: width: 1080 }}" alt="{{ s.erkek_gunduz.alt | escape }}" loading="lazy" style="object-position:50% 62%" width="{{ s.erkek_gunduz.width }}" height="{{ s.erkek_gunduz.height }}">{%- endif -%}
+      {%- if s.erkek_gece != blank -%}<img class="gece-img ay-n" src="{{ s.erkek_gece | image_url: width: 1080 }}" alt="{{ s.erkek_gece.alt | escape }}" loading="lazy" style="object-position:50% 62%" width="{{ s.erkek_gece.width }}" height="{{ s.erkek_gece.height }}">{%- endif -%}
+      <div class="y">
+        <div class="satirlar"><span class="s1">{{ s.satir1 | escape | newline_to_br }}</span><span class="s2">{{ s.satir2 | escape | newline_to_br }}</span></div>
+        <a class="btn" href="#siparis" style="margin-top:16px">{{ s.buton_yazi }} · {{ pv.price | money }}</a>
+        {%- if s.adet > 1 -%}<p style="margin:10px 0 0;font-size:12.5px;color:var(--gSoluk);text-align:center">{{ pv.price | divided_by: s.adet | plus: 50 | divided_by: 100 | times: 100 | money_without_trailing_zeros }} / adet{% if kazanc > 0 %} · {{ kazanc | plus: 50 | divided_by: 100 | times: 100 | money_without_trailing_zeros }} kazancın{% endif %}</p>{%- endif -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var el=kok.querySelector('.kardes'), btn=kok.querySelector('.btn'), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false, ADET={{ s.adet }};
+  function motor(){ bekliyor=false; var vh=innerHeight, r=el.getBoundingClientRect(), gk=Math.max(0,Math.min(1,(vh*.7-r.top)/(vh*.3))); if(az) gk=1; el.style.setProperty('--gk',gk.toFixed(3)); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); addEventListener('resize',motor); motor();
+  btn.addEventListener('click',function(e){ e.preventDefault(); document.dispatchEvent(new CustomEvent('ayluna:paket',{detail:{adet:ADET}})); var h=document.getElementById('siparis'); if(h&&!window.__aySiparisVar) h.scrollIntoView({behavior:az?'auto':'smooth'}); });
+  /* Yapışkan çubuk bu buton ekrandayken çekilsin */
+  new IntersectionObserver(function(es){ document.dispatchEvent(new CustomEvent('ayluna:kardes-gorunur',{detail:es[0].isIntersecting})); },{threshold:0}).observe(btn);
+  /* Kapanışta seçilmeyen model gösterilir */
+  function model(m){ var o=m==='erkek'?'kiz':'erkek', g=kok.querySelector('.ay-g'), n=kok.querySelector('.ay-n'), d=kok.dataset;
+    var gs=d[o+'Gunduz'], ns=d[o+'Gece']; if(g&&gs) g.src=gs; if(n&&ns) n.src=ns; }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kardeş",
+  "tag": "section",
+  "class": "ayluna-kardes",
+  "settings": [
+    { "type": "product", "id": "urun", "label": "Ürün", "info": "Ürün şablonunda boş bırak." },
+    { "type": "textarea", "id": "satir1", "label": "Gündüz satırı", "default": "Bir lamba,\nbir oda." },
+    { "type": "textarea", "id": "satir2", "label": "Gece satırı", "default": "Kardeşi de aynı\nmasalla uyusun." },
+    { "type": "text", "id": "paket_degeri", "label": "Paket varyant seçenek değeri", "default": "2 lamba" },
+    { "type": "range", "id": "adet", "label": "Lamba adedi", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "text", "id": "buton_yazi", "label": "Buton yazısı (fiyat otomatik eklenir)", "default": "2 lamba · kardeşe" },
+    { "type": "header", "content": "Görseller (seçilmeyen modelin odası gösterilir)" },
+    { "type": "image_picker", "id": "kiz_gunduz", "label": "Kız · gündüz" },
+    { "type": "image_picker", "id": "kiz_gece", "label": "Kız · gece" },
+    { "type": "image_picker", "id": "erkek_gunduz", "label": "Erkek · gündüz" },
+    { "type": "image_picker", "id": "erkek_gece", "label": "Erkek · gece" },
+    { "type": "range", "id": "ust_bosluk", "label": "Üst boşluk", "min": 0, "max": 96, "step": 8, "unit": "px", "default": 56 }
+  ],
+  "presets": [ { "name": "Ayluna · Kardeş" } ]
+}
+{% endschema %}

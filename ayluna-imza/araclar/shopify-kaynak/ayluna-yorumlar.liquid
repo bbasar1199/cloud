@@ -1,0 +1,134 @@
+{%- comment -%}
+  Ayluna · Yorumlar: gece hikâyeleri. Kaynak fikir: Instagram hikâye kalıbı (Meta trafiğine tanıdık).
+  Üstte ilerleme çubukları, sağa/sola dokun, basılı tut = durdur. Bloklar: Müşteri fotoğrafı / Yorum.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign urun = product
+  assign puan = s.puan
+  assign yorum_sayisi = s.yorum_sayisi
+  if urun.metafields.loox.avg_rating != blank
+    assign puan = urun.metafields.loox.avg_rating | round: 1 | append: '' | replace: '.', ','
+  endif
+  if urun.metafields.loox.num_reviews != blank
+    assign yorum_sayisi = urun.metafields.loox.num_reviews
+  endif
+-%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--krem)}
+#BOLUM .bolum{padding-bottom:8px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="bolum px" id="yorumlar">
+      <h2 class="h2">{{ s.baslik | escape | newline_to_br }}</h2>
+      <div class="hk" aria-roledescription="hikâye" aria-label="Müşteri yorumları ve fotoğrafları">
+        <div class="hk-cubuk">{%- for b in section.blocks -%}<i><b></b></i>{%- endfor -%}</div>
+        <div class="hk-bas"><span class="av"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg></span><b>{{ s.hesap_adi }}</b><span class="hk-tur">müşteri fotoğrafı</span><button class="hk-dur" aria-label="Durdur" type="button"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></button></div>
+        <div>
+          {%- for b in section.blocks -%}
+            {%- if b.type == 'foto' -%}
+            <div class="hk-kare foto{% if forloop.first %} on{% endif %}" data-tur="müşteri fotoğrafı" {{ b.shopify_attributes }}>
+              {%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 720 }}" srcset="{{ b.settings.resim | image_url: width: 430 }} 430w, {{ b.settings.resim | image_url: width: 720 }} 720w" sizes="(min-width: 430px) 394px, 92vw" alt="Müşteri fotoğrafı" loading="{% if forloop.index < 3 %}eager{% else %}lazy{% endif %}" style="object-position:{{ b.settings.konum }}" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- else -%}{{ 'lifestyle-2' | placeholder_svg_tag }}{%- endif -%}
+              <span class="hk-etiket">{{ b.settings.etiket }}</span>
+            </div>
+            {%- else -%}
+            <div class="hk-kare soz{% if forloop.first %} on{% endif %}" data-tur="yorum" {{ b.shopify_attributes }}>
+              <div class="tirnak" aria-hidden="true">“</div>
+              <blockquote>{{ b.settings.metin }}</blockquote>
+              <div class="kim">{{ b.settings.isim }}{% if b.settings.satin_aldi %} · Satın aldı{% endif %}{% if b.settings.konu != blank %} · <b>{{ b.settings.konu }}</b>{% endif %}</div>
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <button class="hk-dok l" aria-label="Önceki" type="button"></button>
+        <button class="hk-dok r" aria-label="Sonraki" type="button"></button>
+      </div>
+      <div class="hk-ozet"><span><span class="y" aria-hidden="true">★★★★★</span> <b>{{ puan }}</b> · {{ yorum_sayisi }} yorum</span><span class="hk-sira">1 / {{ section.blocks.size }}</span></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var $=function(x){return kok.querySelector(x)}, $$=function(x){return [].slice.call(kok.querySelectorAll(x))};
+  var az=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var kareler=$$('.hk-kare'), cubuklar=$$('.hk-cubuk b'), N=kareler.length; if(!N) return;
+  var SURE={{ s.sure | times: 1000 }}, hi=0, t0=0, gecen=0, duraklat=az, gorunur=false, rf=0, uzun=false, basili=0;
+  function goster(i){ hi=(i+N)%N; gecen=0; t0=0;
+    kareler.forEach(function(x,j){x.classList.toggle('on',j===hi);});
+    cubuklar.forEach(function(c,j){c.style.transform='scaleX('+(j<hi?1:0)+')';});
+    $('.hk-tur').textContent=kareler[hi].dataset.tur; $('.hk-sira').textContent=(hi+1)+' / '+N; }
+  function dongu(t){ rf=0; if(!gorunur) return;
+    if(!duraklat){ if(!t0) t0=t-gecen; gecen=t-t0; cubuklar[hi].style.transform='scaleX('+Math.min(1,gecen/SURE).toFixed(3)+')'; if(gecen>=SURE) goster(hi+1); } else t0=0;
+    rf=requestAnimationFrame(dongu); }
+  function durSet(v){ duraklat=v; var d=$('.hk-dur'); d.setAttribute('aria-label',v?'Oynat':'Durdur'); d.querySelector('svg').innerHTML=v?'<path d="M8 5l11 7-11 7z"/>':'<path d="M9 6v12M15 6v12"/>'; }
+  $('.hk-dok.r').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi+1); });
+  $('.hk-dok.l').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi-1); });
+  $('.hk-dur').addEventListener('click',function(){durSet(!duraklat);});
+  var hk=$('.hk');
+  hk.addEventListener('pointerdown',function(e){ if(e.target.closest('.hk-dur'))return; uzun=false; basili=setTimeout(function(){duraklat=true;basili=-1;uzun=true;},260); });
+  function birak(){ if(basili===-1){ duraklat=$('.hk-dur').getAttribute('aria-label')==='Oynat'; } else clearTimeout(basili); basili=0; }
+  hk.addEventListener('pointerup',birak); hk.addEventListener('pointercancel',birak);
+  new IntersectionObserver(function(es){ gorunur=es[0].isIntersecting; t0=0; if(gorunur&&!rf) rf=requestAnimationFrame(dongu); },{threshold:.4}).observe(hk);
+  if(az) durSet(true);
+  goster(0);
+  /* Tema düzenleyicide blok seçilince o kareye git */
+  document.addEventListener('shopify:block:select',function(e){ var i=kareler.indexOf(e.target); if(i>-1){ durSet(true); goster(i); } });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Yorumlar",
+  "tag": "section",
+  "class": "ayluna-yorumlar",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Anneler\nne diyor" },
+    { "type": "text", "id": "hesap_adi", "label": "Hikâye hesap adı", "default": "Ayluna ailesi" },
+    { "type": "range", "id": "sure", "label": "Kare süresi", "min": 3, "max": 9, "step": 1, "unit": "sn", "default": 5 },
+    { "type": "header", "content": "Puan", "info": "Loox metafield'ı varsa oradan otomatik gelir." },
+    { "type": "text", "id": "puan", "label": "Puan", "default": "4,7" },
+    { "type": "text", "id": "yorum_sayisi", "label": "Yorum sayısı", "default": "62" }
+  ],
+  "blocks": [
+    {
+      "type": "foto",
+      "name": "Müşteri fotoğrafı",
+      "settings": [
+        { "type": "image_picker", "id": "resim", "label": "Fotoğraf", "info": "Üzerinde yazı olmayan kare seç ya da kırp." },
+        { "type": "text", "id": "konum", "label": "Odak", "default": "50% 50%" },
+        { "type": "text", "id": "etiket", "label": "Etiket", "default": "Müşteri fotoğrafı" }
+      ]
+    },
+    {
+      "type": "yorum",
+      "name": "Yorum",
+      "settings": [
+        { "type": "textarea", "id": "metin", "label": "Yorum (gerçek, birebir)" },
+        { "type": "text", "id": "isim", "label": "İsim", "default": "Burak G." },
+        { "type": "checkbox", "id": "satin_aldi", "label": "Satın aldı etiketi", "default": true },
+        { "type": "text", "id": "konu", "label": "Konu", "default": "Uyku" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ayluna · Yorumlar",
+      "blocks": [
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Reklamında nasıl ise aynısı, hatta daha iyisi.", "isim": "Abdülkerim T.", "konu": "Kalite" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.", "isim": "Burak G.", "konu": "Uyku" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.", "isim": "Handan B.", "konu": "Hediye" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "2 tane aldık, gayet sağlam geldi. Paketlenmesi de güzeldi.", "isim": "Sevcan Z.", "konu": "Kalite" } },
+        { "type": "foto", "settings": { "konum": "50% 100%" } },
+        { "type": "yorum", "settings": { "metin": "Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.", "isim": "Mehmet C.", "konu": "Kalite" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

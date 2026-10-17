@@ -1,0 +1,194 @@
+{%- comment -%}
+  Ayluna · Yorumlar: gece hikâyeleri. Kaynak fikir: Instagram hikâye kalıbı (Meta trafiğine tanıdık).
+  Üstte ilerleme çubukları, sağa/sola dokun, basılı tut = durdur. Bloklar: Müşteri fotoğrafı / Yorum.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign urun = product
+  assign puan = s.puan
+  assign yorum_sayisi = s.yorum_sayisi
+  if urun.metafields.loox.avg_rating != blank
+    assign puan = urun.metafields.loox.avg_rating | round: 1 | append: '' | replace: '.', ','
+  endif
+  if urun.metafields.loox.num_reviews != blank
+    assign yorum_sayisi = urun.metafields.loox.num_reviews
+  endif
+-%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .px{padding-inline:18px}
+#ay-{{ section.id }} .ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#ay-{{ section.id }} .h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1;letter-spacing:-.025em;margin:0;text-wrap:balance}
+#ay-{{ section.id }} .puan{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+#ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
+#ay-{{ section.id }} .b.foto{grid-row:span 2;padding:0;border:0;background:var(--gece2);color:#FFFDF9}
+#ay-{{ section.id }} .b.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .b.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 40%,rgba(12,16,39,.85))}
+#ay-{{ section.id }} .b.foto .y{z-index:1}
+#ay-{{ section.id }} .b.foto .y{position:absolute;left:14px;bottom:12px;right:14px}
+#ay-{{ section.id }} .etiket{display:flex;justify-content:space-between;align-items:baseline;margin:24px 0 10px;font-size:13px}
+#ay-{{ section.id }} .etiket b{font-weight:600}
+#ay-{{ section.id }} .bolum{padding-top:64px}
+#ay-{{ section.id }} .hk{position:relative;height:460px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);color:#FFFDF9;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+#ay-{{ section.id }} .hk-kare{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--e)}
+#ay-{{ section.id }} .hk-kare.on{opacity:1}
+#ay-{{ section.id }} .hk-kare img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 6s var(--e)}
+#ay-{{ section.id }} .hk-kare.on img{transform:scale(1)}
+#ay-{{ section.id }} .hk-kare.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.55),rgba(12,16,39,0) 24%,rgba(12,16,39,0) 70%,rgba(12,16,39,.6))}
+#ay-{{ section.id }} .hk-kare.soz{display:flex;flex-direction:column;justify-content:center;padding:0 24px;background:var(--lac)}
+#ay-{{ section.id }} .hk-kare.soz blockquote{margin:0;font-family:"Young Serif",serif;font-size:27px;line-height:1.18;letter-spacing:-.01em;transform:translateY(14px);transition:transform .6s var(--e)}
+#ay-{{ section.id }} .hk-kare.soz.on blockquote{transform:none}
+#ay-{{ section.id }} .hk-kare.soz .tirnak{font-family:"Young Serif",serif;font-size:80px;line-height:.6;color:var(--amber);height:44px}
+#ay-{{ section.id }} .hk-kare.soz .kim{margin-top:18px;font-size:13px;color:var(--gSoluk)}
+#ay-{{ section.id }} .hk-kare.soz .kim b{color:var(--amber);font-weight:600}
+#ay-{{ section.id }} .hk-cubuk{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;gap:4px}
+#ay-{{ section.id }} .hk-cubuk i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,253,249,.3);overflow:hidden;position:relative}
+#ay-{{ section.id }} .hk-cubuk i b{position:absolute;inset:0;background:#FFFDF9;transform-origin:left;transform:scaleX(0)}
+#ay-{{ section.id }} .hk-bas{position:absolute;left:12px;right:12px;top:24px;z-index:3;display:flex;align-items:center;gap:8px;font-size:12.5px}
+#ay-{{ section.id }} .hk-bas .av{width:30px;height:30px;border-radius:50%;background:var(--krem);display:grid;place-items:center}
+#ay-{{ section.id }} .hk-bas b{font-weight:600}
+#ay-{{ section.id }} .hk-bas span{color:rgba(255,253,249,.75)}
+#ay-{{ section.id }} .hk-dur{margin-left:auto;width:44px;height:44px;margin-right:-8px;border:0;background:none;color:#FFFDF9;display:grid;place-items:center;cursor:pointer}
+#ay-{{ section.id }} .hk-dok{position:absolute;top:70px;bottom:0;z-index:2;width:50%;border:0;background:none;padding:0;cursor:pointer}
+#ay-{{ section.id }} .hk-dok.l{left:0}
+#ay-{{ section.id }} .hk-dok.r{right:0}
+#ay-{{ section.id }} .hk-etiket{position:absolute;left:16px;bottom:16px;z-index:3;font-size:12px;color:rgba(255,253,249,.85);padding:5px 10px;border-radius:999px;background:rgba(12,16,39,.5)}
+#ay-{{ section.id }} .hk-ozet{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:var(--soluk);font-variant-numeric:tabular-nums}
+#ay-{{ section.id }} .hk-ozet .y{color:var(--amber2);letter-spacing:1.5px}
+#ay-{{ section.id }} .hk-ozet b{color:var(--metin)}
+#ay-{{ section.id }} .ilerleme{display:flex;gap:4px;margin:6px 18px 0}
+#ay-{{ section.id }} .ilerleme i{flex:1;height:2px;border-radius:2px;background:rgba(244,237,227,.18);overflow:hidden;position:relative}
+#ay-{{ section.id }} .ilerleme i::after{content:"";position:absolute;inset:0;background:var(--amber);transform:scaleX(var(--d,0));transform-origin:left;transition:transform .3s var(--e)}
+#ay-{{ section.id }} .urun{flex:0 0 150px;text-decoration:none}
+#ay-{{ section.id }} .urun img{width:150px;height:150px;border-radius:16px;object-fit:cover}
+#ay-{{ section.id }} .urun b{display:block;margin-top:8px;font-size:13.5px;font-weight:600;line-height:1.3;color:#FFFDF9}
+#ay-{{ section.id }} .urun span{font-size:13px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--krem)}
+#ay-{{ section.id }} .bolum{padding-bottom:8px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="bolum px" id="yorumlar">
+      <h2 class="h2">{{ s.baslik | escape | newline_to_br }}</h2>
+      <div class="hk" aria-roledescription="hikâye" aria-label="Müşteri yorumları ve fotoğrafları">
+        <div class="hk-cubuk">{%- for b in section.blocks -%}<i><b></b></i>{%- endfor -%}</div>
+        <div class="hk-bas"><span class="av"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg></span><b>{{ s.hesap_adi }}</b><span class="hk-tur">müşteri fotoğrafı</span><button class="hk-dur" aria-label="Durdur" type="button"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></button></div>
+        <div>
+          {%- for b in section.blocks -%}
+            {%- if b.type == 'foto' -%}
+            <div class="hk-kare foto{% if forloop.first %} on{% endif %}" data-tur="müşteri fotoğrafı" {{ b.shopify_attributes }}>
+              {%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 720 }}" srcset="{{ b.settings.resim | image_url: width: 430 }} 430w, {{ b.settings.resim | image_url: width: 720 }} 720w" sizes="(min-width: 430px) 394px, 92vw" alt="Müşteri fotoğrafı" loading="{% if forloop.index < 3 %}eager{% else %}lazy{% endif %}" style="object-position:{{ b.settings.konum }}" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- else -%}{{ 'lifestyle-2' | placeholder_svg_tag }}{%- endif -%}
+              <span class="hk-etiket">{{ b.settings.etiket }}</span>
+            </div>
+            {%- else -%}
+            <div class="hk-kare soz{% if forloop.first %} on{% endif %}" data-tur="yorum" {{ b.shopify_attributes }}>
+              <div class="tirnak" aria-hidden="true">“</div>
+              <blockquote>{{ b.settings.metin }}</blockquote>
+              <div class="kim">{{ b.settings.isim }}{% if b.settings.satin_aldi %} · Satın aldı{% endif %}{% if b.settings.konu != blank %} · <b>{{ b.settings.konu }}</b>{% endif %}</div>
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <button class="hk-dok l" aria-label="Önceki" type="button"></button>
+        <button class="hk-dok r" aria-label="Sonraki" type="button"></button>
+      </div>
+      <div class="hk-ozet"><span><span class="y" aria-hidden="true">★★★★★</span> <b>{{ puan }}</b> · {{ yorum_sayisi }} yorum</span><span class="hk-sira">1 / {{ section.blocks.size }}</span></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var $=function(x){return kok.querySelector(x)}, $$=function(x){return [].slice.call(kok.querySelectorAll(x))};
+  var az=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var kareler=$$('.hk-kare'), cubuklar=$$('.hk-cubuk b'), N=kareler.length; if(!N) return;
+  var SURE={{ s.sure | times: 1000 }}, hi=0, t0=0, gecen=0, duraklat=az, gorunur=false, rf=0, uzun=false, basili=0;
+  function goster(i){ hi=(i+N)%N; gecen=0; t0=0;
+    kareler.forEach(function(x,j){x.classList.toggle('on',j===hi);});
+    cubuklar.forEach(function(c,j){c.style.transform='scaleX('+(j<hi?1:0)+')';});
+    $('.hk-tur').textContent=kareler[hi].dataset.tur; $('.hk-sira').textContent=(hi+1)+' / '+N; }
+  function dongu(t){ rf=0; if(!gorunur) return;
+    if(!duraklat){ if(!t0) t0=t-gecen; gecen=t-t0; cubuklar[hi].style.transform='scaleX('+Math.min(1,gecen/SURE).toFixed(3)+')'; if(gecen>=SURE) goster(hi+1); } else t0=0;
+    rf=requestAnimationFrame(dongu); }
+  function durSet(v){ duraklat=v; var d=$('.hk-dur'); d.setAttribute('aria-label',v?'Oynat':'Durdur'); d.querySelector('svg').innerHTML=v?'<path d="M8 5l11 7-11 7z"/>':'<path d="M9 6v12M15 6v12"/>'; }
+  $('.hk-dok.r').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi+1); });
+  $('.hk-dok.l').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi-1); });
+  $('.hk-dur').addEventListener('click',function(){durSet(!duraklat);});
+  var hk=$('.hk');
+  hk.addEventListener('pointerdown',function(e){ if(e.target.closest('.hk-dur'))return; uzun=false; basili=setTimeout(function(){duraklat=true;basili=-1;uzun=true;},260); });
+  function birak(){ if(basili===-1){ duraklat=$('.hk-dur').getAttribute('aria-label')==='Oynat'; } else clearTimeout(basili); basili=0; }
+  hk.addEventListener('pointerup',birak); hk.addEventListener('pointercancel',birak);
+  new IntersectionObserver(function(es){ gorunur=es[0].isIntersecting; t0=0; if(gorunur&&!rf) rf=requestAnimationFrame(dongu); },{threshold:.4}).observe(hk);
+  if(az) durSet(true);
+  goster(0);
+  /* Tema düzenleyicide blok seçilince o kareye git */
+  document.addEventListener('shopify:block:select',function(e){ var i=kareler.indexOf(e.target); if(i>-1){ durSet(true); goster(i); } });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Yorumlar",
+  "tag": "section",
+  "class": "ayluna-yorumlar",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Anneler\nne diyor" },
+    { "type": "text", "id": "hesap_adi", "label": "Hikâye hesap adı", "default": "Ayluna ailesi" },
+    { "type": "range", "id": "sure", "label": "Kare süresi", "min": 3, "max": 9, "step": 1, "unit": "sn", "default": 5 },
+    { "type": "header", "content": "Puan", "info": "Loox metafield'ı varsa oradan otomatik gelir." },
+    { "type": "text", "id": "puan", "label": "Puan", "default": "4,7" },
+    { "type": "text", "id": "yorum_sayisi", "label": "Yorum sayısı", "default": "62" }
+  ],
+  "blocks": [
+    {
+      "type": "foto",
+      "name": "Müşteri fotoğrafı",
+      "settings": [
+        { "type": "image_picker", "id": "resim", "label": "Fotoğraf", "info": "Üzerinde yazı olmayan kare seç ya da kırp." },
+        { "type": "text", "id": "konum", "label": "Odak", "default": "50% 50%" },
+        { "type": "text", "id": "etiket", "label": "Etiket", "default": "Müşteri fotoğrafı" }
+      ]
+    },
+    {
+      "type": "yorum",
+      "name": "Yorum",
+      "settings": [
+        { "type": "textarea", "id": "metin", "label": "Yorum (gerçek, birebir)" },
+        { "type": "text", "id": "isim", "label": "İsim", "default": "Burak G." },
+        { "type": "checkbox", "id": "satin_aldi", "label": "Satın aldı etiketi", "default": true },
+        { "type": "text", "id": "konu", "label": "Konu", "default": "Uyku" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ayluna · Yorumlar",
+      "blocks": [
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Reklamında nasıl ise aynısı, hatta daha iyisi.", "isim": "Abdülkerim T.", "konu": "Kalite" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.", "isim": "Burak G.", "konu": "Uyku" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.", "isim": "Handan B.", "konu": "Hediye" } },
+        { "type": "foto" },
+        { "type": "yorum", "settings": { "metin": "2 tane aldık, gayet sağlam geldi. Paketlenmesi de güzeldi.", "isim": "Sevcan Z.", "konu": "Kalite" } },
+        { "type": "foto", "settings": { "konum": "50% 100%" } },
+        { "type": "yorum", "settings": { "metin": "Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.", "isim": "Mehmet C.", "konu": "Kalite" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+{%- comment -%}
+  Ayluna · Kendi dünyasında: kaydırınca çerçeve yakınlaşarak açılır, diskler farklı hızlarda süzülür.
+  Yalnız transform kullanır. Disk blokları sırayla 4 sabit konuma yerleşir.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign konumlar = 'left:22px;top:150px;width:70px;height:70px|right:20px;top:330px;width:62px;height:62px|left:70px;top:60px;width:30px;height:30px;opacity:.8|right:96px;top:110px;width:26px;height:26px;opacity:.8' | split: '|'
+  assign hizlar = '1.2|1.6|.5|.4' | split: '|'
+  assign donler = '10|-12|6|-6' | split: '|'
+-%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece)}
+{% endstyle %}
+<div id="ay-{{ section.id }}" data-erkek="{% if s.resim_erkek != blank %}{{ s.resim_erkek | image_url: width: 1080 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="dunya" aria-label="{{ s.baslik | escape }}">
+      <div class="cerceve">{%- if s.resim_kiz != blank -%}<img class="ay-dunya" src="{{ s.resim_kiz | image_url: width: 1080 }}" srcset="{{ s.resim_kiz | image_url: width: 430 }} 430w, {{ s.resim_kiz | image_url: width: 720 }} 720w, {{ s.resim_kiz | image_url: width: 1080 }} 1080w" sizes="(min-width: 430px) 430px, 100vw" alt="{{ s.resim_kiz.alt | escape }}" loading="lazy" width="{{ s.resim_kiz.width }}" height="{{ s.resim_kiz.height }}">{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+      {%- for b in section.blocks limit: 4 -%}
+        <span class="ucan" data-hiz="{{ hizlar[forloop.index0] }}" data-don="{{ donler[forloop.index0] }}" style="{{ konumlar[forloop.index0] }}" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 160 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
+      {%- endfor -%}
+      <div class="y"><h2 class="h2" style="color:#FFFDF9">{{ s.baslik | escape | newline_to_br }}</h2></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var el=kok.querySelector('.dunya'), ucan=[].slice.call(kok.querySelectorAll('.ucan')), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false;
+  function motor(){ bekliyor=false; var vh=innerHeight, r=el.getBoundingClientRect(); if(r.bottom<-200||r.top>vh+200) return;
+    var pr=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height*.6))); if(az) pr=1; el.style.setProperty('--p',pr.toFixed(3));
+    ucan.forEach(function(u){ var h=+u.dataset.hiz, d=+u.dataset.don; u.style.transform='translateY('+((.5-pr)*140*h)+'px) rotate('+((pr-.5)*2*d)+'deg)'; }); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); addEventListener('resize',motor); motor();
+  var im=kok.querySelector('.ay-dunya'), ilk=im&&im.getAttribute('src');
+  function model(m){ if(im&&kok.dataset.erkek){ im.removeAttribute('srcset'); im.src=m==='erkek'?kok.dataset.erkek:ilk; } }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kendi dünyası",
+  "tag": "section",
+  "class": "ayluna-dunya",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Her disk,\nbaşka bir gece." },
+    { "type": "image_picker", "id": "resim_kiz", "label": "Görsel (kız / varsayılan)" },
+    { "type": "image_picker", "id": "resim_erkek", "label": "Görsel (erkek)" }
+  ],
+  "blocks": [
+    { "type": "disk", "name": "Süzülen disk", "limit": 4, "settings": [ { "type": "image_picker", "id": "resim", "label": "Disk görseli" } ] }
+  ],
+  "presets": [ { "name": "Ayluna · Kendi dünyası", "blocks": [ {"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"} ] } ]
+}
+{% endschema %}

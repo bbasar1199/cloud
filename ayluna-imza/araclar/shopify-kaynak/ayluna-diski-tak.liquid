@@ -1,0 +1,111 @@
+{%- comment -%}
+  Ayluna · Diski tak (imza an): dokunulan disk lambaya uçar, oda geceye geçer, tavanda o diskin masalı döner.
+  Görünür olduktan 2 sn sonra dokunulmamışsa ilk diski kendisi takar (bir kez).
+  "Masal başına" fiyatı = ürünün (seçili/ilk varyant) fiyatı ÷ disk bloğu sayısı.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign urun = product
+  if s.urun != blank
+    assign urun = s.urun
+  endif
+  assign disk_sayisi = section.blocks.size
+  assign masal = 0
+  if disk_sayisi > 0 and urun != blank
+    assign masal = urun.selected_or_first_available_variant.price | divided_by: disk_sayisi
+  endif
+  capture alt_yazi
+    echo disk_sayisi | append: ' disk'
+    if s.masal_goster and masal > 0
+      assign masal_tl = masal | plus: 50 | divided_by: 100 | times: 100 | money_without_trailing_zeros
+      echo ' · masal başına ' | append: masal_tl
+    endif
+  endcapture
+-%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+{% endstyle %}
+<div id="ay-{{ section.id }}" data-erkek-gunduz="{% if s.erkek_gunduz != blank %}{{ s.erkek_gunduz | image_url: width: 900 }}{% endif %}" data-erkek-gece="{% if s.erkek_gece != blank %}{{ s.erkek_gece | image_url: width: 900 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="dt" aria-label="{{ s.baslik | escape }}">
+      <div class="px">
+        <h2 class="h2" style="color:#FFFDF9">{{ s.baslik | escape | newline_to_br }}</h2>
+        {%- if s.aciklama != blank -%}<p class="dt-alt">{{ s.aciklama }}</p>{%- endif -%}
+      </div>
+      <div class="dt-oda">
+        {%- if s.kiz_gunduz != blank -%}<img class="ay-gunduz" src="{{ s.kiz_gunduz | image_url: width: 900 }}" alt="{{ s.kiz_gunduz.alt | escape }}" loading="lazy" width="{{ s.kiz_gunduz.width }}" height="{{ s.kiz_gunduz.height }}">{%- endif -%}
+        {%- if s.kiz_gece != blank -%}<img class="dt-gece ay-gece" src="{{ s.kiz_gece | image_url: width: 900 }}" alt="{{ s.kiz_gece.alt | escape }}" loading="lazy" width="{{ s.kiz_gece.width }}" height="{{ s.kiz_gece.height }}">{%- endif -%}
+        <div class="dt-tavan" aria-hidden="true"><img class="ay-tavan" alt="" width="520" height="520"></div>
+        <span class="dt-ipucu">{{ s.ipucu }}</span>
+        <div class="dt-yazi"><span><span>{{ s.secili_ust }}</span><b class="ay-ad">{{ s.secilmedi }}</b></span>{%- if s.temsili != blank -%}<span class="dt-temsili">{{ s.temsili }}</span>{%- endif -%}</div>
+      </div>
+      <div class="dt-tepsi kaydirma" aria-label="{{ disk_sayisi }} masal diski">
+        {%- for b in section.blocks -%}
+        <button class="dt-disk" type="button" data-ad="{{ b.settings.ad | escape }}" data-src="{% if b.settings.resim != blank %}{{ b.settings.resim | image_url: width: 520 }}{% endif %}" aria-pressed="false" aria-label="{{ b.settings.ad | escape }} diskini tak" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 120 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</button>
+        {%- endfor -%}
+      </div>
+      <div class="dt-alt-sat"><span class="ay-dt-sayac" data-ilk="{{ alt_yazi | strip | escape }}">{{ alt_yazi | strip }}</span><button class="ay-bastan" type="button">{{ s.bastan }}</button></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var $=function(x){return kok.querySelector(x)}, $$=function(x){return [].slice.call(kok.querySelectorAll(x))};
+  var az=matchMedia('(prefers-reduced-motion: reduce)').matches, oda=$('.dt-oda'), diskler=$$('.dt-disk'), N=diskler.length, mesgul=false, dokunuldu=false;
+  var SECILMEDI={{ s.secilmedi | json }};
+  function yak(i){ var d=diskler[i]; $('.ay-tavan').src=d.dataset.src; $('.ay-ad').textContent=d.dataset.ad; $('.ay-dt-sayac').textContent=(i+1)+' / '+N+' · '+d.dataset.ad;
+    oda.classList.remove('yandi'); void oda.offsetWidth; oda.classList.add('yandi'); }
+  function tak(bt){ if(mesgul||!bt) return; var i=diskler.indexOf(bt);
+    diskler.forEach(function(x){x.setAttribute('aria-pressed',x===bt);});
+    if(az){yak(i);return;}
+    mesgul=true;
+    var r=bt.getBoundingClientRect(), o=oda.getBoundingClientRect(), hx=o.left+o.width*.5-29, hy=o.top+o.height*.6-29;
+    var u=document.createElement('span'); u.className='dt-ucan'; u.style.left=r.left+'px'; u.style.top=r.top+'px'; u.innerHTML='<img src="'+bt.dataset.src+'" alt="">'; kok.appendChild(u);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){ u.style.transform='translate('+(hx-r.left)+'px,'+(hy-r.top)+'px) scale(.35) rotate(200deg)'; u.style.opacity='0'; });});
+    setTimeout(function(){yak(i);},620); setTimeout(function(){u.remove();mesgul=false;},900); }
+  diskler.forEach(function(bt){ bt.addEventListener('click',function(){dokunuldu=true;tak(bt);}); });
+  $('.dt-tepsi').addEventListener('pointerdown',function(){dokunuldu=true;},{passive:true});
+  $('.ay-bastan').addEventListener('click',function(){ dokunuldu=true; oda.classList.remove('yandi'); $('.ay-ad').textContent=SECILMEDI; $('.ay-dt-sayac').textContent=$('.ay-dt-sayac').dataset.ilk; diskler.forEach(function(x){x.setAttribute('aria-pressed','false');}); });
+  var zaman=0;
+  new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ zaman=setTimeout(function(){ if(!dokunuldu) tak(diskler[0]); ob.disconnect(); },2000); } else clearTimeout(zaman); },{threshold:.6}).observe(oda);
+  var ilk={g:($('.ay-gunduz')||{}).src, n:($('.ay-gece')||{}).src};
+  function model(m){ var g=$('.ay-gunduz'), n=$('.ay-gece'); if(g&&kok.dataset.erkekGunduz) g.src=m==='erkek'?kok.dataset.erkekGunduz:ilk.g; if(n&&kok.dataset.erkekGece) n.src=m==='erkek'?kok.dataset.erkekGece:ilk.n; }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Diski tak",
+  "tag": "section",
+  "class": "ayluna-diski-tak",
+  "settings": [
+    { "type": "product", "id": "urun", "label": "Ürün (masal başına fiyat için)", "info": "Ürün şablonunda boş bırak." },
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Bir disk seç,\noda kararsın." },
+    { "type": "text", "id": "aciklama", "label": "Açıklama", "default": "Dokunduğun disk lambaya girer, tavanda masalı görürsün." },
+    { "type": "image_picker", "id": "kiz_gunduz", "label": "Gündüz oda (kız / varsayılan)" },
+    { "type": "image_picker", "id": "kiz_gece", "label": "Gece oda (kız / varsayılan, aynı kadraj)" },
+    { "type": "image_picker", "id": "erkek_gunduz", "label": "Gündüz oda (erkek)" },
+    { "type": "image_picker", "id": "erkek_gece", "label": "Gece oda (erkek)" },
+    { "type": "text", "id": "ipucu", "label": "İpucu", "default": "Aşağıdan bir disk seç" },
+    { "type": "text", "id": "secili_ust", "label": "Seçili disk üst yazısı", "default": "Bu gecenin masalı" },
+    { "type": "text", "id": "secilmedi", "label": "Seçilmedi yazısı", "default": "Henüz seçilmedi" },
+    { "type": "text", "id": "temsili", "label": "Temsilî görünüm notu", "default": "Temsilî görünüm" },
+    { "type": "checkbox", "id": "masal_goster", "label": "Masal başına fiyatı göster", "default": true },
+    { "type": "text", "id": "bastan", "label": "Sıfırla butonu", "default": "Baştan" }
+  ],
+  "blocks": [
+    { "type": "disk", "name": "Disk", "limit": 24, "settings": [
+      { "type": "image_picker", "id": "resim", "label": "Disk görseli" },
+      { "type": "text", "id": "ad", "label": "Masalın adı", "default": "Ay ve yıldız" }
+    ] }
+  ],
+  "presets": [ { "name": "Ayluna · Diski tak", "blocks": [
+    {"type":"disk","settings":{"ad":"Ay ve yıldız"}},{"type":"disk","settings":{"ad":"Okyanus"}},{"type":"disk","settings":{"ad":"Uzay"}},{"type":"disk","settings":{"ad":"Deniz kızı"}},
+    {"type":"disk","settings":{"ad":"Denizanası"}},{"type":"disk","settings":{"ad":"Şato"}},{"type":"disk","settings":{"ad":"Hayvanlar"}},{"type":"disk","settings":{"ad":"Gökkuşağı"}},
+    {"type":"disk","settings":{"ad":"Kış gecesi"}},{"type":"disk","settings":{"ad":"Taşıtlar"}},{"type":"disk","settings":{"ad":"Masal"}},{"type":"disk","settings":{"ad":"Doğum günü"}}
+  ] } ]
+}
+{% endschema %}

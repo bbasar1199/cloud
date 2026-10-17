@@ -1,0 +1,120 @@
+{%- comment -%}
+  Ayluna · Kardeşin gecesi (kapanış): kaydırınca öbür modelin odası gündüzden geceye geçer, iki satır yer değiştirir.
+  Buton fiyatı, adet fiyatı ve kazanç; "paket değeri" ile eşleşen varyanttan otomatik hesaplanır.
+  Butona basınca Sipariş bölümünde o paket seçilir ve sayfa siparişe kayar (ayluna:paket).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign urun = product
+  if s.urun != blank
+    assign urun = s.urun
+  endif
+  assign pv = urun.selected_or_first_available_variant
+  for v in urun.variants
+    if s.paket_degeri != blank and v.options contains s.paket_degeri
+      assign pv = v
+      break
+    endif
+  endfor
+  assign kazanc = pv.compare_at_price | minus: pv.price
+-%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .sayfa{max-width:430px;margin:0 auto;background:var(--krem);overflow:clip;position:relative}
+#ay-{{ section.id }} .px{padding-inline:18px}
+#ay-{{ section.id }} .model{flex:0 0 74%;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--gece2);height:200px;text-align:left;transition:transform .45s var(--e),opacity .45s var(--e)}
+#ay-{{ section.id }} .model img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .model::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 45%,rgba(12,16,39,.82))}
+#ay-{{ section.id }} .model .y{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#FFFDF9}
+#ay-{{ section.id }} .model .y b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:22px;line-height:1.1}
+#ay-{{ section.id }} .model .y span{font-size:12.5px;color:#D9DDF0}
+#ay-{{ section.id }} .model[aria-pressed=false]{opacity:.62;transform:scale(.96)}
+#ay-{{ section.id }} .paket{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;padding:15px 14px;border-radius:18px;border:1.5px solid var(--cizgi);background:var(--yuzey);cursor:pointer;text-align:left;transition:border-color .3s var(--e),background .3s var(--e)}
+#ay-{{ section.id }} .paket[aria-pressed=true]{border-color:var(--lac);background:#FFFFFF}
+#ay-{{ section.id }} .paket .alt{display:block;font-size:12.5px;color:var(--soluk);margin-top:2px}
+#ay-{{ section.id }} .paket .alt em{font-style:normal;color:#2E6B4F;font-weight:600}
+#ay-{{ section.id }} .iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#ay-{{ section.id }} .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--amber);color:var(--lac);font-weight:600;font-size:16px;cursor:pointer;text-decoration:none}
+#ay-{{ section.id }} .kardes{position:relative;height:600px;overflow:hidden;margin-top:56px}
+#ay-{{ section.id }} .kardes img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .kardes .gece-img{opacity:var(--gk,0)}
+#ay-{{ section.id }} .kardes::after{content:"";position:absolute;inset:auto 0 0 0;height:300px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));z-index:1}
+#ay-{{ section.id }} .kardes .y{position:absolute;left:18px;right:18px;bottom:28px;z-index:2}
+#ay-{{ section.id }} .kardes .satirlar{position:relative;height:84px}
+#ay-{{ section.id }} .kardes .satirlar span{position:absolute;inset:0;font-family:"Young Serif",serif;font-size:34px;line-height:1.05;color:#FFFDF9}
+#ay-{{ section.id }} .kardes .s1{opacity:clamp(0,calc(1 - var(--gk,0) * 2),1);transform:translateY(calc(var(--gk,0) * -14px))}
+#ay-{{ section.id }} .kardes .s2{opacity:clamp(0,calc(var(--gk,0) * 2 - 1),1);transform:translateY(calc((1 - var(--gk,0)) * 14px))}
+#ay-{{ section.id }} .urun{flex:0 0 150px;text-decoration:none}
+#ay-{{ section.id }} .urun img{width:150px;height:150px;border-radius:16px;object-fit:cover}
+#ay-{{ section.id }} .urun b{display:block;margin-top:8px;font-size:13.5px;font-weight:600;line-height:1.3;color:#FFFDF9}
+#ay-{{ section.id }} .urun span{font-size:13px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}
+#ay-{{ section.id }} .kardes{margin-top:{{ s.ust_bosluk }}px}
+{% endstyle %}
+<div id="ay-{{ section.id }}"
+  data-kiz-gunduz="{% if s.kiz_gunduz != blank %}{{ s.kiz_gunduz | image_url: width: 1080 }}{% endif %}" data-kiz-gece="{% if s.kiz_gece != blank %}{{ s.kiz_gece | image_url: width: 1080 }}{% endif %}"
+  data-erkek-gunduz="{% if s.erkek_gunduz != blank %}{{ s.erkek_gunduz | image_url: width: 1080 }}{% endif %}" data-erkek-gece="{% if s.erkek_gece != blank %}{{ s.erkek_gece | image_url: width: 1080 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="kardes" aria-label="{{ s.satir1 | escape }}">
+      {%- comment -%} Varsayılan model kız olduğundan kapanışta erkek odası görünür {%- endcomment -%}
+      {%- if s.erkek_gunduz != blank -%}<img class="ay-g" src="{{ s.erkek_gunduz | image_url: width: 1080 }}" alt="{{ s.erkek_gunduz.alt | escape }}" loading="lazy" style="object-position:50% 62%" width="{{ s.erkek_gunduz.width }}" height="{{ s.erkek_gunduz.height }}">{%- endif -%}
+      {%- if s.erkek_gece != blank -%}<img class="gece-img ay-n" src="{{ s.erkek_gece | image_url: width: 1080 }}" alt="{{ s.erkek_gece.alt | escape }}" loading="lazy" style="object-position:50% 62%" width="{{ s.erkek_gece.width }}" height="{{ s.erkek_gece.height }}">{%- endif -%}
+      <div class="y">
+        <div class="satirlar"><span class="s1">{{ s.satir1 | escape | newline_to_br }}</span><span class="s2">{{ s.satir2 | escape | newline_to_br }}</span></div>
+        <a class="btn" href="#siparis" style="margin-top:16px">{{ s.buton_yazi }} · {{ pv.price | money }}</a>
+        {%- if s.adet > 1 -%}<p style="margin:10px 0 0;font-size:12.5px;color:var(--gSoluk);text-align:center">{{ pv.price | divided_by: s.adet | plus: 50 | divided_by: 100 | times: 100 | money_without_trailing_zeros }} / adet{% if kazanc > 0 %} · {{ kazanc | plus: 50 | divided_by: 100 | times: 100 | money_without_trailing_zeros }} kazancın{% endif %}</p>{%- endif -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var el=kok.querySelector('.kardes'), btn=kok.querySelector('.btn'), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false, ADET={{ s.adet }};
+  function motor(){ bekliyor=false; var vh=innerHeight, r=el.getBoundingClientRect(), gk=Math.max(0,Math.min(1,(vh*.7-r.top)/(vh*.3))); if(az) gk=1; el.style.setProperty('--gk',gk.toFixed(3)); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); addEventListener('resize',motor); motor();
+  btn.addEventListener('click',function(e){ e.preventDefault(); document.dispatchEvent(new CustomEvent('ayluna:paket',{detail:{adet:ADET}})); var h=document.getElementById('siparis'); if(h&&!window.__aySiparisVar) h.scrollIntoView({behavior:az?'auto':'smooth'}); });
+  /* Yapışkan çubuk bu buton ekrandayken çekilsin */
+  new IntersectionObserver(function(es){ document.dispatchEvent(new CustomEvent('ayluna:kardes-gorunur',{detail:es[0].isIntersecting})); },{threshold:0}).observe(btn);
+  /* Kapanışta seçilmeyen model gösterilir */
+  function model(m){ var o=m==='erkek'?'kiz':'erkek', g=kok.querySelector('.ay-g'), n=kok.querySelector('.ay-n'), d=kok.dataset;
+    var gs=d[o+'Gunduz'], ns=d[o+'Gece']; if(g&&gs) g.src=gs; if(n&&ns) n.src=ns; }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kardeş",
+  "tag": "section",
+  "class": "ayluna-kardes",
+  "settings": [
+    { "type": "product", "id": "urun", "label": "Ürün", "info": "Ürün şablonunda boş bırak." },
+    { "type": "textarea", "id": "satir1", "label": "Gündüz satırı", "default": "Bir lamba,\nbir oda." },
+    { "type": "textarea", "id": "satir2", "label": "Gece satırı", "default": "Kardeşi de aynı\nmasalla uyusun." },
+    { "type": "text", "id": "paket_degeri", "label": "Paket varyant seçenek değeri", "default": "2 lamba" },
+    { "type": "range", "id": "adet", "label": "Lamba adedi", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "text", "id": "buton_yazi", "label": "Buton yazısı (fiyat otomatik eklenir)", "default": "2 lamba · kardeşe" },
+    { "type": "header", "content": "Görseller (seçilmeyen modelin odası gösterilir)" },
+    { "type": "image_picker", "id": "kiz_gunduz", "label": "Kız · gündüz" },
+    { "type": "image_picker", "id": "kiz_gece", "label": "Kız · gece" },
+    { "type": "image_picker", "id": "erkek_gunduz", "label": "Erkek · gündüz" },
+    { "type": "image_picker", "id": "erkek_gece", "label": "Erkek · gece" },
+    { "type": "range", "id": "ust_bosluk", "label": "Üst boşluk", "min": 0, "max": 96, "step": 8, "unit": "px", "default": 56 }
+  ],
+  "presets": [ { "name": "Ayluna · Kardeş" } ]
+}
+{% endschema %}

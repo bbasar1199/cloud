@@ -1,0 +1,63 @@
+AYLUNA · LUNADREAM BÖLÜMLERİ · KURULUM
+(Online Store 2.0 / Horizon ve Dawn tabanlı temalar)
+
+1) FONTLAR
+Tema > Kodu düzenle > Assets > "Yeni öğe ekle" ile şu 6 dosyayı yükle
+(ayluna-imza/onizleme/f/ klasöründen):
+  young-serif-latin-400-normal.woff2
+  young-serif-latin-ext-400-normal.woff2
+  onest-latin-400-normal.woff2
+  onest-latin-ext-400-normal.woff2
+  onest-latin-600-normal.woff2
+  onest-latin-ext-600-normal.woff2
+
+2) BÖLÜMLER
+Kodu düzenle > Sections > "Yeni bölüm ekle" > Liquid. Adı dosya adıyla aynı olsun
+(.txt yerine .liquid). İçini sil, .txt dosyasının tamamını yapıştır, Kaydet.
+Sayfadaki sıra:
+  ayluna-duyuru.txt          -> sections/ayluna-duyuru.liquid
+  ayluna-sahne.txt           -> sections/ayluna-sahne.liquid
+  ayluna-siparis.txt         -> sections/ayluna-siparis.liquid
+  ayluna-yorumlar.txt        -> sections/ayluna-yorumlar.liquid
+  ayluna-kutu.txt            -> sections/ayluna-kutu.liquid
+  ayluna-dunya.txt           -> sections/ayluna-dunya.liquid
+  ayluna-diski-tak.txt       -> sections/ayluna-diski-tak.liquid
+  ayluna-bir-gece.txt        -> sections/ayluna-bir-gece.liquid
+  ayluna-sss.txt             -> sections/ayluna-sss.liquid
+  ayluna-kardes.txt          -> sections/ayluna-kardes.liquid
+  ayluna-diger-isiklar.txt   -> sections/ayluna-diger-isiklar.liquid
+  ayluna-alt-bilgi.txt       -> sections/ayluna-alt-bilgi.liquid
+
+3) ŞABLON
+Özelleştir > üstten Ürünler > "Yeni şablon oluştur" (ör. lunadream) > temanın
+ürün bilgisi bölümünü gizle > "Bölüm ekle" ile Ayluna bölümlerini yukarıdaki sırayla
+ekle. Ürün > Tema şablonu: lunadream.
+Temanın başlığını bu şablonda gizlersen Sahne'deki "logo ve sepet" onun işini görür;
+başlık görünecekse bu ayarı kapat.
+
+4) VARYANTLAR (fiyatlar buradan hesaplanır)
+LunaDream'de iki seçenek olmalı: Model (Tavşanlı / Uzay Kaşifi) ve Paket (1 lamba / 2 lamba).
+Her varyanta fiyat + karşılaştırma fiyatı gir. Sipariş bölümündeki Model ve Paket
+bloklarının "Varyant seçenek değeri" alanı Shopify'daki değerle harfi harfine aynı olmalı.
+İndirim yüzdesi, adet fiyatı, kazanç, masal başına fiyat ve Kardeş butonu fiyatı
+kendiliğinden hesaplanır. Fiyat değiştirince sayfayı ayrıca düzenlemen gerekmez.
+
+5) KAPIDA ÖDEME UYGULAMASI
+Sipariş > "Kapıda ödeme uygulamasının buton seçicisi" alanına uygulamanın
+butonunun seçicisini yaz (uygulamanın ayarlarında yazar). Boş kalırsa kaydırınca
+ürün sepete eklenir ve ödemeye gidilir. "Birlikte al" ürünü uygulama modunda
+sepete eklenir; formda görünmesi uygulamanın sepet desteğine bağlıdır.
+
+6) VİDEOLAR (Bir gece)
+Ayarlar > Dosyalar'a ayluna-imza/onizleme/v/ içindeki mp4'leri yükle.
+Bir gece bölümünde her ana videoyu seç: m1-isik, m2-disk, m3-kiz, m4-tavan, m5-kiz.
+Erkek alanlarına m3-erkek ve m5-erkek. Poster Shopify'da otomatik oluşur.
+
+7) YORUMLAR
+Loox ürün metafield'ı (loox.avg_rating, loox.num_reviews) varsa puan ve sayı oradan
+gelir; yoksa bölüm ayarındaki değer görünür. Fotoğraf seçerken üzerinde yazı
+olmayan kare seç (ugc1k.jpg yazısı kırpılmış hâlidir).
+
+8) KONTROL
+Kaydettikten sonra telefonda aç: sayaç ayın son günü 23:59:59'a sayar, son 3 günde
+turuncuya döner. Köşeli parantezli alanlar ([X], [numara]) teyit edilince doldurulacak.

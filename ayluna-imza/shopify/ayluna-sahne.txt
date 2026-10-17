@@ -1,0 +1,136 @@
+{%- comment -%}
+  Ayluna · Sahne (ilk ekran): "Işığı kapat" anahtarı gündüz fotoğrafını gece fotoğrafına çevirir.
+  Kız/Erkek görselleri, Sipariş bölümündeki model seçimiyle (ayluna:model olayı) değişir.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#ay-{{ section.id }} .ust{position:absolute;inset:0 0 auto 0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px;color:#FFFDF9}
+#ay-{{ section.id }} .ust button,#ay-{{ section.id }} .ust a.ikon{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;cursor:pointer;text-decoration:none}
+#ay-{{ section.id }} .logo{display:flex;align-items:center;gap:7px;min-height:44px;text-decoration:none}
+#ay-{{ section.id }} .logo span{font-family:"Young Serif",serif;font-size:21px;line-height:1}
+#ay-{{ section.id }} .sahne{position:relative;height:520px;overflow:hidden;background:#000}
+#ay-{{ section.id }} .kare{position:absolute;inset:0;opacity:0;transition:opacity .5s var(--e)}
+#ay-{{ section.id }} .kare.on{opacity:1}
+#ay-{{ section.id }} .kare img{width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .kare .gece{position:absolute;inset:0}
+#ay-{{ section.id }} .sahne::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,16,39,.55),rgba(12,16,39,0) 22%,rgba(12,16,39,0) 60%,rgba(12,16,39,.75))}
+#ay-{{ section.id }} .anahtar{position:absolute;left:16px;top:66px;z-index:4;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:4px 14px 4px 4px;border-radius:999px;border:1px solid rgba(255,253,249,.3);background:rgba(12,16,39,.45);color:#FFFDF9;font-size:13.5px;font-weight:600;cursor:pointer}
+#ay-{{ section.id }} .anahtar .yuva{position:relative;width:44px;height:34px;border-radius:999px;background:rgba(255,253,249,.22)}
+#ay-{{ section.id }} .anahtar .top{position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:#FFFDF9;transition:transform .45s var(--e),background .45s var(--e)}
+#ay-{{ section.id }} .anahtar[aria-pressed=true] .top{transform:translateX(10px);background:var(--amber)}
+#ay-{{ section.id }} .saat{position:absolute;right:18px;top:72px;z-index:4;font-family:"Young Serif",serif;color:#FFFDF9;font-size:26px;font-variant-numeric:tabular-nums}
+#ay-{{ section.id }} .kucuk{position:absolute;left:16px;right:16px;bottom:46px;z-index:4;display:flex;gap:8px}
+#ay-{{ section.id }} .kucuk button{width:52px;height:52px;border-radius:14px;overflow:hidden;padding:0;border:2px solid transparent;cursor:pointer;opacity:.7;transition:opacity .3s,border-color .3s}
+#ay-{{ section.id }} .kucuk button.on{border-color:#FFFDF9;opacity:1}
+#ay-{{ section.id }} .kucuk img{width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
+#ay-{{ section.id }} .model{flex:0 0 74%;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--gece2);height:200px;text-align:left;transition:transform .45s var(--e),opacity .45s var(--e)}
+#ay-{{ section.id }} .model img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#ay-{{ section.id }} .model::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 45%,rgba(12,16,39,.82))}
+#ay-{{ section.id }} .model[aria-pressed=false]{opacity:.62;transform:scale(.96)}
+#ay-{{ section.id }} .dunya{position:relative;height:620px;overflow:hidden;background:var(--gece2)}
+#ay-{{ section.id }} .dunya::after{content:"";position:absolute;inset:auto 0 0 0;height:260px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));pointer-events:none;z-index:2}
+#ay-{{ section.id }} .raf{display:flex;gap:12px;overflow-x:auto;margin:20px -18px 0;padding:0 18px}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--gece2)}
+#ay-{{ section.id }} .ust a.logo{color:#FFFDF9}
+{% endstyle %}
+<div id="ay-{{ section.id }}" data-erkek-gunduz="{% if s.erkek_gunduz != blank %}{{ s.erkek_gunduz | image_url: width: 1080 }}{% endif %}" data-erkek-gece="{% if s.erkek_gece != blank %}{{ s.erkek_gece | image_url: width: 1080 }}{% endif %}" data-erkek-dunya="{% if s.erkek_dunya != blank %}{{ s.erkek_dunya | image_url: width: 1080 }}{% endif %}" data-erkek-elde="{% if s.erkek_elde != blank %}{{ s.erkek_elde | image_url: width: 1080 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="sahne" aria-label="{{ s.urun_adi | escape }} görselleri">
+      {%- if s.ust_goster -%}
+      <header class="ust">
+        <a class="ikon" href="#" aria-label="Menü" onclick="event.preventDefault();var b=document.querySelector('header-drawer summary, .header__icon--menu');if(b)b.click();else location.href='{{ routes.collections_url }}';"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"/></svg></a>
+        <a class="logo" href="{{ routes.root_url }}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"/></svg><span>{{ s.logo_yazi }}</span></a>
+        <a class="ikon" href="{{ routes.cart_url }}" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></a>
+      </header>
+      {%- endif -%}
+      <div class="kare on" data-kare="0">
+        {%- if s.kiz_gunduz != blank -%}
+          <img class="ay-gunduz" src="{{ s.kiz_gunduz | image_url: width: 1080 }}" srcset="{{ s.kiz_gunduz | image_url: width: 430 }} 430w, {{ s.kiz_gunduz | image_url: width: 720 }} 720w, {{ s.kiz_gunduz | image_url: width: 1080 }} 1080w" sizes="(min-width: 430px) 430px, 100vw" alt="{{ s.kiz_gunduz.alt | escape }}" width="{{ s.kiz_gunduz.width }}" height="{{ s.kiz_gunduz.height }}" fetchpriority="high" loading="eager" style="object-position:50% 62%">
+        {%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}
+        {%- if s.kiz_gece != blank -%}
+          <img class="gece ay-gece" src="{{ s.kiz_gece | image_url: width: 1080 }}" srcset="{{ s.kiz_gece | image_url: width: 430 }} 430w, {{ s.kiz_gece | image_url: width: 720 }} 720w, {{ s.kiz_gece | image_url: width: 1080 }} 1080w" sizes="(min-width: 430px) 430px, 100vw" alt="{{ s.kiz_gece.alt | escape }}" width="{{ s.kiz_gece.width }}" height="{{ s.kiz_gece.height }}" loading="eager" style="object-position:50% 62%;opacity:0">
+        {%- endif -%}
+      </div>
+      {%- if s.kiz_dunya != blank -%}<div class="kare" data-kare="1"><img class="ay-dunya" src="{{ s.kiz_dunya | image_url: width: 1080 }}" alt="{{ s.kiz_dunya.alt | escape }}" loading="lazy" width="{{ s.kiz_dunya.width }}" height="{{ s.kiz_dunya.height }}"></div>{%- endif -%}
+      {%- if s.kiz_elde != blank -%}<div class="kare" data-kare="2"><img class="ay-elde" src="{{ s.kiz_elde | image_url: width: 1080 }}" alt="{{ s.kiz_elde.alt | escape }}" loading="lazy" width="{{ s.kiz_elde.width }}" height="{{ s.kiz_elde.height }}"></div>{%- endif -%}
+      {%- if s.tavan != blank -%}<div class="kare" data-kare="3"><img src="{{ s.tavan | image_url: width: 1080 }}" alt="{{ s.tavan.alt | escape }}" loading="lazy" width="{{ s.tavan.width }}" height="{{ s.tavan.height }}"></div>{%- endif -%}
+      <button class="anahtar" type="button" aria-pressed="false"><span class="yuva"><span class="top"></span></span><span class="ay-anahtar-yazi">{{ s.kapat_yazi }}</span></button>
+      <span class="saat" aria-hidden="true">{{ s.saat_gunduz }}</span>
+      <div class="kucuk" role="group" aria-label="Görseller">
+        {%- if s.kiz_gece != blank -%}<button type="button" class="on" data-git="0" aria-label="Odada" aria-pressed="true"><img class="ay-mini-gece" src="{{ s.kiz_gece | image_url: width: 120 }}" alt="" loading="lazy" width="{{ s.kiz_gece.width }}" height="{{ s.kiz_gece.height }}"></button>{%- endif -%}
+        {%- if s.kiz_dunya != blank -%}<button type="button" data-git="1" aria-label="Kendi dünyasında" aria-pressed="false"><img class="ay-mini-dunya" src="{{ s.kiz_dunya | image_url: width: 120 }}" alt="" loading="lazy" width="{{ s.kiz_dunya.width }}" height="{{ s.kiz_dunya.height }}"></button>{%- endif -%}
+        {%- if s.kiz_elde != blank -%}<button type="button" data-git="2" aria-label="Elde" aria-pressed="false"><img class="ay-mini-elde" src="{{ s.kiz_elde | image_url: width: 120 }}" alt="" loading="lazy" width="{{ s.kiz_elde.width }}" height="{{ s.kiz_elde.height }}"></button>{%- endif -%}
+        {%- if s.tavan != blank -%}<button type="button" data-git="3" aria-label="Tavanda" aria-pressed="false"><img src="{{ s.tavan | image_url: width: 120 }}" alt="" loading="lazy" width="{{ s.tavan.width }}" height="{{ s.tavan.height }}"></button>{%- endif -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var $=function(x){return kok.querySelector(x)}, $$=function(x){return [].slice.call(kok.querySelectorAll(x))};
+  var az=matchMedia('(prefers-reduced-motion: reduce)').matches, p=0, raf=0;
+  var KAPAT={{ s.kapat_yazi | json }}, AC={{ s.ac_yazi | json }}, SG={{ s.saat_gunduz | json }}, SN={{ s.saat_gece | json }};
+  function ciz(){ var g=$('.ay-gece'); if(g) g.style.opacity=Math.min(1,p*1.15); $('.saat').textContent=p>.5?SN:SG; $('.anahtar').setAttribute('aria-pressed',p>.5); $('.ay-anahtar-yazi').textContent=p>.5?AC:KAPAT; }
+  function tween(h,sure){ cancelAnimationFrame(raf); if(az){p=h;ciz();return;} var b=p,t0=0; (function adim(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/sure), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; p=b+(h-b)*e; ciz(); if(k<1)raf=requestAnimationFrame(adim); })(performance.now()); }
+  {%- if s.otomatik_kapat -%}setTimeout(function(){tween(1,2600);},1000);{%- endif -%}
+  $('.anahtar').addEventListener('click',function(){tween(p>.5?0:1,2000);});
+  function git(i){ $$('.kare').forEach(function(k){k.classList.toggle('on',+k.dataset.kare===i);}); $$('.kucuk button').forEach(function(x){x.classList.toggle('on',+x.dataset.git===i);x.setAttribute('aria-pressed',+x.dataset.git===i);}); $('.anahtar').style.display=i===0?'':'none'; $('.saat').style.display=i===0?'':'none'; }
+  $$('.kucuk button').forEach(function(x){x.addEventListener('click',function(){git(+x.dataset.git);});});
+  /* Model değişince görseller (Sipariş bölümünden ayluna:model) */
+  var ilk={};
+  ['gunduz','gece','dunya','elde'].forEach(function(k){ var im=$('.ay-'+k); if(im) ilk[k]=im.getAttribute('src'); });
+  function model(m){ ['gunduz','gece','dunya','elde'].forEach(function(k){ var im=$('.ay-'+k), e=kok.dataset['erkek'+k.charAt(0).toUpperCase()+k.slice(1)]; if(!im||!e) return; var src=m==='erkek'?e:ilk[k]; im.removeAttribute('srcset'); im.src=src; var mini=$('.ay-mini-'+k); if(mini) mini.src=src; }); }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);});
+  if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Sahne",
+  "tag": "section",
+  "class": "ayluna-sahne",
+  "settings": [
+    { "type": "checkbox", "id": "ust_goster", "label": "Görselin üstünde logo ve sepet göster", "info": "Temanın kendi başlığını bu şablonda gizliyorsan açık bırak.", "default": true },
+    { "type": "text", "id": "logo_yazi", "label": "Logo yazısı", "default": "Ayluna" },
+    { "type": "text", "id": "urun_adi", "label": "Ürün adı (erişilebilirlik)", "default": "LunaDream" },
+    { "type": "header", "content": "Kız modeli (varsayılan)" },
+    { "type": "image_picker", "id": "kiz_gunduz", "label": "Gündüz oda" },
+    { "type": "image_picker", "id": "kiz_gece", "label": "Gece oda (aynı kadraj)" },
+    { "type": "image_picker", "id": "kiz_dunya", "label": "Kendi dünyasında" },
+    { "type": "image_picker", "id": "kiz_elde", "label": "Elde" },
+    { "type": "header", "content": "Erkek modeli (boşsa kız görselleri kalır)" },
+    { "type": "image_picker", "id": "erkek_gunduz", "label": "Gündüz oda" },
+    { "type": "image_picker", "id": "erkek_gece", "label": "Gece oda" },
+    { "type": "image_picker", "id": "erkek_dunya", "label": "Kendi dünyasında" },
+    { "type": "image_picker", "id": "erkek_elde", "label": "Elde" },
+    { "type": "header", "content": "Ortak" },
+    { "type": "image_picker", "id": "tavan", "label": "Tavana yansıma" },
+    { "type": "checkbox", "id": "otomatik_kapat", "label": "Açılışta ışığı kendisi kapatsın", "default": true },
+    { "type": "text", "id": "kapat_yazi", "label": "Anahtar yazısı (gündüz)", "default": "Işığı kapat" },
+    { "type": "text", "id": "ac_yazi", "label": "Anahtar yazısı (gece)", "default": "Işığı aç" },
+    { "type": "text", "id": "saat_gunduz", "label": "Saat (gündüz)", "default": "19:30" },
+    { "type": "text", "id": "saat_gece", "label": "Saat (gece)", "default": "21:00" }
+  ],
+  "presets": [{ "name": "Ayluna · Sahne" }]
+}
+{% endschema %}

@@ -1,0 +1,117 @@
+{%- comment -%}
+  Ayluna · Bir gece, beş an: eğik makara kartları, her kartta sessiz döngü video.
+  Görünen video oynar, görünmeyen durur (IntersectionObserver). Azaltılmış harekette yalnız poster görünür.
+  Her an için kız/erkek videosu ayrı yüklenebilir; erkek boşsa kız videosu kalır.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section style="padding:36px 0 8px" aria-label="{{ s.baslik | escape }}">
+      <h2 class="h2 px" style="color:#FFFDF9">{{ s.baslik | escape | newline_to_br }}</h2>
+      <div class="ilerleme">{%- for b in section.blocks -%}<i></i>{%- endfor -%}</div>
+      <div class="makaralar kaydirma">
+        {%- for b in section.blocks -%}
+          {%- liquid
+            assign vk = b.settings.video_kiz
+            assign ve = b.settings.video_erkek
+            assign src_k = ''
+            assign src_e = ''
+            assign en_iyi = 0
+            for kaynak in vk.sources
+              if kaynak.mime_type == 'video/mp4' and kaynak.width <= 1080 and kaynak.width > en_iyi
+                assign src_k = kaynak.url
+                assign en_iyi = kaynak.width
+              endif
+            endfor
+            assign en_iyi = 0
+            for kaynak in ve.sources
+              if kaynak.mime_type == 'video/mp4' and kaynak.width <= 1080 and kaynak.width > en_iyi
+                assign src_e = kaynak.url
+                assign en_iyi = kaynak.width
+              endif
+            endfor
+            assign baslik_e = b.settings.baslik_erkek | default: b.settings.baslik
+            assign aciklama_e = b.settings.aciklama_erkek | default: b.settings.aciklama
+          -%}
+          <article class="makara" {{ b.shopify_attributes }}
+            data-k-src="{{ src_k }}" data-k-poster="{% if vk.preview_image %}{{ vk.preview_image | image_url: width: 720 }}{% endif %}" data-k-b="{{ b.settings.baslik | escape }}" data-k-a="{{ b.settings.aciklama | escape }}"
+            data-e-src="{{ src_e }}" data-e-poster="{% if ve.preview_image %}{{ ve.preview_image | image_url: width: 720 }}{% endif %}" data-e-b="{{ baslik_e | escape }}" data-e-a="{{ aciklama_e | escape }}">
+            {%- if src_k != blank -%}
+              <video muted playsinline loop autoplay preload="metadata" disablepictureinpicture aria-label="{{ b.settings.baslik | escape }}"{% if vk.preview_image %} poster="{{ vk.preview_image | image_url: width: 720 }}"{% endif %}><source src="{{ src_k }}" type="video/mp4"></video>
+            {%- elsif b.settings.resim != blank -%}
+              <img src="{{ b.settings.resim | image_url: width: 600 }}" alt="{{ b.settings.baslik | escape }}" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">
+            {%- endif -%}
+            <span class="s">{{ b.settings.saat }}</span>
+            <div class="y"><b class="ay-b">{{ b.settings.baslik }}</b><span class="ay-a">{{ b.settings.aciklama }}</span></div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var kap=kok.querySelector('.makaralar'), kartlar=[].slice.call(kok.querySelectorAll('.makara')), cubuk=[].slice.call(kok.querySelectorAll('.ilerleme i'));
+  var az=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ var v=e.target; if(e.isIntersecting){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } else v.pause(); }); },{threshold:.35});
+  function hazirla(){ [].forEach.call(kok.querySelectorAll('video'),function(v){ v.muted=true; if(az){ v.removeAttribute('autoplay'); v.preload='none'; v.pause(); } else io.observe(v); }); }
+  function egim(){ var orta=kap.scrollLeft+kap.clientWidth/2, en=0, yakin=1e9;
+    kartlar.forEach(function(m,i){ var c=m.offsetLeft+m.offsetWidth/2, o=(c-orta)/m.offsetWidth, oo=Math.max(-1.4,Math.min(1.4,o));
+      m.style.transform=az?'':'rotateY('+(-oo*22)+'deg) scale('+(1-Math.abs(oo)*.08)+')'; m.style.opacity=1-Math.min(.45,Math.abs(oo)*.35);
+      if(yakin>Math.abs(o)){yakin=Math.abs(o);en=i;} });
+    cubuk.forEach(function(x,i){x.style.setProperty('--d',i<=en?1:0);}); }
+  kap.addEventListener('scroll',function(){requestAnimationFrame(egim);},{passive:true});
+  function model(m){ var k=m==='erkek'?'e':'k';
+    kartlar.forEach(function(a){ var src=a.dataset[k+'Src']||a.dataset.kSrc, po=a.dataset[k+'Poster']||a.dataset.kPoster, v=a.querySelector('video');
+      a.querySelector('.ay-b').textContent=a.dataset[k+'B']; a.querySelector('.ay-a').textContent=a.dataset[k+'A'];
+      if(v&&src&&v.querySelector('source').getAttribute('src')!==src){ v.querySelector('source').setAttribute('src',src); if(po) v.poster=po; v.load(); if(!az){ var r=v.getBoundingClientRect(); if(r.right>0&&innerWidth>r.left&&r.bottom>0&&innerHeight>r.top){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } } } }); }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);});
+  hazirla(); if(window.AylunaModel&&window.AylunaModel!=='kiz') model(window.AylunaModel); egim();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Bir gece",
+  "tag": "section",
+  "class": "ayluna-bir-gece",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Bir gece,\nbeş an" }
+  ],
+  "blocks": [
+    {
+      "type": "an",
+      "name": "An",
+      "limit": 7,
+      "settings": [
+        { "type": "text", "id": "saat", "label": "Saat", "default": "20:00" },
+        { "type": "text", "id": "baslik", "label": "Başlık", "default": "Işığı yak" },
+        { "type": "text", "id": "aciklama", "label": "Açıklama", "default": "Sıcak, göz yormayan ay ışığı" },
+        { "type": "video", "id": "video_kiz", "label": "Video (kız / varsayılan)", "info": "Sessiz, 4-6 sn, 9:16, mp4. Poster otomatik gelir." },
+        { "type": "image_picker", "id": "resim", "label": "Video yoksa görsel" },
+        { "type": "header", "content": "Erkek modeli (boşsa üstteki kalır)" },
+        { "type": "video", "id": "video_erkek", "label": "Video (erkek)" },
+        { "type": "text", "id": "baslik_erkek", "label": "Başlık (erkek)" },
+        { "type": "text", "id": "aciklama_erkek", "label": "Açıklama (erkek)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ayluna · Bir gece",
+      "blocks": [
+        { "type": "an", "settings": { "saat": "20:00", "baslik": "Işığı yak", "aciklama": "Sıcak, göz yormayan ay ışığı" } },
+        { "type": "an", "settings": { "saat": "20:30", "baslik": "Diski seç", "aciklama": "Kubbeyi aç, bu gecenin masalı" } },
+        { "type": "an", "settings": { "saat": "20:45", "baslik": "Ninniyi aç", "aciklama": "Telefondan bağla, lambadan çalsın", "baslik_erkek": "Robotu çevir", "aciklama_erkek": "Uzay Kaşifi tavana döner" } },
+        { "type": "an", "settings": { "saat": "21:00", "baslik": "Tavanda masal", "aciklama": "Yıldızlar yavaşça döner" } },
+        { "type": "an", "settings": { "saat": "21:15", "baslik": "Gözler kapanır", "aciklama": "Oda karanlıkta kalmaz" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

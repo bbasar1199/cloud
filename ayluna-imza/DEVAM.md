@@ -12,7 +12,7 @@ Bu klasör, Ayluna (ayluna.shop) için yeniden tasarlanan LunaDream ürün sayfa
 
 ## Dosyalar
 - `onizleme/index.html` — ana sayfa (saf HTML/CSS/JS). Görseller `onizleme/g/`, fontlar `onizleme/f/` (Young Serif + Onest, Fontsource).
-- `onizleme/fikirler.html` — eleştirmenin 3 fikri: Diski tak, Ay bitmeden, Gece hikâyeleri.
+- `onizleme/fikirler.html` — eleştirmenin 3 fikri: Diski tak, Ay bitmeden, Gece hikâyeleri (Diski tak ve Gece hikâyeleri tam, Ay bitmeden yalnız ay kartı olarak index'e girdi).
 - `araclar/ekran-goruntusu.js` — 390×844 telefon ekranında sayfa boyunca ekran görüntüsü alır:
   `NODE_PATH=$(npm root -g) node ayluna-imza/araclar/ekran-goruntusu.js /tmp/ekran [index.html|fikirler.html]`
   Her değişiklikten sonra çalıştır ve görüntülere bakarak kontrol et.
@@ -29,6 +29,12 @@ Bu klasör, Ayluna (ayluna.shop) için yeniden tasarlanan LunaDream ürün sayfa
 - Ürün görselleri gerçek üründen Google Flow (Nano Banana Pro) ile üretildi; ürünün kendisi değiştirilmez.
 
 ## Sıradaki işler
-1. Remotion ile "Bir gece, beş an" kartları için kısa videolar (mevcut görsellerden).
-2. Kullanıcının seçtiği fikirleri `index.html`'e yerleştirmek.
-3. Onaydan sonra bölümleri Shopify OS 2.0 section olarak `.txt` çıkarmak (schema ile düzenlenebilir).
+1. Kullanıcıdan teyitler (RAPOR.md "Teyit bekleyenler"): ölçü, pil, yaş, teslim, varyant yapısı, COD seçicisi.
+2. Shopify'a kurulum (`shopify/KURULUM.txt`) ve gerçek telefonda deneme: videolar, sayaç, COD akışı.
+3. Masaüstü düzeni: bölümler şimdilik 430px sütunda ortalanıyor.
+4. Gerçek müşteri videosu gelirse hikâyelere video karesi eklemek.
+
+## Son durum (17 Ekim 2026)
+- Videolar: `onizleme/v/` (kaynak `araclar/remotion/`, `npm run video`).
+- Seçilen fikirler index'te; eski hâli `onizleme/yedek/index-fikirlerden-once.html`.
+- Shopify: kaynak `araclar/shopify-kaynak/*.liquid` → `python3 ayluna-imza/araclar/shopify-derle.py` → `shopify/*.txt` (CSS index.html'den otomatik alınır, Liquid/şema denetlenir). Sahte verili önizleme: `araclar/shopify-onizle.js` (liquidjs gerekir).

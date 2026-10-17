@@ -1,0 +1,22 @@
+{%- comment -%} Ayluna · Duyuru bandı: tek somut avantaj {%- endcomment -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece2)}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <div class="duyuru">{{ section.settings.metin }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ayluna · Duyuru",
+  "tag": "section",
+  "class": "ayluna-duyuru",
+  "settings": [
+    { "type": "text", "id": "metin", "label": "Duyuru metni", "default": "Kapıda nakit ya da kartla öde · Ücretsiz kargo" }
+  ],
+  "presets": [{ "name": "Ayluna · Duyuru" }]
+}
+{% endschema %}

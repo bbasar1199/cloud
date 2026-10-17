@@ -476,7 +476,7 @@ button{font:inherit;color:inherit}
         <div class="dt-yazi"><span><span>Bu gecenin masalı</span><b id="dtAd">Henüz seçilmedi</b></span><span class="dt-temsili">Temsilî görünüm</span></div>
       </div>
       <div class="dt-tepsi kaydirma" id="dtTepsi" aria-label="12 masal diski"></div>
-      <div class="dt-alt-sat"><span id="dtSayac">12 disk · masal başına ₺141</span><button id="dtSifirla" type="button">Baştan</button></div>
+      <div class="dt-alt-sat"><span id="dtSayac">12 disk · masal başına ₺142</span><button id="dtSifirla" type="button">Baştan</button></div>
     </section>
 
     <section style="padding:36px 0 8px" aria-label="Bir gece, beş an">
@@ -706,7 +706,7 @@ button{font:inherit;color:inherit}
   }
   $$('.dt-disk').forEach(function(bt){ bt.addEventListener('click',function(){ dtDokunuldu=true; tak(bt); }); });
   tepsi.addEventListener('pointerdown',function(){dtDokunuldu=true;},{passive:true});
-  $('#dtSifirla').addEventListener('click',function(){ dtDokunuldu=true; oda.classList.remove('yandi'); $('#dtAd').textContent='Henüz seçilmedi'; $('#dtSayac').textContent='12 disk · masal başına ₺141'; $$('.dt-disk').forEach(function(x){x.setAttribute('aria-pressed','false');}); });
+  $('#dtSifirla').addEventListener('click',function(){ dtDokunuldu=true; oda.classList.remove('yandi'); $('#dtAd').textContent='Henüz seçilmedi'; $('#dtSayac').textContent='12 disk · masal başına ₺142'; $$('.dt-disk').forEach(function(x){x.setAttribute('aria-pressed','false');}); });
   /* Görünür olduktan 2 sn sonra dokunulmamışsa ilk diski kendisi takar (bir kez) */
   var dtZaman=0;
   new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ dtZaman=setTimeout(function(){ if(!dtDokunuldu){ tak($('.dt-disk')); } ob.disconnect(); },2000); } else clearTimeout(dtZaman); },{threshold:.6}).observe(oda);

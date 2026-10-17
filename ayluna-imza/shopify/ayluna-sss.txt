@@ -1,0 +1,91 @@
+{%- comment -%} Ayluna · Sorular: dönen iade mührü + itiraz kıran sorular {%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .px{padding-inline:18px}
+#ay-{{ section.id }} .ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#ay-{{ section.id }} .h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1;letter-spacing:-.025em;margin:0;text-wrap:balance}
+#ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
+#ay-{{ section.id }} .sss{border-top:1px solid rgba(244,237,227,.14);margin-top:20px}
+#ay-{{ section.id }} .sss details{border-bottom:1px solid rgba(244,237,227,.14)}
+#ay-{{ section.id }} .sss summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;font-weight:600}
+#ay-{{ section.id }} .sss summary::-webkit-details-marker{display:none}
+#ay-{{ section.id }} .sss summary .arti{transition:transform .3s var(--e);color:var(--amber)}
+#ay-{{ section.id }} .sss details[open] .arti{transform:rotate(45deg)}
+#ay-{{ section.id }} .sss p{margin:0 0 18px;color:var(--gSoluk);font-size:14.5px}
+#ay-{{ section.id }} .muhur{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-top:22px}
+#ay-{{ section.id }} .muhur .m{position:relative;width:96px;height:96px}
+#ay-{{ section.id }} .muhur .m svg{transform:rotate(calc(var(--p,0.5) * 220deg - 110deg))}
+#ay-{{ section.id }} .muhur .m b{position:absolute;inset:0;display:grid;place-items:center;font-family:"Young Serif",serif;font-weight:400;font-size:28px;color:#FFFDF9}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}
+#ay-{{ section.id }} .sss p,#ay-{{ section.id }} .sss .ay-cevap{margin:0 0 18px;color:var(--gSoluk);font-size:14.5px}
+#ay-{{ section.id }} .sss .ay-cevap p{margin:0 0 8px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="px" style="padding-top:48px;padding-bottom:{{ s.alt_bosluk }}px">
+      <h2 class="h2" style="color:#FFFDF9">{{ s.baslik }}</h2>
+      {%- if s.muhur_goster -%}
+      <div class="muhur">
+        <span class="m"><b>{{ s.muhur_sayi }}</b><svg viewBox="0 0 120 120" width="96" height="96" aria-hidden="true"><defs><path id="ay-muhur-{{ section.id }}" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text font-family="Onest,sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.2" fill="#F2A65A"><textPath href="#ay-muhur-{{ section.id }}">{{ s.muhur_yazi }}</textPath></text></svg></span>
+        <p style="margin:0;font-size:15px;line-height:1.4">{{ s.muhur_metin }}</p>
+      </div>
+      {%- endif -%}
+      <div class="sss">
+        {%- for b in section.blocks -%}
+        <details {{ b.shopify_attributes }}><summary>{{ b.settings.soru }}<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ay-cevap">{{ b.settings.cevap }}</div></details>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var m=kok.querySelector('.muhur'), az=matchMedia('(prefers-reduced-motion: reduce)').matches, bekliyor=false; if(!m) return;
+  function motor(){ bekliyor=false; var vh=innerHeight, r=m.getBoundingClientRect(), pr=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height*.6))); if(az) pr=.5; m.style.setProperty('--p',pr.toFixed(3)); }
+  addEventListener('scroll',function(){ if(!bekliyor){bekliyor=true;requestAnimationFrame(motor);} },{passive:true}); motor();
+  document.addEventListener('shopify:block:select',function(e){ if(kok.contains(e.target)) e.target.open=true; });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Sorular",
+  "tag": "section",
+  "class": "ayluna-sss",
+  "settings": [
+    { "type": "text", "id": "baslik", "label": "Başlık", "default": "Sorular" },
+    { "type": "checkbox", "id": "muhur_goster", "label": "İade mührünü göster", "default": true },
+    { "type": "text", "id": "muhur_sayi", "label": "Mühür sayısı", "default": "30" },
+    { "type": "text", "id": "muhur_yazi", "label": "Mühür çevre yazısı", "default": "30 GÜN İADE · ÖNCE GÖR SONRA ÖDE · " },
+    { "type": "text", "id": "muhur_metin", "label": "Mühür yanı metin", "default": "Önce görürsün, sonra ödersin. Beğenmezsen 30 gün içinde geri gönder." },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 80, "step": 8, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    { "type": "soru", "name": "Soru", "settings": [
+      { "type": "text", "id": "soru", "label": "Soru", "default": "Kapıda ödeme nasıl oluyor?" },
+      { "type": "richtext", "id": "cevap", "label": "Cevap", "default": "<p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p>" }
+    ] }
+  ],
+  "presets": [ { "name": "Ayluna · Sorular", "blocks": [
+    { "type": "soru", "settings": { "soru": "Hoparlör hangi modelde?", "cevap": "<p>Yalnızca Tavşanlı (kız) modelde Bluetooth ninni hoparlörü var. Uzay Kaşifi hoparlörsüz.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kapıda ödeme nasıl oluyor?", "cevap": "<p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kaç günde gelir?", "cevap": "<p>Hafta içi 16:00'ya kadar verilen sipariş aynı gün kargoda. Teslimat genelde [X] iş günü.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kaç yaş için uygun?", "cevap": "<p>[Yaş aralığı mağaza tarafından eklenecek]</p>" } }
+  ] } ]
+}
+{% endschema %}

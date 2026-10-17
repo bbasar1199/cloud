@@ -1,0 +1,76 @@
+{%- comment -%}
+  Ayluna · Kutudan ne çıkıyor: kapak kalkar, lamba ve diskler sırayla yerine oturur.
+  Görünür olunca kendiliğinden açılır; dokununca kapanır/açılır. Diskler blok olarak eklenir (en fazla 12).
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--krem)}
+#BOLUM .bolum{padding-bottom:{{ s.alt_bosluk }}px}
+{% endstyle %}
+<div id="ay-{{ section.id }}" data-erkek="{% if s.lamba_erkek != blank %}{{ s.lamba_erkek | image_url: width: 400 }}{% endif %}">
+  <div class="ay-ic">
+    <section class="bolum px">
+      <h2 class="h2">{{ s.baslik | escape | newline_to_br }}</h2>
+      <button type="button" class="kutu-sahne" aria-pressed="false" aria-label="Kutuyu aç ya da kapat">
+        <span class="kapak"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg><b>{{ s.kapak_baslik }}</b><small>{{ s.kapak_alt }}</small></span>
+        <span class="parca k-lamba" data-gecikme="0">{%- if s.lamba_kiz != blank -%}<img class="ay-lamba" src="{{ s.lamba_kiz | image_url: width: 400 }}" alt="" loading="lazy" width="{{ s.lamba_kiz.width }}" height="{{ s.lamba_kiz.height }}">{%- endif -%}</span>
+        {%- for b in section.blocks limit: 12 -%}
+          {%- liquid
+            assign i = forloop.index0
+            if i < 6
+              assign sol = i | times: 24 | plus: 14
+              assign gec = i | times: 60 | plus: 120
+            else
+              assign sol = i | minus: 6 | times: 24 | plus: 182
+              assign gec = i | minus: 6 | times: 60 | plus: 480
+            endif
+          -%}
+          <span class="parca k-disk" data-gecikme="{{ gec }}" style="left:{{ sol }}px;top:236px" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 96 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
+        {%- endfor -%}
+        <span class="parca k-yazi" style="left:14px;top:284px" data-gecikme="840">{{ s.sol_yazi }}</span>
+        <span class="parca k-yazi a" style="left:182px;top:284px" data-gecikme="840">{{ s.sag_yazi }}</span>
+        <span class="parca k-alt" data-gecikme="900"><span>{{ s.alt_sol }}</span><span>{{ s.alt_sag }}</span></span>
+      </button>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var kutu=kok.querySelector('.kutu-sahne'), acildi=false;
+  function ayarla(acik){ kutu.classList.toggle('acik-kutu',acik); kutu.setAttribute('aria-pressed',acik); [].forEach.call(kutu.querySelectorAll('.parca'),function(x){ x.style.transitionDelay=acik?((x.dataset.gecikme||0)+'ms'):'0ms'; }); }
+  kutu.addEventListener('click',function(){acildi=true;ayarla(!kutu.classList.contains('acik-kutu'));});
+  new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting&&!acildi){ acildi=true; ayarla(true); ob.disconnect(); } },{rootMargin:'0px 0px -45% 0px'}).observe(kutu);
+  var lamba=kok.querySelector('.ay-lamba'), ilk=lamba&&lamba.src;
+  function model(m){ if(lamba&&kok.dataset.erkek) lamba.src=m==='erkek'?kok.dataset.erkek:ilk; }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+  document.addEventListener('shopify:section:load',function(e){ if(e.target.contains(kutu)) ayarla(true); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kutu",
+  "tag": "section",
+  "class": "ayluna-kutu",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Kutudan\nne çıkıyor?" },
+    { "type": "text", "id": "kapak_baslik", "label": "Kapak yazısı", "default": "LunaDream" },
+    { "type": "text", "id": "kapak_alt", "label": "Kapak alt yazısı", "default": "Dokun, aç" },
+    { "type": "image_picker", "id": "lamba_kiz", "label": "Lamba görseli (kız / varsayılan)" },
+    { "type": "image_picker", "id": "lamba_erkek", "label": "Lamba görseli (erkek)" },
+    { "type": "text", "id": "sol_yazi", "label": "Sol disk grubu yazısı", "default": "6 masal diski" },
+    { "type": "text", "id": "sag_yazi", "label": "Sağ disk grubu yazısı", "default": "+6 hediye disk" },
+    { "type": "text", "id": "alt_sol", "label": "Alt sol", "default": "USB şarj kablosu" },
+    { "type": "text", "id": "alt_sag", "label": "Alt sağ (ölçü/pil teyit edilince)", "default": "Boyut [X] cm · Pil [X] saat" },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 72 }
+  ],
+  "blocks": [
+    { "type": "disk", "name": "Disk", "limit": 12, "settings": [ { "type": "image_picker", "id": "resim", "label": "Disk görseli" } ] }
+  ],
+  "presets": [
+    { "name": "Ayluna · Kutu", "blocks": [ {"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"},{"type":"disk"} ] }
+  ]
+}
+{% endschema %}
