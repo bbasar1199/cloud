@@ -38,7 +38,7 @@ const BLOK={
  'ayluna-diski-tak':(b,i)=>({resim:img('disk'+(i+1)+'.jpg',188,188)}),
  'ayluna-bir-gece':(b,i)=>({video_kiz:video(['m1-isik','m2-disk','m3-kiz','m4-tavan','m5-kiz'][i]),video_erkek:i===2?video('m3-erkek'):i===4?video('m5-erkek'):null})
 };
-const SIRA=['ayluna-duyuru','ayluna-sahne','ayluna-siparis','ayluna-yorumlar','ayluna-kutu','ayluna-dunya','ayluna-diski-tak','ayluna-bir-gece','ayluna-sss','ayluna-kardes','ayluna-diger-isiklar','ayluna-alt-bilgi'];
+const SIRA=['ayluna-duyuru','ayluna-sahne','ayluna-siparis','ayluna-fayda','ayluna-yorumlar','ayluna-kutu','ayluna-dunya','ayluna-diski-tak','ayluna-bir-gece','ayluna-sss','ayluna-kardes','ayluna-diger-isiklar','ayluna-kapanis','ayluna-alt-bilgi'];
 (async()=>{
   let govde='';
   for(const ad of SIRA){

@@ -1,0 +1,78 @@
+{%- comment -%}
+  Ayluna · Fayda: eski "Sihirli Özellikler"in emojisiz hâli. Kaynak fikir: bentogrids.com.
+  İlk blok geniş (koyu) kart olur; "model" bloğu kız/erkek modeline göre yazısını değiştirir.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--krem)}
+#BOLUM .bolum{padding-bottom:{{ s.alt_bosluk }}px}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="bolum px" aria-label="Ne yapıyor">
+      <h2 class="h2">{{ s.baslik | escape | newline_to_br }}</h2>
+      <div class="fayda">
+        {%- for b in section.blocks -%}
+          {%- case b.settings.ikon -%}
+            {%- when 'tavan' -%}{%- capture ik -%}<path d="M4 10c4-5 12-5 16 0"/><path d="M12 14v6M8 20h8"/><circle cx="12" cy="12" r="2"/>{%- endcapture -%}
+            {%- when 'disk' -%}{%- capture ik -%}<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/>{%- endcapture -%}
+            {%- when 'isik' -%}{%- capture ik -%}<path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/><path d="M9.5 19h5"/>{%- endcapture -%}
+            {%- when 'pil' -%}{%- capture ik -%}<rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 11v2"/><path d="M7 10v4M10 10v4"/>{%- endcapture -%}
+            {%- when 'muzik' -%}{%- capture ik -%}<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>{%- endcapture -%}
+            {%- else -%}{%- capture ik -%}<path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"/>{%- endcapture -%}
+          {%- endcase -%}
+          <div class="fy{% if forloop.first %} genis{% endif %}" {{ b.shopify_attributes }}{% if b.settings.erkek_baslik != blank %} data-k-b="{{ b.settings.baslik | escape }}" data-k-a="{{ b.settings.aciklama | escape }}" data-e-b="{{ b.settings.erkek_baslik | escape }}" data-e-a="{{ b.settings.erkek_aciklama | escape }}"{% endif %}>
+            <span class="ik"><svg class="ico" viewBox="0 0 24 24">{{ ik }}</svg></span>
+            <span><b class="ay-b">{{ b.settings.baslik }}</b><span class="acik ay-a">{{ b.settings.aciklama }}</span></span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  function model(m){ var k=m==='erkek'?'e':'k'; [].forEach.call(kok.querySelectorAll('.fy[data-e-b]'),function(x){ x.querySelector('.ay-b').textContent=x.dataset[k+'B']; x.querySelector('.ay-a').textContent=x.dataset[k+'A']; }); }
+  document.addEventListener('ayluna:model',function(e){model(e.detail.model);}); if(window.AylunaModel) model(window.AylunaModel);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Fayda",
+  "tag": "section",
+  "class": "ayluna-fayda",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Ekran yok.\nReklam yok.\nSadece masal." },
+    { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 80, "step": 8, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "fayda",
+      "name": "Fayda",
+      "limit": 7,
+      "settings": [
+        { "type": "select", "id": "ikon", "label": "İkon", "options": [ { "value": "tavan", "label": "Tavan" }, { "value": "disk", "label": "Disk" }, { "value": "isik", "label": "Işık" }, { "value": "pil", "label": "Pil" }, { "value": "muzik", "label": "Müzik" }, { "value": "ay", "label": "Ay" } ], "default": "ay" },
+        { "type": "text", "id": "baslik", "label": "Başlık", "default": "Sıcak ışık" },
+        { "type": "text", "id": "aciklama", "label": "Açıklama", "default": "Oda karanlıkta kalmaz" },
+        { "type": "text", "id": "erkek_baslik", "label": "Erkek modelinde başlık (boşsa değişmez)" },
+        { "type": "text", "id": "erkek_aciklama", "label": "Erkek modelinde açıklama" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ayluna · Fayda",
+      "blocks": [
+        { "type": "fayda", "settings": { "ikon": "tavan", "baslik": "Tavana masal yansıtır", "aciklama": "Diski tak, ışığı kapat; tavan yavaşça döner." } },
+        { "type": "fayda", "settings": { "ikon": "disk", "baslik": "Her gece başka disk", "aciklama": "12 masal diski, 6'sı hediye" } },
+        { "type": "fayda", "settings": { "ikon": "isik", "baslik": "Sıcak ışık", "aciklama": "Oda karanlıkta kalmaz" } },
+        { "type": "fayda", "settings": { "ikon": "pil", "baslik": "Şarjlı, kablosuz", "aciklama": "Komodinden yatağa taşınır" } },
+        { "type": "fayda", "settings": { "ikon": "muzik", "baslik": "Ninni hoparlörü", "aciklama": "Bluetooth, Tavşanlı modelde", "erkek_baslik": "Uzay Kaşifi", "erkek_aciklama": "Robot tasarım, hoparlörsüz" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

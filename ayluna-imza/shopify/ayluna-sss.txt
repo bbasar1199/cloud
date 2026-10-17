@@ -84,7 +84,7 @@
   "presets": [ { "name": "Ayluna · Sorular", "blocks": [
     { "type": "soru", "settings": { "soru": "Hoparlör hangi modelde?", "cevap": "<p>Yalnızca Tavşanlı (kız) modelde Bluetooth ninni hoparlörü var. Uzay Kaşifi hoparlörsüz.</p>" } },
     { "type": "soru", "settings": { "soru": "Kapıda ödeme nasıl oluyor?", "cevap": "<p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p>" } },
-    { "type": "soru", "settings": { "soru": "Kaç günde gelir?", "cevap": "<p>Hafta içi 16:00'ya kadar verilen sipariş aynı gün kargoda. Teslimat genelde [X] iş günü.</p>" } },
+    { "type": "soru", "settings": { "soru": "Kaç günde gelir?", "cevap": "<p>Sipariş 1 iş gününde kargoya verilir; Türkiye geneli 3-7 günde kapında. Aras, DHL ya da PTT ile gelir, Track123'ten takip edersin.</p>" } },
     { "type": "soru", "settings": { "soru": "Kaç yaş için uygun?", "cevap": "<p>[Yaş aralığı mağaza tarafından eklenecek]</p>" } }
   ] } ]
 }

@@ -73,6 +73,12 @@
     assign baslik = urun.title
   endif
   assign ek = s.ek_urun.selected_or_first_available_variant
+  assign kart_oran = 100 | minus: s.kart_yuzde
+  assign kart_fiyat = secili_varyant.price | times: kart_oran | divided_by: 100
+  assign ilk_odeme = 'kapi'
+  if s.kart_goster
+    assign ilk_odeme = 'kart'
+  endif
 -%}
 {% style %}
 /*AYLUNA_CSS*/
@@ -164,13 +170,21 @@
         <button type="button" class="ekle" aria-pressed="false" data-id="{{ ek.id }}" data-fiyat="{{ ek.price }}"><span class="k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{%- if s.ek_urun.featured_image != blank -%}<img src="{{ s.ek_urun.featured_image | image_url: width: 120 }}" alt="" loading="lazy" width="{{ s.ek_urun.featured_image.width }}" height="{{ s.ek_urun.featured_image.height }}">{%- else -%}<span></span>{%- endif -%}<span>{{ s.ek_urun.title }}</span><b>+{{ ek.price | money }}</b></button>
         {%- endif -%}
 
+        {%- if s.kart_goster -%}
+        <div class="odeme" role="group" aria-label="Ödeme yöntemi">
+          <button type="button" class="od kart" data-od="kart" aria-pressed="true"><span class="radyo"><i></i></span><span class="ad">{{ s.kart_ad }}</span><span class="tutar"><b class="ay-od-kart">{{ kart_fiyat | money }}</b><s class="ay-od-eski">{{ secili_varyant.price | money }}</s></span><span class="not">{{ s.kart_not }}</span></button>
+          <button type="button" class="od kapi" data-od="kapi" aria-pressed="false"><span class="radyo"><i></i></span><span class="ad">{{ s.kapi_ad }}</span><span class="tutar"><b class="ay-od-kapi">{{ secili_varyant.price | money }}</b></span><span class="not">{{ s.kapi_not }}</span></button>
+        </div>
+        {%- endif -%}
         <div class="kaydir">
           <span class="dolgu"></span>
-          <span class="iz"><span class="ay-iz-yazi">{{ s.buton_yazi }}</span>&nbsp;<i class="ay-iz-fiyat">{{ secili_varyant.price | money }}</i></span>
-          <button type="button" class="top ipucu" aria-label="{{ s.buton_yazi | escape }}"><svg class="ico" viewBox="0 0 24 24" style="stroke-width:2.2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+          <span class="iz"><span class="ay-iz-yazi">{% if s.kart_goster %}{{ s.buton_kart }}{% else %}{{ s.buton_yazi }}{% endif %}</span>&nbsp;<i class="ay-iz-fiyat">{% if s.kart_goster %}{{ kart_fiyat | money }}{% else %}{{ secili_varyant.price | money }}{% endif %}</i></span>
+          <button type="button" class="top ipucu" aria-label="Sipariş ver"><svg class="ico" viewBox="0 0 24 24" style="stroke-width:2.2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
         </div>
-        <p class="alt-not"><span>{{ s.whatsapp_not }}</span><span aria-hidden="true">·</span><span class="ay-kargo"></span></p>
-        {%- if s.online_not != blank -%}<p class="alt-not" style="margin-top:2px">{{ s.online_not }}</p>{%- endif -%}
+        {%- if s.teslim_goster -%}
+        <div class="teslim" aria-label="Teslimat"><i class="dol" aria-hidden="true"></i><span><b>Bugün</b>sipariş</span><span><b class="ay-t-kargo"></b>kargoda</span><span><b class="ay-t-kapi"></b>kapında</span></div>
+        {%- endif -%}
+        {%- if s.teslim_alt != blank -%}<p class="alt-not">{{ s.teslim_alt }}</p>{%- endif -%}
 
         {%- form 'product', urun, class: 'ay-gizli-form', novalidate: 'novalidate' -%}
           <input type="hidden" name="id" value="{{ secili_varyant.id }}" class="ay-varyant-id">
@@ -183,7 +197,7 @@
     <div class="yapis">
       {%- if ilk_model.settings.kart_resim != blank -%}<img class="ay-yapis-img" src="{{ ilk_model.settings.kart_resim | image_url: width: 160 }}" alt="" loading="lazy" style="object-position:{{ ilk_model.settings.kart_konum }}" width="{{ ilk_model.settings.kart_resim.width }}" height="{{ ilk_model.settings.kart_resim.height }}">{%- endif -%}
       <span class="f"><b class="ay-yapis-fiyat">{{ secili_varyant.price | money }}</b><span class="ay-yapis-not"></span></span>
-      <a class="btn" href="#siparis">{{ s.yapis_buton }}</a>
+      <a class="btn" href="#siparis">{% if s.kart_goster %}{{ s.yapis_kart }}{% else %}{{ s.yapis_buton }}{% endif %}</a>
     </div>
     {%- endif -%}
   </div>
@@ -195,7 +209,7 @@
   var $=function(x){return kok.querySelector(x)}, $$=function(x){return [].slice.call(kok.querySelectorAll(x))};
   var az=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PARA={{ shop.money_format | strip_html | json }}, V=JSON.parse($('.ay-varyantlar').textContent);
-  var COD={{ s.cod_secici | json }}, SONRA={{ s.sepet_sonrasi | json }}, KESIM={{ s.kargo_kesim }}, SAYAC_UST={{ s.sayac_ust | json }};
+  var COD={{ s.cod_secici | json }}, SONRA={{ s.sepet_sonrasi | json }}, KARGO_GUN={{ s.kargo_is_gunu }}, T_MIN={{ s.teslim_min }}, T_MAX={{ s.teslim_max }}, KART_Y={{ s.kart_yuzde }}, KOD={{ s.kart_kod | json }}, YAZI={kart:{{ s.buton_kart | json }},kapi:{{ s.buton_yazi | json }},ykart:{{ s.yapis_kart | json }},ykapi:{{ s.yapis_buton | json }}}, SAYAC_UST={{ s.sayac_ust | json }};
   function bicim(c,d,bin,ond){ var x=(c/100).toFixed(d).split('.'); return x[0].replace(/\B(?=(\d{3})+(?!\d))/g,bin)+(x[1]?ond+x[1]:''); }
   function para(c){ var m=PARA.match(/\{\{\s*(\w+)\s*\}\}/), t=m?m[1]:'amount';
     var v={amount:bicim(c,2,',','.'),amount_no_decimals:bicim(c,0,',','.'),amount_with_comma_separator:bicim(c,2,'.',','),amount_no_decimals_with_comma_separator:bicim(c,0,'.',','),amount_with_apostrophe_separator:bicim(c,2,"'",'.'),amount_with_space_separator:bicim(c,2,' ',',')}[t]||bicim(c,2,',','.');
@@ -205,7 +219,7 @@
 
   /* ---------- Durum ---------- */
   var ilkModel=$('.model'), ilkPaket=$('.paket[aria-pressed=true]')||$('.paket');
-  var S={model:ilkModel?ilkModel.dataset.deger:'', anahtar:ilkModel?ilkModel.dataset.anahtar:'kiz', paket:ilkPaket?ilkPaket.dataset.deger:'', adet:ilkPaket?+ilkPaket.dataset.adet:1, ek:false};
+  var S={model:ilkModel?ilkModel.dataset.deger:'', anahtar:ilkModel?ilkModel.dataset.anahtar:'kiz', paket:ilkPaket?ilkPaket.dataset.deger:'', adet:ilkPaket?+ilkPaket.dataset.adet:1, ek:false, odeme:'{{ ilk_odeme }}'};
   function bul(model,paket){ for(var i=0;i<V.length;i++){ var o=V[i].o; if((!model||o.indexOf(model)>-1)&&(!paket||o.indexOf(paket)>-1)) return V[i]; } return V[0]; }
   function ekFiyat(){ var e=$('.ekle'); return S.ek&&e?+e.dataset.fiyat:0; }
 
@@ -225,7 +239,11 @@
     $('.ay-birim').textContent=para(tv.p);
     var eski=$('.ay-birim-eski'), yz=$('.ay-yuzde'); if(eski&&tv.c>tv.p){ eski.textContent=para(tv.c); yz.textContent='%'+Math.round((tv.c-tv.p)*100/tv.c)+' indirim'; }
     var e=$('.ekle'); if(e) e.setAttribute('aria-pressed',S.ek);
-    $('.ay-iz-fiyat').textContent=para(t); var yf=$('.ay-yapis-fiyat'); if(yf) yf.textContent=para(t);
+    var kartT=Math.round(t*(100-KART_Y)/100), odT=S.odeme==='kart'?kartT:t;
+    var ok=$('.ay-od-kart'); if(ok){ ok.textContent=para(kartT); $('.ay-od-eski').textContent=para(t); $('.ay-od-kapi').textContent=para(t); }
+    $$('.od').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.od===S.odeme);});
+    $('.ay-iz-yazi').textContent=S.odeme==='kart'?YAZI.kart:YAZI.kapi; var ybt=$('.yapis .btn'); if(ybt) ybt.textContent=S.odeme==='kart'?YAZI.ykart:YAZI.ykapi;
+    [$('.ay-iz-fiyat'),$('.ay-yapis-fiyat')].forEach(function(el){ if(!el||el.textContent===para(odT)) return; el.textContent=para(odT); if(!az){ el.classList.remove('fiyat-tik'); void el.offsetWidth; el.classList.add('fiyat-tik'); } });
     var pn=$('.ay-paket-not'); if(pn) pn.textContent=S.adet>1?S.adet+' lamba seçili':'';
     var inp=$('.ay-varyant-id'); if(inp){ inp.value=v.id; inp.dispatchEvent(new Event('change',{bubbles:true})); }
   }
@@ -238,6 +256,7 @@
     document.dispatchEvent(new CustomEvent('ayluna:model',{detail:{model:S.anahtar}}));
   });});
   $$('.paket').forEach(function(x){x.addEventListener('click',function(){S.paket=x.dataset.deger;S.adet=+x.dataset.adet||1;uygula();});});
+  $$('.od').forEach(function(x){x.addEventListener('click',function(){S.odeme=x.dataset.od;uygula();});});
   var ekB=$('.ekle'); if(ekB) ekB.addEventListener('click',function(){S.ek=!S.ek;uygula();});
   /* Kardeş bölümü "2 lamba" butonu */
   document.addEventListener('ayluna:paket',function(e){ var x=$$('.paket').filter(function(p){return +p.dataset.adet===e.detail.adet;})[0]; if(x){S.paket=x.dataset.deger;S.adet=e.detail.adet;uygula();} siparisAc(); });
@@ -256,10 +275,12 @@
     if(kart){ kart.classList.toggle('son',sonGun); $('.ay-sayac-tarih').textContent=tarih; $('.ay-sayac-ust').textContent=sonGun?('Son '+(g+1)+' gün · bu fiyat'):SAYAC_UST;
       $('.ay-kalan').innerHTML=g===0?('Bugün son gün<br>'+(sa>0?sa+' sa ':'')+d+' dk'):(g+' gün<br>'+sa+' sa '+d+' dk'); if(gorundu) ayUygula(); }
     var yn=$('.ay-yapis-not'); if(yn) yn.textContent=tarih+' bu fiyat';
-    var hi=n.getDay()>0&&n.getDay()<6, t;
-    if(hi&&n.getHours()<KESIM){ var kal=KESIM*60-(n.getHours()*60+n.getMinutes()); t='bugün kargoda ('+(kal>=60?Math.floor(kal/60)+' sa ':'')+(kal%60)+' dk kaldı)'; }
-    else{ var x=new Date(n); do{x.setDate(x.getDate()+1);}while(x.getDay()===0||x.getDay()===6); t=x.getDate()+' '+AY[x.getMonth()]+' '+GUN[x.getDay()]+' kargoda'; }
-    $('.ay-kargo').textContent=t;
+    /* Kargo: N iş günü sonra; teslim: kargodan T_MIN-T_MAX gün sonra */
+    var tk=$('.ay-t-kargo');
+    if(tk){ var x=new Date(n), i=0; while(i<KARGO_GUN){ x.setDate(x.getDate()+1); if(x.getDay()!==0&&x.getDay()!==6) i++; }
+      var a=new Date(x), z=new Date(x); a.setDate(a.getDate()+T_MIN); z.setDate(z.getDate()+T_MAX);
+      tk.textContent=KARGO_GUN?x.getDate()+' '+AY[x.getMonth()]:'Bugün';
+      $('.ay-t-kapi').textContent=a.getMonth()===z.getMonth()?(a.getDate()+'-'+z.getDate()+' '+AY[z.getMonth()]):(a.getDate()+' '+AY[a.getMonth()].slice(0,3)+' - '+z.getDate()+' '+AY[z.getMonth()].slice(0,3)); }
     setTimeout(sayac,(60-n.getSeconds())*1000);
   }
   if(kart) new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ gorundu=true; ayUygula(); ob.disconnect(); } },{threshold:.5}).observe(kart);
@@ -269,13 +290,13 @@
   function siparisVer(){
     if(gonderildi) return; gonderildi=true;
     var v=bul(S.model,S.paket), e=$('.ekle'), ekId=S.ek&&e?+e.dataset.id:0;
-    var codBtn=COD?document.querySelector(COD):null;
+    var codBtn=(S.odeme==='kapi'&&COD)?document.querySelector(COD):null;
     if(codBtn){ /* Kapıda ödeme uygulaması: varyantı forma yaz, uygulamanın butonuna tıkla */
       var ekle=ekId?fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:ekId,quantity:1}]})}).catch(function(){}):Promise.resolve();
       ekle.then(function(){ codBtn.click(); setTimeout(sifirla,1200); }); return; }
     var items=[{id:v.id,quantity:1}]; if(ekId) items.push({id:ekId,quantity:1});
     fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:items})})
-      .then(function(r){ if(!r.ok) throw 0; location.href=SONRA==='sepet'?'{{ routes.cart_url }}':'/checkout'; })
+      .then(function(r){ if(!r.ok) throw 0; if(S.odeme==='kart'){ location.href=KOD?'/discount/'+encodeURIComponent(KOD)+'?redirect=%2Fcheckout':'/checkout'; return; } location.href=SONRA==='sepet'?'{{ routes.cart_url }}':'/checkout'; })
       .catch(function(){ $('.ay-iz-yazi').textContent='Bir sorun oldu, tekrar dene'; sifirla(); });
   }
   function sifirla(){ gonderildi=false; top.style.transform=''; dolgu.style.transform='scaleX(0)'; kz.classList.remove('tam'); }
@@ -287,6 +308,8 @@
   kz.addEventListener('click',function(e){ if(e.target===kz) tamamla(); });
   function siparisAc(e){ if(e) e.preventDefault(); var y=kz.getBoundingClientRect().top+scrollY-120; scrollTo({top:y,behavior:az?'auto':'smooth'}); }
   var yb=$('.yapis .btn'); if(yb) yb.addEventListener('click',siparisAc);
+  document.addEventListener('ayluna:siparis',function(){siparisAc();});
+  var tes=$('.teslim'); if(tes) new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ tes.classList.add('gor'); ob.disconnect(); } },{threshold:.6}).observe(tes);
 
   /* ---------- Yapışkan çubuk: ana buton yukarıda kaybolunca açılır ---------- */
   var yapis=$('.yapis');
@@ -330,14 +353,26 @@
     { "type": "text", "id": "sayac_ust", "label": "Sayaç üst yazısı", "default": "Fiyatlar her ay güncellenir" },
     { "type": "product", "id": "ek_urun", "label": "Birlikte al ürünü" },
     { "type": "header", "content": "Sipariş" },
-    { "type": "text", "id": "buton_yazi", "label": "Kaydırma butonu yazısı", "default": "Kaydır, kapıda öde" },
+    { "type": "checkbox", "id": "kart_goster", "label": "Kartla öde seçeneği (varsayılan seçili)", "default": true },
+    { "type": "range", "id": "kart_yuzde", "label": "Kartla ödemede indirim", "min": 0, "max": 20, "step": 1, "unit": "%", "default": 5 },
+    { "type": "text", "id": "kart_kod", "label": "Kart indirim kodu", "info": "Shopify'da bu yüzdeyle bir indirim kodu oluştur ve buraya yaz; ödemeye kodla gidilir. Boşsa indirim ödemede uygulanmaz.", "default": "" },
+    { "type": "text", "id": "kart_ad", "label": "Kart seçeneği adı", "default": "Kartla öde" },
+    { "type": "text", "id": "kart_not", "label": "Kart seçeneği notu", "default": "%5 daha az" },
+    { "type": "text", "id": "kapi_ad", "label": "Kapıda seçeneği adı", "default": "Kapıda öde" },
+    { "type": "text", "id": "kapi_not", "label": "Kapıda seçeneği notu", "default": "nakit ya da kart" },
+    { "type": "text", "id": "buton_kart", "label": "Kaydırma yazısı (kart)", "default": "Kaydır, kartla öde" },
+    { "type": "text", "id": "buton_yazi", "label": "Kaydırma yazısı (kapıda)", "default": "Kaydır, kapıda öde" },
     { "type": "text", "id": "cod_secici", "label": "Kapıda ödeme uygulamasının buton seçicisi", "info": "Ör. .es-form-trigger veya #releasit-button. Boşsa sepete ekler.", "default": "" },
     { "type": "select", "id": "sepet_sonrasi", "label": "Seçici boşsa sepete ekledikten sonra", "options": [ { "value": "odeme", "label": "Ödemeye git" }, { "value": "sepet", "label": "Sepete git" } ], "default": "odeme" },
-    { "type": "text", "id": "whatsapp_not", "label": "Butonun altı: onay notu", "default": "WhatsApp onayı" },
-    { "type": "range", "id": "kargo_kesim", "label": "Aynı gün kargo son saati", "min": 10, "max": 20, "step": 1, "default": 16 },
-    { "type": "text", "id": "online_not", "label": "Online ödeme notu", "default": "Online ödersen ek %5 indirim" },
+    { "type": "header", "content": "Teslimat" },
+    { "type": "checkbox", "id": "teslim_goster", "label": "Teslimat adımlarını göster", "default": true },
+    { "type": "range", "id": "kargo_is_gunu", "label": "Kaç iş gününde kargoda", "min": 0, "max": 3, "step": 1, "default": 1 },
+    { "type": "range", "id": "teslim_min", "label": "Kargodan sonra en az gün", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "range", "id": "teslim_max", "label": "Kargodan sonra en çok gün", "min": 1, "max": 14, "step": 1, "default": 7 },
+    { "type": "text", "id": "teslim_alt", "label": "Adımların altı", "default": "Aras · DHL · PTT · Track123 ile takip · 30 gün iade" },
     { "type": "checkbox", "id": "yapis_goster", "label": "Yapışkan alt çubuk", "default": true },
-    { "type": "text", "id": "yapis_buton", "label": "Yapışkan buton yazısı", "default": "Kapıda öde" }
+    { "type": "text", "id": "yapis_kart", "label": "Yapışkan buton (kart)", "default": "Kartla öde" },
+    { "type": "text", "id": "yapis_buton", "label": "Yapışkan buton (kapıda)", "default": "Kapıda öde" }
   ],
   "blocks": [
     {

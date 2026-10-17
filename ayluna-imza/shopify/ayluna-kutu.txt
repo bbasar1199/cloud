@@ -18,6 +18,8 @@
 #ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
 #ay-{{ section.id }} .px{padding-inline:18px}
 #ay-{{ section.id }} .h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1;letter-spacing:-.025em;margin:0;text-wrap:balance}
+#ay-{{ section.id }} .ust{position:absolute;inset:0 0 auto 0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px;color:#FFFDF9}
+#ay-{{ section.id }} .ust button{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;cursor:pointer;text-decoration:none}
 #ay-{{ section.id }} .b{border-radius:20px;overflow:hidden;position:relative;background:var(--yuzey);border:1px solid var(--cizgi);padding:14px}
 #ay-{{ section.id }} .b .acik{display:block;font-size:12.5px;color:var(--soluk);margin-top:6px;line-height:1.3}
 #ay-{{ section.id }} .model{flex:0 0 74%;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--gece2);height:200px;text-align:left;transition:transform .45s var(--e),opacity .45s var(--e)}
@@ -25,18 +27,18 @@
 #ay-{{ section.id }} .model::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,0) 45%,rgba(12,16,39,.82))}
 #ay-{{ section.id }} .model[aria-pressed=false]{opacity:.62;transform:scale(.96)}
 #ay-{{ section.id }} .bolum{padding-top:64px}
-#ay-{{ section.id }} .kutu-sahne{position:relative;height:370px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);border:0;width:100%;padding:0;cursor:pointer;display:block;text-align:left}
+#ay-{{ section.id }} .kutu-sahne{position:relative;height:382px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);border:0;width:100%;padding:0;cursor:pointer;display:block;text-align:left}
 #ay-{{ section.id }} .kapak{position:absolute;left:50%;top:116px;width:224px;height:144px;margin-left:-112px;border-radius:16px;background:var(--krem);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--lac);transition:transform .5s var(--e),opacity .45s var(--e);z-index:3;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
 #ay-{{ section.id }} .kapak b{font-family:"Young Serif",serif;font-weight:400;font-size:21px}
 #ay-{{ section.id }} .kapak small{font-size:12px;color:var(--soluk)}
 #ay-{{ section.id }} .parca{position:absolute;opacity:0;transform:translateY(40px) scale(.6);transition:transform .6s var(--e),opacity .45s var(--e)}
 #ay-{{ section.id }} .acik-kutu .kapak{transform:translateY(-280px) rotate(-8deg);opacity:0}
 #ay-{{ section.id }} .acik-kutu .parca{opacity:1;transform:none}
-#ay-{{ section.id }} .k-lamba{left:50%;top:22px;width:136px;height:176px;margin-left:-68px;border-radius:18px;overflow:hidden}
+#ay-{{ section.id }} .k-lamba{left:50%;top:20px;width:124px;height:156px;margin-left:-62px;border-radius:18px;overflow:hidden}
 #ay-{{ section.id }} .k-lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:35% 75%}
 #ay-{{ section.id }} .k-disk{width:38px;height:38px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px rgba(255,253,249,.15)}
 #ay-{{ section.id }} .k-disk img{width:100%;height:100%;object-fit:cover}
-#ay-{{ section.id }} .k-yazi{font-size:12px;color:var(--gSoluk)}
+#ay-{{ section.id }} .k-yazi{font-size:12px;color:var(--gSoluk);left:calc(50% - 140px)}
 #ay-{{ section.id }} .k-yazi.a{color:var(--amber);font-weight:600}
 #ay-{{ section.id }} .k-alt{left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;font-size:12.5px;color:#FFFDF9}
 #ay-{{ section.id }} .k-alt span:last-child{color:var(--gSoluk)}
@@ -55,18 +57,20 @@
         {%- for b in section.blocks limit: 12 -%}
           {%- liquid
             assign i = forloop.index0
+            assign k = i | modulo: 6
+            assign sol = k | times: 48
             if i < 6
-              assign sol = i | times: 24 | plus: 14
-              assign gec = i | times: 60 | plus: 120
+              assign ust = 212
+              assign gec = k | times: 60 | plus: 120
             else
-              assign sol = i | minus: 6 | times: 24 | plus: 182
-              assign gec = i | minus: 6 | times: 60 | plus: 480
+              assign ust = 284
+              assign gec = k | times: 60 | plus: 480
             endif
           -%}
-          <span class="parca k-disk" data-gecikme="{{ gec }}" style="left:{{ sol }}px;top:236px" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 96 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
+          <span class="parca k-disk" data-gecikme="{{ gec }}" style="left:calc(50% - 140px + {{ sol }}px);top:{{ ust }}px;width:40px;height:40px" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 96 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
         {%- endfor -%}
-        <span class="parca k-yazi" style="left:14px;top:284px" data-gecikme="840">{{ s.sol_yazi }}</span>
-        <span class="parca k-yazi a" style="left:182px;top:284px" data-gecikme="840">{{ s.sag_yazi }}</span>
+        <span class="parca k-yazi" style="top:192px" data-gecikme="100">{{ s.sol_yazi }}</span>
+        <span class="parca k-yazi a" style="top:264px" data-gecikme="460">{{ s.sag_yazi }}</span>
         <span class="parca k-alt" data-gecikme="900"><span>{{ s.alt_sol }}</span><span>{{ s.alt_sag }}</span></span>
       </button>
     </section>
@@ -97,8 +101,8 @@
     { "type": "text", "id": "kapak_alt", "label": "Kapak alt yazısı", "default": "Dokun, aç" },
     { "type": "image_picker", "id": "lamba_kiz", "label": "Lamba görseli (kız / varsayılan)" },
     { "type": "image_picker", "id": "lamba_erkek", "label": "Lamba görseli (erkek)" },
-    { "type": "text", "id": "sol_yazi", "label": "Sol disk grubu yazısı", "default": "6 masal diski" },
-    { "type": "text", "id": "sag_yazi", "label": "Sağ disk grubu yazısı", "default": "+6 hediye disk" },
+    { "type": "text", "id": "sol_yazi", "label": "Üst sıra yazısı", "default": "6 masal diski" },
+    { "type": "text", "id": "sag_yazi", "label": "Alt sıra yazısı", "default": "+6 hediye disk" },
     { "type": "text", "id": "alt_sol", "label": "Alt sol", "default": "USB şarj kablosu" },
     { "type": "text", "id": "alt_sag", "label": "Alt sağ (ölçü/pil teyit edilince)", "default": "Boyut [X] cm · Pil [X] saat" },
     { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 72 }

@@ -6,7 +6,7 @@
   - Diski tak → 3B disk halkasının yerine. Model seçimine göre oda değişiyor, dokunulmazsa 2 sn sonra ilk diski kendisi takıyor, buton artık "Baştan".
   - Ay bitmeden → yalnız ay kartı alındı, eski geri sayımın yerine geçti (tek satır, ince ilerleme çizgisi, saniye yok, son gün "Bugün son gün").
   - Gece hikâyeleri → not destesinin yerine. Yükseklik 460px, Abdülkerim T. yorumu eklendi, ugc4 eklendi, ugc1'in yazısı kırpıldı (`g/ugc1k.jpg`).
-- **Shopify bölümleri** (`shopify/*.txt`, 12 bölüm + `KURULUM.txt`): Fiyat, karşılaştırma fiyatı, indirim yüzdesi, adet fiyatı, kazanç, masal başına fiyat ve kardeş butonu varyant verisinden hesaplanıyor. Ay sonu sayacı JS ile ayın son günü 23:59:59'a sayıyor. Model seçimi bütün bölümlere `ayluna:model` olayıyla gidiyor. Theme Check'ten hatasız geçti. Sahte verili Liquid çizimiyle telefonda denendi; görünüş index ile aynı. Derleyici: `araclar/shopify-derle.py`.
+- **Shopify bölümleri** (`shopify/*.txt`, 14 bölüm + `KURULUM.txt`): Fiyat, karşılaştırma fiyatı, indirim yüzdesi, adet fiyatı, kazanç, masal başına fiyat ve kardeş butonu varyant verisinden hesaplanıyor. Ay sonu sayacı JS ile ayın son günü 23:59:59'a sayıyor. Model seçimi bütün bölümlere `ayluna:model` olayıyla gidiyor. Theme Check'ten hatasız geçti. Sahte verili Liquid çizimiyle telefonda denendi; görünüş index ile aynı. Derleyici: `araclar/shopify-derle.py`.
 - Düzeltmeler: SSS mührünün çevre yazısı görünmüyordu (aynı id çakışması), kutudaki elde görselinde poster yazısı kırpıldı, masal başına fiyat ₺141 yerine yuvarlanarak ₺142.
 
 ## Eleştirmenin seçimi
@@ -14,8 +14,18 @@
 - **Gece hikâyeleri: girsin.** Meta'dan gelen kullanıcı bu düzeni tanıyor. Fotoğraf ve yorum tek yerde, eski bölümden daha az yazılı.
 - **Ay bitmeden: kısmen.** Ay kartı dürüst ve güzel bulundu. Paket kartları levhadakileri tekrarladığı için alınmadı; ikinci bir paket seçici kafa karıştırırdı.
 
+## Ek tur (aynı gün): "eksik kalıyor"
+Kaynaklar: Himanshu'nun X listesi (60fps.design, bentogrids, cta.gallery, footer.design, unsection...). Siteler bu ortamdan yalnız metin olarak açılabildi, görselleri görülemedi. Eleştirmen eksikleri sıraladı, şunlar yapıldı (index + Shopify):
+- Ödeme seçici: "Kartla öde" varsayılan, %5 düşülmüş fiyat; "Kapıda öde" ikinci. Kaydırma yazısı, yapışkan buton ve form seçime göre değişiyor. Shopify'da indirim, ayardaki indirim koduyla ödemede uygulanıyor.
+- Teslimat adımları: Bugün → [1 iş günü] kargoda → [3-7 gün] kapında, tarihler otomatik. Altında Aras · DHL · PTT · Track123 · 30 gün iade. 16:00 kesimi kaldırıldı.
+- Fayda bölümü (yeni `ayluna-fayda`): "Ekran yok. Reklam yok. Sadece masal." ve ince çizgi ikonlu 5 kart; hoparlör kartı modele göre değişiyor.
+- Kutudan ne çıkıyor: diskler iki sıra (6 + 6 hediye), boşluk kapandı.
+- Kapanış kartı (yeni `ayluna-kapanis`): WhatsApp'tan sor + Sipariş ver. Footer'daki [numara]/[Firma unvanı] yer tutucuları kaldırıldı.
+- Sıradaki: masaüstü düzeni (solda yapışkan galeri, sağda satın alma kutusu).
+
 ## Teyit bekleyenler
-- Ölçüler, pil süresi, yaş aralığı, teslim süresi, 16:00 kargo kesimi, online ödemede %5, firma unvanı, WhatsApp numarası.
+- Kartla ödemede %5 (sayfada artık varsayılan seçenek), WhatsApp numarası ve firma unvanı (footer'dan kaldırıldı, eklenmesi gerekiyor).
+- Ölçüler, pil süresi, yaş aralığı.
 - 2'li pakette hediye disk sayısı, 12 disk adı (kutu içeriğiyle karşılaştır), "Satın aldı" etiketi, 4,7 · 62 yorum.
 - Shopify'da LunaDream varyant yapısı: Model × Paket seçenekleri ve "2 lamba" ayrı bir varyant olmalı.
 - Kapıda ödeme uygulamasının buton seçicisi.

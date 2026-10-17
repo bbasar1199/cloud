@@ -18,6 +18,7 @@ Sayfadaki sıra:
   ayluna-duyuru.txt          -> sections/ayluna-duyuru.liquid
   ayluna-sahne.txt           -> sections/ayluna-sahne.liquid
   ayluna-siparis.txt         -> sections/ayluna-siparis.liquid
+  ayluna-fayda.txt           -> sections/ayluna-fayda.liquid
   ayluna-yorumlar.txt        -> sections/ayluna-yorumlar.liquid
   ayluna-kutu.txt            -> sections/ayluna-kutu.liquid
   ayluna-dunya.txt           -> sections/ayluna-dunya.liquid
@@ -26,6 +27,7 @@ Sayfadaki sıra:
   ayluna-sss.txt             -> sections/ayluna-sss.liquid
   ayluna-kardes.txt          -> sections/ayluna-kardes.liquid
   ayluna-diger-isiklar.txt   -> sections/ayluna-diger-isiklar.liquid
+  ayluna-kapanis.txt         -> sections/ayluna-kapanis.liquid
   ayluna-alt-bilgi.txt       -> sections/ayluna-alt-bilgi.liquid
 
 3) ŞABLON
@@ -42,7 +44,11 @@ bloklarının "Varyant seçenek değeri" alanı Shopify'daki değerle harfi harf
 İndirim yüzdesi, adet fiyatı, kazanç, masal başına fiyat ve Kardeş butonu fiyatı
 kendiliğinden hesaplanır. Fiyat değiştirince sayfayı ayrıca düzenlemen gerekmez.
 
-5) KAPIDA ÖDEME UYGULAMASI
+5) ÖDEME
+Varsayılan seçenek "Kartla öde"; sayfa %5 düşülmüş fiyatı gösterir. İndirimin ödemede
+gerçekten uygulanması için: İndirimler > İndirim kodu oluştur (%5, tüm ürünler) ve kodu
+Sipariş > "Kart indirim kodu" alanına yaz. Kapıda ödemede bu kod kullanılmaz.
+Kapıda ödeme uygulaması:
 Sipariş > "Kapıda ödeme uygulamasının buton seçicisi" alanına uygulamanın
 butonunun seçicisini yaz (uygulamanın ayarlarında yazar). Boş kalırsa kaydırınca
 ürün sepete eklenir ve ödemeye gidilir. "Birlikte al" ürünü uygulama modunda
@@ -57,6 +63,9 @@ Erkek alanlarına m3-erkek ve m5-erkek. Poster Shopify'da otomatik oluşur.
 Loox ürün metafield'ı (loox.avg_rating, loox.num_reviews) varsa puan ve sayı oradan
 gelir; yoksa bölüm ayarındaki değer görünür. Fotoğraf seçerken üzerinde yazı
 olmayan kare seç (ugc1k.jpg yazısı kırpılmış hâlidir).
+
+7b) KAPANIŞ
+Kapanış > "WhatsApp numarası" alanına numarayı yaz (boşsa WhatsApp butonu görünmez).
 
 8) KONTROL
 Kaydettikten sonra telefonda aç: sayaç ayın son günü 23:59:59'a sayar, son 3 günde

@@ -31,10 +31,11 @@ Bu klasör, Ayluna (ayluna.shop) için yeniden tasarlanan LunaDream ürün sayfa
 ## Sıradaki işler
 1. Kullanıcıdan teyitler (RAPOR.md "Teyit bekleyenler"): ölçü, pil, yaş, teslim, varyant yapısı, COD seçicisi.
 2. Shopify'a kurulum (`shopify/KURULUM.txt`) ve gerçek telefonda deneme: videolar, sayaç, COD akışı.
-3. Masaüstü düzeni: bölümler şimdilik 430px sütunda ortalanıyor.
+3. Masaüstü düzeni (öncelikli): solda yapışkan galeri, sağda satın alma kutusu; diğer bölümler geniş ızgara. Bölümler şimdilik 430px sütunda.
 4. Gerçek müşteri videosu gelirse hikâyelere video karesi eklemek.
 
 ## Son durum (17 Ekim 2026)
+- Ödeme: kartla öde varsayılan (%5), kapıda ikinci; teslimat adımları otomatik tarihli. Fayda ve Kapanış bölümleri eklendi.
 - Videolar: `onizleme/v/` (kaynak `araclar/remotion/`, `npm run video`).
 - Seçilen fikirler index'te; eski hâli `onizleme/yedek/index-fikirlerden-once.html`.
 - Shopify: kaynak `araclar/shopify-kaynak/*.liquid` → `python3 ayluna-imza/araclar/shopify-derle.py` → `shopify/*.txt` (CSS index.html'den otomatik alınır, Liquid/şema denetlenir). Sahte verili önizleme: `araclar/shopify-onizle.js` (liquidjs gerekir).

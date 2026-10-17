@@ -18,18 +18,20 @@
         {%- for b in section.blocks limit: 12 -%}
           {%- liquid
             assign i = forloop.index0
+            assign k = i | modulo: 6
+            assign sol = k | times: 48
             if i < 6
-              assign sol = i | times: 24 | plus: 14
-              assign gec = i | times: 60 | plus: 120
+              assign ust = 212
+              assign gec = k | times: 60 | plus: 120
             else
-              assign sol = i | minus: 6 | times: 24 | plus: 182
-              assign gec = i | minus: 6 | times: 60 | plus: 480
+              assign ust = 284
+              assign gec = k | times: 60 | plus: 480
             endif
           -%}
-          <span class="parca k-disk" data-gecikme="{{ gec }}" style="left:{{ sol }}px;top:236px" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 96 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
+          <span class="parca k-disk" data-gecikme="{{ gec }}" style="left:calc(50% - 140px + {{ sol }}px);top:{{ ust }}px;width:40px;height:40px" {{ b.shopify_attributes }}>{%- if b.settings.resim != blank -%}<img src="{{ b.settings.resim | image_url: width: 96 }}" alt="" loading="lazy" width="{{ b.settings.resim.width }}" height="{{ b.settings.resim.height }}">{%- endif -%}</span>
         {%- endfor -%}
-        <span class="parca k-yazi" style="left:14px;top:284px" data-gecikme="840">{{ s.sol_yazi }}</span>
-        <span class="parca k-yazi a" style="left:182px;top:284px" data-gecikme="840">{{ s.sag_yazi }}</span>
+        <span class="parca k-yazi" style="top:192px" data-gecikme="100">{{ s.sol_yazi }}</span>
+        <span class="parca k-yazi a" style="top:264px" data-gecikme="460">{{ s.sag_yazi }}</span>
         <span class="parca k-alt" data-gecikme="900"><span>{{ s.alt_sol }}</span><span>{{ s.alt_sag }}</span></span>
       </button>
     </section>
@@ -60,8 +62,8 @@
     { "type": "text", "id": "kapak_alt", "label": "Kapak alt yazısı", "default": "Dokun, aç" },
     { "type": "image_picker", "id": "lamba_kiz", "label": "Lamba görseli (kız / varsayılan)" },
     { "type": "image_picker", "id": "lamba_erkek", "label": "Lamba görseli (erkek)" },
-    { "type": "text", "id": "sol_yazi", "label": "Sol disk grubu yazısı", "default": "6 masal diski" },
-    { "type": "text", "id": "sag_yazi", "label": "Sağ disk grubu yazısı", "default": "+6 hediye disk" },
+    { "type": "text", "id": "sol_yazi", "label": "Üst sıra yazısı", "default": "6 masal diski" },
+    { "type": "text", "id": "sag_yazi", "label": "Alt sıra yazısı", "default": "+6 hediye disk" },
     { "type": "text", "id": "alt_sol", "label": "Alt sol", "default": "USB şarj kablosu" },
     { "type": "text", "id": "alt_sag", "label": "Alt sağ (ölçü/pil teyit edilince)", "default": "Boyut [X] cm · Pil [X] saat" },
     { "type": "range", "id": "alt_bosluk", "label": "Alt boşluk", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 72 }

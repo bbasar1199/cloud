@@ -160,6 +160,30 @@ button{font:inherit;color:inherit}
 .kaydir.surukle .top{transition:none;cursor:grabbing}
 .kaydir .ipucu{animation:ipucu 2.4s var(--e) 1.6s 2}
 @keyframes ipucu{0%,100%{transform:translateX(0)}30%{transform:translateX(18px)}55%{transform:translateX(0)}}
+/* Ödeme seçimi: kartla (varsayılan, %5) / kapıda */
+.odeme{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.od{position:relative;display:grid;gap:2px;padding:12px 12px 11px 40px;border-radius:16px;border:1.5px solid var(--cizgi);background:var(--yuzey);text-align:left;cursor:pointer;min-height:44px;transition:border-color .3s var(--e),background .3s var(--e)}
+.od[aria-pressed=true]{border-color:var(--lac);background:#fff}
+.od .radyo{position:absolute;left:12px;top:13px}
+.od[aria-pressed=true] .radyo{border-color:var(--lac)}
+.od[aria-pressed=true] .radyo i{transform:scale(1)}
+.od .ad{font-weight:600;font-size:14.5px}
+.od .tutar{font-variant-numeric:tabular-nums;font-size:13px;color:var(--soluk)}
+.od .tutar b{color:var(--metin);font-size:15px}
+.od .tutar s{margin-left:4px;font-size:12px}
+.od .not{font-size:11.5px;color:#2E6B4F;font-weight:600}
+.od.kapi .not{color:var(--soluk);font-weight:400}
+.fiyat-tik{display:inline-block;animation:tik .45s var(--e)}
+@keyframes tik{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Teslimat adımları: bugün → kargoda → kapında */
+.teslim{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:16px;font-size:12px;line-height:1.3;color:var(--soluk);text-align:center}
+.teslim::before{content:"";position:absolute;left:16.6%;right:16.6%;top:5px;height:2px;background:var(--cizgi)}
+.teslim .dol{position:absolute;left:16.6%;right:16.6%;top:5px;height:2px;background:var(--lac);transform-origin:left;transform:scaleX(0);transition:transform 1.4s var(--e)}
+.teslim.gor .dol{transform:scaleX(1)}
+.teslim span{position:relative;display:grid;justify-items:center;gap:6px}
+.teslim span::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--krem);border:2px solid var(--lac)}
+.teslim span:last-child::before{background:var(--amber);border-color:var(--amber)}
+.teslim b{display:block;color:var(--metin);font-weight:600;font-variant-numeric:tabular-nums}
 .alt-not{display:flex;justify-content:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--soluk);text-align:center}
 .alt-not a{color:var(--metin);font-weight:600}
 
@@ -205,18 +229,18 @@ button{font:inherit;color:inherit}
 .hk-ozet b{color:var(--metin)}
 
 /* ===== Kutuyu aç ===== */
-.kutu-sahne{position:relative;height:370px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);border:0;width:100%;padding:0;cursor:pointer;display:block;text-align:left}
+.kutu-sahne{position:relative;height:382px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);border:0;width:100%;padding:0;cursor:pointer;display:block;text-align:left}
 .kapak{position:absolute;left:50%;top:116px;width:224px;height:144px;margin-left:-112px;border-radius:16px;background:var(--krem);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--lac);transition:transform .5s var(--e),opacity .45s var(--e);z-index:3;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
 .kapak b{font-family:"Young Serif",serif;font-weight:400;font-size:21px}
 .kapak small{font-size:12px;color:var(--soluk)}
 .parca{position:absolute;opacity:0;transform:translateY(40px) scale(.6);transition:transform .6s var(--e),opacity .45s var(--e)}
 .acik-kutu .kapak{transform:translateY(-280px) rotate(-8deg);opacity:0}
 .acik-kutu .parca{opacity:1;transform:none}
-.k-lamba{left:50%;top:22px;width:136px;height:176px;margin-left:-68px;border-radius:18px;overflow:hidden}
+.k-lamba{left:50%;top:20px;width:124px;height:156px;margin-left:-62px;border-radius:18px;overflow:hidden}
 .k-lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:35% 75%}
 .k-disk{width:38px;height:38px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px rgba(255,253,249,.15)}
 .k-disk img{width:100%;height:100%;object-fit:cover}
-.k-yazi{font-size:12px;color:var(--gSoluk)}
+.k-yazi{font-size:12px;color:var(--gSoluk);left:calc(50% - 140px)}
 .k-yazi.a{color:var(--amber);font-weight:600}
 .k-alt{left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;font-size:12.5px;color:#FFFDF9}
 .k-alt span:last-child{color:var(--gSoluk)}
@@ -314,6 +338,20 @@ button{font:inherit;color:inherit}
 .dev span{display:inline-block;transform:translateY(calc((1 - var(--p,1)) * 60%))}
 .linkler{display:flex;flex-wrap:wrap;gap:0 18px;padding:22px 18px 6px;font-size:13px;background:#0A0D20}
 .linkler a{text-decoration:none;padding:12px 0;color:var(--gSoluk)}
+.kapanis{margin:0 18px;padding:22px 20px 20px;border-radius:24px;background:var(--lac);color:var(--gMetin)}
+.kapanis p{margin:8px 0 0;font-size:14.5px;color:var(--gSoluk)}
+.kapanis .iki-btn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.kapanis .btn{min-height:52px;font-size:15px}
+.kapanis .btn.ikincil{background:transparent;color:#FFFDF9;border:1.5px solid rgba(244,237,227,.35)}
+/* Fayda: ekran yok, reklam yok, sadece masal */
+.fayda{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.fy{border-radius:20px;background:var(--yuzey);border:1px solid var(--cizgi);padding:16px 14px 14px;display:grid;gap:8px;align-content:start}
+.fy.genis{grid-column:span 2;grid-template-columns:44px 1fr;align-items:center;background:var(--lac);border-color:var(--lac);color:var(--gMetin)}
+.fy.genis .acik{color:var(--gSoluk)}
+.fy .ik{width:44px;height:44px;border-radius:14px;background:#F9DFC4;color:#8A4A12;display:grid;place-items:center}
+.fy.genis .ik{background:rgba(242,166,90,.16);color:var(--amber)}
+.fy b{display:block;font-size:15.5px;font-weight:600;line-height:1.25}
+.fy .acik{display:block;font-size:12.5px;color:var(--soluk);line-height:1.35;margin-top:2px}
 .telif{margin:0;padding:6px 18px 110px;font-size:12px;color:#7D84A6;background:#0A0D20}
 
 /* Yapışkan çubuk */
@@ -399,12 +437,18 @@ button{font:inherit;color:inherit}
 
       <button class="ekle" id="ekle" aria-pressed="false"><span class="k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><img src="g/u-yildiz.jpg" alt=""><span>Yıldız Işığı Nemlendirici</span><b>+₺849,99</b></button>
 
+      <div class="odeme" role="group" aria-label="Ödeme yöntemi">
+        <button type="button" class="od kart" data-od="kart" aria-pressed="true"><span class="radyo"><i></i></span><span class="ad">Kartla öde</span><span class="tutar"><b id="odKart">₺2.612,49</b><s id="odKartEski">₺2.749,99</s></span><span class="not">%5 daha az</span></button>
+        <button type="button" class="od kapi" data-od="kapi" aria-pressed="false"><span class="radyo"><i></i></span><span class="ad">Kapıda öde</span><span class="tutar"><b id="odKapi">₺2.749,99</b></span><span class="not">nakit ya da kart</span></button>
+      </div>
+
       <div class="kaydir" id="kaydir">
         <span class="dolgu" id="dolgu"></span>
-        <span class="iz" id="izYazi">Kaydır, kapıda öde <i id="izFiyat">₺2.749,99</i></span>
-        <button class="top ipucu" id="kaydirTop" aria-label="Kapıda ödemeyle sipariş ver"><svg class="ico" viewBox="0 0 24 24" style="stroke-width:2.2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+        <span class="iz" id="izYazi"><span id="izMetin">Kaydır, kartla öde</span> <i id="izFiyat">₺2.612,49</i></span>
+        <button class="top ipucu" id="kaydirTop" aria-label="Sipariş ver"><svg class="ico" viewBox="0 0 24 24" style="stroke-width:2.2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
       </div>
-      <p class="alt-not" id="kargoNot"><span>WhatsApp onayı</span><span aria-hidden="true">·</span><span id="kargoTarih"></span></p>
+      <div class="teslim" id="teslim" aria-label="Teslimat"><i class="dol" aria-hidden="true"></i><span><b>Bugün</b>sipariş</span><span><b id="tKargo"></b>kargoda</span><span><b id="tKapi"></b>kapında</span></div>
+      <p class="alt-not" id="kargoNot"><span>Aras · DHL · PTT</span><span aria-hidden="true">·</span><span>Track123 ile takip</span><span aria-hidden="true">·</span><span>30 gün iade</span></p>
 
       <div class="form" id="form">
         <form class="ic" onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Önizleme: siparişin alındı'">
@@ -416,11 +460,23 @@ button{font:inherit;color:inherit}
             <div class="alan"><label for="ilce">İlçe</label><input id="ilce" autocomplete="address-level2"></div>
           </div>
           <div class="alan"><label for="adres">Açık adres</label><textarea id="adres" autocomplete="street-address"></textarea></div>
-          <div style="display:flex;justify-content:space-between;font-size:14px;border-top:1px dashed #DDD2C1;padding-top:10px"><span class="soluk">Kapıda ödeyeceğin</span><b id="formToplam">₺2.749,99</b></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;border-top:1px dashed #DDD2C1;padding-top:10px"><span class="soluk" id="formEtiket">Ödeyeceğin</span><b id="formToplam">₺2.749,99</b></div>
           <button class="btn" type="submit">Siparişi tamamla</button>
-          <p style="margin:0;font-size:12.5px;text-align:center" class="soluk">Online ödersen ek %5 indirim</p>
+          <p style="margin:0;font-size:12.5px;text-align:center" class="soluk" id="formNot">Sipariş WhatsApp'tan onaylanır</p>
         </form>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== FAYDA: eski "Sihirli Özellikler"in emojisiz hâli. Kaynak fikir: bentogrids.com ===== -->
+  <section class="bolum px" aria-label="Ne yapıyor">
+    <h2 class="h2">Ekran yok.<br>Reklam yok.<br>Sadece masal.</h2>
+    <div class="fayda">
+      <div class="fy genis"><span class="ik"><svg class="ico" viewBox="0 0 24 24"><path d="M4 10c4-5 12-5 16 0"/><path d="M12 14v6M8 20h8"/><circle cx="12" cy="12" r="2"/></svg></span><span><b>Tavana masal yansıtır</b><span class="acik">Diski tak, ışığı kapat; tavan yavaşça döner.</span></span></div>
+      <div class="fy"><span class="ik"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span><b>Her gece başka disk</b><span class="acik">12 masal diski, 6'sı hediye</span></span></div>
+      <div class="fy"><span class="ik"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/><path d="M9.5 19h5"/></svg></span><span><b>Sıcak ışık</b><span class="acik">Oda karanlıkta kalmaz</span></span></div>
+      <div class="fy"><span class="ik"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 11v2"/><path d="M7 10v4M10 10v4"/></svg></span><span><b>Şarjlı, kablosuz</b><span class="acik">Komodinden yatağa taşınır</span></span></div>
+      <div class="fy"><span class="ik" id="fyIk"><svg class="ico" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span><span><b id="fyB">Ninni hoparlörü</b><span class="acik" id="fyA">Bluetooth, Tavşanlı modelde</span></span></div>
     </div>
   </section>
 
@@ -445,8 +501,8 @@ button{font:inherit;color:inherit}
       <span class="kapak"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg><b>LunaDream</b><small>Dokun, aç</small></span>
       <span class="parca k-lamba" style="transition-delay:0ms"><img id="kutuLamba" src="g/elde.jpg" alt=""></span>
       <span id="kutuDiskler"></span>
-      <span class="parca k-yazi" style="left:14px;top:284px" data-gecikme="840">6 masal diski</span>
-      <span class="parca k-yazi a" style="left:182px;top:284px" data-gecikme="840">+6 hediye disk</span>
+      <span class="parca k-yazi" style="top:192px" data-gecikme="100">6 masal diski</span>
+      <span class="parca k-yazi a" style="top:264px" data-gecikme="460">+6 hediye disk</span>
       <span class="parca k-alt" data-gecikme="900"><span id="kutuKablo">USB şarj kablosu</span><span>Boyut [X] cm · Pil [X] saat</span></span>
     </button>
   </section>
@@ -494,7 +550,7 @@ button{font:inherit;color:inherit}
       <div class="sss">
         <details><summary>Hoparlör hangi modelde?<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Yalnızca Tavşanlı (kız) modelde Bluetooth ninni hoparlörü var. Uzay Kaşifi hoparlörsüz.</p></details>
         <details><summary>Kapıda ödeme nasıl oluyor?<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Siparişin WhatsApp'tan onaylanır. Ürün gelince kargo görevlisine nakit ya da kartla ödersin.</p></details>
-        <details><summary>Kaç günde gelir?<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Hafta içi 16:00'ya kadar verilen sipariş aynı gün kargoda. Teslimat genelde [X] iş günü.</p></details>
+        <details><summary>Kaç günde gelir?<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sipariş 1 iş gününde kargoya verilir; Türkiye geneli 3-7 günde kapında. Aras, DHL ya da PTT ile gelir, Track123'ten takip edersin.</p></details>
         <details><summary>Kaç yaş için uygun?<span class="arti"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>[Yaş aralığı mağaza tarafından eklenecek]</p></details>
       </div>
     </section>
@@ -522,6 +578,15 @@ button{font:inherit;color:inherit}
     </section>
   </div>
 
+  <!-- Kapanış: destek + son çağrı. Kaynak fikir: cta.gallery -->
+  <div style="background:var(--gece);padding:44px 0">
+    <section class="kapanis" aria-label="Destek">
+      <h2 class="ser" style="margin:0;font-size:26px;line-height:1.1;color:#FFFDF9">Aklına takılan<br>bir şey mi var?</h2>
+      <p>WhatsApp'tan yaz, genelde 2 saat içinde dönüyoruz.</p>
+      <div class="iki-btn"><a class="btn ikincil" href="#" id="waBtn">WhatsApp'tan sor</a><a class="btn" href="#siparis" id="kapanisBtn">Sipariş ver</a></div>
+    </section>
+  </div>
+
   <!-- ===== ALT BİLGİ ===== -->
   <footer class="alt-bilgi" data-p id="altBilgi">
     <div class="tepeler" aria-hidden="true">
@@ -532,13 +597,13 @@ button{font:inherit;color:inherit}
     </div>
     <p class="dev" aria-label="Ayluna"><span>A</span><span>y</span><span>l</span><span>u</span><span>n</span><span>a</span></p>
     <nav class="linkler" aria-label="Alt bağlantılar"><a href="#">Gece lambaları</a><a href="#">Projektörler</a><a href="#">Nemlendiriciler</a><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade</a><a href="#">İletişim</a></nav>
-    <p class="telif">WhatsApp [numara] · [Firma unvanı] · ETBİS [QR] · © 2026 Ayluna</p>
+    <p class="telif">© 2026 Ayluna</p>
   </footer>
 
   <div class="yapis" id="yapis">
     <img id="yapisImg" src="g/kiz-oda.jpg" alt="" style="object-position:30% 75%">
     <span class="f"><b id="yapisFiyat">₺2.749,99</b><span id="yapisNot">Bu fiyat ay sonuna kadar</span></span>
-    <a class="btn" href="#siparis" id="yapisBtn">Kapıda öde</a>
+    <a class="btn" href="#siparis" id="yapisBtn">Kartla öde</a>
   </div>
 </div>
 
@@ -549,7 +614,7 @@ button{font:inherit;color:inherit}
   function TL(v,k){var s=(k?v.toFixed(2):String(Math.round(v))).split('.');return '₺'+s[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(k?','+s[1]:'');}
 
   /* ---------- Durum ---------- */
-  var S={model:'kiz',paket:2,ekle:false};
+  var S={model:'kiz',paket:2,ekle:false,odeme:'kart'};
   var MOD={
     kiz:{ad:'Kız Çocuklar İçin · Tavşanlı',gunduz:'g/kiz-gunduz.jpg',gece:'g/kiz-gece.jpg',dunya:'g/kiz-dunya.jpg',oda:'g/kiz-oda.jpg',pos:'30% 75%',elde:'g/elde.jpg',bv:'Ninni',ba:'Bluetooth hoparlör'},
     erkek:{ad:'Erkek Çocuklar İçin · Uzay Kaşifi',gunduz:'g/erkek-gunduz.jpg',gece:'g/erkek-gece.jpg',dunya:'g/erkek-dunya.jpg',oda:'g/erkek-gunduz.jpg',pos:'55% 70%',elde:'g/erkek-gunduz.jpg',bv:'Robot',ba:'Uzay Kaşifi tasarım'}
@@ -575,7 +640,7 @@ button{font:inherit;color:inherit}
     var m=MOD[S.model], o=MOD[S.model==='kiz'?'erkek':'kiz'];
     $('#gunduz').src=m.gunduz; $('#gece').src=m.gece; $('#dunyaKare').src=m.dunya; $('#dunyaMini').src=m.dunya; $('#eldeKare').src=m.elde; $('#eldeMini').src=m.elde;
     $('.kucuk button[data-git="0"] img').src=m.gece;
-    $('#modelAd').textContent=m.ad; $('#bentoDeger').textContent=m.bv; $('#bentoAcik').textContent=m.ba;
+    $('#modelAd').textContent=m.ad; $('#fyB').textContent=S.model==='kiz'?'Ninni hoparlörü':'Uzay Kaşifi'; $('#fyA').textContent=S.model==='kiz'?'Bluetooth, Tavşanlı modelde':'Robot tasarım, hoparlörsüz'; $('#bentoDeger').textContent=m.bv; $('#bentoAcik').textContent=m.ba;
     $('#dunyaImg').src=m.dunya; $('#bentoImg').src=m.dunya; $('#kutuLamba').src=m.elde;
     $('#yapisImg').src=m.oda; $('#yapisImg').style.objectPosition=m.pos;
     $('#kardesGunduz').src=o.gunduz; $('#kardesGece').src=o.gece; $('#dtGunduz').src=m.gunduz; $('#dtGeceImg').src=m.gece;
@@ -588,11 +653,19 @@ button{font:inherit;color:inherit}
   function fiyatUygula(){
     $$('.paket').forEach(function(x){x.setAttribute('aria-pressed',+x.dataset.paket===S.paket);});
     $('#ekle').setAttribute('aria-pressed',S.ekle);
-    var t=TL(toplam(),true); $('#izFiyat').textContent=t; $('#formToplam').textContent=t; $('#yapisFiyat').textContent=t;
+    var tum=toplam(), kart=Math.round(tum*95)/100, od=S.odeme==='kart'?kart:tum, t=TL(od,true);
+    $('#odKart').textContent=TL(kart,true); $('#odKartEski').textContent=TL(tum,true); $('#odKapi').textContent=TL(tum,true);
+    $$('.od').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.od===S.odeme);});
+    $('#izMetin').textContent=S.odeme==='kart'?'Kaydır, kartla öde':'Kaydır, kapıda öde';
+    $('#yapisBtn').textContent=S.odeme==='kart'?'Kartla öde':'Kapıda öde';
+    $('#formEtiket').textContent=S.odeme==='kart'?'Kartla ödeyeceğin':'Kapıda ödeyeceğin';
+    $('#formNot').textContent=S.odeme==='kart'?'Sonraki adımda kart bilgilerini girersin':"Sipariş WhatsApp'tan onaylanır";
+    ['#izFiyat','#yapisFiyat','#formToplam'].forEach(function(q){ var e=$(q); if(e.textContent!==t){ e.textContent=t; if(!azHareket){ e.classList.remove('fiyat-tik'); void e.offsetWidth; e.classList.add('fiyat-tik'); } } });
     $('#paketNot').textContent=S.paket===2?'2 lamba seçili':'';
   }
   $$('.paket').forEach(function(x){x.addEventListener('click',function(){S.paket=+x.dataset.paket;fiyatUygula();});});
   $('#ekle').addEventListener('click',function(){S.ekle=!S.ekle;fiyatUygula();});
+  $$('.od').forEach(function(x){x.addEventListener('click',function(){S.odeme=x.dataset.od;fiyatUygula();});});
   $('#kardesBtn').addEventListener('click',function(e){S.paket=2;fiyatUygula();siparisAc(e);});
 
   /* ---------- Geri sayım (ayın son günü 23:59:59) ---------- */
@@ -613,10 +686,11 @@ button{font:inherit;color:inherit}
     $('#sayacKalan').innerHTML=g===0?('Bugün son gün<br>'+(s>0?s+' sa ':'')+d+' dk'):(g+' gün<br>'+s+' sa '+d+' dk');
     $('#yapisNot').textContent=son.getDate()+' '+EKE[son.getMonth()]+' kadar bu fiyat';
     if(ayGorundu) ayUygula();
-    var kesim=16, hi=n.getDay()>0&&n.getDay()<6, t;
-    if(hi&&n.getHours()<kesim){var kal=kesim*60-(n.getHours()*60+n.getMinutes()); t='bugün kargoda ('+(kal>=60?Math.floor(kal/60)+' sa ':'')+(kal%60)+' dk kaldı)';}
-    else{var x=new Date(n);do{x.setDate(x.getDate()+1);}while(x.getDay()===0||x.getDay()===6);t=x.getDate()+' '+AY[x.getMonth()]+' '+GUN[x.getDay()]+' kargoda';}
-    $('#kargoTarih').textContent=t;
+    /* 1 iş gününde kargoda, Türkiye geneli 3-7 gün */
+    var x=new Date(n); do{x.setDate(x.getDate()+1);}while(x.getDay()===0||x.getDay()===6);
+    var a=new Date(x), z=new Date(x); a.setDate(a.getDate()+3); z.setDate(z.getDate()+7);
+    $('#tKargo').textContent=x.getDate()+' '+AY[x.getMonth()];
+    $('#tKapi').textContent=a.getMonth()===z.getMonth()?(a.getDate()+'-'+z.getDate()+' '+AY[z.getMonth()]):(a.getDate()+' '+AY[a.getMonth()].slice(0,3)+' - '+z.getDate()+' '+AY[z.getMonth()].slice(0,3));
     setTimeout(sayac,(60-n.getSeconds())*1000);
   }
   new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ ayGorundu=true; ayUygula(); ob.disconnect(); } },{threshold:.5}).observe($('#sayac'));
@@ -630,7 +704,8 @@ button{font:inherit;color:inherit}
   top.addEventListener('pointerup',birak); top.addEventListener('pointercancel',birak);
   kz.addEventListener('click',function(e){ if(e.target===kz) formAc(); });
   function siparisAc(e){ if(e)e.preventDefault(); formAc(); var y=kz.getBoundingClientRect().top+scrollY-90; scrollTo({top:y,behavior:azHareket?'auto':'smooth'}); }
-  $('#yapisBtn').addEventListener('click',siparisAc);
+  $('#yapisBtn').addEventListener('click',siparisAc); $('#kapanisBtn').addEventListener('click',siparisAc);
+  new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ $('#teslim').classList.add('gor'); ob.disconnect(); } },{threshold:.6}).observe($('#teslim'));
 
   /* ---------- Yorumlar: gece hikâyeleri ---------- */
   var K=[
@@ -677,8 +752,9 @@ button{font:inherit;color:inherit}
 
   /* ---------- Kutuyu aç ---------- */
   var kd=$('#kutuDiskler'), html='';
-  for(var i=0;i<12;i++){ var sol=i<6?(14+i*24):(182+(i-6)*24), gec=i<6?(120+i*60):(480+(i-6)*60);
-    html+='<span class="parca k-disk" data-gecikme="'+gec+'" style="left:'+sol+'px;top:236px;transform-origin:center"><img src="g/disk'+(i+1)+'.jpg" alt=""></span>'; }
+  /* İki sıra: üstte kutudaki 6 disk, altta 6 hediye disk */
+  for(var i=0;i<12;i++){ var sira=i<6?0:1, k=i%6, gec=sira?(480+k*60):(120+k*60);
+    html+='<span class="parca k-disk" data-gecikme="'+gec+'" style="left:calc(50% - 140px + '+(k*48)+'px);top:'+(sira?284:212)+'px;width:40px;height:40px"><img src="g/disk'+(i+1)+'.jpg" alt=""></span>'; }
   kd.innerHTML=html;
   var kutu=$('#kutu');
   function kutuAyarla(acik){ kutu.classList.toggle('acik-kutu',acik); kutu.setAttribute('aria-pressed',acik); $$('#kutu .parca').forEach(function(x){ x.style.transitionDelay=acik?((x.dataset.gecikme||0)+'ms'):'0ms'; }); }

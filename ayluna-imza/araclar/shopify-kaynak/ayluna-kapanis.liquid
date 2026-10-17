@@ -1,0 +1,45 @@
+{%- comment -%} Ayluna · Kapanış: destek + son çağrı. Kaynak fikir: cta.gallery {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign wa = s.whatsapp | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+-%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{background:var(--gece);color:var(--gMetin)}
+#BOLUM .ay-ic{padding:44px 0}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <section class="kapanis" aria-label="Destek">
+      <h2 class="ser" style="margin:0;font-size:26px;line-height:1.1;color:#FFFDF9">{{ s.baslik | escape | newline_to_br }}</h2>
+      {%- if s.metin != blank -%}<p>{{ s.metin }}</p>{%- endif -%}
+      <div class="iki-btn">
+        {%- if wa != blank -%}<a class="btn ikincil" href="https://wa.me/{{ wa }}{% if s.wa_mesaj != blank %}?text={{ s.wa_mesaj | url_encode }}{% endif %}" target="_blank" rel="noopener">{{ s.wa_buton }}</a>{%- endif -%}
+        <a class="btn" href="#siparis"{% if wa == blank %} style="grid-column:span 2"{% endif %}>{{ s.siparis_buton }}</a>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var b=kok.querySelector('a[href="#siparis"]'); b.addEventListener('click',function(e){ if(window.__aySiparisVar){ e.preventDefault(); document.dispatchEvent(new CustomEvent('ayluna:siparis')); } });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kapanış",
+  "tag": "section",
+  "class": "ayluna-kapanis",
+  "settings": [
+    { "type": "textarea", "id": "baslik", "label": "Başlık (satır başı korunur)", "default": "Aklına takılan\nbir şey mi var?" },
+    { "type": "text", "id": "metin", "label": "Metin", "default": "WhatsApp'tan yaz, genelde 2 saat içinde dönüyoruz." },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp numarası", "info": "Ülke koduyla, ör. 905XXXXXXXXX. Boşsa WhatsApp butonu görünmez.", "default": "" },
+    { "type": "text", "id": "wa_mesaj", "label": "Hazır mesaj", "default": "Merhaba, LunaDream hakkında bir sorum var." },
+    { "type": "text", "id": "wa_buton", "label": "WhatsApp butonu", "default": "WhatsApp'tan sor" },
+    { "type": "text", "id": "siparis_buton", "label": "Sipariş butonu", "default": "Sipariş ver" }
+  ],
+  "presets": [ { "name": "Ayluna · Kapanış" } ]
+}
+{% endschema %}
