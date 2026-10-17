@@ -240,6 +240,7 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
   - Sayfalar: `NODE_PATH=$(npm root -g) node ayluna-imza/araclar/ekran-goruntusu.js <klasör> <sayfa.html>`
   - Tuval panosu: `node ayluna-imza/araclar/dc-onizle.js ayluna-imza/canvas/Main.dc.html <png> '<durum-json>' <y> <yükseklik>` (aynı `NODE_PATH`). Sayfa başı için y = −470. Yerelde yalnız `canvas/magaza/` görselleri var.
 - Shopify derleme: `python3 ayluna-imza/araclar/shopify-derle.py`.
+- Disk/çizim netleştirme (yapay zekâ, CPU): `python3 -m venv v && v/bin/pip install --index-url https://download.pytorch.org/whl/cpu torch && v/bin/pip install numpy pillow`; model `RealESRGAN_x4plus_anime_6B.pth` (GitHub xinntao/Real-ESRGAN v0.2.2.4); `v/bin/python ayluna-imza/araclar/disk/disk_kes.py <afiş> <çıkış> --sr <model.pth>`. Tuvale yükleme: Artifact `asset: true`; yeni id'ler `araclar/blob-yerel.json`'a (yerel önizleme için).
 - Görsel üretimi (Flow / Nano Banana Pro):
   - Ürün sıfırdan üretilmez; yalnız sahne değişir.
   - Görselde yazı üretilmez.
@@ -274,6 +275,8 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Güzel yorumlarımız var, videolarımız var; onlar için de uygun section oluştur ve kur" | **Videolar** bölümü (9:16 kaydırmalı kartlar, canlıda Shopify videosu; ekrandayken sessiz, dokununca sesli) satın alma kutusunun altında. **Yorum duvarı**: puan, müşteri fotoğrafları, konu çipleri, kaydırmalı beyaz yorum kartları; metinler Loox'tan birebir. |
 | 17 Eki | "Gönderdiğim gibi üst kısım ve görseller bir olsun" | Logo bandı ayrı şerit değil; fotoğrafın üstüne biner (Main gibi), üstte koyu geçiş. |
 | 17 Eki | "Baskılayıcıları biraz daha arttıralım" | Aciliyet artırılır ama **yalnız gerçek veriyle**: fiyatın altında kampanya sayacı (bitiş tarihi ayarı), butonun üstünde "Stok azalıyor: son X adet" (Shopify envanteri, eşik altı), "Dün X aile sipariş verdi" (Shopify Flow metafield), yapışkan çubukta kalan süre. Veri yoksa satır gizlenir. Uydurma sayı ve sahte sayaç yok. Nabız noktası en fazla 3 kez yanıp söner. |
+| 17 Eki | "Görselleri tekrar üretip yüksek kaliteyle koyacaktın, diskler için yapmamışsın" | Kesip büyütmek yetmez; diskler **yapay zekâ ile netleştirilir** (Real-ESRGAN çizim modeli, x4, 512px). Desen değişmez. Büyük önizlemede bulanıklık ya da JPEG kırıntısı kabul edilmez; teslimden önce 260px'te önce/sonra karşılaştırılır. |
+| 17 Eki | "Her gün sıfırlanan sayacı koruyabiliriz; toptancı zammı geldiği anda zam yapıyorum, her an olabilir, bu baskılayıcı gerçek sayılır" | **Bugünkü fiyat sayacı** fiyatın altında: her gece 23:59'da (İstanbul) sıfırlanır, altında "Toptancı zammı gelirse fiyat ertesi gün güncellenir." Gerçek olması için koşul: gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. Ay sonu kampanya sayacı kalktı. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

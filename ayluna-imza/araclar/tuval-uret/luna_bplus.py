@@ -176,15 +176,16 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
     <h1 class="dev">LunaDream<span>.</span></h1>
     <p style="margin: 12px 0 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 24px; letter-spacing: -.02em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span style="font-size: 14px; font-weight: 600; color: #2E6B4F">kartla {{p1on}}</span></p>
-    <!-- Kampanya sayacı: bitiş tarihi tema ayarından; varsayılan kapalı (zam/kampanya kararı gelince açılır). Tuvalde ay sonuna sayar. -->
+    <!-- Bugünkü fiyat sayacı: her gece 23:59'da (İstanbul) sıfırlanır. Toptancı zammı gün içinde gelse de o günün fiyatı 23:59'a kadar korunur. -->
     <div class="sayac2" role="timer" aria-label="{{cdAria}}"><span style="display: flex; align-items: center; gap: 8px; min-width: 0">""" + LOGO.replace('width="20" height="20"','width="16" height="16"') + """<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cdLine}}</span></span><b>{{cdShort}}</b></div>
+    <p style="margin: 6px 2px 0; font-size: 12.5px; color: #5C6078">Toptancı zammı gelirse fiyat ertesi gün güncellenir.</p>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 26px">Sihirli özellikler</p>
     <h2 class="h2" style="font-size: 26px">Uyku vakti savaş değil,<br>minik bir masal<span class="n">.</span></h2>
     <div class="sih">
       <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">Odayı loş, sıcak bir ışıkla aydınlatır.</span></div>
-      <a class="oz" href="#diskler"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span class="yelpaze"><img src="/_blob/19a4ad9f9e772d41f459a81c0db97441" alt=""><img src="/_blob/eee41a0261197a47220148f75a138195" alt=""><img src="/_blob/303b0bb3eb84e2b79a6e23f18c49942e" alt=""></span></span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
+      <a class="oz" href="#diskler"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span class="yelpaze"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""></span></span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
       <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></div></sc-if>
       <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninnili robot</b><span class="t">Uyku öncesi ninni çalar.</span></div></sc-if>
       <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></div>
@@ -361,8 +362,8 @@ JS = """class Component extends DCLogic {
     var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kare on' : 'kare', pick: function () { self.setState({ g: i }); } }; });
     // Süzülen hediye diskleri: fotoğrafın kenarında, yavaş (7 sn), yalnız transform
     var tiles = [
-      { id: '19a4ad9f9e772d41f459a81c0db97441', x: -16, y: 330, s: 46, r: -12, d: 0 },
-      { id: 'eee41a0261197a47220148f75a138195', x: 364, y: 340, s: 38, r: 8, d: -2.3 }
+      { id: 'a24f13e032569f76d64b9b0fbe8d74f7', x: -16, y: 330, s: 46, r: -12, d: 0 },
+      { id: 'b088d2c82561b76f6db997fbc3944059', x: 364, y: 340, s: 38, r: 8, d: -2.3 }
     ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d }; });
     var kiz = S.model === 'kiz';
     var KIZ = B + 'e02351b3be4a1c555c5d760d0bbda723', ERKEK = B + '0033dfea6282c5bc479c385213661c00';
@@ -390,19 +391,17 @@ JS = """class Component extends DCLogic {
       { t: '21:00', title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', src: B + 'aa906021e8f134fc2cb53a35d7d0f47e', alt: 'Tavanda masal yansıması', pos: '50% 40%' },
       { t: '07:30', title: 'Sabah şarja', text: 'Gün boyu dolar, akşam hazır.', src: DAY, alt: 'Gündüz komodinde LunaDream', pos: '62% 70%' }
     ];
-    // Kampanya sayacı: canlıda bitiş tarihi tema ayarından; tuvalde ayın son günü 23:59
-    var AYT = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    // Bugünkü fiyat sayacı (kullanıcı kararı): her gece 23:59'da (İstanbul) sıfırlanır. Gerçek olması için:
+    // toptancı zammı gün içinde gelse bile o günün fiyatı 23:59'a kadar korunur, yeni fiyat ertesi gün başlar.
     function IKI(n) { return n < 10 ? '0' + n : String(n); }
-    var simdi = new Date(S.now || Date.now()), mo = simdi.getMonth();
-    var end = new Date(simdi.getFullYear(), mo + 1, 0, 23, 59, 59, 999), diff = Math.max(0, end.getTime() - simdi.getTime());
-    var dd = Math.floor(diff / 86400000), hh = Math.floor(diff / 3600000) % 24, mi = Math.floor(diff / 60000) % 60, ss = Math.floor(diff / 1000) % 60;
-    var calLeft = end.getDate() - simdi.getDate() + 1;
-    var AYDA = ["Ocak'ta", "Şubat'ta", "Mart'ta", "Nisan'da", "Mayıs'ta", "Haziran'da", "Temmuz'da", "Ağustos'ta", "Eylül'de", "Ekim'de", "Kasım'da", "Aralık'ta"];
-    var bitis = end.getDate() + ' ' + AYDA[mo];
-    var cdLine = calLeft <= 3 ? (calLeft === 1 ? 'Son gün: ' : 'Son ' + calLeft + ' gün: ') + bitis + ' bitiyor' : 'Kampanya ' + bitis + ' bitiyor';
-    var cdShort = (dd > 0 ? dd + 'g ' : '') + IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
-    var cdTiny = dd > 0 ? dd + ' gün kaldı' : IKI(hh) + 'sa ' + IKI(mi) + 'dk kaldı';
-    var cdAria = 'Kampanyanın bitmesine ' + dd + ' gün ' + hh + ' saat ' + mi + ' dakika';
+    var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var gunSonu = new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999);
+    var kalan = Math.max(0, gunSonu.getTime() - ist.getTime());
+    var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    var cdLine = 'Bugünkü fiyat garantisi';
+    var cdShort = IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
+    var cdTiny = 'Bugünkü fiyat: ' + IKI(hh) + 'sa ' + IKI(mi) + 'dk';
+    var cdAria = 'Bugünkü fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika';
     // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
     var vids = [
       { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '34462d69c62584aeefaca4cff769f3b5', pos: '50% 50%' },
@@ -421,14 +420,14 @@ JS = """class Component extends DCLogic {
     ];
     var topics = ['Tümü', 'Uyku', 'Hediye', 'Kalite'].map(function (t) { var on = S.topic === t; return { n: t, cls: on ? 'cip on' : 'cip', on: on ? 'true' : 'false', pick: function () { self.setState({ topic: t }); } }; });
     var revs = REV.filter(function (r) { return S.topic === 'Tümü' || r.tags.indexOf(S.topic) > -1; }).map(function (r) { return { q: r.q, name: r.name, tags: r.tags.join(' · ') }; });
-    // Diskler: mağazadaki 1024px tema afişinden kesildi, 384px (araclar/disk/disk_kes.py). Unicorn ve 2025 kutuda yok, alınmadı.
+    // Diskler: mağazadaki 1024px tema afişinden kesildi, Real-ESRGAN (çizim modeli) ile x4 netleştirildi, 512px (araclar/disk/disk_kes.py --sr). Unicorn ve 2025 kutuda yok, alınmadı.
     var DISCS = [
-      { n: 'Ay ve yıldız', id: '379ae195597ca12d584391e5dd2fc76b' }, { n: 'Okyanus', id: '19a4ad9f9e772d41f459a81c0db97441' },
-      { n: 'Uzay', id: 'eee41a0261197a47220148f75a138195' }, { n: 'Deniz kızı', id: '303b0bb3eb84e2b79a6e23f18c49942e' },
-      { n: 'Denizanası', id: '723d41435d8265df6dd97a8eb9f61ad7' }, { n: 'Şato', id: 'ee9af085a73095cc6053107569e04056' },
-      { n: 'Hayvanlar', id: '4e52a1be4da28120964ea71eb463511a' }, { n: 'Kış gecesi', id: '045ea1de4341044b2a99f4d896a5a523' },
-      { n: 'Taşıtlar', id: '0bdff40efb3a91439c4a6e6c94ff3199' }, { n: 'Masal', id: 'e87168d9d952f34cbf0935a053ff94ad' },
-      { n: 'Doğum günü', id: 'd288260aa18d2bc2bcdaa7ce13a57f67' }
+      { n: 'Ay ve yıldız', id: '4a3a69e8c1d8dddad8c33f8f463b8a0e' }, { n: 'Okyanus', id: 'a24f13e032569f76d64b9b0fbe8d74f7' },
+      { n: 'Uzay', id: 'b088d2c82561b76f6db997fbc3944059' }, { n: 'Deniz kızı', id: '04ed9ce4ae8a36619975caa7d2de9ad8' },
+      { n: 'Denizanası', id: 'e3caea057eb48a63b2ecb70c317f5e3b' }, { n: 'Şato', id: 'bbd010d8d946edc8fef9c0404cba4ea2' },
+      { n: 'Hayvanlar', id: 'ed5548471e30af0d03e8b419f8ab81ee' }, { n: 'Kış gecesi', id: '88d0b83acee35abef0934694ef439827' },
+      { n: 'Taşıtlar', id: 'deaace9b300bee84399862a13f84b2d6' }, { n: 'Masal', id: '6b08a94993cfc00099888dd3bd4cf110' },
+      { n: 'Doğum günü', id: 'c2e8b0c346ed92731ab4a2f83a01d3ef' }
     ];
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });

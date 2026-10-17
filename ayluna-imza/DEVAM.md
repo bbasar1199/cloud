@@ -169,6 +169,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - her disk için karanlık odada çekilmiş gerçek tavan fotoğrafı istenecek
 - Sorulacak: robotta Bluetooth var mı, ninni dahili mi? Videolar hangileri (dosyalar)? Kampanya bitiş tarihi?
 
+## Tur 10 · Net diskler ve günlük fiyat sayacı (17 Ekim, gece)
+- Kullanıcı:
+  - "Diskler için yüksek kalite yapmamışsın."
+  - "Her gün sıfırlanan sayaç gerçek sayılır, çünkü toptancı zammı gelince hemen zam yapıyorum."
+- **Diskler:** 11 disk Real-ESRGAN çizim modeliyle x4 netleştirildi (512px). `araclar/disk/disk_kes.py --sr`, kurulum TASARIM-BILGISI §9'da. Tuvale yeni asset olarak yüklendi; eski Lanczos sürümler silindi (biri izin verilmediği için kaldı, kullanılmıyor).
+- **Sayaç:** "Bugünkü fiyat garantisi" + saat:dk:sn, her gece 23:59'da (İstanbul) sıfırlanır. Altında "Toptancı zammı gelirse fiyat ertesi gün güncellenir." Yapışkan çubukta "Bugünkü fiyat: 06sa 39dk".
+- Kullanıcıya söylendi: gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunmalı, yoksa sayaç yanıltıcı sayılır.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
@@ -179,7 +187,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 6. Gerçek müşteri videosu gelirse video karesi.
 
 ## Kullanıcının netleştirdiği yön (17 Ekim, sonra)
-- İnsanların alıştığı kalıplar (emoji fayda listesi, indirim sayacı, "dün satılan", stok alarmı) atılmaz; iyileştirilir. Baskı unsurları istiyor; gerçek veriye bağlanır (stok: Shopify envanteri, dün satılan: Flow ile metafield, sayaç: gerçek ay sonu zammı).
+- İnsanların alıştığı kalıplar (emoji fayda listesi, indirim sayacı, "dün satılan", stok alarmı) atılmaz; iyileştirilir. Baskı unsurları istiyor; gerçek veriye bağlanır (stok: Shopify envanteri, dün satılan: Flow ile metafield, sayaç: her gece sıfırlanan bugünkü fiyat garantisi; Tur 10).
 - Gösteriş/yeniden kurgu değil, işe yarayan iyileştirme bekliyor.
 
 ## Yeni iskelet denemesi (17 Ekim 2026)
