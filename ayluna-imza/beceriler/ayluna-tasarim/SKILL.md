@@ -142,7 +142,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 
 ## Shopify
-- Horizon (veya mevcut tema) + Ayluna'ya özel bölümler.
+- **Sıfırdan Ayluna teması** (kullanıcı kararı, 17 Ekim). Hiçbir hazır tema (Horizon, Dawn…) kopyalanmaz ya da temel alınmaz; her parça benzersiz yazılır.
+- İlk kurulum zip ile yapılır, sonraki değişiklikler `.txt` olarak verilir. Şu an canlıda ChatGPT ile yapılmış bir sürüm var; o da değiştirilecek.
 - Kaynak `araclar/shopify-kaynak/*.liquid` → `python3 ayluna-imza/araclar/shopify-derle.py` → `shopify/*.txt`. Kurulum: `shopify/KURULUM.txt`.
 - Bölümler Main.dc'ye göre yazılır.
 - Bilinen hatalar `TASARIM-BILGISI.md` §8'de.

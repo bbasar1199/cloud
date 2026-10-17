@@ -72,6 +72,8 @@ Her oturumda `DEVAM.md`'den sonra bunu oku. Ayrıntı ve kaynaklar `ogrenme/` kl
 - **Risk:** kartta takılan büyükanne hiç almayabilir. Online payı, dönüşüm ve iade birlikte ölçülür.
 - PTT rozeti öne çıkarılmaz. Başarı ölçüsü teslim edilen cirodur.
 
+**Fiyat kanıtı:** kullanıcı teyit etti, ₺1.999 son 10 günde uygulandı. Kampanya tarihleri sorulacak.
+
 **Ürün gerçekleri:**
 - 1 lamba ₺1.699,99, 2 lamba ₺2.749,99.
 - Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, **hoparlörsüz**.
@@ -211,7 +213,9 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
   - `request.design_mode` ya da `?onizleme=` ile satıcı önizlemesi
   - `shopify:section:unload` temizliği
 - Liquid yazmadan önce `shopify-liquid` becerisiyle doküman ara; teslimden önce doğrula.
-- Horizon'da en güncellemeye dayanıklı yol: satın alma öğeleri `blocks/` altında tema bloğu olarak `_product-details` içinde. `product-information` çatallanmaz.
+- **Tema sıfırdan yazılır** (kullanıcı kararı, 17 Ekim). Hazır temadan kod alınmaz.
+  - İlk kurulum zip ile yapılır: Shopify'da sıfırdan tema ancak böyle yüklenir. Sonraki değişiklikler dosya dosya `.txt` olarak verilir.
+  - Satın alma öğeleri yeniden kullanılabilir tema blokları olarak `blocks/` altında yazılır.
 - Instagram tarayıcısı:
   - sayfa videosuz da satmalı
   - sahnede `svh` kullanılır
@@ -236,6 +240,9 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Kendini tasarımda en üst seviyeye getir, tüm dosyaları öğren" (daha önce de söylemiş) | Her oturum bu dosyayla başlar. Öğrenilen her şey depoya yazılır. |
 | 17 Eki | Fayda listesi, sayaç, stok, "dün satılan" atılmasın | Tanıdık kalıp korunur, inceltilir, gerçek veriye bağlanır. |
 | 17 Eki | Öncelik online ödeme (%5), kapıda ikinci | Kart varsayılan; bütün CTA'lar seçimi taşır. |
+| 17 Eki | "Hiçbir Shopify temasını kopyalamanı istemiyorum. Şu an ChatGPT ile yaptığım bir sürüm bağlı; tüm kısımlarını senin yapmanı istiyorum, benzersiz olmalı." | **Sıfırdan Ayluna teması.** Horizon/Dawn temel alınmaz, hazır temadan kod alınmaz. Shopify'ın zorunlu dosya yapısı kullanılır (layout, templates, sections, snippets, config, locales); kod ve tasarım tamamen özgün. |
+| 17 Eki | Üstü çizili ₺1.999 son 10 günde ayluna.shop'ta uygulandı | Üstü çizili fiyat kalır. Kampanya başlangıç ve bitiş tarihi sayfaya yazılır. Fiyat geçmişi kanıtı saklanır. 2'li pakette "2 ayrı almaya göre ₺649,99 daha az". |
+| 17 Eki | Aylık zam: "henüz karar vermedim" | Sayaç tasarımda durur, yayında kapalı başlar (ayar). Karar gelince açılır ve yeni fiyat yazılır. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
@@ -255,4 +262,4 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 4. 16:00 kesimi gerçek mi?
 5. 3'lü paket olsun mu?
 6. 2'li pakette "3 taksit" satırı olsun mu?
-7. Yapı: ayrı bölüm mü, Horizon tema bloğu mu?
+7. ~~Yapı~~: karar verildi, sıfırdan özel tema.
