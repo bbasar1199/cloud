@@ -383,6 +383,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
     - 30 gün yaprağı ince bir şerit gibi kalıyor (mühür ağırlığı verilmeli)
   - Hatalar ve kural ihlalleri düzeltildi: kutu kapakları ok gibi görünüyordu, "Ge" kırpması, 48px, teslim çizelgesi aralığı. Zevk önerileri kullanıcıya soruldu.
 
+## Tuval düzeni (17 Ekim, gece)
+- Kullanıcı: "Nihai tasarımımız ve yeni ajanlardan sonra yaptığımız tasarım kalsın, diğerlerini kapat; silme."
+- Tuvalde iki sayfa var (`canvas.json` → `pages`), Sürüm 58:
+  - **Güncel:** açılış sayfası (`launch.page`). Yalnız B+ (x=0) ve C2 (x=470) yan yana.
+  - **Arşiv:** diğer 26 pano ve eski başlıklar. Hiçbiri silinmedi.
+- Yeni pano eklerken `boards` girdisine `"page": "guncel"` ya da `"arsiv"` yazılır. Sayfa yazılmazsa pano ilk sayfaya (Güncel) düşer.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
