@@ -256,6 +256,30 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - 2'lide "+6 hediye disk" (canlı sitedeki teklif)
   - teslim süreleri (mağaza politikası)
 
+## Tur 13b · Eleştirmen 9/10, son 5 madde (17 Ekim, gece)
+- Eleştirmen 26 maddeden sonra 9/10 verdi. Kalan 5 tasarım maddesi uygulandı:
+  - **Tek model kontrolü:** 1 Adet'te Kız / Erkek kartları; 2 Adet'te aynı yerde 2 Kız / Kız + Erkek / 2 Erkek (iki lamba yan yana). Paketin altındaki çipler kalktı.
+  - **Kısa Sihirli kartları:** ~150 → ~110px; ikon 36, açıklama tek satır ("Altısı hediye ›", "Şarjlı, taşınır.").
+  - **Tekrar yok:** üst güven satırı "Ücretsiz kargo · 30 gün iade · Kartla %5 indirim"; 1 Adet alt satırı "Kendine" (2 Adet "Kardeşe").
+  - **Kart logoları:** Visa (simple-icons çizimi), Mastercard (resmi iki daire), troy (marka renginde yazı; açık kaynak çizimi yok).
+  - **Yorum kartı:** alıntı ile isim arası boşluk kalktı.
+- Yorum kartına yıldız ve model etiketi eklenmedi: yorum başına puan ve model bilgisi yok, Loox'tan gelince eklenir.
+- Gerçek veri bekleyenler:
+  - puan, yorum sayısı ve dağılımı
+  - stok ve "dün aldı" sayısı
+  - videolar
+  - müşteri fotoğrafları (izin)
+  - tavan fotoğrafları
+  - kutuda ve hediye diskler, 12. disk
+  - 2'li kutu fotoğrafı
+  - boyut, pil, yaş
+  - 15–30. gün iade koşulu
+  - ödeme altyapısı ve kart markaları
+  - ticari bilgiler
+  - kampanya tarihi
+  - robotta ninninin nasıl çaldığı
+  - Bir gece görselleri (HF_TOKEN)
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
