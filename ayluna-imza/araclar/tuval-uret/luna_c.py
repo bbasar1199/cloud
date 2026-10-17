@@ -38,6 +38,21 @@ def tutamak(i, n=9):
 CSS += r"""
 /* C2 · Ay yaprakları: her bölüm bir öncekinin üstüne 28px biner (levha motifi). Ton sırası: kum, ak, gece, gece2, kum, ak, kum, ak, gece. */
 .levha{padding-bottom:60px}
+/* Teslim çizelgesi kapıda notuna yakın dursun, yaprak kenarıyla arası belirgin (yakınlık net) */
+.levha .yol{margin-top:16px}
+/* Ayluna kuralı: dokunma alanı en az 48px (B+'da lamba seçici 42px) */
+.seg-b{min-height:48px}
+/* Yapışkan çubuk yaprakların üstünde kalsın (DOM sırasına bağlı kalmasın) */
+.yapis{z-index:6}
+/* Yatay kaydırıcılarda odak halkasının alt kenarı kırpılmasın */
+.yaprak .noscroll{padding-bottom:6px!important}
+/* Ak yapraktaki krem kartta konu çipi kaybolmasın */
+.y-ak .yk2 .konu{background:#E9DCC7}
+/* Giriş hareketi yaprağın kendisinde değil içeriğinde: yaprak hep opak kalır, altından zemin ya da önceki yaprağın düz kenarı görünmez */
+@supports (animation-timeline: view()){
+  .yaprak.gir{animation:none}
+  .yaprak.gir > :not(.tutamak){animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+}
 /* Levha z-index 4 (sahnenin üstüne biner); yapraklar onun da üstüne binmeli. Eşit z-index, DOM sırası: sonraki yaprak üstte. */
 .yaprak{position:relative;z-index:5;isolation:isolate;margin-top:-28px;border-radius:28px 28px 0 0;padding-top:42px;padding-bottom:56px}
 .y-ak{background:#FFFDF9}
@@ -53,7 +68,6 @@ CSS += r"""
 .alt-bilgi.yaprak-son{position:relative;z-index:5;isolation:isolate;margin-top:-28px;padding-top:44px}
 /* Açık yapraklarda iç kartlar çizgisiz, krem dolgulu (çizgi soğuk duruyordu) */
 .y-ak .yk2,.y-ak .kart{background:#F6F1E9;border-color:transparent}
-.y-kum .yk2,.y-kum .kart{border-color:transparent}
 .y-kum .sss{border-bottom-color:rgba(26,33,66,.12)}
 .sss-liste{margin-top:14px;border-top:1.5px solid rgba(26,33,66,.12)}
 .y-kum .otuz,.y-ak .otuz{padding:0}
@@ -65,7 +79,9 @@ CSS += r"""
 .bas-yan{font-size:13px;font-weight:600;color:#5C6078;padding-bottom:3px;white-space:nowrap}
 /* Kapına ne gelir: elde fotoğrafı + kutular + içerik */
 .kutu-izgara{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;align-items:center;margin-top:16px}
-.elde{height:180px;border-radius:20px;overflow:hidden;background:#E6DAC7}
+.elde{position:relative;height:180px;border-radius:20px;overflow:hidden;background:#E6DAC7}
+.elde-not{position:absolute;left:8px;bottom:8px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(255,253,249,.92);color:#1A2142}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .elde img{width:100%;height:100%;object-fit:cover;display:block}
 .kutular{display:flex;gap:4px}
 .kutu{display:flex;flex-direction:column;align-items:center;gap:2px;width:68px;animation:kutu-gir .45s cubic-bezier(.2,.7,.2,1) both}
@@ -79,17 +95,19 @@ CSS += r"""
 .icerik b{display:inline-block;min-width:24px;font-variant-numeric:tabular-nums}
 .icerik-not{margin:8px 0 0;font-size:13px;color:#5C6078}"""
 
-KUTU_SVG = ('<svg viewBox="0 0 68 62"><path d="M10 34 2 26l7-5"></path><path d="M58 34l8-8-7-5"></path>'
+KUTU_SVG = ('<svg viewBox="0 0 68 62"><path d="M10 34 5 21"></path><path d="M58 34l5-13"></path>'
             '<rect class="on-yuz" x="10" y="34" width="48" height="26" rx="3"></rect><path d="M24 44h20"></path></svg>')
 
 KUTU = """  <!-- Kapına ne gelir (Tur 16'dan): seçime göre kaç kutu gelir, her kutuda ne var. Elde fotoğrafı boyutu gösterir.
        Brif şikâyeti "12 disk yazıyor, 6 geliyor" yüzünden "6 + 6 hediye" yazılır. Kutudaki lamba: stüdyo fotoğrafından
        yalnız arka planı temizlenmiş kesim (ürün pikselleri aynı; canvas/c-gorsel/lamba-*.png). -->
-  <section class="px yaprak y-kum gir" id="kutu">""" + tutamak(5) + """
+  <section class="px yaprak y-kum gir" id="kutu">""" + tutamak(4) + """
     <div class="bas"><h2 class="h2">Kapına ne gelir<span class="n">?</span></h2><span class="bas-yan">{{kutuSay}}</span></div>
     <div class="kutu-izgara">
-      <div class="elde"><img src="/_blob/3b0286a3c7e80c1f887b23193de25c76" alt="Elde tutulan LunaDream"></div>
+      <!-- Elde fotoğrafı yalnız Kız modelinde var; seçim yalnız Erkek ise Erkek stüdyo fotoğrafı (fotoğraf kutularla çelişmesin) -->
+      <div class="elde"><img src="{{eldeSrc}}" alt="{{eldeAlt}}" style="object-position: {{eldePos}}"><span class="elde-not">{{eldeNot}}</span></div>
       <div>
+        <span class="sr">{{kutuSr}}</span>
         <div class="kutular" aria-hidden="true"><sc-for list="{{kutular}}" as="k" hint-placeholder-count="2"><span class="kutu"><span class="kutu-ill"><img src="{{k.src}}" alt="">""" + KUTU_SVG + """</span><b>{{k.ad}}</b></span></sc-for></div>
         <ul class="icerik"><li><b>1</b> lamba</li><li><b>6</b> masal diski</li><li><b>+6</b> hediye disk</li><li><b>1</b> USB şarj kablosu</li></ul>
         <sc-if value="{{ikiliAcik}}" hint-placeholder-val="{{true}}"><p class="icerik-not">Her kutuda bunların hepsi var.</p></sc-if>
@@ -103,9 +121,11 @@ KUTU = """  <!-- Kapına ne gelir (Tur 16'dan): seçime göre kaç kutu gelir, h
 HTML = degis(HTML, '  <section class="bolum gir" id="videolar">', '  <section class="yaprak y-kum gir" id="videolar">' + tutamak(1))
 HTML = degis(HTML, '  <section id="yorumlar" class="bolum gir">', '  <section id="yorumlar" class="yaprak y-ak gir">' + tutamak(2))
 HTML = degis(HTML, '  <!-- Bir gece, beş an -->\n  <section class="gece gir">', '  <!-- Bir gece, beş an -->\n  <section class="yaprak y-gece gir">' + tutamak(3))
-HTML = degis(HTML, '  <section class="gece gir" id="diskler">', '  <section class="yaprak y-gece2 gir" id="diskler">' + tutamak(4))
-_a, _b = HTML.index('  <!-- Kutuda ne var -->'), HTML.index('  <!-- 30 gün iade -->')
-HTML = HTML[:_a] + KUTU + HTML[_b:]
+HTML = degis(HTML, '  <section class="gece gir" id="diskler">', '  <section class="yaprak y-gece2 gir" id="diskler">' + tutamak(5))
+# Sıra: Bir gece → Kapına ne gelir → Diskler. İki gece yaprağı art arda ~950px kesintisiz koyu blok yapıyordu (design-review, eleştirmen);
+# kutu ("6 masal diski + 6 hediye") diskler bölümüne de doğal geçiş.
+_d, _k, _o = HTML.index('  <!-- Diskler: tavana yansıt -->'), HTML.index('  <!-- Kutuda ne var -->'), HTML.index('  <!-- 30 gün iade -->')
+HTML = HTML[:_d] + KUTU + HTML[_d:_k] + HTML[_o:]
 HTML = degis(HTML, '  <!-- 30 gün iade -->\n  <section class="px bolum gir">', '  <!-- 30 gün iade -->\n  <section class="px yaprak y-ak gir">' + tutamak(6))
 HTML = degis(HTML, '  <!-- SSS -->\n  <section class="px bolum gir">', '  <!-- SSS -->\n  <section class="px yaprak y-kum gir">' + tutamak(7))
 HTML = degis(HTML, '<div style="margin-top: 14px; border-top: 1.5px solid #E3D8C7">', '<div class="sss-liste">')
@@ -131,10 +151,13 @@ for eski, yeni, kac in [('4279ec63f6d2d18f033818bde2521861', '8b1f621be2cb3b6133
                         ('e11f41ebd04fb544a2dcfc3fc03a9c26', '7ad3cbbe71680f4ed3027dbd056e391f', 1)]:  # video kapağı: müşteri
     JS = degis(JS, eski, yeni, kac)
 JS = degis(JS, "    return {\n      gal: gal,", """    // Kapına ne gelir: 1 Adet = seçili model; 2 Adet = iki lambanın seçimi (kutudaki lamba arka planı temizlenmiş kesim)
+    var tumErkek = S.adet === 2 ? (l1 === 'erkek' && l2 === 'erkek') : S.model === 'erkek';
     var kutular = (S.adet === 2 ? [l1, l2] : [S.model]).map(function (m) { return { src: B + (m === 'kiz' ? 'b823966c39ff35824b4d6e74757646ec' : '20f90021119e4c3bdbc930b283e3635a'), ad: m === 'kiz' ? 'Kız' : 'Erkek' }; });
     return {
       kutular: kutular, kutuSay: S.adet === 2 ? '2 kutu' : '1 kutu',
+      kutuSr: 'Kapına ' + kutular.length + ' kutu gelir: ' + kutular.map(function (k) { return k.ad; }).join(' ve ') + '.',
+      eldeSrc: tumErkek ? ERKEK : B + '8f8d1462c27c62b0bbd3066d72c92025', eldeAlt: tumErkek ? 'LunaDream Erkek (Uzay Kaşifi)' : 'Elde tutulan LunaDream Kız', eldeNot: tumErkek ? 'Erkek modeli' : 'Kız modeli, elde', eldePos: tumErkek ? '50% 62%' : '40% 50%',
       gal: gal,""")
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · C2 Ay yaprakları', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('C_H', 5820)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · C2 Ay yaprakları', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('C_H', 5854)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))

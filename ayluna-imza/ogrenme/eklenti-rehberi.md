@@ -74,3 +74,8 @@ Sonuç: Her tasarım turunda ikisi birlikte, paralel çalışır.
 - Eleştirmenin zevk önerileri kullanıcıya seçenek olarak gider.
 - design-review, Playwright MCP olmadan da yerel önizleyici ve düz Playwright betikleriyle çalıştı.
 - web-design-guidelines ve make-interfaces-feel-better kuralları ajan içinden kontrol listesi olarak kullanıldı (iç içe köşe yarıçapı, `touch-action`, scroll-snap boşluğu bunlardan geldi).
+
+## İkinci test: Tur 17, C2 (17 Ekim 2026)
+- design-review, panoda görünmeyen ama canlıda çıkacak bir hatayı ölçerek buldu. Kaydırınca giriş hareketi yaprağı yarı saydam yapıyordu; panoda `.pg{overflow:hidden}` hareketi durduruyor. Aynı turda kontrast oranlarını tek tek hesapladı (hepsi AA) ve odak sırasını saydı (76 durak).
+- Eleştirmen yine iskelet ve zevk tarafını gördü: ay tutamağı süs, levha soğuk, 30 gün zayıf. design-review bunları görmedi.
+- İş bölümü doğrulandı: teknik bulgular sorulmadan düzeltilir, zevk önerileri kullanıcıya gider.

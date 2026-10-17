@@ -197,10 +197,11 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
   - "Kimin için?"
   - Ay atlası (ana sayfa için)
   - Ayrıntı: `ogrenme/tuval-imza.md`, `ogrenme/eski-tasarimlar.md`.
-- **Denemede (Tur 16, C panosu; kullanıcı kararı bekliyor):**
-  - Kapına gelecek (seçime göre kutu sayısı ve kutu içeriği)
-  - Gece hikâyesi (dokunarak ilerleyen kareler)
-  - Ay evreli ilerleme göstergesi
+- **Denemede (Tur 17, C2 panosu; kullanıcı kararı bekliyor):**
+  - Ay yaprakları iskeleti (bölüm = üst üste binen sıcak tonlu yaprak)
+  - Kapına ne gelir? (seçime göre kutu sayısı ve içerik)
+  - Ay tutamakları (eleştirmen 4/10)
+- **Reddedilen (Tur 16):** bölümleri hikâye karelerine toplamak ("çok kısaltmışız").
 
 ## 7. Mevzuat ve dürüstlük (8 kural; kaynaklar `ogrenme/arastirma.md`)
 1. ✓ Üstü çizili önceki fiyat = indirimden önceki **10 gün** içinde ayluna.shop'ta uygulanan en düşük fiyat. Kampanya tarihleri yazılır, ispat satıcıdadır. Fiyat sabitse `compare_at_price` boş kalır. Kaynak: Resmî Gazete 1 Temmuz 2026 / 33297, yürürlük 1 Ağustos 2026.

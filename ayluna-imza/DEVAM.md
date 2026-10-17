@@ -353,6 +353,36 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - yeni oda sahnelerindeki duvar yıldızları gerçek yansımadan net olabilir; gerçek fotoğrafla karşılaştırılmalı
   - canlıda 1. kare video olursa "Sesi aç" ayrı düğme olmalı
 
+## Tur 17 · C2 "Ay yaprakları": bölümler geri, iskelet yeniden (17 Ekim, gece)
+- Kullanıcı (C hikâyesine): "Çok kısaltmışız; hâlâ soğukluk, düzensizlik var, tam yakın değil uzak değil. Alt kısım section olarak görünmeli; değişiklik bölümler, iskelet, sayfanın görünüşü üzerine olmalıydı."
+  - Kural olarak TASARIM-BILGISI §10 ve SKILL'e yazıldı.
+- **C2** (`luna_c.py` → `canvas/LunaDreamC.dc.html`, tuvalde kullanıcının taşıdığı yerde, Sürüm 57). İçerik B+ ile aynı; iskelet değişti:
+  - **Yapraklar:** her alt bölüm bir öncekinin üstüne 28px biner (levha motifi). Ton sırası: kum `#EEE3D2`, ak `#FFFDF9`, gece `#1A2142` ve `#121735`.
+  - Bölüm sınırını boşluk değil yüzey değişimi gösterir.
+  - **Ay tutamakları:** her yaprağın tepesinde, aşağı indikçe dolar; alt bilgide dolunay.
+  - Gece yapraklarının tepesinde hafif amber ışık var. Açık yapraklarda iç kartlar çizgisiz ve krem dolgulu.
+  - Sıra: Videolar, Yorumlar, Bir gece, **Kapına ne gelir?**, Diskler, 30 gün, SSS, Diğer, Alt bilgi.
+    - Kutu, iki gece yaprağının arasına alındı; yoksa ~950px kesintisiz koyu blok oluşuyordu.
+    - "Kapına ne gelir?" seçime göre 1 ya da 2 kutu gösterir. Elde fotoğrafı yalnız Kız modelinde var; seçim yalnız Erkek ise Erkek stüdyo fotoğrafı görünür.
+- **design-review:** Engel yok. Düzeltilenler:
+  - `.gir` canlıda yaprağı yarı saydam yapıyordu; artık yalnız içerik hareket ediyor.
+  - Elde fotoğrafı seçimi izlemiyordu.
+  - Fotoğrafta afiş yazısı ("Ge…") vardı; kırpıldı.
+  - İki gece yaprağı arasındaki kontrast 1,12:1 idi; sıra değişti.
+  - Çip kontrastı, kaydırıcı odak halkası, yapışkan çubuk z-index'i.
+  - Lamba seçici 48px oldu. B+'da hâlâ 42px.
+  - Panoda `.pg{overflow:hidden}` yüzünden view() hareketi hiç oynamıyor; hareket ancak canlıda denetlenebilir.
+- **Eleştirmen:** B+ 6,5/10, C2 7,5/10.
+  - En beğendiği 3 fikir:
+    1. yaprak iskeleti (9/10)
+    2. Kapına ne gelir? (8/10)
+    3. çizgisiz krem kartlar ve gece yapraklarındaki amber ışık (8/10)
+  - Beğenmedikleri:
+    - ay tutamakları (4/10; 18px'te evreler okunmuyor, ortada ikinci eksen açıyor; ya kaldır ya sola al ve 5 evre yap)
+    - levha hâlâ çizgili beyaz kartlarla en soğuk yer
+    - 30 gün yaprağı ince bir şerit gibi kalıyor (mühür ağırlığı verilmeli)
+  - Hatalar ve kural ihlalleri düzeltildi: kutu kapakları ok gibi görünüyordu, "Ge" kırpması, 48px, teslim çizelgesi aralığı. Zevk önerileri kullanıcıya soruldu.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
