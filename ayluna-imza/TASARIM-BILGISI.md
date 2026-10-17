@@ -88,8 +88,13 @@ Her oturumda `DEVAM.md`'den sonra bunu oku. Ayrıntı ve kaynaklar `ogrenme/` kl
 
 **Ürün gerçekleri:**
 - 1 lamba ₺1.699,99, 2 lamba ₺2.749,99.
-- Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, **ninnili** (kullanıcı, 17 Eki; eski "hoparlörsüz" bilgisi geçersiz). Robotta Bluetooth olup olmadığı teyit edilmedi.
-- Kutuda 6 disk + 6 hediye disk. Brif şikâyeti: "12 disk yazıyor, 6 geliyor". Bu yüzden her yerde "6 + 6 hediye" yazılır, çıplak "12 disk" yazılmaz.
+- Kız = tavşanlı, Erkek = Uzay Kaşifi robot. **İkisi de Bluetooth ile ninni çalar** (kullanıcı, 17 Eki).
+- **3 parlaklık ayarı** var. **Her yaş için uygun.** Boyut ve pil süresi sayfaya yazılmaz (kullanıcı kararı).
+- **Kampanya:** Ekim ayı boyunca (1–31 Ekim). Kart: **tüm kredi ve banka kartları** geçer.
+- **Stok satırı elle:** kullanıcı Shopify stoğunu kullanmıyor; "Stokta son X adet" satırını kendisi yazar ve açıp kapatır (şimdilik 18). "Dün X aile aldı" satırı veri olmadığı için yok.
+- **İade:** 30 gün; iade kodunu Ayluna gönderir, iade kargosu ücretsiz.
+- **Müşteri fotoğrafları** (Loox foto yorumları) sayfada kullanılabilir (kullanıcı izni, 17 Eki).
+- Kutuda 6 disk + 6 hediye disk; **her kutuda hepsi çıkar** (2'li pakette her kutuda +6 hediye). Brif şikâyeti: "12 disk yazıyor, 6 geliyor". Bu yüzden her yerde "6 + 6 hediye" yazılır, çıplak "12 disk" yazılmaz.
 - Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan gelir.
 - Uydurma sayılar kullanılmaz: "Elif K.", 2.467, 10.000+, 12.000+.
@@ -288,6 +293,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Eleştirmenin 10 vermesini engelleyen kısımlar neyse bana sormadan direkt siteye ekle" | (GERİ ALINDI, aşağıya bak.) Uygulandı, kullanıcı beğenmedi. |
 | 17 Eki | (Tur 13 uygulaması, GERİ ALINDI) | Artık geçerli değil: kutu listesi seçilen pakete bağlı; yapışkan çubuk seçimi aynen söyler; kart notu karşılaştırmayı adlandırır ("kapıda ödemeye göre"); puan yıldızları kesirli ve doğru dolar; üstü çizili fiyat ve % rozeti yalnız 10 gün kanıtı olan üründe; alıntı metni Young Serif 16 (başlık dışındaki tek serif kullanım). |
 | 17 Eki | "Eleştirmen için yaptıklarımızı geriye döndür, eski hâlini istiyorum. Model seçimi oradan yapmayalım; 2 adet seçilirse oradan ufak bir seçim kısmı çıksın, erkek mi kız mı" | **Eleştirmenin önerileri toplu uygulanmaz.** Kullanıcıya en iyi 3 fikir gösterilir, kullanıcı seçer. Tur 13 eleştirmen değişiklikleri (yıldız SVG, kart logoları, Kardeşe/Kendine, kutu listesi bağlama, disk rayı ayrımı, Bir gece krem vb.) geri alındı. **Model kartı yalnız Kız / Erkek.** 2 Adet seçiliyken paketin altında küçük seçim: "1. lamba [Kız / Erkek] · 2. lamba [Kız / Erkek]"; model kartına dokununca iki lamba da o modele döner. |
+| 17 Eki | Bilgiler: Ekim kampanyası, her kutuda hepsi, boyut/pil yazılmasın, her yaş, Bluetooth iki modelde, 3 parlaklık, tüm kartlar, stok elle (18), ücretsiz iade kodu, müşteri fotoğrafı izni, "Flow ile üretebilirsin" | Bilgiler §3'e işlendi. Flow (Google) yalnız kullanıcının tarayıcısından çalışır; bulut oturumunda tarayıcı bağlantısı yoksa görsel üretimi claude.ai sohbetinde (Claude in Chrome + Flow) yapılır ya da `HF_TOKEN` eklenir. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
