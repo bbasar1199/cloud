@@ -28,33 +28,33 @@ CSS = r""".pg{background:#F6F1E9}
 .mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#EFE6D8}
 .mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 62%}
 .msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Sihirli Özellikler: 4 kart, ürüne özgü küçük animasyonlar (yalnız transform/opacity) */
+/* Sihirli Özellikler: 48px dolu, iki tonlu ikon; animasyon ikonun içinde (yalnız transform/opacity). Kullanıcı isteği: sonsuz ama yavaş; canlıda yalnız ekrandayken oynar. */
 .sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.oz{position:relative;overflow:hidden;min-height:172px;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1.5px solid #E3D8C7;color:#1A2142}
+.oz{position:relative;min-height:136px;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:6px;background:#FFFDF9;border:1.5px solid #E3D8C7;color:#1A2142;text-decoration:none}
 .oz.koyu{background:#1A2142;border-color:#1A2142;color:#FFFDF9}
 .oz.amber{background:#F2A65A;border-color:#F2A65A;color:#1A2142}
-.oz .kutu{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#F3E9DA;color:#1A2142;position:relative;z-index:1}
-.oz.koyu .kutu{background:rgba(255,253,249,.1);color:#F2A65A}
-.oz.amber .kutu{background:rgba(26,33,66,.12)}
-.oz .kutu svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.oz b{font-size:16px;font-weight:700;line-height:1.2;position:relative;z-index:1}
-.oz span.t{font-size:13px;line-height:1.4;opacity:.8;position:relative;z-index:1}
-.hale{position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,0) 65%);animation:nefes 4.5s ease-in-out infinite}
-@keyframes nefes{0%,100%{transform:scale(.85);opacity:.55}50%{transform:scale(1.12);opacity:1}}
-.yelpaze{position:absolute;right:10px;top:12px;width:86px;height:56px}
-.yelpaze img{position:absolute;top:0;width:44px;height:44px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFDF9,0 6px 10px -6px rgba(0,0,0,.5);transform-origin:50% 120%;animation:yel 6s ease-in-out infinite alternate}
-.yelpaze img:nth-child(1){right:36px;--r:-14deg}.yelpaze img:nth-child(2){right:18px;--r:0deg;animation-delay:-2s}.yelpaze img:nth-child(3){right:0;--r:14deg;animation-delay:-4s}
+.oz b{font-size:16px;font-weight:700;line-height:1.2;margin-top:4px}
+.oz span.t{font-size:13px;line-height:1.4;opacity:.85}
+.ik{position:relative;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;overflow:visible}
+.ik svg{position:relative;z-index:1;width:30px;height:30px}
+.ik.ay{background:#2B3463}
+.ik.ay .hale{position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.7),rgba(242,166,90,0) 62%);animation:nefes 4.5s ease-in-out infinite}
+@keyframes nefes{0%,100%{transform:scale(.8);opacity:.45}50%{transform:scale(1.15);opacity:1}}
+.ik.disk{background:#F3E9DA}
+.ik.disk img{position:absolute;left:9px;top:9px;width:30px;height:30px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFDF9;transform-origin:50% 140%;animation:yel 5s ease-in-out infinite alternate}
+.ik.disk img:nth-child(1){--r:-28deg}.ik.disk img:nth-child(2){--r:0deg}.ik.disk img:nth-child(3){--r:28deg}
 @keyframes yel{from{transform:rotate(0)}to{transform:rotate(var(--r))}}
-.dalga{display:flex;align-items:flex-end;gap:4px;height:26px;margin-top:auto}
-.dalga i{display:block;width:5px;height:26px;border-radius:3px;background:#1A2142;transform-origin:50% 100%;animation:ses 1.2s ease-in-out infinite}
-.dalga i:nth-child(2){animation-delay:-.2s}.dalga i:nth-child(3){animation-delay:-.4s}.dalga i:nth-child(4){animation-delay:-.6s}.dalga i:nth-child(5){animation-delay:-.8s}
-@keyframes ses{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
-.yorunge{position:absolute;right:14px;top:14px;width:46px;height:46px;border-radius:50%;border:1px dashed rgba(26,33,66,.35);animation:don 6s linear infinite}
-.yorunge::after{content:"";position:absolute;left:50%;top:-4px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#1A2142}
+.ik.nota{background:#1A2142}
+.ik.nota .halka{position:absolute;inset:0;border-radius:14px;border:2px solid #1A2142;animation:yay 2.4s ease-out infinite}
+.ik.nota .halka:nth-child(2){animation-delay:1.2s}
+@keyframes yay{from{transform:scale(1);opacity:.7}to{transform:scale(1.55);opacity:0}}
+.ik.robot{background:#1A2142}
+.ik.robot .yor{position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(26,33,66,.45);animation:don 7s linear infinite}
+.ik.robot .yor::after{content:"";position:absolute;left:50%;top:-4px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#1A2142}
 @keyframes don{to{transform:rotate(360deg)}}
-.pil{position:relative;height:12px;margin-top:auto;border-radius:4px;border:1.5px solid rgba(255,253,249,.5);overflow:hidden}
-.pil i{position:absolute;inset:1.5px;border-radius:2px;background:#F2A65A;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
-@keyframes sarj{0%{transform:scaleX(.18)}70%,100%{transform:scaleX(1)}}
+.ik.pil{background:#2B3463}
+.ik.pil .dolum{transform-box:fill-box;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
+@keyframes sarj{0%{transform:scaleX(.15)}70%,100%{transform:scaleX(1)}}
 .hayal{display:grid;grid-template-columns:minmax(0,1fr) 120px;margin-top:10px;border-radius:20px;overflow:hidden;background:#1A2142;color:#FFFDF9}
 .hayal img{width:100%;height:100%;min-height:112px;object-fit:cover;display:block}
 /* Paket (canlı sitedeki biçim) */
@@ -138,9 +138,10 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <section class="px" id="siparis" style="padding-top: 20px">
     <!-- Puan ve sayı canlıda Loox'tan; veri yoksa gizlenir -->
-    <a href="#yorumlar" style="display: inline-flex; align-items: center; gap: 6px; min-height: 32px; font-size: 13.5px; text-decoration: none; color: #5C6078">""" + STAR + """<b style="color: #1A2142">{{rating}}</b> · {{reviews}} yorum</a>
+    <a href="#yorumlar" style="display: inline-flex; align-items: center; gap: 6px; min-height: 48px; font-size: 13.5px; text-decoration: none; color: #5C6078">""" + STAR + """<b style="color: #1A2142">{{rating}}</b> · {{reviews}} yorum</a>
     <h1 class="dev">LunaDream<span>.</span></h1>
     <p class="alt">Işığı kapattığında <em>tavanda masal</em> başlar.</p>
+    <p style="margin: 12px 0 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 24px; letter-spacing: -.02em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span style="font-size: 14px; font-weight: 600; color: #2E6B4F">kartla {{p1on}}</span></p>
 
     <div class="etiket" style="margin-top: 22px"><span>Model</span><b>{{modelName}}</b></div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
@@ -150,15 +151,17 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
 
     <!-- Sihirli Özellikler (yeri canlıdaki gibi: model seçiminden sonra) -->
-    <h2 class="h2" style="margin-top: 30px; font-size: 26px">Uyku vakti savaş değil,<br>minik bir masal<span class="n">.</span></h2>
+    <p class="ust-yazi" style="margin-top: 30px">Sihirli özellikler</p>
+    <h2 class="h2" style="font-size: 26px">Uyku vakti savaş değil,<br>minik bir masal<span class="n">.</span></h2>
     <div class="sih">
-      <div class="oz koyu"><span class="hale" aria-hidden="true"></span><span class="kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span><b>Mışıl mışıl uykular</b><span class="t">Yumuşacık ışık, huzurlu bir geçiş.</span></div>
-      <div class="oz"><span class="yelpaze" aria-hidden="true"><img src="/_blob/336d1995fe82f1e73d526c0e2697677e" alt=""><img src="/_blob/2c6f33b11e553e39fd315693c5cf692b" alt=""><img src="/_blob/6e25420625a6a34858578ba9e632cda7" alt=""></span><span class="kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><b>+6 hediye disk</b><span class="t">Her gece yeni bir masal; siparişe dahil.</span></div>
-      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz amber"><span class="kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span><span class="dalga" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div></sc-if>
-      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz amber"><span class="yorunge" aria-hidden="true"></span><span class="kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3"></path><rect x="5" y="6" width="14" height="10" rx="3"></rect><circle cx="9.5" cy="11" r="1.2"></circle><circle cx="14.5" cy="11" r="1.2"></circle><path d="M8 19l1.5-3M16 19l-1.5-3"></path></svg></span><b>Uzay Kaşifi</b><span class="t">Robot projektör yıldızları tavana saçar.</span></div></sc-if>
-      <div class="oz koyu"><span class="kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span><span class="pil" aria-hidden="true"><i></i></span></div>
+      <div class="oz koyu"><span class="ik ay" aria-hidden="true"><span class="hale"></span><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path><circle cx="18" cy="5" r="1.3" fill="#FFFDF9"></circle></svg></span><b>Mışıl mışıl uykular</b><span class="t">Yumuşacık ışık, huzurlu bir geçiş.</span></div>
+      <a class="oz" href="#diskler"><span class="ik disk" aria-hidden="true"><img src="/_blob/336d1995fe82f1e73d526c0e2697677e" alt=""><img src="/_blob/2c6f33b11e553e39fd315693c5cf692b" alt=""><img src="/_blob/6e25420625a6a34858578ba9e632cda7" alt=""></span><b>6 + 6 masal</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
+      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz amber"><span class="ik nota" aria-hidden="true"><span class="halka"></span><span class="halka"></span><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11" fill="none" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path><circle cx="6.5" cy="17" r="2.8" fill="#F2A65A"></circle><circle cx="16.5" cy="15" r="2.8" fill="#FFFDF9"></circle></svg></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, lambadan çalsın.</span></div></sc-if>
+      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz amber"><span class="ik robot" aria-hidden="true"><span class="yor"></span><svg viewBox="0 0 24 24"><path d="M12 2.5v3" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path><rect x="4.5" y="5.5" width="15" height="11" rx="3.5" fill="#FFFDF9"></rect><circle cx="9.5" cy="11" r="1.6" fill="#1A2142"></circle><circle cx="14.5" cy="11" r="1.6" fill="#1A2142"></circle><path d="M8 20l1.5-3.5M16 20l-1.5-3.5" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></path></svg></span><b>Uzay Kaşifi</b><span class="t">Robot projektör, tavanda uzay.</span></div></sc-if>
+      <div class="oz koyu"><span class="ik pil" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2.5" fill="none" stroke="#FFFDF9" stroke-width="1.8"></rect><rect class="dolum" x="4.5" y="9" width="12" height="6" rx="1.2" fill="#F2A65A"></rect><path d="M21 10.5v3" stroke="#FFFDF9" stroke-width="2" stroke-linecap="round"></path></svg></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></div>
     </div>
-    <div class="hayal"><div style="padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px"><b style="font-size: 16px; line-height: 1.3">Çocuğunun hayalleri artık odasında.</b><span style="font-size: 13px; color: #B9BED6">Işığı yak, o gülümsemeyi izle.</span></div><img src="/_blob/652e1893a0ae33a24ee0e3d53edab757" alt="LunaDream ile çocuk (müşteri paylaşımı)"></div>
+    <div class="hayal"><div style="padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px"><b style="font-size: 16px; line-height: 1.3">Çocuğunun hayalleri artık odasında.</b><span style="font-size: 13px; color: #B9BED6">Işığı yak, o gülümsemeyi izle.</span></div><img src="/_blob/b9e869a37734e184ce3a88695b4ec64a" alt="Müşteri fotoğrafı"></div>
+    <!-- Müşteri fotoğrafı: paylaşım izni teyit edilecek -->
 
     <div class="etiket" style="margin-top: 28px"><span>Paket</span><span style="font-weight: 600">Kampanya · [tarih aralığı]</span></div>
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 14px">
@@ -212,7 +215,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Diskler: tavana yansıt -->
-  <section class="gece" style="margin-top: 52px">
+  <section class="gece" id="diskler" style="margin-top: 52px">
     <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 15px; color: #B9BED6">Diski seç, tavanda gör.</p></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
@@ -272,7 +275,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
   </footer>
 
-  <!-- Yapışkan çubuk: canlıda ana butonlar ekrandan çıkınca belirir; padding-bottom: env(safe-area-inset-bottom) -->
+  <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #EFE6D8"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
     <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 17px">{{onPrice}}</b><span style="font-size: 12px; color: #F2A65A">kartla · {{adetName}}</span></span>
@@ -313,12 +316,12 @@ JS = """class Component extends DCLogic {
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
     var DAY = B + '05d7f0466966800b2be9e851b9ada476';
     var moments = [
-      { t: '20:00', title: 'Işığı yak', text: 'Sıcak, göz yormayan ay ışığı.', src: B + '4279ec63f6d2d18f033818bde2521861', alt: 'LunaDream sıcak ışıkta', pos: '50% 40%' },
-      { t: '20:30', title: 'Diski tak', text: 'Kubbeyi aç, bu gecenin masalını seç.', src: B + 'a08519c97197df401382b43ca8425d43', alt: 'Kubbesi açık LunaDream', pos: '50% 50%' },
-      kiz ? { t: '20:45', title: 'Ninniyi çal', text: 'Telefondan bağla, lambadan çalsın.', src: B + '8409b88186ef148c62a07a0bd6f2a19e', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
-          : { t: '20:45', title: 'Robotu tavana çevir', text: 'Uzay Kaşifi yıldızları tavana saçar.', src: B + '966c145d86bf4b972aa27d983118b8f7', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
-      { t: '21:00', title: 'Tavanda masal', text: 'Yıldızlar döner, gözler kapanır.', src: B + 'aa906021e8f134fc2cb53a35d7d0f47e', alt: 'Tavanda masal yansıması', pos: '50% 40%' },
-      { t: '07:30', title: 'Şarja tak', text: 'Akşam yine hazır.', src: DAY, alt: 'Gündüz komodinde LunaDream', pos: '62% 70%' }
+      { t: '20:00', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', src: B + '4279ec63f6d2d18f033818bde2521861', alt: 'LunaDream sıcak ışıkta', pos: '50% 40%' },
+      { t: '20:30', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', src: B + 'a08519c97197df401382b43ca8425d43', alt: 'Kubbesi açık LunaDream', pos: '50% 50%' },
+      kiz ? { t: '20:45', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', src: B + '8409b88186ef148c62a07a0bd6f2a19e', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
+          : { t: '20:45', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', src: B + '966c145d86bf4b972aa27d983118b8f7', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
+      { t: '21:00', title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', src: B + 'aa906021e8f134fc2cb53a35d7d0f47e', alt: 'Tavanda masal yansıması', pos: '50% 40%' },
+      { t: '07:30', title: 'Sabah şarja', text: 'Gün boyu dolar, akşam hazır.', src: DAY, alt: 'Gündüz komodinde LunaDream', pos: '62% 70%' }
     ];
     var REV = [
       { tags: ['Uyku'], name: 'Burak G.', q: 'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.' },
@@ -329,7 +332,7 @@ JS = """class Component extends DCLogic {
     ];
     var RENK = [['#1A2142', '#FFFDF9'], ['#FFFDF9', '#1A2142'], ['#F2A65A', '#1A2142']];
     var topics = ['Tümü', 'Uyku', 'Hediye', 'Kalite'].map(function (t) { var on = S.topic === t; return { n: t, cls: on ? 'cip on' : 'cip', on: on ? 'true' : 'false', pick: function () { self.setState({ topic: t }); } }; });
-    var revs = REV.filter(function (r) { return S.topic === 'Tümü' || r.tags.indexOf(S.topic) > -1; }).map(function (r, i) { var c = RENK[i % 3]; return { q: r.q, name: r.name, tags: r.tags.join(' · '), bg: c[0], fg: c[1] }; });
+    var revs = REV.filter(function (r) { return S.topic === 'Tümü' || r.tags.indexOf(S.topic) > -1; }).slice(0, 3).map(function (r, i) { var c = RENK[i % 3]; return { q: r.q, name: r.name, tags: r.tags.join(' · '), bg: c[0], fg: c[1] }; });
     var DISCS = [
       { n: 'Ay ve yıldız', id: '63f8557bf1f7867885fdbdedeb19c5ed' }, { n: 'Okyanus', id: '336d1995fe82f1e73d526c0e2697677e' },
       { n: 'Uzay', id: '2c6f33b11e553e39fd315693c5cf692b' }, { n: 'Deniz kızı', id: '6e25420625a6a34858578ba9e632cda7' },
@@ -347,8 +350,13 @@ JS = """class Component extends DCLogic {
       { n: 'Ayluna Çocuk Gece Feneri', p: 1599, c: 0, id: '1b84557bbf4571b164475234e4266b82' },
       { n: 'Galaxy USB Projektör', p: 1599, c: 1999, id: '7055567d8e0fcaae38df5a577f509656' },
       { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: 'abe882f12bc58627f99b18a6e9aae0df' },
+      { n: 'Aroma Terapi Nemlendirici', p: 1499, c: 1999, id: '1942d96f59772d783f5fca6259071786' },
+      { n: 'Eğitici Akıllı Çizim Tahtası', p: 1199, c: 1999, id: 'e3cc38b54acdddf55b1658d706382e82' },
       { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: '94179bf5fda7b68f949842832e376fe6' },
-      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '408afb48de0f2b2be66d095849fedda8' }
+      { n: 'Sunset Lamba', p: 699, c: 999, id: '9bd9f9b4f1a38c4163064ce1c6117bbf' },
+      { n: 'Dokunmatik Ambiyans Lamba', p: 1299.99, c: 0, id: '7ada3d5cdd7a8fa792622a30dc3f761b' },
+      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '408afb48de0f2b2be66d095849fedda8' },
+      { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: '233784939af80bdc12f69eca3b2e25b4' }
     ];
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
@@ -364,6 +372,7 @@ JS = """class Component extends DCLogic {
       gal: gal, gNo: S.g + 1, gCount: G.length, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KIZ : ERKEK,
       kiz: kiz, erkek: !kiz, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       onLabel: 'Güvenli Ödeme İle Al · ' + TL(online, true), onPrice: TL(online, true),
+      p1: TL(P1, true), c1: TL(C1, true), p1on: TL(Math.round(P1 * 0.95 * 100) / 100, true),
       onNote: 'Kartla %5 indirim · kapıda ödemeye göre ' + TL(kapida - online, true) + ' az',
       kpNote: 'Kapıda ödeme ücreti ₺80 · toplam ' + TL(kapida, true),
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,

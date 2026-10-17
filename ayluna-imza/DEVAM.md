@@ -74,8 +74,21 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Üretim betikleri `araclar/tuval-uret/` altında. `python3 yonler.py`, ardından `python3 bplus.py`.
 - Uyarı: galerideki "Temalar" posterinde unicorn diski görünüyor (kutudan çıkmıyorsa 2 şikâyet var).
 
+## Tur 6 · B+ seçildi, tam sayfa (17 Ekim, gece)
+- Kullanıcı: "B+ ile devam et, ama emoji benefit olmalı; önceden animasyonlu bir benefit yapmıştık".
+  - Bu blok, "Ayluna Yeni Tasarım" tuvalinin I yönündeki "Sihirli özellikler" (YonI.dc.html).
+- Tam sayfa: `canvas/LunaDreamBPlus.dc.html` (üretim: `araclar/tuval-uret/luna_bplus.py`). Tuvalde B+'nın altında (x=1880, y=2200).
+- Sihirli Özellikler:
+  - 2×2 kart, animasyon ikonun içinde.
+  - Kartlar: Mışıl mışıl uykular · 6 + 6 masal (disklere götürür) · Bluetooth ninni (Kız) / Uzay Kaşifi (Erkek) · Kablosuz kullanım.
+  - Uydurma "+10.000 Mutlu Anne" ve teyitsiz "21 ışık modu" konmadı.
+- Eleştirmenin 3 iyileştirmesi uygulandı:
+  - fiyat ilk ekranda
+  - animasyon ikonun içinde
+  - tekrar budandı ("Bir gece" yeni cümleler, 3 yorum)
+
 ## Sıradaki işler (17 Ekim, güncel)
-1. Kullanıcı Tur 5'ten yön seçsin (öneri B+). Seçilen yönle tam ürün sayfası, sonra sıfırdan tema.
+1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
 2. Fiyat ve mevzuat soruları: son 10 günün fiyatı, Kasım zammı, iade metni (`TASARIM-BILGISI.md` §11).
 3. Kullanıcıdan teyitler: ölçü, pil, yaş, teslim, varyant yapısı, kapıda ödeme seçicisi.

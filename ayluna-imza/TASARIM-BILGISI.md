@@ -126,6 +126,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
   - İmza an yeniden seçilecek ("Işığı kapat" çıkarıldı, 17 Ekim).
   - Yeni sonsuz döngü eklenmez. `prefers-reduced-motion` desteklenir.
+  - **İstisna (kullanıcı isteği, 17 Ekim):** "Sihirli Özellikler" ikonlarındaki yavaş döngüler (hale 4,5 sn, yelpaze 5 sn, nota halkası 2,4 sn, yörünge 7 sn, pil 3,8 sn). Canlıda yalnız ekrandayken oynar (IntersectionObserver).
 - **İkon:** ince çizgili SVG, emoji yok.
 
 **Main'in bilinen kusurları** (taşırken düzelt):
