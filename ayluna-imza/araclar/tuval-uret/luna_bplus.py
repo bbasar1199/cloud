@@ -15,7 +15,7 @@ CSS = r""".pg{background:#F6F1E9}
 .sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
 .sahne .kare-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 78%,rgba(12,16,39,.97) 86.5%,#0C1027 89%);pointer-events:none}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
-.yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
+.yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
 .seritler{position:absolute;left:16px;right:16px;bottom:42px;z-index:3;display:flex;align-items:flex-end;gap:8px}
 .kare{flex:none;width:48px;height:48px;padding:0;border-radius:12px;border:2px solid rgba(255,253,249,.28);background:#0C1027;overflow:hidden;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
@@ -42,12 +42,33 @@ CSS = r""".pg{background:#F6F1E9}
 }
 .guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#2E6B4F}
 .guven-ust span+span::before{content:"·";margin-right:10px;color:#9AA79F}
-.ikili{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;font-weight:600;color:#5C6078}
-.cip2{display:inline-flex;align-items:center;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.ikili3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.cip2{display:inline-flex;align-items:center;min-height:48px;padding:0 6px;justify-content:center;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .cip2.on{border-color:#1A2142;box-shadow:inset 0 0 0 1px #1A2142}
+.yap-foto{position:relative;flex:none;width:50px;height:46px}
+.yap-foto img{position:absolute;left:0;top:3px;width:32px;height:40px;border-radius:10px;object-fit:cover;object-position:50% 60%;background:#EFE6D8;box-shadow:0 0 0 2px #1A2142}
+.yap-foto img.iki{left:16px}
+.kartlar{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:6px 0 0;font-size:12px;color:#5C6078}
+.kl{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:22px;padding:0 5px;border-radius:5px;background:#FFFDF9;border:1px solid #E3D8C7;font-size:12px;font-weight:800;line-height:1}
+.kl.visa{color:#1A1F71;font-style:italic;letter-spacing:.02em}
+.kl.troy{color:#00A0A0;font-weight:700}
+.kl.mc i{display:block;width:12px;height:12px;border-radius:50%;background:#EB001B}
+.kl.mc i+i{margin-left:-5px;background:#F79E1B;opacity:.9}
+.kp-link{display:flex;justify-content:center;align-items:center;min-height:48px;margin-top:6px;font-size:14px;color:#C9CDE0;text-decoration:underline;text-underline-offset:3px}
+.dag{display:flex;flex-direction:column;gap:2px;margin-top:12px}
+.dag-s{display:grid;grid-template-columns:12px minmax(0,1fr) 28px;gap:8px;align-items:center;font-size:13px;line-height:18px;color:#5C6078}
+.dag-c{display:block;height:4px;border-radius:999px;background:#E3D8C7;overflow:hidden}
+.dag-c i{display:block;height:100%;border-radius:999px;background:#E59A4C}
+.ray{display:flex;flex-direction:column;margin-top:14px}
+.ray-et{font-size:12px;font-weight:600;color:#B9BED6;margin-bottom:6px}
+.ray-d{display:flex;gap:4px}
+.dbos{flex:none;width:46px;height:46px;margin:5px;border-radius:50%;border:1.5px dashed rgba(185,190,214,.6)}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
-.yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D9CDB9;line-height:1}
-.yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
+.yildiz2{position:relative;display:inline-block;width:78px;height:14px;line-height:0;vertical-align:-2px}
+.yildiz2 .bos,.yildiz2 .dolu{position:absolute;left:0;top:0;display:flex;gap:2px;height:14px;overflow:hidden}
+.yildiz2 svg{flex:none;width:14px;height:14px}
+.yildiz2 .bos svg{fill:#D9CDB9}
+.yildiz2 .dolu svg{fill:#E59A4C}
 .dev{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
 .dev span,.h2 span.n{color:#E59A4C}
 .mkart{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
@@ -93,15 +114,15 @@ CSS = r""".pg{background:#F6F1E9}
 .lamba.iki{left:26px}
 .pk.on .lamba{border-color:#1A2142}
 .pk-ad{font-size:17px;font-weight:700;letter-spacing:-.02em}
-.pk-sub{font-size:13px;opacity:.75;margin-top:2px}
+.pk-sub{font-size:13px;opacity:.75;margin-top:2px;text-wrap:balance}
 .pk-fiyat{font-size:18px;font-weight:700;letter-spacing:-.02em}
 .pk.on .pk-fiyat{color:#F2A65A}
 .pk-eski{font-size:13px;opacity:.7;margin-top:3px}
 .pk-hediye{display:block;padding:9px 14px;font-size:14px;font-weight:700;background:#F3E9DA;color:#8A4A12;border-radius:0 0 18.5px 18.5px}
 .pk.on .pk-hediye{background:#F2A65A;color:#1A2142}
 .kurdele{position:absolute;right:14px;top:-13px;z-index:1;padding:3px 12px;border-radius:999px;background:#F2A65A;color:#1A2142;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #F6F1E9}
-.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
-.btn-on:active{transform:translateY(4px)}
+.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 3px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
+.btn-on:active{transform:translateY(2px)}
 .btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .bnot{margin:7px 0 0;text-align:center;font-size:13px;color:#5C6078}
 .yol{position:relative;list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -119,20 +140,20 @@ CSS = r""".pg{background:#F6F1E9}
 .gece{background:#1A2142;color:#EDE5D8;padding:32px 0 34px;margin-top:36px;border-radius:28px}
 .an{position:relative;flex:0 0 240px;height:320px;border-radius:24px;overflow:hidden;background:#0C1027;scroll-snap-align:start}
 .an img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.an .saat{position:absolute;left:16px;top:14px;font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
+.an .saat{position:absolute;left:16px;top:14px;font-family:"Young Serif",Georgia,serif;font-size:32px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
 .an .alt2{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px}
 .cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cip.on{background:#1A2142;color:#FFFDF9}
 .tavan{position:relative;height:280px;overflow:hidden;background:radial-gradient(70% 70% at 50% 45%,#232B55 0%,rgba(26,33,66,0) 100%)}
-.yansima{position:absolute;left:50%;top:42%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.92);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.yansima{position:absolute;left:50%;top:42%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.96);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
 .yansima.on{opacity:.92;transform:none}
 .yansima img{width:100%;height:100%;object-fit:cover;display:block}
-.dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:64px;min-height:60px;flex:none}
-.dbtn img{width:54px;height:54px;border-radius:50%;object-fit:cover;outline:2px solid transparent;outline-offset:3px;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:56px;min-height:56px;flex:none}
+.dbtn img{width:46px;height:46px;border-radius:50%;object-fit:cover;outline:2px solid transparent;outline-offset:3px;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
 .dbtn.on{color:#FFFDF9;font-weight:600}
 .dbtn.on img{outline-color:#F2A65A;transform:translateY(-4px)}
 .otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:4px 0;color:#1A2142}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:40px;line-height:.85;letter-spacing:-.03em;color:#E59A4C}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:.85;letter-spacing:-.03em;color:#E59A4C}
 .sss{border-bottom:1.5px solid #E3D8C7}
 .sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
@@ -162,14 +183,15 @@ CSS = r""".pg{background:#F6F1E9}
 .mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#EDE3D3;cursor:pointer}
 .mf img{width:100%;height:100%;object-fit:cover;display:block}
 .yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
-.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#E59A4C;height:20px}
+.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:22px;line-height:.6;color:#E59A4C;height:20px}
 .yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
 .yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2E6B4F}
 .yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F3E9DA;color:#5C5245}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}"""
 
-STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
+YP = '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"></path></svg>'
+STAR = '<span class="yildiz2" aria-hidden="true"><span class="bos">' + YP * 5 + '</span><span class="dolu" style="width: {{starW}}px">' + YP * 5 + '</span></span>'
 LOGO = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg>'
 
 HTML = """<div class="pg" style="padding-bottom: 0">
@@ -180,7 +202,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px">""" + LOGO + """<span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
     <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
-    <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
+    <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s; opacity: {{t.op}}"><img src="{{t.src}}" alt=""></span></sc-for>
     <div class="seritler">
       <div class="noscroll" style="display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; padding: 2px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent)">
         <sc-for list="{{gal}}" as="f" hint-placeholder-count="7"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""></button></sc-for>
@@ -202,10 +224,11 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
     <div class="sih">
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">Loş, sıcak gece ışığı.</span></div>
+      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Yumuşak ay ışığı</b><span class="t">Loş, sıcak ton.</span></div>
       <a class="oz" href="#diskler"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span class="yelpaze"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""></span></span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
-      <sc-if value="{{kiz}}" hint-placeholder-val="{{true}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, çalsın.</span></div></sc-if>
-      <sc-if value="{{erkek}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninnili robot</b><span class="t">Ninni çalar.</span></div></sc-if>
+      <sc-if value="{{kizTek}}" hint-placeholder-val="{{true}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan çal.</span></div></sc-if>
+      <sc-if value="{{erkekTek}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninnili robot</b><span class="t">Ninni çalar.</span></div></sc-if>
+      <sc-if value="{{karisik}}" hint-placeholder-val="{{false}}"><div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Ninni iki modelde</b><span class="t">Kızda Bluetooth ile.</span></div></sc-if>
       <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarjlı, her odaya taşı.</span></div>
     </div>
 
@@ -220,7 +243,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 14px">
       <sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
         <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}">
-          <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if>
+          <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Kardeşe</span></sc-if>
           <span class="pk-ust">
             <span class="pk-foto"><span class="lamba"><img src="{{b.src1}}" alt=""></span><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="lamba iki"><img src="{{b.src2}}" alt=""></span></sc-if></span>
             <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b class="pk-ad">{{b.t}}</b><span class="pk-sub">{{b.sub}}</span></span>
@@ -231,13 +254,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       </sc-for>
     </div>
 
-    <sc-if value="{{ikiliAcik}}" hint-placeholder-val="{{true}}"><div class="ikili" role="group" aria-label="İki lambanın modeli"><span>İki lamba:</span><sc-for list="{{ikiliSec}}" as="o" hint-placeholder-count="2"><button class="{{o.cls}}" onClick="{{o.pick}}" aria-pressed="{{o.on}}">{{o.n}}</button></sc-for></div></sc-if>
+    <sc-if value="{{ikiliAcik}}" hint-placeholder-val="{{true}}"><div class="ikili3" role="group" aria-label="İki lambanın modeli"><sc-for list="{{ikiliSec}}" as="o" hint-placeholder-count="3"><button class="{{o.cls}}" onClick="{{o.pick}}" aria-pressed="{{o.on}}">{{o.n}}</button></sc-for></div></sc-if>
     <!-- Stok: Shopify envanteri eşiğin (tema ayarı) altındaysa görünür. Dün: Shopify Flow her gece metafield'e yazar; sayı yoksa ya da 3'ten azsa satır gizli. -->
     <ul class="canli">
       <li><i style="background: #E59A4C"></i><span>Stokta son <b>[X]</b> adet · dün <b>[X]</b> aile aldı</span></li>
     </ul>
     <button class="btn-on" type="button">{{onLabel}}</button>
-    <p class="bnot">{{onNote}}</p>
+    <p class="bnot" style="color: #2E6B4F; font-weight: 600">{{onNote}}</p>
+    <!-- Kabul edilen kart markaları ve ödeme altyapısı teyit edilecek; Amex/Diners/Discover/JCB konmaz -->
+    <p class="kartlar"><span class="kl visa">VISA</span><span class="kl mc" aria-label="Mastercard"><i></i><i></i></span><span class="kl troy">troy</span><span>3D Secure · [ödeme altyapısı]</span></p>
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar (uygulama korunur; ek ürünler ve ₺80 ücret orada). -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <p class="bnot">{{kpNote}}</p>
@@ -255,7 +280,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
   <section id="yorumlar" class="bolum gir">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <!-- Puan dağılımı Loox'tan; veri yoksa gizli -->
+    <div class="dag px" aria-label="Puan dağılımı"><sc-for list="{{dag}}" as="d" hint-placeholder-count="5"><span class="dag-s"><span>{{d.y}}</span><span class="dag-c"><i style="width: {{d.w}}%"></i></span><span>{{d.n}}</span></span></sc-for></div>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
       <sc-for list="{{mfoto}}" as="f" hint-placeholder-count="5"><button class="mf" type="button" aria-label="Müşteri fotoğrafını büyüt"><img src="{{f.src}}" alt="{{f.alt}}"></button></sc-for>
     </div>
@@ -264,21 +291,21 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 2px">
       <sc-for list="{{revs}}" as="r" hint-placeholder-count="3">
-        <figure class="yk2"><span class="konu">{{r.tags}}</span><span class="tirnak" aria-hidden="true">“</span><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Satın aldı</span></figcaption></figure>
+        <figure class="yk2"><span class="tirnak" aria-hidden="true">“</span><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Satın aldı</span></figcaption></figure>
       </sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
     <div class="px"><a href="#" class="cip" style="display: flex; justify-content: center; margin-top: 14px">{{reviews}} yorumun hepsini oku</a>
-    <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır; hepsi yayımlanır.</p></div>
+    <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yalnız sipariş verenlerin yorumları.</p></div>
   </section>
 
   <!-- Bir gece, beş an -->
-  <section class="gece gir">
-    <div class="px"><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
-    <div class="noscroll" style="display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 18px 16px 0">
+  <section class="bolum gir">
+    <div class="px"><h2 class="h2">Bir gece, beş an<span class="n">.</span></h2></div>
+    <div class="noscroll" style="display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 0">
       <!-- Canlıda: kısa sessiz döngü videolar (onizleme/v/), yalnız ekrandayken oynar -->
       <sc-for list="{{moments}}" as="a" hint-placeholder-count="5">
-        <article class="an"><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12,16,39,.88) 0%, rgba(12,16,39,0) 55%)"></span><span class="saat">{{a.t}}</span><span class="alt2"><b style="font-size: 16px; color: #FFFDF9">{{a.title}}</b><span style="font-size: 14px; color: #B9BED6">{{a.text}}</span></span></article>
+        <article class="an"><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12,16,39,.88) 0%, rgba(12,16,39,0) 55%)"></span><span class="saat">{{a.t}}</span><span class="alt2"><b style="font-size: 16px; color: #FFFDF9">{{a.title}}</b></span></article>
       </sc-for>
       <span aria-hidden="true" style="flex: 0 0 4px"></span>
     </div>
@@ -286,15 +313,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Diskler: tavana yansıt -->
   <section class="gece gir" id="diskler">
-    <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
+    <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda, altısı hediye<span class="n">.</span></h2></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
-      <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>
-      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Disk</span><b class="ser" style="font-size: 18px; font-weight: 400">{{discName}}</b></span>
+      <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı: {{discName}}]</span>
+      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; color: #FFFDF9"><img src="{{discSrc}}" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,253,249,.35)"><b class="ser" style="font-size: 17px; font-weight: 400">{{discName}}</b></span>
     </div></div>
-    <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 14px 16px 0">
-      <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for>
-    </div>
+    <!-- Hangi 6 disk kutuda, hangi 6 hediye: teyit edilecek (robotta da 6 + 6 mı?) -->
+    <div class="px ray"><span class="ray-et">Kutuda [teyit]</span><div class="ray-d"><sc-for list="{{discsA}}" as="d" hint-placeholder-count="6"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for></div>
+    <span class="ray-et" style="margin-top: 10px">Hediye [teyit]</span><div class="ray-d"><sc-for list="{{discsB}}" as="d" hint-placeholder-count="5"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for><span class="dbos" aria-label="[12. disk]"></span></div></div>
     <!-- Teyit: hangi 6 disk kutuda, hangi 6 hediye; hediyeler işaretlenecek -->
   </section>
 
@@ -302,9 +329,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <section class="px bolum gir">
     <h2 class="h2">Kutudan ne çıkıyor<span class="n">.</span></h2>
     <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 16px">
-      <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #EDE3D3"><img src="/_blob/54f170c0696110348e309338400f7cc7" alt="Elde tutulan LunaDream" style="width: 100%; height: 100%; object-fit: cover"></div>
+      <div style="position: relative; height: 200px; border-radius: 20px; overflow: hidden; background: #EDE3D3"><sc-if value="{{kutuIki}}" hint-placeholder-val="{{false}}"><span style="position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr"><img src="{{kutu1}}" alt="" style="width: 100%; height: 100%; object-fit: cover"><img src="{{kutu2}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></span><span style="position: absolute; left: 8px; bottom: 8px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 2px 8px; border-radius: 999px">[2'li kutu fotoğrafı]</span></sc-if><sc-if value="{{tekKutu}}" hint-placeholder-val="{{true}}"><img src="/_blob/54f170c0696110348e309338400f7cc7" alt="Elde tutulan LunaDream" style="width: 100%; height: 100%; object-fit: cover"></sc-if></div>
       <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
-        <li><b>1</b> {{boxModel}}</li><li><b>6</b> masal diski</li><li><b>+6</b> hediye disk</li><li><b>1</b> USB şarj kablosu</li>
+        <sc-for list="{{kutu}}" as="k" hint-placeholder-count="4"><li><b>{{k.a}}</b> {{k.t}}</li></sc-for>
         <li style="color: #5C6078; font-size: 13px; padding-top: 6px; border-top: 1px dashed #D9CDB9">Boyut [X] cm · Pil [X] saat</li>
       </ul>
     </div>
@@ -338,6 +365,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div class="px">
       <h2 class="h2" style="color: #FFFDF9">İlk geceyi<br>birlikte izleyin<span class="n">.</span></h2>
       <button class="btn-on" type="button" style="margin-top: 16px">{{onLabel}}</button>
+      <a href="#siparis" class="kp-link">Kapıda ödemek istersen · {{kapidaTL}}</a>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
       <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F3E9DA"><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
@@ -347,9 +375,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
-    <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #EFE6D8"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
+    <span class="yap-foto"><img src="{{yap1}}" alt=""><sc-if value="{{yapIki}}" hint-placeholder-val="{{true}}"><img class="iki" src="{{yap2}}" alt=""></sc-if></span>
     <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
-    <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 4px 0 #C97F38">Satın al</button>
+    <button class="btn-on" type="button" style="flex: 0 0 140px; width: 140px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 #C97F38">Satın al</button>
   </div>
 </div>
 """
@@ -378,22 +406,25 @@ JS = """class Component extends DCLogic {
     var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kare on' : 'kare', pick: function () { self.setState({ g: i }); } }; });
     // Süzülen hediye diskleri: fotoğrafın kenarında, yavaş (7 sn), yalnız transform
     var tiles = [
-      { id: 'a24f13e032569f76d64b9b0fbe8d74f7', x: -16, y: 330, s: 46, r: -12, d: 0 },
-      { id: 'b088d2c82561b76f6db997fbc3944059', x: 364, y: 340, s: 38, r: 8, d: -2.3 }
-    ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d }; });
-    var kiz = S.model === 'kiz';
+      { id: 'a24f13e032569f76d64b9b0fbe8d74f7', x: 8, y: 330, s: 46, r: -12, d: 0 },
+      { id: 'b088d2c82561b76f6db997fbc3944059', x: 344, y: 340, s: 38, r: 8, d: -2.3 }
+    ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d, op: G[S.g].oda ? 1 : 0 }; });
+    var kiz = S.model === 'kiz', karisik = S.adet === 2 && S.ikili === 'karisik';
     var KIZ = B + 'e02351b3be4a1c555c5d760d0bbda723', ERKEK = B + '0033dfea6282c5bc479c385213661c00';
     var models = [
       { id: 'kiz', n: 'Kız', sub: 'Tavşanlı · ninnili', src: KIZ }, { id: 'erkek', n: 'Erkek', sub: 'Robot · ninnili', src: ERKEK }
-    ].map(function (m) { var on = S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, on: on ? 'true' : 'false', cls: on ? 'mkart on' : 'mkart', pick: function () { self.setState({ model: m.id }); } }; });
+    ].map(function (m) { var on = karisik || S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, on: on ? 'true' : 'false', cls: on ? 'mkart on' : 'mkart', pick: function () { self.setState({ model: m.id, ikili: 'ayni' }); } }; });
     // Paket: canlı sitedeki biçim. 1 Adet'te ₺1.999 (son 10 günde uygulandı, kullanıcı teyidi). 2 Adet'te birim fiyat.
     var P1 = 1699.99, P2 = 2749.99, C1 = 1999;
     // 2'li paket: iki lamba aynı model ya da 1 Kız + 1 Erkek (canlıda sepete iki ayrı varyant eklenir)
-    var ikili = S.ikili === 'karisik' ? [KIZ, ERKEK] : (kiz ? [KIZ, KIZ] : [ERKEK, ERKEK]), ikiliSrc = ikili;
-    var ikiliSec = [{ id: 'ayni', n: kiz ? '2 Kız' : '2 Erkek' }, { id: 'karisik', n: '1 Kız + 1 Erkek' }].map(function (o) { var on = (S.ikili || 'ayni') === o.id; return { n: o.n, on: on ? 'true' : 'false', cls: on ? 'cip2 on' : 'cip2', pick: function () { self.setState({ ikili: o.id }); } }; });
+    var ikiliSrc = karisik ? [KIZ, ERKEK] : (kiz ? [KIZ, KIZ] : [ERKEK, ERKEK]);
+    var ikiliSec = [{ id: '2kiz', n: '2 Kız' }, { id: 'karisik', n: 'Kız + Erkek' }, { id: '2erkek', n: '2 Erkek' }].map(function (o) {
+      var on = o.id === 'karisik' ? karisik : (!karisik && S.model === (o.id === '2kiz' ? 'kiz' : 'erkek'));
+      return { n: o.n, on: on ? 'true' : 'false', cls: on ? 'cip2 on' : 'cip2', pick: function () { self.setState(o.id === 'karisik' ? { ikili: 'karisik' } : { ikili: 'ayni', model: o.id === '2kiz' ? 'kiz' : 'erkek' }); } };
+    });
     var paket = [
       { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', rib: false },
-      { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(P2 / 2), sub: TL(2 * P1 - P2, true) + ' tasarruf', rib: true }
+      { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(P2 / 2), sub: '2 ayrı alıma göre ' + TL(2 * P1 - P2, true) + ' az', rib: true }
     ].map(function (b) { var on = S.adet === b.n; return { src1: b.n === 2 ? ikiliSrc[0] : (kiz ? KIZ : ERKEK), src2: ikiliSrc[1], t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
     var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, kapida = total + 80;
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
@@ -419,7 +450,7 @@ JS = """class Component extends DCLogic {
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     var cdLine = 'Bugünkü fiyat garantisi';
     var cdShort = IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
-    var cdTiny = IKI(hh) + 'sa ' + IKI(mi) + 'dk kaldı';
+    var cdTiny = 'Bugünkü fiyat · ' + IKI(hh) + ':' + IKI(mi);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
     // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
     var vids = [
@@ -430,6 +461,7 @@ JS = """class Component extends DCLogic {
     ];
     // Müşteri fotoğrafları (Loox foto yorumları)
     var mfoto = ['0f174c24e39d6cc31f00e1e5cec0b71a', '872c633eba2deae50857a393085d6d6e', 'a3904987484c22fc3cb242c93283a2b8', 'bc6c8ee4a959d062430c96eb318b745d', 'e11f41ebd04fb544a2dcfc3fc03a9c26'].map(function (id) { return { src: B + id, alt: 'Müşteri fotoğrafı' }; });
+    var DAG = [5, 4, 3, 2, 1].map(function (y) { return { y: y, w: 0, n: '[X]' }; });
     var REV = [
       { tags: ['Uyku'], name: 'Burak G.', q: 'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.' },
       { tags: ['Hediye'], name: 'Handan B.', q: 'Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.' },
@@ -448,7 +480,12 @@ JS = """class Component extends DCLogic {
       { n: 'Taşıtlar', id: 'deaace9b300bee84399862a13f84b2d6' }, { n: 'Masal', id: '6b08a94993cfc00099888dd3bd4cf110' },
       { n: 'Doğum günü', id: 'c2e8b0c346ed92731ab4a2f83a01d3ef' }
     ];
+    // Kutu listesi seçime bağlı ("12 disk" diye çıplak yazılmaz). Robot posterinde de 6 tema diski yazıyor.
+    var LMB = { kiz: 'tavşanlı lamba', erkek: 'robot lamba' };
+    var kutu = S.adet === 1 ? [{ a: '1', t: LMB[S.model] }, { a: '6', t: 'masal diski' }, { a: '+6', t: 'hediye disk' }, { a: '1', t: 'USB şarj kablosu' }]
+      : (karisik ? [{ a: '1', t: LMB.kiz }, { a: '1', t: LMB.erkek }] : [{ a: '2', t: LMB[S.model] }]).concat([{ a: '2 × 6', t: 'masal diski' }, { a: '+6', t: 'hediye disk' }, { a: '2', t: 'USB şarj kablosu' }]);
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
+    var discsA = discs.slice(0, 6), discsB = discs.slice(6);
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });
     var PR = [
       { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'f3f3e14eee224ef5534b9b897030ff58' },
@@ -466,7 +503,7 @@ JS = """class Component extends DCLogic {
       { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: '233784939af80bdc12f69eca3b2e25b4' }
     ];
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
-    var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
+    var shop = PR.map(function (x) { var d = false; /* son 10 gün fiyat kanıtı yalnız LunaDream için var */ return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
     var faq = [
       { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. Kız (tavşanlı) modeli telefona Bluetooth ile bağlanır. Erkek (robot) modelde ninni [dahili mi, Bluetooth mu: teyit edilecek].' },
       { q: 'Kaç yaş için uygun?', a: '[yaş] yaş ve üzeri çocuklar için uygundur.' },
@@ -477,19 +514,19 @@ JS = """class Component extends DCLogic {
     ];
     return {
       gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KIZ : ERKEK,
-      kiz: kiz, erkek: !kiz, paket: paket, ikiliSec: ikiliSec, ikiliAcik: S.adet === 2, adetName: S.adet === 2 ? (S.ikili === 'karisik' ? '1 Kız + 1 Erkek' : '2 Adet') : '1 Adet',
+      kiz: kiz, erkek: !kiz, kizTek: kiz && !karisik, erkekTek: !kiz && !karisik, karisik: karisik, paket: paket, ikiliSec: ikiliSec, ikiliAcik: S.adet === 2, adetName: S.adet === 2 ? (karisik ? 'Kız + Erkek' : (kiz ? '2 Kız' : '2 Erkek')) : (kiz ? '1 Kız' : '1 Erkek'), yap1: S.adet === 2 ? ikiliSrc[0] : (kiz ? KIZ : ERKEK), yap2: ikiliSrc[1], yapIki: S.adet === 2, kutu: kutu, kutuIki: S.adet === 2, tekKutu: S.adet !== 2, kutu1: ikiliSrc[0], kutu2: ikiliSrc[1], kapidaTL: TL(kapida, true),
       onLabel: 'Güvenli Ödeme İle Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
-      onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
+      onNote: 'Kapıda ödemeye göre ' + TL(kapida - online, true) + ' daha az',
       kpNote: '+₺80 kapıda ödeme ücreti · ' + TL(kapida, true),
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
-      rating: '4,7', reviews: 62, starPct: 94,
-      moments: moments, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      rating: '4,7', reviews: 62, starW: (Math.floor(4.7) * 16 + (4.7 % 1) * 14).toFixed(1), dag: DAG,
+      moments: moments, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAria: cdAria, discs: discs, discsA: discsA, discsB: discsB, proj: proj, discName: DISCS[S.disc].n, discSrc: B + DISCS[S.disc].id,
       boxModel: kiz ? 'tavşanlı lamba' : 'Uzay Kaşifi lamba', shop: shop, shopCount: PR.length, faq: faq
     };
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · B+ Gece Postası', css=CSS) + HTML + TAIL.format(h=6150, js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · B+ Gece Postası', css=CSS) + HTML + TAIL.format(h=5950, js=JS))
 print('yazıldı:', os.path.abspath(OUT))

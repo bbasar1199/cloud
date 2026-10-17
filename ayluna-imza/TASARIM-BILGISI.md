@@ -286,6 +286,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Evet (2'li varsayılan) ama bir kız bir erkek seçilebilir" | Varsayılan paket 2'li kalır. 2'li seçiliyken "İki lamba: 2 Kız / 1 Kız + 1 Erkek" seçimi görünür; karışıkta paket görselinde iki farklı lamba, sepete iki ayrı varyant eklenir. |
 | 17 Eki | "Yazı kısımları hâlâ biraz büyük, hâlâ biraz daha yazı var ve iç içe gibi" | **Ölçek v3:** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 (30 gün: 40) · paket adı 17, paket fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. **Az yazı:** başlığı olan bölümde ayrıca üst etiket yok; tek cümlelik açıklama; yardımcı satırlar birleştirilir; iç notlar sayfada değil yorum satırında. **İç içe değil:** kart içinde kart/panel yok; gölge yok; çerçeve yalnız seçilebilir öğede. |
 | 17 Eki | "Eleştirmenin 10 vermesini engelleyen kısımlar neyse bana sormadan direkt siteye ekle" | Eleştirmenin 10 için istediği maddeler kullanıcıya sorulmadan uygulanır; veri gerektirenler yer tutucuyla kurulur. Karar sonra birlikte verilir. |
+| 17 Eki | (Tur 13 uygulaması) | Kalıcı kurallar: kutu listesi seçilen pakete bağlı; yapışkan çubuk seçimi aynen söyler; kart notu karşılaştırmayı adlandırır ("kapıda ödemeye göre"); puan yıldızları kesirli ve doğru dolar; üstü çizili fiyat ve % rozeti yalnız 10 gün kanıtı olan üründe; alıntı metni Young Serif 16 (başlık dışındaki tek serif kullanım). |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

@@ -227,6 +227,35 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - varsayılan paket 2'li mi kalsın (yapışkan çubukta ₺2.612,49 görünüyor)?
   - 2'li pakette hediye disk sayısı
 
+## Tur 13 · Ölçek v3, az yazı, Kız + Erkek paketi, eleştirmenin 26 maddesi (17 Ekim, gece)
+- Kullanıcı:
+  - 2'li varsayılan kalsın ama bir kız bir erkek seçilebilsin.
+  - Yazı hâlâ büyük, fazla ve iç içe.
+  - "Eleştirmenin 10 vermesini engelleyenleri bana sormadan ekle, sonra karar verelim."
+- **Ölçek v3:** ürün adı 28, bölüm başlığı 22, gövde 15, açıklama 14, fiyat 20. Gereksiz etiketler ve uzun notlar kalktı; gölge ve iç çerçeveler azaldı.
+- **2'li paket:**
+  - "2 Kız / Kız + Erkek / 2 Erkek" (3 sütun), model kartlarıyla senkron
+  - karışıkta iki model kartı da seçili
+  - Sihirli 3. kart "Ninni iki modelde · Kızda Bluetooth ile."
+- Eleştirmenin 26 maddesi (önceki puan 8/10) uygulandı:
+  - kutu listesi seçime bağlı; 2'li kutu fotoğrafı yer tutucu
+  - yapışkan çubukta iki lamba ve "Kız + Erkek · kartla" / "Bugünkü fiyat · 06:02"
+  - kart notu "Kapıda ödemeye göre ₺X daha az"
+  - kart markaları satırı (VISA, Mastercard, troy · 3D Secure · [ödeme altyapısı]; teyit)
+  - kapanışta "Kapıda ödemek istersen · ₺X"
+  - 2'li alt satır "2 ayrı alıma göre ₺649,99 az"; kurdele "Kardeşe"
+  - SVG yıldızlar (4,7 doğru dolum); puan dağılımı [X]; "Yalnız sipariş verenlerin yorumları."
+  - disk rayı "Kutuda [teyit]" 6 + "Hediye [teyit]" 5 + boş daire; tavan etiketi "[gerçek tavan fotoğrafı: ad]" ve küçük disk
+  - "Yumuşak ay ışığı"; "Telefondan çal."
+  - diğer ürünlerde eski fiyat ve rozet yok (10 gün kanıtı yok)
+  - Bir gece krem zeminde, kartta yalnız saat ve başlık
+  - yorum kartında konu hapı yok
+  - süzülen diskler kenarda tam görünür, yalnız oda sahnelerinde
+  - buton gölgesi 3px; "30" 32px
+- Bilinçli istisnalar:
+  - 2'lide "+6 hediye disk" (canlı sitedeki teklif)
+  - teslim süreleri (mağaza politikası)
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
