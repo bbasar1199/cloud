@@ -46,7 +46,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
 - **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → puan/Stokta → LunaDream → fiyat → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
-- **Yazı ölçeği (kesin):** ürün adı 32 · fiyat 22 · bölüm başlığı 26 · büyük rakam 40 · kart başlığı 18–20 · fiyat 24 · gövde 16 · açıklama 15 · not 13 · etiket 12. Ara boyut yok; kullanıcı düzensiz/büyük yazıyı "kaos" buldu. Bölüm etiketi tek stil, büyük harf yok.
+- **Yazı ölçeği v3 (kesin):** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 · paket adı 17 / fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. Ara boyut yok. Kullanıcı büyük ve düzensiz yazıyı iki kez düzeltti.
+- **Az yazı, iç içe değil:** başlığı olan bölümde üst etiket yok; tek cümle açıklama; kart içinde kart yok; gölge yok.
+- **2'li paket:** varsayılan seçili; "2 Kız / 1 Kız + 1 Erkek" seçilebilir.
 - **Fiyat satırı:** fiyat + üstü çizili eski fiyat + "%X indirim" rozeti. Kartla fiyat başlıkta yok, yalnız ödeme butonunda.
 - **Müşteriye iç gerekçe yazılmaz** (toptancı, maliyet, zam sebebi).
 - **Boşluk ve geçiş:** bölüm arası 36px; koyu bölümler yuvarlak köşeli panel; bölümler kaydırınca hafifçe (20px, saydamdan) gelir.

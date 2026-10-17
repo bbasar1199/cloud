@@ -117,7 +117,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 | `--sayac` | **#A05A1C** (Main'deki #B4651F 3,9:1, eşiğin altında) | sayaç rakamı |
 | `--yesil` | #2E6B4F | Stokta, %5, kartla öde dürtmesi |
 
-- **Yazı:** Young Serif 400 yalnız başlıkta. Ölçek (Tur 12): ürün adı 32, fiyat 22, H2 26, büyük rakam 40, kart başlığı 18–20, fiyat 24, gövde 16, açıklama 15, not 13, etiket 12. Onest gövde **16px** (Main'de 15). 12px altı yazı yok. Rakamlar `tabular-nums`.
+- **Yazı:** Young Serif 400 yalnız başlıkta. Ölçek (Tur 13, v3): ürün adı 28, bölüm başlığı 22, gövde 15, açıklama 14, fiyat 20 (eski: ürün adı 32, fiyat 22, H2 26, büyük rakam 40, kart başlığı 18–20, fiyat 24, gövde 16, açıklama 15, not 13, etiket 12. Onest gövde **16px** (Main'de 15). 12px altı yazı yok. Rakamlar `tabular-nums`.
 - **Şekil:**
   - Köşe: levha 28, kart 14–22, buton 16, input 12, çip 999.
   - Kenar 16px. Gölge yerine 1px çizgi.
@@ -283,6 +283,9 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Arada bazı yerlerde fazla boşluk var" | Bölüm arası 36px (52 değil). Koyu bölümler yuvarlak köşeli panel (28px), araları 36px. |
 | 17 Eki | "Section aralarına geçiş için hafif animasyonlar yapabilirsin" | Bölümler kaydırınca 20px aşağıdan ve saydamdan gelir (`animation-timeline: view()`, yalnız transform/opacity, destek yoksa ya da azaltılmış harekette yok). "Her bölüme fade-in yasak" kuralı bu kullanıcı için kalktı; yalnız bu hafif biçimde. |
 | 17 Eki | "Bir gece 5 an için gerekli görselleri oluştur" | Görseller gerçek ürün fotoğrafından FLUX Kontext ile üretilir (`araclar/gorsel/bir_gece_uret.py`). Bulut ortamında `HF_TOKEN` gerekir; ücretsiz kota ortak IP'de dolu. Kalitesiz (filigranlı, ürünü yeniden çizen) görsel sayfaya konmaz. |
+| 17 Eki | "Evet (2'li varsayılan) ama bir kız bir erkek seçilebilir" | Varsayılan paket 2'li kalır. 2'li seçiliyken "İki lamba: 2 Kız / 1 Kız + 1 Erkek" seçimi görünür; karışıkta paket görselinde iki farklı lamba, sepete iki ayrı varyant eklenir. |
+| 17 Eki | "Yazı kısımları hâlâ biraz büyük, hâlâ biraz daha yazı var ve iç içe gibi" | **Ölçek v3:** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 (30 gün: 40) · paket adı 17, paket fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. **Az yazı:** başlığı olan bölümde ayrıca üst etiket yok; tek cümlelik açıklama; yardımcı satırlar birleştirilir; iç notlar sayfada değil yorum satırında. **İç içe değil:** kart içinde kart/panel yok; gölge yok; çerçeve yalnız seçilebilir öğede. |
+| 17 Eki | "Eleştirmenin 10 vermesini engelleyen kısımlar neyse bana sormadan direkt siteye ekle" | Eleştirmenin 10 için istediği maddeler kullanıcıya sorulmadan uygulanır; veri gerektirenler yer tutucuyla kurulur. Karar sonra birlikte verilir. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
