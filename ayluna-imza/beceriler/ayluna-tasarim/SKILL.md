@@ -43,7 +43,17 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - paket
   - ay sonu fiyat sayacı (her ay zam yapıyor)
   - sosyal kanıt
-- Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır. **Ama ikonlu fayda listesi hiçbir biçimde yok** (emoji, çizgi ikon şeridi, ikon kartları); fayda fotoğrafla ve kısa metinle anlatılır.
+- Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
+- **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
+  - 2×2 kart: ikon, başlık, tek cümle ve ürüne özgü küçük animasyon (nefes alan hale, yelpaze diskler, dolan pil, ses dalgası).
+  - Yeri model seçiminden sonra.
+  - Uydurma ya da teyitsiz madde yok ("+10.000 Mutlu Anne", "21 ışık modu").
+- **Seçilen yön (17 Ekim): B+ Gece Postası.**
+  - lacivert üst bant, tam genişlik galeri, büyük "LunaDream." başlığı
+  - seçili kart lacivert, fiyatı amber
+  - amber, basılınca çöken "Güvenli Ödeme İle Al"; çizgili "Kapıda Ödeme ile Sipariş Ver"
+  - noktalı teslim çizgisi
+  - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
 - "Işığı kapat" anahtarı ve gece sahnesi kullanılmaz. Galeri ana ürün fotoğraflarından gelir.
 - **Paket ve ödeme canlı sitedeki gibi kalır:**
   - alt alta "1 Adet / 2 Adet" kartları ve altlarında "+6 Tane Ücretsiz Hediye Disk" şeridi
