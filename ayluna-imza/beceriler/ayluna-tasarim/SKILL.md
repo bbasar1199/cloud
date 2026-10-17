@@ -9,7 +9,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 
 **İşe başlamadan:**
 1. Depo `bbasar1199/cloud`, dal `ayluna-imza-onizleme`.
-2. Sırayla oku: `ayluna-imza/DEVAM.md`, `ayluna-imza/RAPOR.md`, `ayluna-imza/TASARIM-BILGISI.md`.
+2. Sırayla oku: `ayluna-imza/DEVAM.md`, `ayluna-imza/RAPOR.md`, `ayluna-imza/TASARIM-BILGISI.md`. Görünüş Main'den, kurallar TASARIM-BILGISI'nden alınır.
 
 **Güncel ve seçilmiş tasarım:**
 - "Ayluna İmza Tasarım" tuvalindeki `project/Main.dc.html` (https://claude.ai/artifact/CHmRtH4tjbapGmPtuQGsTH).
@@ -44,7 +44,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - ay sonu fiyat sayacı (her ay zam yapıyor)
   - sosyal kanıt
 - Alışılmış satış kalıpları (fayda listesi, sayaç, stok, "dün satılan") atılmaz; inceltilir ve gerçek veriye bağlanır.
-- Gidişat: büyük ve gösterişliden kompakt ve tanıdığa doğru. Yeni öneri "daha az, daha net" olmalı.
+- Main seçildikten sonra sadeleşti (kimin istediği kayıtlı değil). Kompakt kal, ama sıradan Shopify'a düşme; "acayip ama sıkmayan" isteği geçerli.
 
 ## Tasarım sistemi (Main.dc)
 - **Renkler:**
@@ -57,12 +57,12 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - 11px etiket için #766B5B, sayaç için #A05A1C kullan. Eski #8A7F6E ve #B4651F kontrastta kalıyor.
 - **Yazı:**
   - Young Serif 400 yalnız başlıkta: H1 50px/.95, H2 30px/1.06.
-  - Onest gövde 15px. 16px öneriliyor; kararı kullanıcıda.
+  - Onest gövde 16px (Main'de 15).
   - 12px altı yazı yok. Rakamlar `tabular-nums`.
 - **Şekil:**
   - Köşe: levha 28, kart 14–22, buton 16, input 12, çip 999.
   - Kenar boşluğu 16px. Gölge yerine 1px çizgi.
-  - Dokunma alanı ≥44px, ana buton 58px.
+  - Dokunma alanı ≥48px, ana buton 58px.
 - **Hareket:**
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
   - İmza an "Işığı kapat" anahtarı (oda gündüzden geceye).
@@ -92,7 +92,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 12. Yapışkan çubuk.
 
 ## Gerçekler (uydurma yerine bunlar)
-- İade 30 gün (90 değil). Ücretsiz kargo. 1 iş gününde kargoda, 3–7 günde teslim. Kargo takibi Track123.
+- İade 30 gün (90 değil): 14 gün yasal cayma + 16 gün Ayluna. Ücretsiz kargo. Kargo takibi Track123.
+- Mağaza politikasında "1 iş gününde kargoda, 3–7 günde teslim" yazıyor, ama teyit listesinde. 16:00 kesimi teyitsiz.
 - LunaDream fiyatları:
   - 1 lamba ₺1.699,99 (karşılaştırma ₺1.999,00)
   - 2 lamba ₺2.749,99 (karşılaştırma ₺3.998,00)

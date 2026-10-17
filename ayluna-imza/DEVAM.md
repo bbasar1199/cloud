@@ -21,7 +21,8 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - İstedikleri: "acayip ama sıkmayan" tarz, doğa gibi uyumlu hareketler, güven veren, dönüşüm odaklı; bundle, ay sonu fiyat geri sayımı (her ay zam yapıyor), sosyal kanıt; tek ürün mağazası değil (15 ürün).
 
 ## Dosyalar
-- `onizleme/index.html` — ana sayfa (saf HTML/CSS/JS). Görseller `onizleme/g/`, fontlar `onizleme/f/` (Young Serif + Onest, Fontsource).
+- **`canvas/Main.dc.html`: kullanıcının seçtiği tasarım. Yeni iş buradan başlar.**
+- `onizleme/index.html` ve `onizleme/iskelet.html`: eski önizleme denemeleri. Saf HTML/CSS/JS. Görseller `onizleme/g/`, fontlar `onizleme/f/` (Young Serif + Onest, Fontsource).
 - `onizleme/fikirler.html` — eleştirmenin 3 fikri: Diski tak, Ay bitmeden, Gece hikâyeleri (Diski tak ve Gece hikâyeleri tam, Ay bitmeden yalnız ay kartı olarak index'e girdi).
 - `araclar/ekran-goruntusu.js` — 390×844 telefon ekranında sayfa boyunca ekran görüntüsü alır:
   `NODE_PATH=$(npm root -g) node ayluna-imza/araclar/ekran-goruntusu.js /tmp/ekran [index.html|fikirler.html]`
@@ -35,14 +36,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 ## Ürün bilgileri
 - LunaDream: 1 lamba ₺1.699,99 (₺1.999,00), 2 lamba ₺2.749,99 (₺3.998,00). Kız modeli = tavşanlı karusel, Bluetooth ninni hoparlörlü; Erkek modeli = Uzay Kaşifi robot, hoparlörsüz. Kutuda 6 disk + 6 hediye disk (2'li pakette hediye sayısı teyit edilecek).
 - Gerçek yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C.; 4,7 · 62 yorum (teyit edilecek).
-- Teyit bekleyenler: ölçüler, pil süresi, yaş aralığı, teslim süresi, 16:00 kargo kesimi, online ödemede %5, firma unvanı, WhatsApp numarası.
+- Teyit bekleyenler: ölçüler, pil süresi, yaş aralığı, teslim süresi, 16:00 kargo kesimi, firma unvanı, WhatsApp numarası.
+- Online ödemede %5: kullanıcı 17 Ekim'de kendisi söyledi ("kartla %5 indirim"). İndirim kodu Shopify'da tanımlanmalı.
 - Ürün görselleri gerçek üründen Google Flow (Nano Banana Pro) ile üretildi; ürünün kendisi değiştirilmez.
 
-## Sıradaki işler
-1. Kullanıcıdan teyitler (RAPOR.md "Teyit bekleyenler"): ölçü, pil, yaş, teslim, varyant yapısı, COD seçicisi.
-2. Shopify'a kurulum (`shopify/KURULUM.txt`) ve gerçek telefonda deneme: videolar, sayaç, COD akışı.
-3. Masaüstü düzeni (öncelikli): solda yapışkan galeri, sağda satın alma kutusu; diğer bölümler geniş ızgara. Bölümler şimdilik 430px sütunda.
-4. Gerçek müşteri videosu gelirse hikâyelere video karesi eklemek.
+## Sıradaki işler (17 Ekim, güncel)
+1. **Shopify bölümlerini Main.dc'den yeniden türet.** Bugünkü bölümler iskelet.html'den geliyor, seçilen tasarımı yansıtmıyor. Main'in kusurlarını taşırken düzelt (`TASARIM-BILGISI.md` §4).
+2. Fiyat ve mevzuat soruları: son 10 günün fiyatı, Kasım zammı, iade metni (`TASARIM-BILGISI.md` §11).
+3. Kullanıcıdan teyitler: ölçü, pil, yaş, teslim, varyant yapısı, kapıda ödeme seçicisi.
+4. Shopify'a kurulum ve gerçek telefonda, Instagram içinden deneme.
+5. Masaüstü düzeni: solda yapışkan galeri, sağda satın alma kutusu.
+6. Gerçek müşteri videosu gelirse video karesi.
 
 ## Kullanıcının netleştirdiği yön (17 Ekim, sonra)
 - İnsanların alıştığı kalıplar (emoji fayda listesi, indirim sayacı, "dün satılan", stok alarmı) atılmaz; iyileştirilir. Baskı unsurları istiyor; gerçek veriye bağlanır (stok: Shopify envanteri, dün satılan: Flow ile metafield, sayaç: gerçek ay sonu zammı).

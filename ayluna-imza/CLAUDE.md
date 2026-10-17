@@ -15,7 +15,7 @@ Ayluna (ayluna.shop) Shopify mağazasının LunaDream ürün sayfası ve tema b�
 - Ödeme: kartla öde varsayılan (%5 indirim), kapıda ödeme ikinci.
 - Teyitsiz bilgi köşeli yer tutucu kalır: [X] cm.
 
-## Bölüm kararı süreci
+## Tasarım kararı süreci (hata düzeltmede gerekmez)
 1. Taslağı yap.
 2. Ekran görüntüsü al ve bak (`araclar/ekran-goruntusu.js` ya da `araclar/dc-onizle.js`).
 3. `ayluna-elestirmen` ajanına denetlet (`.claude/agents/ayluna-elestirmen.md`).
