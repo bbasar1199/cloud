@@ -1,0 +1,17 @@
+{
+  "name": "ayluna-makara-videolari",
+  "private": true,
+  "description": "Bir gece, beş an kartları için sessiz döngü videolar (Remotion). public/ klasörüne ../../onizleme/g/*.jpg kopyalanır.",
+  "scripts": {
+    "kareler": "node render.mjs kare hepsi kare",
+    "video": "CRF=22 node render.mjs video hepsi cikti"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.300",
+    "@remotion/cli": "4.0.300",
+    "@remotion/renderer": "4.0.300",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.300"
+  }
+}

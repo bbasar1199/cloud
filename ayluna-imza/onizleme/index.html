@@ -125,14 +125,21 @@ button{font:inherit;color:inherit}
 .paket .sag s{font-size:12.5px;color:var(--soluk)}
 .serit{position:absolute;top:-10px;left:14px;font-size:11px;font-weight:700;letter-spacing:.02em;background:var(--amber);color:var(--lac);padding:3px 9px;border-radius:999px}
 
-/* Geri sayım: tek satır, gerçek tarih */
-.sayac{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:16px;background:var(--lac);color:var(--gMetin);font-size:13px}
-.sayac .kutu{display:flex;gap:6px;margin-left:auto;font-variant-numeric:tabular-nums}
-.sayac .kutu span{min-width:40px;text-align:center;padding:5px 6px;border-radius:10px;background:rgba(255,255,255,.08);line-height:1.1}
-.sayac .kutu b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:18px;color:#FFFDF9}
-.sayac .kutu small{font-size:10px;color:var(--gSoluk)}
-.sayac.son{background:var(--amber);color:var(--lac)}
-.sayac.son .kutu b,.sayac.son .kutu small{color:var(--lac)}
+/* Ay bitmeden: geri sayım ayın evresi olarak (fikirler.html · Fikir 2, yalnız ay kartı) */
+.ay-sayac{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;margin-top:14px;padding:12px 14px 14px;border-radius:16px;background:var(--lac);color:var(--gMetin);overflow:hidden}
+.ay-evre{position:relative;width:44px;height:44px;border-radius:50%;overflow:hidden;background:var(--amber)}
+.ay-evre i{position:absolute;inset:-1px;border-radius:50%;background:var(--lac);transform:translateX(105%);transition:transform 1.6s var(--e)}
+.ay-evre::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,253,249,.14)}
+.ay-y{font-size:12.5px;line-height:1.3;color:var(--gSoluk)}
+.ay-y b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:19px;line-height:1.15;color:#FFFDF9}
+.ay-kalan{font-size:13px;font-weight:600;color:var(--amber);font-variant-numeric:tabular-nums;text-align:right;line-height:1.25}
+.ay-hat{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(244,237,227,.12)}
+.ay-hat i{position:absolute;inset:0;background:var(--amber);transform-origin:left;transform:scaleX(0);transition:transform 1.6s var(--e)}
+.ay-sayac.son{background:var(--amber);color:var(--lac)}
+.ay-sayac.son .ay-y,.ay-sayac.son .ay-y b,.ay-sayac.son .ay-kalan{color:var(--lac)}
+.ay-sayac.son .ay-evre{background:#FFFDF9}
+.ay-sayac.son .ay-evre i{background:var(--amber)}
+.ay-sayac.son .ay-hat i{background:var(--lac)}
 
 /* Birlikte al */
 .ekle{display:grid;grid-template-columns:24px 44px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;margin-top:12px;padding:10px 12px;border-radius:16px;border:1.5px dashed #C9BFAE;background:none;cursor:pointer;text-align:left;font-size:13.5px}
@@ -168,26 +175,34 @@ button{font:inherit;color:inherit}
 .iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--amber);color:var(--lac);font-weight:600;font-size:16px;cursor:pointer;text-decoration:none}
 
-/* ===== Yorumlar: not destesi ===== */
+/* ===== Yorumlar: gece hikâyeleri (fikirler.html · Fikir 3) ===== */
 .bolum{padding-top:64px}
-.alinti-buyuk{position:relative;margin:22px 0 0;font-family:"Young Serif",serif;font-size:25px;line-height:1.22}
-.alinti-buyuk::before{content:"\201C";position:absolute;left:-4px;top:-46px;font-size:96px;line-height:1;color:var(--amber)}
-.alinti-buyuk figcaption{margin-top:12px;font-family:"Onest",sans-serif;font-size:13px;color:var(--soluk)}
-.cipler{display:flex;gap:8px;overflow-x:auto;margin:22px -18px 0;padding:0 18px}
-.cip{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #DDD2C1;background:transparent;cursor:pointer;font-size:14px}
-.cip[aria-pressed=true]{background:var(--lac);border-color:var(--lac);color:#FFFDF9}
-.deste{position:relative;height:212px;margin-top:22px;touch-action:pan-y}
-.not{position:absolute;inset:0;background:var(--yuzey);border:1px solid var(--cizgi);border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 30px -24px rgba(26,33,66,.45);transition:transform .5s var(--e),opacity .5s var(--e)}
-.not blockquote{margin:0;font-family:"Young Serif",serif;font-size:21px;line-height:1.3}
-.not .alt{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--soluk)}
-.not .alt b{color:#8A4A12;font-weight:600}
-.not.ucar{transform:translateX(-120%) rotate(-12deg)!important;opacity:0!important}
-.deste-alt{display:flex;justify-content:space-between;align-items:center;margin-top:20px;font-size:13px;color:var(--soluk);font-variant-numeric:tabular-nums}
-.oklar{display:flex;gap:8px}
-.ok{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--lac);background:transparent;display:grid;place-items:center;cursor:pointer}
-.ok.dolu{background:var(--lac);color:#FFFDF9}
-.foto-serit{display:flex;gap:8px;overflow-x:auto;margin:24px -18px 0;padding:0 18px}
-.foto-serit img{flex:none;width:118px;height:156px;border-radius:16px;object-fit:cover}
+.hk{position:relative;height:460px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);color:#FFFDF9;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.hk-kare{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--e)}
+.hk-kare.on{opacity:1}
+.hk-kare img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 6s var(--e)}
+.hk-kare.on img{transform:scale(1)}
+.hk-kare.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.55),rgba(12,16,39,0) 24%,rgba(12,16,39,0) 70%,rgba(12,16,39,.6))}
+.hk-kare.soz{display:flex;flex-direction:column;justify-content:center;padding:0 24px;background:var(--lac)}
+.hk-kare.soz blockquote{margin:0;font-family:"Young Serif",serif;font-size:27px;line-height:1.18;letter-spacing:-.01em;transform:translateY(14px);transition:transform .6s var(--e)}
+.hk-kare.soz.on blockquote{transform:none}
+.hk-kare.soz .tirnak{font-family:"Young Serif",serif;font-size:80px;line-height:.6;color:var(--amber);height:44px}
+.hk-kare.soz .kim{margin-top:18px;font-size:13px;color:var(--gSoluk)}
+.hk-kare.soz .kim b{color:var(--amber);font-weight:600}
+.hk-cubuk{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;gap:4px}
+.hk-cubuk i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,253,249,.3);overflow:hidden;position:relative}
+.hk-cubuk i b{position:absolute;inset:0;background:#FFFDF9;transform-origin:left;transform:scaleX(0)}
+.hk-bas{position:absolute;left:12px;right:12px;top:24px;z-index:3;display:flex;align-items:center;gap:8px;font-size:12.5px}
+.hk-bas .av{width:30px;height:30px;border-radius:50%;background:var(--krem);display:grid;place-items:center}
+.hk-bas b{font-weight:600}
+.hk-bas span{color:rgba(255,253,249,.75)}
+.hk-dur{margin-left:auto;width:44px;height:44px;margin-right:-8px;border:0;background:none;color:#FFFDF9;display:grid;place-items:center;cursor:pointer}
+.hk-dok{position:absolute;top:70px;bottom:0;z-index:2;width:50%;border:0;background:none;padding:0;cursor:pointer}
+.hk-dok.l{left:0}.hk-dok.r{right:0}
+.hk-etiket{position:absolute;left:16px;bottom:16px;z-index:3;font-size:12px;color:rgba(255,253,249,.85);padding:5px 10px;border-radius:999px;background:rgba(12,16,39,.5)}
+.hk-ozet{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:var(--soluk);font-variant-numeric:tabular-nums}
+.hk-ozet .y{color:var(--amber2);letter-spacing:1.5px}
+.hk-ozet b{color:var(--metin)}
 
 /* ===== Kutuyu aç ===== */
 .kutu-sahne{position:relative;height:370px;margin-top:22px;border-radius:24px;overflow:hidden;background:var(--lac);border:0;width:100%;padding:0;cursor:pointer;display:block;text-align:left}
@@ -198,7 +213,7 @@ button{font:inherit;color:inherit}
 .acik-kutu .kapak{transform:translateY(-280px) rotate(-8deg);opacity:0}
 .acik-kutu .parca{opacity:1;transform:none}
 .k-lamba{left:50%;top:22px;width:136px;height:176px;margin-left:-68px;border-radius:18px;overflow:hidden}
-.k-lamba img{width:100%;height:100%;object-fit:cover}
+.k-lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:35% 75%}
 .k-disk{width:38px;height:38px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px rgba(255,253,249,.15)}
 .k-disk img{width:100%;height:100%;object-fit:cover}
 .k-yazi{font-size:12px;color:var(--gSoluk)}
@@ -218,26 +233,37 @@ button{font:inherit;color:inherit}
 .dunya .y{position:absolute;left:18px;right:18px;bottom:30px;z-index:3}
 .dunya::after{content:"";position:absolute;inset:auto 0 0 0;height:260px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));pointer-events:none;z-index:2}
 
-/* Disk halkası: 3B döner halka */
-.halka-bolum{padding:24px 0 40px;text-align:center}
-.tavan{position:relative;width:236px;height:236px;margin:22px auto 0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px rgba(242,166,90,.08),0 0 80px rgba(242,166,90,.25)}
-.tavan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s var(--e),transform .6s var(--e)}
-.tavan .eski{opacity:0;transform:scale(.8)}
-.disk-ad{margin-top:16px;font-family:"Young Serif",serif;font-size:24px}
-.disk-sayi{font-size:12.5px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
-.sahne3d{position:relative;height:148px;margin-top:20px;perspective:900px;touch-action:pan-y;cursor:grab}
-.halka{position:absolute;left:50%;top:40px;width:0;height:0;transform-style:preserve-3d;transition:transform .7s var(--e)}
-.surukleniyor .halka{transition:none}
-.halka button{position:absolute;left:-34px;top:-34px;width:68px;height:68px;border-radius:50%;overflow:hidden;border:0;padding:0;cursor:pointer;backface-visibility:hidden;box-shadow:0 10px 20px -10px rgba(0,0,0,.8)}
-.halka button img{width:100%;height:100%;object-fit:cover}
-.halka button.on{box-shadow:0 0 0 3px var(--amber),0 10px 20px -10px rgba(0,0,0,.8)}
-.halka-ok{position:absolute;top:96px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,237,227,.25);background:rgba(12,16,39,.4);color:#FFFDF9;display:grid;place-items:center;cursor:pointer;z-index:5}
-.halka-ok.l{left:calc(50% - 54px)}.halka-ok.r{right:calc(50% - 54px)}
+/* Diski tak: disk lambaya girer, oda kararır, tavanda masal (fikirler.html · Fikir 1) */
+.dt{padding:28px 0 40px}
+.dt-alt{margin:10px 0 0;font-size:14.5px;color:var(--gSoluk)}
+.dt-oda{position:relative;height:430px;margin:20px 18px 0;border-radius:24px;overflow:hidden;background:var(--gece2);isolation:isolate}
+.dt-oda>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.dt-oda .dt-gece{opacity:0;transition:opacity 1.1s var(--e)}
+.dt-oda.yandi .dt-gece{opacity:1}
+.dt-tavan{position:absolute;left:50%;top:-150px;width:520px;height:520px;margin-left:-260px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.4);transition:opacity 1.2s var(--e),transform 1.4s var(--e);mix-blend-mode:screen;-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 68%);mask-image:radial-gradient(circle,#000 30%,transparent 68%);pointer-events:none}
+.dt-tavan img{width:100%;height:100%;object-fit:cover;animation:dtDon 40s var(--e) infinite alternate}
+.dt-oda.yandi .dt-tavan{opacity:.62;transform:scale(1)}
+@keyframes dtDon{to{transform:rotate(90deg)}}
+.dt-oda::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(180deg,rgba(12,16,39,0),rgba(12,16,39,.85));pointer-events:none}
+.dt-yazi{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.dt-yazi b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:24px;line-height:1.1;color:#FFFDF9}
+.dt-yazi span{font-size:12.5px;color:var(--gSoluk)}
+.dt-temsili{font-size:11px;color:var(--gSoluk);opacity:.8;white-space:nowrap}
+.dt-ipucu{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,-50%);padding:8px 14px;border-radius:999px;background:rgba(12,16,39,.62);color:#FFFDF9;font-size:13px;font-weight:600;white-space:nowrap;transition:opacity .4s var(--e)}
+.dt-oda.yandi .dt-ipucu{opacity:0}
+.dt-tepsi{display:flex;gap:10px;overflow-x:auto;padding:16px 18px 6px;scroll-snap-type:x proximity}
+.dt-disk{flex:none;width:58px;height:58px;padding:0;border:0;border-radius:50%;overflow:hidden;cursor:pointer;scroll-snap-align:start;box-shadow:0 0 0 1.5px rgba(244,237,227,.16);transition:transform .35s var(--e),box-shadow .35s var(--e)}
+.dt-disk img{width:100%;height:100%;object-fit:cover}
+.dt-disk[aria-pressed=true]{box-shadow:0 0 0 3px var(--amber);transform:scale(.9)}
+.dt-ucan{position:fixed;z-index:30;width:58px;height:58px;border-radius:50%;overflow:hidden;pointer-events:none;transition:transform .75s var(--e),opacity .3s var(--e) .55s}
+.dt-ucan img{width:100%;height:100%;object-fit:cover}
+.dt-alt-sat{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 18px 0;font-size:12.5px;color:var(--gSoluk);font-variant-numeric:tabular-nums}
+.dt-alt-sat button{min-height:44px;padding:0 4px;border:0;background:none;color:#FFFDF9;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;flex:none}
 
 /* Bir gece: eğik makaralar */
 .makaralar{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px calc(50% - 125px) 8px;perspective:1000px}
-.makara{flex:0 0 250px;height:420px;border-radius:22px;overflow:hidden;position:relative;scroll-snap-align:center;background:var(--gece2);transition:transform .2s linear,opacity .2s linear;will-change:transform}
-.makara img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.makara{flex:0 0 250px;height:420px;border-radius:22px;overflow:hidden;position:relative;scroll-snap-align:center;background:var(--gece2);transition:transform .2s var(--e),opacity .2s var(--e);will-change:transform}
+.makara img,.makara video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .makara::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.4),rgba(12,16,39,0) 30%,rgba(12,16,39,0) 55%,rgba(12,16,39,.88))}
 .makara .s{position:absolute;left:16px;top:14px;z-index:1;font-family:"Young Serif",serif;font-size:30px;color:var(--amber);font-variant-numeric:tabular-nums}
 .makara .y{position:absolute;left:16px;right:16px;bottom:16px;z-index:1}
@@ -364,9 +390,11 @@ button{font:inherit;color:inherit}
         <button class="paket" data-paket="2" aria-pressed="true"><span class="serit">Kardeşe</span><span class="radyo"><i></i></span><span><span class="ad">2 lamba</span><span class="alt">₺1.375 / adet · <em>₺1.248 kazanç</em></span></span><span class="sag"><b>₺2.749,99</b><s>₺3.998,00</s></span></button>
       </div>
 
-      <div class="sayac" id="sayac" aria-live="polite">
-        <span id="sayacYazi">Bu fiyat ay sonuna kadar</span>
-        <span class="kutu" id="sayacKutu"></span>
+      <div class="ay-sayac" id="sayac" aria-live="polite">
+        <span class="ay-evre" aria-hidden="true"><i id="ayGolge"></i></span>
+        <span class="ay-y"><span id="sayacUst">Fiyatlar her ay güncellenir</span><b id="sayacTarih"></b></span>
+        <span class="ay-kalan" id="sayacKalan"></span>
+        <span class="ay-hat" aria-hidden="true"><i id="ayHat"></i></span>
       </div>
 
       <button class="ekle" id="ekle" aria-pressed="false"><span class="k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><img src="g/u-yildiz.jpg" alt=""><span>Yıldız Işığı Nemlendirici</span><b>+₺849,99</b></button>
@@ -396,16 +424,18 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ===== YORUMLAR: not destesi ===== -->
+  <!-- ===== YORUMLAR: gece hikâyeleri ===== -->
+  <!-- Kaynak fikir: Instagram hikâye kalıbı (Meta trafiğine tanıdık): üstte ilerleme çubukları, sağa/sola dokun, basılı tut = durdur. Eski not destesi: yedek/index-fikirlerden-once.html -->
   <section class="bolum px" id="yorumlar">
     <h2 class="h2">Anneler<br>ne diyor</h2>
-    <figure class="alinti-buyuk" style="margin-top:58px">Reklamında nasıl ise aynısı, hatta daha iyisi.<figcaption>Abdülkerim T. · Satın aldı · ★ 4,7 ortalama, 62 yorum</figcaption></figure>
-    <div class="cipler kaydirma" id="cipler"></div>
-    <div class="deste" id="deste"></div>
-    <div class="deste-alt"><span id="desteSira">1 / 4</span><span class="oklar"><button class="ok" id="desteGeri" aria-label="Önceki yorum"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M15 5l-7 7 7 7"/></svg></button><button class="ok dolu" id="desteIleri" aria-label="Sonraki yorum"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M9 5l7 7-7 7"/></svg></button></span></div>
-    <div class="foto-serit kaydirma" aria-label="Müşteri fotoğrafları">
-      <img src="g/ugc1.jpg" alt="Müşteri fotoğrafı"><img src="g/ugc5.jpg" alt="Müşteri fotoğrafı"><img src="g/ugc3.jpg" alt="Müşteri fotoğrafı"><img src="g/ugc2.jpg" alt="Müşteri fotoğrafı"><img src="g/ugc4.jpg" alt="Müşteri fotoğrafı">
+    <div class="hk" id="hk" aria-roledescription="hikâye" aria-label="Müşteri yorumları ve fotoğrafları">
+      <div class="hk-cubuk" id="hkCubuk"></div>
+      <div class="hk-bas"><span class="av"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#E59A4C"/></svg></span><b>Ayluna ailesi</b><span id="hkTur">müşteri fotoğrafı</span><button class="hk-dur" id="hkDur" aria-label="Durdur" type="button"><svg class="ico" viewBox="0 0 24 24" id="hkDurIco"><path d="M9 6v12M15 6v12"/></svg></button></div>
+      <div id="hkKareler"></div>
+      <button class="hk-dok l" id="hkGeri" aria-label="Önceki" type="button"></button>
+      <button class="hk-dok r" id="hkIleri" aria-label="Sonraki" type="button"></button>
     </div>
+    <div class="hk-ozet"><span><span class="y" aria-hidden="true">★★★★★</span> <b>4,7</b> · 62 yorum</span><span id="hkSira">1 / 10</span></div>
   </section>
 
   <!-- ===== KUTUYU AÇ ===== -->
@@ -432,16 +462,21 @@ button{font:inherit;color:inherit}
       <div class="y"><h2 class="h2" style="color:#FFFDF9">Her disk,<br>başka bir gece.</h2></div>
     </section>
 
-    <section class="halka-bolum" aria-label="12 masal diski">
-      <p class="soluk" style="margin:0;font-size:13.5px">Halkayı çevir, tavanda gör</p>
-      <div class="tavan" id="tavan"><img id="tavanA" src="g/disk1.jpg" alt=""><img id="tavanB" class="eski" src="g/disk1.jpg" alt=""></div>
-      <div class="disk-ad" id="diskAd">Ay ve yıldız</div>
-      <div class="disk-sayi" id="diskSayi">1 / 12 · masal başına ₺141</div>
-      <div class="sahne3d" id="sahne3d">
-        <button class="halka-ok l" id="halkaGeri" aria-label="Önceki disk"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="halka" id="halka"></div>
-        <button class="halka-ok r" id="halkaIleri" aria-label="Sonraki disk"><svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M9 5l7 7-7 7"/></svg></button>
+    <!-- Diski tak: eski 3B disk halkası yedek/index-fikirlerden-once.html içinde -->
+    <section class="dt" id="diskiTak" aria-label="Diski tak">
+      <div class="px">
+        <h2 class="h2" style="color:#FFFDF9">Bir disk seç,<br>oda kararsın.</h2>
+        <p class="dt-alt">Dokunduğun disk lambaya girer, tavanda masalı görürsün.</p>
       </div>
+      <div class="dt-oda" id="dtOda">
+        <img id="dtGunduz" src="g/kiz-gunduz.jpg" alt="Gündüz çocuk odası, komodinde LunaDream" loading="lazy">
+        <img id="dtGeceImg" class="dt-gece" src="g/kiz-gece.jpg" alt="Gece, LunaDream tavana yansıtıyor" loading="lazy">
+        <div class="dt-tavan" aria-hidden="true"><img id="dtTavan" src="g/disk1.jpg" alt=""></div>
+        <span class="dt-ipucu" id="dtIpucu">Aşağıdan bir disk seç</span>
+        <div class="dt-yazi"><span><span>Bu gecenin masalı</span><b id="dtAd">Henüz seçilmedi</b></span><span class="dt-temsili">Temsilî görünüm</span></div>
+      </div>
+      <div class="dt-tepsi kaydirma" id="dtTepsi" aria-label="12 masal diski"></div>
+      <div class="dt-alt-sat"><span id="dtSayac">12 disk · masal başına ₺141</span><button id="dtSifirla" type="button">Baştan</button></div>
     </section>
 
     <section style="padding:36px 0 8px" aria-label="Bir gece, beş an">
@@ -453,7 +488,7 @@ button{font:inherit;color:inherit}
     <section class="px" style="padding-top:48px" data-p id="sssBolum">
       <h2 class="h2" style="color:#FFFDF9">Sorular</h2>
       <div class="muhur">
-        <span class="m"><b>30</b><svg viewBox="0 0 120 120" width="96" height="96" aria-hidden="true"><defs><path id="hk" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text font-family="Onest,sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.2" fill="#F2A65A"><textPath href="#hk">30 GÜN İADE · ÖNCE GÖR SONRA ÖDE · </textPath></text></svg></span>
+        <span class="m"><b>30</b><svg viewBox="0 0 120 120" width="96" height="96" aria-hidden="true"><defs><path id="muhurYol" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text font-family="Onest,sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.2" fill="#F2A65A"><textPath href="#muhurYol">30 GÜN İADE · ÖNCE GÖR SONRA ÖDE · </textPath></text></svg></span>
         <p style="margin:0;font-size:15px;line-height:1.4">Önce görürsün, sonra ödersin. Beğenmezsen 30 gün içinde geri gönder.</p>
       </div>
       <div class="sss">
@@ -543,7 +578,7 @@ button{font:inherit;color:inherit}
     $('#modelAd').textContent=m.ad; $('#bentoDeger').textContent=m.bv; $('#bentoAcik').textContent=m.ba;
     $('#dunyaImg').src=m.dunya; $('#bentoImg').src=m.dunya; $('#kutuLamba').src=m.elde;
     $('#yapisImg').src=m.oda; $('#yapisImg').style.objectPosition=m.pos;
-    $('#kardesGunduz').src=o.gunduz; $('#kardesGece').src=o.gece;
+    $('#kardesGunduz').src=o.gunduz; $('#kardesGece').src=o.gece; $('#dtGunduz').src=m.gunduz; $('#dtGeceImg').src=m.gece;
     $$('.model').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.model===S.model);});
     makaraKur();
   }
@@ -565,20 +600,26 @@ button{font:inherit;color:inherit}
   var EKE=["Ocak'a","Şubat'a","Mart'a","Nisan'a","Mayıs'a","Haziran'a","Temmuz'a","Ağustos'a","Eylül'e","Ekim'e","Kasım'a","Aralık'a"];
   var GUN=['pazar','pazartesi','salı','çarşamba','perşembe','cuma','cumartesi'];
   function iki(n){return n<10?'0'+n:''+n;}
+  var ayOran=1, ayGorundu=false;
+  /* Ay dolunaydan başlar, ay sonuna doğru incelir: gölge sağdan içeri kayar (yalnız transform) */
+  function ayUygula(){ $('#ayGolge').style.transform='translateX('+(12+ayOran*93).toFixed(1)+'%)'; $('#ayHat').style.transform='scaleX('+(1-ayOran).toFixed(3)+')'; }
   function sayac(){
-    var n=new Date(), son=new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59), f=Math.max(0,son-n);
-    var g=Math.floor(f/864e5), s=Math.floor(f/36e5)%24, d=Math.floor(f/6e4)%60, sn=Math.floor(f/1e3)%60, sonGun=g<3;
-    var kutular=[[g,'gün'],[s,'saat'],[d,'dk']]; if(sonGun) kutular.push([sn,'sn']);
-    $('#sayacKutu').innerHTML=kutular.map(function(k){return '<span><b>'+(k[1]==='gün'?k[0]:iki(k[0]))+'</b><small>'+k[1]+'</small></span>';}).join('');
+    var n=new Date(), bas=new Date(n.getFullYear(),n.getMonth(),1), son=new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59), f=Math.max(0,son-n);
+    var g=Math.floor(f/864e5), s=Math.floor(f/36e5)%24, d=Math.floor(f/6e4)%60, sonGun=g<3;
+    ayOran=f/(son-bas);
     $('#sayac').classList.toggle('son',sonGun);
-    var yazi=sonGun?('Son '+(g+1)+' gün: bu fiyat '+son.getDate()+' '+EKE[son.getMonth()]+' kadar'):('Fiyatlar her ay güncellenir.<br><b style="color:#FFFDF9">Bu fiyat '+son.getDate()+' '+EKE[son.getMonth()]+' kadar</b>');
-    $('#sayacYazi').innerHTML=yazi; $('#yapisNot').textContent=son.getDate()+' '+EKE[son.getMonth()]+' kadar bu fiyat';
+    $('#sayacTarih').textContent=son.getDate()+' '+EKE[son.getMonth()]+' kadar';
+    $('#sayacUst').textContent=sonGun?('Son '+(g+1)+' gün · bu fiyat'):'Fiyatlar her ay güncellenir';
+    $('#sayacKalan').innerHTML=g===0?('Bugün son gün<br>'+(s>0?s+' sa ':'')+d+' dk'):(g+' gün<br>'+s+' sa '+d+' dk');
+    $('#yapisNot').textContent=son.getDate()+' '+EKE[son.getMonth()]+' kadar bu fiyat';
+    if(ayGorundu) ayUygula();
     var kesim=16, hi=n.getDay()>0&&n.getDay()<6, t;
     if(hi&&n.getHours()<kesim){var kal=kesim*60-(n.getHours()*60+n.getMinutes()); t='bugün kargoda ('+(kal>=60?Math.floor(kal/60)+' sa ':'')+(kal%60)+' dk kaldı)';}
     else{var x=new Date(n);do{x.setDate(x.getDate()+1);}while(x.getDay()===0||x.getDay()===6);t=x.getDate()+' '+AY[x.getMonth()]+' '+GUN[x.getDay()]+' kargoda';}
     $('#kargoTarih').textContent=t;
-    setTimeout(sayac, sonGun?1000:(60-n.getSeconds())*1000);
+    setTimeout(sayac,(60-n.getSeconds())*1000);
   }
+  new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ ayGorundu=true; ayUygula(); ob.disconnect(); } },{threshold:.5}).observe($('#sayac'));
 
   /* ---------- Kaydırarak sipariş ---------- */
   var kz=$('#kaydir'), top=$('#kaydirTop'), dolgu=$('#dolgu'), surX=null, max=0, dx=0;
@@ -591,23 +632,48 @@ button{font:inherit;color:inherit}
   function siparisAc(e){ if(e)e.preventDefault(); formAc(); var y=kz.getBoundingClientRect().top+scrollY-90; scrollTo({top:y,behavior:azHareket?'auto':'smooth'}); }
   $('#yapisBtn').addEventListener('click',siparisAc);
 
-  /* ---------- Yorum destesi ---------- */
-  var REV=[{k:'Uyku',n:'Burak G.',q:'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.'},{k:'Hediye',n:'Handan B.',q:'Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.'},{k:'Kalite',n:'Sevcan Z.',q:'2 tane aldık, gayet sağlam geldi. Paketlenmesi de güzeldi.'},{k:'Kalite',n:'Mehmet C.',q:'Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.'}];
-  var konu='Tümü', ri=0, mesgul=false;
-  function liste(){return REV.filter(function(r){return konu==='Tümü'||r.k===konu;});}
-  function cipCiz(){ $('#cipler').innerHTML=['Tümü','Uyku','Hediye','Kalite'].map(function(c){var n=c==='Tümü'?REV.length:REV.filter(function(r){return r.k===c;}).length;return '<button class="cip" aria-pressed="'+(c===konu)+'" data-c="'+c+'">'+c+'</button>';}).join(''); $$('#cipler .cip').forEach(function(x){x.addEventListener('click',function(){konu=x.dataset.c;ri=0;cipCiz();desteCiz();});}); }
-  function desteCiz(){
-    var L=liste(), d=$('#deste'); d.innerHTML='';
-    var kac=Math.min(3,L.length);
-    for(var k=kac-1;k>=0;k--){ var r=L[(ri+k)%L.length], el=document.createElement('figure'); el.className='not'; el.style.margin='0';
-      var rot=[0,-2.5,2.5][k]; el.style.transform='translateY('+(k*12)+'px) scale('+(1-k*.045)+') rotate('+rot+'deg)'; el.style.opacity=[1,.92,.82][k]; el.style.zIndex=3-k;
-      el.innerHTML='<blockquote>“'+r.q+'”</blockquote><figcaption class="alt"><span>'+r.n+' · Satın aldı</span><b>'+r.k+'</b></figcaption>'; d.appendChild(el); }
-    $('#desteSira').textContent=(ri+1)+' / '+L.length;
+  /* ---------- Yorumlar: gece hikâyeleri ---------- */
+  var K=[
+    {t:'f',src:'g/ugc2.jpg',pos:'50% 40%'},
+    {t:'s',q:'Reklamında nasıl ise aynısı, hatta daha iyisi.',n:'Abdülkerim T.',k:'Kalite'},
+    {t:'f',src:'g/ugc1k.jpg',pos:'50% 50%'},
+    {t:'s',q:'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.',n:'Burak G.',k:'Uyku'},
+    {t:'f',src:'g/ugc5.jpg',pos:'50% 50%'},
+    {t:'s',q:'Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.',n:'Handan B.',k:'Hediye'},
+    {t:'f',src:'g/ugc3.jpg',pos:'50% 50%'},
+    {t:'s',q:'2 tane aldık, gayet sağlam geldi. Paketlenmesi de güzeldi.',n:'Sevcan Z.',k:'Kalite'},
+    {t:'f',src:'g/ugc4.jpg',pos:'50% 100%'},
+    {t:'s',q:'Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.',n:'Mehmet C.',k:'Kalite'}
+  ];
+  var SURE=5200, hi=0, t0=0, gecen=0, duraklat=false, gorunur=false, rf=0;
+  $('#hkKareler').innerHTML=K.map(function(k,i){ return k.t==='f'
+    ? '<div class="hk-kare foto"><img src="'+k.src+'" alt="Müşteri fotoğrafı" style="object-position:'+k.pos+'"'+(i>1?' loading="lazy"':'')+'><span class="hk-etiket">Müşteri fotoğrafı</span></div>'
+    : '<div class="hk-kare soz"><div class="tirnak" aria-hidden="true">“</div><blockquote>'+k.q+'</blockquote><div class="kim">'+k.n+' · Satın aldı · <b>'+k.k+'</b></div></div>'; }).join('');
+  $('#hkCubuk').innerHTML=K.map(function(){return '<i><b></b></i>';}).join('');
+  var kareler=$$('.hk-kare'), cubuklar=$$('#hkCubuk b');
+  function goster(i){ hi=(i+K.length)%K.length; gecen=0; t0=0;
+    kareler.forEach(function(x,j){x.classList.toggle('on',j===hi);});
+    cubuklar.forEach(function(c,j){c.style.transform='scaleX('+(j<hi?1:0)+')';});
+    $('#hkTur').textContent=K[hi].t==='f'?'müşteri fotoğrafı':'yorum';
+    $('#hkSira').textContent=(hi+1)+' / '+K.length; }
+  function dongu(t){
+    rf=0; if(!gorunur) return;
+    if(!duraklat && !azHareket){ if(!t0) t0=t-gecen; gecen=t-t0; cubuklar[hi].style.transform='scaleX('+Math.min(1,gecen/SURE).toFixed(3)+')'; if(gecen>=SURE) goster(hi+1); }
+    else t0=0;
+    rf=requestAnimationFrame(dongu);
   }
-  function ileri(){ var L=liste(); if(mesgul||L.length<2)return; mesgul=true; var ust=$('#deste .not:last-child'); ust.classList.add('ucar'); setTimeout(function(){ri=(ri+1)%L.length;desteCiz();mesgul=false;},azHareket?0:430); }
-  function geri(){ var L=liste(); ri=(ri-1+L.length)%L.length; desteCiz(); }
-  $('#desteIleri').addEventListener('click',ileri); $('#desteGeri').addEventListener('click',geri);
-  var dX=null; $('#deste').addEventListener('pointerdown',function(e){dX=e.clientX;}); $('#deste').addEventListener('pointerup',function(e){if(dX===null)return;var f=e.clientX-dX;dX=null;if(f<-40)ileri();else if(f>40)geri();});
+  var uzun=false;
+  $('#hkIleri').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi+1);});
+  $('#hkGeri').addEventListener('click',function(){ if(uzun){uzun=false;return;} goster(hi-1);});
+  function durSet(v){ duraklat=v; $('#hkDur').setAttribute('aria-label',v?'Oynat':'Durdur'); $('#hkDurIco').innerHTML=v?'<path d="M8 5l11 7-11 7z"/>':'<path d="M9 6v12M15 6v12"/>'; }
+  $('#hkDur').addEventListener('click',function(){durSet(!duraklat);});
+  var basili=0;
+  $('#hk').addEventListener('pointerdown',function(e){ if(e.target.closest('.hk-dur'))return; uzun=false; basili=setTimeout(function(){duraklat=true;basili=-1;uzun=true;},260); });
+  function birakHk(){ if(basili===-1){ duraklat=$('#hkDur').getAttribute('aria-label')==='Oynat'; } else clearTimeout(basili); basili=0; }
+  $('#hk').addEventListener('pointerup',birakHk); $('#hk').addEventListener('pointercancel',birakHk);
+  new IntersectionObserver(function(es){ gorunur=es[0].isIntersecting; t0=0; if(gorunur && !rf) rf=requestAnimationFrame(dongu); },{threshold:.4}).observe($('#hk'));
+  goster(0);
+  if(azHareket){ durSet(true); }
 
   /* ---------- Kutuyu aç ---------- */
   var kd=$('#kutuDiskler'), html='';
@@ -618,30 +684,46 @@ button{font:inherit;color:inherit}
   function kutuAyarla(acik){ kutu.classList.toggle('acik-kutu',acik); kutu.setAttribute('aria-pressed',acik); $$('#kutu .parca').forEach(function(x){ x.style.transitionDelay=acik?((x.dataset.gecikme||0)+'ms'):'0ms'; }); }
   kutu.addEventListener('click',function(){kutuAyarla(!kutu.classList.contains('acik-kutu'));});
 
-  /* ---------- Disk halkası ---------- */
+  /* ---------- Diski tak ---------- */
   var DISK=['Ay ve yıldız','Okyanus','Uzay','Deniz kızı','Denizanası','Şato','Hayvanlar','Gökkuşağı','Kış gecesi','Taşıtlar','Masal','Doğum günü'];
-  var halka=$('#halka'), adim=0, R=150;
-  DISK.forEach(function(ad,i){ var bt=document.createElement('button'); bt.setAttribute('aria-label',ad+' diski'); bt.style.transform='rotateY('+(i*30)+'deg) translateZ('+R+'px)'; bt.innerHTML='<img src="g/disk'+(i+1)+'.jpg" alt="">'; bt.addEventListener('click',function(){ var hedef=i, simdi=((adim%12)+12)%12, fark=((hedef-simdi+18)%12)-6; diskGit(adim+fark); }); halka.appendChild(bt); });
-  var aktifA=true;
-  function diskGit(n){ adim=n; var sec=((n%12)+12)%12; halka.style.transform='rotateY('+(-n*30)+'deg)'; $$('#halka button').forEach(function(x,i){x.classList.toggle('on',i===sec);});
-    var a=$('#tavanA'), bb=$('#tavanB'), yeni=aktifA?bb:a, eski=aktifA?a:bb; yeni.src='g/disk'+(sec+1)+'.jpg'; yeni.classList.remove('eski'); eski.classList.add('eski'); aktifA=!aktifA;
-    $('#diskAd').textContent=DISK[sec]; $('#diskSayi').textContent=(sec+1)+' / 12 · masal başına ₺141'; }
-  $('#halkaIleri').addEventListener('click',function(){diskGit(adim+1);}); $('#halkaGeri').addEventListener('click',function(){diskGit(adim-1);});
-  var hX=null,hBas=0; var s3=$('#sahne3d');
-  s3.addEventListener('pointerdown',function(e){ if(e.target.closest('.halka-ok'))return; hX=e.clientX; hBas=adim; s3.classList.add('surukleniyor'); });
-  window.addEventListener('pointermove',function(e){ if(hX===null)return; var f=(e.clientX-hX)/40; halka.style.transform='rotateY('+(-(hBas-f)*30)+'deg)'; });
-  window.addEventListener('pointerup',function(e){ if(hX===null)return; var f=Math.round((e.clientX-hX)/40); s3.classList.remove('surukleniyor'); hX=null; if(f!==0) diskGit(hBas-f); else diskGit(adim); });
-  diskGit(0);
+  var tepsi=$('#dtTepsi'), oda=$('#dtOda'), dtMesgul=false, dtDokunuldu=false;
+  tepsi.innerHTML=DISK.map(function(a,i){return '<button class="dt-disk" type="button" data-i="'+i+'" aria-pressed="false" aria-label="'+a+' diskini tak"><img src="g/disk'+(i+1)+'.jpg" alt="" loading="lazy"></button>';}).join('');
+  function yak(i){
+    $('#dtTavan').src='g/disk'+(i+1)+'.jpg'; $('#dtAd').textContent=DISK[i]; $('#dtSayac').textContent=(i+1)+' / 12 · '+DISK[i];
+    oda.classList.remove('yandi'); void oda.offsetWidth; oda.classList.add('yandi');
+  }
+  function tak(bt){
+    if(dtMesgul) return; var i=+bt.dataset.i;
+    $$('.dt-disk').forEach(function(x){x.setAttribute('aria-pressed',x===bt);});
+    if(azHareket){yak(i);return;}
+    dtMesgul=true;
+    var r=bt.getBoundingClientRect(), o=oda.getBoundingClientRect();
+    var hx=o.left+o.width*.5-29, hy=o.top+o.height*.6-29; /* lambanın kubbesi */
+    var u=document.createElement('span'); u.className='dt-ucan'; u.style.left=r.left+'px'; u.style.top=r.top+'px'; u.innerHTML='<img src="g/disk'+(i+1)+'.jpg" alt="">'; document.body.appendChild(u);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){ u.style.transform='translate('+(hx-r.left)+'px,'+(hy-r.top)+'px) scale(.35) rotate(200deg)'; u.style.opacity='0'; });});
+    setTimeout(function(){ yak(i); }, 620);
+    setTimeout(function(){ u.remove(); dtMesgul=false; }, 900);
+  }
+  $$('.dt-disk').forEach(function(bt){ bt.addEventListener('click',function(){ dtDokunuldu=true; tak(bt); }); });
+  tepsi.addEventListener('pointerdown',function(){dtDokunuldu=true;},{passive:true});
+  $('#dtSifirla').addEventListener('click',function(){ dtDokunuldu=true; oda.classList.remove('yandi'); $('#dtAd').textContent='Henüz seçilmedi'; $('#dtSayac').textContent='12 disk · masal başına ₺141'; $$('.dt-disk').forEach(function(x){x.setAttribute('aria-pressed','false');}); });
+  /* Görünür olduktan 2 sn sonra dokunulmamışsa ilk diski kendisi takar (bir kez) */
+  var dtZaman=0;
+  new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ dtZaman=setTimeout(function(){ if(!dtDokunuldu){ tak($('.dt-disk')); } ob.disconnect(); },2000); } else clearTimeout(dtZaman); },{threshold:.6}).observe(oda);
 
   /* ---------- Bir gece: eğik makaralar ---------- */
+  /* Görünen video oynar, görünmeyen durur */
+  var vidIO=new IntersectionObserver(function(es){ es.forEach(function(e){ var v=e.target; if(e.isIntersecting){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } else v.pause(); }); },{threshold:.35});
   function makaraKur(){
     var kiz=S.model==='kiz', M=[
-      ['20:00','Işığı yak','Sıcak, göz yormayan ay ışığı','g/elde.jpg','50% 40%'],
-      ['20:30','Diski seç','Kubbeyi aç, bu gecenin masalı','g/yuva.jpg','50% 50%'],
-      ['20:45',kiz?'Ninniyi aç':'Robotu çevir',kiz?'Telefondan bağla, lambadan çalsın':'Uzay Kaşifi tavana döner',kiz?'g/kiz-dunya.jpg':'g/erkek-dunya.jpg','50% 60%'],
-      ['21:00','Tavanda masal','Yıldızlar yavaşça döner','g/tavan.jpg','50% 50%'],
-      ['21:15','Gözler kapanır','Oda karanlıkta kalmaz',kiz?'g/kiz-gece.jpg':'g/erkek-gece.jpg','50% 40%']];
-    $('#makaralar').innerHTML=M.map(function(m){return '<article class="makara"><img src="'+m[3]+'" alt="'+m[1]+'" style="object-position:'+m[4]+'"><span class="s">'+m[0]+'</span><div class="y"><b>'+m[1]+'</b><span>'+m[2]+'</span></div></article>';}).join('');
+      ['20:00','Işığı yak','Sıcak, göz yormayan ay ışığı','v/m1-isik'],
+      ['20:30','Diski seç','Kubbeyi aç, bu gecenin masalı','v/m2-disk'],
+      ['20:45',kiz?'Ninniyi aç':'Robotu çevir',kiz?'Telefondan bağla, lambadan çalsın':'Uzay Kaşifi tavana döner',kiz?'v/m3-kiz':'v/m3-erkek'],
+      ['21:00','Tavanda masal','Yıldızlar yavaşça döner','v/m4-tavan'],
+      ['21:15','Gözler kapanır','Oda karanlıkta kalmaz',kiz?'v/m5-kiz':'v/m5-erkek']];
+    /* Sessiz döngü videolar; azaltılmış harekette yalnız poster görünür */
+    $('#makaralar').innerHTML=M.map(function(m){return '<article class="makara"><video muted playsinline loop '+(azHareket?'preload="none"':'autoplay preload="metadata"')+' poster="'+m[3]+'.jpg" aria-label="'+m[1]+'" disablepictureinpicture><source src="'+m[3]+'.mp4" type="video/mp4"></video><span class="s">'+m[0]+'</span><div class="y"><b>'+m[1]+'</b><span>'+m[2]+'</span></div></article>';}).join('');
+    $$('#makaralar video').forEach(function(v){ v.muted=true; if(azHareket){v.removeAttribute('autoplay');v.pause();} else vidIO.observe(v); });
     makaraEgim();
   }
   function makaraEgim(){
@@ -676,7 +758,7 @@ button{font:inherit;color:inherit}
   /* ---------- İller ---------- */
   'Adana Adıyaman Afyonkarahisar Ağrı Aksaray Amasya Ankara Antalya Ardahan Artvin Aydın Balıkesir Bartın Batman Bayburt Bilecik Bingöl Bitlis Bolu Burdur Bursa Çanakkale Çankırı Çorum Denizli Diyarbakır Düzce Edirne Elazığ Erzincan Erzurum Eskişehir Gaziantep Giresun Gümüşhane Hakkari Hatay Iğdır Isparta İstanbul İzmir Kahramanmaraş Karabük Karaman Kars Kastamonu Kayseri Kilis Kırıkkale Kırklareli Kırşehir Kocaeli Konya Kütahya Malatya Manisa Mardin Mersin Muğla Muş Nevşehir Niğde Ordu Osmaniye Rize Sakarya Samsun Şanlıurfa Siirt Sinop Sivas Şırnak Tekirdağ Tokat Trabzon Tunceli Uşak Van Yalova Yozgat Zonguldak'.split(' ').forEach(function(il){var o=document.createElement('option');o.textContent=il;$('#il').appendChild(o);});
 
-  cipCiz(); desteCiz(); modelUygula(); fiyatUygula(); sayac(); motor();
+  modelUygula(); fiyatUygula(); sayac(); motor();
 })();
 </script>
 </body>
