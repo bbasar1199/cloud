@@ -136,6 +136,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Kutu: lamba + 6 disk + 6 hediye disk + USB kablo. Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan çekilir (4,7 · 62, teyit bekliyor). "Elif K.", 2.467, 10.000+ ve 12.000+ uydurmadır.
 - Bilinmeyen değer köşeli yer tutucu kalır: [X] cm, [X] saat, [yaş], [Firma unvanı], [numara].
+- LunaDream (17 Eki teyidi): iki model de Bluetooth ninni; 3 parlaklık ayarı; her yaş için; her kutuda 6 + 6 hediye disk; boyut ve pil süresi yazılmaz; Ekim kampanyası 1–31 Ekim; tüm kartlar geçer; stok satırı elle (şimdilik 18); iade kodu Ayluna'dan, iade kargosu ücretsiz; Loox müşteri fotoğrafları kullanılabilir.
 
 ## İş verisi → tasarım kuralı
 - Kapıda ödemede iade %28,6, ön ödemede %0,8. İadelerin %92'si "alıcı bulunamadı".

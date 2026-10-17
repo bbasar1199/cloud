@@ -286,6 +286,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Model kartı yalnız Kız / Erkek. 2 Adet seçilince paketin altında "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]" (durum `l1`, `l2`; boşsa model kartındaki seçim). 2'li paket görseli ve yapışkan çubuk ("2 Kız", "2 Erkek", "Kız + Erkek") seçime göre değişir.
 - Kural: eleştirmen önerileri kullanıcı seçmeden toplu uygulanmaz.
 
+## Tur 15 · Gerçek bilgiler işlendi (17 Ekim, gece)
+- Kullanıcının verdikleri sayfaya işlendi:
+  - Kampanya 1–31 Ekim
+  - "Stokta son 18 adet" (elle; "dün" satırı kalktı)
+  - 2'li pakette "Her kutuda +6 hediye disk"
+  - Sihirli: "3 parlaklık ayarı"; Bluetooth ninni iki modelde
+  - SSS: her yaş, Bluetooth iki modelde, tüm kartlar, ücretsiz iade kodu, 3 parlaklık
+  - 30 gün: "İade kargosu ücretsiz."
+  - boyut/pil satırı kalktı
+- Hâlâ bekleyenler:
+  - satıcı bilgileri
+  - Loox 4,7/62 teyidi
+  - videolar
+  - tavan fotoğrafları
+  - Bir gece görselleri: Flow bu bulut oturumundan çalışmaz; claude.ai sohbetinde Claude in Chrome ile ya da HF_TOKEN ile. İstemler `araclar/gorsel/bir_gece_uret.py` içinde.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
