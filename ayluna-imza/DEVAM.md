@@ -302,6 +302,57 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - tavan fotoğrafları
   - Bir gece görselleri: Flow bu bulut oturumundan çalışmaz; claude.ai sohbetinde Claude in Chrome ile ya da HF_TOKEN ile. İstemler `araclar/gorsel/bir_gece_uret.py` içinde.
 
+## Tur 16 · Yeni deneme: C "Gece hikâyesi" ve yeni ajanların ilk testi (17 Ekim, gece)
+- Kullanıcı: "Yeni bir dokunuşa başlayalım, yeni bir tasarım dene; yeni ajanlar işe yarayacak mı?"
+- **Pano:** `canvas/LunaDreamC.dc.html` (üretici `araclar/tuval-uret/luna_c.py`). Tuvalde B+'nın sağında (x=2350, y=3100), Sürüm 54. B+ değişmedi.
+  - B+'nın onaylı parçaları üreticiden birebir alınır: sahne, levha, Sihirli, model, paket, lamba seçimi, butonlar, SSS, diğer ürünler, alt bilgi, yapışkan çubuk.
+  - **Kapına gelecek:** paket ile butonlar arasında. 1 ya da 2 çizgi kutu; içinden gerçek lamba çıkar. Lamba görselleri stüdyo fotoğrafından yalnız arka planı temizlenmiş kesimlerdir (`canvas/c-gorsel/lamba-*.png`, OpenCV GrabCut). Metin: "Kapına 2 kutu gelir. Her kutuda lamba, 6 + 6 hediye disk ve USB şarj kablosu."
+  - **Gece hikâyesi:** videolar, yorumlar, Bir gece, diskler, kutu ve 30 gün tek bölümde toplandı. 6 kare:
+    1. masal
+    2. disk seç ve tavanda gör
+    3. ninni
+    4. 3 yorum
+    5. müşteri fotoğrafları
+    6. iade, kargo, kapıda ödeme ve buton
+    - Kareler dokunarak ilerler, kendiliğinden ilerlemez. İlerleme çizgisi yerine 6 ay evresi var: görülen kare dolu, görülmeyen yalnız çizgi, son kare dolunay.
+  - Sayfa 6150 → 3999px.
+  - Galerinin ilk üç fotoğrafı yerel dosyalardan yeniden yüklendi (`canvas/c-gorsel/`). Yerel önizleme artık tuvalle aynı görselleri gösteriyor.
+- **design-review (teknik):**
+  - Engel yok. 2 Yüksek bulgu:
+    - gizli karelerdeki 13 düğme Tab ile odak alıyordu
+    - ileri/geri odak çizgisi görünmüyordu
+  - Orta bulgular:
+    - ay düğmesi 44px
+    - eksik tablist kalıbı
+    - geçişte "hayalet" yazı
+    - açık zeminde amber "30"
+    - kare yüksekliği 520px
+  - Hepsi düzeltildi. Gizli kare `visibility:hidden` oldu, geçiş "önce sön, sonra gel" biçiminde. Betikle doğrulandı: odak alan gizli öğe 0, ay düğmesi 48px.
+- **Eleştirmen (zevk):**
+  - Puanlar: B+ 6/10, C 7/10.
+  - En beğendiği 3 fikir:
+    1. Kapına gelecek
+    2. 3 karelik ürün hikâyesi
+    3. Ay evreleri
+  - Beğenmedikleri:
+    - yorumlar ve müşteri fotoğrafları dokunmanın arkasında kalıyor
+    - Videolar bölümü kalktı (kullanıcı istemişti)
+    - 6. kare "Işık kapanınca" başlığının altında anlatıyı koparıyor
+  - Kural düzeltmeleri hemen uygulandı:
+    - "Yasal 14 günü 30 güne uzattık" (mevzuat 4)
+    - 48px dokunma alanı
+    - daha kısa kutu metni
+  - Zevk önerileri uygulanmadı; kullanıcı seçecek.
+- **Kullanıcıya soruldu:** C'den B+'ya ne taşınsın? Seçenekler:
+  - Kapına gelecek
+  - ürün hikâyesi (yorum şeridi dışarıda kalsın)
+  - ay evreleri
+  - C'nin tamamı
+- Riskler:
+  - `[gerçek tavan fotoğrafı]` hâlâ yer tutucu
+  - yeni oda sahnelerindeki duvar yıldızları gerçek yansımadan net olabilir; gerçek fotoğrafla karşılaştırılmalı
+  - canlıda 1. kare video olursa "Sesi aç" ayrı düğme olmalı
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.

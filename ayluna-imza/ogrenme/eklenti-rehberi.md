@@ -59,3 +59,18 @@ Kullanım sırası (Ayluna):
 2. Değişiklikten sonra teknik denetim: `/design-review` (kırık, erişilemez, tutarsız olan).
 3. İnce cila: make-interfaces-feel-better, web-design-guidelines kendiliğinden devreye girer.
 4. Bulgular kullanıcıya seçenek olarak gider; toplu uygulanmaz.
+
+## İlk test: Tur 16, C panosu (17 Ekim 2026)
+
+İki ajan aynı panoya paralel bakınca birbirini tamamladı.
+
+| Ajan | Bulduğu | Kaçırdığı |
+|---|---|---|
+| `design-review` (yeni) | Klavye odağı gizli karelerde (13 öğe), görünmeyen odak çizgisi, eksik ARIA kalıbı, geçişte üst üste binen yazı, kontrast 2,28:1, iPhone SE'de sığmama. Ölçerek buldu (Playwright betikleri, kontrast hesabı). | Satış ve kullanıcı geçmişi: Videolar bölümünün kullanıcı isteği olduğu, sosyal kanıtın saklandığı |
+| `ayluna-elestirmen` | Sosyal kanıt saklanıyor, Videolar kalkmış, mevzuat cümlesi düşmüş, metin tekrarı, puan ve 3 fikir | Klavye ve ekran okuyucu sorunlarının hepsi |
+
+Sonuç: Her tasarım turunda ikisi birlikte, paralel çalışır.
+- design-review bulguları teknik hatadır; sorulmadan düzeltilir.
+- Eleştirmenin zevk önerileri kullanıcıya seçenek olarak gider.
+- design-review, Playwright MCP olmadan da yerel önizleyici ve düz Playwright betikleriyle çalıştı.
+- web-design-guidelines ve make-interfaces-feel-better kuralları ajan içinden kontrol listesi olarak kullanıldı (iç içe köşe yarıçapı, `touch-action`, scroll-snap boşluğu bunlardan geldi).
