@@ -140,7 +140,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 8. Galeride mağaza posterleri var ve yazılı. **İkisinde doğrulanmamış yorum var** ("Elif K." kartı, isimli yorum kolajı). v2'de çıkarıldı; canlı sitede ve reklamlarda da kaldırılmalı.
 
 ## 5. Sayfa yapısı (Main)
-1. ~~Gece sahnesi ve "Işığı kapat"~~ (17 Ekim'de çıkarıldı): yerine ana ürün fotoğraflı galeri ve küçük resim şeridi.
+1. Gece sahnesi galeri: ana ürün fotoğrafları kırpılmadan, kenarlarda süzülen diskler, üstte küçük resimler, altına binen levha (Tur 8). "Işığı aç/kapat" anahtarı ve saat yok (17 Ekim).
 2. Karar levhası (sahnenin üstüne −30px biner). Sırası:
    - puan, Stokta, H1
    - 4'lü özellik şeridi
@@ -260,12 +260,14 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Emoji benefiti hiçbirinde beğenmedim" | Durağan emoji ya da ikon fayda listeleri beğenilmedi. (Aynı gün daraltıldı: animasyonlu "Sihirli Özellikler" isteniyor, aşağıya bak.) |
 | 17 Eki | "Model seçim kısmı idare eder" (Main'deki küçük stüdyo fotoğraflı kartlar) | Model kartları kalır; daha iyisi bulunursa önerilir. |
 | 17 Eki | "Ürün fotoğrafları ana ürün fotoğrafları olacak" | Galeri Shopify'daki ana ürün medyasından gelir; özel sahne görseli galeriye konmaz. ("Elif K." ve yorum kolajı içeren 2 görsel mevzuat gereği ürün medyasından çıkarılmalı.) |
-| 17 Eki | "Işığı aç kapat kısmını kullanmayız" | Gece sahnesi ve "Işığı kapat" anahtarı yok. |
+| 17 Eki | "Işığı aç kapat kısmını kullanmayız" | "Işığı aç/kapat" anahtarı ve saat yok. (Gece sahnesi çerçevesi sonra geri istendi, aşağıya bak.) |
 | 17 Eki | "Basit emojiler, sıkıcı tasarımlar hâlâ devam ediyor" | Tasarım sıkıcı bulunuyor. Sade şablon görünümü yetmez; karakterli, akılda kalan görsel dil gerekir. Yön seçimi yeniden açık. |
 | 17 Eki | "B+ ile devam et, ama emoji benefit olmalı; önceden animasyonlu bir benefit yapmıştık, ürünün 4 özelliğini gösteriyordu" | **Seçilen yön: B+ Gece Postası.** "İkonlu fayda yok" kuralı daraltıldı: **durağan** emoji ya da ikon listesi istenmiyor. "Ayluna Yeni Tasarım" tuvali I yönündeki **animasyonlu "Sihirli Özellikler"** bloğu isteniyor. Bu blok 2×2 kart: ikon kutusu, başlık, tek cümle ve ürüne özgü küçük animasyon (nefes alan hale, yelpaze diskler, dolan pil…). Yeri canlıdaki gibi model seçiminden sonra. Uydurma madde ("+10.000 Mutlu Anne") ve teyitsiz madde ("21 ışık modu") konmaz. |
 | 17 Eki | "Şu anki kapıda ödeme ve bundle şeklimi koru" | **Canlı sitedeki yapı korunur.** Paket: alt alta "1 Adet / 2 Adet" kartları, ürün küçük resmi, % indirim, fiyat ve eski fiyat, altta "+6 Tane Ücretsiz Hediye Disk" şeridi, 2 Adet'te "En Çok Tercih Edilen" kurdelesi. Altında iki ayrı buton: "Güvenli Ödeme İle Al" (online) ve "Kapıda Ödeme ile Sipariş Ver" (uygulamanın açılır formu). Ödeme seçici kartları kullanılmaz. |
 | 17 Eki | "Görsel kısmını diğeri gibi yapalım ama emoji benefit kısmını biraz daha iyileştirelim; renkler vesaire çok boğuyor" | **Sihirli Özellikler sakin olur.** Koyu ve amber dolu kartlar yok; kartlar beyaz. **Amber yalnız ikonda ve hareket eden parçada** (ışık). Gölge yok, 1px çizgi. Açık zeminde amber etiket okunmuyor: etiket rengi `#A05A1C`. Disk satırı "6 + 6 masal diski"; Erkek satırı özellik anlatır ("Tavanda uzay"). Altındaki "hayal" bandı da açık (krem). |
 | 17 Eki | "Sihirli V1 iyi gibi, sen ne dersin" (eleştirmen V3 Liste'yi seçmişti) | **Seçilen: V1 Sade beyaz.** 2×2 beyaz kart, lacivert ikon kutusu + amber ikon. Her kartta üst satır: solda ikon, sağda canlı gösterge (aynı yerde); altında başlık ve tek cümle (15px, dengeli kırılım). Ay kartında hale ikon kutusunun arkasında parlar. Eleştirmen kullanıcıdan farklı seçerse karar kullanıcınındır; eleştirmenin düzeltmeleri seçilen varyanta uygulanır. |
+| 17 Eki | Main'in galeri ekran görüntüsü: "Görsel kısmı böyle olsun ama bizim ürün görsellerimiz olacak yine" | **Galeri = gece sahnesi.** Gece laciverti zemin, üstte logo, ana ürün fotoğrafı (kare poster) kırpılmadan tam genişlik, alt kenarı geceye karışır; hediye diskleri fotoğrafın kenarında süzülür (ürünü kapatmaz); küçük resimler ve "1/7" sayacı fotoğrafın üstünde; altına yuvarlak köşeli levha biner (tutamak, puan, Stokta). "Işığı aç" anahtarı ve saat yine yok. |
+| 17 Eki | Kullanıcı tuvalde sildi: "Işığı kapattığında tavanda masal başlar" alt başlığı ve "hayal" bandı (müşteri fotoğraflı) | Başlıktan hemen sonra fiyat gelir; alt başlık yok. Sihirli Özellikler'in altında ek bant yok. Kullanıcının tuvalde yaptığı silme/taşımalar üreticiye (`luna_bplus.py`) işlenir; yayından önce tuvaldeki sürüm okunur. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

@@ -51,12 +51,12 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Yeri model seçiminden sonra.
   - Uydurma ya da teyitsiz madde yok ("+10.000 Mutlu Anne", "21 ışık modu").
 - **Seçilen yön (17 Ekim): B+ Gece Postası.**
-  - lacivert üst bant, tam genişlik galeri, büyük "LunaDream." başlığı
+  - gece sahnesi galeri (aşağıda), büyük "LunaDream." başlığı
   - seçili kart lacivert, fiyatı amber
   - amber, basılınca çöken "Güvenli Ödeme İle Al"; çizgili "Kapıda Ödeme ile Sipariş Ver"
   - noktalı teslim çizgisi
   - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
-- "Işığı kapat" anahtarı ve gece sahnesi kullanılmaz. Galeri ana ürün fotoğraflarından gelir.
+- "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.
 - **Paket ve ödeme canlı sitedeki gibi kalır:**
   - alt alta "1 Adet / 2 Adet" kartları ve altlarında "+6 Tane Ücretsiz Hediye Disk" şeridi
   - "Güvenli Ödeme İle Al" ve "Kapıda Ödeme ile Sipariş Ver" diye iki ayrı buton
@@ -88,7 +88,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **İkon:** ince çizgili SVG, ilk çizgi amber. Emoji asla.
 
 ## Sayfa akışı (ürün sayfası)
-1. Galeri: ana ürün fotoğrafları (gece sahnesi ve ışık anahtarı yok).
+1. Galeri: gece sahnesi çerçevesinde ana ürün fotoğrafları (ışık anahtarı yok).
 2. Üstüne binen karar levhası. Sırası:
    - puan ve Stokta, H1
    - 4'lü özellik şeridi

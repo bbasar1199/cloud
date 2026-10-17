@@ -111,6 +111,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - "6 + 6 masal diski · Diskleri gör", Erkek'te "Tavanda uzay"
   - Eleştirmenin V3 için önerdiği renk ve yazı düzeltmeleri V1'e uygulandı.
 
+## Tur 8 · Galeri gece sahnesi oldu (17 Ekim, gece)
+- Kullanıcı Main'in galerisini gösterdi: "Görsel kısmı böyle olsun ama bizim ürün görsellerimiz olacak yine".
+- `luna_bplus.py` → `.sahne`:
+  - gece laciverti zemin, üstte logo
+  - kare ürün posteri 390×390, kırpılmaz; alt kenarı geceye karışır
+  - 3 hediye diski kenarlarda süzülür (7 sn)
+  - küçük resimler ve "1/7" fotoğrafın üstünde
+  - altına yuvarlak köşeli levha biner (tutamak, puan, Stokta)
+- "Işığı aç" anahtarı ve saat konmadı (17 Ekim kararı).
+- Kullanıcı tuvalde alt başlığı ve "hayal" bandını sildi; üreticiye işlendi. Pano yüksekliği 6100.
+- "Stokta" canlıda Shopify stok bilgisinden gelir; stok yoksa görünmez.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
