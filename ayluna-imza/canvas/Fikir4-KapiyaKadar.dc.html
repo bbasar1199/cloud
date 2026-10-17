@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Fikir · Kapıya kadar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.yol{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}
+.yol .cizgi{position:absolute;left:12.5%;right:12.5%;top:9px;height:2px;background:#E3D8C7}
+.yol .dolu{position:absolute;left:12.5%;right:12.5%;top:9px;height:2px;background:#F2A65A;transform-origin:0 50%;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.durak{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
+.durak .nokta{width:20px;height:20px;border-radius:50%;border:2px solid #C9BFAE;background:#F6F1E9;margin-bottom:6px;transition:background .3s,border-color .3s}
+.durak b{font-size:13px;font-weight:600;line-height:1.2}
+.durak span{font-size:12px;color:#5C6078;line-height:1.25}
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg" style="padding: 22px 0 26px">
+  <div class="px">
+      <div class="etiket" style="margin-top: 18px"><span>Ödeme</span></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+        <sc-for list="{{pays}}" as="o" hint-placeholder-count="2">
+          <button class="odeme" onClick="{{o.pick}}" aria-pressed="{{o.on}}" style="border-color: {{o.bd}}; background: {{o.bg}}">
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 6px"><b style="font-size: 13.5px; font-weight: 600">{{o.n}}</b><sc-if value="{{o.hasPct}}" hint-placeholder-val="{{false}}"><span class="rozet" style="background: #2E6B4F; color: #FFFDF9">%5 indirim</span></sc-if></span>
+            <span style="font-size: 12.5px; font-variant-numeric: tabular-nums; color: #5C6078; margin-top: 4px"><b style="color: #1A2142; font-weight: 600">{{o.price}}</b> <s style="opacity: .6">{{o.old}}</s></span>
+          </button>
+        </sc-for>
+      </div>
+      <button class="btn" type="button" style="margin-top: 12px">{{ctaLabel}}</button>
+
+      <!-- Kapıya kadar: tahmini teslim satırının yerine. Tarihler İstanbul saatiyle; 1 iş günü + 3–7 gün (mağaza politikası, teyit bekliyor). -->
+      <ol class="yol" aria-label="Siparişten teslime" style="list-style: none; padding: 0; margin-bottom: 0">
+        <span class="cizgi" aria-hidden="true"></span>
+        <span class="dolu" aria-hidden="true" style="transform: scaleX({{fill}})"></span>
+        <sc-for list="{{stops}}" as="d" hint-placeholder-count="4">
+          <li class="durak"><span class="nokta" aria-hidden="true" style="background: {{d.bg}}; border-color: {{d.bd}}"></span><b>{{d.t}}</b><span>{{d.s}}</span></li>
+        </sc-for>
+      </ol>
+      <p style="margin: 14px 0 0; padding: 10px 12px; border-radius: 12px; background: #FFFDF9; border: 1px solid #EDE3D3; font-size: 13px; line-height: 1.45; text-align: center">{{tail}}</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":372}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { pay: 'online', fill: 0 }; }
+  componentDidMount() { var self = this; this.t = setTimeout(function () { self.setState({ fill: 1 / 3 }); }, 300); }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    var self = this, S = this.state;
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
+    var kargo = kd.getDate() + ' ' + AY[kd.getMonth()];
+    var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+
+    var total = 2749.99, onTotal = Math.round(total * 0.95 * 100) / 100, online = S.pay === 'online';
+    var pays = [
+      { id: 'online', n: 'Kartla öde', price: TL(onTotal, true), old: TL(total, true), pct: true },
+      { id: 'kapida', n: 'Kapıda öde', price: TL(total, true), old: '', pct: false }
+    ].map(function (o) { var on = S.pay === o.id; return { n: o.n, price: o.price, old: o.old, hasPct: o.pct, on: on ? 'true' : 'false', bd: on ? '#1A2142' : '#E3D8C7', bg: on ? '#FFFDF9' : 'transparent', pick: function () { self.setState({ pay: o.id }); } }; });
+
+    var stops = [
+      { t: 'Bugün', s: 'Sipariş' },
+      { t: 'Bugün', s: 'WhatsApp onayı' },
+      { t: kargo, s: 'Kargoda' },
+      { t: teslim, s: online ? 'Kapında' : 'Kapıda öde' }
+    ].map(function (d, i) { return { t: d.t, s: d.s, bg: i === 0 ? '#F2A65A' : '#F6F1E9', bd: i < 2 ? '#F2A65A' : '#C9BFAE' }; });
+    return {
+      pays: pays, stops: stops, fill: S.fill,
+      ctaLabel: online ? 'Kartla öde · ' + TL(onTotal, true) : 'Kapıda ödemeyle al · ' + TL(total, true),
+      tail: online ? 'İlk masal, teslim akşamı.' : 'Teslim günü telefonun açık olsun; ödemeyi kapıda nakit ya da kartla yaparsın.'
+    };
+  }
+}
+</script>
+</body>
+</html>

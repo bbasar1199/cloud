@@ -40,8 +40,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Online ödemede %5: kullanıcı 17 Ekim'de kendisi söyledi ("kartla %5 indirim"). İndirim kodu Shopify'da tanımlanmalı.
 - Ürün görselleri gerçek üründen Google Flow (Nano Banana Pro) ile üretildi; ürünün kendisi değiştirilmez.
 
+## Tur 4 · yeni site başladı (17 Ekim, akşam)
+- Kullanıcı kararı: **sıfırdan, benzersiz Ayluna teması.** Hazır tema kopyalanmaz; şu an canlıda ChatGPT ile yapılmış bir sürüm var. İlk iş LunaDream sayfası.
+- `canvas/LunaDreamV2.dc.html` tuvale eklendi ("Tur 4"). Main'den farkları:
+  - Main'in 8 kusuru düzeltildi; mevzuat düzeltmeleri yapıldı.
+  - Galeride "Elif K." ve doğrulanmamış yorum kolajı içeren mağaza posterleri vardı; yazısız ürün sahneleriyle değiştirildi.
+  - Zam sayacı `zamSayaci` ayarıyla, varsayılan kapalı.
+  - Kampanya şeridine dokununca "Fiyat nasıl?" açıklaması açılıyor.
+- Eleştirmenin seçtiği 3 fikir panosu kullanıcı onayı bekliyor:
+  - `Fikir4-KapiyaKadar`: tarihli teslim çizgisi
+  - `Fikir5-TavanaYansit`: disk seçilince tavanda görünür; gerçek tavan fotoğrafları çekilmeli
+  - `Fikir6-HediyeMi`: hediye anahtarı
+- Theme Check yerelde kurulabilir: `npm i @shopify/theme-check-node` (scratchpad'e), sonra `node node_modules/@shopify/theme-check-node/dist/cli.js <tema-klasörü>`.
+
 ## Sıradaki işler (17 Ekim, güncel)
-1. **Shopify bölümlerini Main.dc'den yeniden türet.** Bugünkü bölümler iskelet.html'den geliyor, seçilen tasarımı yansıtmıyor. Main'in kusurlarını taşırken düzelt (`TASARIM-BILGISI.md` §4).
+1. Kullanıcıdan v2 ve 3 fikir için onay al.
+2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
 2. Fiyat ve mevzuat soruları: son 10 günün fiyatı, Kasım zammı, iade metni (`TASARIM-BILGISI.md` §11).
 3. Kullanıcıdan teyitler: ölçü, pil, yaş, teslim, varyant yapısı, kapıda ödeme seçicisi.
 4. Shopify'a kurulum ve gerçek telefonda, Instagram içinden deneme.

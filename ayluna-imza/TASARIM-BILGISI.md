@@ -109,7 +109,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 - **Şekil:**
   - Köşe: levha 28, kart 14–22, buton 16, input 12, çip 999.
   - Kenar 16px. Gölge yerine 1px çizgi.
-  - Dokunma alanı ≥48px (Shopify önerisi; Main'de çipler 40px).
+  - Dokunma alanı ≥48px (Shopify önerisi; Main'de çipler 40px). v2'de uygulandı.
 - **Hareket:**
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
   - İmza an "Işığı kapat".
@@ -124,7 +124,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 5. "Annelerin videoları" bölümü fotoğrafı video gibi gösteriyor. Gerçek video yoksa bölüm gizlenir.
 6. 16:00 kargo kesimi teyitsiz. Sayaç cihaz saatiyle çalışıyor; İstanbul saati olmalı.
 7. "Tüm ürünler · 15" yazıyor, listede 13 ürün var. 10,5px yazı ve 40px çip var.
-8. Galeride mağaza posterleri var ve yazılı. Yazısız kareler tercih edilmeli.
+8. Galeride mağaza posterleri var ve yazılı. **İkisinde doğrulanmamış yorum var** ("Elif K." kartı, isimli yorum kolajı). v2'de çıkarıldı; canlı sitede ve reklamlarda da kaldırılmalı.
 
 ## 5. Sayfa yapısı (Main)
 1. Gece sahnesi: "Işığı kapat" anahtarı, 1/11 galeri, küçük resim şeridi.
@@ -182,6 +182,7 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
 
 ## 7. Mevzuat ve dürüstlük (8 kural; kaynaklar `ogrenme/arastirma.md`)
 1. ✓ Üstü çizili önceki fiyat = indirimden önceki **10 gün** içinde ayluna.shop'ta uygulanan en düşük fiyat. Kampanya tarihleri yazılır, ispat satıcıdadır. Fiyat sabitse `compare_at_price` boş kalır. Kaynak: Resmî Gazete 1 Temmuz 2026 / 33297, yürürlük 1 Ağustos 2026.
+1b. Bu kural **bütün ürünlerdeki** üstü çizili fiyatlar için geçerli (nemlendirici ₺1.099, projektör ₺2.999 vb.); her birinin son 10 gün kanıtı olmalı.
 2. ✓ Şartlı indirimler de bu kurala tabidir: kartla %5, paket kazancı. ₺3.998 gibi "2 × eski fiyat" yerine "2 ayrı almaya göre ₺649,99 daha az" yazılır. Hukukçu teyidi önerilir.
 3. ✓ Satın alımı doğrulanamayan yorum yayımlanamaz. Olumsuz yorum gizlenemez. Puan ve sayı Loox'tan gelir; veri yoksa blok gizlenir.
 4. Yasal cayma 14 gündür. "30 gün iade" = 14 yasal + 16 Ayluna. Yasal hak özel avantaj gibi sunulmaz.

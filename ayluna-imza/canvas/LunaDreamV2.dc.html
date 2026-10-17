@@ -25,7 +25,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1),background .15s}
 .btn:hover{background:#2B3463;color:#FFFDF9}
 .btn:active{transform:scale(.985)}
-.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #DDD2C1;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:999px;border:1px solid #DDD2C1;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
 .chip.on{background:#1A2142;color:#FFFDF9;border-color:#1A2142}
 
 /* --- İmza hareketler (yalnız transform + opacity) --- */
@@ -53,7 +53,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .kare{flex:none;width:48px;height:48px;padding:0;border-radius:12px;border:2px solid rgba(255,253,249,.28);background:#0C1027;overflow:hidden;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .kare:active{transform:scale(.94)}
 .kare img{display:block;width:100%;height:100%;object-fit:cover}
-.anahtar{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:4px 14px 4px 4px;border-radius:999px;border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:600;transition:background .6s,color .6s}
+.anahtar{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:4px 14px 4px 4px;border-radius:999px;border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:600;transition:background .6s,color .6s}
 .anahtar .yuva{width:46px;height:34px;border-radius:999px;position:relative;transition:background .6s}
 .anahtar .top{position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;transition:transform .5s cubic-bezier(.2,.7,.2,1),background .6s;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 
@@ -70,7 +70,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .mkart .foto{display:block;width:52px;height:52px;border-radius:10px;overflow:hidden;background:#EFE6D8}
 .mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.55);transform-origin:50% 62%}
 .mkart:active,.paket:active,.odeme:active{transform:scale(.98)}
-.paket{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;height:64px;padding:0 14px;border-radius:14px;border:1.5px solid;font:inherit;text-align:left;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.paket{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;min-height:64px;padding:10px 14px;border-radius:14px;border:1.5px solid;font:inherit;text-align:left;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
 .rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
 .serit2{display:flex;justify-content:space-between;align-items:center;gap:10px;height:38px;margin-top:8px;padding:0 12px;border-radius:12px;border:1px solid #E3D8C7;color:#1A2142;font-size:12.5px;font-weight:500}
 .odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
@@ -109,14 +109,15 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yk.koyu{background:#1A2142;border-color:#1A2142;color:#F3E9DA}
 .yk.koyu figcaption{color:#B9BED6}
 .yk.koyu .etk{background:rgba(242,166,90,.18);color:#F2A65A}
-.faq summary{list-style:none;cursor:pointer}
+.faq summary,.fiyatnot summary{list-style:none;cursor:pointer}
+.fiyatnot summary::-webkit-details-marker{display:none}
 .faq summary::-webkit-details-marker{display:none}
 .faq[open] .plus{transform:rotate(45deg)}
 .plus{transition:transform .2s}
 .pg{position:relative}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#E3D8C7;line-height:1}
 .yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
-.ince{display:flex;align-items:center;min-height:44px}
+.ince{display:flex;align-items:center;min-height:48px}
 @supports (animation-timeline: view()){
   .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
   @keyframes rv{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
@@ -258,7 +259,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
             </span>
             <span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; font-variant-numeric: tabular-nums">
               <b style="font-size: 17px; font-weight: 700; letter-spacing: -.02em">{{b.price}}</b>
-              <sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s style="font-size: 12px; opacity: .6; margin-top: 3px">{{b.old}}</s></sc-if>
+              <sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s style="font-size: 12px; opacity: .6; margin-top: 3px">{{b.old}}</s></sc-if><sc-if value="{{b.hasUnit}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; opacity: .75; margin-top: 3px">{{b.unit}}</span></sc-if>
             </span>
           </button>
         </sc-for>
@@ -273,10 +274,16 @@ a{color:#1A2142}a:hover{color:#2B3463}
         </div>
       </sc-if>
       <sc-if value="{{zamOff}}" hint-placeholder-val="{{true}}">
-        <div class="serit2">
-          <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span style="white-space: nowrap">Kampanya fiyatı</span></span>
-          <b style="font-variant-numeric: tabular-nums; color: #A05A1C; font-weight: 600; white-space: nowrap">[başlangıç] – [bitiş]</b>
-        </div>
+        <details class="fiyatnot" style="margin-top: 8px; border: 1px solid #E3D8C7; border-radius: 12px">
+          <summary style="display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; font-size: 13px; font-weight: 500; cursor: pointer">
+            <span style="white-space: nowrap">Kampanya · [tarih aralığı]</span>
+            <span style="font-size: 13px; color: #5C6078; white-space: nowrap; text-decoration: underline; text-underline-offset: 3px">Fiyat nasıl?</span>
+          </summary>
+          <div style="padding: 0 12px 12px; font-size: 13px; line-height: 1.5; color: #3A3F5A">
+            <p style="margin: 0">Önceki fiyat ₺1.999,00: kampanyadan önceki 10 günde bu sitede uygulanan en düşük fiyat.</p>
+            <p style="margin: 6px 0 0">Seçimin için: kartla <b>{{onPrice}}</b> · kapıda <b>{{selPrice}}</b>.</p>
+          </div>
+        </details>
       </sc-if>
 
       <!-- Birlikte al: tek satır -->
@@ -303,7 +310,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
       <sc-if value="{{formClosed}}" hint-placeholder-val="{{true}}">
         <button class="btn nefes" type="button" onClick="{{cta}}" style="margin-top: 12px">{{ctaLabel}}</button>
         <p class="mut" style="margin: 8px 0 0; font-size: 13px; text-align: center">{{shipText}}</p>
-        <sc-if value="{{isKapida}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{toOnline}}" style="display: block; margin: 2px auto 0; min-height: 44px; padding: 0 8px; border: 0; background: transparent; font: inherit; font-size: 12.5px; font-weight: 600; color: #2E6B4F; text-decoration: underline; text-underline-offset: 3px; cursor: pointer">Kartla öde, {{onSave}} daha az öde</button></sc-if>
+        <sc-if value="{{isKapida}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{toOnline}}" style="display: block; margin: 2px auto 0; min-height: 48px; padding: 0 8px; border: 0; background: transparent; font: inherit; font-size: 12.5px; font-weight: 600; color: #2E6B4F; text-decoration: underline; text-underline-offset: 3px; cursor: pointer">Kartla öde, {{onSave}} daha az öde</button></sc-if>
       </sc-if>
       <sc-if value="{{formOpen}}" hint-placeholder-val="{{false}}">
         <form onSubmit="{{submit}}" style="margin-top: 12px; padding: 16px; border-radius: 18px; background: #FFFDF9; border: 1.5px solid #1A2142; display: flex; flex-direction: column; gap: 12px">
@@ -316,7 +323,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
           </div>
           <div class="alan"><label for="adres">Açık adres</label><textarea id="adres" autocomplete="street-address" placeholder="Mahalle, sokak, bina ve daire no"></textarea></div>
           <div style="display: flex; justify-content: space-between; padding: 10px 0 2px; border-top: 1px dashed #DDD2C1; font-size: 14px"><span class="mut">Kapıda ödenecek · {{selTitle}}</span><b style="font-variant-numeric: tabular-nums">{{selPrice}}</b></div>
-          <button type="button" onClick="{{toOnline}}" style="margin-top: -6px; min-height: 44px; padding: 0; border: 0; background: transparent; font: inherit; color: #2E6B4F; font-size: 12.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; align-self: flex-end; cursor: pointer">Kartla öde, {{onSave}} daha az öde</button>
+          <button type="button" onClick="{{toOnline}}" style="margin-top: -6px; min-height: 48px; padding: 0; border: 0; background: transparent; font: inherit; color: #2E6B4F; font-size: 12.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; align-self: flex-end; cursor: pointer">Kartla öde, {{onSave}} daha az öde</button>
           <button class="btn" type="submit" style="background: #F2A65A; color: #1A2142">{{submitLabel}}</button>
           <span style="display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 12.5px; color: #2E6B4F; font-weight: 600"><svg class="ico" viewBox="0 0 24 24" style="width: 16px; height: 16px"><path d="M4 20l1.4-3.8A8 8 0 1 1 8.6 19z"></path></svg>Siparişin WhatsApp'tan onaylanır, sonra kargoya verilir</span>
         </form>
@@ -332,7 +339,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
     <!-- Sosyal kanıt: müşteri fotoğrafı karuseli -->
     <div style="margin-top: 18px">
-      <a class="px" href="#yorumlar" style="display: block; font-size: 13px; font-weight: 600; text-decoration: none; color: #1A2142"><span style="color: #E59A4C">★</span> {{rating}} · {{reviewCount}} yorum <span class="mut" style="font-weight: 500">— anneler fotoğraflarını paylaştı →</span></a>
+      <a class="px" href="#yorumlar" style="display: block; font-size: 13px; font-weight: 600; text-decoration: none; color: #1A2142"><span style="color: #E59A4C">★</span> {{rating}} · {{reviewCount}} yorum <span class="mut" style="font-weight: 500">— ailelerin fotoğrafları →</span></a>
       <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 10px 16px 0">
         <sc-for list="{{photos}}" as="u" hint-placeholder-count="5">
           <img src="{{u.src}}" alt="{{u.alt}}" style="flex: 0 0 120px; width: 120px; height: 150px; border-radius: 14px; object-fit: cover; scroll-snap-align: start; background: #EDE3D3">
@@ -378,7 +385,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <!-- ====== Yorumlar (sade hali) ====== -->
   <section id="yorumlar" class="px" style="padding-top: 48px">
     <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
-      <h2 class="h2 rv">Anneler ne diyor</h2>
+      <h2 class="h2 rv">Aileler ne diyor</h2>
       <span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1"><span class="ser" style="font-size: 30px">{{rating}}</span><span class="mut" style="font-size: 12px">{{reviewCount}} yorum</span></span>
     </div>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; margin: 16px -16px 0; padding: 0 16px">
@@ -398,8 +405,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <!-- ====== Disk plakları ====== -->
   <section style="padding-top: 48px">
     <div class="px">
-      <h2 class="h2 rv">On iki masal,<br>tek lamba.</h2>
-      <p class="mut" style="margin: 8px 0 0; font-size: 15px">Kutuda 6 disk, yanında 6 hediye disk. Seç, yakından bak.</p>
+      <h2 class="h2 rv">Altı masal kutuda,<br>altısı hediye.</h2>
+      <p class="mut" style="margin: 8px 0 0; font-size: 15px">Her disk tavana başka bir masal yansıtır. Seç, yakından bak.</p>
     </div>
     <div class="px kalk" style="margin-top: 18px">
       <div style="position: relative; height: 300px; border-radius: 22px; overflow: hidden; background: radial-gradient(120% 90% at 50% 40%, #232B55 0%, #141A36 60%, #0C1027 100%); display: grid; place-items: center">
@@ -495,7 +502,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
       <img class="img buyut" src="/_blob/d0c41725fb735b5851374f373ff814f3" alt="Gece yanan LunaDream" style="height: 100%; object-position: 50% 40%">
       <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,26,54,0) 30%, #141A36 92%)"></span>
       <div class="px" style="position: absolute; left: 0; right: 0; bottom: 8px; color: #FFFDF9">
-        <h2 class="h2 rv" style="color: #FFFDF9; font-size: 28px">Bu gece ilk masalı<br>birlikte izleyin.</h2>
+        <h2 class="h2 rv" style="color: #FFFDF9; font-size: 28px">İlk geceyi<br>birlikte izleyin.</h2>
         <a class="btn" href="#siparis" onClick="{{cta}}" style="margin-top: 14px; background: #F2A65A; color: #1A2142">{{ctaLabel}}</a>
       </div>
     </div>
@@ -559,7 +566,7 @@ class Component extends DCLogic {
     var KIZ = B + '8409b88186ef148c62a07a0bd6f2a19e', ERKEK = B + '966c145d86bf4b972aa27d983118b8f7';
     var kiz = S.model === 'kiz', modelSrc = kiz ? KIZ : ERKEK;
 
-    // Sahne: 6 kare. 0 Odada (gündüz/gece), 1 Model (seçili modele göre), 2 Elde, 3 Yakın, 4 Tavanda, 5 Müşteri
+    // Sahne: 7 kare. 0 Odada (gündüz/gece), 1 Model (seçili modele göre), 2 Elde, 3 Sıcak ışık, 4 Disk yuvası, 5 Tavanda, 6 Müşteri
     var isRoom = S.frame === 0;
     var frames = [
       { src: DAY, alt: 'Gündüz çocuk odası, komodinde kapalı LunaDream', op: isRoom ? (1 - Math.min(1, p * 1.15)).toFixed(3) : 0, pos: '50% 62%' },
@@ -570,16 +577,13 @@ class Component extends DCLogic {
     var FR = [
       { n: 'Odada', src: night ? NIGHT : DAY },
       { n: 'Model', src: modelSrc },
-      // Mağazadaki gerçek ürün fotoğrafları (ayluna.shop/products/lunadream-gece-lambasi)
-      { n: 'Masalsı gece ışığı', src: B + '211acb76d908e8ed6d4f5fcddc987893', alt: 'Kar üstünde yanan tavşanlı LunaDream', pos: '50% 50%' },
-      { n: 'Müşteri', src: B + '652e1893a0ae33a24ee0e3d53edab757', alt: 'Müşteri paylaşımı: LunaDream ile çocuk', pos: '50% 50%' },
-      { n: 'Temalar', src: B + 'ec0a99ef7b8839a12ab7e6aa4282f7da', alt: 'Tema diskleri ve lamba', pos: '50% 50%' },
-      { n: 'Yorum', src: B + '35f6b0090fd4e65b22f48d111fe61905', alt: 'Müşteri yorumu ve lamba', pos: '50% 50%' },
-      { n: 'Gece modu', src: B + 'a08890007843d79d94bfffc397a3d0ac', alt: 'Yıldız yansıtılan yatak odası', pos: '50% 50%' },
-      { n: 'Deniz altı', src: B + 'd4efe7e83c74524ece75e962161f7fff', alt: 'Duvara yansıyan deniz altı teması', pos: '50% 50%' },
-      { n: 'Yorumlar', src: B + 'fd0a28089115b8aa3de9bcb92a65a8e2', alt: 'Müşteri yorumlarıyla lamba', pos: '50% 50%' },
-      { n: 'Hediye', src: B + '3ddd8b8b95f040d436d5d0ea350924b8', alt: 'Elde tutulan iki LunaDream', pos: '50% 50%' },
-      { n: 'Uzay Kaşifi', src: B + '98db755893dbcebe192c69e73ae5afff', alt: 'Uzay Kaşifi modeli ve çocuk', pos: '50% 50%' }
+      // Yazısız ürün sahneleri (gerçek üründen, yalnız sahne değişti) + gerçek müşteri paylaşımı.
+      // Mağaza posterleri çıkarıldı: yazılılar ilk ekranda reklam gibi duruyor; ikisinde doğrulanmamış yorum var ("Elif K.", yorum kolajı) → yayımlanamaz.
+      { n: 'Elde', src: B + '54f170c0696110348e309338400f7cc7', alt: 'Elde tutulan LunaDream', pos: '50% 50%' },
+      { n: 'Sıcak ışık', src: B + '4279ec63f6d2d18f033818bde2521861', alt: 'LunaDream sıcak ışık modunda', pos: '50% 40%' },
+      { n: 'Disk yuvası', src: B + 'a08519c97197df401382b43ca8425d43', alt: 'Kubbesi açık LunaDream ve disk yuvası', pos: '50% 50%' },
+      { n: 'Tavanda', src: B + 'aa906021e8f134fc2cb53a35d7d0f47e', alt: 'Tavanda masal yansıması', pos: '50% 40%' },
+      { n: 'Müşteri', src: B + '652e1893a0ae33a24ee0e3d53edab757', alt: 'Müşteri paylaşımı: LunaDream ile çocuk', pos: '50% 50%' }
     ];
     FR.forEach(function (f, i) { if (i > 1) { frames.push({ src: f.src, alt: f.alt, op: S.frame === i ? 1 : 0, pos: f.pos }); } });
     var thumbs = FR.map(function (f, i) { var on = i === S.frame; return { n: f.n, src: f.src, on: on ? 'true' : 'false', bd: on ? '#FFFDF9' : 'rgba(255,253,249,.28)', pick: function () { self.setState({ frame: i }); } }; });
@@ -594,7 +598,7 @@ class Component extends DCLogic {
 
     var models = [
       { id: 'kiz', n: 'Kız', sub: 'Tavşanlı · ninnili', src: B + 'e02351b3be4a1c555c5d760d0bbda723', alt: 'Tavşanlı LunaDream' },
-      { id: 'erkek', n: 'Erkek', sub: 'Uzay Kaşifi', src: B + '0033dfea6282c5bc479c385213661c00', alt: 'Uzay Kaşifi LunaDream' }
+      { id: 'erkek', n: 'Erkek', sub: 'Robotlu · ninnisiz', src: B + '0033dfea6282c5bc479c385213661c00', alt: 'Uzay Kaşifi LunaDream' }
     ].map(function (m) { var on = S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, alt: m.alt, on: on ? 'true' : 'false', bd: on ? '#1A2142' : '#E3D8C7', bg: on ? '#FFFDF9' : 'transparent', pick: function () { self.setState({ model: m.id }); } }; });
 
     // Fiyatlar tek yerde: Shopify'da price + compare_at_price. Yüzde ve tasarruf otomatik hesaplanır, zamda elle düzeltme yok.
@@ -607,10 +611,10 @@ class Component extends DCLogic {
     ];
     BUND.forEach(function (b) {
       b.price = TL(b.p, true); b.old = b.cmp ? TL(b.cmp, true) : ''; b.pct = b.cmp ? '%' + Math.round((1 - b.p / b.cmp) * 100) : '';
-      b.unit = TL(b.p / b.n);
-      b.sub = b.n === 1 ? b.pct + ' indirim' : 'tanesi ' + b.unit + ' · tekli ' + TL(BUND[0].p);
+      b.unit = 'tanesi ' + TL(b.p / b.n);
+      b.sub = b.n === 1 ? b.pct + ' indirim' : '2 ayrı alıma göre ' + TL(BUND[0].p * b.n - b.p, true) + ' az';
     });
-    var bundles = BUND.map(function (b) { var on = S.bundle === b.n; return { title: b.title, price: b.price, old: b.old, hasOld: !!b.old, sub: b.sub, hasTag: b.tag, on: on ? 'true' : 'false', bg: on ? '#1A2142' : '#FFFDF9', fg: on ? '#FFFDF9' : '#1A2142', bd: on ? '#1A2142' : '#E3D8C7', rBd: on ? '#F2A65A' : '#C9BFAE', dot: on ? 1 : 0, tagBg: on ? '#F2A65A' : '#F3E9DA', tagFg: on ? '#1A2142' : '#8A4A12', pick: function () { self.setState({ bundle: b.n }); } }; });
+    var bundles = BUND.map(function (b) { var on = S.bundle === b.n; return { title: b.title, price: b.price, old: b.old, hasOld: !!b.old, hasUnit: !b.old && b.n > 1, unit: b.unit, sub: b.sub, hasTag: b.tag, on: on ? 'true' : 'false', bg: on ? '#1A2142' : '#FFFDF9', fg: on ? '#FFFDF9' : '#1A2142', bd: on ? '#1A2142' : '#E3D8C7', rBd: on ? '#F2A65A' : '#C9BFAE', dot: on ? 1 : 0, tagBg: on ? '#F2A65A' : '#F3E9DA', tagFg: on ? '#1A2142' : '#8A4A12', pick: function () { self.setState({ bundle: b.n }); } }; });
     var sel = BUND.filter(function (b) { return b.n === S.bundle; })[0];
     var ADDON = 849.99, total = sel.p + (S.addon ? ADDON : 0);
     // Online ödeme indirimi: %5, tutardan otomatik
@@ -661,7 +665,7 @@ class Component extends DCLogic {
     var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
     var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + ' – ' + t2.getDate() + ' ' + AY[t2.getMonth()];
-    var shipText = 'Tahmini teslim: ' + teslim + ' · ücretsiz kargo';
+    var shipText = 'Tahmini teslim: ' + teslim;
 
     // Bir gece, beş an (kaydırılabilir kartlar)
     var M = [
@@ -749,7 +753,7 @@ class Component extends DCLogic {
       openForm: function () { self.setState({ form: true }); },
       frameCount: FR.length, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi',
       cdShort: dd + 'g ' + P2(hh) + ':' + P2(mm) + ':' + P2(ss),
-      pays: pays, onSave: TL(total - onTotal),
+      pays: pays, onSave: TL(total - onTotal), onPrice: TL(onTotal, true),
       barPrice: TL(online ? onTotal : total, true), barLabel: online ? 'Kartla öde' : 'Kapıda öde',
       ctaLabel: online ? 'Kartla öde · ' + TL(onTotal, true) : 'Kapıda ödemeyle al · ' + TL(total, true),
       isKapida: !online,

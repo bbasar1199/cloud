@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Fikir · Hediye mi?</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.anah{display:grid;grid-template-columns:40px minmax(0,1fr) 52px;gap:12px;align-items:center;width:100%;min-height:64px;padding:10px 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s}
+.anah .yuva{width:46px;height:28px;border-radius:999px;position:relative;transition:background .3s}
+.anah .top{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFDF9;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.alan{display:flex;flex-direction:column;gap:5px}
+.alan label{font-size:13px;font-weight:600;color:#3A3F5A}
+.alan input,.alan textarea{width:100%;min-height:50px;border:1.5px solid #DDD2C1;border-radius:12px;background:#FFFDF9;padding:0 14px;font:inherit;font-size:16px;color:#1A2142}
+.alan textarea{padding:12px 14px;min-height:76px;resize:none}
+.bilgi{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;font-size:13px;line-height:1.45;color:#3A3F5A}
+@keyframes ac{from{opacity:0;transform:translateY(-8px)}}
+.acil{animation:ac .3s cubic-bezier(.2,.7,.2,1) both}
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg" style="padding: 22px 0 26px">
+  <div class="px">
+    <!-- Hediye mi?: ödemenin hemen üstü, kapalı başlar. Canlıda alanlar sepet özniteliği (cart attributes) olarak kaydedilir. -->
+    <button class="anah" type="button" onClick="{{toggle}}" aria-pressed="{{giftOn}}" style="border-color: {{bd}}; background: {{bg}}">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #F3E9DA; display: grid; place-items: center"><svg class="ico" viewBox="0 0 24 24" style="color: #1A2142"><path d="M20 12v8H4v-8" stroke="#E59A4C"></path><path d="M2.5 8h19v4h-19zM12 8v12M12 8c-1.5-3-5-3.6-5-1.4C7 8 12 8 12 8zM12 8c1.5-3 5-3.6 5-1.4C17 8 12 8 12 8z"></path></svg></span>
+      <span style="display: flex; flex-direction: column; line-height: 1.25"><b style="font-size: 15px; font-weight: 600">Hediye mi?</b><span class="mut" style="font-size: 13px">Not ekle, sürpriz bozulmasın</span></span>
+      <span class="yuva" aria-hidden="true" style="background: {{track}}"><span class="top" style="transform: translateX({{knob}})"></span></span>
+    </button>
+
+    <sc-if value="{{giftOn}}" hint-placeholder-val="{{false}}">
+      <div class="acil" style="margin-top: 10px; padding: 14px; border-radius: 16px; background: #FFFDF9; border: 1px solid #EDE3D3; display: flex; flex-direction: column; gap: 12px">
+        <div class="alan"><label for="not">Hediye notu</label><textarea id="not" maxlength="120" placeholder="Sevgili [ad], tatlı rüyalar. — Anneannen"></textarea></div>
+        <div class="alan"><label for="alici">Alıcının telefonu</label><input id="alici" type="tel" inputmode="tel" autocomplete="off" placeholder="05XX XXX XX XX"></div>
+        <div class="bilgi"><svg class="ico" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: #2E6B4F"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>Fatura kutuya konmaz, e-postana gelir. <span class="mut">[muhasebeci teyidi]</span></span></div>
+        <div class="bilgi"><svg class="ico" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: #2E6B4F"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>Kargo, teslimde alıcıyı bu numaradan arar. <span class="mut">[kargo teyidi]</span></span></div>
+      </div>
+    </sc-if>
+      <div class="etiket" style="margin-top: 18px"><span>Ödeme</span></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+        <sc-for list="{{pays}}" as="o" hint-placeholder-count="2">
+          <button class="odeme" onClick="{{o.pick}}" aria-pressed="{{o.on}}" style="border-color: {{o.bd}}; background: {{o.bg}}">
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 6px"><b style="font-size: 13.5px; font-weight: 600">{{o.n}}</b><sc-if value="{{o.hasPct}}" hint-placeholder-val="{{false}}"><span class="rozet" style="background: #2E6B4F; color: #FFFDF9">%5 indirim</span></sc-if></span>
+            <span style="font-size: 12.5px; font-variant-numeric: tabular-nums; color: #5C6078; margin-top: 4px"><b style="color: #1A2142; font-weight: 600">{{o.price}}</b> <s style="opacity: .6">{{o.old}}</s></span>
+          </button>
+        </sc-for>
+      </div>
+
+    <sc-if value="{{warn}}" hint-placeholder-val="{{false}}">
+      <p class="acil" style="margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; background: #F3E9DA; font-size: 13px; line-height: 1.45; color: #1A2142">Hediyede kapıda ödemeyi alıcı yapar ({{kapida}}). Haberi yoksa teslim alamayabilir.<br><button type="button" onClick="{{toOnline}}" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0; border: 0; background: transparent; font: inherit; font-weight: 600; color: #2E6B4F; text-decoration: underline; text-underline-offset: 3px; cursor: pointer">Kartla öde, {{onSave}} daha az öde</button></p>
+    </sc-if>
+    <button class="btn" type="button" style="margin-top: 12px">{{ctaLabel}}</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":730}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { gift: false, pay: 'online' }; }
+  renderVals() {
+    var self = this, S = this.state;
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    var total = 2749.99, onTotal = Math.round(total * 0.95 * 100) / 100, online = S.pay === 'online';
+    var pays = [
+      { id: 'online', n: 'Kartla öde', price: TL(onTotal, true), old: TL(total, true), pct: true },
+      { id: 'kapida', n: 'Kapıda öde', price: TL(total, true), old: '', pct: false }
+    ].map(function (o) { var on = S.pay === o.id; return { n: o.n, price: o.price, old: o.old, hasPct: o.pct, on: on ? 'true' : 'false', bd: on ? '#1A2142' : '#E3D8C7', bg: on ? '#FFFDF9' : 'transparent', pick: function () { self.setState({ pay: o.id }); } }; });
+
+    var g = S.gift;
+    return {
+      pays: pays, giftOn: g ? 'true' : 'false',
+      toggle: function () { self.setState({ gift: !self.state.gift }); },
+      bd: g ? '#1A2142' : '#E3D8C7', bg: g ? '#FFFDF9' : 'transparent',
+      track: g ? '#1A2142' : '#C9BFAE', knob: g ? '18px' : '0px',
+      warn: g && !online, kapida: TL(total, true), onSave: TL(total - onTotal),
+      toOnline: function () { self.setState({ pay: 'online' }); },
+      ctaLabel: online ? 'Kartla öde · ' + TL(onTotal, true) : 'Kapıda ödemeyle al · ' + TL(total, true)
+    };
+  }
+}
+</script>
+</body>
+</html>

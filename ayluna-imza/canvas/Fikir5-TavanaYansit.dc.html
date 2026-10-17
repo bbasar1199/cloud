@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Fikir · Tavana yansıt</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.tavan{position:relative;height:320px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#0C1027 0%,#141A36 70%,#1A2142 100%)}
+.yansima{position:absolute;left:50%;top:44%;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.92);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.yansima.on{opacity:.92;transform:none}
+.yansima img{width:100%;height:100%;object-fit:cover;display:block}
+.dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:62px;min-height:84px;flex:none}
+.dbtn img{width:52px;height:52px;border-radius:50%;object-fit:cover;outline:2px solid transparent;outline-offset:3px;transition:transform .25s cubic-bezier(.2,.7,.2,1),outline-color .2s}
+.dbtn.on{color:#FFFDF9;font-weight:600}
+.dbtn.on img{outline-color:#F2A65A;transform:translateY(-4px)}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg" style="background: #141A36; color: #EDE5D8; padding: 34px 0 30px">
+  <div class="px">
+    <h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye.</h2>
+    <p style="margin: 8px 0 0; font-size: 15px; color: #B9BED6">Diski seç, tavanda gör.</p>
+  </div>
+  <div class="px" style="margin-top: 16px">
+    <div class="tavan">
+      <!-- Duvar–tavan birleşimi: odada olduğunu hissettiren tek çizgi -->
+      <svg aria-hidden="true" viewBox="0 0 358 320" style="position: absolute; inset: 0; width: 100%; height: 100%"><path d="M0 262 L72 214 L286 214 L358 262" fill="none" stroke="rgba(255,253,249,.10)" stroke-width="1.5"></path></svg>
+      <sc-for list="{{proj}}" as="p" hint-placeholder-count="2">
+        <span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span>
+      </sc-for>
+      <span aria-hidden="true" style="position: absolute; left: 50%; bottom: -60px; width: 180px; height: 120px; margin-left: -90px; border-radius: 50%; background: radial-gradient(closest-side, rgba(242,166,90,.45), rgba(242,166,90,0))"></span>
+      <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>
+      <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Tavanda</span><b class="ser" style="font-size: 22px; font-weight: 400">{{name}}</b></span>
+      <span class="rozet" style="position: absolute; right: 14px; bottom: 16px; background: {{tagBg}}; color: {{tagFg}}">{{tag}}</span>
+    </div>
+  </div>
+  <p class="px not" style="margin: 18px 0 0; color: #B9BED6">Kutuda</p>
+  <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px 0">
+    <sc-for list="{{kutu}}" as="d" hint-placeholder-count="6">
+      <button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini tavanda göster"><img src="{{d.src}}" alt=""><span>{{d.n}}</span></button>
+    </sc-for>
+  </div>
+  <p class="px not" style="margin: 12px 0 0; color: #F2A65A">Hediye</p>
+  <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px 0">
+    <sc-for list="{{hediye}}" as="d" hint-placeholder-count="6">
+      <button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini tavanda göster"><img src="{{d.src}}" alt=""><span>{{d.n}}</span></button>
+    </sc-for>
+  </div>
+  <p class="px" style="margin: 12px 0 0; font-size: 12.5px; color: #B9BED6">[Hangi 6 diskin kutuda, hangisinin hediye olduğu teyit edilecek.]</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":810}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { disc: 1 }; }
+  renderVals() {
+    var self = this, S = this.state, B = '/_blob/';
+    // Canlıda her diskin gerçek tavan yansıma fotoğrafı kullanılır (çizim/AI değil); yalnız seçilen yüklenir, diğerleri lazy.
+    var DISCS = [
+      { n: 'Ay ve yıldız', id: '63f8557bf1f7867885fdbdedeb19c5ed' }, { n: 'Okyanus', id: '336d1995fe82f1e73d526c0e2697677e' },
+      { n: 'Uzay', id: '2c6f33b11e553e39fd315693c5cf692b' }, { n: 'Deniz kızı', id: '6e25420625a6a34858578ba9e632cda7' },
+      { n: 'Denizanası', id: '210c9b211afc86f40a3736f7dca41856' }, { n: 'Şato', id: 'c47c719d14b2dd08716967b126324ad7' },
+      { n: 'Hayvanlar', id: '81713384676b51d6a15c426fe5ace95f' }, { n: 'Gökkuşağı', id: '6202a8de2d18ea09b2bd1328835a7221' },
+      { n: 'Kış gecesi', id: 'de53d54e97de9b7ea6f936c94e218e26' }, { n: 'Taşıtlar', id: '0fa320a5ec8bbbb5066e6e197ba96666' },
+      { n: 'Masal', id: 'e10addf033ab0d3bb401f79055402da8' }, { n: 'Doğum günü', id: '10d49c7a953d26c819ef5c9970cd8c6a' }
+    ];
+    function btn(d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; }
+    var hediyeMi = S.disc >= 6;
+    return {
+      proj: DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; }),
+      kutu: DISCS.slice(0, 6).map(btn), hediye: DISCS.slice(6).map(function (d, i) { return btn(d, i + 6); }),
+      name: DISCS[S.disc].n, tag: hediyeMi ? 'Hediye disk' : 'Kutuda',
+      tagBg: hediyeMi ? '#F2A65A' : 'rgba(255,253,249,.14)', tagFg: hediyeMi ? '#1A2142' : '#FFFDF9'
+    };
+  }
+}
+</script>
+</body>
+</html>
