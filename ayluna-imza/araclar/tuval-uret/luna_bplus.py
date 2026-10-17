@@ -30,10 +30,19 @@ CSS = r""".pg{background:#F6F1E9}
 .h2{font-size:26px;line-height:1.12}
 .etiket{font-size:13px}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
+.duyuru{display:flex;justify-content:center;align-items:center;gap:10px;height:36px;background:#F2A65A;color:#1A2142;font-size:13px;font-weight:600}
+.duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em}
+.indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F3E9DA;color:#A05A1C}
+/* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
+   Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
+@supports (animation-timeline: view()){
+  .gir{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+  @keyframes gir{from{opacity:.001;transform:translateY(20px)}to{opacity:1;transform:none}}
+}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D9CDB9;line-height:1}
 .yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
-.dev{font-family:"Young Serif",Georgia,serif;font-size:44px;line-height:1;letter-spacing:-.03em;margin:8px 0 0;color:#1A2142;white-space:nowrap}
+.dev{font-family:"Young Serif",Georgia,serif;font-size:32px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
 .dev span,.h2 span.n{color:#E59A4C}
 .mkart{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .mkart:active,.pk:active,.cip:active{transform:scale(.985)}
@@ -99,10 +108,10 @@ CSS = r""".pg{background:#F6F1E9}
 .guven{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:12px 0;border-top:1px solid #E3D8C7;border-bottom:1px solid #E3D8C7;font-size:13px;font-weight:600}
 .guven span+span::before{content:"·";margin-right:14px;color:#E59A4C}
 /* Bölümler */
-.bolum{padding-top:52px}
+.bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
-.gece{background:#1A2142;color:#EDE5D8;padding:44px 0 46px;margin-top:52px}
-.an{position:relative;flex:0 0 270px;height:420px;border-radius:24px;overflow:hidden;background:#0C1027;scroll-snap-align:start}
+.gece{background:#1A2142;color:#EDE5D8;padding:32px 0 34px;margin-top:36px;border-radius:28px}
+.an{position:relative;flex:0 0 260px;height:380px;border-radius:24px;overflow:hidden;background:#0C1027;scroll-snap-align:start}
 .an img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .an .saat{position:absolute;left:16px;top:14px;font-family:"Young Serif",Georgia,serif;font-size:40px;line-height:1;color:#F2A65A;font-variant-numeric:tabular-nums}
 .an .alt2{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px}
@@ -124,13 +133,11 @@ CSS = r""".pg{background:#F6F1E9}
 .sss .arti{width:32px;height:32px;border-radius:50%;background:#1A2142;color:#FFFDF9;display:grid;place-items:center;flex:none;transition:transform .2s}
 .sss[open] .arti{transform:rotate(45deg)}
 .kart{flex:0 0 168px;scroll-snap-align:start;background:#FFFDF9;border-radius:20px;border:1.5px solid #E3D8C7;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#1A2142}
-.alt-bilgi{background:#1A2142;color:#C9CDE0;margin-top:56px;padding:40px 0 100px}
+.alt-bilgi{background:#1A2142;color:#C9CDE0;margin-top:36px;padding:32px 0 100px;border-radius:28px 28px 0 0}
 .alt-bilgi a{color:#FFFDF9;text-decoration:none;display:flex;align-items:center;min-height:48px}
 .yapis{position:sticky;bottom:0;z-index:5;margin-top:-76px;height:76px;padding:0 12px;background:#1A2142;display:flex;align-items:center;gap:10px;border-radius:20px 20px 0 0}
 /* Baskı unsurları (Tur 9, kullanıcı: "baskılayıcıları arttıralım"): yalnız gerçek veriyle, veri yoksa gizlenir.
    Sayaç: kampanya bitiş tarihi (tema ayarı). Stok: Shopify envanteri eşik altındaysa. Dün: Shopify Flow'un yazdığı metafield. */
-.sayac2{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px;margin-top:12px;padding:0 12px;border-radius:14px;background:#1A2142;color:#FFFDF9;font-size:13px;font-weight:600}
-.sayac2 b{font-variant-numeric:tabular-nums;color:#F2A65A;font-weight:700;white-space:nowrap}
 .canli{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:#1A2142}
 .canli li{display:flex;align-items:center;gap:10px}
 @keyframes nabiz{0%,100%{opacity:1}50%{opacity:.3}}
@@ -160,6 +167,8 @@ STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: 
 LOGO = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg>'
 
 HTML = """<div class="pg" style="padding-bottom: 0">
+  <!-- Üst şerit: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
+  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><b>{{cdShort}}</b></div>
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px">""" + LOGO + """<span class="ser" style="font-size: 20px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
@@ -181,13 +190,10 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2E6B4F"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #3B8A63"></span>Stokta</span>
     </div>
     <h1 class="dev">LunaDream<span>.</span></h1>
-    <p style="margin: 12px 0 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 24px; letter-spacing: -.02em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span style="font-size: 14px; font-weight: 600; color: #2E6B4F">kartla {{p1on}}</span></p>
-    <!-- Bugünkü fiyat sayacı: her gece 23:59'da (İstanbul) sıfırlanır. Toptancı zammı gün içinde gelse de o günün fiyatı 23:59'a kadar korunur. -->
-    <div class="sayac2" role="timer" aria-label="{{cdAria}}"><span style="display: flex; align-items: center; gap: 8px; min-width: 0">""" + LOGO.replace('width="20" height="20"','width="16" height="16"') + """<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cdLine}}</span></span><b>{{cdShort}}</b></div>
-    <p style="margin: 6px 2px 0; font-size: 13px; color: #5C6078">Toptancı zammı gelirse fiyat ertesi gün güncellenir.</p>
+    <p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 22px; letter-spacing: -.01em">{{p1}}</b><s style="font-size: 15px; color: #5C6078">{{c1}}</s><span class="indirim">%{{pct}} indirim</span></p>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
-    <p class="ust-yazi" style="margin-top: 26px">Sihirli özellikler</p>
+    <p class="ust-yazi" style="margin-top: 22px">Sihirli özellikler</p>
     <h2 class="h2">Uyku vakti savaş değil,<br>minik bir masal<span class="n">.</span></h2>
     <div class="sih">
       <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">Odayı loş, sıcak bir ışıkla aydınlatır.</span></div>
@@ -197,14 +203,14 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarj et, her yere taşı.</span></div>
     </div>
 
-    <div class="etiket" style="margin-top: 28px"><span>Model</span><b>{{modelName}}</b></div>
+    <div class="etiket" style="margin-top: 24px"><span>Model</span><b>{{modelName}}</b></div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
       <sc-for list="{{models}}" as="m" hint-placeholder-count="2">
         <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="foto"><img src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 15px; font-weight: 700">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
       </sc-for>
     </div>
 
-    <div class="etiket" style="margin-top: 28px"><span>Paket</span><span style="font-weight: 600">Kampanya · [tarih aralığı]</span></div>
+    <div class="etiket" style="margin-top: 24px"><span>Paket</span><span style="font-weight: 600">Kampanya · [tarih aralığı]</span></div>
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 14px">
       <sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
         <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}">
@@ -234,7 +240,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
-  <section class="bolum" id="videolar">
+  <section class="bolum gir" id="videolar">
     <div class="px"><p class="ust-yazi">Videolar</p><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
       <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
@@ -243,7 +249,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Bir gece, beş an -->
-  <section class="gece">
+  <section class="gece gir">
     <div class="px"><p class="ust-yazi" style="color: #F2A65A">Nasıl kullanılır</p><h2 class="h2" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 18px 16px 0">
       <!-- Canlıda: kısa sessiz döngü videolar (onizleme/v/), yalnız ekrandayken oynar -->
@@ -255,7 +261,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
-  <section id="yorumlar" class="bolum">
+  <section id="yorumlar" class="bolum gir">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">.</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 40px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <p class="px" style="margin: 18px 0 0; font-size: 13px; font-weight: 700; color: #766B5B">Müşteri fotoğrafları</p>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 8px 16px 0">
@@ -275,7 +281,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Diskler: tavana yansıt -->
-  <section class="gece" id="diskler" style="margin-top: 52px">
+  <section class="gece gir" id="diskler">
     <div class="px"><h2 class="h2" style="color: #FFFDF9">Altı masal kutuda,<br>altısı hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 15px; color: #B9BED6">Diski seç, tavanda gör.</p></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
@@ -289,7 +295,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Kutuda ne var -->
-  <section class="px bolum">
+  <section class="px bolum gir">
     <h2 class="h2">Kutudan<br>ne çıkıyor<span class="n">.</span></h2>
     <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 16px">
       <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #EDE3D3"><img src="/_blob/54f170c0696110348e309338400f7cc7" alt="Elde tutulan LunaDream" style="width: 100%; height: 100%; object-fit: cover"></div>
@@ -301,12 +307,12 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- 30 gün iade -->
-  <section class="px bolum">
+  <section class="px bolum gir">
     <div class="otuz"><b class="say">30</b><span style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 18px; line-height: 1.2">gün içinde iade</b><span style="font-size: 15px; line-height: 1.4">İlk 14 gün yasal cayma hakkın; Ayluna bunu 30 güne uzatır.</span></span></div>
   </section>
 
   <!-- SSS -->
-  <section class="px bolum">
+  <section class="px bolum gir">
     <h2 class="h2">Merak<br>edilenler<span class="n">.</span></h2>
     <div style="margin-top: 14px; border-top: 1.5px solid #E3D8C7">
       <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p style="margin: 0 0 16px; font-size: 15px; color: #3A3F5A">{{f.a}}</p></details></sc-for>
@@ -314,7 +320,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Diğer ürünler -->
-  <section class="bolum">
+  <section class="bolum gir">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4">
@@ -404,10 +410,10 @@ JS = """class Component extends DCLogic {
     var gunSonu = new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999);
     var kalan = Math.max(0, gunSonu.getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
-    var cdLine = 'Bugünkü fiyat garantisi';
+    var cdLine = 'Bugüne özel fiyat';
     var cdShort = IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
-    var cdTiny = 'Bugünkü fiyat: ' + IKI(hh) + 'sa ' + IKI(mi) + 'dk';
-    var cdAria = 'Bugünkü fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika';
+    var cdTiny = 'Bugüne özel · ' + IKI(hh) + 'sa ' + IKI(mi) + 'dk';
+    var cdAria = 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika';
     // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
     var vids = [
       { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '34462d69c62584aeefaca4cff769f3b5', pos: '50% 50%' },
@@ -466,7 +472,7 @@ JS = """class Component extends DCLogic {
       gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KIZ : ERKEK,
       kiz: kiz, erkek: !kiz, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       onLabel: 'Güvenli Ödeme İle Al · ' + TL(online, true), onPrice: TL(online, true),
-      p1: TL(P1, true), c1: TL(C1, true), p1on: TL(Math.round(P1 * 0.95 * 100) / 100, true),
+      p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
       onNote: 'Kartla %5 indirim · kapıda ödemeye göre ' + TL(kapida - online, true) + ' az',
       kpNote: 'Kapıda ödeme ücreti ₺80 · toplam ' + TL(kapida, true),
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,

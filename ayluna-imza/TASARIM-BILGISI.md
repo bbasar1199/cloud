@@ -117,7 +117,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 | `--sayac` | **#A05A1C** (Main'deki #B4651F 3,9:1, eşiğin altında) | sayaç rakamı |
 | `--yesil` | #2E6B4F | Stokta, %5, kartla öde dürtmesi |
 
-- **Yazı:** Young Serif 400 yalnız başlıkta. Ölçek (Tur 11): H1 44, H2 26, büyük rakam 40, kart başlığı 18–20, fiyat 24, gövde 16, açıklama 15, not 13, etiket 12. Onest gövde **16px** (Main'de 15). 12px altı yazı yok. Rakamlar `tabular-nums`.
+- **Yazı:** Young Serif 400 yalnız başlıkta. Ölçek (Tur 12): ürün adı 32, fiyat 22, H2 26, büyük rakam 40, kart başlığı 18–20, fiyat 24, gövde 16, açıklama 15, not 13, etiket 12. Onest gövde **16px** (Main'de 15). 12px altı yazı yok. Rakamlar `tabular-nums`.
 - **Şekil:**
   - Köşe: levha 28, kart 14–22, buton 16, input 12, çip 999.
   - Kenar 16px. Gölge yerine 1px çizgi.
@@ -277,7 +277,12 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Baskılayıcıları biraz daha arttıralım" | Aciliyet artırılır ama **yalnız gerçek veriyle**: fiyatın altında kampanya sayacı (bitiş tarihi ayarı), butonun üstünde "Stok azalıyor: son X adet" (Shopify envanteri, eşik altı), "Dün X aile sipariş verdi" (Shopify Flow metafield), yapışkan çubukta kalan süre. Veri yoksa satır gizlenir. Uydurma sayı ve sahte sayaç yok. Nabız noktası en fazla 3 kez yanıp söner. |
 | 17 Eki | "Görselleri tekrar üretip yüksek kaliteyle koyacaktın, diskler için yapmamışsın" | Kesip büyütmek yetmez; diskler **yapay zekâ ile netleştirilir** (Real-ESRGAN çizim modeli, x4, 512px). Desen değişmez. Büyük önizlemede bulanıklık ya da JPEG kırıntısı kabul edilmez; teslimden önce 260px'te önce/sonra karşılaştırılır. |
 | 17 Eki | "Her gün sıfırlanan sayacı koruyabiliriz; toptancı zammı geldiği anda zam yapıyorum, her an olabilir, bu baskılayıcı gerçek sayılır" | **Bugünkü fiyat sayacı** fiyatın altında: her gece 23:59'da (İstanbul) sıfırlanır, altında "Toptancı zammı gelirse fiyat ertesi gün güncellenir." Gerçek olması için koşul: gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. Ay sonu kampanya sayacı kalktı. |
-| 17 Eki | "Yazı fontu bazı yerlerde çok büyük, düzensizlik, kaos var" | **Tek yazı ölçeği**, dışına çıkılmaz: başlık 1: 44 (yalnız ürün adı) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün: 56) · kart başlığı: 18–20 · fiyat: 24 · gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Ara boyut (13,5 / 14,5 / 21 / 46 / 52 / 88 / 100) yok. Bölüm etiketi tek stil (13px kalın, #A05A1C, büyük harf ve harf aralığı yok). Yeni öğe eklerken bu ölçekten seçilir. |
+| 17 Eki | "Yazı fontu bazı yerlerde çok büyük, düzensizlik, kaos var" | **Tek yazı ölçeği**, dışına çıkılmaz: başlık 1: 44 → Tur 12'de 32 (yalnız ürün adı) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün: 56) · kart başlığı: 18–20 · fiyat: 24 · gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Ara boyut (13,5 / 14,5 / 21 / 46 / 52 / 88 / 100) yok. Bölüm etiketi tek stil (13px kalın, #A05A1C, büyük harf ve harf aralığı yok). Yeni öğe eklerken bu ölçekten seçilir. |
+| 17 Eki | "LunaDream yazısı çok büyük, fiyat çok büyük, yanında indirimli fiyat, onun yanında kartla fiyat" | Ürün adı **32**. Fiyat satırı yalnız: fiyat (22) + üstü çizili eski fiyat + "%15 indirim" rozeti. Kartla fiyat başlıkta yazılmaz; yalnız ödeme butonunda ve altındaki notta. |
+| 17 Eki | "Toptancı zammı falan karıştırmışsın, bu öyle bir şey değil; müşteriye doğru sunum önemli" | **İç gerekçe (toptancı, maliyet, zam sebebi) müşteriye asla yazılmaz.** Sayaç canlıdaki gibi sayfanın en üstünde ince şerit: "Bugüne özel fiyat 06:26:42", her gece sıfırlanır. |
+| 17 Eki | "Arada bazı yerlerde fazla boşluk var" | Bölüm arası 36px (52 değil). Koyu bölümler yuvarlak köşeli panel (28px), araları 36px. |
+| 17 Eki | "Section aralarına geçiş için hafif animasyonlar yapabilirsin" | Bölümler kaydırınca 20px aşağıdan ve saydamdan gelir (`animation-timeline: view()`, yalnız transform/opacity, destek yoksa ya da azaltılmış harekette yok). "Her bölüme fade-in yasak" kuralı bu kullanıcı için kalktı; yalnız bu hafif biçimde. |
+| 17 Eki | "Bir gece 5 an için gerekli görselleri oluştur" | Görseller gerçek ürün fotoğrafından FLUX Kontext ile üretilir (`araclar/gorsel/bir_gece_uret.py`). Bulut ortamında `HF_TOKEN` gerekir; ücretsiz kota ortak IP'de dolu. Kalitesiz (filigranlı, ürünü yeniden çizen) görsel sayfaya konmaz. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

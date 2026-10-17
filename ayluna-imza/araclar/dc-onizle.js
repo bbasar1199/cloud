@@ -36,7 +36,8 @@ function R(){const v=C.renderVals();const r=document.getElementById('root');r.in
 R();</script></body></html>`;
 const PH = path.join(require('os').tmpdir(), 'ayluna-dc-onizle.html');
 fs.writeFileSync(PH, page);
-(async()=>{const b=await chromium.launch();const pg=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
+(async()=>{const b=await chromium.launch();// Tam sayfa görüntüde kaydırmaya bağlı geçişler içeriği gizlemesin: azaltılmış hareket
+  const pg=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,reducedMotion:'reduce'});
 pg.on('pageerror',e=>console.log('ERR',e.message));
 await pg.goto('file://'+PH);await pg.waitForTimeout(800);
 const y=await pg.evaluate(()=>{const e=document.getElementById('siparis');return e?e.getBoundingClientRect().top+scrollY:0});
