@@ -53,6 +53,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Fiyat satırı:** fiyat + üstü çizili eski fiyat + "%X indirim" rozeti. Kartla fiyat başlıkta yok, yalnız ödeme butonunda.
 - **Müşteriye iç gerekçe yazılmaz** (toptancı, maliyet, zam sebebi).
 - **Boşluk ve geçiş:** bölüm arası 36px; koyu bölümler yuvarlak köşeli panel; bölümler kaydırınca hafifçe (20px, saydamdan) gelir.
+- **Bölümler hep ayrı ve görünür** (17 Eki, Tur 16 düzeltmesi): yeni deneme içerik kesmez, bölümleri hikâye/karusel içine toplamaz. Tasarım turu iskelete ve görünüşe dokunur: bölüm yüzeyleri, aralık ritmi, sıcaklık. Yakınlık net olur: grup içi sıkı, bölüm sınırı yüzey değişimiyle okunur. Soğuk ince çizgili beyaz kartlar yerine sıcak dolgulu yüzeyler. Kullanıcının tarifi: "soğukluk, düzensizlik; tam yakın değil uzak değil".
 - **Baskı unsurları istenir** (sayaç, stok, dün satılan) ama yalnız gerçek veriyle; veri yoksa gizlenir.
   - Sayaç = sayfanın en üstünde ince amber şerit "Bugüne özel fiyat 06:26:42", her gece 23:59'da (İstanbul) sıfırlanır. Koşul (yalnız sahibine söylenir): gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur.
 - **Disk görselleri:** mağaza afişinden kesilip yapay zekâ ile netleştirilmiş diskler (Real-ESRGAN çizim modeli, 512px); sadece büyütmek yetmez. Unicorn ve 2025 kutuda yok.
