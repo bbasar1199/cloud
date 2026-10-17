@@ -1,0 +1,43 @@
+{%- comment -%}
+  Ayluna · Kampanya bandı (yapışkan): saniyeli geri sayım. Bitiş: girilen tarih ya da ayın son günü 23:59:59.
+  Sayaç gerçek bir fiyat değişikliğine bağlıdır; bitince bir sonraki aya geçer, sahte sıfırlanma yok.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+/*AYLUNA_CSS*/
+#BOLUM{position:sticky;top:0;z-index:40;background:var(--amber)}
+#BOLUM .ay-ic{overflow:visible}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <div class="bant" role="status"><span class="ay-bant-yazi">{{ s.metin }}</span><span class="sy"></span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var AY=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  var METIN={{ s.metin | json }}, BITIS={{ s.bitis | json }};
+  function iki(n){return n<10?'0'+n:''+n;}
+  function hedef(n){ if(BITIS){ var p=BITIS.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2],23,59,59); if(d>n) return d; } return new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59); }
+  function ciz(){ var n=new Date(), son=hedef(n), f=Math.max(0,son-n), g=Math.floor(f/864e5);
+    kok.querySelector('.ay-bant-yazi').textContent=(g<3?'Son '+(g+1)+' gün: ':'')+METIN.replace('{ay}',AY[son.getMonth()]);
+    var p=[[g,'g'],[Math.floor(f/36e5)%24,'s'],[Math.floor(f/6e4)%60,'d'],[Math.floor(f/1e3)%60,'sn']];
+    kok.querySelector('.sy').innerHTML=p.map(function(x){return '<span>'+(x[1]==='g'?x[0]:iki(x[0]))+'<small>'+x[1]+'</small></span>';}).join('');
+    setTimeout(ciz,1000-n.getMilliseconds()); }
+  ciz();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kampanya bandı",
+  "tag": "section",
+  "class": "ayluna-bant",
+  "settings": [
+    { "type": "text", "id": "metin", "label": "Yazı", "info": "{ay} yerine bitiş ayının adı gelir.", "default": "{ay} fiyatı bitiyor" },
+    { "type": "text", "id": "bitis", "label": "Bitiş tarihi (YYYY-AA-GG)", "info": "Boşsa ayın son günü 23:59:59. Tarih geçince yine ay sonuna sayar.", "default": "" }
+  ],
+  "presets": [ { "name": "Ayluna · Kampanya bandı" } ]
+}
+{% endschema %}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Shopify bölümlerini derler.
-araclar/shopify-kaynak/*.liquid şablonlarındaki /*AYLUNA_CSS*/ yerine, onizleme/index.html
+araclar/shopify-kaynak/*.liquid şablonlarındaki /*AYLUNA_CSS*/ yerine, onizleme/iskelet.html
 içindeki CSS'ten yalnız o bölümde geçen sınıfların kurallarını #ay-{{ section.id }} ile
 kapsayarak koyar; çıktıyı shopify/<ad>.txt olarak yazar. Ardından Liquid etiket dengesini ve
 {% schema %} JSON'unu denetler.
@@ -13,7 +13,7 @@ KAYNAK = KOK / 'araclar' / 'shopify-kaynak'
 CIKTI = KOK / 'shopify'
 S = '#ay-{{ section.id }}'
 
-html = (KOK / 'onizleme' / 'index.html').read_text(encoding='utf-8')
+html = (KOK / 'onizleme' / 'iskelet.html').read_text(encoding='utf-8')  # iskelet, index'in CSS'ini ve yeni kalıpları içerir
 css = html[html.index('<style>') + 7:html.index('</style>')]
 css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 

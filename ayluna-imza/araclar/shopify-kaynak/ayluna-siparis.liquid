@@ -1,5 +1,5 @@
 {%- comment -%}
-  Ayluna · Sipariş levhası: puan, başlık, fiyat, bento, model, paket, ay sayacı, birlikte al,
+  Ayluna · Sipariş levhası: puan, başlık, fiyat, dün satılan + stok alarmı, öne çıkan maddeler, model, paket, ay sayacı, birlikte al,
   kaydırarak kapıda öde, kargo notu ve yapışkan alt çubuk.
   Fiyatlar, karşılaştırma fiyatı, indirim yüzdesi, adet fiyatı ve kazanç varyant verisinden hesaplanır.
   Varyant eşleşmesi: model bloğunun "seçenek değeri" + paket bloğunun "seçenek değeri" (ör. "Tavşanlı" + "2 lamba").
@@ -73,6 +73,11 @@
     assign baslik = urun.title
   endif
   assign ek = s.ek_urun.selected_or_first_available_variant
+  assign dun = s.dun_elle
+  if urun.metafields.custom.dun_satilan != blank
+    assign dun = urun.metafields.custom.dun_satilan.value | default: urun.metafields.custom.dun_satilan
+  endif
+  assign dun = dun | plus: 0
   assign kart_oran = 100 | minus: s.kart_yuzde
   assign kart_fiyat = secili_varyant.price | times: kart_oran | divided_by: 100
   assign ilk_odeme = 'kapi'
@@ -102,18 +107,28 @@
         {%- if s.alt_baslik != blank -%}<p class="alt-baslik">{{ s.alt_baslik }}</p>{%- endif -%}
         <div class="fiyat"><b class="ay-birim">{{ tek_varyant.price | money }}</b>{%- if tek_varyant.compare_at_price > tek_varyant.price -%}<s class="ay-birim-eski">{{ tek_varyant.compare_at_price | money }}</s><span class="rozet ay-yuzde">%{{ tek_varyant.compare_at_price | minus: tek_varyant.price | times: 1000 | divided_by: tek_varyant.compare_at_price | plus: 5 | divided_by: 10 }} indirim</span>{%- endif -%}</div>
 
-        <div class="bento">
-          <div class="b foto">{%- if ilk_model.settings.bento_resim != blank -%}<img class="ay-bento-img" src="{{ ilk_model.settings.bento_resim | image_url: width: 600 }}" alt="" loading="lazy" style="object-position:50% 30%" width="{{ ilk_model.settings.bento_resim.width }}" height="{{ ilk_model.settings.bento_resim.height }}">{%- endif -%}<div class="y"><span class="deger">{{ s.bento1_deger }}</span><span class="acik">{{ s.bento1_acik }}</span></div></div>
-          <div class="b"><span class="deger">{{ s.bento2_deger }}</span><span class="acik">{{ s.bento2_acik }}</span></div>
-          <div class="b"><span class="deger ay-bento-deger">{{ ilk_model.settings.bento_deger }}</span><span class="acik ay-bento-acik">{{ ilk_model.settings.bento_acik }}</span></div>
-          <div class="b genis"><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>{{ s.guven1 }}</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg>{{ s.guven2 }}</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg>{{ s.guven3 }}</span></div>
+        {%- if s.baski_goster -%}
+        <div class="baski">
+          {%- if dun > 0 -%}<div class="dun"><span class="nabiz" aria-hidden="true"></span><span><b>{{ dun }} kişi</b> {{ s.dun_yazi }}</span></div>{%- endif -%}
+          <div class="ay-stok" hidden><div class="stok-y"><span class="ay-stok-model"></span><b class="ay-stok-yazi"></b></div><div class="stok-c"><i class="ay-stok-c"></i></div></div>
         </div>
+        {%- endif -%}
+        {%- assign maddeler = section.blocks | where: 'type', 'madde' -%}
+        {%- if maddeler.size > 0 -%}
+        <ul class="fl" aria-label="Öne çıkanlar">
+          {%- for b in maddeler -%}
+          <li {{ b.shopify_attributes }}><span class="ik"><svg viewBox="0 0 24 24">{%- case b.settings.ikon -%}{%- when 'ay' -%}<path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"/>{%- when 'hediye' -%}<rect x="4" y="9" width="16" height="11" rx="2"/><path d="M3 9h18M12 9v11"/><path d="M12 9c-2.5 0-4.5-1-4.5-3S10 3.5 12 9c2-5.5 4.5-5 4.5-3S14.5 9 12 9z"/>{%- when 'muzik' -%}<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>{%- when 'pil' -%}<rect x="3" y="7" width="16" height="10" rx="2.5"/><path d="M21 11v2M7 10.5v3M10.5 10.5v3"/>{%- when 'goz' -%}<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/>{%- when 'aile' -%}<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3 19c.6-3.3 2.6-5 5-5s4.4 1.7 5 5M13.5 19c.4-2.4 1.6-3.7 3-3.7s2.7 1.3 3 3.7"/>{%- when 'disk' -%}<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.2"/>{%- when 'kalkan' -%}<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>{%- endcase -%}</svg></span><span>{%- if b.settings.model_bagli -%}<b class="ay-bento-deger">{{ ilk_model.settings.bento_deger }}</b><span class="a ay-bento-acik">{{ ilk_model.settings.bento_acik }}</span>{%- else -%}<b>{{ b.settings.baslik }}</b><span class="a">{{ b.settings.aciklama }}</span>{%- endif -%}</span></li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+        <div class="guven"><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>{{ s.guven1 }}</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg>{{ s.guven2 }}</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg>{{ s.guven3 }}</span></div>
+
 
         {%- if modeller.size > 0 -%}
         <div class="etiket"><span class="soluk">{{ s.model_etiket }}</span><b class="ay-model-ad">{{ ilk_model.settings.ad }}</b></div>
         <div class="modeller kaydirma">
           {%- for b in modeller -%}
-          <button type="button" class="model" data-deger="{{ b.settings.deger | escape }}" data-anahtar="{{ b.settings.anahtar }}" data-ad="{{ b.settings.ad | escape }}" data-bv="{{ b.settings.bento_deger | escape }}" data-ba="{{ b.settings.bento_acik | escape }}" data-bento="{% if b.settings.bento_resim != blank %}{{ b.settings.bento_resim | image_url: width: 600 }}{% endif %}" data-oda="{% if b.settings.kart_resim != blank %}{{ b.settings.kart_resim | image_url: width: 160 }}{% endif %}" data-konum="{{ b.settings.kart_konum }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ b.shopify_attributes }}>
+          <button type="button" class="model" data-deger="{{ b.settings.deger | escape }}" data-anahtar="{{ b.settings.anahtar }}" data-ad="{{ b.settings.ad | escape }}" data-bv="{{ b.settings.bento_deger | escape }}" data-ba="{{ b.settings.bento_acik | escape }}" data-oda="{% if b.settings.kart_resim != blank %}{{ b.settings.kart_resim | image_url: width: 160 }}{% endif %}" data-konum="{{ b.settings.kart_konum }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ b.shopify_attributes }}>
             {%- if b.settings.kart_resim != blank -%}<img src="{{ b.settings.kart_resim | image_url: width: 640 }}" alt="" loading="lazy" style="object-position:{{ b.settings.kart_konum }}" width="{{ b.settings.kart_resim.width }}" height="{{ b.settings.kart_resim.height }}">{%- endif -%}
             <span class="cember"></span><span class="tik"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
             <span class="y"><b>{{ b.settings.kart_baslik }}</b><span>{{ b.settings.kart_alt }}</span></span>
@@ -201,7 +216,7 @@
     </div>
     {%- endif -%}
   </div>
-  <script type="application/json" class="ay-varyantlar">[{%- for v in urun.variants -%}{"id":{{ v.id }},"o":{{ v.options | json }},"p":{{ v.price }},"c":{{ v.compare_at_price | default: 0 }},"a":{{ v.available }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+  <script type="application/json" class="ay-varyantlar">[{%- for v in urun.variants -%}{"id":{{ v.id }},"o":{{ v.options | json }},"p":{{ v.price }},"c":{{ v.compare_at_price | default: 0 }},"a":{{ v.available }},"s":{% if v.inventory_management == 'shopify' %}{{ v.inventory_quantity }}{% else %}null{% endif %}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
 </div>
 <script>
 (function(){
@@ -221,6 +236,12 @@
   var ilkModel=$('.model'), ilkPaket=$('.paket[aria-pressed=true]')||$('.paket');
   var S={model:ilkModel?ilkModel.dataset.deger:'', anahtar:ilkModel?ilkModel.dataset.anahtar:'kiz', paket:ilkPaket?ilkPaket.dataset.deger:'', adet:ilkPaket?+ilkPaket.dataset.adet:1, ek:false, odeme:'{{ ilk_odeme }}'};
   function bul(model,paket){ for(var i=0;i<V.length;i++){ var o=V[i].o; if((!model||o.indexOf(model)>-1)&&(!paket||o.indexOf(paket)>-1)) return V[i]; } return V[0]; }
+  /* Stok alarmı: seçili modelin tek lamba varyantının gerçek stoğu; eşiğin üstündeyse gizli */
+  var ESIK={{ s.stok_esik }}, MODEL_ADI={};
+  function stokCiz(){ var k=$('.ay-stok'); if(!k) return; var tek=$('.paket[data-adet="1"]'), v=bul(S.model,tek?tek.dataset.deger:S.paket);
+    if(v.s===null||v.s===undefined||v.s<=0||v.s>ESIK){ k.hidden=true; return; }
+    k.hidden=false; var m=$('.model[aria-pressed=true] .y b'); $('.ay-stok-model').textContent=(m?m.textContent+' ':'')+'modelde'; $('.ay-stok-yazi').textContent='son '+v.s+' adet';
+    $('.ay-stok-c').style.transform='scaleX('+(v.s/ESIK).toFixed(2)+')'; }
   function ekFiyat(){ var e=$('.ekle'); return S.ek&&e?+e.dataset.fiyat:0; }
 
   /* ---------- Başlık: odaklanma ---------- */
@@ -245,12 +266,12 @@
     $('.ay-iz-yazi').textContent=S.odeme==='kart'?YAZI.kart:YAZI.kapi; var ybt=$('.yapis .btn'); if(ybt) ybt.textContent=S.odeme==='kart'?YAZI.ykart:YAZI.ykapi;
     [$('.ay-iz-fiyat'),$('.ay-yapis-fiyat')].forEach(function(el){ if(!el||el.textContent===para(odT)) return; el.textContent=para(odT); if(!az){ el.classList.remove('fiyat-tik'); void el.offsetWidth; el.classList.add('fiyat-tik'); } });
     var pn=$('.ay-paket-not'); if(pn) pn.textContent=S.adet>1?S.adet+' lamba seçili':'';
+    stokCiz();
     var inp=$('.ay-varyant-id'); if(inp){ inp.value=v.id; inp.dispatchEvent(new Event('change',{bubbles:true})); }
   }
   $$('.model').forEach(function(x){x.addEventListener('click',function(){
     S.model=x.dataset.deger; S.anahtar=x.dataset.anahtar; window.AylunaModel=S.anahtar;
     $('.ay-model-ad').textContent=x.dataset.ad; var bv=$('.ay-bento-deger'), ba=$('.ay-bento-acik'); if(bv)bv.textContent=x.dataset.bv; if(ba)ba.textContent=x.dataset.ba;
-    var bi=$('.ay-bento-img'); if(bi&&x.dataset.bento) bi.src=x.dataset.bento;
     var yi=$('.ay-yapis-img'); if(yi&&x.dataset.oda){ yi.src=x.dataset.oda; yi.style.objectPosition=x.dataset.konum; }
     uygula(); x.scrollIntoView({behavior:az?'auto':'smooth',inline:'center',block:'nearest'});
     document.dispatchEvent(new CustomEvent('ayluna:model',{detail:{model:S.anahtar}}));
@@ -339,10 +360,11 @@
     { "type": "text", "id": "yorum_hedef", "label": "Puan bağlantısı", "default": "#yorumlar" },
     { "type": "text", "id": "stok_yazi", "label": "Stok yazısı", "default": "Stokta" },
     { "type": "header", "content": "Bento" },
-    { "type": "text", "id": "bento1_deger", "label": "Fotoğraflı kutu: büyük yazı", "default": "12" },
-    { "type": "text", "id": "bento1_acik", "label": "Fotoğraflı kutu: açıklama", "default": "masal diski, 6'sı hediye" },
-    { "type": "text", "id": "bento2_deger", "label": "İkinci kutu: büyük yazı", "default": "Şarjlı" },
-    { "type": "text", "id": "bento2_acik", "label": "İkinci kutu: açıklama", "default": "kablosuz, komodinden yatağa" },
+    { "type": "header", "content": "Satış baskısı (gerçek veri)" },
+    { "type": "checkbox", "id": "baski_goster", "label": "Dün satılan + stok alarmı satırı", "default": true },
+    { "type": "number", "id": "dun_elle", "label": "Dün satılan (elle)", "info": "Ürünün custom.dun_satilan metafield'ı varsa o kullanılır (Shopify Flow ile her gece güncellenir). 0 ise satır gizlenir.", "default": 0 },
+    { "type": "text", "id": "dun_yazi", "label": "Dün satılan yazısı", "default": "dün LunaDream aldı" },
+    { "type": "range", "id": "stok_esik", "label": "Stok alarmı eşiği", "info": "Gerçek stok bu sayının altına inince 'son X adet' görünür.", "min": 5, "max": 100, "step": 5, "default": 30 },
     { "type": "text", "id": "guven1", "label": "Güven 1", "default": "Kapıda öde" },
     { "type": "text", "id": "guven2", "label": "Güven 2", "default": "Ücretsiz kargo" },
     { "type": "text", "id": "guven3", "label": "Güven 3", "default": "30 gün iade" },
@@ -375,6 +397,7 @@
     { "type": "text", "id": "yapis_buton", "label": "Yapışkan buton (kapıda)", "default": "Kapıda öde" }
   ],
   "blocks": [
+    {"type": "madde", "name": "Öne çıkan madde", "limit": 8, "settings": [{"type": "select", "id": "ikon", "label": "İkon", "options": [{"value": "ay", "label": "Ay / uyku"}, {"value": "hediye", "label": "Hediye"}, {"value": "muzik", "label": "Müzik"}, {"value": "pil", "label": "Pil"}, {"value": "goz", "label": "Göz"}, {"value": "aile", "label": "Aile"}, {"value": "disk", "label": "Disk"}, {"value": "kalkan", "label": "Garanti"}], "default": "ay"}, {"type": "text", "id": "baslik", "label": "Başlık", "default": "Uyku rutini"}, {"type": "text", "id": "aciklama", "label": "Açıklama", "default": "Uyku vakti savaş değil, minik bir masal"}, {"type": "checkbox", "id": "model_bagli", "label": "Yazı seçili modelden gelsin", "info": "Model bloğundaki 'modele bağlı madde' alanları kullanılır.", "default": false}]},
     {
       "type": "model",
       "name": "Model",
@@ -387,9 +410,8 @@
         { "type": "text", "id": "kart_konum", "label": "Kart görsel odağı", "default": "30% 75%" },
         { "type": "text", "id": "kart_baslik", "label": "Kart başlığı", "default": "Tavşanlı" },
         { "type": "text", "id": "kart_alt", "label": "Kart alt yazısı", "default": "Kız modeli · ninni hoparlörlü" },
-        { "type": "image_picker", "id": "bento_resim", "label": "Bento fotoğrafı" },
-        { "type": "text", "id": "bento_deger", "label": "Bento: büyük yazı", "default": "Ninni" },
-        { "type": "text", "id": "bento_acik", "label": "Bento: açıklama", "default": "Bluetooth hoparlör" }
+        { "type": "text", "id": "bento_deger", "label": "Modele bağlı madde: başlık", "default": "Ninni hoparlörü" },
+        { "type": "text", "id": "bento_acik", "label": "Modele bağlı madde: açıklama", "default": "Bluetooth, telefondan çal" }
       ]
     },
     {
@@ -410,8 +432,14 @@
     {
       "name": "Ayluna · Sipariş",
       "blocks": [
-        { "type": "model", "settings": { "deger": "Tavşanlı", "anahtar": "kiz", "ad": "Kız Çocuklar İçin · Tavşanlı", "kart_baslik": "Tavşanlı", "kart_alt": "Kız modeli · ninni hoparlörlü", "kart_konum": "30% 75%", "bento_deger": "Ninni", "bento_acik": "Bluetooth hoparlör" } },
-        { "type": "model", "settings": { "deger": "Uzay Kaşifi", "anahtar": "erkek", "ad": "Erkek Çocuklar İçin · Uzay Kaşifi", "kart_baslik": "Uzay Kaşifi", "kart_alt": "Erkek modeli · robot, hoparlörsüz", "kart_konum": "55% 70%", "bento_deger": "Robot", "bento_acik": "Uzay Kaşifi tasarım" } },
+        {"type": "madde", "settings": {"ikon": "ay", "baslik": "Uyku rutini", "aciklama": "Uyku vakti savaş değil, minik bir masal", "model_bagli": false}},
+        {"type": "madde", "settings": {"ikon": "hediye", "baslik": "6 + 6 hediye disk", "aciklama": "Her gece tavanda başka masal", "model_bagli": false}},
+        {"type": "madde", "settings": {"ikon": "muzik", "baslik": "", "aciklama": "", "model_bagli": true}},
+        {"type": "madde", "settings": {"ikon": "pil", "baslik": "Kablosuz, şarjlı", "aciklama": "Şarj olurken de çalışır", "model_bagli": false}},
+        {"type": "madde", "settings": {"ikon": "goz", "baslik": "Göz yormaz", "aciklama": "Işık tavana yansır, LED ısınmaz", "model_bagli": false}},
+        {"type": "madde", "settings": {"ikon": "aile", "baslik": "12.000+ sipariş", "aciklama": "Binlerce ailenin gece ritüeli", "model_bagli": false}},
+        { "type": "model", "settings": { "deger": "Tavşanlı", "anahtar": "kiz", "ad": "Kız Çocuklar İçin · Tavşanlı", "kart_baslik": "Tavşanlı", "kart_alt": "Kız modeli · ninni hoparlörlü", "kart_konum": "30% 75%", "bento_deger": "Ninni hoparlörü", "bento_acik": "Bluetooth, telefondan çal" } },
+        { "type": "model", "settings": { "deger": "Uzay Kaşifi", "anahtar": "erkek", "ad": "Erkek Çocuklar İçin · Uzay Kaşifi", "kart_baslik": "Uzay Kaşifi", "kart_alt": "Erkek modeli · robot, hoparlörsüz", "kart_konum": "55% 70%", "bento_deger": "Uzay Kaşifi", "bento_acik": "Robot tasarım, hoparlörsüz" } },
         { "type": "paket", "settings": { "deger": "1 lamba", "ad": "1 lamba", "adet": 1, "hediye": "+6 hediye disk" } },
         { "type": "paket", "settings": { "deger": "2 lamba", "ad": "2 lamba", "adet": 2, "serit": "Kardeşe", "varsayilan": true } }
       ]

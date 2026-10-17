@@ -16,8 +16,8 @@ L.registerTag('style',{parse(t,r){this.tpl=[];const s=this.liquid.parser.parseSt
 L.registerTag('form',{parse(t,r){this.args=t.args;this.tpl=[];const s=this.liquid.parser.parseStream(r);s.on('tag:endform',()=>s.stop()).on('template',x=>this.tpl.push(x)).on('end',()=>{throw new Error('form')});s.start();},*render(ctx,em){em.write('<form class="ay-gizli-form" style="display:none">');yield this.liquid.renderer.renderTemplates(this.tpl,ctx,em);em.write('</form>');}});
 
 const M=['Tavşanlı','Uzay Kaşifi'], P=[['1 lamba',169999,199900],['2 lamba',274999,399800]];
-let id=1; const variants=[]; for(const m of M) for(const p of P) variants.push({id:id++,options:[m,p[0]],price:p[1],compare_at_price:p[2],available:true,title:m+' / '+p[0]});
-const product={title:'LunaDream',variants,selected_or_first_available_variant:variants[0],metafields:{loox:{}},url:'#'};
+let id=1; const variants=[]; for(const m of M) for(const p of P) variants.push({id:id++,options:[m,p[0]],price:p[1],compare_at_price:p[2],available:true,title:m+' / '+p[0],inventory_management:'shopify',inventory_quantity:m==='Tavşanlı'?17:120});
+const product={title:'LunaDream',variants,selected_or_first_available_variant:variants[0],metafields:{loox:{},custom:{dun_satilan:{value:23}}},url:'#'};
 const urun=(t,f,p,c)=>({title:t,url:'#',price:p,compare_at_price:c,price_varies:false,featured_image:img(f,600,600)});
 const video=(n)=>({sources:[{mime_type:'video/mp4',width:720,url:ON+'v/'+n+'.mp4'}],preview_image:{src:ON+'v/'+n+'.jpg'}});
 const OV={
@@ -38,7 +38,7 @@ const BLOK={
  'ayluna-diski-tak':(b,i)=>({resim:img('disk'+(i+1)+'.jpg',188,188)}),
  'ayluna-bir-gece':(b,i)=>({video_kiz:video(['m1-isik','m2-disk','m3-kiz','m4-tavan','m5-kiz'][i]),video_erkek:i===2?video('m3-erkek'):i===4?video('m5-erkek'):null})
 };
-const SIRA=['ayluna-duyuru','ayluna-sahne','ayluna-siparis','ayluna-fayda','ayluna-yorumlar','ayluna-kutu','ayluna-dunya','ayluna-diski-tak','ayluna-bir-gece','ayluna-sss','ayluna-kardes','ayluna-diger-isiklar','ayluna-kapanis','ayluna-alt-bilgi'];
+const SIRA=['ayluna-bant','ayluna-sahne','ayluna-siparis','ayluna-fayda','ayluna-yorumlar','ayluna-kutu','ayluna-dunya','ayluna-diski-tak','ayluna-bir-gece','ayluna-sss','ayluna-kardes','ayluna-diger-isiklar','ayluna-kapanis','ayluna-alt-bilgi'];
 (async()=>{
   let govde='';
   for(const ad of SIRA){

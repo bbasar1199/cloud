@@ -1,0 +1,64 @@
+{%- comment -%}
+  Ayluna · Kampanya bandı (yapışkan): saniyeli geri sayım. Bitiş: girilen tarih ya da ayın son günü 23:59:59.
+  Sayaç gerçek bir fiyat değişikliğine bağlıdır; bitince bir sonraki aya geçer, sahte sıfırlanma yok.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{% style %}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Young Serif";font-weight:400;font-display:swap;src:url({{ 'young-serif-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-ext-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:400;font-display:swap;src:url({{ 'onest-latin-400-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-ext-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-weight:600;font-display:swap;src:url({{ 'onest-latin-600-normal.woff2' | asset_url }}) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#ay-{{ section.id }}{--krem:#F6F1E9;--yuzey:#FFFDF9;--cizgi:#E3D8C7;--lac:#1A2142;--gece:#141A36;--gece2:#0C1027;--metin:#1A2142;--soluk:#5C6078;--gSoluk:#B9BED6;--gMetin:#F4EDE3;--amber:#F2A65A;--amber2:#E59A4C;--e:cubic-bezier(.2,.7,.2,1);color:var(--metin);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{box-sizing:border-box}
+#ay-{{ section.id }} img{display:block;max-width:100%}
+#ay-{{ section.id }} a{color:inherit}
+#ay-{{ section.id }} button{font:inherit;color:inherit}
+#ay-{{ section.id }} .ay-ic{max-width:430px;margin:0 auto;position:relative;overflow:clip}
+#ay-{{ section.id }} .fiyat{display:flex;align-items:baseline;gap:10px;margin-top:14px;font-variant-numeric:tabular-nums}
+#ay-{{ section.id }} .fiyat b{font-size:28px;letter-spacing:-.02em;font-weight:600}
+#ay-{{ section.id }} .fiyat s{color:var(--soluk)}
+#ay-{{ section.id }} .iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#ay-{{ section.id }} .bant{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:10px;min-height:40px;padding:6px 12px;background:var(--amber);color:var(--lac);font-size:13px;font-weight:600}
+#ay-{{ section.id }} .bant .sy{display:inline-flex;gap:3px;font-variant-numeric:tabular-nums}
+#ay-{{ section.id }} .bant .sy span{min-width:26px;padding:2px 4px;border-radius:6px;background:var(--lac);color:#FFFDF9;text-align:center;font-size:12.5px;line-height:1.35}
+#ay-{{ section.id }} .bant .sy span small{font-size:9px;opacity:.7;margin-left:1px}
+
+@media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
+#ay-{{ section.id }}{position:sticky;top:0;z-index:40;background:var(--amber)}
+#ay-{{ section.id }} .ay-ic{overflow:visible}
+{% endstyle %}
+<div id="ay-{{ section.id }}">
+  <div class="ay-ic">
+    <div class="bant" role="status"><span class="ay-bant-yazi">{{ s.metin }}</span><span class="sy"></span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var kok=document.getElementById('ay-{{ section.id }}'); if(!kok) return;
+  var AY=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  var METIN={{ s.metin | json }}, BITIS={{ s.bitis | json }};
+  function iki(n){return n<10?'0'+n:''+n;}
+  function hedef(n){ if(BITIS){ var p=BITIS.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2],23,59,59); if(d>n) return d; } return new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59); }
+  function ciz(){ var n=new Date(), son=hedef(n), f=Math.max(0,son-n), g=Math.floor(f/864e5);
+    kok.querySelector('.ay-bant-yazi').textContent=(g<3?'Son '+(g+1)+' gün: ':'')+METIN.replace('{ay}',AY[son.getMonth()]);
+    var p=[[g,'g'],[Math.floor(f/36e5)%24,'s'],[Math.floor(f/6e4)%60,'d'],[Math.floor(f/1e3)%60,'sn']];
+    kok.querySelector('.sy').innerHTML=p.map(function(x){return '<span>'+(x[1]==='g'?x[0]:iki(x[0]))+'<small>'+x[1]+'</small></span>';}).join('');
+    setTimeout(ciz,1000-n.getMilliseconds()); }
+  ciz();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ayluna · Kampanya bandı",
+  "tag": "section",
+  "class": "ayluna-bant",
+  "settings": [
+    { "type": "text", "id": "metin", "label": "Yazı", "info": "{ay} yerine bitiş ayının adı gelir.", "default": "{ay} fiyatı bitiyor" },
+    { "type": "text", "id": "bitis", "label": "Bitiş tarihi (YYYY-AA-GG)", "info": "Boşsa ayın son günü 23:59:59. Tarih geçince yine ay sonuna sayar.", "default": "" }
+  ],
+  "presets": [ { "name": "Ayluna · Kampanya bandı" } ]
+}
+{% endschema %}

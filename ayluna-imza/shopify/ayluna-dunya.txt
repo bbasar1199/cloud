@@ -38,6 +38,7 @@
 #ay-{{ section.id }} .dunya .ucan img{width:100%;height:100%;object-fit:cover}
 #ay-{{ section.id }} .dunya .y{position:absolute;left:18px;right:18px;bottom:30px;z-index:3}
 #ay-{{ section.id }} .dunya::after{content:"";position:absolute;inset:auto 0 0 0;height:260px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));pointer-events:none;z-index:2}
+@media (min-width:960px){#ay-{{ section.id }} .h2{font-size:52px}#ay-{{ section.id }} .dunya{border-radius:28px}#ay-{{ section.id }} .model{flex:0 0 calc(50% - 6px)}}
 
 @media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
 #ay-{{ section.id }}{background:var(--gece)}

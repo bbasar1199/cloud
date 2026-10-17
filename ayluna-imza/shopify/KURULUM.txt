@@ -15,7 +15,8 @@ Tema > Kodu düzenle > Assets > "Yeni öğe ekle" ile şu 6 dosyayı yükle
 Kodu düzenle > Sections > "Yeni bölüm ekle" > Liquid. Adı dosya adıyla aynı olsun
 (.txt yerine .liquid). İçini sil, .txt dosyasının tamamını yapıştır, Kaydet.
 Sayfadaki sıra:
-  ayluna-duyuru.txt          -> sections/ayluna-duyuru.liquid
+  ayluna-bant.txt            -> sections/ayluna-bant.liquid   (kampanya sayacı; duyurunun yerine)
+  ayluna-duyuru.txt          -> sections/ayluna-duyuru.liquid (istersen)
   ayluna-sahne.txt           -> sections/ayluna-sahne.liquid
   ayluna-siparis.txt         -> sections/ayluna-siparis.liquid
   ayluna-fayda.txt           -> sections/ayluna-fayda.liquid
@@ -63,6 +64,15 @@ Erkek alanlarına m3-erkek ve m5-erkek. Poster Shopify'da otomatik oluşur.
 Loox ürün metafield'ı (loox.avg_rating, loox.num_reviews) varsa puan ve sayı oradan
 gelir; yoksa bölüm ayarındaki değer görünür. Fotoğraf seçerken üzerinde yazı
 olmayan kare seç (ugc1k.jpg yazısı kırpılmış hâlidir).
+
+7a) SATIŞ BASKISI (gerçek veriyle)
+- Stok alarmı: Ürünlerde "Stok takibi" açık olmalı. Seçili modelin stoğu Sipariş >
+  "Stok alarmı eşiği"nin altına inince "son X adet" çıkar; üstündeyken görünmez.
+- Dün satılan: Ayarlar > Özel veriler > Ürünler > tanım ekle: custom.dun_satilan (tam sayı).
+  Shopify Flow: Zamanlanmış (her gün 00:05) > "Sipariş verilerini al" (dünün siparişleri,
+  bu ürün) > adetleri topla > "Ürün metafield'ını güncelle" custom.dun_satilan.
+  Flow kurulana kadar Sipariş > "Dün satılan (elle)" alanına gerçek sayıyı yazabilirsin; 0 ise gizli.
+- Kampanya bandı: bitiş tarihi boşsa ayın son günü 23:59:59'a sayar (her ay zam).
 
 7b) KAPANIŞ
 Kapanış > "WhatsApp numarası" alanına numarayı yaz (boşsa WhatsApp butonu görünmez).

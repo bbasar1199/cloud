@@ -184,7 +184,8 @@ button{font:inherit;color:inherit}
 .teslim span::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--krem);border:2px solid var(--lac)}
 .teslim span:last-child::before{background:var(--amber);border-color:var(--amber)}
 .teslim b{display:block;color:var(--metin);font-weight:600;font-variant-numeric:tabular-nums}
-.alt-not{display:flex;justify-content:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--soluk);text-align:center}
+.alt-not{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;margin-top:10px;font-size:12.5px;color:var(--soluk);text-align:center}
+.alt-not span{white-space:nowrap}
 .alt-not a{color:var(--metin);font-weight:600}
 
 /* Form */
@@ -403,12 +404,40 @@ button{font:inherit;color:inherit}
 .ok-i{width:20px;height:20px;border-radius:50%;background:var(--lac);color:#fff;display:inline-grid;place-items:center}
 .yok-i{display:inline-block;width:12px;height:2px;border-radius:2px;background:#C9BFAE;vertical-align:middle}
 
+/* ===== Tanıdık kalıplar, gerçek veriyle ===== */
+/* Üst bant: kampanya sayacı (ayın son günü 23:59:59) */
+.bant{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:10px;min-height:40px;padding:6px 12px;background:var(--amber);color:var(--lac);font-size:13px;font-weight:600}
+.bant .sy{display:inline-flex;gap:3px;font-variant-numeric:tabular-nums}
+.bant .sy span{min-width:26px;padding:2px 4px;border-radius:6px;background:var(--lac);color:#FFFDF9;text-align:center;font-size:12.5px;line-height:1.35}
+.bant .sy span small{font-size:9px;opacity:.7;margin-left:1px}
+/* Baskı satırı: dün satılan + stok (gerçek veri; eşiğin üstündeyse stok gizlenir) */
+.baski{display:grid;gap:10px;margin-top:14px;padding:12px 14px;border-radius:16px;background:var(--yuzey);border:1px solid var(--cizgi)}
+.dun{display:flex;align-items:center;gap:9px;font-size:13.5px}
+.dun b{font-weight:600}
+.nabiz{position:relative;width:10px;height:10px;border-radius:50%;background:#2E9A62;flex:none}
+.nabiz::after{content:"";position:absolute;inset:0;border-radius:50%;background:#2E9A62;animation:nabiz 1.8s var(--e) infinite}
+@keyframes nabiz{from{transform:scale(1);opacity:.6}to{transform:scale(2.6);opacity:0}}
+.stok-y{display:flex;justify-content:space-between;font-size:13px}
+.stok-y b{color:#B4471F;font-weight:600}
+.stok-c{height:6px;border-radius:6px;background:#EFE5D6;overflow:hidden;margin-top:6px}
+.stok-c i{display:block;height:100%;background:linear-gradient(90deg,#E59A4C,#C4572A);transform-origin:left;transform:scaleX(0);transition:transform 1.4s var(--e)}
+/* Fayda listesi: alışılmış ikon + başlık + tek satır, ama her satır somut */
+.fl{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-top:18px;padding:16px 14px;border-radius:20px;background:var(--yuzey);border:1px solid var(--cizgi)}
+.fl li{list-style:none;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start}
+.fl ul{margin:0;padding:0;display:contents}
+.fl .ik{width:38px;height:38px;border-radius:12px;background:#FFF0DE;color:#B4620F;display:grid;place-items:center}
+.fl .ik svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fl b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.fl span.a{display:block;font-size:12.5px;color:var(--soluk);line-height:1.35;margin-top:2px}
+.guven{display:flex;justify-content:space-between;gap:8px;margin-top:10px;padding:11px 14px;border-radius:14px;background:var(--lac);color:var(--gMetin);font-size:12.5px;font-weight:600}
+.guven span{display:inline-flex;align-items:center;gap:6px}
+
 /* ===== Masaüstü ===== */
 @media (min-width:960px){
   body{background:var(--krem)}
   .sayfa{max-width:none;overflow:visible}
   .ust-izgara{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;max-width:1180px;margin:0 auto;padding:24px 32px 0;align-items:start}
-  .ust-izgara .sahne{position:sticky;top:16px;height:calc(100vh - 32px);max-height:760px;border-radius:28px}
+  .ust-izgara .sahne{position:sticky;top:56px;height:calc(100vh - 72px);max-height:760px;border-radius:28px}
   .ust-izgara .levha{margin-top:0;border-radius:0;background:transparent}
   .ust-izgara .levha .px{padding-inline:0}
   .ust-izgara .tutamak{display:none}
@@ -424,6 +453,7 @@ button{font:inherit;color:inherit}
   .dunya{border-radius:28px}
   .makaralar{padding-inline:calc(50% - 560px)}
   .yapis{max-width:640px;border-radius:20px 20px 0 0}
+  .fl{grid-template-columns:1fr 1fr 1fr}
   .alt-bilgi .dev{font-size:240px}
   .kapanis{max-width:720px;margin:0 auto}
   .kutu-sahne{max-width:560px;margin-left:auto;margin-right:auto}
@@ -444,7 +474,7 @@ button{font:inherit;color:inherit}
 <body>
 <div class="sayfa" id="sayfa">
 
-  <div class="duyuru">Kartla ödemede %5 indirim · Kapıda ödeme · Ücretsiz kargo</div>
+  <div class="bant" role="status"><span id="bantYazi">Ekim fiyatı bitiyor</span><span class="sy" id="bantSayac"></span></div>
   <div class="ust-izgara">
 
   <!-- ===== SAHNE ===== -->
@@ -484,12 +514,19 @@ button{font:inherit;color:inherit}
       <p class="alt-baslik">Uyku vakti savaş değil, minik bir masal.</p>
       <div class="fiyat"><b id="birimFiyat">₺1.699,99</b><s id="birimEski">₺1.999,00</s><span class="rozet" id="birimYuzde">%15 indirim</span></div>
 
-      <div class="bento">
-        <div class="b foto"><img id="bentoImg" src="g/kiz-dunya.jpg" alt="" style="object-position:50% 30%"><div class="y"><span class="deger">12</span><span class="acik">masal diski<br>6'sı hediye</span></div></div>
-        <div class="b"><span class="deger">Şarjlı</span><span class="acik">kablosuz, komodinden yatağa</span></div>
-        <div class="b"><span class="deger" id="bentoDeger">Ninni</span><span class="acik" id="bentoAcik">Bluetooth hoparlör</span></div>
-        <div class="b genis"><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>Kapıda öde</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg>Ücretsiz kargo</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg>30 gün iade</span></div>
+      <div class="baski">
+        <div class="dun"><span class="nabiz" aria-hidden="true"></span><span><b id="dunSayi">23 kişi</b> dün LunaDream aldı</span></div>
+        <div id="stokKutu"><div class="stok-y"><span id="stokModel">Tavşanlı modelde</span><b id="stokYazi">son 17 adet</b></div><div class="stok-c"><i id="stokCubuk"></i></div></div>
       </div>
+      <ul class="fl" aria-label="Öne çıkanlar">
+        <li><span class="ik"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"/></svg></span><span><b>Uyku rutini</b><span class="a">Uyku vakti savaş değil, minik bir masal</span></span></li>
+        <li><span class="ik"><svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M3 9h18M12 9v11"/><path d="M12 9c-2.5 0-4.5-1-4.5-3S10 3.5 12 9c2-5.5 4.5-5 4.5-3S14.5 9 12 9z"/></svg></span><span><b>6 + 6 hediye disk</b><span class="a">Her gece tavanda başka masal</span></span></li>
+        <li><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span><span><b id="bentoDeger">Ninni hoparlörü</b><span class="a" id="bentoAcik">Bluetooth, telefondan çal</span></span></li>
+        <li><span class="ik"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="10" rx="2.5"/><path d="M21 11v2M7 10.5v3M10.5 10.5v3"/></svg></span><span><b>Kablosuz, şarjlı</b><span class="a">Şarj olurken de çalışır</span></span></li>
+        <li><span class="ik"><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span><span><b>Göz yormaz</b><span class="a">Işık tavana yansır, LED ısınmaz</span></span></li>
+        <li><span class="ik"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3 19c.6-3.3 2.6-5 5-5s4.4 1.7 5 5M13.5 19c.4-2.4 1.6-3.7 3-3.7s2.7 1.3 3 3.7"/></svg></span><span><b>12.000+ sipariş</b><span class="a">Binlerce ailenin gece ritüeli</span></span></li>
+      </ul>
+      <div class="guven"><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>Kapıda öde</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg>Ücretsiz kargo</span><span><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg>30 gün iade</span></div>
 
       <div class="etiket"><span class="soluk">Model</span><b id="modelAd">Kız Çocuklar İçin · Tavşanlı</b></div>
       <div class="modeller kaydirma" id="modeller">
@@ -720,8 +757,8 @@ button{font:inherit;color:inherit}
   /* ---------- Durum ---------- */
   var S={model:'kiz',paket:2,ekle:false,odeme:'kart'};
   var MOD={
-    kiz:{ad:'Kız Çocuklar İçin · Tavşanlı',gunduz:'g/kiz-gunduz.jpg',gece:'g/kiz-gece.jpg',dunya:'g/kiz-dunya.jpg',oda:'g/kiz-oda.jpg',pos:'30% 75%',elde:'g/elde.jpg',bv:'Ninni',ba:'Bluetooth hoparlör'},
-    erkek:{ad:'Erkek Çocuklar İçin · Uzay Kaşifi',gunduz:'g/erkek-gunduz.jpg',gece:'g/erkek-gece.jpg',dunya:'g/erkek-dunya.jpg',oda:'g/erkek-gunduz.jpg',pos:'55% 70%',elde:'g/erkek-gunduz.jpg',bv:'Robot',ba:'Uzay Kaşifi tasarım'}
+    kiz:{ad:'Kız Çocuklar İçin · Tavşanlı',gunduz:'g/kiz-gunduz.jpg',gece:'g/kiz-gece.jpg',dunya:'g/kiz-dunya.jpg',oda:'g/kiz-oda.jpg',pos:'30% 75%',elde:'g/elde.jpg',bv:'Ninni hoparlörü',ba:'Bluetooth, telefondan çal'},
+    erkek:{ad:'Erkek Çocuklar İçin · Uzay Kaşifi',gunduz:'g/erkek-gunduz.jpg',gece:'g/erkek-gece.jpg',dunya:'g/erkek-dunya.jpg',oda:'g/erkek-gunduz.jpg',pos:'55% 70%',elde:'g/erkek-gunduz.jpg',bv:'Uzay Kaşifi',ba:'Robot tasarım, hoparlörsüz'}
   };
   var PAKET={1:{p:1699.99,c:1999},2:{p:2749.99,c:3998}}, EKLE=849.99;
   function toplam(){return PAKET[S.paket].p+(S.ekle?EKLE:0);}
@@ -745,11 +782,11 @@ button{font:inherit;color:inherit}
     $('#gunduz').src=m.gunduz; $('#gece').src=m.gece; $('#dunyaKare').src=m.dunya; $('#dunyaMini').src=m.dunya; $('#eldeKare').src=m.elde; $('#eldeMini').src=m.elde;
     $('.kucuk button[data-git="0"] img').src=m.gece;
     $('#modelAd').textContent=m.ad; var kz2=S.model==='kiz'; $('#ozMuzikB').textContent=kz2?'Ninniyi de o çalar':'Uzay Kaşifi tavana döner'; $('#ozMuzikP').textContent=kz2?'Telefonunu Bluetooth ile bağla; ninni, masal ya da müzik lambanın hoparlöründen çalsın.':'Robot tasarımlı Uzay Kaşifi aynı masal disklerini tavana yansıtır. Bu modelde hoparlör yok.'; $('#ozMuzikC').textContent=kz2?'Tavşanlı modelde':'Hoparlörsüz model'; $('#ozMuzikImg').src=m.dunya; $('#ozGeceImg').src=m.gece; $('#tusSes').style.display=kz2?'':'none'; $$('.kar [data-m]').forEach(function(x){x.classList.toggle('sec',x.dataset.m===S.model);}); $('#bentoDeger').textContent=m.bv; $('#bentoAcik').textContent=m.ba;
-    $('#dunyaImg').src=m.dunya; $('#bentoImg').src=m.dunya; $('#kutuLamba').src=m.elde;
+    $('#dunyaImg').src=m.dunya; $('#kutuLamba').src=m.elde;
     $('#yapisImg').src=m.oda; $('#yapisImg').style.objectPosition=m.pos;
     $('#kardesGunduz').src=o.gunduz; $('#kardesGece').src=o.gece; $('#dtGunduz').src=m.gunduz; $('#dtGeceImg').src=m.gece;
     $$('.model').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.model===S.model);});
-    makaraKur();
+    makaraKur(); if(typeof stokCiz==='function') stokCiz();
   }
   $$('.model').forEach(function(x){x.addEventListener('click',function(){S.model=x.dataset.model;modelUygula();x.scrollIntoView({behavior:azHareket?'auto':'smooth',inline:'center',block:'nearest'});});});
 
@@ -790,6 +827,7 @@ button{font:inherit;color:inherit}
     $('#sayacUst').textContent=sonGun?('Son '+(g+1)+' gün · bu fiyat'):'Fiyatlar her ay güncellenir';
     $('#sayacKalan').innerHTML=g===0?('Bugün son gün<br>'+(s>0?s+' sa ':'')+d+' dk'):(g+' gün<br>'+s+' sa '+d+' dk');
     $('#yapisNot').textContent=son.getDate()+' '+EKE[son.getMonth()]+' kadar bu fiyat';
+    $('#bantYazi').textContent=(sonGun?'Son '+(g+1)+' gün: ':'')+AY[son.getMonth()]+' fiyatı bitiyor';
     if(ayGorundu) ayUygula();
     /* 1 iş gününde kargoda, Türkiye geneli 3-7 gün */
     var x=new Date(n); do{x.setDate(x.getDate()+1);}while(x.getDay()===0||x.getDay()===6);
@@ -798,6 +836,15 @@ button{font:inherit;color:inherit}
     $('#tKapi').textContent=a.getMonth()===z.getMonth()?(a.getDate()+'-'+z.getDate()+' '+AY[z.getMonth()]):(a.getDate()+' '+AY[a.getMonth()].slice(0,3)+' - '+z.getDate()+' '+AY[z.getMonth()].slice(0,3));
     setTimeout(sayac,(60-n.getSeconds())*1000);
   }
+  /* Üst bant sayacı: saniyeli */
+  function bant(){ var n=new Date(), son=new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59), f=Math.max(0,son-n);
+    var p=[[Math.floor(f/864e5),'g'],[Math.floor(f/36e5)%24,'s'],[Math.floor(f/6e4)%60,'d'],[Math.floor(f/1e3)%60,'sn']];
+    $('#bantSayac').innerHTML=p.map(function(x){return '<span>'+(x[1]==='g'?x[0]:iki(x[0]))+'<small>'+x[1]+'</small></span>';}).join('');
+    setTimeout(bant,1000-n.getMilliseconds()); }
+  bant();
+  /* Stok ve dün satılan: Shopify'da gerçek stok ve günlük satış verisinden gelir. Önizlemede örnek değer. */
+  var STOK={kiz:17,erkek:24}, ESIK=30;
+  function stokCiz(){ var n=STOK[S.model]; $('#stokKutu').style.display=n<=ESIK?'':'none'; $('#stokModel').textContent=(S.model==='kiz'?'Tavşanlı':'Uzay Kaşifi')+' modelde'; $('#stokYazi').textContent='son '+n+' adet'; $('#stokCubuk').style.transform='scaleX('+(n/ESIK).toFixed(2)+')'; }
   new IntersectionObserver(function(es,ob){ if(es[0].isIntersecting){ ayGorundu=true; ayUygula(); ob.disconnect(); } },{threshold:.5}).observe($('#sayac'));
 
   /* ---------- Kaydırarak sipariş ---------- */

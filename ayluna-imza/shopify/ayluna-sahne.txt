@@ -46,6 +46,7 @@
 #ay-{{ section.id }} .dunya{position:relative;height:620px;overflow:hidden;background:var(--gece2)}
 #ay-{{ section.id }} .dunya::after{content:"";position:absolute;inset:auto 0 0 0;height:260px;background:linear-gradient(180deg,rgba(20,26,54,0),var(--gece));pointer-events:none;z-index:2}
 #ay-{{ section.id }} .raf{display:flex;gap:12px;overflow-x:auto;margin:20px -18px 0;padding:0 18px}
+@media (min-width:960px){#ay-{{ section.id }} .dunya{border-radius:28px}#ay-{{ section.id }} .model{flex:0 0 calc(50% - 6px)}}
 
 @media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
 #ay-{{ section.id }}{background:var(--gece2)}

@@ -41,6 +41,7 @@
 #ay-{{ section.id }} .ilerleme{display:flex;gap:4px;margin:6px 18px 0}
 #ay-{{ section.id }} .ilerleme i{flex:1;height:2px;border-radius:2px;background:rgba(244,237,227,.18);overflow:hidden;position:relative}
 #ay-{{ section.id }} .ilerleme i::after{content:"";position:absolute;inset:0;background:var(--amber);transform:scaleX(var(--d,0));transform-origin:left;transition:transform .3s var(--e)}
+@media (min-width:960px){#ay-{{ section.id }} .h2{font-size:52px}#ay-{{ section.id }} .makaralar{padding-inline:calc(50% - 560px)}#ay-{{ section.id }} .model{flex:0 0 calc(50% - 6px)}}
 
 @media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
 #ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}

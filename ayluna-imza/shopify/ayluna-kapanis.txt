@@ -25,6 +25,7 @@
 #ay-{{ section.id }} .kapanis .iki-btn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 #ay-{{ section.id }} .kapanis .btn{min-height:52px;font-size:15px}
 #ay-{{ section.id }} .kapanis .btn.ikincil{background:transparent;color:#FFFDF9;border:1.5px solid rgba(244,237,227,.35)}
+@media (min-width:960px){#ay-{{ section.id }} .h2{font-size:52px}#ay-{{ section.id }} .kapanis{max-width:720px;margin:0 auto}}
 
 @media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
 #ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}

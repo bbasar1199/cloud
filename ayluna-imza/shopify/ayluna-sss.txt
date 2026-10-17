@@ -28,6 +28,7 @@
 #ay-{{ section.id }} .muhur .m{position:relative;width:96px;height:96px}
 #ay-{{ section.id }} .muhur .m svg{transform:rotate(calc(var(--p,0.5) * 220deg - 110deg))}
 #ay-{{ section.id }} .muhur .m b{position:absolute;inset:0;display:grid;place-items:center;font-family:"Young Serif",serif;font-weight:400;font-size:28px;color:#FFFDF9}
+@media (min-width:960px){#ay-{{ section.id }} .h2{font-size:52px}}
 
 @media (prefers-reduced-motion:reduce){#ay-{{ section.id }} *,#ay-{{ section.id }} *::before,#ay-{{ section.id }} *::after{transition-duration:.01ms!important;animation:none!important}}
 #ay-{{ section.id }}{background:var(--gece);color:var(--gMetin)}
