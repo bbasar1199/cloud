@@ -12,7 +12,13 @@ const css = (html.match(/<style>([\s\S]*?)<\/style>/) || [])[1];
 const body = html.split('</helmet>')[1].split('</x-dc>')[0];
 const script = html.match(/data-dc-script[^>]*>([\s\S]*?)<\/script>/)[1];
 const fonts = `@font-face{font-family:"Young Serif";src:url(file://${F}young-serif-latin-ext-400-normal.woff2)}@font-face{font-family:"Young Serif";src:url(file://${F}young-serif-latin-400-normal.woff2)}` + [400,500,600,700].map(w=>`@font-face{font-family:Onest;font-weight:${w};src:url(file://${F}onest-latin-${w}-normal.woff2)}@font-face{font-family:Onest;font-weight:${w};src:url(file://${F}onest-latin-ext-${w}-normal.woff2);unicode-range:U+0100-024F}`).join('');
-const page = `<!doctype html><html><head><meta charset=utf-8><style>${fonts}${css}</style></head><body><template id=T>${body}</template><div id=root></div>
+// Ek yerel yazı tipleri (yeni panolar için): araclar/yerel-fontlar.json → [{"aile":"Literata","dosya":"literata","agirlik":[400,500]}]
+// Dosyalar onizleme/f/<dosya>-latin-<w>-normal.woff2 ve -latin-ext- (ğ ş ı İ için U+0100-024F)
+let ekFont = '';
+const EF = path.join(__dirname, 'yerel-fontlar.json');
+if (fs.existsSync(EF)) for (const e of JSON.parse(fs.readFileSync(EF, 'utf8'))) for (const w of e.agirlik)
+  ekFont += `@font-face{font-family:"${e.aile}";font-weight:${w};src:url(file://${F}${e.dosya}-latin-${w}-normal.woff2)}@font-face{font-family:"${e.aile}";font-weight:${w};src:url(file://${F}${e.dosya}-latin-ext-${w}-normal.woff2);unicode-range:U+0100-024F}`;
+const page = `<!doctype html><html><head><meta charset=utf-8><style>${fonts}${ekFont}${css}</style></head><body><template id=T>${body}</template><div id=root></div>
 <script>class DCLogic{constructor(p){this.props=p;this.state={}}setState(o){Object.assign(this.state,o);R()}}
 ${script}
 const BM=${JSON.stringify(blobMap)};
