@@ -2,8 +2,8 @@
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 const [src, out, stateJson, clipFrom, clipH] = process.argv.slice(2);
-const P = path.dirname(src), MAG = path.resolve(P, '../magaza');
-const F = '/home/claude/cloud/ayluna-imza/onizleme/f/';
+const P = path.dirname(src), MAG = fs.existsSync(path.join(P, 'magaza')) ? path.resolve(P, 'magaza') : path.resolve(P, '../magaza');
+const F = path.resolve(__dirname, '../onizleme/f') + '/';
 const blobMap = { e02351b3be4a1c555c5d760d0bbda723:'m-kiz', '0033dfea6282c5bc479c385213661c00':'m-erkek', '211acb76d908e8ed6d4f5fcddc987893':'ld0','652e1893a0ae33a24ee0e3d53edab757':'ld1',ec0a99ef7b8839a12ab7e6aa4282f7da:'ld2','35f6b0090fd4e65b22f48d111fe61905':'ld3',a08890007843d79d94bfffc397a3d0ac:'ld4',d4efe7e83c74524ece75e962161f7fff:'ld5',fd0a28089115b8aa3de9bcb92a65a8e2:'ld6','3ddd8b8b95f040d436d5d0ea350924b8':'ld7','98db755893dbcebe192c69e73ae5afff':'ld8'};
 let html = fs.readFileSync(src, 'utf8');
 const css = (html.match(/<style>([\s\S]*?)<\/style>/) || [])[1];
@@ -32,10 +32,11 @@ function walk(n,sc,parent){
  n.childNodes.forEach(c=>walk(c,sc,el));parent.appendChild(el)}
 function R(){const v=C.renderVals();const r=document.getElementById('root');r.innerHTML='';const t=document.getElementById('T').content;t.childNodes.forEach(c=>walk(c,v,r))}
 R();</script></body></html>`;
-fs.writeFileSync(path.join(__dirname,'p.html'), page);
+const PH = path.join(require('os').tmpdir(), 'ayluna-dc-onizle.html');
+fs.writeFileSync(PH, page);
 (async()=>{const b=await chromium.launch();const pg=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
 pg.on('pageerror',e=>console.log('ERR',e.message));
-await pg.goto('file://'+path.join(__dirname,'p.html'));await pg.waitForTimeout(800);
+await pg.goto('file://'+PH);await pg.waitForTimeout(800);
 const y=await pg.evaluate(()=>{const e=document.getElementById('siparis');return e?e.getBoundingClientRect().top+scrollY:0});
 await pg.screenshot({path:out,clip:{x:0,y:y+Number(clipFrom||0),width:390,height:Number(clipH||1000)},fullPage:true});
 console.log('levha y',y);await b.close()})();
