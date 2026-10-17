@@ -177,6 +177,21 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - **Sayaç:** "Bugünkü fiyat garantisi" + saat:dk:sn, her gece 23:59'da (İstanbul) sıfırlanır. Altında "Toptancı zammı gelirse fiyat ertesi gün güncellenir." Yapışkan çubukta "Bugünkü fiyat: 06sa 39dk".
 - Kullanıcıya söylendi: gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunmalı, yoksa sayaç yanıltıcı sayılır.
 
+## Tur 11 · Yazı ölçeği düzeldi (17 Ekim, gece)
+- Kullanıcı: "Yazı fontu bazı yerlerde çok büyük, düzensizlik var."
+- Sayfada 20'den fazla farklı yazı boyutu (12–100px) ve iki etiket stili vardı.
+- Tek ölçeğe bağlandı. Küçülenler:
+  - LunaDream 56 → 44
+  - bölüm başlıkları 30/26 → 26
+  - puan 52 → 40
+  - saatler 46 → 40
+  - "30" 88 → 56
+  - paket adı 24 → 20
+  - alt marka yazısı 100 → 72
+- Ara boyutlar 13/15'e toplandı.
+- "MODEL/PAKET" büyük harf etiketleri diğer bölüm etiketleriyle aynı stile geçti.
+- Ölçek TASARIM-BILGISI §4 ve §10'da.
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.

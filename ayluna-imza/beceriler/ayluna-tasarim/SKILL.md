@@ -46,6 +46,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
 - **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → puan/Stokta → LunaDream → fiyat → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
+- **Yazı ölçeği (kesin):** ürün adı 44 · bölüm başlığı 26 · büyük rakam 40 · kart başlığı 18–20 · fiyat 24 · gövde 16 · açıklama 15 · not 13 · etiket 12. Ara boyut yok; kullanıcı düzensiz/büyük yazıyı "kaos" buldu. Bölüm etiketi tek stil, büyük harf yok.
 - **Baskı unsurları istenir** (sayaç, stok, dün satılan) ama yalnız gerçek veriyle; veri yoksa gizlenir.
   - Sayaç = "Bugünkü fiyat garantisi", her gece 23:59'da (İstanbul) sıfırlanır; altında "Toptancı zammı gelirse fiyat ertesi gün güncellenir." Koşul: gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur.
 - **Disk görselleri:** mağaza afişinden kesilip yapay zekâ ile netleştirilmiş diskler (Real-ESRGAN çizim modeli, 512px); sadece büyütmek yetmez. Unicorn ve 2025 kutuda yok.
