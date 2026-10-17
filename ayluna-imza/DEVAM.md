@@ -192,6 +192,41 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - "MODEL/PAKET" büyük harf etiketleri diğer bölüm etiketleriyle aynı stile geçti.
 - Ölçek TASARIM-BILGISI §4 ve §10'da.
 
+## Tur 12 · Sade başlık, üst sayaç, sıkı aralar (17 Ekim, gece)
+- Kullanıcı:
+  - LunaDream ve fiyat çok büyük; fiyat satırında üç fiyat vardı.
+  - Müşteriye "toptancı zammı" yazılmaz.
+  - Fazla boşluk var; bölüm geçişlerinde hafif animasyon olsun.
+  - Bir gece beş an görselleri gerekiyor.
+- Yapılanlar:
+  - **Üst kısım:**
+    - en üstte amber şerit "Bugünkü fiyat garantisi 06:17:46", her gece sıfırlanır
+    - ürün adı 32px
+    - fiyat satırı: fiyat + eski fiyat + "%15 indirim"
+    - hemen altında "Ücretsiz kargo · 30 gün iade · Güvenli ödeme"
+    - levhadaki ikinci büyük başlık kalktı
+  - **Satın alma:**
+    - kurdele "En avantajlı"
+    - 2'li pakette "₺649,99 tasarruf"
+    - kapıda ödeme butonu sakinleşti (15px, ince çerçeve)
+    - Model etiketindeki tekrar kalktı
+  - **Sıra:** Videolar → Yorumlar → Bir gece → Diskler.
+  - **Düzen:**
+    - bölüm arası 36px; koyu bölümler yuvarlak köşeli panel
+    - kaydırınca hafif geçiş
+    - Bir gece kartları 240×320
+    - 30 gün paneli krem
+    - disk alt yazısı "Diski seç, desenini gör."
+    - 07:30 metni "Gündüz şarja tak."
+  - **Görseller:** HF ücretsiz kotası dolu; `araclar/gorsel/bir_gece_uret.py` hazır, `HF_TOKEN` ortam değişkeni eklenince çalışır. 20:30 için mevcut "kubbesi açık" görseli kalır.
+- Eleştirmen 7/10. En beğendiği 3 fikir:
+  - ödeme ikilisi
+  - teslim tarih çizgisi
+  - disk seçici
+- Açık sorular:
+  - varsayılan paket 2'li mi kalsın (yapışkan çubukta ₺2.612,49 görünüyor)?
+  - 2'li pakette hediye disk sayısı
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
