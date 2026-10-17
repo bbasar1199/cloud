@@ -43,7 +43,13 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - paket
   - ay sonu fiyat sayacı (her ay zam yapıyor)
   - sosyal kanıt
-- Alışılmış satış kalıpları (fayda listesi, sayaç, stok, "dün satılan") atılmaz; inceltilir ve gerçek veriye bağlanır.
+- Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır. **Ama ikonlu fayda listesi hiçbir biçimde yok** (emoji, çizgi ikon şeridi, ikon kartları); fayda fotoğrafla ve kısa metinle anlatılır.
+- "Işığı kapat" anahtarı ve gece sahnesi kullanılmaz. Galeri ana ürün fotoğraflarından gelir.
+- **Paket ve ödeme canlı sitedeki gibi kalır:**
+  - alt alta "1 Adet / 2 Adet" kartları ve altlarında "+6 Tane Ücretsiz Hediye Disk" şeridi
+  - "Güvenli Ödeme İle Al" ve "Kapıda Ödeme ile Sipariş Ver" diye iki ayrı buton
+  - kapıda ödeme formunu uygulama açar; kapıda ödeme ücreti ₺80
+- Kullanıcı sade şablon görünümünü "sıkıcı" buluyor; karakterli, akılda kalan bir görsel dil istiyor.
 - Main seçildikten sonra sadeleşti (kimin istediği kayıtlı değil). Kompakt kal, ama sıradan Shopify'a düşme; "acayip ama sıkmayan" isteği geçerli.
 
 ## Tasarım sistemi (Main.dc)
@@ -65,20 +71,19 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Dokunma alanı ≥48px, ana buton 58px.
 - **Hareket:**
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
-  - İmza an "Işığı kapat" anahtarı (oda gündüzden geceye).
+  - İmza an henüz seçilmedi ("Işığı kapat" kullanıcı tarafından çıkarıldı).
   - Yeni sonsuz döngü eklenmez. `prefers-reduced-motion` desteklenir.
 - **İkon:** ince çizgili SVG, ilk çizgi amber. Emoji asla.
 
 ## Sayfa akışı (ürün sayfası)
-1. Gece sahnesi: ışık anahtarı ve galeri.
+1. Galeri: ana ürün fotoğrafları (gece sahnesi ve ışık anahtarı yok).
 2. Üstüne binen karar levhası. Sırası:
    - puan ve Stokta, H1
    - 4'lü özellik şeridi
    - Model (küçük stüdyo fotoğraflı kartlar)
-   - Paket (1 lamba / 2 lamba "Kardeşe")
+   - Paket: canlı sitedeki 1 Adet / 2 Adet kartları ve hediye disk şeridi
    - ince ay sonu şeridi, birlikte al
-   - **Ödeme: Kartla öde %5 varsayılan, Kapıda öde ikinci**
-   - CTA (tutarı ve seçimi taşır), kapıda formu sayfa içinde
+   - **İki buton: "Güvenli Ödeme İle Al" (%5) üstte, "Kapıda Ödeme ile Sipariş Ver" altta.** Kapıda ödeme ücreti ₺80 baştan yazılır.
    - güven üçlüsü, müşteri fotoğrafları
 3. Bir gece, beş an.
 4. Çipli yorumlar.

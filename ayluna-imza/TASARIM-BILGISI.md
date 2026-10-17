@@ -72,6 +72,18 @@ Her oturumda `DEVAM.md`'den sonra bunu oku. Ayrıntı ve kaynaklar `ogrenme/` kl
 - **Risk:** kartta takılan büyükanne hiç almayabilir. Online payı, dönüşüm ve iade birlikte ölçülür.
 - PTT rozeti öne çıkarılmaz. Başarı ölçüsü teslim edilen cirodur.
 
+**Canlı kapıda ödeme formu (17 Ekim'de görüldü):**
+- Uygulamanın açılır formu. Alanlar: Ad, Soyad, Telefon, Adres, İl, İlçe, abonelik kutusu, "Kapıda Ödeme Tipi: Nakit / Kredi Kartı".
+- Ek ürün teklifleri: Astronot Hava Temizleyici ₺749, Kum Saati ₺699,99, Işıklı Nemlendirici ₺749,99, Hızlı Kargo ₺79,99.
+- **Kapıda Ödeme Ücreti ₺80.** Kapıda toplam: 1 lamba ₺1.779,99, 2 lamba ₺2.829,99. Kartla ödemenin gerçek avantajı %5 + ₺80: 1 lambada ₺165, 2 lambada ₺217,50.
+- Mevzuat gereği ₺80 ürün sayfasında baştan yazılır.
+- Canlı sayfadaki hatalar:
+  - iki pakette de "%20 İndirim" yazıyor; gerçeği %15 ve %31
+  - kart logoları Amex/Diners/Discover/JCB
+  - "1 Yıl Garanti · 90 Gün Para İade" yazıyor
+  - "35 kişi inceliyor", "3 günde 399 adet"
+  - "2467 Onaylı Kullanıcı Yorumu"
+
 **Fiyat kanıtı:** kullanıcı teyit etti, ₺1.999 son 10 günde uygulandı. Kampanya tarihleri sorulacak.
 
 **Ürün gerçekleri:**
@@ -112,7 +124,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
   - Dokunma alanı ≥48px (Shopify önerisi; Main'de çipler 40px). v2'de uygulandı.
 - **Hareket:**
   - Tek eğri `cubic-bezier(.2,.7,.2,1)`, yalnız transform ve opacity.
-  - İmza an "Işığı kapat".
+  - İmza an yeniden seçilecek ("Işığı kapat" çıkarıldı, 17 Ekim).
   - Yeni sonsuz döngü eklenmez. `prefers-reduced-motion` desteklenir.
 - **İkon:** ince çizgili SVG, emoji yok.
 
@@ -127,13 +139,13 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 8. Galeride mağaza posterleri var ve yazılı. **İkisinde doğrulanmamış yorum var** ("Elif K." kartı, isimli yorum kolajı). v2'de çıkarıldı; canlı sitede ve reklamlarda da kaldırılmalı.
 
 ## 5. Sayfa yapısı (Main)
-1. Gece sahnesi: "Işığı kapat" anahtarı, 1/11 galeri, küçük resim şeridi.
+1. ~~Gece sahnesi ve "Işığı kapat"~~ (17 Ekim'de çıkarıldı): yerine ana ürün fotoğraflı galeri ve küçük resim şeridi.
 2. Karar levhası (sahnenin üstüne −30px biner). Sırası:
    - puan, Stokta, H1
    - 4'lü özellik şeridi
-   - Model, Paket (1 / 2 "Kardeşe")
+   - Model, Paket (canlı sitedeki 1 Adet / 2 Adet kartları)
    - ay sonu şeridi, birlikte al
-   - Ödeme, CTA, kapıda formu
+   - iki buton: online ve kapıda (uygulama formu)
    - güven üçlüsü, müşteri fotoğrafları
 3. Bir gece, beş an.
 4. Çipli yorumlar.
@@ -151,7 +163,7 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
 ## 6. Kalıp kütüphanesi
 - **Tutulanlar:**
   - model → paket → ödeme → toplam → teslim → yapışkan çubuk zinciri
-  - "Işığı kapat" anahtarı
+  - ~~"Işığı kapat" anahtarı~~ (17 Ekim: kullanılmayacak)
   - saatli gece ritüeli
   - kutu içeriği
   - "Kardeşe" paketi
@@ -244,6 +256,12 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | "Hiçbir Shopify temasını kopyalamanı istemiyorum. Şu an ChatGPT ile yaptığım bir sürüm bağlı; tüm kısımlarını senin yapmanı istiyorum, benzersiz olmalı." | **Sıfırdan Ayluna teması.** Horizon/Dawn temel alınmaz, hazır temadan kod alınmaz. Shopify'ın zorunlu dosya yapısı kullanılır (layout, templates, sections, snippets, config, locales); kod ve tasarım tamamen özgün. |
 | 17 Eki | Üstü çizili ₺1.999 son 10 günde ayluna.shop'ta uygulandı | Üstü çizili fiyat kalır. Kampanya başlangıç ve bitiş tarihi sayfaya yazılır. Fiyat geçmişi kanıtı saklanır. 2'li pakette "2 ayrı almaya göre ₺649,99 daha az". |
 | 17 Eki | Aylık zam: "henüz karar vermedim" | Sayaç tasarımda durur, yayında kapalı başlar (ayar). Karar gelince açılır ve yeni fiyat yazılır. |
+| 17 Eki | "Emoji benefiti hiçbirinde beğenmedim" | **İkonlu fayda listesi hiçbir biçimde yok**: emoji, çizgi ikon şeridi, ikon kartlı ızgara ("Sihirli Özellikler" dahil). Fayda fotoğrafla ve kısa metinle anlatılır. |
+| 17 Eki | "Model seçim kısmı idare eder" (Main'deki küçük stüdyo fotoğraflı kartlar) | Model kartları kalır; daha iyisi bulunursa önerilir. |
+| 17 Eki | "Ürün fotoğrafları ana ürün fotoğrafları olacak" | Galeri Shopify'daki ana ürün medyasından gelir; özel sahne görseli galeriye konmaz. ("Elif K." ve yorum kolajı içeren 2 görsel mevzuat gereği ürün medyasından çıkarılmalı.) |
+| 17 Eki | "Işığı aç kapat kısmını kullanmayız" | Gece sahnesi ve "Işığı kapat" anahtarı yok. |
+| 17 Eki | "Basit emojiler, sıkıcı tasarımlar hâlâ devam ediyor" | Tasarım sıkıcı bulunuyor. Sade şablon görünümü yetmez; karakterli, akılda kalan görsel dil gerekir. Yön seçimi yeniden açık. |
+| 17 Eki | "Şu anki kapıda ödeme ve bundle şeklimi koru" | **Canlı sitedeki yapı korunur.** Paket: alt alta "1 Adet / 2 Adet" kartları, ürün küçük resmi, % indirim, fiyat ve eski fiyat, altta "+6 Tane Ücretsiz Hediye Disk" şeridi, 2 Adet'te "En Çok Tercih Edilen" kurdelesi. Altında iki ayrı buton: "Güvenli Ödeme İle Al" (online) ve "Kapıda Ödeme ile Sipariş Ver" (uygulamanın açılır formu). Ödeme seçici kartları kullanılmaz. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
