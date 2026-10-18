@@ -17,7 +17,7 @@ import luna_e as E
 import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
-I = dict(Y.I, bas='7e1339aefa8d185cd41f6c37b16853c5', kesim='5782766948fef68b7273c061529d6324')
+I = dict(Y.I, bas='7e1339aefa8d185cd41f6c37b16853c5', kesim='5782766948fef68b7273c061529d6324', afis='be86b4a93cb896b0ad69042a2e915e68')
 # Kutudaki 12 film diski (kullanıcının paylaştığı afişin sırası). Afişten kırpıldı, Higgsfield ile 4K büyütüldü (desen aynı), 384px. Adlar desenin tarifidir.
 DISK = [('Hilal ve bulutlar', '3966dd40e4ad197b240bee587f2f3c53'), ('Kızıl yıldız', 'f59c74007d5decf352040bde12619017'),
         ('Mavi nebula', '80696da4e0a6cd338d881afa47afd6a0'), ('Kuzey ışığı', '1bc307933815c7618200af85edb0279a'),
@@ -51,7 +51,9 @@ TEMA['gumus-a'] = dict(TEMA['gumus'], ad='Ay gümüşü · Yön A yazısı', alt
 ANA_TEMA = os.environ.get('U_TEMA', 'gumus-a')
 
 GAL = [('oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30%'), ('urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'),
-       ('bas', 'Projektör başlığı yakından', '50% 40%')]
+       ('bas', 'Projektör başlığı yakından', '50% 40%'),
+       # Mağazanın ürün afişi (yalnız teyitli bilgiler: 360°, USB, 4 cm, 23,5 cm). Diğer afişler 5K, lens sayısı ya da uydurma yorum taşıdığı için alınmadı.
+       ('afis', 'Galaxy USB: esnek gövde, 360° döner başlık; başlık 4 cm, toplam boy 23,5 cm', '50% 50%')]
 # Herkesin odasına: hikâye kartı. Disk, kutudaki 12 diskten o odaya önerilen.
 KIM = [('Çocuk odası', 'cocuk', 'Masaldan sonra galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'),
        ('Genç odası', 'denizanasi', 'Odan, kurallar senin.', 'Işığı kapat, oda başka bir yere dönsün.', 'Denizanası', '62% 40%'),
@@ -133,11 +135,15 @@ CSS = r"""
 
 /* Sinema galeri (Yön A): tam ekran fotoğraf; başlık ve küçük resimler görselin içinde. 5 sn'de geçer, dokununca durur. */
 .hero{position:relative;height:560px;overflow:hidden;background:var(--koyu);color:#fff}
-.hero .hf{position:absolute;left:0;top:52px;width:100%;height:calc(100% - 52px);object-fit:cover;opacity:0;transition:opacity .8s var(--ease)}
-.hero .hf.on{opacity:1;animation:kb 7s linear both}
-.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(20,26,54,1) 0,rgba(20,26,54,1) 52px,rgba(20,26,54,.35) 60px,rgba(20,26,54,0) 22%,rgba(20,26,54,0) 44%,rgba(20,26,54,.94) 86%)}
+.h-iz{position:absolute;left:0;right:0;top:52px;bottom:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.hs{position:relative;flex:0 0 100%;overflow:hidden;scroll-snap-align:start;background:var(--koyu)}
+.hs>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hs.on>img{animation:kb 7s linear both}
+.hs.afis>img{top:50%;bottom:auto;height:auto;aspect-ratio:1/1;transform:translateY(-58%)}
+.hs.afis.on>img{animation:none}
+.hs::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,26,54,.35) 0,rgba(20,26,54,0) 12%,rgba(20,26,54,0) 50%,rgba(20,26,54,.92) 92%)}
 .hero .u-ust{position:relative;z-index:2}
-.hero-y{position:absolute;left:16px;right:16px;bottom:100px;z-index:2}
+.hero-y{position:absolute;left:16px;right:16px;bottom:64px;z-index:2}
 .hero-y .bas-y{font-size:44px;line-height:.96}
 .hero-y .bas-y>span{display:block;overflow:hidden;padding-bottom:4px}
 .hero-y .bas-y i{display:block;font-style:normal;animation:satir .9s var(--ease) both}
@@ -145,14 +151,16 @@ CSS = r"""
 .hero-y .bas-y em{font-style:normal;color:var(--v)}
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
-.kc{position:absolute;left:16px;right:16px;bottom:18px;z-index:2;display:flex;align-items:center;gap:8px}
-.kc button{position:relative;flex:none;width:56px;height:56px;padding:0;border:0;border-radius:10px;overflow:hidden;background:var(--koyu);box-shadow:0 0 0 1.5px rgba(238,242,250,.3);transition:transform .3s var(--ease)}
-.kc button.on{box-shadow:0 0 0 2px var(--v);transform:translateY(-2px)}
-.kc img{width:100%;height:100%;object-fit:cover;display:block}
-.kc i{position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--v);transform:scaleX(0);transform-origin:0 50%}
-.kc button.oto i{animation:dol 5s linear both}
-.kc .sira{display:flex;flex-direction:column;align-items:flex-end;margin-left:auto;font-size:13px;font-weight:600;color:#D5DBEA;font-variant-numeric:tabular-nums;line-height:1.3}
-.kc .sira small{font-size:12px;font-weight:500;color:var(--acik)}
+/* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
+.h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.d-iz{display:flex;align-items:center;gap:10px}
+.d-iz svg{width:16px;height:16px;fill:none;stroke:rgba(238,242,250,.42);stroke-width:1.6;stroke-linecap:round;transition:transform .4s var(--ease)}
+.d-iz .ark{opacity:0}
+.d-iz .lit{stroke:var(--v)}.d-iz .lit .ic{fill:var(--v)}.d-iz .lit .ark{opacity:1}
+.d-iz .on{transform:scale(1.35)}
+.d-iz .on .ark{transform-origin:12px 12px;animation:don 2.4s linear infinite}
+.h-alt .sira{display:flex;flex-direction:column;align-items:flex-end;font-size:13px;font-weight:600;color:#D5DBEA;font-variant-numeric:tabular-nums;line-height:1.3}
+.h-alt .sira small{font-size:12px;font-weight:500;color:var(--acik)}
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
@@ -416,12 +424,12 @@ OTUZ = ''.join('<i style="transform: rotate(%ddeg); animation-delay: %.2fs"></i>
 SERIT = '<div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>'
 
 HERO = ("""
-  <!-- Sinema galeri (Yön A): beyaz ürün önce; başlık ve küçük resimler görselin içinde. 5 sn'de geçer, dokununca durur. -->
+  <!-- Sinema galeri (Yön A): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur). Başlık yalnız ilk fotoğrafta.
+       Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
   <section class="hero" aria-label="Galaxy USB fotoğrafları">
-    <sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img class="{{f.cls}}" src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></sc-for>
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div></sc-if></div></sc-for></div>
     """ + Y.ust('rgba(238,242,250,.6)') + """
-    <div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div>
-    <div class="kc"><sc-for list="{{gal}}" as="f" hint-placeholder-count="3"><button class="{{f.kcls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""><i></i></button></sc-for><span class="sira">{{gNo}} / {{gCount}}<small>Temsilî görseller</small></span></div>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira" aria-live="polite">{{gNo}} / {{gCount}}<small>Temsilî görseller</small></span></div>
   </section>
 """)
 
@@ -579,19 +587,26 @@ JS = """class Component extends DCLogic {
     // Tek saat: sayaç, galeri (5 sn), disk (3 sn), oda kartı (5 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) o.g = (S.g + 1) % """ + str(len(GAL)) + """;
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % """ + str(len(GAL)) + """);
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % """ + str(len(KIM)) + """; o.kBas = t; }
       self.setState(o);
     }, 1000);
   }
+  // Galeri: kaydırma kabını bir sonraki fotoğrafa götür (kabı yoksa durumu değiştir)
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
+  // Çizim sonrası kap başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
+  componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
     var I = """ + str(I) + """;
     var GAL = """ + str([list(x) for x in GAL]) + """;
-    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: B + I[g[0]], n: g[1], pos: g[2], on: on ? 'true' : 'false', cls: on ? 'hf on' : 'hf', kcls: on ? (S.gOto ? 'on oto' : 'on') : '', pick: function () { self.setState({ g: i, gOto: false }); } }; });
+    var gal = GAL.map(function (g, i) { var on = i === S.g, afis = g[0] === 'afis'; return { src: B + I[g[0]], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (afis ? ' afis' : '') + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    // Kaydırma: hangi fotoğraf ortadaysa o; elle kaydırılınca kendiliğinden geçiş durur
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
     var DISK = """ + str([list(x) for x in DISK]) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: B + d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var DS = {}; DISK.forEach(function (d) { DS[d[0]] = B + d[1]; });
@@ -639,7 +654,7 @@ JS = """class Component extends DCLogic {
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
     return {
-      gal: gal, gNo: S.g + 1, gCount: GAL.length,
+      gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay,
       disk: disk, dNo: S.disk + 1, dAd: DISK[S.disk][0],
       kim: kim,
       kPrev: function () { self.setState({ kim: (S.kim + KIM.length - 1) % KIM.length, kBas: S.t }); },

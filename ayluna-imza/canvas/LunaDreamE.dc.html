@@ -39,18 +39,25 @@ a{color:#1A2142}a:hover{color:#2B3463}
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
 .sahne{position:relative;height:476px;background:#0C1027;overflow:hidden;color:#FFFDF9}
 .sahne header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;text-shadow:0 1px 8px rgba(12,16,39,.5)}
-.sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:446px}
+.sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:446px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.sahne .kare-foto::-webkit-scrollbar{display:none}
+.kf{position:relative;flex:0 0 390px;height:446px;scroll-snap-align:start}
 .sahne .gec{position:absolute;top:0;bottom:0;width:50%;z-index:1;padding:0;border:0;background:transparent;cursor:pointer}
-.sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover;transition:opacity .45s cubic-bezier(.2,.7,.2,1)}
-.sahne .kare-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 78%,rgba(12,16,39,.97) 86.5%,#0C1027 89%);pointer-events:none}
+.sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover}
+.sahne .kf::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 78%,rgba(12,16,39,.97) 86.5%,#0C1027 89%);pointer-events:none}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
 .yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
 .seritler{position:absolute;left:16px;right:16px;bottom:42px;z-index:3;display:flex;align-items:flex-end;gap:8px}
-.kare{flex:none;width:48px;height:48px;padding:0;border-radius:12px;border:2px solid rgba(255,253,249,.28);background:#0C1027;overflow:hidden;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
-.kare.on{border-color:#FFFDF9}
-.kare:active{transform:scale(.94)}
-.kare img{display:block;width:100%;height:100%;object-fit:cover}
+/* Galeri göstergesi (küçük resimlerin yerine, kullanıcı: "görünmesin, kaydırılır olsun; altlarına ay animasyonu, sayfa geçtikçe tamamlanıyor gibi"):
+   her fotoğrafa bir ay; geçtikçe evreler yanar, son fotoğrafta dolunay. Hareket yalnız transform/opacity. */
+.ay-iz{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.ay-iz svg{width:15px;height:15px;flex:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.ay-iz circle{fill:rgba(12,16,39,.45);stroke:rgba(255,253,249,.5);stroke-width:1.6}
+.ay-iz path{fill:#F2A65A;opacity:0;transform-origin:12px 12px;transform:scale(.5);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
+.ay-iz .lit path{opacity:1;transform:none}
+.ay-iz .on{transform:scale(1.4)}
+.ay-iz .on circle{stroke:#FFFDF9}
 .sira{flex:none;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;padding:4px 9px;border-radius:999px;background:#0C1027}
 .levha{position:relative;z-index:4;margin-top:-30px;background:#F6F1E9;border-radius:28px 28px 0 0;padding-top:14px}
 /* Yazı ölçeği (Tur 11, kullanıcı: "yazı bazı yerlerde çok büyük, düzensiz"):
@@ -362,14 +369,13 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
-    <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
+    <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></div></sc-for></div>
     <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
     <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
+    <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
     <div class="seritler">
-      <div class="noscroll" style="display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; padding: 2px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent)">
-        <sc-for list="{{gal}}" as="f" hint-placeholder-count="7"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""></button></sc-for>
-      </div>
-      <span class="sira">{{gNo}}/{{gCount}}</span>
+      <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></span>
+      <span class="sira" aria-live="polite">{{gNo}}/{{gCount}}</span>
     </div>
   </section>
 
@@ -546,7 +552,10 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 class Component extends DCLogic {
   constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
   componentDidMount() {
-    var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
+    var self = this;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.gOto = false;
+    // Tek saat: sayaç + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur)
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto !== false && self.tik % 5 === 0) self.galGit((self.state.g + 1) % Math.max(1, document.querySelectorAll('.kf').length)); self.setState({ now: Date.now() }); }, 1000);
     // Bir gece (kullanıcı: "kaydırdıkça değişmiyor"): iki durum.
     // Telefon ve tam pencere (Oynat): sayfa kayar, panel yapışık; ekranın ortasını geçen son adım anı seçer.
     // Tuval: pano kendi kaymaz, tuval kayar. Ekranda görünen işaretler ekranın üst ve alt kenarını verir;
@@ -598,7 +607,12 @@ class Component extends DCLogic {
     this.tio.disconnect(); this.izSay = iz.length; this.izIlk = iz[0];
     iz.forEach(function (z) { self.tio.observe(z); });
   }
-  componentDidUpdate() { if (this.tio && this.izIlk && !this.izIlk.isConnected) this.izBagla(); }
+  componentDidUpdate() {
+    if (this.tio && this.izIlk && !this.izIlk.isConnected) this.izBagla();
+    // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
+    var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
+  }
+  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
   componentWillUnmount() { clearInterval(this.iv); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
@@ -617,7 +631,11 @@ class Component extends DCLogic {
       { id: '3ddd8b8b95f040d436d5d0ea350924b8', n: 'Hediye', pos: '50% 50%' },
       { id: '98db755893dbcebe192c69e73ae5afff', n: 'Uzay Kaşifi', pos: '50% 50%' }
     ];
-    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, on: on ? 'true' : 'false', op: on ? 1 : 0, cls: on ? 'kare on' : 'kare', pick: function () { self.setState({ g: i }); } }; });
+    // Ay göstergesi: i. fotoğrafın evresi (i+1)/N; geçilenler ve o anki yanar, son fotoğrafta dolunay
+    function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto !== false && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
     // Süzülen hediye diskleri: fotoğrafın kenarında, yavaş (7 sn), yalnız transform
     var tiles = [
       { id: 'a24f13e032569f76d64b9b0fbe8d74f7', x: -16, y: 330, s: 46, r: -12, d: 0 },
@@ -736,7 +754,7 @@ class Component extends DCLogic {
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
     return {
-      gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
+      gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
