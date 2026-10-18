@@ -43,9 +43,10 @@ R();</script></body></html>`;
 const PH = path.join(require('os').tmpdir(), 'ayluna-dc-onizle.html');
 fs.writeFileSync(PH, page);
 (async()=>{const b=await chromium.launch();// Tam sayfa görüntüde kaydırmaya bağlı geçişler içeriği gizlemesin: azaltılmış hareket
-  const pg=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,reducedMotion:'reduce'});
+  const pg=await b.newPage({viewport:{width:Number(process.env.ONIZLE_W||390),height:Number(process.env.ONIZLE_H||844)},deviceScaleFactor:2,reducedMotion:'reduce'});
 pg.on('pageerror',e=>console.log('ERR',e.message));
 await pg.goto('file://'+PH);await pg.waitForTimeout(800);
 const y=await pg.evaluate(()=>{const e=document.getElementById('siparis');return e?e.getBoundingClientRect().top+scrollY:0});
-await pg.screenshot({path:out,clip:{x:0,y:y+Number(clipFrom||0),width:390,height:Number(clipH||1000)},fullPage:true});
+// clipH 'tam' → bütün sayfa (geniş panolar için ONIZLE_W ile)
+await pg.screenshot(clipH==='tam'?{path:out,fullPage:true}:{path:out,clip:{x:0,y:y+Number(clipFrom||0),width:Number(process.env.ONIZLE_W||390),height:Number(clipH||1000)},fullPage:true});
 console.log('levha y',y);await b.close()})();

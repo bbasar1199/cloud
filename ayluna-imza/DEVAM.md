@@ -442,6 +442,23 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Duvar bir ton koyulaştı.
   - Disk odağı ile seçimi ayrıldı; ekran okuyucu metinleri düzeltildi.
 - Tuvalde Güncel sayfası: B+ (x=0), C2 (x=470), D (x=940). Sürüm 59.
+- 18 Ekim, kullanıcı: "Hayır olmamış, o section için UI tasarım istiyorum." Satır satır açılma kaldırıldı. Yerine **kaydırınca ilerleyen gece sahnesi** geldi (D, Sürüm 61).
+  - Sahne 560px ve yapışık. Telefonda her an ~70vh kaydırmayla değişir (IntersectionObserver, ekranın ortası).
+  - Değişenler:
+    - gök (Gece katmanının opaklığı)
+    - lamba ışığı
+    - yükselip batan ay
+    - yıldızlar
+    - fotoğraf ve metin geçişi
+  - Altta 5 saatlik şerit; dokununca o ana gider.
+  - Durum tek sınıfta (`.an0`–`.an4`).
+  - Tuvalde (görüntü alanı 1600px+) kaydırma adımları kapanır, şeritle gezilir.
+  - Ayrı pano `LunaDreamD-BirGece.dc.html` (`luna_d_gece.py`): 5 an soldan sağa, Güncel sayfasında.
+- (Önceki deneme, Sürüm 60: satırlar kaydırıldıkça tek tek açılıyordu; kullanıcı beğenmedi.)
+  - Her an ekrana girince bir kez açılır (IntersectionObserver %35).
+  - Ray çizilir, nokta belirir; saat soldan, metin aşağıdan, fotoğraf sağdan gelir.
+  - 20:45'te açık perde söner (gece çöker), 07:30'da gece perdesi söner (sabah).
+  - Gözlemci yoksa ya da azaltılmış hareket açıksa satırlar hiç kapanmaz.
 - **Açık sorular:**
   - Kutuda 12 disk var, sayfada 11 disk görseli var. 12. disk hangisi?
   - Gerçek tavan fotoğrafları yok.

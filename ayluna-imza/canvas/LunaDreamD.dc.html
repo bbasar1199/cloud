@@ -246,37 +246,49 @@ a{color:#1A2142}
 .yorumlar small{display:block;margin-top:6px;font-size:13px;color:var(--sis)}
 .btn-ince{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:16px;border:1.5px solid var(--gece);border-radius:14px;color:var(--gece);font-size:15px;font-weight:700;text-decoration:none}
 
-/* 10 · Bir gece, beş an: her satır kendi bandı; akşam kararır, sabah açılır. Soldaki saat rayı satırları bağlar */
-.gece-bas{padding:32px 20px 8px}
-.an{position:relative;display:grid;grid-template-columns:52px 9px minmax(0,1fr) 72px;gap:12px;align-items:center;padding:16px 20px}
-.an::before{content:"";position:absolute;z-index:1;left:87.75px;top:0;bottom:0;width:1.5px;background:var(--cizgi);transform-origin:50% 0;transition:transform .64s var(--e)}
-.an.koyu::before{background:rgba(255,248,240,.24)}
-.an.ilk::before{top:50%}
-.an.son::before{bottom:50%}
-.saat{position:relative;z-index:1;font-size:20px;color:var(--kehribar)}
-.an.koyu .saat{color:var(--lamba)}
-.nok{position:relative;z-index:1;width:9px;height:9px;border-radius:50%;background:var(--kehribar)}
-.an.koyu .nok{background:var(--lamba)}
-.an b{display:block;font-size:15px;font-weight:700;line-height:1.3}
-.an p{margin:2px 0 0;font-size:14px;color:var(--sis);line-height:1.4}
-.an.koyu p{color:rgba(255,248,240,.72)}
-.an img{width:72px;height:96px;border-radius:20px;object-fit:cover;display:block}
-/* Kaydırıldıkça açılır (kullanıcı isteği): her an ekrana girince (IntersectionObserver, %35) bir kez açılır.
-   Ray o satırda yukarıdan aşağı çizilir, nokta belirir; saat soldan, metin aşağıdan, fotoğraf sağdan açılır.
-   20:45'te gece çöker (açık perde söner), 07:30'da sabah olur (gece perdesi söner). Yalnız transform/opacity, tek eğri.
-   Gözlemci kurulamazsa ya da azaltılmış hareket açıksa satırlar hiç kapanmaz. */
-.an > *{position:relative;z-index:1}
-.an > .perde{position:absolute;inset:0;z-index:0;transition:opacity .64s var(--e) .08s}
-.an:not(.kapali) > .perde{opacity:0}
-.an .saat{transition:opacity .4s var(--e) .12s,transform .4s var(--e) .12s}
-.an .nok{transition:transform .32s var(--e) .24s}
-.an .an-yazi{transition:opacity .4s var(--e) .2s,transform .4s var(--e) .2s}
-.an img{transform-origin:100% 50%;transition:opacity .48s var(--e) .28s,transform .48s var(--e) .28s}
-.an.kapali::before{transform:scaleY(0)}
-.an.kapali .saat{opacity:0;transform:translateX(-12px)}
-.an.kapali .nok{transform:scale(0)}
-.an.kapali .an-yazi{opacity:0;transform:translateY(12px)}
-.an.kapali img{opacity:0;transform:translateX(12px) scale(.86)}
+/* 10 · Bir gece, beş an · "kaydırınca ilerleyen gece" (kullanıcı: "o section için UI tasarım istiyorum").
+   Sahne ekranda sabit kalır (sticky); kaydırdıkça saat 20:00 → 07:30 ilerler: gök kararır, ay yükselir ve batar,
+   yıldızlar çıkar, fotoğraf ve metin değişir, sabah her şey açılır. Alttaki saat şeridine dokununca o ana gider.
+   Durum tek sınıfta: .an0 … .an4 (canlı bileşen ve 5 karelik pano aynı CSS'i kullanır). Yalnız transform/opacity. */
+.gece-bolum{position:relative;background:var(--carsaf)}
+.gece-bas{padding:32px 20px 16px}
+.gece-cerceve{position:sticky;top:0;height:560px;overflow:hidden;isolation:isolate;background:var(--duvar)}
+.gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s var(--e)}
+.gk-aksam{background:var(--gece);opacity:0}
+.gk-isik{background:radial-gradient(75% 55% at 50% 46%,rgba(242,166,90,.6),rgba(242,166,90,0) 74%);opacity:.5}
+.gk-yildiz{opacity:0}
+.gk-yildiz circle{fill:var(--carsaf)}
+.gk-ay{position:absolute;left:0;top:0;width:26px;height:26px;fill:var(--lamba);opacity:0;transition:transform .64s var(--e),opacity .64s var(--e)}
+.an0 .gk-aksam{opacity:0}.an1 .gk-aksam{opacity:.18}.an2 .gk-aksam,.an3 .gk-aksam{opacity:1}.an4 .gk-aksam{opacity:0}
+.an0 .gk-isik{opacity:.45}.an1 .gk-isik{opacity:1}.an2 .gk-isik{opacity:1}.an3 .gk-isik{opacity:.75}.an4 .gk-isik{opacity:0}
+.an2 .gk-yildiz{opacity:.75}.an3 .gk-yildiz{opacity:1}
+.an0 .gk-ay{transform:translate(28px,70px) scale(.8);opacity:0}
+.an1 .gk-ay{transform:translate(72px,40px) scale(.9);opacity:.85}
+.an2 .gk-ay{transform:translate(182px,18px);opacity:1}
+.an3 .gk-ay{transform:translate(292px,34px);opacity:1}
+.an4 .gk-ay{transform:translate(346px,72px) scale(.8);opacity:0}
+.g-foto{position:absolute;left:20px;right:20px;top:72px;height:248px;border-radius:20px;overflow:hidden;background:var(--gece)}
+.g-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .48s var(--e),transform .64s var(--e)}
+.g-yazi{position:absolute;left:20px;right:20px;top:336px;height:140px}
+.g-an{position:absolute;inset:0;opacity:0;transform:translateY(12px);transition:opacity .32s var(--e),transform .32s var(--e)}
+.g-an .saat{display:block;font-size:40px;line-height:1.1;color:var(--kehribar)}
+.g-an h3{margin:4px 0 0;font-size:22px;line-height:1.25}
+.g-an p{margin:6px 0 0;font-size:15px;line-height:1.45;color:var(--gece)}
+.g-an.koyu{color:var(--carsaf)}.g-an.koyu .saat{color:var(--lamba)}.g-an.koyu p{color:rgba(255,248,240,.72)}
+.an0 .g-foto img:nth-child(1),.an1 .g-foto img:nth-child(2),.an2 .g-foto img:nth-child(3),.an3 .g-foto img:nth-child(4),.an4 .g-foto img:nth-child(5){opacity:1;transform:none}
+.an0 .g-an:nth-child(1),.an1 .g-an:nth-child(2),.an2 .g-an:nth-child(3),.an3 .g-an:nth-child(4),.an4 .g-an:nth-child(5){opacity:1;transform:none;transition-delay:.12s}
+/* Saat şeridi: sabit açık yüzey (gökle renk değiştirmez); seçili an Gece dolgu. Altında ilerleme çizgisi. */
+.g-serit{position:absolute;left:20px;right:20px;bottom:16px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:56px;border-radius:14px;background:var(--carsaf);overflow:hidden}
+.g-serit button{position:relative;z-index:1;min-height:48px;border:0;background:transparent;font-size:13px;font-weight:700;color:var(--sis);cursor:pointer}
+.g-serit-sec{position:absolute;left:0;top:0;bottom:0;width:20%;border-radius:14px;background:var(--gece);transition:transform .4s var(--e)}
+.an0 .g-serit-sec{transform:none}.an1 .g-serit-sec{transform:translateX(100%)}.an2 .g-serit-sec{transform:translateX(200%)}.an3 .g-serit-sec{transform:translateX(300%)}.an4 .g-serit-sec{transform:translateX(400%)}
+.an0 .g-serit button:nth-child(2),.an1 .g-serit button:nth-child(3),.an2 .g-serit button:nth-child(4),.an3 .g-serit button:nth-child(5),.an4 .g-serit button:nth-child(6){color:var(--carsaf)}
+/* Kaydırma adımları: canlıda her an ~70vh kaydırma; sahne bu sürede yapışık kalır. Uzun görüntü alanında (tuval, 1600px+) adım yok, şeritle gezilir. */
+.gece-adimlar{margin-top:-560px}
+.gece-adim{height:70vh}
+.gece-adim:first-child{height:calc(560px + 10vh)}
+@media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
+.gece-ipucu{margin:4px 0 0;font-size:14px;color:var(--sis)}
 
 /* 11 · 30 gün iade (Çarşaf) */
 .otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
@@ -436,10 +448,19 @@ a{color:#1A2142}
     <p class="not">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır.</p>
   </section>
 
-  <!-- 10 · Bir gece, beş an: her an kendi bandında; akşam kararır (20:45 ve 21:00 gece), sabah açılır -->
-  <section aria-labelledby="gece-bas" class="gir2">
-    <div class="gece-bas b-c"><h2 class="h2 lit" id="gece-bas">Bir gece, beş an</h2></div>
-    <sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="{{a.cls}}" data-an="{{a.i}}"><sc-if value="{{a.perdeVar}}" hint-placeholder-val="{{false}}"><span class="perde" aria-hidden="true" style="background: {{a.perde}}"></span></sc-if><span class="saat lit tab">{{a.t}}</span><i class="nok" aria-hidden="true"></i><span class="an-yazi"><b>{{a.title}}</b><p>{{a.text}}</p></span><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"></div></sc-for>
+  <!-- 10 · Bir gece, beş an: kaydırınca ilerleyen gece. Sahne yapışık; kaydırma adımları (canlıda IntersectionObserver) ya da saat şeridi anı seçer. -->
+  <section class="gece-bolum" id="bir-gece" aria-labelledby="gece-bas">
+    <div class="gece-bas"><h2 class="h2 lit" id="gece-bas">Bir gece, beş an</h2><p class="gece-ipucu">Kaydır, gece ilerlesin.</p></div>
+    <div class="{{geceCls}}">
+      <span class="gk gk-aksam" aria-hidden="true"></span>
+      <span class="gk gk-isik" aria-hidden="true"></span>
+      <svg class="gk gk-yildiz" viewBox="0 0 390 560" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="9" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="11" r="1.4"></circle><circle cx="225" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="329" cy="43" r="0.9"></circle><circle cx="303" cy="43" r="1.1"></circle><circle cx="33" cy="20" r="0.9"></circle><circle cx="293" cy="60" r="0.9"></circle><circle cx="156" cy="32" r="0.9"></circle><circle cx="284" cy="124" r="1.4"></circle><circle cx="165" cy="156" r="0.9"></circle><circle cx="305" cy="160" r="1.1"></circle><circle cx="57" cy="96" r="1.4"></circle><circle cx="38" cy="169" r="1.1"></circle><circle cx="356" cy="282" r="1.1"></circle></svg>
+      <svg class="gk-ay" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg>
+      <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
+      <div class="g-yazi" aria-live="polite"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="{{a.cls}}" aria-hidden="{{a.gizli}}"><span class="saat lit tab">{{a.t}}</span><h3 class="lit">{{a.title}}</h3><p>{{a.text}}</p></div></sc-for></div>
+      <div class="g-serit" role="group" aria-label="Gecenin anları"><span class="g-serit-sec" aria-hidden="true"></span><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button type="button" class="tab" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}">{{a.t}}</button></sc-for></div>
+    </div>
+    <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
 
   <!-- 11 · 30 gün iade: yasal 14 gün özel avantaj gibi sunulmaz -->
@@ -476,29 +497,25 @@ a{color:#1A2142}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6419}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6372}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 0, eski: -1, anHazir: false, anBit: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 0, eski: -1, gece: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    // Bir gece: satırlar ekrana girdikçe açılır. Gözlemci yoksa ya da azaltılmış hareket açıksa hiç kapanmaz.
-    var azalt = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (typeof IntersectionObserver !== 'undefined' && !azalt && this.anBagla()) this.setState({ anHazir: true });
+    // Bir gece: kaydırma adımları ekranın ortasına gelince an değişir. Uzun görüntü alanında (tuval) adım yok; şeritle gezilir.
+    if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600) this.geceBagla();
   }
-  anBagla() {
-    var self = this, rows = document.querySelectorAll('[data-an]');
-    if (!rows.length) return false;
+  geceBagla() {
+    var self = this, adim = document.querySelectorAll('[data-adim]');
+    if (!adim.length) return;
     if (this.io) this.io.disconnect();
     this.io = new IntersectionObserver(function (es) {
-      var bit = self.state.anBit;
-      es.forEach(function (e) { if (e.isIntersecting) bit |= 1 << Number(e.target.getAttribute('data-an')); });
-      if (bit !== self.state.anBit) self.setState({ anBit: bit });
-    }, { threshold: 0.35 });
-    rows.forEach(function (r) { self.io.observe(r); });
-    this.anIlk = rows[0];
-    return true;
+      es.forEach(function (e) { if (e.isIntersecting) { var i = Number(e.target.getAttribute('data-adim')); if (i !== self.state.gece) self.setState({ gece: i }); } });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    adim.forEach(function (r) { self.io.observe(r); });
+    this.adimIlk = adim[0];
   }
-  componentDidUpdate() { if (this.io && this.anIlk && !this.anIlk.isConnected) this.anBagla(); }
+  componentDidUpdate() { if (this.io && this.adimIlk && !this.adimIlk.isConnected) this.geceBagla(); }
   componentWillUnmount() { clearInterval(this.iv); if (this.io) this.io.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
@@ -575,18 +592,18 @@ class Component extends DCLogic {
     ];
     var topics = ['Tümü', 'Uyku', 'Hediye', 'Kalite'].map(function (t) { var on = S.topic === t; return { n: t, cls: on ? 'cip on' : 'cip', on: on ? 'true' : 'false', pick: function () { self.setState({ topic: t }); } }; });
     var revs = REV.filter(function (r) { return S.topic === 'Tümü' || r.tags.indexOf(S.topic) > -1; }).map(function (r) { return { q: r.q, name: r.name, tags: r.tags.join(', ') }; });
-    // Bir gece: akşam kararır (20:45, 21:00 gece bandı), sabah açılır. Erkek modelde 20:45 değişir.
+    // Bir gece: akşam kararır (20:45, 21:00 koyu), sabah açılır. Erkek modelde 20:45 değişir.
     var M = [
-      { t: '20:00', b: 'b-c', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: '8b1f621be2cb3b6133b7b78bc14e1963', alt: 'Elde tutulan, yanan LunaDream', pos: '50% 30%' },
-      { t: '20:30', b: 'b-d', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', id: '5b284c77c252b08a2974bde8e43de126', alt: 'Kubbesi açık LunaDream ve diskler', pos: '50% 40%' },
-      kiz ? { t: '20:45', b: 'b-g koyu', perde: 'var(--duvar)', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
-          : { t: '20:45', b: 'b-g koyu', perde: 'var(--duvar)', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
-      { t: '21:00', b: 'b-g koyu', title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', id: kiz ? '3d214a1ba100aaf3d85bb18a27325237' : '49da18af3a87a3c97bb59cb9dbe8817f', alt: 'Gece yatak başında yanan LunaDream, duvarda yıldızlar', pos: '50% 55%' },
-      { t: '07:30', b: 'b-d', perde: 'var(--gece)', title: 'Sabah şarja', text: 'Gündüz şarja tak.', id: kiz ? '2288b7fbcc230bd9d47e25ef6550ce78' : 'cbd70711defa628872683fa471fcac61', alt: 'Gündüz komodinde LunaDream', pos: '50% 72%' }
+      { t: '20:00', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: '8b1f621be2cb3b6133b7b78bc14e1963', alt: 'Elde tutulan, yanan LunaDream', pos: '50% 30%' },
+      { t: '20:30', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', id: '5b284c77c252b08a2974bde8e43de126', alt: 'Kubbesi açık LunaDream ve diskler', pos: '50% 40%' },
+      kiz ? { t: '20:45', koyu: true, title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
+          : { t: '20:45', koyu: true, title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
+      { t: '21:00', koyu: true, title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', id: kiz ? '3d214a1ba100aaf3d85bb18a27325237' : '49da18af3a87a3c97bb59cb9dbe8817f', alt: 'Gece yatak başında yanan LunaDream, duvarda yıldızlar', pos: '50% 55%' },
+      { t: '07:30', title: 'Sabah şarja', text: 'Gündüz şarja tak.', id: kiz ? '2288b7fbcc230bd9d47e25ef6550ce78' : 'cbd70711defa628872683fa471fcac61', alt: 'Gündüz komodinde LunaDream', pos: '50% 72%' }
     ];
-    // anBit: açılmış satırlar (bit maskesi). anHazir değilse (gözlemci kurulmadı) hepsi açık.
-    var moments = M.map(function (a, i) { var kapali = S.anHazir && !(S.anBit & (1 << i)); return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: a.alt, pos: a.pos,
-      perdeVar: !!a.perde, perde: a.perde || '', cls: 'an ' + a.b + (i === 0 ? ' ilk' : '') + (i === M.length - 1 ? ' son' : '') + (kapali ? ' kapali' : '') }; });
+    var gece = S.gece || 0;
+    var moments = M.map(function (a, i) { var on = i === gece; return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: on ? a.alt : '', pos: a.pos,
+      on: on ? 'true' : 'false', gizli: on ? 'false' : 'true', cls: 'g-an' + (a.koyu ? ' koyu' : ''), pick: function () { self.setState({ gece: i }); } }; });
     var PR = [
       { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'f3f3e14eee224ef5534b9b897030ff58' },
       { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '2b381f338377f23e32074d6dbb452587' },
@@ -623,7 +640,7 @@ class Component extends DCLogic {
       discs: discs, proj: proj, discName: DISCS[S.disc].n, lambaKes: kiz ? KES_K : KES_E, lambaAlt: kiz ? 'LunaDream Kız' : 'LunaDream Erkek',
       kutuSay: kutuSay, kutuNot: S.adet === 2 ? 'Her kutuda bunların hepsi var.' : 'Hepsi tek kutuda.',
       eldeSrc: tumErkek ? ERKEK : B + '8f8d1462c27c62b0bbd3066d72c92025', eldeAlt: tumErkek ? 'LunaDream Erkek (Uzay Kaşifi)' : 'Elde tutulan LunaDream Kız', eldeNot: tumErkek ? 'Erkek modeli' : 'Kız modeli, elde', eldePos: tumErkek ? '50% 62%' : '40% 50%',
-      vids: vids, mfoto: mfoto, topics: topics, revs: revs, moments: moments, shop: shop, shopCount: PR.length, faq: faq,
+      vids: vids, mfoto: mfoto, topics: topics, revs: revs, moments: moments, geceCls: 'gece-cerceve an' + gece, shop: shop, shopCount: PR.length, faq: faq,
       yapisSrc: S.adet === 2 ? kes(l1) : kes(S.model), yapisSrc2: kes(l2), yapisIki: S.adet === 2 && l1 !== l2
     };
   }
