@@ -480,6 +480,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
 - Shopify bölümleri ve diğer ürün sayfaları bu dile göre yazılır.
 
+## Galaxy USB · Yön A sakin düzen + animasyonlar (18 Ekim, en güncel)
+- Kullanıcı: Yön A'nın sakin düzeni + yaptığım animasyonlar; eleştirmenden 3 öneriyi seçti (%5 butonda, baskı tek satır, oda çipleri); diskleri yeniden üret; fontlar ve renkler beğenilmedi.
+- `luna_usb.py` baştan yazıldı: `TEMA` sözlüğü (lacivert sabit; ikinci renk, zemin, yazı tipi), `sayfa(tema, kesit)`. Ana pano `GalaxyUSB.dc.html` (h 6480, şimdilik `buz`; `U_TEMA=<ad> python3 luna_usb.py`). Renk seçenek panoları `GalaxyUSB-Renk-kuzey/pembe/mercan/gumus.dc.html` (h 2600, x 4230–5640). Yön B ve C arşive taşındı.
+- Düzen: şerit (tek sayaç) → başlık bandı + tam ekran fotoğraf (oda, ürün, başlık), başlık ve küçük resimler görselin içinde → ad, fiyat → birleşik özellik kutusu → paket → "Her kutuda 12 film diski" → stok satırı → iki satırlı kart butonu → kapıda → kargo döngüsü → İçin rahat olsun (birleşik kutu, kartla öde) → 12 disk → Herkesin odasına (çipler görselin içinde) → Nereye takılır → kurulum → yorumlar → 30 gün → SSS (8) → diğer ürünler → alt bilgi → yapışkan çubuk (sayaçsız).
+- Diskler Higgsfield ile büyütüldü (2 kredi; şerit iki kez reddedildi, 4×3 ızgara geçti). Yeni blob'lar `luna_usb.py` DISK ve `araclar/blob-yerel.json`'da.
+- Yerel önizlemeye Outfit, DM Sans, Sora, Manrope, Plus Jakarta Sans, Fraunces eklendi.
+- Bekleyen: kullanıcının renk seçimi (eleştirmen sıralaması ile), sonra ana panoya uygulanır.
+
 ## Galaxy USB · Yön A geliştirilmiş: güncel sayfa (18 Ekim)
 - Kullanıcı A'yı seçti: sarı yok, koyu lacivert marka rengi her üründe, ürün beyaz, daha çok animasyon, Herkesin odası daha iyi UI, güven ve baskı bölümleri. Sonra: "USB adaptör yok; içindeki diskler bunlar ve 12 diskli" (afiş).
 - Pano: `canvas/GalaxyUSB.dc.html` (`araclar/tuval-uret/luna_usb.py`; yalnız `luna_usb_yon` ve `luna_e.isaret` alır, E'nin CSS'i yok). Tuvalde x=3290, h 6890, `expand: fill`. Eski E kopyası taslağın yerine geçti.

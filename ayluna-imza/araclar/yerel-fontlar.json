@@ -47,5 +47,60 @@
   "dosya": "archivo",
   "degisken": "wdth",
   "agirlik": []
+ },
+ {
+  "aile": "Outfit",
+  "dosya": "outfit",
+  "agirlik": [
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "DM Sans",
+  "dosya": "dm-sans",
+  "agirlik": [
+   400,
+   500,
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "Sora",
+  "dosya": "sora",
+  "agirlik": [
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "Manrope",
+  "dosya": "manrope",
+  "agirlik": [
+   400,
+   500,
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "Plus Jakarta Sans",
+  "dosya": "plus-jakarta-sans",
+  "agirlik": [
+   400,
+   500,
+   600,
+   700,
+   800
+  ]
+ },
+ {
+  "aile": "Fraunces",
+  "dosya": "fraunces",
+  "agirlik": [
+   500,
+   600
+  ]
  }
 ]
