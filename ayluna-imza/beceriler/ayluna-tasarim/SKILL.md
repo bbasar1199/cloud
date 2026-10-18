@@ -45,7 +45,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - sosyal kanıt
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
-- **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → puan/Stokta → LunaDream → fiyat → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
+- **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → LunaDream + puan (aynı satır) → fiyat + Stokta → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
 - **Yazı ölçeği v3 (kesin):** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 · paket adı 17 / fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. Ara boyut yok. Kullanıcı büyük ve düzensiz yazıyı iki kez düzeltti.
 - **Az yazı, iç içe değil:** başlığı olan bölümde üst etiket yok; tek cümle açıklama; kart içinde kart yok; gölge yok.
 - **Model ve 2'li paket:** model kartı yalnız Kız / Erkek. 2 Adet (varsayılan) seçilince paketin altında küçük seçim: "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]". Tur 25'ten beri: model kartı = 1. lamba; 2. lamba, 2 Adet kartının içinde çiple seçilir (hap segment yok).
@@ -92,6 +92,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Hediye diski "her kutuda +6" diye yazılır; çıplak "12 disk" yazılmaz.
   - **Yapışkan öğe** (Bir gece paneli, satın al çubuğu): hiçbir atasında `overflow:hidden` olmaz; taşma `overflow:clip` ile kesilir. Kaydırmalı bölüm telefon boyunda kaydırılarak denetlenir (tuval boyu hatayı göstermez). Panel ekranda ortalanmış kart olarak yapışır.
   - **Kaydırmaya bağlı hareket tuvalde de çalışmalı:** tuvalde pano kaymaz, tuval kayar. Sayfa kaydırmasının yanında tuvalin görünür alanı da izlenir (görünmez işaretler + IntersectionObserver, rootMargin'siz). Pano `expand: "fill"`. Sınama: `araclar/kaydirma-testi.js`.
+  - **Puan ürün adının yanında** (Tur 25): solda ad, sağda yıldızlar + ortalama, altında "N yorum"; dokununca yorumlara iner. "Stokta" fiyat satırının sağ ucunda.
   - Soru başlıkları soru işaretiyle biter.
   - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.

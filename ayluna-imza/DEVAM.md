@@ -506,6 +506,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Tuval: panelin 2000px üstünden altına 25px arayla görünmez noktalar (`.gece-iz`); ekranda görünenler ekranın kenarlarını verir, ekranın ortası panelden geçerken an 0 → 4. Kullanıcı yay ya da okla seçerse, kaydırma başka bir ana geçene kadar seçimine dokunmaz.
   - Pano `expand: "fill"`: Oynat'ta küçültülüp sığdırılmaz, telefon sayfası gibi kayar (390px sütun ortada).
   - Sınama: `araclar/kaydirma-testi.js` (telefon + başka kökenli çerçevede tuval, x1 ve x0,6).
+- **Puan ürün adının yanında** (kullanıcı: "yorum kısmı ürün ismi yanında olsun, yıldız sayısı ve ortalaması tasarıma uygun"; tuval Sürüm 72, E h 5670): solda "LunaDream.", sağda iki satır, sağa yaslı: amber yıldızlar + "4,7" (kalın), altında "62 yorum" (soluk, ince alt çizgi); dokununca yorumlara iner. Adın üstündeki puan/Stokta satırı kalktı; "Stokta" fiyat satırının sağ ucuna geçti.
 
 ## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
 - Kullanıcı:

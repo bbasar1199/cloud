@@ -81,6 +81,16 @@ CSS = r""".pg{background:#F6F1E9}
 .duyuru{display:flex;justify-content:center;align-items:center;gap:8px;height:36px;background:#0C1027;color:#B9BED6;font-size:13px;font-weight:600;border-bottom:1px solid rgba(255,253,249,.08)}
 .sayac-ay{width:14px;height:14px;flex:none}.sayac-ay circle{fill:none;stroke:rgba(185,190,214,.6);stroke-width:1.6}.sayac-ay path{fill:#F2A65A}
 .duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#F2A65A}
+/* Ad satırı: solda ad, sağda puan (iki satır, sağa yaslı); puanın yıldızları ışık, tek amber */
+.ad-satir{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px}
+.ad-satir .dev{margin:0}
+.puan{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;min-height:48px;text-decoration:none;color:#1A2142;white-space:nowrap}
+.puan-ust{display:flex;align-items:center;gap:6px;font-size:15px;line-height:1}
+.puan-ust .yildiz{font-size:14px}
+.puan-ust b{font-weight:700;font-variant-numeric:tabular-nums}
+.puan-alt{font-size:13px;line-height:1.2;color:#5C6078;text-decoration:underline;text-decoration-color:#D6CAB6;text-underline-offset:3px}
+.stok{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:13px;font-weight:600;color:#2E6B4F;align-self:center}
+.stok::before{content:"";width:7px;height:7px;border-radius:50%;background:#2E6B4F}
 .indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
@@ -365,14 +375,14 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <section class="px levha" id="siparis">
-    <!-- Puan ve sayı canlıda Loox'tan; veri yoksa gizlenir. "Stokta" Shopify stok bilgisinden; stok yoksa görünmez -->
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
-      <a href="#yorumlar" style="display: inline-flex; align-items: center; gap: 6px; min-height: 48px; font-size: 13px; text-decoration: none; color: #5C6078">""" + STAR + """<b style="color: #1A2142">{{rating}}</b> · {{reviews}} yorum</a>
-      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2E6B4F"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #2E6B4F"></span>Stokta</span>
+    <!-- Ad ve puan aynı satırda (kullanıcı, Tur 25: "yorum kısmı ürün ismi yanında olsun"). Puan ve sayı canlıda Loox'tan;
+         veri yoksa puan gizlenir, ad tek başına kalır. Dokununca yorumlara iner. -->
+    <div class="ad-satir">
+      <h1 class="dev">LunaDream<span>.</span></h1>
+      <a class="puan" href="#yorumlar" aria-label="5 üzerinden {{rating}} puan, {{reviews}} yorum"><span class="puan-ust">""" + STAR + """<b>{{rating}}</b></span><span class="puan-alt">{{reviews}} yorum</span></a>
     </div>
-    <h1 class="dev">LunaDream<span>.</span></h1>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
-    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span></p>
+    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim, stokta"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span><span class="stok" aria-hidden="true">Stokta</span></p>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
@@ -733,5 +743,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5700)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5670)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))
