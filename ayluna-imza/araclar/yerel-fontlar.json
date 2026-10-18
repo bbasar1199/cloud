@@ -105,5 +105,20 @@
   "italik": [
    500
   ]
+ },
+ {
+  "aile": "Big Shoulders Display",
+  "dosya": "big-shoulders-display",
+  "agirlik": [
+   700,
+   800
+  ]
+ },
+ {
+  "aile": "Instrument Serif",
+  "dosya": "instrument-serif",
+  "agirlik": [
+   400
+  ]
  }
 ]
