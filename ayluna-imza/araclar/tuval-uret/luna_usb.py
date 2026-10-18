@@ -453,7 +453,7 @@ AL = ("""
       <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if><span class="{{b.gCls}}"><img src=\"""" + KES + """\" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src=\"""" + KES + """\" alt=""></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-s"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if><span>{{b.unit}}</span></span><span class="nokta"><i></i></span></button>
     </sc-for></div>
     <p class="disk-not">""" + disk_yigin() + """<span>Her kutuda 12 film diski</span></p>
-    <!-- Baskı: tek satır, butonun üstünde. Stok elle yazılır ve açılıp kapanır; veri yoksa satır gizlenir. "Dün X" yalnız gerçek veriyle. -->
+    <!-- Baskı: tek satır, butonun üstünde. Stok ELLE girilir (kullanıcı, 18 Eki: "stoklar elle girilecek"): Shopify'da bölüm ayarı sayı + aç/kapa; Shopify stoğuna bağlı değil, boşsa satır gizlenir. "Dün X" yalnız gerçek veriyle. -->
     <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
