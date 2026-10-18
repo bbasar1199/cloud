@@ -475,6 +475,25 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
+- Kullanıcı:
+  - fiyat önce 1999 olsun, indirimliye düşsün
+  - model seçimi estetik olsun
+  - Bir gece UI olsun, ay kaydırdıkça dolsun
+  - kargo takibi "verildi"den başlayan animasyonla çalışsın
+  - buton altı yazılar silinsin
+  - satış için yeni bölümler, influencer için bir kısım düşünülsün
+- E'de yapılanlar (tuval Sürüm 67, h 5893):
+  - **Fiyat:** 1,6 sn, bir kez oynar. ₺1.999,00 görünür, çizilir, sağa kayıp küçülür; ₺1.699,99 yukarıdan düşer; "%15 indirim" belirir. Azaltılmış harekette doğrudan son hâl.
+  - **Model:** gece penceresi. Kemerli pencerede lamba kesimi; seçilene gece iner, yıldızlar çıkar, lamba yanar; adın önünde dolunay noktası.
+  - **Bir gece:** yaydaki noktalar ay evresi (hilal → dolunay). Büyük ay her anda biraz daha dolar; telefonda kaydırdıkça dolar.
+  - **Kargo takibi:** "Sipariş verildi" hilali dolar, amber çizgi ve paket noktası Kargoda'ya akar, yarım ay, sonra Kapında dolunayı ve tek seferlik ışık halkası. Toplam ~3 sn, ekrana girince bir kez (IntersectionObserver).
+  - **Buton altı yazılar silindi.** Kapıda butonu iki satır: "Kapıda Ödeme ile Sipariş Ver" ve "₺2.829,99 · ₺80 kapıda ödeme ücreti dahil". ₺80'in baştan yazılması mevzuat gereği.
+- **Yeni bölüm önerileri** ayrı panoda: `canvas/LunaDreamE-Bolumler.dc.html` (`luna_e_bolumler.py`), tuvalde x=1880, y=700. Kullanıcı seçecek.
+  1. Annelerin gözünden (influencer): dikey video kartları, hesap çipi, kısa söz. Hesap ve söz yer tutucu. Yorumların üstüne.
+  2. Kapıda öde, için rahat olsun: koyu panel; ay evresiyle 3 adım (sipariş ver → WhatsApp'tan onayla → kapıda öde); güven satırı; "Kartla ödersen ₺217,50 daha az". Butonların altına.
+  3. Sıradan bir gece lambası değil: karşılaştırma, yalnız teyitli özellikler. Sihirli'nin altına ya da Diskler'in üstüne.
+
 ## Tur 23 · E: eleştirmenin 3 fikri (18 Ekim)
 - Kullanıcı üç fikri de seçti. Hepsi uygulandı; tuval Sürüm 66, E h 5804.
 - **1 · Amber tek vurgu:**

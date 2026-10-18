@@ -84,6 +84,10 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - **Marka işareti:** ince daire içinde amber hilal (evre çizimi). Başta ve alt bilgide aynı kilitle kullanılır. Sayacın yanında gün bittikçe söner.
   - **Seçili durum:** model ve lamba seçiminde 2px çerçeve ve dolunay noktası. Dolu lacivert yalnız pakette kalır.
   - **Küçük ürün görselleri:** her yerde arka planı temizlenmiş stüdyo kesimi kullanılır, bej kare kullanılmaz.
+  - **Fiyat düşüşü** (kullanıcı isteği): açılışta bir kez ₺1.999,00 → çizilir → indirimli fiyat yukarıdan düşer → rozet. Sayan rakam kuralının tek istisnasıdır.
+  - **Model seçimi:** gece penceresi. Kemerli pencerede lamba kesimi durur; seçilene gece iner ve lamba yanar.
+  - **Ay evresi hareketi:** Bir gece'de ay her anda biraz daha dolar. Kargo takibi ekrana girince "Sipariş verildi"den başlar ve sırayla dolar.
+  - **Buton altında not yazılmaz.** ₺80 kapıda ödeme ücreti kapıda butonunun içinde yazılır (mevzuat).
   - Soru başlıkları soru işaretiyle biter.
   - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.
