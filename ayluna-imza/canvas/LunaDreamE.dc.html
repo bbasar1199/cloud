@@ -62,7 +62,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
 .duyuru{display:flex;justify-content:center;align-items:center;gap:10px;height:36px;background:#F2A65A;color:#1A2142;font-size:13px;font-weight:600}
 .duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em}
-.indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F1E8DA;color:#A05A1C}
+.indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
 @supports (animation-timeline: view()){
@@ -75,7 +75,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .ls{display:flex;align-items:center;gap:6px}
 .ls-no{font-size:13px;font-weight:600;color:#5C6078;white-space:nowrap}
 .seg{display:inline-flex;padding:3px;border-radius:999px;background:#F1E8DA}
-.seg-b{min-height:42px;min-width:54px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:#5C6078;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.seg-b{min-height:48px;min-width:54px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:#5C6078;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .seg-b.on{background:#1A2142;color:#FFFDF9}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D6CAB6;line-height:1}
@@ -171,9 +171,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s cubic-bezier(.2,.7,.2,1)}
 .gk-yildiz{opacity:.25}
 .gk-yildiz circle{fill:#FFFDF9}
-.gk-sabah{background:linear-gradient(180deg,rgba(185,190,214,.22),rgba(185,190,214,.06) 70%);opacity:0}
-.gk-gunes{background:radial-gradient(96px 96px at 351px 183px,rgba(242,166,90,.4),rgba(242,166,90,0));opacity:0}
-.an4 .gk-gunes{opacity:1}
+.gk-sabah{background:linear-gradient(0deg,rgba(242,166,90,.16),rgba(242,166,90,0) 34%);opacity:0}
+
 .gk-isik{background:radial-gradient(132px 132px at 195px 216px,rgba(242,166,90,.34),rgba(242,166,90,0))}
 .an0 .gk-isik{opacity:.95}.an1 .gk-isik{opacity:.75}.an2 .gk-isik{opacity:.6}.an3 .gk-isik{opacity:.4}.an4 .gk-isik{opacity:0}
 .an1 .gk-yildiz{opacity:.55}.an2 .gk-yildiz{opacity:.85}.an3 .gk-yildiz{opacity:1}.an4 .gk-yildiz{opacity:0}
@@ -185,13 +184,13 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .g-nokta{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer}
 .g-nokta i{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,253,249,.7);background:#1A2142;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .32s cubic-bezier(.2,.7,.2,1)}
 .g-nokta[aria-pressed="true"] i{opacity:0;transform:scale(.4)}
-.g-saat{position:absolute;min-width:48px;min-height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;transform:translate(-50%,-50%);font:inherit;font-size:13px;font-weight:600;color:#B9BED6;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer}
+.g-saat{position:absolute;min-width:48px;min-height:48px;padding:0;border:0;background:transparent;display:grid;place-items:center;transform:translate(-50%,-50%);font:inherit;font-size:13px;font-weight:600;color:#B9BED6;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer}
 .g-saat.on{color:#FFFDF9}
 .g-ay-kol{position:absolute;left:195px;top:216px;width:0;height:0;transition:transform .64s cubic-bezier(.2,.7,.2,1)}
 .g-ay{position:absolute;left:156px;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;display:grid;place-items:center;pointer-events:none;transition:transform .64s cubic-bezier(.2,.7,.2,1),opacity .64s cubic-bezier(.2,.7,.2,1)}
-.g-ay::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,0) 68%)}
+.g-ay::before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.34),rgba(242,166,90,0) 68%)}
 .g-ay svg{position:relative;width:30px;height:30px;fill:#F2A65A}
-.an4 .g-ay{opacity:.45}
+.an4 .g-ay{opacity:.35}
 .g-foto{position:absolute;left:107px;top:128px;width:176px;height:176px;border-radius:50%;overflow:hidden;background:#0C1027}
 .g-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .48s cubic-bezier(.2,.7,.2,1),transform .64s cubic-bezier(.2,.7,.2,1)}
 .g-yazi{position:absolute;left:72px;right:72px;top:332px;height:120px;text-align:center}
@@ -230,7 +229,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .muhur g circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:2.6}
 .muhur g path{fill:#E59A4C}
 .muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#E59A4C}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#A05A1C}
 .muhur-say span{margin-top:2px;font-size:12px;font-weight:700;color:#1A2142}
 .sss{border-bottom:1.5px solid #E3D8C7}
 .sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
@@ -358,7 +357,6 @@ a{color:#1A2142}a:hover{color:#2B3463}
       <div class="g-bas"><h2 class="h2" id="gece-bas" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2><p style="margin: 6px 0 0; font-size: 14px; color: #B9BED6">Kaydır ya da yaydaki saate dokun.</p></div>
       <div class="g-alan"><div class="g-ic">
         <span class="gk gk-isik" aria-hidden="true"></span>
-        <span class="gk gk-gunes" aria-hidden="true"></span>
         <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka" cx="195" cy="216" r="96"></circle></svg>
         <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
         <div class="g-noktalar" role="group" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button class="{{a.saatCls}}" type="button" tabindex="-1" aria-hidden="true" style="left: {{a.lx}}px; top: {{a.ly}}px" onClick="{{a.pick}}">{{a.t}}</button><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for></div>
@@ -432,7 +430,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4">
-        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #F1E8DA; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #F1E8DA; color: #A05A1C; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
+        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #F1E8DA; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #FFFDF9; color: #A05A1C; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
       </sc-for>
     </div>
   </section>
@@ -457,7 +455,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5797}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5803}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
   componentDidMount() {

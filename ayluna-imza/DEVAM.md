@@ -489,7 +489,19 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Teslim çizgisi hilal → yarım ay → dolunay; kaydırınca sırayla dolar.
   - 30 gün iade için 8 evreli mühür; yazısı "Beğenmezsen iade et".
 - **Sıra:** Bir gece → Yorumlar → Diskler. Böylece açık ve koyu bölümler sırayla gelir (§5 ve beceri sırası).
-- Tuval Sürüm 64: E h 5797. Eleştirmene "büyük marka hissi" için 3 fikir soruldu.
+- Tuval Sürüm 64: E h 5797.
+- **Eleştirmen (7,5/10):**
+  - En iyi parça teslim çizgisindeki ay evreleri (9).
+  - Kusurlar düzeltildi (Sürüm 65, h 5803):
+    - Mühürdeki "30" kehribar (2,06:1 → 5:1).
+    - "%15 indirim" rozeti yüzey zeminde (4,35 → 5:1).
+    - Lamba seçici ve yay saatleri 48px.
+    - Ay halesi küçüldü.
+    - Kadranın 07:30'u: gri-mor örtü ve ayın üstündeki güneş kalktı, alttan ince şafak geldi.
+  - **Kullanıcıya sorulan 3 fikir:**
+    1. Amber yalnız ışık ve eylem: üst şerit koyu; kurdele krem; seçili paket fiyatı beyaz; ikinci amber (#E59A4C) kalkar; her ekranda tek amber yüzey butondur.
+    2. Ay evresi tek marka işareti: logo hilali evre çiziminden; baştaki ve alttaki logo aynı; sayacın yanında gün ilerledikçe sönen ay; model ve lamba seçiminde dolu lacivert yerine çerçeve ve dolunay noktası.
+    3. Fotoğraf dili tek: küçük ürün görselleri aynı stüdyo setinden; kadranın gece anları gece ışığında (Flow); disk tavanda ışık gibi (screen karışımı); galerideki yazılı afişlerin yazısız sürümleri.
 
 ## Tur 21 · E, B+'nın diliyle yeniden (18 Ekim)
 - Kullanıcı (E'ye bakarken): "Sipariş fişini kaldır, emoji benefiti düzelt, yazım hataları berbat, yazı fontu kötü; her şey çok yabancı duruyor, bir bütün ve uyum yakala."
