@@ -475,6 +475,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 26 · Odası böyle görünecek (18 Ekim)
+- Kullanıcı: "Kutudan ne çıkıyor'u kaldıralım; 2 odanın nasıl göründüğünü gösteren görsel yapalım, metin içeren görsel kısmı gibi ama daha iyi dursun."
+- Üç seçenek panosu: `canvas/LunaDreamE-Oda.dc.html` (`luna_e_oda.py`), tuvalde x=2820, y=700. A Poster, B Kaydırmalı, C Görsel + binen levha.
+  - İlk denemede başlık lambanın üstüne biniyordu; yazı fotoğrafın altına, lacivert banda alındı (ürünün üstüne yazı gelmez).
+- **Karar: kullanıcı B'yi seçti; E'ye işlendi** (tuval Sürüm 74, E h 6130):
+  - Diskler'den sonra, 30 gün iadeden önce: "Odası böyle görünecek." İki oda posteri yan yana kayar (300px kart, ikincisi kenardan görünür), altında iki nokta.
+  - Kart: üstte gece oda fotoğrafı ve model çipi (ay evresiyle), altında lacivert bantta Young Serif başlık ("Tavanda ay ve yıldızlar." / "Odası bir uzay gemisi."), tek cümle ve "… modelini seç" (modeli seçer, model kartlarına kayar).
+  - Altında tek satır: "Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir."
+  - "Kutudan ne çıkıyor?" bölümü kalktı; içerik SSS'nin ilk sorusu oldu (1 lamba, 6 masal diski, 6 hediye disk, USB şarj kablosu; iki modelde de aynı).
+  - Fotoğraflar Bir gece'nin 20:00 anında da var (aynı oda fotoğrafları).
+
 ## Tur 25 · Kargo döngüsü, kapıda butonu, güven satırı, seçici seçenekleri (18 Ekim)
 - Kullanıcı (E'ye bakarak):
   - "Animasyon çalışmıyor" (kargo takibi)

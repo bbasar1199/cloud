@@ -292,6 +292,24 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .gece-adim:first-child{height:calc(var(--gh) + 30vh)}
 @media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 @media (prefers-reduced-motion:reduce){.gk,.g-ay-kol,.g-ay,.g-ay path,.g-foto img,.g-an,.g-evre{transition:none}}
+/* Odası böyle görünecek (Tur 26, kullanıcı "B · Kaydırmalı"yı seçti): iki oda posteri yan yana kayar, ikincisi kenardan görünür.
+   Üstte fotoğraf (lamba ve tavan açık kalır), altında lacivert yazı bandı; yazı ürünün üstüne binmez. */
+.b-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 0}
+.poster{position:relative;display:flex;flex-direction:column;flex:0 0 300px;overflow:hidden;scroll-snap-align:start;border-radius:24px;background:#1A2142;color:#FFFDF9}
+.p-foto{position:relative;flex:none;height:340px;overflow:hidden;background:#0C1027}
+.p-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.p-cip{position:absolute;left:14px;top:14px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 7px;border-radius:999px;background:rgba(255,253,249,.94);color:#1A2142;font-size:12px;font-weight:700}
+.p-cip .evre{width:14px;height:14px}.p-cip .evre circle{fill:none;stroke:#1A2142;stroke-width:1.6}.p-cip .evre path{fill:#F2A65A}
+.p-alt{display:flex;flex-direction:column;gap:6px;padding:18px}
+.p-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+.p-bas span{color:#F2A65A}
+.p-yazi{margin:0;font-size:14px;line-height:1.45;color:#B9BED6}
+.p-sec{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:44px;margin-top:4px;padding:0 14px;border:1.5px solid rgba(255,253,249,.55);border-radius:999px;background:transparent;color:#FFFDF9;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.p-sec:active{transform:scale(.97)}
+.ok-ik{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.b-say{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.b-say i{width:6px;height:6px;border-radius:50%;background:#D6CAB6}.b-say i.on{background:#1A2142}
+.temsil{margin:10px 16px 0;font-size:12px;color:#5C6078}
 .cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cip.on{background:#1A2142;color:#FFFDF9}
 .tavan{position:relative;height:280px;overflow:hidden;background:radial-gradient(70% 70% at 50% 45%,#232B55 0%,rgba(26,33,66,0) 100%)}
@@ -395,7 +413,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
     <!-- Seçiciler (Tur 25, kullanıcı "Satır kartlar"ı seçti): model yan yana iki yarım kart, paket alt alta satır kart,
          2 Adet açılınca kartın içinde 2. lamba. 1. lamba = model. Canlıda 2 Adet sepete iki ayrı varyant olarak eklenir. -->
-    <div class="etiket" style="margin-top: 24px"><span>{{modelEtiket}}</span></div>
+    <div class="etiket" id="modeller" style="margin-top: 24px"><span>{{modelEtiket}}</span></div>
     <div class="yarim-iz">
       <sc-for list="{{models}}" as="m" hint-placeholder-count="2">
         <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="sat yarim"><span class="tl"><img src="{{m.src}}" alt=""></span><span class="sat-orta"><span class="ad">{{m.n}}</span><span class="alt">{{m.sub}}</span></span><svg class="ayr" viewBox="0 0 24 24" aria-hidden="true"><circle class="h" cx="12" cy="12" r="9"></circle><circle class="d" cx="12" cy="12" r="5"></circle></svg></span></button>
@@ -486,15 +504,18 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Kullanıcı: her kutuda bütün diskler çıkar (6 + 6 hediye), iki modelde de -->
   </section>
 
-  <!-- Kutuda ne var -->
-  <section class="px bolum gir">
-    <h2 class="h2">Kutudan ne çıkıyor<span class="n">?</span></h2>
-    <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 16px">
-      <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #F1E8DA"><img src="{{eldeSrc}}" alt="{{eldeAlt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{eldePos}}"></div>
-      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
-        <li><b>1</b> {{boxModel}}</li><li><b>6</b> masal diski</li><li><b>+6</b> hediye disk</li><li><b>1</b> USB şarj kablosu</li>
-      </ul>
+  <!-- Odası böyle görünecek (Tur 26, kullanıcı B'yi seçti; "Kutudan ne çıkıyor"un yerine, kutu içeriği SSS'ye geçti).
+       Görseller tuvaldeki gece oda fotoğrafları (gerçek ürün referansıyla), temsilî. Yazı HTML; fotoğrafa gömülmez.
+       "… modelini seç" modeli seçer ve model kartlarına kaydırır. -->
+  <section class="bolum gir" id="odalar">
+    <div class="px"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
+    <div class="b-serit noscroll" onScroll="{{odaKay}}">
+      <div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda ay ve<br>yıldızlar<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button" onClick="{{secKiz}}">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
+      <div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.78) + """'></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Odası bir uzay<br>gemisi<span>.</span></p><p class="p-yazi">Robot lamba yanınca duvara ve tavana yıldızlar düşer.</p><button class="p-sec" type="button" onClick="{{secErkek}}">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
+      <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
+    <div class="b-say" aria-hidden="true"><i class="{{nokta0}}"></i><i class="{{nokta1}}"></i></div>
+    <p class="temsil">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
   </section>
 
   <!-- 30 gün iade -->
@@ -720,7 +741,12 @@ JS = """class Component extends DCLogic {
     ];
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
+    // Odalar: "… modelini seç" modeli seçer, model kartlarına kayar; şerit kaydıkça nokta değişir
+    function odaSec(m) { return function () { self.setState({ model: m }); var h = document.getElementById('modeller');
+      if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); }; }
+    function odaKay(e) { var el = e && (e.currentTarget || e.target); if (!el) return; var i = el.scrollLeft > 150 ? 1 : 0; if (i !== (self.state.oda || 0)) self.setState({ oda: i }); }
     var faq = [
+      { q: 'Kutudan ne çıkıyor?', a: 'Seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı.' },
       { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. İkisi de telefona Bluetooth ile bağlanır; çalan ninni lambadan gelir.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
       { q: 'Kargo ne zaman gelir?', a: 'Siparişin 1 iş gününde kargoya verilir, Türkiye geneline 3–7 günde ulaşır.' },
@@ -738,10 +764,10 @@ JS = """class Component extends DCLogic {
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
       yolCls: S.yolAc ? 'yol on' : 'yol', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
-      boxModel: kiz ? 'tavşanlı lamba' : 'Uzay Kaşifi lamba', eldeSrc: kiz ? B + '8f8d1462c27c62b0bbd3066d72c92025' : ERKEK, eldeAlt: kiz ? 'Elde tutulan LunaDream Kız' : 'LunaDream Erkek (Uzay Kaşifi)', eldePos: kiz ? '40% 50%' : '50% 62%', shop: shop, shopCount: PR.length, faq: faq
+      secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
     };
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5670)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6130)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))
