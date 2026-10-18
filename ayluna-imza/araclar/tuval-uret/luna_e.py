@@ -9,12 +9,40 @@ from ortak import HEAD, TAIL, TL_JS
 
 # Bir gece kadranı: fotoğraf penceresinin merkezi (195, 216), yay yarıçapı 156; 5 an yayda (açı, derece)
 KAD_X, KAD_Y, KAD_R = 195, 216, 156
+
+
+def ay(f, r=9, c=12):
+    # Ay evresi yolu: f = aydınlık kısım (0..1), sağdan dolar
+    rx = abs(1 - 2 * f) * r
+    return 'M%d %dA%d %d 0 0 1 %d %dA%.2f %d 0 0 %d %d %dZ' % (c, c - r, r, r, c, c + r, rx, r, 0 if f < .5 else 1, c, c - r)
+
+
+def muhur():
+    # 30 gün mührü: halkada 8 ay evresi (yeni aydan dolunaya ve geri); 30 gün ≈ bir ay döngüsü
+    g = ''
+    for i in range(8):
+        a = math.radians(-90 + i * 45)
+        x, y = 52 + 41 * math.cos(a), 52 + 41 * math.sin(a)
+        f = [0, .25, .5, .75, 1, .75, .5, .25][i]
+        ters = ' transform="matrix(-1 0 0 1 24 0)"' if i > 4 else ''  # küçülen ay öbür yandan aydınlık
+        g += '<g transform="translate(%.1f %.1f) scale(.5)"><circle cx="12" cy="12" r="9"></circle>%s</g>' % (x - 6, y - 6, '<path d="%s"%s></path>' % (ay(f), ters) if f else '')
+    return '<svg class="muhur" viewBox="0 0 104 104" aria-hidden="true"><circle class="mh-halka" cx="52" cy="52" r="50.5"></circle>' + g + '</svg>'
+
+
+# Teslim çizgisi: hilal (bugün) → yarım ay (kargoda) → dolunay (kapında). Kaydırınca sırayla dolar.
+YOL = ''.join('<li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="%s"></path></svg><b>%s</b><span>%s</span></li>' % (ay(f), b, t)
+              for f, b, t in [(.22, 'Bugün', 'Siparişin alındı'), (.5, '{{kargo}}', 'Kargoda'), (1, '{{teslim}}', 'Kapında')])
 KAD_A = [168, 128, 90, 52, 12]
 KAD_P = [[round(KAD_X + KAD_R * math.cos(math.radians(a)), 1), round(KAD_Y - KAD_R * math.sin(math.radians(a)), 1)] for a in KAD_A]
 KAD_L = [[round(KAD_X + 121 * math.cos(math.radians(a)), 1), round(KAD_Y - 121 * math.sin(math.radians(a)), 1)] for a in KAD_A]  # saat yazıları yayın içinde
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE.dc.html')
 
 CSS = r""".pg{background:#F6F1E9}
+/* Renkler (Tur 22, kullanıcı: "renkler birbirine giriyor, büyük marka hissi yok"): 50 tondan 12'ye indi.
+   Açık: krem #F6F1E9 zemin · yüzey #FFFDF9 kart · ton #F1E8DA rozet/çip/boş görsel · çizgi #E3D8C7 · kesik #D6CAB6
+   Yazı: lacivert #1A2142 · soluk #5C6078 · kehribar #A05A1C (küçük etiket) · yeşil #2E6B4F (yalnız Stokta, Satın aldı)
+   Işık: amber #F2A65A (buton, ay, ışık) · amber2 #E59A4C (yıldız, başlık noktası, ay evresi) · basma gölgesi #C97F38
+   Koyu: gece #1A2142 panel · gece2 #0C1027 fotoğraf zemini · koyuda ikincil #B9BED6. Amber yalnız ışık ve ana butonda; bir ekranda bir amber blok. */
 /* Sahne (Tur 8, kullanıcı: "görsel kısmı Main'deki gibi, ama bizim ürün görsellerimiz"): gece laciverti zemin, üstte logo,
    kare ürün fotoğrafı kırpılmadan tam genişlik, alt kenarı geceye karışır; diskler fotoğrafın kenarlarında yavaşça süzülür;
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
@@ -43,23 +71,23 @@ CSS = r""".pg{background:#F6F1E9}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
 .duyuru{display:flex;justify-content:center;align-items:center;gap:10px;height:36px;background:#F2A65A;color:#1A2142;font-size:13px;font-weight:600}
 .duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em}
-.indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F3E9DA;color:#A05A1C}
+.indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F1E8DA;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
 @supports (animation-timeline: view()){
   .gir{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
   @keyframes gir{from{opacity:.001;transform:translateY(20px)}to{opacity:1;transform:none}}
 }
-.guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#2E6B4F}
-.guven-ust span+span::before{content:"·";margin-right:10px;color:#9AA79F}
+.guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#1A2142}
+.guven-ust span+span::before{content:"·";margin-right:10px;color:#E59A4C}
 .lamba-sec{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
 .ls{display:flex;align-items:center;gap:6px}
 .ls-no{font-size:13px;font-weight:600;color:#5C6078;white-space:nowrap}
-.seg{display:inline-flex;padding:3px;border-radius:999px;background:#EFE6D8}
+.seg{display:inline-flex;padding:3px;border-radius:999px;background:#F1E8DA}
 .seg-b{min-height:42px;min-width:54px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:#5C6078;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .seg-b.on{background:#1A2142;color:#FFFDF9}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
-.yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D9CDB9;line-height:1}
+.yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D6CAB6;line-height:1}
 .yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
 .dev{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
 .dev span,.h2 span.n{color:#E59A4C}
@@ -67,18 +95,18 @@ CSS = r""".pg{background:#F6F1E9}
 .mkart:active,.pk:active,.cip:active{transform:scale(.985)}
 .mkart.on{background:#1A2142;border-color:#1A2142;color:#FFFDF9}
 .mkart.on .msub{color:#B9BED6}
-.mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#EFE6D8}
+.mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#F1E8DA}
 .mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 62%}
 .msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Sihirli Özellikler (Tur 7b, kullanıcı V1'i seçti): 2×2 beyaz kart, lacivert ikon kutusu + amber ikon.
    Her kartta üst satır: solda ikon, sağda ürüne özgü küçük canlı gösterge; altında başlık ve tek cümle.
    Döngüler yavaş, yalnız transform/opacity. Canlıda kart ekrana girince 150 ms arayla başlar (IntersectionObserver). */
 .sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.oz{position:relative;isolation:isolate;overflow:hidden;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1px solid #EDE3D3;color:#1A2142;text-decoration:none}
+.oz{position:relative;isolation:isolate;overflow:hidden;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142;text-decoration:none}
 .oz-ust{display:flex;align-items:center;justify-content:space-between;gap:8px;height:48px;margin-bottom:2px}
 .oz .ik{position:relative;width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center;background:#1A2142;color:#F2A65A}
 .oz .ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.oz .ik.yan::before{content:"";position:absolute;inset:-22px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.7),rgba(242,166,90,0) 66%);animation:nefes 4.5s ease-in-out infinite}
+.oz .ik.yan::before{content:"";position:absolute;inset:-14px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.45),rgba(242,166,90,0) 66%);animation:nefes 4.5s ease-in-out infinite}
 .oz b{font-size:15px;font-weight:700;line-height:1.25}
 .oz .t{font-size:14px;line-height:1.4;color:#5C6078;text-wrap:balance}
 .oz .t u{color:#A05A1C;text-underline-offset:3px;white-space:nowrap}
@@ -101,7 +129,7 @@ CSS = r""".pg{background:#F6F1E9}
 .pk.on{background:#1A2142;border-color:#1A2142;color:#FFFDF9}
 .pk-ust{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:12px;align-items:center;padding:18px 14px 14px}
 .pk-foto{position:relative;width:78px;height:60px}
-.lamba{position:absolute;left:0;top:0;width:52px;height:60px;border-radius:14px;overflow:hidden;background:#EFE6D8;border:2px solid #FFFDF9}
+.lamba{position:absolute;left:0;top:0;width:52px;height:60px;border-radius:14px;overflow:hidden;background:#F1E8DA;border:2px solid #FFFDF9}
 .lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.55);transform-origin:50% 60%}
 .lamba.iki{left:26px}
 .pk.on .lamba{border-color:#1A2142}
@@ -110,18 +138,27 @@ CSS = r""".pg{background:#F6F1E9}
 .pk-fiyat{font-size:18px;font-weight:700;letter-spacing:-.02em}
 .pk.on .pk-fiyat{color:#F2A65A}
 .pk-eski{font-size:13px;opacity:.7;margin-top:3px}
-.pk-hediye{display:block;padding:9px 14px;font-size:14px;font-weight:700;background:#F3E9DA;color:#8A4A12;border-radius:0 0 18.5px 18.5px}
-.pk.on .pk-hediye{background:#F2A65A;color:#1A2142}
+.pk-hediye{display:block;padding:9px 14px;font-size:14px;font-weight:700;background:#F1E8DA;color:#A05A1C;border-radius:0 0 18.5px 18.5px}
+.pk.on .pk-hediye{background:rgba(255,253,249,.07);border-top:1px solid rgba(255,253,249,.12);color:#F2A65A}
 .kurdele{position:absolute;right:14px;top:-13px;z-index:1;padding:3px 12px;border-radius:999px;background:#F2A65A;color:#1A2142;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #F6F1E9}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
 .btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .bnot{margin:7px 0 0;text-align:center;font-size:13px;color:#5C6078}
-.yol{position:relative;list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:13px;border-top:1.5px dashed #C9BFAE}
+.yol{position:relative;list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));view-timeline-name:--yol}
+.yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:14px;border-top:1.5px dashed #D6CAB6}
 .yol li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
-.yol li::before{content:"";width:26px;height:26px;border-radius:50%;background:#F6F1E9;border:1.5px solid #1A2142;margin-bottom:6px;box-shadow:inset 0 0 0 5px #F6F1E9,inset 0 0 0 13px #E3D8C7}
-.yol li:first-child::before{box-shadow:inset 0 0 0 5px #F6F1E9,inset 0 0 0 13px #F2A65A}
+.yol .evre{width:28px;height:28px;margin-bottom:6px;background:#F6F1E9;border-radius:50%}
+.yol .evre circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:1.4}
+.yol .evre path{fill:#E59A4C;transform-origin:12px 12px}
+/* Ay evresi efekti: çizgi ekrana girince hilal, yarım ay ve dolunay sırayla dolar (yalnız opacity/transform, bir kez) */
+@supports (animation-timeline: view()){
+  .yol .evre path{animation:dol linear both;animation-timeline:--yol}
+  .yol li:nth-child(1) .evre path{animation-range:entry 30% entry 60%}
+  .yol li:nth-child(2) .evre path{animation-range:entry 50% entry 80%}
+  .yol li:nth-child(3) .evre path{animation-range:entry 70% entry 100%}
+  @keyframes dol{from{opacity:0;transform:scale(.4) rotate(-40deg)}to{opacity:1;transform:none}}
+}
 .yol b{font-size:14px;font-weight:700}
 .yol span{font-size:13px;color:#5C6078}
 .guven{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:12px 0;border-top:1px solid #E3D8C7;border-bottom:1px solid #E3D8C7;font-size:13px;font-weight:600}
@@ -143,8 +180,10 @@ CSS = r""".pg{background:#F6F1E9}
 .gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s cubic-bezier(.2,.7,.2,1)}
 .gk-yildiz{opacity:.25}
 .gk-yildiz circle{fill:#FFFDF9}
-.gk-sabah{background:linear-gradient(205deg,rgba(242,166,90,.42),rgba(242,166,90,.1) 42%,rgba(242,166,90,0) 68%);opacity:0}
-.gk-isik{background:radial-gradient(200px 200px at 195px 216px,rgba(242,166,90,.5),rgba(242,166,90,0))}
+.gk-sabah{background:linear-gradient(180deg,rgba(185,190,214,.22),rgba(185,190,214,.06) 70%);opacity:0}
+.gk-gunes{background:radial-gradient(96px 96px at 351px 183px,rgba(242,166,90,.4),rgba(242,166,90,0));opacity:0}
+.an4 .gk-gunes{opacity:1}
+.gk-isik{background:radial-gradient(132px 132px at 195px 216px,rgba(242,166,90,.34),rgba(242,166,90,0))}
 .an0 .gk-isik{opacity:.95}.an1 .gk-isik{opacity:.75}.an2 .gk-isik{opacity:.6}.an3 .gk-isik{opacity:.4}.an4 .gk-isik{opacity:0}
 .an1 .gk-yildiz{opacity:.55}.an2 .gk-yildiz{opacity:.85}.an3 .gk-yildiz{opacity:1}.an4 .gk-yildiz{opacity:0}
 .an4 .gk-sabah{opacity:1}
@@ -192,15 +231,23 @@ CSS = r""".pg{background:#F6F1E9}
 .dbtn img{width:54px;height:54px;border-radius:50%;object-fit:cover;outline:2px solid transparent;outline-offset:3px;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
 .dbtn.on{color:#FFFDF9;font-weight:600}
 .dbtn.on img{outline-color:#F2A65A;transform:translateY(-4px)}
-.otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:4px 0;color:#1A2142}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:40px;line-height:.85;letter-spacing:-.03em;color:#E59A4C}
+.otuz{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:center;padding:4px 0;color:#1A2142}
+/* Ay evreli mühür (kullanıcı: "yarım ay, tam ay olma efektini kullanmaya devam et"): teslim çizgisiyle aynı ay dili */
+.muhur-kap{position:relative;width:104px;height:104px}
+.muhur{position:absolute;left:0;top:0;width:104px;height:104px}
+.muhur .mh-halka{fill:none;stroke:#E3D8C7;stroke-width:1.5}
+.muhur g circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:2.6}
+.muhur g path{fill:#E59A4C}
+.muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#E59A4C}
+.muhur-say span{margin-top:2px;font-size:12px;font-weight:700;color:#1A2142}
 .sss{border-bottom:1.5px solid #E3D8C7}
 .sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
-.sss .arti{width:32px;height:32px;border-radius:50%;background:#1A2142;color:#FFFDF9;display:grid;place-items:center;flex:none;transition:transform .2s}
+.sss .arti{width:32px;height:32px;border-radius:50%;border:1.5px solid #1A2142;color:#1A2142;font-weight:400;font-size:18px;display:grid;place-items:center;flex:none;transition:transform .2s}
 .sss[open] .arti{transform:rotate(45deg)}
 .kart{flex:0 0 168px;scroll-snap-align:start;background:#FFFDF9;border-radius:20px;border:1.5px solid #E3D8C7;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#1A2142}
-.alt-bilgi{background:#1A2142;color:#C9CDE0;margin-top:36px;padding:32px 0 100px;border-radius:28px 28px 0 0}
+.alt-bilgi{background:#1A2142;color:#B9BED6;margin-top:36px;padding:32px 0 100px;border-radius:28px 28px 0 0}
 .alt-bilgi a{color:#FFFDF9;text-decoration:none;display:flex;align-items:center;min-height:48px}
 .yapis{position:sticky;bottom:0;z-index:5;margin-top:-76px;height:76px;padding:0 12px;background:#1A2142;display:flex;align-items:center;gap:10px;border-radius:20px 20px 0 0}
 /* Baskı unsurları (Tur 9, kullanıcı: "baskılayıcıları arttıralım"): yalnız gerçek veriyle, veri yoksa gizlenir.
@@ -217,17 +264,17 @@ CSS = r""".pg{background:#F6F1E9}
 .vid-oyna svg{width:22px;height:22px;fill:#1A2142;margin-left:3px}
 .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
 .vid-alt b{font-size:14px}
-.vid-alt span{font-size:13px;color:#D9DCEB}
+.vid-alt span{font-size:13px;color:#B9BED6}
 .vid-etiket{position:absolute;left:10px;top:10px;z-index:1;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(12,16,39,.6)}
 /* Yorum duvarı: müşteri fotoğrafları + konu çipleri + kaydırmalı yorum kartları (metinler Loox'tan birebir) */
-.mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#EDE3D3;cursor:pointer}
+.mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#F1E8DA;cursor:pointer}
 .mf img{width:100%;height:100%;object-fit:cover;display:block}
 .yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
 .yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#E59A4C;height:20px}
 .yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
 .yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2E6B4F}
-.yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F3E9DA;color:#5C5245}
+.yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F1E8DA;color:#5C6078}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}"""
 CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:rotate(%ddeg)}' % (i, a, i, a) for i, a in enumerate(KAD_A))
 
@@ -255,7 +302,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Puan ve sayı canlıda Loox'tan; veri yoksa gizlenir. "Stokta" Shopify stok bilgisinden; stok yoksa görünmez -->
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
       <a href="#yorumlar" style="display: inline-flex; align-items: center; gap: 6px; min-height: 48px; font-size: 13px; text-decoration: none; color: #5C6078">""" + STAR + """<b style="color: #1A2142">{{rating}}</b> · {{reviews}} yorum</a>
-      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2E6B4F"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #3B8A63"></span>Stokta</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2E6B4F"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #2E6B4F"></span>Stokta</span>
     </div>
     <h1 class="dev">LunaDream<span>.</span></h1>
     <p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; font-variant-numeric: tabular-nums"><b style="font-size: 20px; letter-spacing: -.01em">{{p1}}</b><s style="font-size: 14px; color: #5C6078">{{c1}}</s><span class="indirim">%{{pct}} indirim</span></p>
@@ -302,7 +349,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar (uygulama korunur; ek ürünler ve ₺80 ücret orada). -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <p class="bnot">{{kpNote}}</p>
-    <ol class="yol" aria-label="Siparişten teslime"><li><b>Bugün</b><span>Siparişin alındı</span></li><li><b>{{kargo}}</b><span>Kargoda</span></li><li><b>{{teslim}}</b><span>Kapında</span></li></ol>
+    <ol class="yol" aria-label="Siparişten teslime">""" + YOL + """</ol>
   </section>
 
   <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
@@ -312,6 +359,26 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
+  </section>
+
+  <!-- Bir gece, beş an · gece kadranı. Panel yapışık; kaydırma adımları (canlıda IntersectionObserver), yaydaki saat ya da oklar anı seçer. -->
+  <section class="gece-bolum" id="bir-gece" aria-labelledby="gece-bas">
+    <div class="{{geceCls}}">
+      <svg class="gk gk-yildiz" viewBox="0 0 390 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle><circle cx="52" cy="250" r="0.8"></circle><circle cx="342" cy="220" r="0.8"></circle></svg>
+      <span class="gk gk-sabah" aria-hidden="true"></span>
+      <div class="g-bas"><h2 class="h2" id="gece-bas" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2><p style="margin: 6px 0 0; font-size: 14px; color: #B9BED6">Kaydır ya da yaydaki saate dokun.</p></div>
+      <div class="g-alan"><div class="g-ic">
+        <span class="gk gk-isik" aria-hidden="true"></span>
+        <span class="gk gk-gunes" aria-hidden="true"></span>
+        <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka" cx="195" cy="216" r="96"></circle></svg>
+        <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
+        <div class="g-noktalar" role="group" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button class="{{a.saatCls}}" type="button" tabindex="-1" aria-hidden="true" style="left: {{a.lx}}px; top: {{a.ly}}px" onClick="{{a.pick}}">{{a.t}}</button><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for></div>
+        <span class="g-ay-kol" aria-hidden="true"><span class="g-ay"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span>
+        <div class="g-yazi" aria-live="polite"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="g-an" aria-hidden="{{a.gizli}}"><span class="saat">{{a.t}}</span><b>{{a.title}}</b><span class="t">{{a.text}}</span></div></sc-for></div>
+        <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
+      </div></div>
+    </div>
+    <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
 
   <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
@@ -333,25 +400,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır; hepsi yayımlanır.</p></div>
   </section>
 
-  <!-- Bir gece, beş an · gece kadranı. Panel yapışık; kaydırma adımları (canlıda IntersectionObserver), yaydaki saat ya da oklar anı seçer. -->
-  <section class="gece-bolum gir" id="bir-gece" aria-labelledby="gece-bas">
-    <div class="{{geceCls}}">
-      <svg class="gk gk-yildiz" viewBox="0 0 390 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle><circle cx="52" cy="250" r="0.8"></circle><circle cx="342" cy="220" r="0.8"></circle></svg>
-      <span class="gk gk-sabah" aria-hidden="true"></span>
-      <div class="g-bas"><h2 class="h2" id="gece-bas" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2><p style="margin: 6px 0 0; font-size: 14px; color: #B9BED6">Kaydır ya da yaydaki saate dokun.</p></div>
-      <div class="g-alan"><div class="g-ic">
-        <span class="gk gk-isik" aria-hidden="true"></span>
-        <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka" cx="195" cy="216" r="96"></circle></svg>
-        <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
-        <div class="g-noktalar" role="group" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button class="{{a.saatCls}}" type="button" tabindex="-1" aria-hidden="true" style="left: {{a.lx}}px; top: {{a.ly}}px" onClick="{{a.pick}}">{{a.t}}</button><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for></div>
-        <span class="g-ay-kol" aria-hidden="true"><span class="g-ay"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span>
-        <div class="g-yazi" aria-live="polite"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="g-an" aria-hidden="{{a.gizli}}"><span class="saat">{{a.t}}</span><b>{{a.title}}</b><span class="t">{{a.text}}</span></div></sc-for></div>
-        <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
-      </div></div>
-    </div>
-    <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
-  </section>
-
   <!-- Diskler: tavana yansıt -->
   <section class="gece gir" id="diskler">
     <div class="px"><h2 class="h2" style="color: #FFFDF9">Kutuda altı masal,<br>altı da hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
@@ -370,7 +418,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <section class="px bolum gir">
     <h2 class="h2">Kutudan ne çıkıyor<span class="n">?</span></h2>
     <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 16px">
-      <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #EDE3D3"><img src="{{eldeSrc}}" alt="{{eldeAlt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{eldePos}}"></div>
+      <div style="height: 200px; border-radius: 20px; overflow: hidden; background: #F1E8DA"><img src="{{eldeSrc}}" alt="{{eldeAlt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{eldePos}}"></div>
       <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
         <li><b>1</b> {{boxModel}}</li><li><b>6</b> masal diski</li><li><b>+6</b> hediye disk</li><li><b>1</b> USB şarj kablosu</li>
       </ul>
@@ -379,14 +427,14 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- 30 gün iade -->
   <section class="px bolum gir">
-    <div class="otuz"><b class="say">30</b><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px; line-height: 1.2">gün içinde iade</b><span style="font-size: 14px; color: #5C6078">Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
+    <div class="otuz"><span class="muhur-kap">""" + muhur() + """<span class="muhur-say"><b class="say">30</b><span>gün</span></span></span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px; line-height: 1.2">Beğenmezsen iade et</b><span style="font-size: 14px; color: #5C6078">Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
   </section>
 
   <!-- SSS -->
   <section class="px bolum gir">
     <h2 class="h2">Merak edilenler<span class="n">.</span></h2>
     <div style="margin-top: 14px; border-top: 1.5px solid #E3D8C7">
-      <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p style="margin: 0 0 16px; font-size: 14px; color: #3A3F5A">{{f.a}}</p></details></sc-for>
+      <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p style="margin: 0 0 16px; font-size: 14px; color: #5C6078">{{f.a}}</p></details></sc-for>
     </div>
   </section>
 
@@ -395,7 +443,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4">
-        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #EDE3D3; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #F2A65A; color: #1A2142; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
+        <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #F1E8DA; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #F1E8DA; color: #A05A1C; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
       </sc-for>
     </div>
   </section>
@@ -407,14 +455,14 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <button class="btn-on" type="button" style="margin-top: 16px">{{onLabel}}</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
-      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F3E9DA"><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
-      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); font-size: 12px; color: #8E94B3">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
+      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F1E8DA"><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
+      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); font-size: 12px; color: #B9BED6">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
   </footer>
 
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
-    <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #EFE6D8"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
+    <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #F1E8DA"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
     <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 4px 0 #C97F38">Satın al</button>
   </div>
@@ -583,5 +631,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5755)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5797)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))

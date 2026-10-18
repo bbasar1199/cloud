@@ -72,6 +72,14 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
   - Yenilik, bölüm içinde tek bir parça olarak denenir; örnek: Bir gece kadranı. Yazı tipini ve renkleri değiştiren turlar (D; Tur 20'deki E) "yabancı" bulundu.
   - Sipariş fişi istenmiyor.
+  - **Ay evresi dili** (18 Eki, kullanıcı: "yarım ay, tam ay olma efektini kullanmaya devam et"): hilal → yarım ay → dolunay, markanın motifi. Teslim çizgisinde (Bugün / Kargoda / Kapında, kaydırınca sırayla dolar) ve 30 gün mühründe (halkada 8 evre) kullanılır.
+  - **Renk disiplini** (kullanıcı: "renkler birbirine giriyor, büyük marka hissi yok"):
+    - Yaklaşık 12 ton. Açık yüzeyler: krem, yüzey, tek açık ton #F1E8DA.
+    - Çizgiler: tek çizgi, tek kesik çizgi.
+    - Yazı: lacivert, soluk, kehribar. Yeşil yalnız "Stokta" ve "Satın aldı".
+    - Amber yalnız ışıkta ve ana butonda; bir ekranda tek amber blok.
+    - Koyu panelde geniş amber parıltı yok (kahverengiye döner).
+    - Açık ve koyu bölümler sırayla gelir.
   - Soru başlıkları soru işaretiyle biter.
   - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.

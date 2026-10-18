@@ -475,6 +475,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 22 · E: renk uyumu ve ay evreleri (18 Ekim)
+- Kullanıcı: "Yarım ay, tam ay olma efektini kullanmaya devam et. Hâlâ düzensizlikler, renklerin birbirine girdiği, büyük marka hissi vermeyen yerler var."
+- **Renk:** 50 tondan ~12'ye indi.
+  - Açık ve koyu tonlar tekleşti: #F1E8DA, #D6CAB6, #5C6078, koyuda #B9BED6.
+  - Güven satırı lacivert ve amber noktalı.
+  - Seçili paketin hediye şeridi koyu, yazısı amber.
+  - Ürün rozetleri fiyat rozeti biçiminde.
+  - SSS artısı ince halka.
+  - Sihirli'deki ay halesi küçüldü.
+  - Kadranın lamba ışığı ve sabahı kahverengiye dönmüyor: sabah lacivert açılır, küçük bir güneş belirir.
+- **Ay evreleri:**
+  - Teslim çizgisi hilal → yarım ay → dolunay; kaydırınca sırayla dolar.
+  - 30 gün iade için 8 evreli mühür; yazısı "Beğenmezsen iade et".
+- **Sıra:** Bir gece → Yorumlar → Diskler. Böylece açık ve koyu bölümler sırayla gelir (§5 ve beceri sırası).
+- Tuval Sürüm 64: E h 5797. Eleştirmene "büyük marka hissi" için 3 fikir soruldu.
+
 ## Tur 21 · E, B+'nın diliyle yeniden (18 Ekim)
 - Kullanıcı (E'ye bakarken): "Sipariş fişini kaldır, emoji benefiti düzelt, yazım hataları berbat, yazı fontu kötü; her şey çok yabancı duruyor, bir bütün ve uyum yakala."
 - Teşhis: D ve Tur 20'deki E seçilen B+'dan ayrı bir dil kurmuştu.
