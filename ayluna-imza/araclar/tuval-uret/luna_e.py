@@ -192,12 +192,13 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .cip-y img{position:absolute;left:50%;bottom:3px;height:29px;width:auto;transform:translateX(-50%)}
 /* Dönen satır (kullanıcı, 18 Eki): hediye diski ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde, kutu en uzunu
    kadar; dönerken yükseklik değişmez. Giren alttan, çıkan yukarı (yalnız transform/opacity). Hareket azaltılmışsa ikisi alt alta. */
-.donen{position:relative;display:grid;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#F1E8DA;font-size:14px;font-weight:700;color:#A05A1C;overflow:hidden}
+/* Renk (kullanıcı, 18 Eki: "lacivert rengimize çevirsek daha bütün görünür"): lacivert zemin, ay beyazı yazı, ışık yalnız hilalde. */
+.donen{position:relative;display:grid;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#1A2142;font-size:14px;font-weight:700;color:#FFFDF9;overflow:hidden}
 .dn-s{grid-area:1/1;display:flex;align-items:center;gap:8px;min-height:24px;opacity:0;transform:translateY(80%);transition:opacity .36s cubic-bezier(.2,.7,.2,1),transform .36s cubic-bezier(.2,.7,.2,1)}
 .dn-s.on{opacity:1;transform:none}.dn-s.ust{transform:translateY(-80%)}
-.dn-s svg{width:16px;height:16px;flex:none}.dn-s circle{fill:none;stroke:#1A2142;stroke-width:1.6}.dn-s path{fill:#F2A65A}
+.dn-s svg{width:16px;height:16px;flex:none}.dn-s circle{fill:none;stroke:rgba(255,253,249,.7);stroke-width:1.6}.dn-s path{fill:#F2A65A}
 .dn-m{flex:1;min-width:0;font-size:13px;line-height:1.3}
-.dn-sy{flex:none;padding:3px 8px;border-radius:999px;background:#FFFDF9;color:#1A2142;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.dn-sy{flex:none;padding:3px 8px;border-radius:999px;background:rgba(255,253,249,.14);color:#FFFDF9;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .dn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.donen{row-gap:8px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}

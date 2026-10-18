@@ -487,6 +487,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Açık: Cumartesi kargo var mı teyit. Çıkan satırın geçişte üstte kısa süre silik kalması (çıkışı hızlandırma) kullanıcı durdurduğu için yapılmadı.
 - Kullanıcı: "Dün kişi satın aldı kısmına 62 yaz, oraya da hafif bir animasyon, tasarım diline uygun." → LunaDream `DUN = '62'`; satır fiyat düşüşü bitince (1,9 sn) 6px aşağıdan gelir, sayı fiyattaki gibi yukarıdan düşer, yeşil nokta 3 kez yumuşak halka verir. USB'de aynı giriş (rozet "pop" diliyle), sayı hâlâ [X].
 - Kullanıcı: "Stok kısmı için de uygun bir tasarım deneyebilir miyiz, UI." → `stok_secenek.py` → `canvas/LunaDreamE-Stok.dc.html` (tuvalde Güncel sayfası, LunaDream E sütunu): A Yıldız dizisi, B Serif sayı, C Buton kurdelesi. Eleştirmen: C 8/10, B 5/10, A 4/10. Kullanıcı C'yi seçti → `luna_e.py`: butonun üst kenarında "Son 18 adet" kurdelesi (`STOK`), azalan ay, dokunmayı engellemez, buton ekrana girince bir kez; eski stok satırı (`.canli`) kalktı. USB'nin stok satırı henüz eski hâlinde.
+- Kullanıcı: dönen satır "lacivert rengimize çevirsek daha bütün görünür" → `.donen` lacivert zemin, ay beyazı yazı, sayaç çipi yarı saydam beyaz.
 - Tuval ve "Ayluna Mağazası" artifact'ı (DgGy66eo4iqLEhjSn1inje) güncellendi. Yanlışlıkla görselsiz ikinci bir site artifact'ı oluştu (BnpeGU6VRT2pwBB3TmUo8k); silinmesi kullanıcıya soruldu.
 
 ## Çalışan site iskeleti (18 Ekim, en güncel)
