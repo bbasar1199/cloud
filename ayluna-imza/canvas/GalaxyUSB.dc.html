@@ -13,7 +13,7 @@
 <style>
 body{margin:0;background:var(--zemin,#fff)}
 
-.pg{--lac:#1A2142;--koyu:#0C1027;--koyu2:#151C3A;--buz:#8FD3FF;--buz2:#5FA9DA;--zemin:#F2F4F8;--yuzey:#FFFFFF;--cizgi:#DDE2EC;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
+.pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--buz:#8FD3FF;--buz2:#5FA9DA;--zemin:#F2F4F8;--yuzey:#FFFFFF;--cizgi:#DDE2EC;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
   width:390px;margin:0 auto;background:var(--zemin);color:var(--lac);font-family:"Figtree",ui-sans-serif,system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:clip;position:relative}
 @supports not (overflow:clip){.pg{overflow:hidden}}
 .pg *{box-sizing:border-box}
@@ -47,7 +47,7 @@ body{margin:0;background:var(--zemin,#fff)}
 /* Sayaç şeridi: saniye kutusu her saniye tıklar */
 .serit{display:flex;justify-content:center;align-items:center;gap:10px;height:40px;background:var(--koyu);color:#EEF2FA;font-size:13px;font-weight:600}
 .serit .sy{display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
-.serit .sy b{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 4px;border-radius:6px;background:#222B57;font-size:13px}
+.serit .sy b{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 4px;border-radius:6px;background:#2A3466;font-size:13px}
 .serit .sy b.sn{background:var(--buz);color:var(--koyu)}
 .serit .sy i{font-style:normal;color:var(--acik)}
 @keyframes tikA{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:none}}
@@ -70,12 +70,13 @@ body{margin:0;background:var(--zemin,#fff)}
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
 .kc{display:flex;align-items:center;gap:8px;padding:12px 16px 16px}
-.kc button{position:relative;flex:none;width:58px;height:58px;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--koyu2);box-shadow:0 0 0 1.5px rgba(238,242,250,.25);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.kc button{position:relative;flex:none;width:58px;height:58px;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--koyu2);box-shadow:0 0 0 1.5px rgba(238,242,250,.25);transition:transform .3s var(--ease)}
 .kc button.on{box-shadow:0 0 0 2px var(--buz);transform:translateY(-2px)}
 .kc img{width:100%;height:100%;object-fit:cover;display:block}
 .kc i{position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--buz);transform:scaleX(0);transform-origin:0 50%}
 .kc button.oto i{animation:dol 5s linear both}
-.kc .sira{margin-left:auto;font-size:13px;font-weight:600;color:var(--acik);font-variant-numeric:tabular-nums}
+.kc .sira{display:flex;flex-direction:column;align-items:flex-end;margin-left:auto;font-size:13px;font-weight:600;color:var(--acik);font-variant-numeric:tabular-nums;line-height:1.3}
+.kc .sira small{font-size:12px;font-weight:500}
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
@@ -127,7 +128,7 @@ body{margin:0;background:var(--zemin,#fff)}
 .ac-r{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(238,242,250,.12);font-size:14px}
 .ac-r svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--buz);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ping{position:relative;flex:none;width:10px;height:10px;margin:0 4px;border-radius:50%;background:var(--buz)}
-.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--buz);animation:ping 1.8s var(--ease) infinite}
+.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--buz);animation:ping 1.8s var(--ease) 3}
 @keyframes ping{from{transform:scale(1);opacity:.7}to{transform:scale(2.8);opacity:0}}
 .ac-sy{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--buz)}
 
@@ -135,7 +136,7 @@ body{margin:0;background:var(--zemin,#fff)}
 .pk-bas{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:14px;font-weight:700}
 .pk-bas::after{content:"";flex:1;height:1px;background:var(--cizgi)}
 .pk{display:flex;flex-direction:column;gap:14px}
-.pk-k{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:88px;padding:12px 14px 12px 12px;border:0;border-radius:16px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.pk-k{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:88px;padding:12px 14px 12px 12px;border:0;border-radius:16px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
 .pk-k:active{transform:scale(.985)}
 .pk-k.on{box-shadow:inset 0 0 0 2px var(--lac)}
 .pk-g{position:relative;flex:none;width:60px;height:60px;border-radius:12px;background:var(--lac);overflow:hidden}
@@ -155,7 +156,7 @@ body{margin:0;background:var(--zemin,#fff)}
 .disk-not{display:flex;align-items:center;gap:12px;margin:14px 0 0;font-size:14px;font-weight:600}
 .disk-not .dn img{width:30px;height:30px;margin-left:-12px}
 .disk-not .dn img:first-child{margin-left:0}
-.btn1{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:20px;border:0;border-radius:16px;background:var(--lac);color:#fff;font-size:16px;font-weight:700;box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:20px;border:0;border-radius:16px;background:var(--lac);color:#fff;font-size:16px;font-weight:700;box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px);box-shadow:0 0 0 #0C1027}
 .btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--buz);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) infinite}
@@ -217,7 +218,7 @@ body{margin:0;background:var(--zemin,#fff)}
 .dk-ad span{font-size:12px;color:var(--acik);font-variant-numeric:tabular-nums}
 .dk-ad b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em}
 .dk-iz{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 8px;margin-top:18px}
-.dk-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.dk-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease)}
 .dk-iz button img{display:block;width:100%;height:100%;border-radius:50%}
 .dk-iz button.on{box-shadow:0 0 0 2.5px var(--buz);transform:scale(1.1)}
 
@@ -244,7 +245,7 @@ body{margin:0;background:var(--zemin,#fff)}
 .hk-disk{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:4px 12px 4px 4px;border-radius:999px;background:rgba(12,16,39,.72);box-shadow:inset 0 0 0 1px rgba(238,242,250,.18);font-size:13px;font-weight:600}
 .hk-disk img{width:28px;height:28px;border-radius:50%;animation:don 10s linear infinite}
 .hk-sec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
-.hk-sec button{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:14px;font-weight:700;text-align:left;transition:background .25s var(--ease),color .25s var(--ease)}
+.hk-sec button{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:14px;font-weight:700;text-align:left}
 .hk-sec button img{flex:none;width:44px;height:44px;border-radius:10px;object-fit:cover}
 .hk-sec button.on{background:var(--lac);color:#fff;box-shadow:none}
 
@@ -313,7 +314,7 @@ body{margin:0;background:var(--zemin,#fff)}
     <div class="h-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img class="{{f.cls}}" src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div>
-    <div class="kc"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><button class="{{f.kcls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""><i></i></button></sc-for><span class="sira">{{gNo}} / {{gCount}}</span></div>
+    <div class="kc"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><button class="{{f.kcls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""><i></i></button></sc-for><span class="sira">{{gNo}} / {{gCount}}<small>Temsilî görseller</small></span></div>
   </section>
 
   <section class="al" id="siparis">
@@ -327,7 +328,7 @@ body{margin:0;background:var(--zemin,#fff)}
       <div class="oz"><span class="gz"><span class="dn" aria-hidden="true"><img src="/_blob/623dd6e90d7ec540d74e709284fe766b" alt=""><img src="/_blob/2b551fa24218f4e7ae94652879916827" alt=""><img src="/_blob/3d122b270e42112757cdefb40fbe32ce" alt=""></span></span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo salla"><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo"><span class="hale"></span><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
-      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Avuç içi kadar</b><span class="t" style="display: block">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
+      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t" style="display: block">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
     </div>
 
     <!-- Baskı kartı: N, stok ve X Shopify/sipariş verisinden gelir; uydurma sayı yazılmaz. Çubuk genişliği N/stok. -->
@@ -349,7 +350,7 @@ body{margin:0;background:var(--zemin,#fff)}
 
   <section class="px" style="padding-bottom: 44px">
     <h2 class="bas-y h2">İçin rahat<br>olsun<span class="n">.</span></h2>
-    <div class="gv-iz"><div class="gv"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span><b>Ücretsiz kargo</b><span>1 iş gününde kargoda. Track123 ile adım adım takip.</span></div><div class="gv"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span><b>30 gün iade</b><span>Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="gv"><span class="gv-ik kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span><b>Kapıda ödeme</b><span>Ürün gelince nakit ya da kartla öde.</span></div><div class="gv"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span><b>WhatsApp destek</b><span>Ortalama 2 saatte yanıt.</span></div></div><div class="kartlar"><b>Kartla öde, %5 indirim al</b><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span class="km">AMEX</span></div><p class="alt-not">[Ödeme altyapısının adı] · Kart bilgin bize gelmez.</p>
+    <div class="gv-iz"><div class="gv"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span><b>Ücretsiz kargo</b><span>1 iş gününde kargoda, adım adım takip.</span></div><div class="gv"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span><b>30 gün iade</b><span>Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="gv"><span class="gv-ik kutu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span><b>Kapıda ödeme</b><span>Ürün gelince nakit ya da kartla öde.</span></div><div class="gv"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span><b>WhatsApp destek</b><span>Ortalama 2 saatte yanıt.</span></div></div><div class="kartlar"><b>Kartla öde, %5 indirim al</b><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span></div><p class="alt-not">[Ödeme altyapısının adı] · Kart bilgin bize gelmez.</p>
   </section>
 
   <!-- 12 disk: görseller kullanıcının paylaştığı mağaza afişinden kırpıldı. Seçilen disk tavana düşer. -->
@@ -368,7 +369,7 @@ body{margin:0;background:var(--zemin,#fff)}
   <!-- Herkesin odasına: hikâye kartı. Fotoğraflar temsilî; her karede o odaya önerilen disk. -->
   <section class="bolum px" id="odalar">
     <h2 class="bas-y h2">Herkesin<br>odasına<span class="n">.</span></h2>
-    <p class="alt-b">Çocuk odasından salona: ışığı kapat, diski seç.</p>
+    <p class="alt-b">Kimin odası olursa olsun: ışığı kapat, diski seç.</p>
     <div class="hk">
       <sc-for list="{{kim}}" as="k" hint-placeholder-count="2"><img class="{{k.fcls}}" src="{{k.src}}" alt="{{k.alt}}" style="object-position: {{k.pos}}"></sc-for>
       <div class="hk-cub" aria-hidden="true"><sc-for list="{{kim}}" as="k" hint-placeholder-count="4"><span class="{{k.ccls}}"><i></i></span></sc-for></div>
@@ -383,13 +384,13 @@ body{margin:0;background:var(--zemin,#fff)}
 
   <section class="koyu bolum px">
     <h2 class="bas-y h2">Nereye<br>takılır<span class="n">?</span></h2>
-    <div class="tak"><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="7" y="9" width="22" height="14" rx="2"></rect><path d="M3 27h30"></path><path d="M24 23v4"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Laptop</b><span>USB girişine</span></div><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="10" y="5" width="16" height="26" rx="3"></rect><path d="M18 31v2"></path><path d="M14 11h8"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Powerbank</b><span>Prizsiz yerde</span></div><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="9" y="12" width="18" height="16" rx="3"></rect><path d="M14 12V7M22 12V7"></path><path d="M18 28v4"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Şarj başlığı</b><span>Telefonununki olur</span></div></div><p class="alt-not">USB adaptör kutuda yok. Evdeki USB girişli telefon şarj başlığı yeter.</p>
+    <div class="tak"><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="7" y="9" width="22" height="14" rx="2"></rect><path d="M3 27h30"></path><path d="M24 23v4"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Laptop</b><span>USB girişine</span></div><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="10" y="5" width="16" height="26" rx="3"></rect><path d="M18 31v2"></path><path d="M14 11h8"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Powerbank</b><span>Prizsiz yerde</span></div><div class="tk"><span class="tk-g"><svg viewBox="0 0 36 36"><rect x="9" y="12" width="18" height="16" rx="3"></rect><path d="M14 12V7M22 12V7"></path><path d="M18 28v4"></path></svg><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>Şarj başlığı</b><span>USB-A girişli</span></div></div><p class="alt-not">USB adaptör kutuda yok. Evdeki USB-A girişli bir şarj başlığı yeter.</p>
   </section>
 
   <section class="bolum px" id="kurulum">
     <h2 class="bas-y h2">Üç adımda<br>tavanda<span class="n">.</span></h2>
     <ol class="kur">
-      <li><em>1</em><span><b>USB'ye tak</b><span>Laptop, powerbank ya da şarj başlığı.</span></span></li>
+      <li><em>1</em><span><b>USB'ye tak</b><span>USB ucu gövdeye bağlı, ayrı kablo gerekmez.</span></span></li>
       <li><em>2</em><span><b>Diski yerleştir</b><span>Diski başlığa tak, başlığı tavana çevir. [Adımlar teyit edilecek]</span></span></li>
       <li><em>3</em><span><b>Halkayı yavaşça çevir</b><span>Ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin.</span></span></li>
     </ol>
@@ -438,7 +439,7 @@ body{margin:0;background:var(--zemin,#fff)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6890}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6870}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 3, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
@@ -448,7 +449,7 @@ class Component extends DCLogic {
     // Tek saat: sayaç, galeri (5 sn), disk (3 sn), oda kartı (5 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) o.g = (S.g + 1) % 4;
+      if (S.gOto && t % 5 === 0) o.g = (S.g + 1) % 3;
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % 4; o.kBas = t; }
       self.setState(o);
@@ -459,12 +460,12 @@ class Component extends DCLogic {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
     var I = {'cift': 'eae251a225996e67cae4ea4b714d7513', 'saturn': '10b5c03a83fd85a3eb15b3374830001e', 'kelebek': '1697cee7971bbb267fb51dea65064134', 'ay': 'a2010776792420e44288cfaf26ea36cf', 'karadelik': 'ef1770a1ec7be78054cd32a386216a3a', 'denizanasi': 'db2afb7bdda9b8175ad05543628d075b', 'siyah1': 'ca8e068a09abcce3cee3b6b52014e5d4', 'siyah2': '778e6089a2699acbac7bdf05cab5eae1', 'cocuk': 'f2da40fb1654492417c640086532631f', 'urun': '192e0198aa722e532541f454e8278561', 'oda': '7d5f80214a0664a51946b0ece044e8cb', 'bas': '7e1339aefa8d185cd41f6c37b16853c5', 'kesim': '5782766948fef68b7273c061529d6324'};
-    var GAL = [['urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'], ['oda', 'Komodinde Galaxy USB projektör, esnek boynu ve USB ucu', '45% 45%'], ['cift', 'Duvarda kuzey ışığı yansıması önünde bir çift', '42% 40%'], ['bas', 'Projektör başlığı yakından', '50% 40%']];
+    var GAL = [['urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'], ['oda', 'Komodinde Galaxy USB projektör, esnek boynu ve USB ucu', '45% 45%'], ['bas', 'Projektör başlığı yakından', '50% 40%']];
     var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: B + I[g[0]], n: g[1], pos: g[2], on: on ? 'true' : 'false', cls: on ? 'hf on' : 'hf', kcls: on ? (S.gOto ? 'on oto' : 'on') : '', pick: function () { self.setState({ g: i, gOto: false }); } }; });
     var DISK = [['Hilal ve bulutlar', '7b263bd7e166f79b9d4517cb18221c6a'], ['Kızıl yıldız', '7b3f50d4ef190927e3dcba020adbcb63'], ['Mavi nebula', 'c24c90ed616a42663a426327cc5a9577'], ['Kuzey ışığı', '2b551fa24218f4e7ae94652879916827'], ['Pembe nebula', 'aa0c229321171240b9f519c2b32993c6'], ['Sarmal galaksi', '623dd6e90d7ec540d74e709284fe766b'], ['Kozmik göz', 'eb6fdbbf79ab027c8f29c14be4d23dbc'], ['Halkalı gezegen', '3947be9f685b6cc6936686287069c2fa'], ['Samanyolu', '0ae92fac0532f0215951fbb367b7d414'], ['Ay ve bulutlar', 'b35683529443511ae22202c5927fbdc3'], ['Denizanası', '3d122b270e42112757cdefb40fbe32ce'], ['Jüpiter', '5d93bae13c23d9d7ff724003a488d096']];
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: B + d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var DS = {}; DISK.forEach(function (d) { DS[d[0]] = B + d[1]; });
-    var KIM = [['Çocuk odası', 'cocuk', 'Masal yerine galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'], ['Genç odası', 'denizanasi', 'Odan, kurallar senin.', 'Işığı kapat, oda başka bir yere dönsün.', 'Denizanası', '62% 40%'], ['İkimiz için', 'cift', 'Bu akşam sahne tavanda.', 'Film yerine tavanda bir akşam.', 'Kuzey ışığı', '44% 40%'], ['Kendine zaman', 'saturn', 'Ekran yok, sadece gökyüzü.', 'Gün sonunda telefonu bırak, tavana bak.', 'Halkalı gezegen', '52% 40%']];
+    var KIM = [['Çocuk odası', 'cocuk', 'Masaldan sonra galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'], ['Genç odası', 'denizanasi', 'Odan, kurallar senin.', 'Işığı kapat, oda başka bir yere dönsün.', 'Denizanası', '62% 40%'], ['İkimiz için', 'cift', 'Bu akşam sahne tavanda.', 'Film yerine tavanda bir akşam.', 'Kuzey ışığı', '44% 40%'], ['Kendine zaman', 'saturn', 'Ekran yok, sadece gökyüzü.', 'Gün sonunda telefonu bırak, tavana bak.', 'Halkalı gezegen', '52% 40%']];
     var kim = KIM.map(function (k, i) { var on = i === S.kim; return { n: k[0], src: B + I[k[1]], bas: k[2], t: k[3], disk: k[4], dsrc: DS[k[4]], pos: k[5], alt: on ? k[0] + ': ' + k[3] : '', on: on ? 'true' : 'false',
       fcls: on ? 'hk-f on' : 'hk-f', ycls: on ? 'hk-y on' : 'hk-y', scls: on ? 'on' : '', ccls: i < S.kim ? 'bitti' : (on ? (S.kOto ? 'on' : 'dur') : ''),
       pick: function () { self.setState({ kim: i, kBas: S.t, kOto: false }); } }; });
@@ -487,8 +488,8 @@ class Component extends DCLogic {
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
     var faq = [
-      { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB girişli telefon şarj başlığı yeter.' },
-      { q: 'Neyle çalışır?', a: 'USB girişi olan her yerde: laptop, powerbank ya da USB girişli şarj başlığı. Takılıyken çalışır.' },
+      { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB-A girişli bir şarj başlığı yeter.' },
+      { q: 'Neyle çalışır?', a: 'USB girişi olan her yerde: laptop, powerbank ya da USB-A girişli şarj başlığı. Takılıyken çalışır.' },
       { q: 'Gece lambası olarak da kullanılır mı?', a: 'Evet, 2’si 1 arada: gövdesi yumuşak ışıkla yanar. [Işık modları teyit edilecek.]' },
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
       { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.] Zorlanırsan WhatsApp’tan yaz, görüntülü gösterelim.' },
@@ -513,7 +514,7 @@ class Component extends DCLogic {
       kim: kim, kimAd: KIM[S.kim][0], kimSrc: B + I[KIM[S.kim][1]],
       kPrev: function () { self.setState({ kim: (S.kim + KIM.length - 1) % KIM.length, kBas: S.t }); },
       kNext: function () { self.setState({ kim: (S.kim + 1) % KIM.length, kBas: S.t }); },
-      paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet', diskNot: S.adet === 2 ? '2 kutu, 24 film diski' : 'Kutuda 12 film diski',
+      paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet', diskNot: 'Her kutuda 12 film diski',
       onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',

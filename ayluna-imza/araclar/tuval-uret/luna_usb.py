@@ -29,9 +29,9 @@ D = dict((n, B + i) for n, i in DISK)
 KES = B + I['kesim']
 
 GAL = [('urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'), ('oda', 'Komodinde Galaxy USB projektör, esnek boynu ve USB ucu', '45% 45%'),
-       ('cift', 'Duvarda kuzey ışığı yansıması önünde bir çift', '42% 40%'), ('bas', 'Projektör başlığı yakından', '50% 40%')]
+       ('bas', 'Projektör başlığı yakından', '50% 40%')]
 # Herkesin odasına: hikâye kartı. Disk, kutudaki 12 diskten o odaya önerilen.
-KIM = [('Çocuk odası', 'cocuk', 'Masal yerine galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'),
+KIM = [('Çocuk odası', 'cocuk', 'Masaldan sonra galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'),
        ('Genç odası', 'denizanasi', 'Odan, kurallar senin.', 'Işığı kapat, oda başka bir yere dönsün.', 'Denizanası', '62% 40%'),
        ('İkimiz için', 'cift', 'Bu akşam sahne tavanda.', 'Film yerine tavanda bir akşam.', 'Kuzey ışığı', '44% 40%'),
        ('Kendine zaman', 'saturn', 'Ekran yok, sadece gökyüzü.', 'Gün sonunda telefonu bırak, tavana bak.', 'Halkalı gezegen', '52% 40%')]
@@ -41,7 +41,7 @@ OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6
 FIS = '<svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg>'
 
 CSS = r"""
-.pg{--lac:#1A2142;--koyu:#0C1027;--koyu2:#151C3A;--buz:#8FD3FF;--buz2:#5FA9DA;--zemin:#F2F4F8;--yuzey:#FFFFFF;--cizgi:#DDE2EC;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
+.pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--buz:#8FD3FF;--buz2:#5FA9DA;--zemin:#F2F4F8;--yuzey:#FFFFFF;--cizgi:#DDE2EC;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
   width:390px;margin:0 auto;background:var(--zemin);color:var(--lac);font-family:"Figtree",ui-sans-serif,system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:clip;position:relative}
 @supports not (overflow:clip){.pg{overflow:hidden}}
 .pg *{box-sizing:border-box}
@@ -75,7 +75,7 @@ CSS = r"""
 /* Sayaç şeridi: saniye kutusu her saniye tıklar */
 .serit{display:flex;justify-content:center;align-items:center;gap:10px;height:40px;background:var(--koyu);color:#EEF2FA;font-size:13px;font-weight:600}
 .serit .sy{display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
-.serit .sy b{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 4px;border-radius:6px;background:#222B57;font-size:13px}
+.serit .sy b{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 4px;border-radius:6px;background:#2A3466;font-size:13px}
 .serit .sy b.sn{background:var(--buz);color:var(--koyu)}
 .serit .sy i{font-style:normal;color:var(--acik)}
 @keyframes tikA{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:none}}
@@ -98,12 +98,13 @@ CSS = r"""
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
 .kc{display:flex;align-items:center;gap:8px;padding:12px 16px 16px}
-.kc button{position:relative;flex:none;width:58px;height:58px;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--koyu2);box-shadow:0 0 0 1.5px rgba(238,242,250,.25);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.kc button{position:relative;flex:none;width:58px;height:58px;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--koyu2);box-shadow:0 0 0 1.5px rgba(238,242,250,.25);transition:transform .3s var(--ease)}
 .kc button.on{box-shadow:0 0 0 2px var(--buz);transform:translateY(-2px)}
 .kc img{width:100%;height:100%;object-fit:cover;display:block}
 .kc i{position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--buz);transform:scaleX(0);transform-origin:0 50%}
 .kc button.oto i{animation:dol 5s linear both}
-.kc .sira{margin-left:auto;font-size:13px;font-weight:600;color:var(--acik);font-variant-numeric:tabular-nums}
+.kc .sira{display:flex;flex-direction:column;align-items:flex-end;margin-left:auto;font-size:13px;font-weight:600;color:var(--acik);font-variant-numeric:tabular-nums;line-height:1.3}
+.kc .sira small{font-size:12px;font-weight:500}
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
@@ -155,7 +156,7 @@ CSS = r"""
 .ac-r{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(238,242,250,.12);font-size:14px}
 .ac-r svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--buz);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ping{position:relative;flex:none;width:10px;height:10px;margin:0 4px;border-radius:50%;background:var(--buz)}
-.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--buz);animation:ping 1.8s var(--ease) infinite}
+.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--buz);animation:ping 1.8s var(--ease) 3}
 @keyframes ping{from{transform:scale(1);opacity:.7}to{transform:scale(2.8);opacity:0}}
 .ac-sy{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--buz)}
 
@@ -163,7 +164,7 @@ CSS = r"""
 .pk-bas{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:14px;font-weight:700}
 .pk-bas::after{content:"";flex:1;height:1px;background:var(--cizgi)}
 .pk{display:flex;flex-direction:column;gap:14px}
-.pk-k{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:88px;padding:12px 14px 12px 12px;border:0;border-radius:16px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.pk-k{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:88px;padding:12px 14px 12px 12px;border:0;border-radius:16px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
 .pk-k:active{transform:scale(.985)}
 .pk-k.on{box-shadow:inset 0 0 0 2px var(--lac)}
 .pk-g{position:relative;flex:none;width:60px;height:60px;border-radius:12px;background:var(--lac);overflow:hidden}
@@ -183,7 +184,7 @@ CSS = r"""
 .disk-not{display:flex;align-items:center;gap:12px;margin:14px 0 0;font-size:14px;font-weight:600}
 .disk-not .dn img{width:30px;height:30px;margin-left:-12px}
 .disk-not .dn img:first-child{margin-left:0}
-.btn1{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:20px;border:0;border-radius:16px;background:var(--lac);color:#fff;font-size:16px;font-weight:700;box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:20px;border:0;border-radius:16px;background:var(--lac);color:#fff;font-size:16px;font-weight:700;box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px);box-shadow:0 0 0 #0C1027}
 .btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--buz);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) infinite}
@@ -245,7 +246,7 @@ CSS = r"""
 .dk-ad span{font-size:12px;color:var(--acik);font-variant-numeric:tabular-nums}
 .dk-ad b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em}
 .dk-iz{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 8px;margin-top:18px}
-.dk-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.dk-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease)}
 .dk-iz button img{display:block;width:100%;height:100%;border-radius:50%}
 .dk-iz button.on{box-shadow:0 0 0 2.5px var(--buz);transform:scale(1.1)}
 
@@ -272,7 +273,7 @@ CSS = r"""
 .hk-disk{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:4px 12px 4px 4px;border-radius:999px;background:rgba(12,16,39,.72);box-shadow:inset 0 0 0 1px rgba(238,242,250,.18);font-size:13px;font-weight:600}
 .hk-disk img{width:28px;height:28px;border-radius:50%;animation:don 10s linear infinite}
 .hk-sec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
-.hk-sec button{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:14px;font-weight:700;text-align:left;transition:background .25s var(--ease),color .25s var(--ease)}
+.hk-sec button{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:14px;font-weight:700;text-align:left}
 .hk-sec button img{flex:none;width:44px;height:44px;border-radius:10px;object-fit:cover}
 .hk-sec button.on{background:var(--lac);color:#fff;box-shadow:none}
 
@@ -342,21 +343,21 @@ KUTU_IK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-
 WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>'
 GUVEN = ('<div class="gv-iz">'
          '<div class="gv"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span>'
-         '<b>Ücretsiz kargo</b><span>1 iş gününde kargoda. Track123 ile adım adım takip.</span></div>'
+         '<b>Ücretsiz kargo</b><span>1 iş gününde kargoda, adım adım takip.</span></div>'
          '<div class="gv"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span>'
          '<b>30 gün iade</b><span>Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div>'
          '<div class="gv"><span class="gv-ik kutu">' + KUTU_IK + '</span>'
          '<b>Kapıda ödeme</b><span>Ürün gelince nakit ya da kartla öde.</span></div>'
          '<div class="gv"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span>'
          '<b>WhatsApp destek</b><span>Ortalama 2 saatte yanıt.</span></div></div>'
-         '<div class="kartlar"><b>Kartla öde, %5 indirim al</b><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span class="km">AMEX</span></div>'
+         '<div class="kartlar"><b>Kartla öde, %5 indirim al</b><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span></div>'
          '<p class="alt-not">[Ödeme altyapısının adı] · Kart bilgin bize gelmez.</p>')
 
 TAK = ('<div class="tak">'
        '<div class="tk"><span class="tk-g">' + IK['laptop'] + FIS + '</span><b>Laptop</b><span>USB girişine</span></div>'
        '<div class="tk"><span class="tk-g">' + IK['powerbank'] + FIS + '</span><b>Powerbank</b><span>Prizsiz yerde</span></div>'
-       '<div class="tk"><span class="tk-g">' + IK['priz'] + FIS + '</span><b>Şarj başlığı</b><span>Telefonununki olur</span></div></div>'
-       '<p class="alt-not">USB adaptör kutuda yok. Evdeki USB girişli telefon şarj başlığı yeter.</p>')
+       '<div class="tk"><span class="tk-g">' + IK['priz'] + FIS + '</span><b>Şarj başlığı</b><span>USB-A girişli</span></div></div>'
+       '<p class="alt-not">USB adaptör kutuda yok. Evdeki USB-A girişli bir şarj başlığı yeter.</p>')
 
 OTUZ = ''.join('<i style="transform: rotate(%ddeg); animation-delay: %.2fs"></i>' % (k * 12, k * .1) for k in range(30))
 
@@ -368,7 +369,7 @@ HTML = ("""<div class="pg">
     <div class="h-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img class="{{f.cls}}" src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></sc-for></div>
     """ + Y.ust('rgba(238,242,250,.6)') + """
     <div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div>
-    <div class="kc"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><button class="{{f.kcls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""><i></i></button></sc-for><span class="sira">{{gNo}} / {{gCount}}</span></div>
+    <div class="kc"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><button class="{{f.kcls}}" onClick="{{f.pick}}" aria-label="{{f.n}}" aria-pressed="{{f.on}}"><img src="{{f.src}}" alt=""><i></i></button></sc-for><span class="sira">{{gNo}} / {{gCount}}<small>Temsilî görseller</small></span></div>
   </section>
 
   <section class="al" id="siparis">
@@ -382,7 +383,7 @@ HTML = ("""<div class="pg">
       <div class="oz"><span class="gz">""" + disk_yigin() + """</span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo salla"><img src=\"""" + KES + """\" alt=""></span></span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo"><span class="hale"></span><img src=\"""" + KES + """\" alt=""></span></span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
-      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Avuç içi kadar</b><span class="t" style="display: block">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
+      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t" style="display: block">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
     </div>
 
     <!-- Baskı kartı: N, stok ve X Shopify/sipariş verisinden gelir; uydurma sayı yazılmaz. Çubuk genişliği N/stok. -->
@@ -423,7 +424,7 @@ HTML = ("""<div class="pg">
   <!-- Herkesin odasına: hikâye kartı. Fotoğraflar temsilî; her karede o odaya önerilen disk. -->
   <section class="bolum px" id="odalar">
     <h2 class="bas-y h2">Herkesin<br>odasına<span class="n">.</span></h2>
-    <p class="alt-b">Çocuk odasından salona: ışığı kapat, diski seç.</p>
+    <p class="alt-b">Kimin odası olursa olsun: ışığı kapat, diski seç.</p>
     <div class="hk">
       <sc-for list="{{kim}}" as="k" hint-placeholder-count="2"><img class="{{k.fcls}}" src="{{k.src}}" alt="{{k.alt}}" style="object-position: {{k.pos}}"></sc-for>
       <div class="hk-cub" aria-hidden="true"><sc-for list="{{kim}}" as="k" hint-placeholder-count="4"><span class="{{k.ccls}}"><i></i></span></sc-for></div>
@@ -444,7 +445,7 @@ HTML = ("""<div class="pg">
   <section class="bolum px" id="kurulum">
     <h2 class="bas-y h2">Üç adımda<br>tavanda<span class="n">.</span></h2>
     <ol class="kur">
-      <li><em>1</em><span><b>USB'ye tak</b><span>Laptop, powerbank ya da şarj başlığı.</span></span></li>
+      <li><em>1</em><span><b>USB'ye tak</b><span>USB ucu gövdeye bağlı, ayrı kablo gerekmez.</span></span></li>
       <li><em>2</em><span><b>Diski yerleştir</b><span>Diski başlığa tak, başlığı tavana çevir. [Adımlar teyit edilecek]</span></span></li>
       <li><em>3</em><span><b>Halkayı yavaşça çevir</b><span>Ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin.</span></span></li>
     </ol>
@@ -542,8 +543,8 @@ JS = """class Component extends DCLogic {
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
     var faq = [
-      { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB girişli telefon şarj başlığı yeter.' },
-      { q: 'Neyle çalışır?', a: 'USB girişi olan her yerde: laptop, powerbank ya da USB girişli şarj başlığı. Takılıyken çalışır.' },
+      { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB-A girişli bir şarj başlığı yeter.' },
+      { q: 'Neyle çalışır?', a: 'USB girişi olan her yerde: laptop, powerbank ya da USB-A girişli şarj başlığı. Takılıyken çalışır.' },
       { q: 'Gece lambası olarak da kullanılır mı?', a: 'Evet, 2’si 1 arada: gövdesi yumuşak ışıkla yanar. [Işık modları teyit edilecek.]' },
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
       { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.] Zorlanırsan WhatsApp’tan yaz, görüntülü gösterelim.' },
@@ -568,7 +569,7 @@ JS = """class Component extends DCLogic {
       kim: kim, kimAd: KIM[S.kim][0], kimSrc: B + I[KIM[S.kim][1]],
       kPrev: function () { self.setState({ kim: (S.kim + KIM.length - 1) % KIM.length, kBas: S.t }); },
       kNext: function () { self.setState({ kim: (S.kim + 1) % KIM.length, kBas: S.t }); },
-      paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet', diskNot: S.adet === 2 ? '2 kutu, 24 film diski' : 'Kutuda 12 film diski',
+      paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet', diskNot: 'Her kutuda 12 film diski',
       onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
@@ -578,5 +579,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(Y.head('A', 'Galaxy USB Projektör', CSS) + HTML + TAIL.format(h=int(os.environ.get('U_H', 6890)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(Y.head('A', 'Galaxy USB Projektör', CSS) + HTML + TAIL.format(h=int(os.environ.get('U_H', 6870)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))
