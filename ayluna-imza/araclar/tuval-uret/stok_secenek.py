@@ -6,6 +6,7 @@
 # Üç seçenek, aynı bağlamda (dönen satırın altı, Güvenli Ödeme butonunun üstü):
 #   A · Yıldız dizisi: her adet bir nokta (en çok 20; üstünde yalnız yazı). Noktalar soldan sağa bir kez yanar, sonuncusu nabız atar.
 #   B · Serif sayı: sayı Young Serif ile büyük, yanında iki satır yazı; altındaki amber çizgi bir kez çizilir.
+# Eleştirmen: C 8/10, B 5/10, A 4/10 (reddetti). Kullanıcı C'yi seçti → luna_e.py (azalan ay, "Son N adet", dokunmayı engellemez, ekrana girince).
 #   C · Buton kurdelesi: paket kartındaki "En avantajlı" kurdelesinin dili; butonun üst kenarına oturur, satır yer kaplamaz.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)

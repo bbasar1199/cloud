@@ -202,6 +202,14 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 @media (prefers-reduced-motion:reduce){.donen{row-gap:8px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
+/* Stok kurdelesi (kullanıcı, 18 Eki: "C'yi yap"; eleştirmen 8/10): paket kartındaki "En avantajlı" kurdelesinin dili, butonun üst
+   kenarına oturur, ayrı satır açmaz. Dokunmayı engellemez. Buton ekrana girince bir kez 8px aşağıdan gelir (yalnız transform/opacity). */
+.al-on{position:relative;margin-top:24px}
+.al-on .btn-on{margin-top:0}
+.stok-kd{position:absolute;left:18px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:#1A2142;color:#FFFDF9;font-size:12px;font-weight:700;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
+.stok-kd.on{opacity:1;transform:none}
+.stok-kd svg{width:14px;height:14px;flex:none}.stok-kd circle{fill:none;stroke:rgba(255,253,249,.7);stroke-width:1.6}.stok-kd path{fill:#F2A65A}
+@media (prefers-reduced-motion:reduce){.stok-kd{opacity:1;transform:none;transition:none}}
 .btn-kp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;min-height:56px;margin-top:14px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .yol{position:relative;list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:14px;border-top:1.5px dashed #D6CAB6}
@@ -396,6 +404,11 @@ CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:r
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir. Canlıda bölüm ayarı (sayı; boşsa satır gizlenir) ya da Shopify Flow'un
 # her gece yazdığı metafield. Uydurma sayı yazılmaz; önizlemede yer tutucu.
 DUN = '62'  # kullanıcı, 18 Eki
+# Stok (kullanıcı, 18 Eki: "stoklar elle girilecek"): kurdelede "Son N adet". Boşsa kurdele yok.
+STOK = '18'
+# Azalan ay: hediye satırındaki hilalin aynası (ışık solda), "azalıyor" der; oranlı çubuk yerine.
+AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % ay(.15)
+STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
@@ -464,11 +477,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
          Hediye 4 sn, kargo 6 sn. Simge yoldaki gibi: hilal hediye, yarım ay kargoda. Ekran okuyucu ikisini düz metin okur, sayacı saniye saniye okumaz.
          16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
     <p class="donen"><span class="dn-sr">Her kutuda 6 hediye masal diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda +6 hediye masal diski</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.5) + """'></path></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
-    <!-- Stok satırı: kullanıcı elle yazar ve açıp kapatır (tema ayarı: sayı + aç/kapa). Shopify stoğuna bağlı değil. Şimdilik 18. -->
-    <ul class="canli">
-      <li><i style="background: #A05A1C"></i><span>Stokta son <b>18</b> adet</span></li>
-    </ul>
-    <button class="btn-on" type="button">{{onLabel}}</button>
+    <!-- Stok kurdelesi (kullanıcı, 18 Eki: stok denemelerinden C seçildi): Güvenli Ödeme butonunun üst kenarında. Sayı elle
+         (tema ayarı: sayı + aç/kapa; Shopify stoğuna bağlı değil), boşsa kurdele yok ve buton eski yerine döner. -->
+    """ + (STOK_KURDELE if STOK else '') + """<button class="btn-on" type="button">{{onLabel}}</button>""" + ('</div>' if STOK else '') + """
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar. Butonda fiyat yok (kullanıcı, Tur 25); ₺80 ücret ve toplam,
          sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
@@ -611,6 +622,12 @@ JS = """class Component extends DCLogic {
     // ekranın ortası panelin üstünden altına inerken an 0 → 4 ilerler.
     if (window.innerHeight < 1600 && window.CSS && CSS.supports('overflow', 'clip')) this.geceKaydir();
     else if (typeof IntersectionObserver !== 'undefined') this.geceTuval();
+    // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
+    var al = document.querySelector('.al-on');
+    if (al && typeof IntersectionObserver !== 'undefined') {
+      this.stokio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { self.setState({ stokAc: true }); self.stokio.disconnect(); } }, { threshold: .6 });
+      this.stokio.observe(al);
+    } else this.setState({ stokAc: true });
     // Kargo takibi: çizelge ekrana girince döngü başlar (gözlemci yoksa hemen)
     var yol = document.querySelector('.yol');
     if (yol && typeof IntersectionObserver !== 'undefined') {
@@ -813,7 +830,7 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
     };
   }
@@ -821,5 +838,5 @@ JS = """class Component extends DCLogic {
 
 # Diğer ürün sayfaları (luna_usb.py) bu dosyadaki CSS ve parçaları içe aktarır; yazma yalnız doğrudan çalıştırınca
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6152)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6120)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

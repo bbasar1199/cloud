@@ -154,6 +154,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(fark >= 2 && fark <= 3, f + ': sayaç akıyor ' + s1 + ' → ' + s2);
     await sp.clock.runFor(4500); not((await on()).includes(ilk), f + ': başa döndü');
     not((await sp.locator('.yol li').nth(1).textContent()).includes('Bugün'), f + ': yolda kargo tarihi Bugün');
+    if (f.startsWith('lunadream')) { await sp.locator('.al-on').scrollIntoViewIfNeeded(); await sp.clock.runFor(600);
+      not(await sp.locator('.stok-kd.on').textContent() === 'Son 18 adet' && await sp.locator('.canli').count() === 0, f + ': stok kurdelesi butonda, eski stok satırı yok'); }
     await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(11000); // 16.30
     const geç = await sp.locator('.donen .dn-s').nth(1).textContent();
     not(geç.includes('yarın kargoda') && await sp.locator('.dn-sy').count() === 0, f + ': 16.00 sonrası "' + geç + '", sayaç yok');
