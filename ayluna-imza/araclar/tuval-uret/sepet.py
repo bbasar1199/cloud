@@ -6,7 +6,7 @@
 # "Hava temizleyici" yazılmaz: ürün nemlendirici (teyitsiz işlev iddiası). Özel fiyatın yanında mağaza fiyatı düz yazıyla durur (üstü çizili değil).
 # Marka dili (sepet her ürün sayfasında ortak): lacivert #1A2142 + beyaz, Ayluna işareti; Young Serif başlık + Onest gövde.
 # Ödeme: kartla %5 önce, kapıda ikinci; kapıda butonunda fiyat yok (₺80 kapıda ücreti formda ve SSS'de).
-import os, sys
+import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS
 import luna_e as E
@@ -84,6 +84,11 @@ CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,san
 .guven span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--soluk);line-height:1.3}
 .guven svg{width:22px;height:22px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .s-not{margin:0 16px 20px;font-size:12px;color:var(--soluk)}
+.urun-fiyat s{display:block;font-size:12px;color:var(--soluk)}
+.bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
+.bos-s svg{display:block;margin:0 auto 10px}
+.bos-s h3{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:26px}
+.bos-s p{margin:6px 0 0;font-size:15px;color:var(--soluk)}
 @media (prefers-reduced-motion:reduce){.pg *{animation:none!important;transition:none!important}}
 """
 
@@ -91,14 +96,26 @@ AY = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9">
 OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>'
 KAMYON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg>'
 
-HTML = """<div class="pg" style="padding-bottom: 0">
-  <div class="s-ust"><h2>Sepetin <span>{{adetToplam}}</span></h2><button class="kapat" type="button" aria-label="Sepeti kapat"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
-  <p class="kargo-serit">""" + KAMYON + """<span>{{kargoSerit}}</span></p>
+# Siparişine özel teklifler (EasySell "bump"ları): site önizlemesi ve Shopify bunları buradan alır
+EKLER = [dict(k='astronot', n='Astronot Nemlendirici', alt='Mağazada ₺799,00', p=749.00, h='astronot-oda-nemlendirici-aroma-difuzor', img=IMG['astronot']),
+         dict(k='kum', n='Kum Saati Lamba', alt='Mağazada ₺799,00', p=699.99, h='ask-saati', img=IMG['kum']),
+         dict(k='nem', n='Yıldız Işığı Nemlendirici', alt='Mağazada ₺849,99', p=749.99, h='yildiz-isigi-nemlendirici', img=IMG['nem'])]
+BOS_AY = '<svg viewBox="0 0 24 24" aria-hidden="true" style="width: 56px; height: 56px; fill: none; stroke: #1A2142; stroke-width: 1.2"><circle cx="12" cy="12" r="9"></circle><path d="%s" style="fill: #F2A65A; stroke: none"></path></svg>' % E.ay(.22)
 
-  <div class="urun"><img src=\"""" + B + IMG['ld'] + """\" alt="LunaDream Gece Lambası">
-    <div><b>LunaDream Gece Lambası</b><small>2 lamba · Kız + Erkek</small>
-      <div class="urun-alt"><span class="adet"><button type="button" onClick="{{azalt}}" aria-label="Azalt">−</button><span aria-live="polite">{{adet}}</span><button type="button" onClick="{{arttir}}" aria-label="Arttır">+</button></span>
-        <span class="urun-fiyat"><b>{{urunTutar}}</b><br><button class="sil" type="button">Kaldır</button></span></div></div></div>
+HTML = """<div class="pg" style="padding-bottom: 0">
+  <div class="s-ust"><h2>Sepetin <span>{{adetToplam}}</span></h2><button class="kapat" type="button" aria-label="Sepeti kapat" onClick="{{kapat}}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+
+  <!-- Boş sepet: canlıdaki "Sepetiniz boş" + "Alışverişe devam et" -->
+  <sc-if value="{{bos}}" hint-placeholder-val="{{false}}"><div class="bos-s">""" + BOS_AY + """<h3>Sepetin boş</h3><p>Bu gece tavanda ne olsun? Bir göz at.</p>
+    <button class="btn1" type="button" onClick="{{urunlere}}" style="margin: 16px 0 0; width: 100%"><span class="b-ic"><span>Ürünlere bak</span></span>""" + OK + """</button>
+    <button class="btn2" type="button" onClick="{{hesap}}" style="margin: 10px 0 0; width: 100%">Hesabına giriş yap</button></div></sc-if>
+
+  <sc-if value="{{dolu}}" hint-placeholder-val="{{true}}">
+  <p class="kargo-serit">""" + KAMYON + """<span>{{kargoSerit}}</span></p>
+  <sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><div class="urun"><img src="{{u.img}}" alt="{{u.ad}}">
+    <div><b>{{u.ad}}</b><small>{{u.varyant}}</small>
+      <div class="urun-alt"><span class="adet"><button type="button" onClick="{{u.azalt}}" aria-label="Azalt">−</button><span aria-live="polite">{{u.adet}}</span><button type="button" onClick="{{u.arttir}}" aria-label="Arttır">+</button></span>
+        <span class="urun-fiyat"><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
 
   <!-- Siparişine özel: canlı sepetteki üç teklif. Dokununca eklenir; ay dolar. Mağaza fiyatı düz yazı (üstü çizili değil). -->
   <div class="blok-bas"><b>Siparişine özel</b><span>Yalnız bu siparişte</span></div>
@@ -114,29 +131,34 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <p class="ind"><span>Kartla ödeme indirimi (%5)</span><b>−{{indirim}}</b></p>
     <div class="top"><span>Kartla toplam</span><b>{{toplam}}</b></div>
   </div>
-  <button class="btn1" type="button"><span class="b-ic"><span>Güvenli Ödeme ile Öde · {{toplam}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>
-  <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+  <button class="btn1" type="button" onClick="{{odeme}}"><span class="b-ic"><span>Güvenli Ödeme ile Öde · {{toplam}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>
+  <button class="btn2" type="button" onClick="{{kapida}}">Kapıda Ödeme ile Sipariş Ver</button>
+  <p class="s-not" style="margin-top: 10px; text-align: center">Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir.</p>
   <div class="guven">
     <span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg>30 gün iade</span>
     <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg>Kart bilgin bize gelmez</span>
     <span><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>WhatsApp destek</span>
   </div>
+  </sc-if>
 </div>
 """
 
+# Sitede (window.AylunaSepet varsa) satırlar gerçek sepetten gelir; tuvalde örnek sepet (LunaDream 2 lamba) gösterilir.
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { adet: 1, ek: {}, hizli: false }; }
+  constructor(p) { super(p); this.state = { demo: { satirlar: [{ id: 'ld', h: 'lunadream-gece-lambasi', ad: 'LunaDream Gece Lambası', varyant: '2 adet · Kız + Erkek', birim: 2749.99, eski: null, adet: 1, img: '""" + B + IMG['ld'] + """' }], ekler: {}, hizli: false }, v: 0 }; }
+  componentDidMount() { var self = this; window.addEventListener('ayluna-sepet', function () { self.setState({ v: Date.now() }); }); }
   renderVals() {
-    var self = this, S = this.state, B = '/_blob/';
+    var self = this, S = this.state, B = '/_blob/', SP = window.AylunaSepet;
     """ + TL_JS + """
-    var LD = 2749.99;  // LunaDream 2 lamba paketi
-    var T = [
-      { k: 'astronot', n: 'Astronot Nemlendirici', alt: 'Mağazada ₺799,00', p: 749.00, img: '""" + IMG['astronot'] + """' },
-      { k: 'kum', n: 'Kum Saati Lamba', alt: 'Mağazada ₺799,00', p: 699.99, img: '""" + IMG['kum'] + """' },
-      { k: 'nem', n: 'Yıldız Işığı Nemlendirici', alt: 'Mağazada ₺849,99', p: 749.99, img: '""" + IMG['nem'] + """' }
-    ];
-    var teklif = T.map(function (t) { var on = !!S.ek[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
-      pick: function () { var e = Object.assign({}, self.state.ek); e[t.k] = !e[t.k]; self.setState({ ek: e }); } }; });
+    function demo(f) { var d = JSON.parse(JSON.stringify(self.state.demo)); f(d); self.setState({ demo: d }); }
+    var sp = SP ? SP.oku() : S.demo, ekler = sp.ekler || {};
+    var T = """ + json.dumps([dict(k=e['k'], n=e['n'], alt=e['alt'], p=e['p'], img=e['img']) for e in EKLER], ensure_ascii=False) + """;
+    var teklif = T.map(function (t) { var on = !!ekler[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
+      pick: function () { if (SP) SP.ek(t.k); else demo(function (d) { d.ekler[t.k] = !d.ekler[t.k]; }); } }; });
+    var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim), eski: x.eski ? TL(x.eski * x.adet, true) : '',
+      azalt: function () { if (x.adet > 1) { if (SP) SP.adet(x.id, x.adet - 1); else demo(function (d) { d.satirlar[0].adet--; }); } },
+      arttir: function () { if (x.adet < 9) { if (SP) SP.adet(x.id, x.adet + 1); else demo(function (d) { d.satirlar[0].adet++; }); } },
+      sil: function () { if (SP) SP.sil(x.id); else demo(function (d) { d.satirlar = []; }); } }; });
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
@@ -146,19 +168,24 @@ JS = """class Component extends DCLogic {
     var teslimat = [
       { n: 'Standart kargo', t: kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda, ' + teslim + ' kapında', p: 'Ücretsiz', h: false },
       { n: 'Hızlı Kargo', t: 'Siparişin öncelikli hazırlanır, aynı gün kargoya verilir.', p: TL(HIZLI, true), h: true }
-    ].map(function (d) { var on = S.hizli === d.h; return { n: d.n, t: d.t, p: d.p, on: on ? 'true' : 'false', cls: on ? 'tes on' : 'tes', pick: function () { self.setState({ hizli: d.h }); } }; });
-    var urun = LD * S.adet, ek = 0, ekSay = 0;
-    T.forEach(function (t) { if (S.ek[t.k]) { ek += t.p; ekSay++; } });
-    var kargo = S.hizli ? HIZLI : 0;
+    ].map(function (d) { var on = !!sp.hizli === d.h; return { n: d.n, t: d.t, p: d.p, on: on ? 'true' : 'false', cls: on ? 'tes on' : 'tes', pick: function () { if (SP) SP.hizli(d.h); else demo(function (x) { x.hizli = d.h; }); } }; });
+    var urun = 0, adetT = 0, ek = 0, ekSay = 0;
+    sp.satirlar.forEach(function (x) { urun += x.birim * x.adet; adetT += x.adet; });
+    T.forEach(function (t) { if (ekler[t.k]) { ek += t.p; ekSay++; } });
+    var kargo = sp.hizli ? HIZLI : 0;
     var indirim = Math.round((urun + ek) * 0.05 * 100) / 100;
     var toplam = Math.round((urun + ek - indirim + kargo) * 100) / 100;
+    var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
-      adet: S.adet, adetToplam: S.adet + ekSay, urunTutar: TL(urun, true),
-      azalt: function () { if (self.state.adet > 1) self.setState({ adet: self.state.adet - 1 }); },
-      arttir: function () { self.setState({ adet: self.state.adet + 1 }); },
-      teklif: teklif, teslimat: teslimat, kargoSerit: S.hizli ? 'Hızlı Kargo · aynı gün kargoda' : 'Kargo ücretsiz · ' + kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda',
+      bos: !sp.satirlar.length, dolu: sp.satirlar.length > 0, satirlar: satirlar, adetToplam: adetT + ekSay,
+      teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · aynı gün kargoda' : 'Kargo ücretsiz · ' + kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda',
       araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
-      indirim: TL(indirim, true), toplam: TL(toplam, true)
+      indirim: TL(indirim, true), toplam: TL(toplam, true),
+      kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.git(document.referrer && document.referrer.indexOf(location.host) >= 0 ? document.referrer : './'); },
+      odeme: function () { if (window.Ayluna) window.Ayluna.odemeyeGec(); },
+      kapida: function () { if (window.Ayluna) window.Ayluna.kapidaAc(); },
+      urunlere: function () { if (window.Ayluna) window.Ayluna.git('tum-urunler.html'); },
+      hesap: function () { if (window.Ayluna) window.Ayluna.git('hesap.html'); }
     };
   }
 }"""

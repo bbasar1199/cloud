@@ -645,12 +645,12 @@ JS = """class Component extends DCLogic {
     ];
     var PR = [
       { n: 'LunaDream Gece Lambası', p: 1699.99, c: 1999, id: 'e02351b3be4a1c555c5d760d0bbda723' },
-      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '2b381f338377f23e32074d6dbb452587' },
-      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: 'abe882f12bc58627f99b18a6e9aae0df' },
-      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: '94179bf5fda7b68f949842832e376fe6' },
-      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'f3f3e14eee224ef5534b9b897030ff58' },
-      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '408afb48de0f2b2be66d095849fedda8' },
-      { n: 'Sunset Lamba', p: 699, c: 999, id: '9bd9f9b4f1a38c4163064ce1c6117bbf' }
+      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '3df93f38bf4441cdf4dc64b625a1e22d' },
+      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: '9e6102bb76acbfeb101fca8e2fc1024e' },
+      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: 'd326933d74a22adce90d7f6ac3eabf43' },
+      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'c91c0730a3e7924eb99ad263ae4ea6df' },
+      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '0307a2c24e8297579b82099467f001d9' },
+      { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' }
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
     return {

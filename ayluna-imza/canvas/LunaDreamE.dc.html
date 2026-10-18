@@ -724,19 +724,19 @@ class Component extends DCLogic {
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });
     var PR = [
-      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'f3f3e14eee224ef5534b9b897030ff58' },
-      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '2b381f338377f23e32074d6dbb452587' },
-      { n: 'Astronot Oda Nemlendirici', p: 799, c: 0, id: '738c2e608984aaa9d11f9559738f36c2' },
-      { n: 'Ayluna Çocuk Gece Feneri', p: 1599, c: 0, id: '1b84557bbf4571b164475234e4266b82' },
-      { n: 'Galaxy USB Projektör', p: 1599, c: 1999, id: '7055567d8e0fcaae38df5a577f509656' },
-      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: 'abe882f12bc58627f99b18a6e9aae0df' },
-      { n: 'Aroma Terapi Nemlendirici', p: 1499, c: 1999, id: '1942d96f59772d783f5fca6259071786' },
-      { n: 'Eğitici Akıllı Çizim Tahtası', p: 1199, c: 1999, id: 'e3cc38b54acdddf55b1658d706382e82' },
-      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: '94179bf5fda7b68f949842832e376fe6' },
-      { n: 'Sunset Lamba', p: 699, c: 999, id: '9bd9f9b4f1a38c4163064ce1c6117bbf' },
-      { n: 'Dokunmatik Ambiyans Lamba', p: 1299.99, c: 0, id: '7ada3d5cdd7a8fa792622a30dc3f761b' },
-      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '408afb48de0f2b2be66d095849fedda8' },
-      { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: '233784939af80bdc12f69eca3b2e25b4' }
+      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'c91c0730a3e7924eb99ad263ae4ea6df' },
+      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '3df93f38bf4441cdf4dc64b625a1e22d' },
+      { n: 'Astronot Oda Nemlendirici', p: 799, c: 0, id: 'd8080b6820c271f87bc04c6e4740f45e' },
+      { n: 'Ayluna Çocuk Gece Feneri', p: 1599, c: 0, id: '54fbc676197e7a655579e1a97b2ba4ba' },
+      { n: 'Galaxy USB Projektör', p: 1599, c: 1999, id: '88c17ac1f221cab147f23e1a46b7f55e' },
+      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: '9e6102bb76acbfeb101fca8e2fc1024e' },
+      { n: 'Aroma Terapi Nemlendirici', p: 1499, c: 1999, id: '775fa58da36effbe4e62be8ad9e11f4f' },
+      { n: 'Eğitici Akıllı Çizim Tahtası', p: 1199, c: 1999, id: 'c01f20bf04acc790f0e31281b0be778e' },
+      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: 'd326933d74a22adce90d7f6ac3eabf43' },
+      { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' },
+      { n: 'Dokunmatik Ambiyans Lamba', p: 1299.99, c: 0, id: 'f77b44c85460f5ea4bd1588836d4faaf' },
+      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '0307a2c24e8297579b82099467f001d9' },
+      { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: 'dc53ea0cd16957a3ba6babb4922f3a00' }
     ];
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });

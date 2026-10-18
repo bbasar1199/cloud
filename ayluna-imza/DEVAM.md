@@ -475,6 +475,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Çalışan site iskeleti (18 Ekim, en güncel)
+- Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, tüm eksik kısımları düzelt; sepet vesaire her kısım tam çalışsın; Shopify için düzenlerken de aynı şekilde."
+- **Önizleme:** claude.ai artifact "Ayluna Mağazası" (https://claude.ai/artifact/DgGy66eo4iqLEhjSn1inje), zip olarak da verildi. Üretim: `python3 araclar/site/site_uret.py` → `site/` (git dışı; yayın parçası `site-yayin/index.html`). Test: `araclar/site/test.js` (http.server 8765).
+- **Nasıl:** tuval sayfaları (.dc.html) değişmeden kullanılır; `araclar/site/ayluna.js` onları çalıştırır (şablon + DOM yaması) ve siteyi bağlar: yönlendirme, menü, arama, sepet deposu (localStorage), sepet çekmecesi (sepet.html iframe; açılmazsa sepet sayfası), kapıda ödeme formu (EasySell kurgusu), ödeme önizlemesi, sipariş alındı. Ürün verisi `veri.js` (fiyat, paket, seçenek, görsel).
+- **Yeni sayfalar** (`sayfalar2.py`, tuvalde "Site: eksik sayfalar"): Ödeme, Sipariş alındı, Arama, 404, Hesap, 5 politika (kargo, KVKK, mesafeli satış, ön bilgilendirme, hizmet şartları; taslak). `sepet.py` gerçek sepetten okur, boş hâl içinde.
+- Denetim raporu ve Shopify test listesi: `ogrenme/site-denetimi.md` (20 eksik, hepsi düzeltildi).
+- **Sırada:** Shopify teması (sıfırdan Ayluna teması), aynı test listesiyle; Flow görselleri; teyitler.
+
 ## AyFeneri ve Galaksi Night · imza sayfaları (18 Ekim, en güncel)
 - Kullanıcı: "AyLuna AyFeneri ve Galaksi Night Projector için özel sayfa tasarla"; Galaksi Night için referans pococo.com/products/galaxy-projector-star-projector-silver.
 - Yön panoları `ozel_yon.py` (arşivde): AyFeneri A Liman feneri / B Kıyı masalı; Galaksi A Planetaryum / B Gözlemevi (Pococo öğeleri). Eleştirmen raporu kullanıcı seçtikten sonra geldi (AyFeneri B 7, A 5; Galaksi A 7, B 5).

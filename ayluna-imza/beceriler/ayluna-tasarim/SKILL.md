@@ -218,6 +218,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Görselde yazı üretilmez; metin HTML'de eklenir.
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 
+## Teslim: çalışan site
+- Kullanıcı (18 Eki) "tüm iskelet, her kısım tam çalışsın" der: önce denetim (bağlantı, düğme, form, sepet, ödeme, kapıda, boş hâller, politikalar, 320px), eksik listesi, hepsini düzelt; gerçek tarayıcıda uçtan uca tıklama testi geçmeden gönderme. Seçilen paket/model/seçenek sepete aynen gider. Shopify teması da aynı listeyle test edilir (`ogrenme/site-denetimi.md`).
+
 ## Shopify
 - **Sıfırdan Ayluna teması** (kullanıcı kararı, 17 Ekim). Hiçbir hazır tema (Horizon, Dawn…) kopyalanmaz ya da temel alınmaz; her parça benzersiz yazılır.
 - İlk kurulum zip ile yapılır, sonraki değişiklikler `.txt` olarak verilir. Şu an canlıda ChatGPT ile yapılmış bir sürüm var; o da değiştirilecek.
