@@ -80,6 +80,10 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
     - Amber yalnız ışıkta ve ana butonda; bir ekranda tek amber blok.
     - Koyu panelde geniş amber parıltı yok (kahverengiye döner).
     - Açık ve koyu bölümler sırayla gelir.
+    - Tek turuncu #F2A65A. Yalnız ışık (ay, yıldız, evre, başlık noktası) ve ana butonda kullanılır; şerit, kurdele ve seçili fiyat amber olmaz.
+  - **Marka işareti:** ince daire içinde amber hilal (evre çizimi). Başta ve alt bilgide aynı kilitle kullanılır. Sayacın yanında gün bittikçe söner.
+  - **Seçili durum:** model ve lamba seçiminde 2px çerçeve ve dolunay noktası. Dolu lacivert yalnız pakette kalır.
+  - **Küçük ürün görselleri:** her yerde arka planı temizlenmiş stüdyo kesimi kullanılır, bej kare kullanılmaz.
   - Soru başlıkları soru işaretiyle biter.
   - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.

@@ -475,6 +475,27 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 23 · E: eleştirmenin 3 fikri (18 Ekim)
+- Kullanıcı üç fikri de seçti. Hepsi uygulandı; tuval Sürüm 66, E h 5804.
+- **1 · Amber tek vurgu:**
+  - Üst sayaç şeridi koyu (#0C1027); sahneyle tek parça. Rakamlar amber kaldı.
+  - "En avantajlı" kurdelesi krem, lacivert yazı. Seçili paket fiyatı beyaz, hediye şeridi krem yazı.
+  - İkinci turuncu (#E59A4C) kalktı; tek amber #F2A65A.
+  - Mühürdeki "30" lacivert. Stok noktası kehribar.
+  - Koyu zeminde butonun basma gölgesi lacivert (kahverengi şerit yok).
+- **2 · Ay evresi marka işareti:**
+  - Logo: ince daire içinde amber hilal (evre çizimiyle aynı). Başta ve alt bilgide aynı kilit, işaret solda.
+  - Sayacın yanında gün ilerledikçe sönen ay (kalan süre / 24 saat, İstanbul). Üst şeritte ve yapışkan çubukta var.
+  - Seçili model kartı: dolu lacivert yerine 2px çerçeve ve dolunay noktası. Lamba seçiminde de aynı (beyaz hap, çerçeve, amber nokta).
+  - Dolu lacivert yalnız pakette kaldı.
+  - Hediye şeritlerinde küçük hilal.
+- **3 · Tek fotoğraf dili:**
+  - Model, paket ve yapışkan çubukta küçük ürün görselleri hep arka planı temizlenmiş stüdyo kesimi; açık kartta ton karede, koyu kartta lacivert karede.
+  - Kadranın 20:00'ı gece oda fotoğrafı (Kız ve Erkek ayrı); gündüz yalnız 07:30'da.
+  - Disk deseni tavanda ışık gibi (screen karışımı, durağan).
+  - **Bekleyen:** galerideki yazılı afişlerin yazısız sürümleri. Kullanıcının Shopify'daki yazısız ürün görselleri gerekiyor. Gece fotoğraflarını Flow ile yenilemek de kullanıcının tarayıcısını ya da HF_TOKEN'ı gerektiriyor.
+- Ayrıca "62 yorumun hepsini oku" düğmesinin alt çizgisi kalktı.
+
 ## Tur 22 · E: renk uyumu ve ay evreleri (18 Ekim)
 - Kullanıcı: "Yarım ay, tam ay olma efektini kullanmaya devam et. Hâlâ düzensizlikler, renklerin birbirine girdiği, büyük marka hissi vermeyen yerler var."
 - **Renk:** 50 tondan ~12'ye indi.

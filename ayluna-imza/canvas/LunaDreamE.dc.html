@@ -32,7 +32,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 /* Renkler (Tur 22, kullanıcı: "renkler birbirine giriyor, büyük marka hissi yok"): 50 tondan 12'ye indi.
    Açık: krem #F6F1E9 zemin · yüzey #FFFDF9 kart · ton #F1E8DA rozet/çip/boş görsel · çizgi #E3D8C7 · kesik #D6CAB6
    Yazı: lacivert #1A2142 · soluk #5C6078 · kehribar #A05A1C (küçük etiket) · yeşil #2E6B4F (yalnız Stokta, Satın aldı)
-   Işık: amber #F2A65A (buton, ay, ışık) · amber2 #E59A4C (yıldız, başlık noktası, ay evresi) · basma gölgesi #C97F38
+   Işık: amber #F2A65A tek turuncu (buton, ay, yıldız, evre, başlık noktası); açık zeminde basma gölgesi #C97F38, koyuda gölge lacivert
    Koyu: gece #1A2142 panel · gece2 #0C1027 fotoğraf zemini · koyuda ikincil #B9BED6. Amber yalnız ışık ve ana butonda; bir ekranda bir amber blok. */
 /* Sahne (Tur 8, kullanıcı: "görsel kısmı Main'deki gibi, ama bizim ürün görsellerimiz"): gece laciverti zemin, üstte logo,
    kare ürün fotoğrafı kırpılmadan tam genişlik, alt kenarı geceye karışır; diskler fotoğrafın kenarlarında yavaşça süzülür;
@@ -60,8 +60,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .h2{font-size:22px;line-height:1.15}
 .etiket{font-size:13px}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
-.duyuru{display:flex;justify-content:center;align-items:center;gap:10px;height:36px;background:#F2A65A;color:#1A2142;font-size:13px;font-weight:600}
-.duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em}
+.duyuru{display:flex;justify-content:center;align-items:center;gap:8px;height:36px;background:#0C1027;color:#B9BED6;font-size:13px;font-weight:600;border-bottom:1px solid rgba(255,253,249,.08)}
+.sayac-ay{width:14px;height:14px;flex:none}.sayac-ay circle{fill:none;stroke:rgba(185,190,214,.6);stroke-width:1.6}.sayac-ay path{fill:#F2A65A}
+.duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#F2A65A}
 .indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
@@ -70,24 +71,26 @@ a{color:#1A2142}a:hover{color:#2B3463}
   @keyframes gir{from{opacity:.001;transform:translateY(20px)}to{opacity:1;transform:none}}
 }
 .guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#1A2142}
-.guven-ust span+span::before{content:"·";margin-right:10px;color:#E59A4C}
+.guven-ust span+span::before{content:"·";margin-right:10px;color:#F2A65A}
 .lamba-sec{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
 .ls{display:flex;align-items:center;gap:6px}
 .ls-no{font-size:13px;font-weight:600;color:#5C6078;white-space:nowrap}
-.seg{display:inline-flex;padding:3px;border-radius:999px;background:#F1E8DA}
+.seg{display:inline-flex;padding:3px;border-radius:999px;background:#F1E8DA;box-shadow:inset 0 0 0 1px #E3D8C7}
 .seg-b{min-height:48px;min-width:54px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:#5C6078;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
-.seg-b.on{background:#1A2142;color:#FFFDF9}
+.seg-b.on{background:#FFFDF9;color:#1A2142;box-shadow:inset 0 0 0 1.5px #1A2142}
+.seg-b.on::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#F2A65A;vertical-align:1px}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D6CAB6;line-height:1}
-.yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#E59A4C;font-style:normal}
+.yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#F2A65A;font-style:normal}
 .dev{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
-.dev span,.h2 span.n{color:#E59A4C}
-.mkart{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.dev span,.h2 span.n{color:#F2A65A}
+.mkart{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;min-height:70px;padding:8px 10px 8px 8px;border-radius:18px;border:1.5px solid #E3D8C7;background:#FFFDF9;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .mkart:active,.pk:active,.cip:active{transform:scale(.985)}
-.mkart.on{background:#1A2142;border-color:#1A2142;color:#FFFDF9}
-.mkart.on .msub{color:#B9BED6}
-.mkart .foto{width:52px;height:52px;border-radius:12px;overflow:hidden;background:#F1E8DA}
-.mkart .foto img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 62%}
+.mkart.on{border:2px solid #1A2142;padding:7.5px 9.5px 7.5px 7.5px}
+.secim-ay{position:absolute;right:10px;top:10px;width:12px;height:12px;border-radius:50%;background:#F2A65A;box-shadow:0 0 0 1.5px #1A2142;opacity:0;transform:scale(.5);transition:opacity .2s cubic-bezier(.2,.7,.2,1),transform .2s cubic-bezier(.2,.7,.2,1)}
+.mkart.on .secim-ay{opacity:1;transform:none}
+.mkart .foto{position:relative;width:52px;height:52px;border-radius:12px;overflow:hidden;background:#F1E8DA}
+.kesim{position:absolute;left:50%;bottom:4px;height:44px;width:auto;max-width:46px;transform:translateX(-50%)}
 .msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Sihirli Özellikler (Tur 7b, kullanıcı V1'i seçti): 2×2 beyaz kart, lacivert ikon kutusu + amber ikon.
    Her kartta üst satır: solda ikon, sağda ürüne özgü küçük canlı gösterge; altında başlık ve tek cümle.
@@ -108,7 +111,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yelpaze img:nth-child(1){right:38px;--r:-12deg}.yelpaze img:nth-child(2){right:19px;--r:0deg;animation-delay:-1.6s}.yelpaze img:nth-child(3){right:0;--r:12deg;animation-delay:-3.2s}
 @keyframes ses{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 .dalga{display:flex;align-items:flex-end;gap:4px;height:26px}
-.dalga i{display:block;width:4px;height:26px;border-radius:2px;background:#E59A4C;transform-origin:50% 100%;animation:ses 2.4s ease-in-out infinite}
+.dalga i{display:block;width:4px;height:26px;border-radius:2px;background:#F2A65A;transform-origin:50% 100%;animation:ses 2.4s ease-in-out infinite}
 .dalga i:nth-child(2){animation-delay:-.4s}.dalga i:nth-child(3){animation-delay:-.8s}.dalga i:nth-child(4){animation-delay:-1.2s}.dalga i:nth-child(5){animation-delay:-1.6s}
 /* Pil: dolar, dolu bekler, opacity ile söner; başa sıçrama görünmez */
 @keyframes sarj{0%{transform:scaleX(.15);opacity:0}8%{opacity:1}70%{transform:scaleX(1)}90%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
@@ -121,17 +124,18 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .pk-ust{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:12px;align-items:center;padding:18px 14px 14px}
 .pk-foto{position:relative;width:78px;height:60px}
 .lamba{position:absolute;left:0;top:0;width:52px;height:60px;border-radius:14px;overflow:hidden;background:#F1E8DA;border:2px solid #FFFDF9}
-.lamba img{width:100%;height:100%;object-fit:cover;transform:scale(1.55);transform-origin:50% 60%}
+.lamba img{position:absolute;left:50%;bottom:5px;height:46px;width:auto;max-width:44px;transform:translateX(-50%)}
 .lamba.iki{left:26px}
-.pk.on .lamba{border-color:#1A2142}
+.pk.on .lamba{border-color:#1A2142;background:#2A3260}
 .pk-ad{font-size:17px;font-weight:700;letter-spacing:-.02em}
 .pk-sub{font-size:13px;opacity:.75;margin-top:2px;text-wrap:balance}
 .pk-fiyat{font-size:18px;font-weight:700;letter-spacing:-.02em}
-.pk.on .pk-fiyat{color:#F2A65A}
+.pk.on .pk-fiyat{color:#FFFDF9}
 .pk-eski{font-size:13px;opacity:.7;margin-top:3px}
-.pk-hediye{display:block;padding:9px 14px;font-size:14px;font-weight:700;background:#F1E8DA;color:#A05A1C;border-radius:0 0 18.5px 18.5px}
-.pk.on .pk-hediye{background:rgba(255,253,249,.07);border-top:1px solid rgba(255,253,249,.12);color:#F2A65A}
-.kurdele{position:absolute;right:14px;top:-13px;z-index:1;padding:3px 12px;border-radius:999px;background:#F2A65A;color:#1A2142;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #F6F1E9}
+.pk-hediye{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:14px;font-weight:700;background:#F1E8DA;color:#A05A1C;border-radius:0 0 18.5px 18.5px}
+.pk-hediye svg{width:16px;height:16px;flex:none}.pk-hediye circle{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:1.6}.pk-hediye path{fill:#F2A65A}
+.pk.on .pk-hediye{background:rgba(255,253,249,.07);border-top:1px solid rgba(255,253,249,.12);color:#EDE5D8}
+.kurdele{position:absolute;right:14px;top:-13px;z-index:1;padding:3px 12px;border-radius:999px;background:#F6F1E9;color:#1A2142;font-size:12px;font-weight:700;box-shadow:inset 0 0 0 1px #E3D8C7,0 0 0 3px #F6F1E9}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
 .btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
@@ -141,7 +145,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yol li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
 .yol .evre{width:28px;height:28px;margin-bottom:6px;background:#F6F1E9;border-radius:50%}
 .yol .evre circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:1.4}
-.yol .evre path{fill:#E59A4C;transform-origin:12px 12px}
+.yol .evre path{fill:#F2A65A;transform-origin:12px 12px}
 /* Ay evresi efekti: çizgi ekrana girince hilal, yarım ay ve dolunay sırayla dolar (yalnız opacity/transform, bir kez) */
 @supports (animation-timeline: view()){
   .yol .evre path{animation:dol linear both;animation-timeline:--yol}
@@ -153,7 +157,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yol b{font-size:14px;font-weight:700}
 .yol span{font-size:13px;color:#5C6078}
 .guven{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:12px 0;border-top:1px solid #E3D8C7;border-bottom:1px solid #E3D8C7;font-size:13px;font-weight:600}
-.guven span+span::before{content:"·";margin-right:14px;color:#E59A4C}
+.guven span+span::before{content:"·";margin-right:14px;color:#F2A65A}
 /* Bölümler */
 .bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
@@ -214,7 +218,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cip.on{background:#1A2142;color:#FFFDF9}
 .tavan{position:relative;height:280px;overflow:hidden;background:radial-gradient(70% 70% at 50% 45%,#232B55 0%,rgba(26,33,66,0) 100%)}
-.yansima{position:absolute;left:50%;top:42%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.92);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.yansima{mix-blend-mode:screen;position:absolute;left:50%;top:42%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;overflow:hidden;opacity:0;transform:scale(.92);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
 .yansima.on{opacity:.92;transform:none}
 .yansima img{width:100%;height:100%;object-fit:cover;display:block}
 .dbtn{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;padding:0;cursor:pointer;color:#B9BED6;font:inherit;font-size:12px;width:64px;min-height:60px;flex:none}
@@ -227,9 +231,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .muhur{position:absolute;left:0;top:0;width:104px;height:104px}
 .muhur .mh-halka{fill:none;stroke:#E3D8C7;stroke-width:1.5}
 .muhur g circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:2.6}
-.muhur g path{fill:#E59A4C}
+.muhur g path{fill:#F2A65A}
 .muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#A05A1C}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#1A2142}
 .muhur-say span{margin-top:2px;font-size:12px;font-weight:700;color:#1A2142}
 .sss{border-bottom:1.5px solid #E3D8C7}
 .sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
@@ -260,7 +264,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#F1E8DA;cursor:pointer}
 .mf img{width:100%;height:100%;object-fit:cover;display:block}
 .yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
-.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#E59A4C;height:20px}
+.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#F2A65A;height:20px}
 .yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
 .yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2E6B4F}
@@ -271,10 +275,10 @@ a{color:#1A2142}a:hover{color:#2B3463}
 </helmet>
 <div class="pg" style="padding-bottom: 0">
   <!-- Üst şerit: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
-  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><b>{{cdShort}}</b></div>
+  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cdShort}}</b></div>
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
-    <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
+    <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><img src="{{f.src}}" alt="{{f.n}}" style="opacity: {{f.op}}; object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></sc-for><button class="gec" style="left: 0" onClick="{{gPrev}}" aria-label="Önceki fotoğraf"></button><button class="gec" style="right: 0" onClick="{{gNext}}" aria-label="Sonraki fotoğraf"></button></div>
     <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
     <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
@@ -308,7 +312,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <div class="etiket" style="margin-top: 24px"><span>Model</span></div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
       <sc-for list="{{models}}" as="m" hint-placeholder-count="2">
-        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="foto"><img src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 14px; font-weight: 700">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
+        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="secim-ay" aria-hidden="true"></span><span class="foto"><img class="kesim" src="{{m.src}}" alt=""></span><span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b style="font-size: 14px; font-weight: 700">{{m.n}}</b><span class="msub">{{m.sub}}</span></span></button>
       </sc-for>
     </div>
 
@@ -322,7 +326,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
             <span style="display: flex; flex-direction: column; min-width: 0; line-height: 1.2"><b class="pk-ad">{{b.t}}</b><span class="pk-sub">{{b.sub}}</span></span>
             <span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; font-variant-numeric: tabular-nums"><b class="pk-fiyat">{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s class="pk-eski">{{b.old}}</s></sc-if><sc-if value="{{b.hasUnit}}" hint-placeholder-val="{{false}}"><span class="pk-eski">{{b.unit}}</span></sc-if></span>
           </span>
-          <span class="pk-hediye">{{b.hediye}}</span>
+          <span class="pk-hediye"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z'></path></svg>{{b.hediye}}</span>
         </button>
       </sc-for>
     </div>
@@ -330,7 +334,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
     <sc-if value="{{ikiliAcik}}" hint-placeholder-val="{{true}}"><div class="lamba-sec" role="group" aria-label="İki lambanın modeli"><sc-for list="{{lambaSec}}" as="l" hint-placeholder-count="2"><span class="ls"><span class="ls-no">{{l.no}}. lamba</span><span class="seg"><button class="{{l.kCls}}" onClick="{{l.kPick}}" aria-pressed="{{l.kOn}}">Kız</button><button class="{{l.eCls}}" onClick="{{l.ePick}}" aria-pressed="{{l.eOn}}">Erkek</button></span></span></sc-for></div></sc-if>
     <!-- Stok satırı: kullanıcı elle yazar ve açıp kapatır (tema ayarı: sayı + aç/kapa). Shopify stoğuna bağlı değil. Şimdilik 18. -->
     <ul class="canli">
-      <li><i style="background: #E59A4C"></i><span>Stokta son <b>18</b> adet</span></li>
+      <li><i style="background: #A05A1C"></i><span>Stokta son <b>18</b> adet</span></li>
     </ul>
     <button class="btn-on" type="button">{{onLabel}}</button>
     <p class="bnot">{{onNote}}</p>
@@ -383,7 +387,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
       </sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
-    <div class="px"><a href="#" class="cip" style="display: flex; justify-content: center; margin-top: 14px">{{reviews}} yorumun hepsini oku</a>
+    <div class="px"><a href="#" class="cip" style="display: flex; justify-content: center; margin-top: 14px; text-decoration: none">{{reviews}} yorumun hepsini oku</a>
     <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır; hepsi yayımlanır.</p></div>
   </section>
 
@@ -439,23 +443,23 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <footer class="alt-bilgi">
     <div class="px">
       <h2 class="h2" style="color: #FFFDF9">İlk geceyi<br>birlikte izleyin<span class="n">.</span></h2>
-      <button class="btn-on" type="button" style="margin-top: 16px">{{onLabel}}</button>
+      <button class="btn-on" type="button" style="margin-top: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">{{onLabel}}</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
-      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; color: #F1E8DA"><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="margin-bottom: 8px; flex: none"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z" fill="#F2A65A"></path></svg></div>
-      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); font-size: 12px; color: #B9BED6">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
+      <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: center; gap: 12px; color: #FFFDF9"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
+      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,253,249,.12); font-size: 12px; color: #B9BED6">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
   </footer>
 
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
-    <span style="flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #F1E8DA"><img src="{{modelSrc}}" alt="" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 62%"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="font-size: 12px; color: #F2A65A">{{cdTiny}}</span></span>
-    <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 4px 0 #C97F38">Satın al</button>
+    <span style="position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #2A3260"><img class="kesim" src="{{modelSrc}}" alt="" style="height: 38px; bottom: 4px"></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">Satın al</button>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5803}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5804}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
   componentDidMount() {
@@ -500,14 +504,16 @@ class Component extends DCLogic {
     ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d }; });
     var kiz = S.model === 'kiz';
     var KIZ = B + 'e02351b3be4a1c555c5d760d0bbda723', ERKEK = B + '0033dfea6282c5bc479c385213661c00';
+    // Küçük ürün görselleri tek dil: stüdyo fotoğrafından arka planı temizlenmiş kesim (model, paket, yapışkan çubuk)
+    var KES_K = B + 'b823966c39ff35824b4d6e74757646ec', KES_E = B + '20f90021119e4c3bdbc930b283e3635a';
     var models = [
-      { id: 'kiz', n: 'Kız', sub: 'Tavşanlı · ninnili', src: KIZ }, { id: 'erkek', n: 'Erkek', sub: 'Robot · ninnili', src: ERKEK }
+      { id: 'kiz', n: 'Kız', sub: 'Tavşanlı · ninnili', src: KES_K }, { id: 'erkek', n: 'Erkek', sub: 'Robot · ninnili', src: KES_E }
     ].map(function (m) { var on = S.model === m.id; return { n: m.n, sub: m.sub, src: m.src, on: on ? 'true' : 'false', cls: on ? 'mkart on' : 'mkart', pick: function () { self.setState({ model: m.id, l1: null, l2: null }); } }; });
     // Paket: canlı sitedeki biçim. 1 Adet'te ₺1.999 (son 10 günde uygulandı, kullanıcı teyidi). 2 Adet'te birim fiyat.
     var P1 = 1699.99, P2 = 2749.99, C1 = 1999;
     // 2'li paket: iki lamba aynı model ya da 1 Kız + 1 Erkek (canlıda sepete iki ayrı varyant eklenir)
     // 2 Adet seçilince paketin altında küçük seçim: her lamba Kız mı Erkek mi (kullanıcı isteği). Varsayılan: model kartındaki seçim.
-    var l1 = S.l1 || S.model, l2 = S.l2 || S.model, ikiliSrc = [l1 === 'kiz' ? KIZ : ERKEK, l2 === 'kiz' ? KIZ : ERKEK];
+    var l1 = S.l1 || S.model, l2 = S.l2 || S.model, ikiliSrc = [l1 === 'kiz' ? KES_K : KES_E, l2 === 'kiz' ? KES_K : KES_E];
     var lambaSec = [1, 2].map(function (no) {
       var v = no === 1 ? l1 : l2, key = no === 1 ? 'l1' : 'l2';
       function sec(m) { return function () { var o = {}; o[key] = m; self.setState(o); }; }
@@ -516,7 +522,7 @@ class Component extends DCLogic {
     var paket = [
       { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', rib: false },
       { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(Math.floor(P2 / 2 * 100) / 100, true), sub: '2 ayrı almaya göre ' + TL(2 * P1 - P2, true) + ' daha az', rib: true }
-    ].map(function (b) { var on = S.adet === b.n; return { src1: b.n === 2 ? ikiliSrc[0] : (kiz ? KIZ : ERKEK), src2: ikiliSrc[1], t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.n === 2, hediye: b.n === 2 ? 'Her kutuda +6 hediye disk' : '+6 hediye disk', on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
+    ].map(function (b) { var on = S.adet === b.n; return { src1: b.n === 2 ? ikiliSrc[0] : (kiz ? KES_K : KES_E), src2: ikiliSrc[1], t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit || '', hasUnit: !!b.unit, sub: b.sub, rib: b.rib, two: b.n === 2, hediye: b.n === 2 ? 'Her kutuda +6 hediye disk' : '+6 hediye disk', on: on ? 'true' : 'false', cls: on ? 'pk on' : 'pk', pick: function () { self.setState({ adet: b.n }); } }; });
     var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, kapida = total + 80;
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
@@ -525,7 +531,7 @@ class Component extends DCLogic {
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
     // Bir gece: tuvaldeki gerçek ürün görselleri; Erkek'te 20:45 ve 21:00 değişir
     var M = [
-      { t: '20:00', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: '8b1f621be2cb3b6133b7b78bc14e1963', alt: 'Elde tutulan, yanan LunaDream', pos: '50% 30%' },
+      { t: '20:00', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: kiz ? 'fd0bca1b99cf3837b69fb025cc4e2cd9' : '31751eb35473aca04420825deb3c3ce0', alt: 'Gece çocuk odasında komodinde yanan LunaDream', pos: '62% 60%' },
       { t: '20:30', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', id: '5b284c77c252b08a2974bde8e43de126', alt: 'Kubbesi açık LunaDream ve diskler', pos: '50% 40%' },
       kiz ? { t: '20:45', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
           : { t: '20:45', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
@@ -546,6 +552,9 @@ class Component extends DCLogic {
     var cdLine = 'Bugünkü fiyat garantisi';
     var cdShort = IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss);
     var cdTiny = IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı';
+    // Sayaç ayı: gün başında dolunay, gün bittikçe söner (kalan süre / 24 saat). Dakikada bir görünür değişir.
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    var cdAy = AYY(Math.round(kalan / 864000) / 100);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
     // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
     var vids = [
@@ -603,7 +612,7 @@ class Component extends DCLogic {
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
     return {
-      gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KIZ : ERKEK,
+      gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, lambaSec: lambaSec, ikiliAcik: S.adet === 2, adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
@@ -612,7 +621,7 @@ class Component extends DCLogic {
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       boxModel: kiz ? 'tavşanlı lamba' : 'Uzay Kaşifi lamba', eldeSrc: kiz ? B + '8f8d1462c27c62b0bbd3066d72c92025' : ERKEK, eldeAlt: kiz ? 'Elde tutulan LunaDream Kız' : 'LunaDream Erkek (Uzay Kaşifi)', eldePos: kiz ? '40% 50%' : '50% 62%', shop: shop, shopCount: PR.length, faq: faq
     };
   }
