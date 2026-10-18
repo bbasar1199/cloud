@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>LunaDream · E oda seçenekleri</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.pg{background:#F6F1E9;font-size:15px}
+.sec{padding:0 0 36px}
+.oneri{display:flex;align-items:center;gap:8px;margin:0 16px 6px;padding-top:16px;border-top:1px dashed #D6CAB6;font-size:12px;font-weight:700;color:#A05A1C}
+.oneri .evre{width:14px;height:14px}
+.oneri-alt{margin:0 16px 18px;font-size:13px;color:#5C6078;text-wrap:balance}
+.evre circle{fill:none;stroke:#1A2142;stroke-width:1.6}
+.evre path{fill:#F2A65A}
+.h2{font-size:22px;line-height:1.15}
+.h2 span.n{color:#F2A65A}
+.bas{padding:0 16px}
+.temsil{margin:12px 16px 0;font-size:12px;color:#5C6078}
+.pg button:focus-visible,.pg a:focus-visible{outline:2px solid #F2A65A;outline-offset:3px}
+.ok-ik{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* Poster ortak: üstte fotoğraf (lamba ve tavan açık kalır), altında lacivert yazı bandı; yazı ürünün üstüne binmez */
+.poster{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:24px;background:#1A2142;color:#FFFDF9}
+.p-foto{position:relative;flex:none;height:400px;overflow:hidden;background:#0C1027}
+.p-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.p-cip{position:absolute;left:14px;top:14px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 7px;border-radius:999px;background:rgba(255,253,249,.94);color:#1A2142;font-size:12px;font-weight:700}
+.p-cip .evre{width:14px;height:14px}
+.p-alt{display:flex;flex-direction:column;gap:6px;padding:18px 18px 18px}
+.p-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+.p-bas span{color:#F2A65A}
+.p-yazi{margin:0;font-size:14px;line-height:1.45;color:#B9BED6}
+.p-sec{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:44px;margin-top:4px;padding:0 14px;border:1.5px solid rgba(255,253,249,.55);border-radius:999px;background:transparent;color:#FFFDF9;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+
+/* A · Poster: alt alta, 4:5 */
+.a-liste{display:flex;flex-direction:column;gap:14px;margin:16px 16px 0}
+
+/* B · Kaydırmalı */
+.b-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 0;scrollbar-width:none}
+.b-serit::-webkit-scrollbar{display:none}
+.b-serit .poster{flex:0 0 300px;scroll-snap-align:start}
+.b-serit .p-foto{height:340px}
+.b-say{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.b-say i{width:6px;height:6px;border-radius:50%;background:#D6CAB6}.b-say i:first-child{background:#1A2142}
+
+/* C · Görsel + binen levha */
+.c-oda{margin-top:16px}
+.c-oda+.c-oda{margin-top:28px}
+.c-foto{position:relative;height:440px;overflow:hidden;background:#0C1027}
+.c-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.c-cip{position:absolute;top:14px;left:16px}
+.c-oda.ayna .c-cip{left:auto;right:16px}
+.c-levha{position:relative;z-index:1;margin:-44px 16px 0;padding:18px 18px 16px;border-radius:22px;background:#FFFDF9;box-shadow:0 0 0 1px #E3D8C7,0 14px 30px -18px rgba(26,33,66,.35)}
+.c-oda.ayna .c-levha{margin-left:40px}
+.c-oda:not(.ayna) .c-levha{margin-right:40px}
+.c-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.15;letter-spacing:-.01em;color:#1A2142}
+.c-bas span{color:#F2A65A}
+.c-yazi{margin:6px 0 0;font-size:14px;line-height:1.45;color:#5C6078}
+.c-sec{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;padding:0;border:0;background:none;color:#1A2142;font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-color:#D6CAB6;text-underline-offset:4px}
+
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg">
+  <div style="padding: 18px 16px 10px">
+    <h1 class="h2" style="font-size: 22px">Odası böyle görünecek · üç seçenek</h1>
+    <p style="margin: 6px 0 0; font-size: 13px; color: #5C6078">"Kutudan ne çıkıyor"un yerine. İki oda, yazı fotoğrafın içinde ama düzenlenebilir HTML.</p>
+  </div>
+
+  <section class="sec">
+    <p class="oneri"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg>Seçenek A · Poster</p>
+    <p class="oneri-alt">Tam genişlik iki dikey kart, alt alta. Yazı fotoğrafın altında.</p>
+    <div class="bas"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
+    <div class="a-liste"><div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda ay ve<br>yıldızlar<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div><div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 1 12 3Z"></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Odası bir uzay<br>gemisi<span>.</span></p><p class="p-yazi">Robot lamba yanınca duvara ve tavana yıldızlar düşer.</p><button class="p-sec" type="button">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div></div>
+    <p class="temsil">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
+  </section>
+
+  <section class="sec">
+    <p class="oneri"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg>Seçenek B · Kaydırmalı</p>
+    <p class="oneri-alt">İki dikey kart yan yana kayar; ikincisi kenardan görünür. Daha kısa yer kaplar.</p>
+    <div class="bas"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
+    <div class="b-serit"><div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda ay ve<br>yıldızlar<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div><div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 1 12 3Z"></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Odası bir uzay<br>gemisi<span>.</span></p><p class="p-yazi">Robot lamba yanınca duvara ve tavana yıldızlar düşer.</p><button class="p-sec" type="button">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="b-say" aria-hidden="true"><i></i><i></i></div>
+    <p class="temsil">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
+  </section>
+
+  <section class="sec">
+    <p class="oneri"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg>Seçenek C · Görsel + binen levha</p>
+    <p class="oneri-alt">Tam genişlik fotoğraf, altına yazılı beyaz levha biner; ikinci oda aynalı.</p>
+    <div class="bas"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
+    <div class="c-oda"><div class="c-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip c-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg>Kız modeli · Tavşanlı</span></div><div class="c-levha"><p class="c-bas">Tavanda ay ve<br>yıldızlar<span>.</span></p><p class="c-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="c-sec" type="button">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div><div class="c-oda ayna"><div class="c-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip c-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 1 12 3Z"></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="c-levha"><p class="c-bas">Odası bir uzay<br>gemisi<span>.</span></p><p class="c-yazi">Robot lamba yanınca duvara ve tavana yıldızlar düşer.</p><button class="c-sec" type="button">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
+    <p class="temsil">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3700}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = {}; }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
