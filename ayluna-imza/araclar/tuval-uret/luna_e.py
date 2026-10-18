@@ -769,5 +769,7 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6110)), js=JS))
-print('yazıldı:', os.path.abspath(OUT))
+# Diğer ürün sayfaları (luna_usb.py) bu dosyadaki CSS ve parçaları içe aktarır; yazma yalnız doğrudan çalıştırınca
+if __name__ == '__main__':
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6110)), js=JS))
+    print('yazıldı:', os.path.abspath(OUT))

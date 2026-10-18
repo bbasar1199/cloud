@@ -475,6 +475,23 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## NİHAİ TASARIM: LunaDream E (18 Ekim)
+- Kullanıcı: "Tamam, nihai tasarımımız bu olacak." Seçilen tasarım artık `canvas/LunaDreamE.dc.html` (üretici `araclar/tuval-uret/luna_e.py`). `Main.dc.html` eskidi.
+  - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
+- Shopify bölümleri ve diğer ürün sayfaları bu dile göre yazılır.
+
+## Galaxy USB Projektör sayfası (18 Ekim)
+- Kullanıcı: "Şimdi USB projektör için de ona uygun bir tasarım yapalım."
+- Pano: `canvas/GalaxyUSB.dc.html` (`araclar/tuval-uret/luna_usb.py`; E'nin CSS'ini ve parçalarını `import luna_e` ile alır). Tuvalde x=3290, y=0.
+- Görseller: mağazanın 5 afişinin (yapay zekâ, yazılı) yazısız bölgelerinden kesildi → `canvas/usb/`; ürün kesimi rembg ile. "Elif K." kartlı bölge alınmadı.
+- Sayfadaki bilgi yalnız afişlerden: 12 tema diski, USB tak & çalıştır, 360° döner başlık, başlık 4 cm, boy 23,5 cm, temalar Galaksi/Gezegenler/Ay & Uzay/Nebula. Fiyat ₺1.599 / ₺1.999.
+- Bölümler: sayaç şeridi, sahne galeri (4), ad + [puan], fiyat düşüşü, Sihirli (USB ışığı / tema yelpazesi / dönen başlık / cetvel), paket (1 Adet; 2 Adet fiyatı yer tutucu), Kutuda 12 tema (tavan önizlemesi), Üç adımda kur (+ WhatsApp yardım), Odası böyle görünecek (kaydırmalı), Yorumlar (Loox yer tutucusu), 30 gün, SSS, diğer ürünler.
+- **Canlı sayfadaki sorunlar (kullanıcıya bildirildi):**
+  - Puan çelişkisi: "4.7 (2467 Onaylı Kullanıcı Yorumu)" ↔ aynı sayfadaki gerçek yorum kutusu "2.0 / 5, 7 yorum".
+  - Gerçek şikâyetler: kırık geldi, görüntü bulanık, odak halkası zor dönüyor, disk sıkıştı, disk eksik, 3 günde ışık zayıfladı, açma tuşu çalışmıyor.
+  - "90 Gün Para İade" (gerçeği 30), sağlık iddiaları (kortizol, anksiyete, uyku kalitesi), "5K", "6 lens" ↔ "7 katmanlı lens", "130 m²", SSS'de başka ürünün Bluetooth/şarj cümleleri, afişte "Elif K. doğrulanmış alıcı" kartı.
+- Bekleyen: puan kararı (gerçek 2,0 mı, puansız mı), 2'li fiyat, disk değiştirme adımları, stok sayısı, gerçek tavan fotoğrafı.
+
 ## Tur 26 · Odası böyle görünecek (18 Ekim)
 - Kullanıcı: "Kutudan ne çıkıyor'u kaldıralım; 2 odanın nasıl göründüğünü gösteren görsel yapalım, metin içeren görsel kısmı gibi ama daha iyi dursun."
 - Üç seçenek panosu: `canvas/LunaDreamE-Oda.dc.html` (`luna_e_oda.py`), tuvalde x=2820, y=700. A Poster, B Kaydırmalı, C Görsel + binen levha.

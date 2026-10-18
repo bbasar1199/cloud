@@ -68,6 +68,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - amber, basılınca çöken "Güvenli Ödeme İle Al"; çizgili "Kapıda Ödeme ile Sipariş Ver"
   - noktalı teslim çizgisi
   - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
+- **Nihai tasarım (18 Eki): LunaDream E** (`canvas/LunaDreamE.dc.html`). Diğer ürün sayfaları aynı dil ve sırayla kurulur; örnek Galaxy USB (`canvas/GalaxyUSB.dc.html`).
 - **Bütünlük (18 Eki, kullanıcı: "her şey çok yabancı duruyor, bir bütün ve uyum yakala"):**
   - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
   - Yenilik, bölüm içinde tek bir parça olarak denenir; örnek: Bir gece kadranı. Yazı tipini ve renkleri değiştiren turlar (D; Tur 20'deki E) "yabancı" bulundu.
