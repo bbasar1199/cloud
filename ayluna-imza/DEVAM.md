@@ -485,7 +485,9 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Test: `test.js` sabit saatle (Pazartesi 12:47:15) dönüşü, sayacı, 16.00 sonrasını ve yoldaki "Bugün"ü dener.
 - Hızlı Kargo (kullanıcı: "öncelikli kargo oluyor işte"): "Siparişin sıranın önüne alınır, öncelikli hazırlanıp kargolanır." Sepet, kapıda formu (`ayluna.js`), ödeme, teşekkür, kargo politikası, takip sayfası ve `shopify/ayluna-sss.txt` güncellendi; sepette standart kargo da 16.00 kuralıyla ("Bugün kargoda"). Canlı mağazadaki Hızlı Kargo ürün açıklaması kullanıcı tarafından değiştirilmeli.
 - Açık: Cumartesi kargo var mı teyit. Çıkan satırın geçişte üstte kısa süre silik kalması (çıkışı hızlandırma) kullanıcı durdurduğu için yapılmadı.
-- Tuvale yayın ve site artifact'ının yeniden yayını kullanıcı onayı bekliyor.
+- Kullanıcı: "Dün kişi satın aldı kısmına 62 yaz, oraya da hafif bir animasyon, tasarım diline uygun." → LunaDream `DUN = '62'`; satır fiyat düşüşü bitince (1,9 sn) 6px aşağıdan gelir, sayı fiyattaki gibi yukarıdan düşer, yeşil nokta 3 kez yumuşak halka verir. USB'de aynı giriş (rozet "pop" diliyle), sayı hâlâ [X].
+- Kullanıcı: "Stok kısmı için de uygun bir tasarım deneyebilir miyiz, UI." → `stok_secenek.py` → `canvas/LunaDreamE-Stok.dc.html` (tuvalde Güncel sayfası, LunaDream E sütunu): A Yıldız dizisi, B Serif sayı, C Buton kurdelesi. Eleştirmen puanladı, seçim kullanıcıda.
+- Tuval ve "Ayluna Mağazası" artifact'ı (DgGy66eo4iqLEhjSn1inje) güncellendi. Yanlışlıkla görselsiz ikinci bir site artifact'ı oluştu (BnpeGU6VRT2pwBB3TmUo8k); silinmesi kullanıcıya soruldu.
 
 ## Çalışan site iskeleti (18 Ekim, en güncel)
 - Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, tüm eksik kısımları düzelt; sepet vesaire her kısım tam çalışsın; Shopify için düzenlerken de aynı şekilde."

@@ -99,7 +99,16 @@ CSS = r""".pg{background:#F6F1E9}
 /* Dün satırı (kullanıcı, 18 Eki: "Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı"): sayı elle girilir, boşsa satır yok */
 .dun{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;color:#5C6078}
 .dun b{color:#1A2142;font-variant-numeric:tabular-nums}
-.dun i{flex:none;width:8px;height:8px;border-radius:50%;background:#2E6B4F;animation:nabiz 1.8s ease-in-out 3}
+.dun i{position:relative;flex:none;width:8px;height:8px;border-radius:50%;background:#2E6B4F}
+/* Dün satırı girişi (kullanıcı, 18 Eki: "hafif bir animasyon, tasarım diline uygun"): fiyat düşüşünün devamı, bir kez.
+   Fiyat 1,9 sn'de yerine oturunca satır 6px aşağıdan gelir, sayı fiyattaki gibi yukarıdan düşer, nokta üç kez yumuşak halka verir.
+   Sayan rakam yok; yalnız transform/opacity. */
+.dun{animation:dun-gel .5s cubic-bezier(.2,.7,.2,1) 1.9s both}
+.dun b{display:inline-block;animation:fy-dus 1s cubic-bezier(.2,.7,.2,1) 1.9s both}
+.dun i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#2E6B4F;opacity:0;animation:dun-hale 1.8s cubic-bezier(.2,.7,.2,1) 2.5s 3}
+@keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes dun-hale{0%{opacity:.45;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
+@media (prefers-reduced-motion:reduce){.dun,.dun b,.dun i::after{animation:none}}
 .indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
@@ -386,7 +395,7 @@ CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:r
 
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir. Canlıda bölüm ayarı (sayı; boşsa satır gizlenir) ya da Shopify Flow'un
 # her gece yazdığı metafield. Uydurma sayı yazılmaz; önizlemede yer tutucu.
-DUN = '[X]'
+DUN = '62'  # kullanıcı, 18 Eki
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):

@@ -170,6 +170,14 @@ body{margin:0;background:#F2F4F8}
 .dun{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:14px;color:var(--soluk)}
 .dun b{color:var(--lac);font-variant-numeric:tabular-nums}
 .dun svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v2);stroke-width:1.8;stroke-linecap:round}
+/* Dün satırı girişi (kullanıcı, 18 Eki: "hafif bir animasyon"): fiyat ve rozet oturunca bir kez; satır aşağıdan gelir,
+   sayı yukarıdan düşer, simge rozet gibi belirir. Sayan rakam yok. */
+.dun{animation:dun-gel .5s var(--ease) 1.2s both}
+.dun b{display:inline-block;animation:dun-dus .7s var(--ease) 1.35s both}
+.dun svg{animation:pop .5s var(--ease) 1.5s both}
+@keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes dun-dus{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.dun,.dun b,.dun svg{animation:none}}
 /* Dönen satır (kullanıcı, 18 Eki): "Her kutuda 12 film diski" ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde;
    dönerken yükseklik değişmez. Giren alttan, çıkan yukarı. Hareket azaltılmışsa ikisi alt alta. */
 .donen{position:relative;display:grid;margin:14px 0 0;font-size:14px;font-weight:600;overflow:hidden}
