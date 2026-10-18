@@ -496,6 +496,11 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - 2 Adet seçilince kartın içinde "2. lamba" çipleri (Kız/Erkek, kesim görsel + nokta). 2. lamba açıkça seçilmediyse modeli izler.
   - Altta tek hediye şeridi: "Her kutuda +6 hediye masal diski".
   - Kemerli gece penceresi, dolu lacivert paket ve hap segment kalktı (CSS'leri de, kullanılmayan .mkart ile birlikte).
+- **Bir gece boşluğu** (kullanıcı: "Bir gece 5 anın altı neden o kadar çok boş"; tuval Sürüm 70, E h 5700):
+  - Sebep: ortak başlıktaki `.pg{overflow:hidden}` sayfayı kaydırma kabı yapıyordu; yapışkan panel telefonda yukarı kayıp gidiyor, altında ~1.900px boş kaydırma adımı kalıyordu. Yapışkan satın al çubuğu da aynı sebeple çalışmıyordu.
+  - Düzeltme: E'de `.pg{overflow:clip}`; clip'i tanımayan tarayıcıda kaydırma adımları kapanır (yay ve oklarla gezilir).
+  - Panel telefonda üst kenar ile satın al çubuğu arasında ortalanmış kart olarak yapışır (844px ekranda 54px eşit krem pay). Kaydırdıkça an değişir, ay dolar.
+  - Pano yüksekliği yazı tipleri yüklendikten sonra ölçülür (önceki 5624 eksikti, alt 71px kesiliyordu).
 
 ## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
 - Kullanıcı:

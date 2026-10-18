@@ -67,6 +67,12 @@ CSS = r""".pg{background:#F6F1E9}
    başlık 1: 44 (yalnız LunaDream) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün) · kart başlığı: 18–20
    gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Bölüm etiketi tek stil: 13px kalın, #A05A1C, büyük harf yok. */
 .pg{font-size:15px}
+/* Tur 25 (kullanıcı: "Bir gece 5 anın altı neden o kadar çok boş"): ortak başlıktaki overflow:hidden sayfayı kaydırma kabı yapıyor,
+   Bir gece paneli yapışmıyor, telefonda altında ~1.900px boş adım kalıyordu. clip kaydırma kabı oluşturmaz; yapışkan çalışır.
+   clip'i tanımayan eski tarayıcıda kaydırma adımları kapanır (yay ve oklarla gezilir). Canlı temada da sarmalayıcılarda
+   overflow:hidden olmamalı. */
+.pg{overflow:clip}
+@supports not (overflow:clip){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 .h2{font-size:22px;line-height:1.15}
 .etiket{font-size:13px}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
@@ -217,8 +223,10 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
    Akşam lamba ışığı güçlü, gece yıldızlar çoğalır, sabah amber şafak gelir. Yaydaki saate, oklara dokununca ya da
    telefonda kaydırınca ilerler (panel yapışık). Durum tek sınıfta (.an0–.an4). Yalnız transform/opacity. */
 .gece-bolum{--gh:520px;position:relative;margin-top:36px}
+/* Telefonda panel, üst kenar ile satın al çubuğu arasında ortalanmış kart olarak yapışır (eşit krem pay; kadranın içi boşalmaz) */
 @media (max-height:1599px){.gece-bolum{--gh:clamp(520px,calc(100vh - 76px),660px)}}
 .gece-cerceve{position:sticky;top:0;height:var(--gh);display:flex;flex-direction:column;overflow:hidden;isolation:isolate;border-radius:28px;background:#1A2142;color:#EDE5D8}
+@media (max-height:1599px){.gece-cerceve{top:max(0px,calc((100vh - 76px - var(--gh)) / 2))}}
 .g-bas{position:relative;z-index:1;padding:28px 16px 0}
 .g-alan{position:relative;flex:1}
 .g-ic{position:absolute;left:0;top:50%;width:390px;height:468px;margin-top:-234px}
@@ -522,7 +530,7 @@ JS = """class Component extends DCLogic {
   componentDidMount() {
     var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
     // Bir gece: kaydırma adımı ekranın ortasına gelince an değişir. Uzun görüntü alanında (tuval) adım yok; yay ve oklarla gezilir.
-    if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600) this.geceBagla();
+    if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600 && window.CSS && CSS.supports('overflow', 'clip')) this.geceBagla();
     // Kargo takibi: çizelge ekrana girince döngü başlar (gözlemci yoksa hemen)
     var yol = document.querySelector('.yol');
     if (yol && typeof IntersectionObserver !== 'undefined') {
@@ -687,5 +695,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5624)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5700)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))

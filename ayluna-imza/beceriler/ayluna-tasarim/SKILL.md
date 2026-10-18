@@ -90,6 +90,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - **Buton altında not yazılmaz.** Kapıda butonunda fiyat da yazmaz (Tur 25). ₺80 kapıda ödeme ücreti formun özetinde ve SSS'de yazar (mevzuat: sipariş onayından önce).
   - Fiyatın altında "Ücretsiz kargo · 30 gün iade · Güvenli ödeme" gibi güven satırı yok (kullanıcı: "çok kötü duruyor").
   - Hediye diski "her kutuda +6" diye yazılır; çıplak "12 disk" yazılmaz.
+  - **Yapışkan öğe** (Bir gece paneli, satın al çubuğu): hiçbir atasında `overflow:hidden` olmaz; taşma `overflow:clip` ile kesilir. Kaydırmalı bölüm telefon boyunda kaydırılarak denetlenir (tuval boyu hatayı göstermez). Panel ekranda ortalanmış kart olarak yapışır.
   - Soru başlıkları soru işaretiyle biter.
   - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.
