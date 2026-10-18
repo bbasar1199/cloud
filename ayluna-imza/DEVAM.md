@@ -480,6 +480,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
 - Shopify bölümleri ve diğer ürün sayfaları bu dile göre yazılır.
 
+## Site geneli: sepet, ana sayfa, kalan sayfalar (18 Ekim, en güncel)
+- Envanterler: `ogrenme/site-envanter.md` (site geneli, sepet/EasySell, politikalar, 34 sorun) ve `ogrenme/urun-envanter.md` (13 ürün, sorunlu iddialar).
+- Sepet: `canvas/Sepet.dc.html` (`sepet.py`). Ek teklifler EasySell COD formunun "bump"ları (Astronot ₺749 → ürün nemlendirici; Kum Saati ₺699,99; Yıldız Işığı ₺749,99; Hızlı Kargo ₺79,99). Shopify'da sepette çalışması için ayrıca kurulum + otomatik indirim gerekir.
+- Ana sayfa: `canvas/Ayluna-Anasayfa.dc.html` (`anasayfa.py`; arşivdeki eski `Anasayfa.dc.html` korunur). Kullanıcı eleştirmenin 3 satış önerisini istemedi.
+- Kalan sayfalar: `sayfalar.py` → Koleksiyon, Iletisim, KargoTakip, Politika-Iade, Sayfalar-Kucuk (tuvalde x 5170–7050).
+- Sırada: 13 ürünün sade sayfaları (`ogrenme/urun-icerik.json` + `canvas/urunler/<handle>/`), sonra Shopify bölüm kodları.
+- Kullanıcıya bildirilen site sorunları: yasal bilgi yok (Londra YVZNL LTD), politikalarda yer tutucular, 4 farklı iade süresi, sabit "4.7 (2467)", Astronot/Dokunmatik sayfaları başka ürünü anlatıyor, sağlık iddiaları, /collections/all'da COD "Tükendi" hatası, Loox'ta aynı gün yazılmış etiketsiz yorumlar.
+
 ## Galaxy USB · Yön A sakin düzen + animasyonlar (18 Ekim, en güncel)
 - Kullanıcı: Yön A'nın sakin düzeni + yaptığım animasyonlar; eleştirmenden 3 öneriyi seçti (%5 butonda, baskı tek satır, oda çipleri); diskleri yeniden üret; fontlar ve renkler beğenilmedi.
 - `luna_usb.py` baştan yazıldı: `TEMA` sözlüğü (lacivert sabit; ikinci renk, zemin, yazı tipi), `sayfa(tema, kesit)`. Ana pano `GalaxyUSB.dc.html` (h 6480, şimdilik `buz`; `U_TEMA=<ad> python3 luna_usb.py`). Renk seçenek panoları `GalaxyUSB-Renk-kuzey/pembe/mercan/gumus.dc.html` (h 2600, x 4230–5640). Yön B ve C arşive taşındı.
