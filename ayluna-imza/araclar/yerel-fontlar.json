@@ -1,4 +1,51 @@
 [
- {"aile": "Literata", "dosya": "literata", "agirlik": [500]},
- {"aile": "Atkinson Hyperlegible Next", "dosya": "atkinson-hyperlegible-next", "agirlik": [400, 700]}
+ {
+  "aile": "Literata",
+  "dosya": "literata",
+  "agirlik": [
+   500
+  ]
+ },
+ {
+  "aile": "Atkinson Hyperlegible Next",
+  "dosya": "atkinson-hyperlegible-next",
+  "agirlik": [
+   400,
+   700
+  ]
+ },
+ {
+  "aile": "Bricolage Grotesque",
+  "dosya": "bricolage-grotesque",
+  "agirlik": [
+   500,
+   700,
+   800
+  ]
+ },
+ {
+  "aile": "Figtree",
+  "dosya": "figtree",
+  "agirlik": [
+   400,
+   500,
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "Unbounded",
+  "dosya": "unbounded",
+  "agirlik": [
+   500,
+   600,
+   700
+  ]
+ },
+ {
+  "aile": "Archivo",
+  "dosya": "archivo",
+  "degisken": "wdth",
+  "agirlik": []
+ }
 ]

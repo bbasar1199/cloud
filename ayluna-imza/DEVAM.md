@@ -480,6 +480,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
 - Shopify bölümleri ve diğer ürün sayfaları bu dile göre yazılır.
 
+## Galaxy USB · kendine özgü dil, üç yön (18 Ekim)
+- Kullanıcı: ürün yalnız çocuklara değil (çocuk, ebeveyn, genç); her sayfanın dili kendine özel; canlı sayfanın satan görsellerini ve düzenini göz önünde bulundur.
+- Canlı sayfa telefonda incelendi (`scratchpad/usb/canli/`): kare afiş galerisi, "Premium Özellikler" 2×2, "Çok Al Az Öde" (1 Adet ₺1.599 / 2 Adet ₺2.399,99, "+10 Adet Ücretsiz Disk"), iki büyük buton, yetişkin yaşam fotoğrafları (çift, Satürn, kelebek, ay, denizanası, kara delik). Bu fotoğraflar tuvale yüklendi (`canvas/usb/s-*.jpg`).
+- **Ürün rengi çelişkisi:** paket kutusundaki fotoğraflarda projektör siyah, yapay zekâ afişlerinde beyaz. Kullanıcıya soruldu.
+- Üç yön: `canvas/GalaxyUSB-YonA/B/C.dc.html` (`luna_usb_yon.py`), tuvalde x=3760/4230/4700.
+  - A Sinema: sıcak siyah + sinema sarısı, Bricolage Grotesque + Figtree; tam ekran yaşam fotoğrafı, kaydırmalı sahne kartları.
+  - B Gökyüzü paneli: gece laciverti + buz mavisi, Unbounded + Onest; kare galeri, sahne seçici.
+  - C Ferah: açık zemin + mercan, Archivo Expanded; büyük ölçü rakamları, "Kimin odası?" sekmeleri.
+- Yerel önizlemeye yazı tipleri eklendi (`onizleme/f/`, `araclar/yerel-fontlar.json`; değişken yazı tipi desteği `dc-onizle.js`'te).
+
 ## Galaxy USB Projektör sayfası (18 Ekim)
 - Kullanıcı: "Şimdi USB projektör için de ona uygun bir tasarım yapalım."
 - Pano: `canvas/GalaxyUSB.dc.html` (`araclar/tuval-uret/luna_usb.py`; E'nin CSS'ini ve parçalarını `import luna_e` ile alır). Tuvalde x=3290, y=0.
