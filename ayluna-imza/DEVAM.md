@@ -490,7 +490,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   2. Yuvarlak örnek (7/10): model iki büyük yuvarlak örnek; paket görselsiz satır; 2. lamba aynı örneğin küçüğü.
   3. Önce paket, sonra model (6/10): paket satırları üstte; model kareleri adede göre (2 Kız / Kız + Erkek / 2 Erkek), ayrı lamba seçimi yok. Sırayı değiştirir (17 Eki: model paketin üstünde). Varsayılan 2 Kız.
 - Eleştirmen ₺80'in kapıda butonunda kalmasını istedi; kullanıcının açık isteği öncelikli, uygulanmadı.
-- Kullanıcı seçince E'ye işlenecek.
+- **Karar: kullanıcı 1 · Satır kartlar'ı seçti; E'ye işlendi** (tuval Sürüm 69, E h 5624):
+  - Etiket 2 Adet'te "1. lamba", 1 Adet'te "Model". Model yan yana iki yarım kart (kesim görsel, Kız/Tavşanlı, Erkek/Robot, dolunay noktası).
+  - Paket alt alta satır kart: görsel, ad, alt satır (1 Adet "%15 indirim", 2 Adet "₺649,99 kazanç"), fiyat, eski fiyat ya da "tanesi", dolunay noktası; 2 Adet'te lacivert "En avantajlı" kurdelesi.
+  - 2 Adet seçilince kartın içinde "2. lamba" çipleri (Kız/Erkek, kesim görsel + nokta). 2. lamba açıkça seçilmediyse modeli izler.
+  - Altta tek hediye şeridi: "Her kutuda +6 hediye masal diski".
+  - Kemerli gece penceresi, dolu lacivert paket ve hap segment kalktı (CSS'leri de, kullanılmayan .mkart ile birlikte).
 
 ## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
 - Kullanıcı:

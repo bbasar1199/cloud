@@ -48,7 +48,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → puan/Stokta → LunaDream → fiyat → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Kutu → İade → SSS.
 - **Yazı ölçeği v3 (kesin):** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 · paket adı 17 / fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. Ara boyut yok. Kullanıcı büyük ve düzensiz yazıyı iki kez düzeltti.
 - **Az yazı, iç içe değil:** başlığı olan bölümde üst etiket yok; tek cümle açıklama; kart içinde kart yok; gölge yok.
-- **Model ve 2'li paket:** model kartı yalnız Kız / Erkek. 2 Adet (varsayılan) seçilince paketin altında küçük seçim: "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]". Tur 25'te biçimi değişiyor: hap segment kalkar, 2. lamba seçici diliyle seçilir (kullanıcı seçimi bekleniyor).
+- **Model ve 2'li paket:** model kartı yalnız Kız / Erkek. 2 Adet (varsayılan) seçilince paketin altında küçük seçim: "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]". Tur 25'ten beri: model kartı = 1. lamba; 2. lamba, 2 Adet kartının içinde çiple seçilir (hap segment yok).
 - **Eleştirmen önerileri toplu uygulanmaz;** en iyi 3 fikir kullanıcıya gösterilir, kullanıcı seçer (kullanıcı toplu uygulamayı geri aldırdı).
 - **Fiyat satırı:** fiyat + üstü çizili eski fiyat + "%X indirim" rozeti. Kartla fiyat başlıkta yok, yalnız ödeme butonunda.
 - **Müşteriye iç gerekçe yazılmaz** (toptancı, maliyet, zam sebebi).
@@ -85,7 +85,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - **Seçili durum (Tur 25):** model, paket ve 2. lamba aynı dille seçilir: 2px lacivert çerçeve ve amber dolunay noktası. Dolu lacivert seçili kart yok (kullanıcı: "bundle ve aralarında uyum yok"). Renk değişimi anlık; yalnız nokta hareket eder.
   - **Küçük ürün görselleri:** her yerde arka planı temizlenmiş stüdyo kesimi kullanılır, bej kare kullanılmaz.
   - **Fiyat düşüşü** (kullanıcı isteği): açılışta bir kez ₺1.999,00 → çizilir → indirimli fiyat yukarıdan düşer → rozet. Sayan rakam kuralının tek istisnasıdır.
-  - **Model seçimi:** kemerli gece penceresi ve 2. lamba için hap segment kullanılmaz (Tur 25: "lamba seçim kısmı güzel değil"). Seçici biçimi kullanıcının seçimini bekliyor: satır kartlar, yuvarlak örnek ya da önce paket (`canvas/LunaDreamE-Secici.dc.html`).
+  - **Seçiciler = satır kartlar** (Tur 25, kullanıcı seçimi): model yan yana iki yarım kart; paket alt alta satır kart (görsel, ad, "%15 indirim" / "₺649,99 kazanç", fiyat, eski fiyat / "tanesi", dolunay noktası, lacivert "En avantajlı" kurdelesi); 2 Adet açılınca kartın içinde "2. lamba" çipleri; altta tek hediye şeridi "Her kutuda +6 hediye masal diski". Kemerli gece penceresi ve hap segment kullanılmaz.
   - **Ay evresi hareketi:** Bir gece'de ay her anda biraz daha dolar. Kargo takibi "Sipariş verildi"den başlar, sırayla dolar; 8 sn'lik sakin döngü, ekrana girene kadar durur. Tek seferlik animasyon kullanılmaz: tuvalde bakan olmadan biter, "çalışmıyor" sanılır.
   - **Buton altında not yazılmaz.** Kapıda butonunda fiyat da yazmaz (Tur 25). ₺80 kapıda ödeme ücreti formun özetinde ve SSS'de yazar (mevzuat: sipariş onayından önce).
   - Fiyatın altında "Ücretsiz kargo · 30 gün iade · Güvenli ödeme" gibi güven satırı yok (kullanıcı: "çok kötü duruyor").
