@@ -81,7 +81,6 @@ a{color:#1A2142}
 
 /* 3 · Ad levhası (Çarşaf): fotoğrafın üstüne 24px biner, üst köşeleri 28 (levha) */
 .ad{position:relative;z-index:2;margin-top:-24px;padding:8px 20px 32px;border-radius:28px 28px 0 0;background:var(--carsaf)}
-.urun-alt{margin:2px 0 0;font-size:14px;color:var(--sis)}
 .ad-ust{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .puan{display:inline-flex;align-items:center;gap:8px;min-height:48px;font-size:14px;color:var(--gece);text-decoration:none}
 .puan span{color:var(--sis)}
@@ -99,21 +98,21 @@ a{color:#1A2142}
 
 /* 4 · Sihirli özellikler (Duvar): lamba kendi ışığında, seçili modelle değişir. Dört özellik köşelerde;
    kısa çizgiler lambaya değil çevresindeki yörüngeye bağlanır (parçanın yeri iddia edilmez). */
-.isik-sahne{position:relative;height:440px;margin:16px -20px 0}
-.isik-hale{position:absolute;left:15px;top:36px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,.2) 36%,rgba(242,166,90,0) 66%)}
-.yorunge{position:absolute;left:0;top:0;width:390px;height:440px;fill:none;pointer-events:none}
+.isik-sahne{position:relative;height:384px;margin:16px -20px 0}
+.isik-hale{position:absolute;left:35px;top:32px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,.2) 36%,rgba(242,166,90,0) 66%)}
+.yorunge{position:absolute;left:0;top:0;width:390px;height:384px;fill:none;pointer-events:none}
 .yorunge .yr{stroke:var(--gece);stroke-opacity:.22;stroke-width:1.5;stroke-dasharray:1.5 7;stroke-linecap:round}
 .yorunge .yc{stroke:var(--gece);stroke-opacity:.22;stroke-width:1.5;stroke-linecap:round}
 .yorunge .yn{fill:var(--lamba);stroke:var(--duvar);stroke-width:3}
-.sahne-golge{position:absolute;left:115px;top:300px;width:160px;height:28px;border-radius:50%;background:radial-gradient(closest-side,rgba(26,33,66,.22),rgba(26,33,66,0))}
-.sahne-lamba{position:absolute;left:50%;top:216px;width:auto;transform:translate(-50%,-50%)}
-.sahne-lamba.k{height:196px}.sahne-lamba.e{top:230px;height:168px}
+.sahne-golge{position:absolute;left:125px;top:262px;width:140px;height:24px;border-radius:50%;background:radial-gradient(closest-side,rgba(26,33,66,.22),rgba(26,33,66,0))}
+.sahne-lamba{position:absolute;left:50%;top:192px;width:auto;transform:translate(-50%,-50%)}
+.sahne-lamba.k{height:164px}.sahne-lamba.e{top:204px;height:140px}
 .oz{position:absolute;width:140px;display:flex;flex-direction:column;gap:8px}
 .oz b{font-size:15px;font-weight:700;line-height:1.3}
 .oz > span:last-child{margin-top:-6px;font-size:13px;color:var(--sis);line-height:1.4}
 .oz-sol{left:20px;align-items:flex-start}
 .oz-sag{right:20px;align-items:flex-end;text-align:right}
-.oz-ust{top:0}.oz-alt{top:340px}
+.oz-ust{top:0}.oz-alt{top:296px}
 .anim{position:relative;width:40px;height:40px;border-radius:14px;background:var(--gece);color:var(--lamba);display:grid;place-items:center;overflow:hidden;isolation:isolate}
 .anim svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 /* Sihirli döngüleri (kullanıcı istisnası): yavaş, yalnız transform/opacity; canlıda ekran dışındayken durur */
@@ -141,14 +140,14 @@ a{color:#1A2142}
 .etk-satir{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
 .modeller{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 /* Model kartı: arka planı temizlenmiş lamba, açık dairenin üstünden taşar; seçilince daire lamba ışığıyla dolar */
-.mk{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px 12px;border:1.5px solid var(--cizgi);border-radius:14px;background:var(--carsaf);text-align:center;cursor:pointer;transition:transform .16s var(--e)}
+.mk{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;border:1.5px solid var(--cizgi);border-radius:14px;background:var(--carsaf);text-align:center;cursor:pointer;transition:transform .16s var(--e)}
 .mk:active,.pk:active{transform:scale(.98)}
-.mk.on{border:2px solid var(--gece);background:var(--duvar);padding:13.5px 7.5px 11.5px}
-.mk-foto{position:relative;width:72px;height:72px;border-radius:50%;background:var(--duvar);isolation:isolate}
+.mk.on{border:2px solid var(--gece);background:var(--duvar);padding:11.5px 7.5px 9.5px}
+.mk-foto{position:relative;width:60px;height:60px;border-radius:50%;background:var(--duvar);isolation:isolate}
 .mk.on .mk-foto{background:var(--carsaf)}
 .mk-foto::before{content:"";position:absolute;inset:-6px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.7),rgba(242,166,90,0) 70%);opacity:0;transition:opacity .32s var(--e)}
 .mk.on .mk-foto::before{opacity:1}
-.mk-foto img{position:absolute;left:50%;bottom:4px;height:76px;width:auto;max-width:88px;transform:translateX(-50%)}
+.mk-foto img{position:absolute;left:50%;bottom:3px;height:64px;width:auto;max-width:76px;transform:translateX(-50%)}
 .mk-tik{position:absolute;right:8px;top:8px;width:20px;height:20px;border-radius:50%;background:var(--gece);color:var(--carsaf);display:grid;place-items:center;opacity:0;transform:scale(.6);transition:opacity .16s var(--e),transform .16s var(--e)}
 .mk-tik .ik{width:14px;height:14px;stroke-width:2}
 .mk.on .mk-tik{opacity:1;transform:none}
@@ -206,6 +205,7 @@ a{color:#1A2142}
 .fis-sat dd{margin:0;font-weight:700;text-align:right}
 .fis-sat.ana dd{font-size:17px}
 .fis-sat dd small{display:block;font-size:12px;font-weight:400;color:var(--sis)}
+.fis-sat dd small.fark{font-weight:700;color:var(--kehribar)}
 .fis-cizik{height:0;margin:4px 0;border-top:1.5px dashed rgba(26,33,66,.3)}
 /* Teslim satırlarında ay evresi: hilal (bugün), yarım (kargoda), dolunay (kapında) */
 .fis-sat dt svg{width:16px;height:16px;margin-right:8px;vertical-align:-3px}
@@ -281,9 +281,9 @@ a{color:#1A2142}
 .cip{flex:none;min-height:48px;padding:0 16px;border:1.5px solid var(--cizgi);border-radius:14px;background:transparent;font-size:15px;font-weight:700;cursor:pointer}
 .cip.on{background:var(--gece);border-color:var(--gece);color:var(--carsaf)}
 .yorumlar{list-style:none;margin:8px 0 0;padding:0}
-.yorumlar li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1.5px solid var(--cizgi)}
+.yorumlar li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1.5px solid var(--cizgi)}
 /* İmza: adın baş harfi, Gece daire içinde Literata */
-.bas-harf{width:40px;height:40px;border-radius:50%;background:var(--gece);color:var(--carsaf);display:grid;place-items:center;font-size:17px;line-height:1}
+.bas-harf{width:32px;height:32px;margin-top:2px;border-radius:50%;background:var(--carsaf);border:1.5px solid var(--cizgi);color:var(--gece);display:grid;place-items:center;font-size:15px;line-height:1}
 .yorumlar q{display:block;font-size:15px;line-height:1.55;quotes:"“" "”"}
 .yorumlar q::before{content:open-quote}.yorumlar q::after{content:close-quote}
 .yorumlar small{display:block;margin-top:6px;font-size:13px;color:var(--sis)}
@@ -299,7 +299,7 @@ a{color:#1A2142}
 .gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s var(--e)}
 .gk-aksam{background:var(--gece);opacity:0}
 .gk-sabah{background:var(--carsaf);opacity:0}
-.gk-alaca{background:linear-gradient(180deg,rgba(26,33,66,.62),rgba(26,33,66,.12) 62%,rgba(26,33,66,0));opacity:0}
+.gk-alaca{background:linear-gradient(180deg,rgba(26,33,66,.42),rgba(26,33,66,.1) 50%,rgba(26,33,66,0) 80%);opacity:0}
 .gk-isik{background:radial-gradient(250px 250px at 195px 216px,rgba(242,166,90,.75),rgba(242,166,90,0));opacity:.55}
 .gk-gunes{background:radial-gradient(300px 260px at 348px 184px,rgba(242,166,90,.5),rgba(242,166,90,0));opacity:0}
 .gk-yildiz{opacity:0}
@@ -324,14 +324,14 @@ a{color:#1A2142}
 .an2 .g-nokta,.an3 .g-nokta{color:var(--carsaf)}
 .an2 .g-nokta i,.an3 .g-nokta i{background:var(--gece)}
 .an2 .g-saat,.an3 .g-saat{color:rgba(255,248,240,.72)}
-.g-saat.on{color:var(--gece)}.an2 .g-saat.on,.an3 .g-saat.on{color:var(--carsaf)}
+.g-saat.on,.an1 .g-saat{color:var(--gece)}.an2 .g-saat.on,.an3 .g-saat.on{color:var(--carsaf)}
 /* Ay: seçili ana gider (yay boyunca); sabah soluklaşır */
 .g-ay{position:absolute;left:0;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;display:grid;place-items:center;pointer-events:none;transition:transform .64s var(--e),opacity .64s var(--e)}
 .g-ay::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,0) 68%)}
 .g-ay svg{position:relative;width:30px;height:30px;fill:var(--lamba)}
 .an4 .g-ay{opacity:.45}
 /* Fotoğraf penceresi: 192px daire, kadranın merkezinde */
-.g-foto{position:absolute;left:99px;top:120px;width:192px;height:192px;border-radius:50%;overflow:hidden;background:var(--gece)}
+.g-foto{position:absolute;left:107px;top:128px;width:176px;height:176px;border-radius:50%;overflow:hidden;background:var(--gece)}
 .g-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .48s var(--e),transform .64s var(--e)}
 .g-yazi{position:absolute;left:72px;right:72px;top:334px;height:112px;text-align:center}
 .g-an{position:absolute;inset:0;opacity:0;transform:translateY(12px);transition:opacity .32s var(--e),transform .32s var(--e)}
@@ -350,18 +350,18 @@ a{color:#1A2142}
 .g-ok:disabled{opacity:.3;cursor:default}
 /* Kaydırma adımları: canlıda her an ~70vh kaydırma; sahne bu sürede yapışık kalır. Uzun görüntü alanında (tuval, 1600px+) adım yok, noktalar ve oklarla gezilir. */
 .gece-adimlar{margin-top:-468px}
-.gece-adim{height:70vh}
+.gece-adim{height:48vh}
 .gece-adim:first-child{height:calc(468px + 10vh)}
 @media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 .gece-ipucu{margin:4px 0 0;font-size:14px;color:var(--sis)}
 
 /* 11 · 30 gün iade (Çarşaf) */
-.otuz{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;align-items:center}
+.otuz{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:center}
 /* Ay evreli mühür: 30 gün ≈ bir ay döngüsü */
-.muhur-kap{position:relative;width:88px;height:88px}
-.muhur{position:absolute;left:0;top:0;width:88px;height:88px}
+.muhur-kap{position:relative;width:104px;height:104px}
+.muhur{position:absolute;left:0;top:0;width:104px;height:104px}
 .muhur .mh-halka{fill:none;stroke:var(--gece);stroke-opacity:.16;stroke-width:1.5}
-.muhur .mh-bos{fill:none;stroke:var(--gece);stroke-opacity:.45;stroke-width:3.5}
+.muhur .mh-bos{fill:none;stroke:var(--gece);stroke-opacity:.45;stroke-width:3}
 .muhur path{fill:var(--kehribar)}
 .muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .muhur-say b{font-size:28px;color:var(--kehribar)}
@@ -394,6 +394,7 @@ a{color:#1A2142}
 .dev{display:flex;align-items:center;gap:8px;margin-top:24px;font-size:40px;line-height:1}
 .dev .logo-ay{width:32px;height:32px}
 .kdv{margin:16px 0 0;font-size:13px;color:var(--sis)}
+.kp-bag{display:flex;align-items:center;justify-content:center;min-height:48px;font-size:14px;color:var(--gece);text-decoration:underline;text-underline-offset:3px}
 
 /* Yapışkan çubuk (Çarşaf, 64px). Canlıda satın al bölümü ekrandayken gizlenir (IntersectionObserver); env(safe-area-inset-bottom) */
 .yapis{position:sticky;bottom:0;z-index:10;display:flex;align-items:center;gap:12px;height:64px;margin-top:-64px;padding:0 12px 0 16px;background:var(--carsaf);border-top:1.5px solid var(--cizgi)}
@@ -429,7 +430,6 @@ a{color:#1A2142}
   <section class="ad b-c">
     <div class="ad-ust"><a class="puan" href="#yorumlar" aria-label="{{rating}} puan, {{reviews}} yorum. Yorumlara git."><svg class="yildiz" viewBox="0 0 84 15" aria-hidden="true"><defs><clipPath id="yd1"><rect x="0" y="0" width="{{starW}}" height="15"></rect></clipPath></defs><g class="bos"><path transform="translate(0 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(17 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(34 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(51 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(68 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path></g><g class="dolu" clip-path="url(#yd1)"><path transform="translate(0 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(17 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(34 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(51 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path><path transform="translate(68 0)" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"></path></g></svg><b class="tab">{{rating}}</b><span>({{reviews}} yorum)</span></a></div>
     <h1 class="urun-ad lit">LunaDream</h1>
-    <p class="urun-alt">Tavana masal yansıtan gece lambası</p>
     <p class="fiyat tab"><b>{{p1}}</b><s>{{c1}}</s><span class="ind">%{{pct}} indirim</span></p>
     <ul class="guven"><li><svg class="ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17.5" cy="17.5" r="1.8"></circle></svg>Ücretsiz kargo</li><li><svg class="ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"></path><path d="M4 4v4h4"></path></svg>30 gün iade</li><li><svg class="ik" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Güvenli ödeme</li></ul>
   </section>
@@ -439,12 +439,12 @@ a{color:#1A2142}
     <h2 class="h2 lit">Sihirli özellikler</h2>
     <div class="isik-sahne">
       <span class="isik-hale" aria-hidden="true"></span>
-      <svg class="yorunge" viewBox="0 0 390 440" aria-hidden="true"><circle class="yr" cx="195" cy="216" r="128"></circle><path class="yc" d="M78 98L104.5 125.5M312 98L285.5 125.5M78 332L104.5 306.5M312 332L285.5 306.5"></path><circle class="yn" cx="104.5" cy="125.5" r="5.5"></circle><circle class="yn" cx="285.5" cy="125.5" r="5.5"></circle><circle class="yn" cx="104.5" cy="306.5" r="5.5"></circle><circle class="yn" cx="285.5" cy="306.5" r="5.5"></circle></svg>
+      <svg class="yorunge" viewBox="0 0 390 384" aria-hidden="true"><ellipse class="yr" cx="195" cy="192" rx="132" ry="100"></ellipse><path class="yc" d="M70 94L101.7 121.3M320 94L288.3 121.3M70 290L101.7 262.7M320 290L288.3 262.7"></path><circle class="yn" cx="101.7" cy="121.3" r="5.5"></circle><circle class="yn" cx="288.3" cy="121.3" r="5.5"></circle><circle class="yn" cx="101.7" cy="262.7" r="5.5"></circle><circle class="yn" cx="288.3" cy="262.7" r="5.5"></circle></svg>
       <span class="sahne-golge" aria-hidden="true"></span>
       <img class="{{sahneCls}}" src="{{lambaKes}}" alt="{{lambaAlt}}">
       <div class="oz oz-sol oz-ust"><span class="anim" aria-hidden="true"><span class="hale"></span><svg style="fill: currentColor; stroke: none" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span><b>Mışıl mışıl uykular</b><span>3 parlaklık ayarı.</span></div>
       <div class="oz oz-sag oz-ust"><span class="anim" aria-hidden="true"><span class="yel"><img src="/_blob/4a3a69e8c1d8dddad8c33f8f463b8a0e" alt=""><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""></span></span><b>6 + 6 masal diski</b><span>Altısı hediye.</span></div>
-      <div class="oz oz-sol oz-alt"><span class="anim" aria-hidden="true"><span class="dalga"><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span>Telefondan bağlan, çalsın.</span></div>
+      <div class="oz oz-sol oz-alt"><span class="anim" aria-hidden="true"><span class="dalga"><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span>Telefondan çalar.</span></div>
       <div class="oz oz-sag oz-alt"><span class="anim" aria-hidden="true"><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span>Şarjlı, her odaya taşı.</span></div>
     </div>
   </section>
@@ -486,13 +486,13 @@ a{color:#1A2142}
         <div class="fis" role="group" aria-label="Sipariş özeti">
           <div class="fis-bas"><b class="lit">Sipariş fişin</b><span class="tab">{{fisTarih}}</span></div>
           <dl>
-            <div class="fis-sat"><dt>{{fisAdet}}</dt><dd>{{adetName}}</dd></div>
+            <div class="fis-sat"><dt>LunaDream</dt><dd>{{adetName}}</dd></div>
             <div class="fis-sat"><dt>Masal diski</dt><dd class="tab">{{fisDisk}}</dd></div>
             <div class="fis-cizik"></div>
-            <div class="fis-sat ana"><dt>Kartla öde</dt><dd class="tab">{{onPrice}}</dd></div>
+            <div class="fis-sat ana"><dt>Kartla öde</dt><dd class="tab">{{onPrice}}<small class="fark">{{kartFark}} daha az</small></dd></div>
             <div class="fis-sat"><dt>Kapıda öde</dt><dd class="tab">{{kpPrice}}</dd></div>
             <div class="fis-cizik"></div>
-            <div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z"></path></svg>Sipariş</dt><dd class="tab">Bugün</dd></div><div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg>Kargoda</dt><dd class="tab">{{kargo}}</dd></div><div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg>Kapında</dt><dd class="tab">{{teslim}}</dd></div>
+            <div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A6.84 9 0 0 0 12 3Z"></path></svg>Sipariş</dt><dd class="tab">Bugün</dd></div><div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg>Kargoda</dt><dd class="tab">{{kargo}}</dd></div><div class="fis-sat"><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg>Kapında (tahmini)</dt><dd class="tab">{{teslim}}</dd></div>
           </dl>
           <p class="fis-alt">Kargo ücretsiz · 30 gün iade</p>
         </div>
@@ -505,7 +505,7 @@ a{color:#1A2142}
   <section class="tavan koyu gir" id="diskler">
     <svg class="tavan-yildiz" viewBox="0 0 390 330" aria-hidden="true"><circle cx="38" cy="44" r="1.2"></circle><circle cx="84" cy="92" r="0.9"></circle><circle cx="126" cy="30" r="1.4"></circle><circle cx="171" cy="70" r="0.9"></circle><circle cx="222" cy="22" r="1.1"></circle><circle cx="262" cy="84" r="1.4"></circle><circle cx="318" cy="40" r="1.0"></circle><circle cx="352" cy="104" r="1.2"></circle><circle cx="58" cy="150" r="0.9"></circle><circle cx="334" cy="170" r="1.1"></circle><circle cx="24" cy="232" r="1.3"></circle><circle cx="368" cy="262" r="0.9"></circle><circle cx="110" cy="190" r="0.8"></circle><circle cx="290" cy="206" r="0.8"></circle></svg>
     <h2 class="h2 lit">Bu gecenin masalı</h2>
-    <p class="alt-yazi">Diske dokun, tavanda gör.</p>
+    <p class="alt-yazi">Diske dokun, desenini gör.</p>
     <div class="sahne">
       <span class="yer">[gerçek tavan fotoğrafı]</span>
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><span class="hal"></span><img src="{{p.src}}" alt=""></span></sc-for>
@@ -556,7 +556,7 @@ a{color:#1A2142}
       <span class="gk gk-isik" aria-hidden="true"></span>
       <span class="gk gk-gunes" aria-hidden="true"></span>
       <svg class="gk gk-yildiz" viewBox="0 0 390 468" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle></svg>
-      <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay acik" d="M39 216A156 156 0 0 1 351 216"></path><path class="yay koyu-c" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka acik" cx="195" cy="216" r="104"></circle><circle class="halka koyu-c" cx="195" cy="216" r="104"></circle></svg>
+      <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay acik" d="M39 216A156 156 0 0 1 351 216"></path><path class="yay koyu-c" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka acik" cx="195" cy="216" r="96"></circle><circle class="halka koyu-c" cx="195" cy="216" r="96"></circle></svg>
       <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
       <sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><span class="{{a.saatCls}}" style="left: {{a.lx}}px; top: {{a.ly}}px" aria-hidden="true">{{a.t}}</span><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for>
       <span class="g-ay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span>
@@ -568,7 +568,7 @@ a{color:#1A2142}
 
   <!-- 11 · 30 gün iade: yasal 14 gün özel avantaj gibi sunulmaz -->
   <section class="bant b-c gir">
-    <div class="otuz"><span class="muhur-kap"><svg class="muhur" viewBox="0 0 88 88" aria-hidden="true"><circle cx="44" cy="44" r="42.5" class="mh-halka"></circle><g transform="translate(39.0 4.0) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle></g><g transform="translate(63.7 14.3) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z"></path></g><g transform="translate(74.0 39.0) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></g><g transform="translate(63.7 63.7) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 1 12 3Z"></path></g><g transform="translate(39.0 74.0) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></g><g transform="translate(14.3 63.7) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 1 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g><g transform="translate(4.0 39.0) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g><g transform="translate(14.3 14.3) scale(.42)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g></svg><span class="muhur-say"><b class="lit tab">30</b><span>gün</span></span></span><span><b>Beğenmezsen iade et</b><p>Yasal 14 günü 30 güne uzattık. İade kodunu biz göndeririz, kargosu ücretsiz.</p></span></div>
+    <div class="otuz"><span class="muhur-kap"><svg class="muhur" viewBox="0 0 104 104" aria-hidden="true"><circle cx="52" cy="52" r="50.5" class="mh-halka"></circle><g transform="translate(46.0 5.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle></g><g transform="translate(75.0 17.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z"></path></g><g transform="translate(87.0 46.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></g><g transform="translate(75.0 75.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 1 12 3Z"></path></g><g transform="translate(46.0 87.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></g><g transform="translate(17.0 75.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 1 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g><g transform="translate(5.0 46.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g><g transform="translate(17.0 17.0) scale(.5)"><circle cx="12" cy="12" r="9" class="mh-bos"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z" transform="matrix(-1 0 0 1 24 0)"></path></g></svg><span class="muhur-say"><b class="lit tab">30</b><span>gün</span></span></span><span><b>Beğenmezsen iade et</b><p>Yasal 14 günü 30 güne uzattık. İade kodunu biz göndeririz, kargosu ücretsiz.</p></span></div>
   </section>
 
   <!-- 12 · SSS -->
@@ -587,6 +587,7 @@ a{color:#1A2142}
   <footer class="bant b-d" style="padding-bottom: 96px">
     <h2 class="h2 lit">İlk geceyi birlikte izleyin.</h2>
     <button class="btn-ana" type="button" style="margin-top: 16px"><svg class="ik" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg><span>Güvenli Ödeme İle Al</span><span class="fy tab">{{onPrice}}</span></button>
+    <a class="kp-bag tab" href="#siparis">ya da kapıda öde · {{kpPrice}}</a>
     <nav class="yasal" aria-label="Yasal"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></nav>
     <p class="kunye">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
     <p class="dev lit"><svg class="logo-ay" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg>Ayluna</p>
@@ -749,7 +750,7 @@ class Component extends DCLogic {
       vids: vids, mfoto: mfoto, topics: topics, revs: revs, moments: moments, geceCls: 'gece-cerceve an' + gece, shop: shop, shopCount: PR.length, faq: faq,
       geceNo: gece + 1, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); },
       sahneCls: 'sahne-lamba ' + (kiz ? 'k' : 'e'),
-      fisTarih: fisTarih, fisAdet: S.adet === 2 ? '2 Adet' : '1 Adet', fisDisk: S.adet === 2 ? '2 × (6 + 6 hediye)' : '6 + 6 hediye', kpPrice: TL(kapida, true),
+      fisTarih: fisTarih, fisAdet: S.adet === 2 ? '2 Adet' : '1 Adet', fisDisk: S.adet === 2 ? '2 × (6 + 6 hediye)' : '6 + 6 hediye', kpPrice: TL(kapida, true), kartFark: TL(kapida - online, true),
       yapisSrc: S.adet === 2 ? kes(l1) : kes(S.model), yapisSrc2: kes(l2), yapisIki: S.adet === 2 && l1 !== l2
     };
   }
