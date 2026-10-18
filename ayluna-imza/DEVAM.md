@@ -485,6 +485,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Altında tek satır: "Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir."
   - "Kutudan ne çıkıyor?" bölümü kalktı; içerik SSS'nin ilk sorusu oldu (1 lamba, 6 masal diski, 6 hediye disk, USB şarj kablosu; iki modelde de aynı).
   - Fotoğraflar Bir gece'nin 20:00 anında da var (aynı oda fotoğrafları).
+- **Eleştirmen düzeltmeleri (Sürüm 75, E h 6110):** kart başlığı 20px (bölüm başlığından büyük olmaz), düğme 48px; teyitsiz cümleler değişti: "Tavanda ay ve yıldızlar." → "Tavanda masal."; "Odası bir uzay gemisi. Robot lamba yanınca duvara ve tavana yıldızlar düşer." → "Tavanda uzay. Uzay diskini tak, tavan uzaya dönsün." (desen seçilen diske göre değişir, iki model aynı diskleri kullanır). SSS: "2 Adet'te iki kutu gelir."
+- **Kullanıcıya sorulan, bekleyen:**
+  - Oda fotoğrafı sayfada üç kez (galeri ilk kare, Bir gece 20:00, oda kartı). Tavanı da gösteren 2 yeni geniş oda görseli gerekli (kullanıcının görseli ya da onayıyla üretim; ürün yeniden çizilmez).
+  - Bölüm başlığı "Odası böyle görünecek." + "temsilîdir" notu birbirini zayıflatıyor; eleştirmenin önerisi "Hangisi onun?".
+  - "Kutudan ne çıkıyor" ile kaybolan el fotoğrafı (tek boyut ipucu) galeriye taşınsın mı?
+  - Adaptör kutuda var mı: [teyit].
 
 ## Tur 25 · Kargo döngüsü, kapıda butonu, güven satırı, seçici seçenekleri (18 Ekim)
 - Kullanıcı (E'ye bakarak):

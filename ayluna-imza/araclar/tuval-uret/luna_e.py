@@ -301,10 +301,10 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .p-cip{position:absolute;left:14px;top:14px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 7px;border-radius:999px;background:rgba(255,253,249,.94);color:#1A2142;font-size:12px;font-weight:700}
 .p-cip .evre{width:14px;height:14px}.p-cip .evre circle{fill:none;stroke:#1A2142;stroke-width:1.6}.p-cip .evre path{fill:#F2A65A}
 .p-alt{display:flex;flex-direction:column;gap:6px;padding:18px}
-.p-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+.p-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
 .p-bas span{color:#F2A65A}
 .p-yazi{margin:0;font-size:14px;line-height:1.45;color:#B9BED6}
-.p-sec{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:44px;margin-top:4px;padding:0 14px;border:1.5px solid rgba(255,253,249,.55);border-radius:999px;background:transparent;color:#FFFDF9;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.p-sec{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:48px;margin-top:4px;padding:0 14px;border:1.5px solid rgba(255,253,249,.55);border-radius:999px;background:transparent;color:#FFFDF9;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .p-sec:active{transform:scale(.97)}
 .ok-ik{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .b-say{display:flex;justify-content:center;gap:6px;margin-top:12px}
@@ -510,8 +510,8 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <section class="bolum gir" id="odalar">
     <div class="px"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
     <div class="b-serit noscroll" onScroll="{{odaKay}}">
-      <div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda ay ve<br>yıldızlar<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button" onClick="{{secKiz}}">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
-      <div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.78) + """'></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Odası bir uzay<br>gemisi<span>.</span></p><p class="p-yazi">Robot lamba yanınca duvara ve tavana yıldızlar düşer.</p><button class="p-sec" type="button" onClick="{{secErkek}}">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
+      <div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda masal<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button" onClick="{{secKiz}}">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
+      <div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.78) + """'></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Tavanda uzay<span>.</span></p><p class="p-yazi">Uzay diskini tak, tavan uzaya dönsün.</p><button class="p-sec" type="button" onClick="{{secErkek}}">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
     <div class="b-say" aria-hidden="true"><i class="{{nokta0}}"></i><i class="{{nokta1}}"></i></div>
@@ -746,7 +746,7 @@ JS = """class Component extends DCLogic {
       if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); }; }
     function odaKay(e) { var el = e && (e.currentTarget || e.target); if (!el) return; var i = el.scrollLeft > 150 ? 1 : 0; if (i !== (self.state.oda || 0)) self.setState({ oda: i }); }
     var faq = [
-      { q: 'Kutudan ne çıkıyor?', a: 'Seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı.' },
+      { q: 'Kutudan ne çıkıyor?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' },
       { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. İkisi de telefona Bluetooth ile bağlanır; çalan ninni lambadan gelir.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
       { q: 'Kargo ne zaman gelir?', a: 'Siparişin 1 iş gününde kargoya verilir, Türkiye geneline 3–7 günde ulaşır.' },
@@ -769,5 +769,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6130)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6110)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))
