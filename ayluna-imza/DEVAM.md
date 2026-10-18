@@ -483,7 +483,8 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Saat mantığı ortak: `ortak.py` → `KARGO_JS` (İstanbul saati; Pzt–Cum 16.00 öncesi bugün, sonrası "yarın" ya da gün adı, sayaçsız).
   - Teslim çizgisinde kargo tarihi aynı kurala göre ("Bugün"); SSS ve Kargo politikası 16.00 kuralıyla güncellendi.
   - Test: `test.js` sabit saatle (Pazartesi 12:47:15) dönüşü, sayacı, 16.00 sonrasını ve yoldaki "Bugün"ü dener.
-- Açık: sepetteki Hızlı Kargo (₺79,99) da "aynı gün kargoya verilir" diyor; farkı kullanıcıya soruldu. Cumartesi kargo var mı teyit. Çıkan satırın geçişte üstte kısa süre silik kalması (çıkışı hızlandırma) kullanıcı durdurduğu için yapılmadı.
+- Hızlı Kargo (kullanıcı: "öncelikli kargo oluyor işte"): "Siparişin sıranın önüne alınır, öncelikli hazırlanıp kargolanır." Sepet, kapıda formu (`ayluna.js`), ödeme, teşekkür, kargo politikası, takip sayfası ve `shopify/ayluna-sss.txt` güncellendi; sepette standart kargo da 16.00 kuralıyla ("Bugün kargoda"). Canlı mağazadaki Hızlı Kargo ürün açıklaması kullanıcı tarafından değiştirilmeli.
+- Açık: Cumartesi kargo var mı teyit. Çıkan satırın geçişte üstte kısa süre silik kalması (çıkışı hızlandırma) kullanıcı durdurduğu için yapılmadı.
 - Tuvale yayın ve site artifact'ının yeniden yayını kullanıcı onayı bekliyor.
 
 ## Çalışan site iskeleti (18 Ekim, en güncel)

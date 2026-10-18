@@ -188,7 +188,7 @@ TAKIP = ("""
       <button class="btn-l" type="submit">Siparişini takip et</button>
     </form></div>
   <div class="kart-k"><h2>Bulamadın mı?</h2><p>Sipariş numaranla WhatsApp'tan yaz; kargonun nerede olduğunu biz bakalım.</p><a class="btn-c" href="#">""" + WA.replace('<svg ', '<svg style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round" ') + """WhatsApp'tan yaz</a>
-    <ul class="satirlar"><li><span>Kargoya veriliş</span><b>1 iş günü</b></li><li><span>Teslim</span><b>Türkiye geneli 3–7 gün</b></li><li><span>Firmalar</span><b>Aras, DHL, PTT [Yol?]</b></li></ul></div>
+    <ul class="satirlar"><li><span>Kargoya veriliş</span><b>16.00’ya kadar aynı gün</b></li><li><span>Teslim</span><b>Türkiye geneli 3–7 gün</b></li><li><span>Firmalar</span><b>Aras, DHL, PTT [Yol?]</b></li></ul></div>
 """)
 
 # ——— İade ve değişim ———

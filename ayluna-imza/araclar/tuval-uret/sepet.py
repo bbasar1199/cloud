@@ -1,14 +1,15 @@
 # Ayluna · sepet çekmecesi (18 Eki). Çalıştır: python3 sepet.py
 # Kullanıcı: "Bunların hepsi güzel bir şekilde sepette gelecek." Canlı sepetteki ek teklifler (ekran görüntüsü):
 #   Astronot Hava Temizleyici 749.00TL · Siparişinize özel Kum Saati Lamba 699.99TL · Işıklı Nemlendirici 749.99TL ·
-#   Hızlı Kargo 79.99TL ("Siparişiniz öncelikli olarak hazırlanır ve aynı gün kargoya teslim edilir").
+#   Hızlı Kargo 79.99TL. Kullanıcı (18 Eki): "öncelikli kargo oluyor"; standart kargo da 16.00'ya kadar aynı gün çıktığı için
+#   Hızlı Kargo "aynı gün" diye değil, öncelikli hazırlık olarak anlatılır.
 # Mağaza karşılıkları: Astronot Oda Nemlendirici Aroma Difüzör (₺799), Ayluna Kum Saati Lamba (₺799), Yıldız Işığı Nemlendirici (₺849,99).
 # "Hava temizleyici" yazılmaz: ürün nemlendirici (teyitsiz işlev iddiası). Özel fiyatın yanında mağaza fiyatı düz yazıyla durur (üstü çizili değil).
 # Marka dili (sepet her ürün sayfasında ortak): lacivert #1A2142 + beyaz, Ayluna işareti; Young Serif başlık + Onest gövde.
 # Ödeme: kartla %5 önce, kapıda ikinci; kapıda butonunda fiyat yok (₺80 kapıda ücreti formda ve SSS'de).
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS
 import luna_e as E
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'Sepet.dc.html')
 B = '/_blob/'
@@ -160,14 +161,14 @@ JS = """class Component extends DCLogic {
       arttir: function () { if (x.adet < 9) { if (SP) SP.adet(x.id, x.adet + 1); else demo(function (d) { d.satirlar[0].adet++; }); } },
       sil: function () { if (SP) SP.sil(x.id); else demo(function (d) { d.satirlar = []; }); } }; });
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
-    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
-    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    """ + KARGO_JS + """
+    var KG = KARGO(Date.now()), kd = KG.gun, kGun = KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()];
     var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
     var HIZLI = 79.99;
     var teslimat = [
-      { n: 'Standart kargo', t: kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda, ' + teslim + ' kapında', p: 'Ücretsiz', h: false },
-      { n: 'Hızlı Kargo', t: 'Siparişin öncelikli hazırlanır, aynı gün kargoya verilir.', p: TL(HIZLI, true), h: true }
+      { n: 'Standart kargo', t: kGun + ' kargoda, ' + teslim + ' kapında', p: 'Ücretsiz', h: false },
+      { n: 'Hızlı Kargo', t: 'Siparişin sıranın önüne alınır, öncelikli hazırlanıp kargolanır.', p: TL(HIZLI, true), h: true }
     ].map(function (d) { var on = !!sp.hizli === d.h; return { n: d.n, t: d.t, p: d.p, on: on ? 'true' : 'false', cls: on ? 'tes on' : 'tes', pick: function () { if (SP) SP.hizli(d.h); else demo(function (x) { x.hizli = d.h; }); } }; });
     var urun = 0, adetT = 0, ek = 0, ekSay = 0;
     sp.satirlar.forEach(function (x) { urun += x.birim * x.adet; adetT += x.adet; });
@@ -178,7 +179,7 @@ JS = """class Component extends DCLogic {
     var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
       bos: !sp.satirlar.length, dolu: sp.satirlar.length > 0, satirlar: satirlar, adetToplam: adetT + ekSay,
-      teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · aynı gün kargoda' : 'Kargo ücretsiz · ' + kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda',
+      teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
       araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
       indirim: TL(indirim, true), toplam: TL(toplam, true),
       kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.geri(); },

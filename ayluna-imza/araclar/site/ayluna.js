@@ -231,7 +231,7 @@
     var s = Sepet.oku(), t = Sepet.toplam('kapida');
     kf.querySelector('.kf-ozet').innerHTML = s.satirlar.map(function (x) { return '<div class="kf-s"><img src="' + gorsel(x.img) + '" alt=""><span><b>' + x.ad + '</b><small>' + x.varyant + (x.adet > 1 ? ' · ×' + x.adet : '') + '</small></span><em>' + TL(x.birim * x.adet) + '</em></div>'; }).join('');
     kf.querySelector('.kf-ek').innerHTML = '<p class="kf-ek-b">Siparişine ekle</p>' + EKLER.map(function (e) { var on = s.ekler && s.ekler[e.k]; return '<button type="button" class="kf-ekb' + (on ? ' on' : '') + '" data-ek="' + e.k + '" aria-pressed="' + !!on + '"><i></i><span>' + e.n + '</span><em>' + TL(e.p) + '</em></button>'; }).join('') +
-      '<button type="button" class="kf-ekb' + (s.hizli ? ' on' : '') + '" data-ek="__hizli" aria-pressed="' + !!s.hizli + '"><i></i><span>Hızlı Kargo · aynı gün kargoda</span><em>' + TL(HIZLI) + '</em></button>';
+      '<button type="button" class="kf-ekb' + (s.hizli ? ' on' : '') + '" data-ek="__hizli" aria-pressed="' + !!s.hizli + '"><i></i><span>Hızlı Kargo · öncelikli hazırlanır</span><em>' + TL(HIZLI) + '</em></button>';
     kf.querySelector('.kf-top').innerHTML = '<p><span>Ürünler</span><b>' + TL(t.urun + t.ek) + '</b></p><p><span>Kargo</span><b>' + (t.kargo ? TL(t.kargo) : 'Ücretsiz') + '</b></p><p><span>Kapıda ödeme ücreti</span><b>' + TL(t.kapida) + '</b></p><p class="kf-t"><span>Kapıda ödenecek</span><b>' + TL(t.toplam) + '</b></p>';
   }
   var _ek = Sepet.ek; Sepet.ek = function (k, on) { if (k === '__hizli') return Sepet.hizli(!Sepet.oku().hizli); return _ek(k, on); };

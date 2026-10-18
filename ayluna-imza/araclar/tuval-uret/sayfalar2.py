@@ -84,9 +84,9 @@ def L(*m): return '<ul>' + ''.join('<li>%s</li>' % x for x in m) + '</ul>'
 TASLAK = '<p class="taslak">Taslak metin: köşeli yerler doldurulup hukukçuya onaylatılmadan yayına girmez.</p>'
 
 POLITIKA = {
-    'Politika-Kargo.dc.html': ('Ayluna · Kargo ve teslimat', 'Kargo ve<br>teslimat', 'Kargo ücretsiz; 1 iş gününde kargoda.', [
+    'Politika-Kargo.dc.html': ('Ayluna · Kargo ve teslimat', 'Kargo ve<br>teslimat', 'Kargo ücretsiz; 16.00’ya kadar verilen sipariş aynı gün kargoda.', [
         kart('Süreler', L('<b>Kargoya veriliş:</b> iş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir (hafta sonu ve resmî tatiller hariç).',
-                         '<b>Teslim:</b> Türkiye geneli 3–7 iş günü.', '<b>Hızlı Kargo (₺79,99):</b> sepette seçilirse sipariş öncelikli hazırlanır, aynı gün kargoya verilir.',
+                         '<b>Teslim:</b> Türkiye geneli 3–7 iş günü.', '<b>Hızlı Kargo (₺79,99):</b> sepette seçilirse sipariş sıranın önüne alınır, öncelikli hazırlanıp kargolanır.',
                          'Yasal üst sınır: sipariş en geç 30 gün içinde teslim edilir; gecikirse sana haber verir, istersen siparişi iptal ederiz.')),
         kart('Ücretler', L('Kargo tüm siparişlerde ücretsiz.', '<b>Kapıda ödeme ücreti ₺80.</b> Kartla ödemede bu ücret yoktur, üstelik %5 indirim uygulanır.')),
         kart('Kargo firmaları ve takip', L('Aras Kargo, DHL, PTT [hangisi ne zaman kullanılıyor: teyit].', 'Kargoya verilince takip numarası SMS ve e-postayla gelir; "Kargo takip" sayfasından da bakabilirsin.')),
@@ -231,7 +231,7 @@ ODEME_JS = """class Component extends DCLogic {
       satirlar: sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant + (x.adet > 1 ? ' · ×' + x.adet : ''), img: x.img, tutar: TL(x.birim * x.adet, true) }; }),
       ekler: ekL.map(function (e) { return { ad: e.n, img: e.img, tutar: TL(e.p, true) }; }),
       ara: TL(ara, true), kargo: kargo ? TL(kargo, true) : 'Ücretsiz', indirim: TL(ind, true), toplam: TL(top, true), hata: S.hata,
-      kargolar: [{ n: 'Standart kargo', t: '1 iş gününde kargoda, 3–7 günde kapında', p: 'Ücretsiz', h: false }, { n: 'Hızlı Kargo', t: 'Aynı gün kargoya verilir', p: TL(79.99, true), h: true }]
+      kargolar: [{ n: 'Standart kargo', t: '16.00’ya kadar aynı gün kargoda, 3–7 günde kapında', p: 'Ücretsiz', h: false }, { n: 'Hızlı Kargo', t: 'Öncelikli hazırlanır ve kargolanır', p: TL(79.99, true), h: true }]
         .map(function (k) { var on = !!sp.hizli === k.h; return { n: k.n, t: k.t, p: k.p, on: on ? 'true' : 'false', cls: on ? 'o-sec on' : 'o-sec', pick: function () { hizli(k.h); } }; }),
       kapida: function () { if (window.Ayluna) window.Ayluna.kapidaAc(); },
       gonder: function (e) { e.preventDefault(); var f = e.target, d = {};
@@ -248,7 +248,7 @@ TAMAM = ("""
   <div class="tamam">""" + TAMAM_AY + """<h1>Siparişin alındı.</h1><p>Sipariş numaran <b>{{no}}</b>. {{yolYazi}}</p></div>
   <div class="kart-k"><h2>Sırada ne var?</h2><ol class="adim">
     <li><em>1</em><span><b>{{adim1}}</b><span>{{adim1t}}</span></span></li>
-    <li><em>2</em><span><b>1 iş gününde kargoda</b><span>Takip numarası SMS ve e-postayla gelir.</span></span></li>
+    <li><em>2</em><span><b>İş günü 16.00’ya kadar aynı gün kargoda</b><span>Takip numarası SMS ve e-postayla gelir.</span></span></li>
     <li><em>3</em><span><b>3–7 günde kapında</b><span>{{adim3}}</span></span></li></ol></div>
   <div class="kart-k"><h2>Özet</h2><ul class="satirlar"><sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><li><span>{{u.ad}}</span><b>{{u.tutar}}</b></li></sc-for>
     <li><span>Kargo</span><b>{{kargo}}</b></li><sc-if value="{{kapidaVar}}" hint-placeholder-val="{{false}}"><li><span>Kapıda ödeme ücreti</span><b>₺80,00</b></li></sc-if>

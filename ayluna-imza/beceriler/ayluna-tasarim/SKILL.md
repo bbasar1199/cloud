@@ -167,7 +167,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 
 ## Gerçekler (uydurma yerine bunlar)
 - İade 30 gün (90 değil): 14 gün yasal cayma + 16 gün Ayluna. Ücretsiz kargo. Kargo takibi Track123.
-- Kargo: iş günü 16.00’ya kadar verilen sipariş aynı gün kargoda (kullanıcı, 18 Eki), sonrası ertesi iş günü; Türkiye geneli 3–7 günde teslim. Cumartesi kargo teyitsiz.
+- Kargo: iş günü 16.00’ya kadar verilen sipariş aynı gün kargoda (kullanıcı, 18 Eki), sonrası ertesi iş günü; Türkiye geneli 3–7 günde teslim. Cumartesi kargo teyitsiz. Hızlı Kargo (₺79,99) "aynı gün" diye değil, öncelikli hazırlık olarak anlatılır: "Siparişin sıranın önüne alınır, öncelikli hazırlanıp kargolanır."
 - LunaDream fiyatları:
   - 1 lamba ₺1.699,99 (karşılaştırma ₺1.999,00)
   - 2 lamba ₺2.749,99 (karşılaştırma ₺3.998,00)
