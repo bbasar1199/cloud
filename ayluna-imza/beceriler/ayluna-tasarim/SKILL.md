@@ -68,6 +68,12 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - amber, basılınca çöken "Güvenli Ödeme İle Al"; çizgili "Kapıda Ödeme ile Sipariş Ver"
   - noktalı teslim çizgisi
   - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
+- **Bütünlük (18 Eki, kullanıcı: "her şey çok yabancı duruyor, bir bütün ve uyum yakala"):**
+  - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
+  - Yenilik, bölüm içinde tek bir parça olarak denenir; örnek: Bir gece kadranı. Yazı tipini ve renkleri değiştiren turlar (D; Tur 20'deki E) "yabancı" bulundu.
+  - Sipariş fişi istenmiyor.
+  - Soru başlıkları soru işaretiyle biter.
+  - Sıfırı çizgili yazı tipi kullanılmaz (Atkinson Hyperlegible Next'teki "Ø" yazım hatası gibi görünür).
 - "Işığı aç/kapat" anahtarı ve saat kullanılmaz. Galeri ana ürün fotoğraflarından gelir, ama Main'deki gibi gece sahnesi çerçevesinde: lacivert zemin, üstte logo, kare poster kırpılmadan tam genişlik, kenarlarda süzülen hediye diskleri (ürünü kapatmaz), fotoğrafın üstünde küçük resimler ve "1/7", altına binen yuvarlak köşeli levha.
 - **Paket ve ödeme canlı sitedeki gibi kalır:**
   - alt alta "1 Adet / 2 Adet" kartları ve altlarında "+6 Tane Ücretsiz Hediye Disk" şeridi

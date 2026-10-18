@@ -202,6 +202,7 @@ Kodda "Sihirli Özellikler (yeri korunur)" notu var.
   - Kapına ne gelir? (seçime göre kutu sayısı ve içerik)
   - Ay tutamakları (eleştirmen 4/10)
 - **Reddedilen (Tur 16):** bölümleri hikâye karelerine toplamak ("çok kısaltmışız").
+- **Denemede (Tur 21, E panosu):** B+ ve Bir gece kadranı (yaydaki beş saat, ay seçili saate gider, koyu panel). Kullanıcı kararı bekleniyor.
 - **Denemede (Tur 18, D panosu):** "Oda ve Tavan". Yönü ve kararları ajanlar verdi (`ogrenme/tur18/karar.md`): Literata ve Atkinson Hyperlegible Next, bant iskeleti, kubbe kenarlı "Disk tavana açılır", saatle koyulaşan Bir gece. Kullanıcı kararı bekleniyor.
 
 ## 7. Mevzuat ve dürüstlük (8 kural; kaynaklar `ogrenme/arastirma.md`)
@@ -302,6 +303,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 17 Eki | Bilgiler: Ekim kampanyası, her kutuda hepsi, boyut/pil yazılmasın, her yaş, Bluetooth iki modelde, 3 parlaklık, tüm kartlar, stok elle (18), ücretsiz iade kodu, müşteri fotoğrafı izni, "Flow ile üretebilirsin" | Bilgiler §3'e işlendi. Flow (Google) yalnız kullanıcının tarayıcısından çalışır; bulut oturumunda tarayıcı bağlantısı yoksa görsel üretimi claude.ai sohbetinde (Claude in Chrome + Flow) yapılır ya da `HF_TOKEN` eklenir. |
 | 17 Eki | "Çok kısaltmışız; hâlâ soğukluk, düzensizlik var, tam yakın değil uzak değil. Sitenin alt kısmı section olarak görünmeli. Değişiklik bölümler, iskelet, sayfanın görünüşü üzerine olmalıydı." (Tur 16 C hikâyesine) | **Yeni deneme içerik kesmez, bölümleri birleştirip gizlemez** (hikâye/karusel içine toplamak yok). Her bölüm ayrı ve görünür kalır. Yeni tasarım turu iskelete ve görünüşe dokunur: bölüm yüzeyleri, aralık ritmi, sıcaklık. **Yakınlık net olur:** grup içi sıkı (8–16px), bölüm sınırı boşlukla değil yüzey değişimiyle okunur. Soğuk duran ince çizgili beyaz kartlar yerine sıcak dolgulu yüzeyler. |
 | 18 Eki | "Hayır olmamış, o section için UI tasarım istiyorum" (Bir gece) ve "Daha güzel bir UI yapmanı istiyorum" | **Bölüm düz bant + liste olarak kalmaz, ürüne özgü bir arayüz parçası olur:** lamba kendi ışığında özellik sahnesi, sipariş fişi, gece kadranı, ay evreli mühür (E). İçerik ve bölüm sırası korunur. Kullanıcının sildiği bir öğe (ad altındaki alt başlık) yeni turda geri gelmez: eski üretici kopyalanınca bu tablo baştan kontrol edilir. |
+| 18 Eki | (Tur 20 E'sine) "Sipariş fişini kaldır, emoji benefiti düzelt, yazım hataları berbat, yazı fontu kötü; her şey çok yabancı duruyor, bir bütün ve uyum yakala" | **Bütünlük önce gelir:** yeni deneme seçilen B+'nın dilinden çıkmaz (Young Serif + Onest, krem/lacivert/amber, Sihirli V1 2×2 beyaz kart, canlı paket ve iki buton); yenilik bölüm içinde tek parça olarak denenir. Bir önceki satırdaki "ışık sahnesi, sipariş fişi, mühür" yaklaşımı geri alındı; yalnız **Bir gece kadranı** B+ diliyle kaldı. Sipariş fişi yok. "Emoji benefit" = Sihirli Özellikler; seçili biçimi V1. Soru başlıkları "?" ile biter; sıfırı çizgili yazı tipi kullanılmaz. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

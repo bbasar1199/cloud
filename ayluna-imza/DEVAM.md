@@ -475,6 +475,30 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 21 · E, B+'nın diliyle yeniden (18 Ekim)
+- Kullanıcı (E'ye bakarken): "Sipariş fişini kaldır, emoji benefiti düzelt, yazım hataları berbat, yazı fontu kötü; her şey çok yabancı duruyor, bir bütün ve uyum yakala."
+- Teşhis: D ve Tur 20'deki E seçilen B+'dan ayrı bir dil kurmuştu.
+  - Yazı: Literata + Atkinson. Atkinson'ın sıfırı çizgili; "3Ø", "₺1.999,ØØ" gibi okunuyor.
+  - Başka bir renk paleti.
+  - Sihirli yörünge düzenine çevrilmişti; kullanıcının seçtiği V1, 2×2 beyaz kartlardı.
+- Yapılan: `luna_e.py` B+ üretecinden (`luna_bplus.py`) yeniden kuruldu; Tur 20 sürümü git geçmişinde.
+  - B+'dan aynen gelenler: Young Serif + Onest, krem/lacivert/amber, Sihirli V1, canlı paket ve iki buton, teslim çizgisi, yorum duvarı, diskler, kutu, 30 gün, SSS, alt bilgi.
+  - Sipariş fişi yok.
+  - Tek yenilik: **Bir gece kadranı**, B+'nın koyu panelinde.
+    - Yayda beş saat var; ay seçili saate yay boyunca gider.
+    - Akşam lamba ışığı, gece yıldızlar, 07:30'da amber şafak.
+    - Fotoğraf yuvarlak pencerede; saat Young Serif.
+    - Gezinme: yaydaki saate ya da noktaya dokunma, yandaki oklar, telefonda kaydırma.
+  - Yazım düzeltmeleri:
+    - "Aileler ne diyor?" ve "Kutudan ne çıkıyor?" (nokta yerine soru işareti)
+    - "Kutuda altı masal, altı da hediye."
+    - "Güvenli Ödeme ile Al"
+    - 2 Adet: "2 ayrı almaya göre ₺649,99 daha az" (mevzuat §7.2)
+    - "tanesi ₺1.374,99"
+    - "07 sa 01 dk kaldı"
+  - Görseller tuvaldeki en yeni kimliklerle değişti: oda sahneleri, Bir gece, videolar, müşteri fotoğrafları, elde.
+- Tuval Sürüm 63: E (x=1410, h 5755).
+
 ## Tur 20 · E "Işık": daha güzel arayüz (18 Ekim)
 - Kullanıcı: "Daha güzel bir UI yapmanı istiyorum." (Önceki istek: Bir gece için "UI tasarım istiyorum".)
 - Üreteç `araclar/tuval-uret/luna_e.py` → `canvas/LunaDreamE.dc.html`. D'nin kopyası; D'nin içeriği, bölüm sırası, rengi ve yazısı korunur, D dosyası değişmez.
