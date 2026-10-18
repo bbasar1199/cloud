@@ -485,7 +485,8 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Sepet: `canvas/Sepet.dc.html` (`sepet.py`). Ek teklifler EasySell COD formunun "bump"ları (Astronot ₺749 → ürün nemlendirici; Kum Saati ₺699,99; Yıldız Işığı ₺749,99; Hızlı Kargo ₺79,99). Shopify'da sepette çalışması için ayrıca kurulum + otomatik indirim gerekir.
 - Ana sayfa: `canvas/Ayluna-Anasayfa.dc.html` (`anasayfa.py`; arşivdeki eski `Anasayfa.dc.html` korunur). Kullanıcı eleştirmenin 3 satış önerisini istemedi.
 - Kalan sayfalar: `sayfalar.py` → Koleksiyon, Iletisim, KargoTakip, Politika-Iade, Sayfalar-Kucuk (tuvalde x 5170–7050).
-- Sırada: 13 ürünün sade sayfaları (`ogrenme/urun-icerik.json` + `canvas/urunler/<handle>/`), sonra Shopify bölüm kodları.
+- **13 ürünün sade sayfaları:** `urun_sade.py` → `canvas/U-<handle>.dc.html`, tuvalde yeni "Ürünler" sayfası. İçerik `ogrenme/urun-icerik.json` (dürüst; yer tutucular [teyit]); görseller `canvas/urunler/<handle>/` (67 görsel; 23 uydurma yorum kartı ya da sağlık iddialı afiş alınmadı), blob eşlemesi `canvas/urunler/bloblar.json`, yükseklikler `yukseklik.json`. Ürün adları mağazadaki gibi; içerik dosyasındaki ad önerileri (Kum Sanatı Lambası, Zürafalı Projeksiyonlu Çizim Masası, Alev Efektli Aroma Nemlendirici, Retro Pikap Hoparlör) kullanıcıya soruldu.
+- Sırada: kullanıcının kararları (ad önerileri, teyitler), sonra Shopify bölüm kodları.
 - Kullanıcıya bildirilen site sorunları: yasal bilgi yok (Londra YVZNL LTD), politikalarda yer tutucular, 4 farklı iade süresi, sabit "4.7 (2467)", Astronot/Dokunmatik sayfaları başka ürünü anlatıyor, sağlık iddiaları, /collections/all'da COD "Tükendi" hatası, Loox'ta aynı gün yazılmış etiketsiz yorumlar.
 
 ## Galaxy USB · Yön A sakin düzen + animasyonlar (18 Ekim, en güncel)
