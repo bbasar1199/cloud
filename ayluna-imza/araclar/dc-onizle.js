@@ -18,6 +18,9 @@ let ekFont = '';
 const EF = path.join(__dirname, 'yerel-fontlar.json');
 // Değişken yazı tipi (ör. Archivo wdth): tek dosya, ağırlık ve genişlik aralığıyla
 if (fs.existsSync(EF)) for (const e of JSON.parse(fs.readFileSync(EF, 'utf8'))) if (e.degisken) ekFont += `@font-face{font-family:"${e.aile}";font-weight:100 900;font-stretch:62% 125%;src:url(file://${F}${e.dosya}-latin-${e.degisken}-normal.woff2)}@font-face{font-family:"${e.aile}";font-weight:100 900;font-stretch:62% 125%;src:url(file://${F}${e.dosya}-latin-ext-${e.degisken}-normal.woff2);unicode-range:U+0100-024F}`;
+// Eğik (italic) kesimler: {"italik":[500]} → <dosya>-latin-500-italic.woff2
+if (fs.existsSync(EF)) for (const e of JSON.parse(fs.readFileSync(EF, 'utf8'))) for (const w of (e.italik || []))
+  ekFont += `@font-face{font-family:"${e.aile}";font-weight:${w};font-style:italic;src:url(file://${F}${e.dosya}-latin-${w}-italic.woff2)}@font-face{font-family:"${e.aile}";font-weight:${w};font-style:italic;src:url(file://${F}${e.dosya}-latin-ext-${w}-italic.woff2);unicode-range:U+0100-024F}`;
 if (fs.existsSync(EF)) for (const e of JSON.parse(fs.readFileSync(EF, 'utf8'))) for (const w of e.agirlik)
   ekFont += `@font-face{font-family:"${e.aile}";font-weight:${w};src:url(file://${F}${e.dosya}-latin-${w}-normal.woff2)}@font-face{font-family:"${e.aile}";font-weight:${w};src:url(file://${F}${e.dosya}-latin-ext-${w}-normal.woff2);unicode-range:U+0100-024F}`;
 const page = `<!doctype html><html><head><meta charset=utf-8><style>${fonts}${ekFont}${css}</style></head><body><template id=T>${body}</template><div id=root></div>

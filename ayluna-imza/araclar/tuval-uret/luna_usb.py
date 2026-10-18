@@ -39,10 +39,12 @@ TEMA = {
                   fb='"Sora"', fg='"Manrope"', bk=700, bls='-.035em', font='family=Sora:wght@600;700&family=Manrope:wght@400;500;600;700'),
     'mercan': dict(ad='Mercan', alt='Mercan (sarmal galaksinin çekirdeğinden), Plus Jakarta Sans: sıcak, enerjik', v='#FF7A6B', v2='#C3392B', zemin='#F7F4F2', cizgi='#EADFD9',
                    fb='"Plus Jakarta Sans"', fg='"Plus Jakarta Sans"', bk=800, bls='-.035em', font='family=Plus+Jakarta+Sans:wght@400;500;600;700;800'),
-    'gumus': dict(ad='Ay gümüşü', alt='Gümüş ve lacivert, Fraunces + Figtree: sakin, yetişkin, hediye', v='#D3DCEE', v2='#1A2142', zemin='#F4F5F7', cizgi='#E1E4EA',
-                  fb='"Fraunces"', fg='"Figtree"', bk=600, bls='-.02em', font='family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600;700'),
+    # Kullanıcının seçimi (18 Eki). Eleştirmen düzeltmeleri: açık zeminde ikinci ton arduvaz mavisi (v2, 5,5:1); kahramanda "çevir." tek seferlik eğik.
+    'gumus': dict(ad='Ay gümüşü', alt='Gümüş ve lacivert, Fraunces + Figtree: sakin, yetişkin, hediye', v='#D3DCEE', v2='#56658A', zemin='#F4F5F7', cizgi='#E1E4EA',
+                  fb='"Fraunces"', fg='"Figtree"', bk=600, bls='-.02em', font='family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Figtree:wght@400;500;600;700',
+                  ek='.hero-y .bas-y em{font-style:italic;font-weight:500;letter-spacing:-.01em}'),
 }
-ANA_TEMA = os.environ.get('U_TEMA', 'buz')
+ANA_TEMA = os.environ.get('U_TEMA', 'gumus')
 
 GAL = [('oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30%'), ('urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'),
        ('bas', 'Projektör başlığı yakından', '50% 40%')]
@@ -79,7 +81,7 @@ body{margin:0;background:#F2F4F8}
 
 
 def tema_css(t):
-    return '.pg{--v:%(v)s;--v2:%(v2)s;--zemin:%(zemin)s;--cizgi:%(cizgi)s;--fb:%(fb)s,ui-sans-serif,system-ui,sans-serif;--fg:%(fg)s,ui-sans-serif,system-ui,sans-serif;--bk:%(bk)d;--bls:%(bls)s}\n' % t
+    return '.pg{--v:%(v)s;--v2:%(v2)s;--zemin:%(zemin)s;--cizgi:%(cizgi)s;--fb:%(fb)s,ui-sans-serif,system-ui,sans-serif;--fg:%(fg)s,ui-sans-serif,system-ui,sans-serif;--bk:%(bk)d;--bls:%(bls)s}\n' % t + t.get('ek', '') + '\n'
 
 
 CSS = r"""
@@ -260,7 +262,7 @@ CSS = r"""
 .yol-iz i{position:absolute;top:-.25px;width:50%;height:2px;background:var(--lac);transform-origin:0 50%}
 .yol-iz i:first-child{left:0;animation:yc1 8s var(--ease) infinite}.yol-iz i:nth-child(2){left:50%;animation:yc2 8s var(--ease) infinite}
 .yol-iz em{position:absolute;left:0;top:0;width:100%;height:0;z-index:2;animation:ypk 8s var(--ease) infinite}
-.yol-iz em::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--v);box-shadow:0 0 0 2px var(--zemin),0 0 0 3.5px var(--lac)}
+.yol-iz em::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--v2);box-shadow:0 0 0 2px var(--zemin),0 0 0 3.5px var(--lac)}
 @keyframes yc1{0%,6%{transform:scaleX(0);opacity:1}26%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
 @keyframes yc2{0%,38%{transform:scaleX(0);opacity:1}57%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
 @keyframes ypk{0%,4%{transform:none;opacity:0}6%{transform:none;opacity:1}26%,38%{transform:translateX(50%);opacity:1}57%{transform:translateX(100%);opacity:1}60%,100%{transform:translateX(100%);opacity:0}}
@@ -295,7 +297,7 @@ CSS = r"""
 .hk-cub .bitti i,.hk-cub .dur i{transform:none}
 .hk-cub .on i{animation:dol 5s linear both}
 .hk-sec{position:absolute;left:0;right:0;top:24px;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:0 12px}
-.hk-sec button{flex:none;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:rgba(20,26,54,.62);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);color:#fff;font-size:13px;font-weight:700}
+.hk-sec button{flex:none;min-height:48px;padding:0 14px;border:0;border-radius:999px;background:rgba(20,26,54,.62);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);color:#fff;font-size:13px;font-weight:700}
 .pg .hk-sec button.on{background:var(--v);color:var(--koyu);box-shadow:none}
 .hk-git{position:absolute;top:76px;bottom:0;z-index:2;padding:0;border:0;background:transparent}
 .hk-git.geri{left:0;width:35%}.hk-git.ileri{right:0;width:65%}

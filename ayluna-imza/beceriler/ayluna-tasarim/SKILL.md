@@ -73,6 +73,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Marka rengi sabit** (18 Eki, kullanıcı): koyu lacivert #1A2142 her ürün sayfasında; ürüne göre değişen yalnız ikinci renk ve zemin (Galaxy USB: buz mavisi #8FD3FF + #F2F4F8). Sarı kullanılmaz. Ürün gerçek renginde gösterilir (Galaxy USB beyaz).
 - **Hareket:** her özellik kendi işini gösteren sakin bir döngüyle anlatılır (fiş takılır, disk döner); yıldız parıltısı gibi süs hareketi yok.
 - **Kutu içeriği afişle birebir:** diskler mağaza afişinden kırpılıp gerçek hâliyle gösterilir; kutuda olmayan desen ya da aksesuar (Galaxy USB: adaptör) gösterilmez, yazılmaz.
+- **Galaxy USB dili (18 Eki, kullanıcı seçti):** gümüş #D3DCEE + lacivert #1A2142, zemin #F4F5F7, açık zeminde ikinci ton #56658A; Fraunces (başlık) + Figtree; kahramanda tek seferlik eğik vurgu. Kullanıcı sakin ve yumuşak serifli yönü, eleştirmenin önerdiği renkli seçeneklere tercih etti.
 - **Seçilen yönün düzeni korunur** (18 Eki): kullanıcı bir yönü seçtiyse sonraki turlar yalnız istenen parçayı ekler; düzeni baştan kurmak "yabancı" durur.
 - **Ödeme düğmesi:** kartla %5 indirim ana butonun içinde ikinci satır ("Kartla %5 indirim dahil"); güven kutusunda kapıda ödeme övülmez, "Kartla güvenli öde" yazar.
 - **Baskı:** tek satır, butonun hemen üstünde ("Stokta son [N] adet", elle; veri yoksa gizli). Tek sayaç üst şeritte; kart içinde ya da yapışkan çubukta ikinci sayaç yok.

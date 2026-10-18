@@ -14,6 +14,7 @@
 body{margin:0;background:#F2F4F8}
 .pg{--v:#FF92B5;--v2:#C2366B;--zemin:#F7F2F4;--cizgi:#EBDDE3;--fb:"Sora",ui-sans-serif,system-ui,sans-serif;--fg:"Manrope",ui-sans-serif,system-ui,sans-serif;--bk:700;--bls:-.035em}
 
+
 .pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--yuzey:#FFFFFF;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
   width:390px;margin:0 auto;background:var(--zemin);color:var(--lac);font-family:var(--fg);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:clip;position:relative}
 @supports not (overflow:clip){.pg{overflow:hidden}}
@@ -191,7 +192,7 @@ body{margin:0;background:#F2F4F8}
 .yol-iz i{position:absolute;top:-.25px;width:50%;height:2px;background:var(--lac);transform-origin:0 50%}
 .yol-iz i:first-child{left:0;animation:yc1 8s var(--ease) infinite}.yol-iz i:nth-child(2){left:50%;animation:yc2 8s var(--ease) infinite}
 .yol-iz em{position:absolute;left:0;top:0;width:100%;height:0;z-index:2;animation:ypk 8s var(--ease) infinite}
-.yol-iz em::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--v);box-shadow:0 0 0 2px var(--zemin),0 0 0 3.5px var(--lac)}
+.yol-iz em::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--v2);box-shadow:0 0 0 2px var(--zemin),0 0 0 3.5px var(--lac)}
 @keyframes yc1{0%,6%{transform:scaleX(0);opacity:1}26%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
 @keyframes yc2{0%,38%{transform:scaleX(0);opacity:1}57%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
 @keyframes ypk{0%,4%{transform:none;opacity:0}6%{transform:none;opacity:1}26%,38%{transform:translateX(50%);opacity:1}57%{transform:translateX(100%);opacity:1}60%,100%{transform:translateX(100%);opacity:0}}
@@ -226,7 +227,7 @@ body{margin:0;background:#F2F4F8}
 .hk-cub .bitti i,.hk-cub .dur i{transform:none}
 .hk-cub .on i{animation:dol 5s linear both}
 .hk-sec{position:absolute;left:0;right:0;top:24px;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:0 12px}
-.hk-sec button{flex:none;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:rgba(20,26,54,.62);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);color:#fff;font-size:13px;font-weight:700}
+.hk-sec button{flex:none;min-height:48px;padding:0 14px;border:0;border-radius:999px;background:rgba(20,26,54,.62);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);color:#fff;font-size:13px;font-weight:700}
 .pg .hk-sec button.on{background:var(--v);color:var(--koyu);box-shadow:none}
 .hk-git{position:absolute;top:76px;bottom:0;z-index:2;padding:0;border:0;background:transparent}
 .hk-git.geri{left:0;width:35%}.hk-git.ileri{right:0;width:65%}

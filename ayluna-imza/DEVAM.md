@@ -486,7 +486,8 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Düzen: şerit (tek sayaç) → başlık bandı + tam ekran fotoğraf (oda, ürün, başlık), başlık ve küçük resimler görselin içinde → ad, fiyat → birleşik özellik kutusu → paket → "Her kutuda 12 film diski" → stok satırı → iki satırlı kart butonu → kapıda → kargo döngüsü → İçin rahat olsun (birleşik kutu, kartla öde) → 12 disk → Herkesin odasına (çipler görselin içinde) → Nereye takılır → kurulum → yorumlar → 30 gün → SSS (8) → diğer ürünler → alt bilgi → yapışkan çubuk (sayaçsız).
 - Diskler Higgsfield ile büyütüldü (2 kredi; şerit iki kez reddedildi, 4×3 ızgara geçti). Yeni blob'lar `luna_usb.py` DISK ve `araclar/blob-yerel.json`'da.
 - Yerel önizlemeye Outfit, DM Sans, Sora, Manrope, Plus Jakarta Sans, Fraunces eklendi.
-- Bekleyen: kullanıcının renk seçimi (eleştirmen sıralaması ile), sonra ana panoya uygulanır.
+- **Renk: kullanıcı Ay gümüşü'nü seçti** (eleştirmen sırası: Kuzey ışığı 8, Pembe 7, Mercan 6, Gümüş 4). Ana pano artık `gumus` (varsayılan `U_TEMA`). Renk panoları arşivde (x 4700–6110).
+- Açık sorular: puan (gerçek 2,0 mı, puansız mı), ₺1.999 için son 10 günün fiyat kaydı, stok [N], teslim süresinin teyidi, disk değiştirme adımları, ışık modları, kırık/eksik süreci, çift fotoğrafındaki balina (diskte yok).
 
 ## Galaxy USB · Yön A geliştirilmiş: güncel sayfa (18 Ekim)
 - Kullanıcı A'yı seçti: sarı yok, koyu lacivert marka rengi her üründe, ürün beyaz, daha çok animasyon, Herkesin odası daha iyi UI, güven ve baskı bölümleri. Sonra: "USB adaptör yok; içindeki diskler bunlar ve 12 diskli" (afiş).
