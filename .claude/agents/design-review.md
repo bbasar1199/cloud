@@ -1,7 +1,7 @@
 ---
 name: design-review
 description: Teknik tasarım denetçisi. Bir sayfa ya da tuval panosu değiştikten sonra, gerçek tarayıcıda mobil önce (390px) açıp etkileşimi, duyarlı düzeni, erişilebilirliği (WCAG 2.1 AA), konsol hatalarını ve görsel tutarlılığı denetler. Dosya değiştirmez, bulguları önem sırasıyla raporlar. Zevk ve satış kararı için değil (o iş ayluna-elestirmen'in); kırık, erişilemez ya da tutarsız olanı bulmak için kullan.
-tools: Read, Grep, Glob, Bash, mcp__playwright__browser_navigate, mcp__playwright__browser_navigate_back, mcp__playwright__browser_resize, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_snapshot, mcp__playwright__browser_click, mcp__playwright__browser_hover, mcp__playwright__browser_type, mcp__playwright__browser_press_key, mcp__playwright__browser_select_option, mcp__playwright__browser_wait_for, mcp__playwright__browser_evaluate, mcp__playwright__browser_console_messages, mcp__playwright__browser_network_requests, mcp__playwright__browser_tab_list, mcp__playwright__browser_close
+tools: Read, Grep, Glob, Bash, mcp__playwright__browser_navigate, mcp__playwright__browser_navigate_back, mcp__playwright__browser_resize, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_snapshot, mcp__playwright__browser_click, mcp__playwright__browser_hover, mcp__playwright__browser_type, mcp__playwright__browser_press_key, mcp__playwright__browser_select_option, mcp__playwright__browser_wait_for, mcp__playwright__browser_evaluate, mcp__playwright__browser_console_messages, mcp__playwright__browser_network_requests, mcp__playwright__browser_tabs, mcp__playwright__browser_close
 color: pink
 ---
 

@@ -96,3 +96,14 @@ Kullanıcı "her şeyi yeni ajanlar karar versin" dedi.
 - Eleştirmen seçerken kullanıcı geçmişini (§10) kullandı; Eylül'de reddedilen pembe/Baloo çizgisine yakın olan B'yi eledi.
 - design-review iki engel buldu: `overflow:hidden` yapışkan çubuğu ve view() hareketini öldürüyordu, ilk ekranda güven satırı çubuğun altında kalıyordu. Ayrıca CSS özgüllüğü yüzünden buton kalınlığının ezildiğini ölçerek buldu.
 - Kalıcı ders: sayfa kapsayıcısında `overflow:clip` kullanılır. Düğme sıfırlaması `:where()` ile yazılır, yoksa bileşen kurallarını ezer.
+
+---
+
+# 42 Instagram reel'i (18 Ekim 2026)
+
+Ayrıntı: `ogrenme/instagram-42/` (`README.md` özet, `denetim.md` araç denetimi, `grup1-6.md` gönderi gönderi).
+
+- Kurulacak yeni araç: yalnız Chrome DevTools MCP (telefonda hız ölçümü).
+- Playwright MCP root'ta açılmıyordu; `--no-sandbox` eklenmeli.
+- İkisi de denendi. `.mcp.json` değişikliği kullanıcı onayı bekliyor.
+- Kurulmayanlar: transitions.dev (lisans, blur), ux-designer-skill (örtüşme), prompt-master, Stitch MCP, 21st.dev Magic, AutoAE, scrollhaus, vividsites, Refero MCP. Gerekçeleri `denetim.md`'de.

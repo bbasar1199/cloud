@@ -464,6 +464,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Gerçek tavan fotoğrafları yok.
   - 4,7 / 62 Loox teyidi bekliyor.
 
+## Tur 19 · 42 Instagram reel'i incelendi (18 Ekim)
+- Hepsi indirildi, döküldü, kare kare okundu. Özet: `ogrenme/instagram-42/README.md`.
+- Kurulacak: Playwright MCP'ye `--no-sandbox` (root'ta açılmıyordu) ve Chrome DevTools MCP 1.11.0 (performans izi, Lighthouse).
+  - İkisi de denendi.
+  - `.mcp.json` değişikliği kullanıcı onayı bekliyor; hazır metin `ogrenme/instagram-42/denetim.md` sonunda.
+- İmza an adayları:
+  - dev "LUNA" yazısı önünde yükselen lamba
+  - yarıktan basılan kapıda ödeme fişi
+  - seçince zemin ve görselin değiştiği model seçimi
+- Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.
