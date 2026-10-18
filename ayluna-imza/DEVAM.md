@@ -501,6 +501,11 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Düzeltme: E'de `.pg{overflow:clip}`; clip'i tanımayan tarayıcıda kaydırma adımları kapanır (yay ve oklarla gezilir).
   - Panel telefonda üst kenar ile satın al çubuğu arasında ortalanmış kart olarak yapışır (844px ekranda 54px eşit krem pay). Kaydırdıkça an değişir, ay dolar.
   - Pano yüksekliği yazı tipleri yüklendikten sonra ölçülür (önceki 5624 eksikti, alt 71px kesiliyordu).
+- **"Kaydırdıkça değişmiyor"** (tuval Sürüm 71): tuvalde pano kendi kaymaz, tuval kayar; sayfa kaydırmasını dinleyen kod hiç tetiklenmiyordu.
+  - Telefon ve Oynat: sayfa kaydırması (scroll + requestAnimationFrame); ekranın ortasını geçen son adım anı seçer. Eski IntersectionObserver'ın rootMargin'i başka kökenli çerçevede yok sayılır, o yüzden bırakıldı.
+  - Tuval: panelin 2000px üstünden altına 25px arayla görünmez noktalar (`.gece-iz`); ekranda görünenler ekranın kenarlarını verir, ekranın ortası panelden geçerken an 0 → 4. Kullanıcı yay ya da okla seçerse, kaydırma başka bir ana geçene kadar seçimine dokunmaz.
+  - Pano `expand: "fill"`: Oynat'ta küçültülüp sığdırılmaz, telefon sayfası gibi kayar (390px sütun ortada).
+  - Sınama: `araclar/kaydirma-testi.js` (telefon + başka kökenli çerçevede tuval, x1 ve x0,6).
 
 ## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
 - Kullanıcı:

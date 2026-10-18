@@ -36,6 +36,8 @@ KAD_A = [168, 128, 90, 52, 12]
 EVRE = [.14, .34, .55, .8, 1]  # kullanıcı: "kaydırdıkça ayın içi dolsun": her anda ay biraz daha dolar
 KAD_P = [[round(KAD_X + KAD_R * math.cos(math.radians(a)), 1), round(KAD_Y - KAD_R * math.sin(math.radians(a)), 1)] for a in KAD_A]
 KAD_L = [[round(KAD_X + 121 * math.cos(math.radians(a)), 1), round(KAD_Y - 121 * math.sin(math.radians(a)), 1)] for a in KAD_A]  # saat yazıları yayın içinde
+IZ_ARA, IZ_PAY = 25, 2000  # Bir gece tuval izi: 25px aralık, panelin 2000px üstü ve altı
+IZ_SAY = (2 * IZ_PAY + 660) // IZ_ARA + 1
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE.dc.html')
 
 CSS = r""".pg{background:#F6F1E9}
@@ -71,7 +73,7 @@ CSS = r""".pg{background:#F6F1E9}
    Bir gece paneli yapışmıyor, telefonda altında ~1.900px boş adım kalıyordu. clip kaydırma kabı oluşturmaz; yapışkan çalışır.
    clip'i tanımayan eski tarayıcıda kaydırma adımları kapanır (yay ve oklarla gezilir). Canlı temada da sarmalayıcılarda
    overflow:hidden olmamalı. */
-.pg{overflow:clip}
+.pg{overflow:clip;margin:0 auto}
 @supports not (overflow:clip){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 .h2{font-size:22px;line-height:1.15}
 .etiket{font-size:13px}
@@ -273,6 +275,9 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .gece-cerceve :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
 /* Kaydırma adımları: telefonda her an ~48vh kaydırma, panel yapışık kalır. Uzun görüntü alanında (tuval, 1600px+) adım yok. */
 .gece-adimlar{margin-top:calc(-1 * var(--gh))}
+/* Tuvalde kaydırma izi: panelin IZ_PAY px üstünden altına görünmez noktalar (geceTuval) */
+.gece-iz{position:absolute;left:0;top:-""" + str(IZ_PAY) + r"""px;width:1px;height:1px;pointer-events:none}
+.gece-iz i{position:absolute;left:0;width:1px;height:1px}
 .gece-adim{height:48vh}
 .gece-adim:first-child{height:calc(var(--gh) + 30vh)}
 @media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
@@ -434,6 +439,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
         <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
       </div></div>
     </div>
+    <div class="gece-iz" aria-hidden="true"><sc-for list="{{izler}}" as="z" hint-placeholder-count="1"><i data-iz="{{z.i}}" style="top: {{z.y}}px"></i></sc-for></div>
     <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
 
@@ -526,11 +532,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
-    // Bir gece: kaydırma adımı ekranın ortasına gelince an değişir. Uzun görüntü alanında (tuval) adım yok; yay ve oklarla gezilir.
-    if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600 && window.CSS && CSS.supports('overflow', 'clip')) this.geceBagla();
+    // Bir gece (kullanıcı: "kaydırdıkça değişmiyor"): iki durum.
+    // Telefon ve tam pencere (Oynat): sayfa kayar, panel yapışık; ekranın ortasını geçen son adım anı seçer.
+    // Tuval: pano kendi kaymaz, tuval kayar. Ekranda görünen işaretler ekranın üst ve alt kenarını verir;
+    // ekranın ortası panelin üstünden altına inerken an 0 → 4 ilerler.
+    if (window.innerHeight < 1600 && window.CSS && CSS.supports('overflow', 'clip')) this.geceKaydir();
+    else if (typeof IntersectionObserver !== 'undefined') this.geceTuval();
     // Kargo takibi: çizelge ekrana girince döngü başlar (gözlemci yoksa hemen)
     var yol = document.querySelector('.yol');
     if (yol && typeof IntersectionObserver !== 'undefined') {
@@ -538,18 +548,46 @@ JS = """class Component extends DCLogic {
       this.yolio.observe(yol);
     } else this.setState({ yolAc: true });
   }
-  geceBagla() {
-    var self = this, adim = document.querySelectorAll('[data-adim]');
-    if (!adim.length) return;
-    if (this.io) this.io.disconnect();
-    this.io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { var i = Number(e.target.getAttribute('data-adim')); if (i !== self.state.gece) self.setState({ gece: i }); } });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    adim.forEach(function (r) { self.io.observe(r); });
-    this.adimIlk = adim[0];
+  anSec(an) { if (an !== this.geceSon) { this.geceSon = an; if (an !== this.state.gece) this.setState({ gece: an }); } }
+  geceKaydir() {
+    var self = this;
+    this.kaydir = function () {
+      if (self.raf) return;
+      self.raf = requestAnimationFrame(function () {
+        self.raf = 0;
+        var adim = document.querySelectorAll('[data-adim]'), orta = window.innerHeight / 2, an = 0;
+        for (var k = 0; k < adim.length; k++) if (adim[k].getBoundingClientRect().top <= orta) an = k;
+        if (adim.length) self.anSec(an);
+      });
+    };
+    window.addEventListener('scroll', this.kaydir, { passive: true });
+    this.kaydir();
   }
-  componentDidUpdate() { if (this.io && this.adimIlk && !this.adimIlk.isConnected) this.geceBagla(); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.io) this.io.disconnect(); if (this.yolio) this.yolio.disconnect(); }
+  geceTuval() {
+    var self = this, gor = {}, ARA = """ + str(IZ_ARA) + """, PAY = """ + str(IZ_PAY) + """;
+    this.tio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { var i = Number(e.target.getAttribute('data-iz')); if (e.isIntersecting) gor[i] = 1; else delete gor[i]; });
+      var k = Object.keys(gor).map(Number), n = self.izSay;
+      if (!k.length) return;
+      var ust = Math.min.apply(null, k), alt = Math.max.apply(null, k), ustY = ust * ARA, altY = alt * ARA;
+      if (ust > 0 && alt < n - 1) self.ekranH = altY - ustY;           // iki kenar da işaretlerin içinde
+      else if (ust > 0 && self.ekranH) altY = ustY + self.ekranH;      // alt kenar dışarıda
+      else if (alt < n - 1 && self.ekranH) ustY = altY - self.ekranH;  // üst kenar dışarıda
+      else return;                                                     // konum bilinmez (çok uzak yakınlaştırma)
+      var panel = document.querySelector('.gece-cerceve'), H = panel ? panel.offsetHeight : 520;
+      var t = ((ustY + altY) / 2 - PAY + 150) / (H + 300);
+      self.anSec(Math.max(0, Math.min(4, Math.floor(t * 5))));
+    });
+    this.izBagla();
+  }
+  izBagla() {
+    var self = this, iz = document.querySelectorAll('[data-iz]');
+    if (!this.tio || !iz.length) return;
+    this.tio.disconnect(); this.izSay = iz.length; this.izIlk = iz[0];
+    iz.forEach(function (z) { self.tio.observe(z); });
+  }
+  componentDidUpdate() { if (this.tio && this.izIlk && !this.izIlk.isConnected) this.izBagla(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -689,7 +727,7 @@ JS = """class Component extends DCLogic {
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      yolCls: S.yolAc ? 'yol on' : 'yol', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       boxModel: kiz ? 'tavşanlı lamba' : 'Uzay Kaşifi lamba', eldeSrc: kiz ? B + '8f8d1462c27c62b0bbd3066d72c92025' : ERKEK, eldeAlt: kiz ? 'Elde tutulan LunaDream Kız' : 'LunaDream Erkek (Uzay Kaşifi)', eldePos: kiz ? '40% 50%' : '50% 62%', shop: shop, shopCount: PR.length, faq: faq
     };
   }
