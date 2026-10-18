@@ -394,7 +394,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
     <div class="seritler">
       <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></span>
-      <span class="sira" aria-live="polite">{{gNo}}/{{gCount}}</span>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span>
     </div>
   </section>
 

@@ -429,7 +429,7 @@ HERO = ("""
   <section class="hero" aria-label="Galaxy USB fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div></sc-if></div></sc-for></div>
     """ + Y.ust('rgba(238,242,250,.6)') + """
-    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira" aria-live="polite">{{gNo}} / {{gCount}}<small>Temsilî görseller</small></span></div>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 """)
 
