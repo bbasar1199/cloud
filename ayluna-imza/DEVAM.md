@@ -480,17 +480,25 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
 - Shopify bölümleri ve diğer ürün sayfaları bu dile göre yazılır.
 
+## Galaxy USB · Yön A geliştirilmiş: güncel sayfa (18 Ekim)
+- Kullanıcı A'yı seçti: sarı yok, koyu lacivert marka rengi her üründe, ürün beyaz, daha çok animasyon, Herkesin odası daha iyi UI, güven ve baskı bölümleri. Sonra: "USB adaptör yok; içindeki diskler bunlar ve 12 diskli" (afiş).
+- Pano: `canvas/GalaxyUSB.dc.html` (`araclar/tuval-uret/luna_usb.py`; yalnız `luna_usb_yon` ve `luna_e.isaret` alır, E'nin CSS'i yok). Tuvalde x=3290, h 6890, `expand: fill`. Eski E kopyası taslağın yerine geçti.
+- Dil: lacivert #1A2142 + buz mavisi #8FD3FF, zemin #F2F4F8, koyu bölümler #0C1027; Bricolage Grotesque + Figtree; kelime işareti Young Serif.
+- Akış: sayaç şeridi (saniye tıklar) → sinema galeri (beyaz ürün önce, 5 sn'de geçer, yavaş yakınlaşma, küçük resimde dolan çizgi) → ad + "2'si 1 arada" + fiyat → 5 canlı özellik (fiş, 12 disk, esnek boyun, gece lambası, cetvel) → baskı kartı ([N] stok, dün [X], gün sonu sayacı) → paket (2 Adet seçili; "2 ayrı almaya göre ₺798,01 daha az", "tanesi ₺1.199,99", üstü çizili yok) → 12/24 disk notu → iki buton → kargo döngüsü → İçin rahat olsun (4 kart + kart logoları) → Kutuda 12 film diski (seçilen disk tavana düşer, 3 sn'de gezer) → Herkesin odasına (hikâye kartı) → Nereye takılır (adaptör kutuda yok) → Üç adımda tavanda → Yorumlar (Loox yer tutucu) → 30 gün (30 çentik) → SSS (9) → diğer ürünler → alt bilgi → yapışkan çubuk.
+- Diskler: `canvas/usb/d01-d12.webp` (afişten kırpıldı; adlar desen tarifi), blob eşlemesi `araclar/blob-yerel.json`.
+- Açık sorular: puan (gerçek 2,0 mı, puansız mı), ₺1.999 için son 10 günün fiyat kaydı, stok [N] ve dün [X] verisi, disk değiştirme adımları, ışık modları, kırık/eksik gelince süreç, yaşam fotoğraflarındaki desenlerin (kuzey ışığındaki balina, Satürn) disklerle örtüşmesi.
+
 ## Galaxy USB · kendine özgü dil, üç yön (18 Ekim)
 - Kullanıcı: ürün yalnız çocuklara değil (çocuk, ebeveyn, genç); her sayfanın dili kendine özel; canlı sayfanın satan görsellerini ve düzenini göz önünde bulundur.
 - Canlı sayfa telefonda incelendi (`scratchpad/usb/canli/`): kare afiş galerisi, "Premium Özellikler" 2×2, "Çok Al Az Öde" (1 Adet ₺1.599 / 2 Adet ₺2.399,99, "+10 Adet Ücretsiz Disk"), iki büyük buton, yetişkin yaşam fotoğrafları (çift, Satürn, kelebek, ay, denizanası, kara delik). Bu fotoğraflar tuvale yüklendi (`canvas/usb/s-*.jpg`).
-- **Ürün rengi çelişkisi:** paket kutusundaki fotoğraflarda projektör siyah, yapay zekâ afişlerinde beyaz. Kullanıcıya soruldu.
+- **Ürün rengi:** kullanıcı teyit etti, **beyaz**. Siyah paket fotoğrafları (`p-siyah*`) kullanılmaz.
 - Üç yön: `canvas/GalaxyUSB-YonA/B/C.dc.html` (`luna_usb_yon.py`), tuvalde x=3760/4230/4700.
   - A Sinema: sıcak siyah + sinema sarısı, Bricolage Grotesque + Figtree; tam ekran yaşam fotoğrafı, kaydırmalı sahne kartları.
   - B Gökyüzü paneli: gece laciverti + buz mavisi, Unbounded + Onest; kare galeri, sahne seçici.
   - C Ferah: açık zemin + mercan, Archivo Expanded; büyük ölçü rakamları, "Kimin odası?" sekmeleri.
 - Yerel önizlemeye yazı tipleri eklendi (`onizleme/f/`, `araclar/yerel-fontlar.json`; değişken yazı tipi desteği `dc-onizle.js`'te).
 
-## Galaxy USB Projektör sayfası (18 Ekim)
+## Galaxy USB Projektör sayfası · ilk taslak, E kopyası (18 Ekim; yerini Yön A geliştirilmişe bıraktı)
 - Kullanıcı: "Şimdi USB projektör için de ona uygun bir tasarım yapalım."
 - Pano: `canvas/GalaxyUSB.dc.html` (`araclar/tuval-uret/luna_usb.py`; E'nin CSS'ini ve parçalarını `import luna_e` ile alır). Tuvalde x=3290, y=0.
 - Görseller: mağazanın 5 afişinin (yapay zekâ, yazılı) yazısız bölgelerinden kesildi → `canvas/usb/`; ürün kesimi rembg ile. "Elif K." kartlı bölge alınmadı.

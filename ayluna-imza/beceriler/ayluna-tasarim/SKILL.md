@@ -70,6 +70,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
 - **Nihai tasarım (18 Eki): LunaDream E** (`canvas/LunaDreamE.dc.html`).
 - **Her ürün sayfasının kendi tasarım dili** (18 Eki, kullanıcı): renk, yazı tipi, bölüm biçimi ve imza bölümü ürüne ve gerçek kitlesine göre (Galaxy USB: çocuk, ebeveyn, genç, çift). Ortak çekirdek yalnız Ayluna işareti + yazısı, satın alma akışı (kartla %5 önce, kapıda ikinci, kapıda butonunda fiyat yok), 30 gün iade, yer tutucu kuralı ve yasaklar.
+- **Marka rengi sabit** (18 Eki, kullanıcı): koyu lacivert #1A2142 her ürün sayfasında; ürüne göre değişen yalnız ikinci renk ve zemin (Galaxy USB: buz mavisi #8FD3FF + #F2F4F8). Sarı kullanılmaz. Ürün gerçek renginde gösterilir (Galaxy USB beyaz).
+- **Hareket:** her özellik kendi işini gösteren sakin bir döngüyle anlatılır (fiş takılır, disk döner); yıldız parıltısı gibi süs hareketi yok.
+- **Kutu içeriği afişle birebir:** diskler mağaza afişinden kırpılıp gerçek hâliyle gösterilir; kutuda olmayan desen ya da aksesuar (Galaxy USB: adaptör) gösterilmez, yazılmaz.
 - **Yeni ürün sayfasından önce canlı sayfa telefonda incelenir;** satan kalıplar (yaşam fotoğrafları, kare galeri, "Çok al az öde", büyük butonlar) korunur, çelişkili sayı ve sağlık iddiası alınmaz.
 - **Bütünlük (18 Eki, kullanıcı: "her şey çok yabancı duruyor, bir bütün ve uyum yakala"):**
   - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
@@ -165,6 +168,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Galaksi Night ₺2.199 / ₺2.999
   - Yıldız Işığı Nemlendirici ₺849,99 / ₺1.099
 - Modeller: Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, hoparlörsüz. Bluetooth vaadi modele bağlanır.
+- Galaxy USB (18 Eki): beyaz; kutuda projektör + 12 film diski, **USB adaptör yok**; 2'si 1 arada (projektör + gece lambası); başlık 4 cm, toplam boy 23,5 cm; 1 Adet ₺1.599 / ₺1.999, 2 Adet ₺2.399,99 (Kaching). Loox 2,0 · 7 yorum; canlıdaki "4,7 · 2467" ve "90 gün" yanlış.
 - Kutu: lamba + 6 disk + 6 hediye disk + USB kablo. Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan çekilir (4,7 · 62, teyit bekliyor). "Elif K.", 2.467, 10.000+ ve 12.000+ uydurmadır.
 - Bilinmeyen değer köşeli yer tutucu kalır: [X] cm, [X] saat, [yaş], [Firma unvanı], [numara].
