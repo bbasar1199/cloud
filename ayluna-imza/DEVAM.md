@@ -475,6 +475,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Baskı satırları: aynı gün kargo + Dün satılan (18 Ekim, en güncel)
+- Kullanıcı (LunaDream ekran görüntüleriyle): "şu kısım dönsün, ilk hali öyle başlasın; sonra bugün 16'ya kadar verilen siparişler aynı gün kargoda, orada bir sayaç dönsün. Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı yapalım. Diğer USB için de bu baskılayıcıları koyabiliriz."
+- LunaDream (`luna_e.py`) ve Galaxy USB (`luna_usb.py`):
+  - Fiyat satırında "Stokta" yok. Altında "Dün [X] kişi satın aldı" (sayı `DUN` sabiti; canlıda bölüm ayarı ya da Shopify Flow metafield'ı, boşsa satır gizli).
+  - Dönen satır: hediye/disk satırı (4 sn) ↔ "Bugün 16.00’ya kadar verilen siparişler aynı gün kargoda" + 16.00 sayacı (6 sn). Giren alttan, çıkan yukarı; ikisi aynı ızgara hücresinde, yükseklik değişmez. Hareket azaltılmışsa ikisi alt alta.
+  - Saat mantığı ortak: `ortak.py` → `KARGO_JS` (İstanbul saati; Pzt–Cum 16.00 öncesi bugün, sonrası "yarın" ya da gün adı, sayaçsız).
+  - Teslim çizgisinde kargo tarihi aynı kurala göre ("Bugün"); SSS ve Kargo politikası 16.00 kuralıyla güncellendi.
+  - Test: `test.js` sabit saatle (Pazartesi 12:47:15) dönüşü, sayacı, 16.00 sonrasını ve yoldaki "Bugün"ü dener.
+- Açık: sepetteki Hızlı Kargo (₺79,99) da "aynı gün kargoya verilir" diyor; farkı kullanıcıya soruldu. Cumartesi kargo var mı teyit. Çıkan satırın geçişte üstte kısa süre silik kalması (çıkışı hızlandırma) kullanıcı durdurduğu için yapılmadı.
+- Tuvale yayın ve site artifact'ının yeniden yayını kullanıcı onayı bekliyor.
+
 ## Çalışan site iskeleti (18 Ekim, en güncel)
 - Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, tüm eksik kısımları düzelt; sepet vesaire her kısım tam çalışsın; Shopify için düzenlerken de aynı şekilde."
 - **Önizleme:** claude.ai artifact "Ayluna Mağazası" (https://claude.ai/artifact/DgGy66eo4iqLEhjSn1inje), zip olarak da verildi. Üretim: `python3 araclar/site/site_uret.py` → `site/` (git dışı; yayın parçası `site-yayin/index.html`). Test: `araclar/site/test.js` (http.server 8765).

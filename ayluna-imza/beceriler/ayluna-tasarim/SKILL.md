@@ -80,7 +80,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Sepet ek teklifleri:** "Siparişine özel" kartlar, dokununca eklenir; mağaza fiyatı düz yazı (üstü çizili değil); Hızlı Kargo teslimat seçeneği olarak.
 - **Seçilen yönün düzeni korunur** (18 Eki): kullanıcı bir yönü seçtiyse sonraki turlar yalnız istenen parçayı ekler; düzeni baştan kurmak "yabancı" durur.
 - **Ödeme düğmesi:** kartla %5 indirim ana butonun içinde ikinci satır ("Kartla %5 indirim dahil"); güven kutusunda kapıda ödeme övülmez, "Kartla güvenli öde" yazar.
-- **Baskı:** tek satır, butonun hemen üstünde ("Stokta son [N] adet", elle; veri yoksa gizli). Tek sayaç üst şeritte; kart içinde ya da yapışkan çubukta ikinci sayaç yok.
+- **Baskı:** stok satırı butonun hemen üstünde ("Stokta son [N] adet", elle; veri yoksa gizli). Fiyat satırında "Stokta" yazmaz; fiyatın altında "Dün [X] kişi satın aldı" (elle, veri yoksa gizli). Paketin altında dönen satır: önce hediye/disk, sonra "Bugün 16.00’ya kadar verilen siparişler aynı gün kargoda" + 16.00 sayacı (İstanbul saati; 16.00 sonrası ve hafta sonu sayaçsız "yarın / Pazartesi kargoda"). Üst şeritteki fiyat sayacı dışında yalnız bu kargo sayacı olur.
 - **Sahne kartı:** ana nesne (ay, ürün) kırpılmaz; yazı onu örtecekse kartın alt şeridine iner. Işık aç/kapa sahnesinde kapalıyken yansıma görünmez.
 - **İmza ürün sayfasında oda sahneleri:** yazısı görselin içinde kartlar (oda adı + o odadaki an) ve bir büyük görsel kart (hediye / avucuna sığar).
 - **Disk görselleri net:** afiş kırpıntısı küçükse desen değiştirilmeden büyütülür (Flow ile; Higgsfield kullanılmaz), 384px.
@@ -167,7 +167,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 
 ## Gerçekler (uydurma yerine bunlar)
 - İade 30 gün (90 değil): 14 gün yasal cayma + 16 gün Ayluna. Ücretsiz kargo. Kargo takibi Track123.
-- Mağaza politikasında "1 iş gününde kargoda, 3–7 günde teslim" yazıyor, ama teyit listesinde. 16:00 kesimi teyitsiz.
+- Kargo: iş günü 16.00’ya kadar verilen sipariş aynı gün kargoda (kullanıcı, 18 Eki), sonrası ertesi iş günü; Türkiye geneli 3–7 günde teslim. Cumartesi kargo teyitsiz.
 - LunaDream fiyatları:
   - 1 lamba ₺1.699,99 (karşılaştırma ₺1.999,00)
   - 2 lamba ₺2.749,99 (karşılaştırma ₺3.998,00)

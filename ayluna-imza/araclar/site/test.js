@@ -140,7 +140,27 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   await pg.locator('[aria-label="Ara"]').click(); await pg.waitForTimeout(300);
   not(pg.url().endsWith('arama.html'), 'başlık Ara → arama.html');
 
-  console.log('\n' + (loglar.length ? loglar.join('\n') : 'konsol hatası yok'));
+  // Baskı satırları (18 Eki): fiyatta "Stokta" yok, altında "Dün [X]"; dönen satır hediye → aynı gün kargo + 16.00 sayacı (İstanbul saati)
+  for (const [f, ilk] of [['lunadream-gece-lambasi.html', 'hediye'], ['galayx-usb-projektor.html', 'film diski']]) {
+    const sp = await ctx.newPage(); sp.on('pageerror', e => loglar.push('pageerror ' + f + ': ' + e.message));
+    await sp.clock.install({ time: new Date('2026-10-19T09:47:15Z') }); // Pazartesi 12:47:15 İstanbul
+    await sp.goto(KOK + f); await sp.clock.runFor(1500);
+    const on = () => sp.locator('.donen .dn-s.on').textContent();
+    not(!/Stokta/.test(await sp.locator('#siparis .fiyat-satir, #siparis .fiyat').first().textContent()) && /Dün .+ kişi satın aldı/.test(await sp.locator('.dun').textContent()), f + ': fiyatta Stokta yok, altında Dün satırı');
+    not((await on()).includes(ilk), f + ': dönen satır önce "' + ilk + '"');
+    await sp.clock.runFor(3500); const k = await on(), s1 = await sp.locator('.dn-sy').textContent();
+    not(k.includes('16.00’ya kadar') && /^03:12:\d\d$/.test(s1), f + ': sonra aynı gün kargo + sayaç ' + s1);
+    await sp.clock.runFor(2000); const s2 = await sp.locator('.dn-sy').textContent(), fark = +s1.slice(-2) - +s2.slice(-2);
+    not(fark >= 2 && fark <= 3, f + ': sayaç akıyor ' + s1 + ' → ' + s2);
+    await sp.clock.runFor(4500); not((await on()).includes(ilk), f + ': başa döndü');
+    not((await sp.locator('.yol li').nth(1).textContent()).includes('Bugün'), f + ': yolda kargo tarihi Bugün');
+    await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(11000); // 16.30
+    const geç = await sp.locator('.donen .dn-s').nth(1).textContent();
+    not(geç.includes('yarın kargoda') && await sp.locator('.dn-sy').count() === 0, f + ': 16.00 sonrası "' + geç + '", sayaç yok');
+    await sp.close();
+  }
+
+  console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));
   console.log(hata ? `\n${hata} HATA` : '\nHEPSİ TAMAM');
   await b.close();
   process.exit(hata || loglar.length ? 1 : 0);

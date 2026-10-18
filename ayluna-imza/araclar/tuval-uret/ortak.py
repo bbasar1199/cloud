@@ -42,3 +42,17 @@ TAIL = '''</x-dc>
 </html>
 '''
 TL_JS = "function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.') + (kurus ? ',' + s[1] : ''); }"
+# Aynı gün kargo (kullanıcı, 18 Eki: "bugün 16'ya kadar verilen siparişler aynı gün kargoda"). İstanbul saatiyle iş günü
+# (Pzt–Cum) 16.00'dan önce verilen sipariş bugün kargoda, sonrası bir sonraki iş günü. Resmî tatiller canlıda tema ayarı.
+KARGO_JS = """function KARGO(ms) {
+      var ist = new Date(new Date(ms).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+      var isg = function (d) { return d.getDay() !== 0 && d.getDay() !== 6; }, IKI = function (n) { return n < 10 ? '0' + n : String(n); };
+      var gun0 = new Date(ist.getFullYear(), ist.getMonth(), ist.getDate()), kalan = gun0.getTime() + 16 * 3600000 - ist.getTime();
+      var bugun = isg(ist) && kalan > 0, gun = new Date(gun0);
+      if (!bugun) do { gun.setDate(gun.getDate() + 1); } while (!isg(gun));
+      var fark = Math.round((gun - gun0) / 86400000), GUN = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+      var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+      return { bugun: bugun, gun: gun, sayac: bugun ? IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss) : '',
+        metin: bugun ? 'Bugün 16.00’ya kadar verilen siparişler aynı gün kargoda' : 'Bugün verilen siparişler ' + (fark === 1 ? 'yarın' : GUN[gun.getDay()]) + ' kargoda',
+        aria: bugun ? 'Aynı gün kargo için ' + hh + ' saat ' + mi + ' dakika kaldı' : '' };
+    }"""

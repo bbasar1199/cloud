@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS
 
 # Bir gece kadranı: fotoğraf penceresinin merkezi (195, 216), yay yarıçapı 156; 5 an yayda (açı, derece)
 KAD_X, KAD_Y, KAD_R = 195, 216, 156
@@ -43,7 +43,7 @@ OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE.dc.html')
 CSS = r""".pg{background:#F6F1E9}
 /* Renkler (Tur 22, kullanıcı: "renkler birbirine giriyor, büyük marka hissi yok"): 50 tondan 12'ye indi.
    Açık: krem #F6F1E9 zemin · yüzey #FFFDF9 kart · ton #F1E8DA rozet/çip/boş görsel · çizgi #E3D8C7 · kesik #D6CAB6
-   Yazı: lacivert #1A2142 · soluk #5C6078 · kehribar #A05A1C (küçük etiket) · yeşil #2E6B4F (yalnız Stokta, Satın aldı)
+   Yazı: lacivert #1A2142 · soluk #5C6078 · kehribar #A05A1C (küçük etiket) · yeşil #2E6B4F (yalnız "Dün [X] kişi satın aldı")
    Işık: amber #F2A65A tek turuncu (buton, ay, yıldız, evre, başlık noktası); açık zeminde basma gölgesi #C97F38, koyuda gölge lacivert
    Koyu: gece #1A2142 panel · gece2 #0C1027 fotoğraf zemini · koyuda ikincil #B9BED6. Amber yalnız ışık ve ana butonda; bir ekranda bir amber blok. */
 /* Sahne (Tur 8, kullanıcı: "görsel kısmı Main'deki gibi, ama bizim ürün görsellerimiz"): gece laciverti zemin, üstte logo,
@@ -96,8 +96,10 @@ CSS = r""".pg{background:#F6F1E9}
 .puan-ust .yildiz{font-size:14px}
 .puan-ust b{font-weight:700;font-variant-numeric:tabular-nums}
 .puan-alt{font-size:13px;line-height:1.2;color:#5C6078;text-decoration:underline;text-decoration-color:#D6CAB6;text-underline-offset:3px}
-.stok{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:13px;font-weight:600;color:#2E6B4F;align-self:center}
-.stok::before{content:"";width:7px;height:7px;border-radius:50%;background:#2E6B4F}
+/* Dün satırı (kullanıcı, 18 Eki: "Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı"): sayı elle girilir, boşsa satır yok */
+.dun{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;color:#5C6078}
+.dun b{color:#1A2142;font-variant-numeric:tabular-nums}
+.dun i{flex:none;width:8px;height:8px;border-radius:50%;background:#2E6B4F;animation:nabiz 1.8s ease-in-out 3}
 .indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
@@ -179,8 +181,16 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .lcip .ayr{width:18px;height:18px}
 .cip-y{position:relative;width:36px;height:36px;border-radius:50%;background:#F1E8DA;overflow:hidden}
 .cip-y img{position:absolute;left:50%;bottom:3px;height:29px;width:auto;transform:translateX(-50%)}
-.hediye-sat{display:flex;align-items:center;gap:8px;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#F1E8DA;font-size:14px;font-weight:700;color:#A05A1C}
-.hediye-sat svg{width:16px;height:16px;flex:none}.hediye-sat circle{fill:none;stroke:#1A2142;stroke-width:1.6}.hediye-sat path{fill:#F2A65A}
+/* Dönen satır (kullanıcı, 18 Eki): hediye diski ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde, kutu en uzunu
+   kadar; dönerken yükseklik değişmez. Giren alttan, çıkan yukarı (yalnız transform/opacity). Hareket azaltılmışsa ikisi alt alta. */
+.donen{position:relative;display:grid;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#F1E8DA;font-size:14px;font-weight:700;color:#A05A1C;overflow:hidden}
+.dn-s{grid-area:1/1;display:flex;align-items:center;gap:8px;min-height:24px;opacity:0;transform:translateY(80%);transition:opacity .36s cubic-bezier(.2,.7,.2,1),transform .36s cubic-bezier(.2,.7,.2,1)}
+.dn-s.on{opacity:1;transform:none}.dn-s.ust{transform:translateY(-80%)}
+.dn-s svg{width:16px;height:16px;flex:none}.dn-s circle{fill:none;stroke:#1A2142;stroke-width:1.6}.dn-s path{fill:#F2A65A}
+.dn-m{flex:1;min-width:0;font-size:13px;line-height:1.3}
+.dn-sy{flex:none;padding:3px 8px;border-radius:999px;background:#FFFDF9;color:#1A2142;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.dn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.donen{row-gap:8px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
 .btn-kp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;min-height:56px;margin-top:14px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
@@ -374,6 +384,10 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}"""
 CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:rotate(%ddeg)}' % (i, a, i, a) for i, a in enumerate(KAD_A))
 
+# Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir. Canlıda bölüm ayarı (sayı; boşsa satır gizlenir) ya da Shopify Flow'un
+# her gece yazdığı metafield. Uydurma sayı yazılmaz; önizlemede yer tutucu.
+DUN = '[X]'
+DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
     # Marka işareti: ay evresi çizimi (ince daire + amber hilal); teslim çizgisi ve mühürle aynı çizim
@@ -406,7 +420,8 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <a class="puan" href="#yorumlar" aria-label="5 üzerinden {{rating}} puan, {{reviews}} yorum"><span class="puan-ust">""" + STAR + """<b>{{rating}}</b></span><span class="puan-alt">{{reviews}} yorum</span></a>
     </div>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
-    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim, stokta"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span><span class="stok" aria-hidden="true">Stokta</span></p>
+    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span></p>
+""" + DUN_SATIR + """
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
@@ -436,7 +451,10 @@ HTML = """<div class="pg" style="padding-bottom: 0">
         </div>
       </sc-for>
     </div>
-    <p class="hediye-sat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda +6 hediye masal diski</p>
+    <!-- Dönen satır (kullanıcı, 18 Eki: "ilk hali öyle başlasın, sonra bugün 16'ya kadar verilen siparişler aynı gün kargoda, orada bir sayaç dönsün").
+         Hediye 4 sn, kargo 6 sn. Simge yoldaki gibi: hilal hediye, yarım ay kargoda. Ekran okuyucu ikisini düz metin okur, sayacı saniye saniye okumaz.
+         16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
+    <p class="donen"><span class="dn-sr">Her kutuda 6 hediye masal diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda +6 hediye masal diski</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.5) + """'></path></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
     <!-- Stok satırı: kullanıcı elle yazar ve açıp kapatır (tema ayarı: sayı + aç/kapa). Shopify stoğuna bağlı değil. Şimdilik 18. -->
     <ul class="canli">
       <li><i style="background: #A05A1C"></i><span>Stokta son <b>18</b> adet</span></li>
@@ -569,12 +587,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.gOto = false;
-    // Tek saat: sayaç + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur)
-    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto !== false && self.tik % 5 === 0) self.galGit((self.state.g + 1) % Math.max(1, document.querySelectorAll('.kf').length)); self.setState({ now: Date.now() }); }, 1000);
+    var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; if (azH) this.state.gOto = false;
+    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
+      if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
+      if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
+      self.setState(o); }, 1000);
     // Bir gece (kullanıcı: "kaydırdıkça değişmiyor"): iki durum.
     // Telefon ve tam pencere (Oynat): sayfa kayar, panel yapışık; ekranın ortasını geçen son adım anı seçer.
     // Tuval: pano kendi kaymaz, tuval kayar. Ekranda görünen işaretler ekranın üst ve alt kenarını verir;
@@ -680,8 +701,8 @@ JS = """class Component extends DCLogic {
       on: on ? 'true' : 'false', ac: on && b.n === 2, cls: on ? 'kt on' : 'kt', pick: function () { self.setState({ adet: b.n }); } }; });
     var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, kapida = total + 80;
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
-    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
-    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    """ + KARGO_JS + """
+    var KG = KARGO(S.now || Date.now()), kd = KG.gun;
     var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
     // Bir gece: tuvaldeki gerçek ürün görselleri; Erkek'te 20:45 ve 21:00 değişir
@@ -767,7 +788,7 @@ JS = """class Component extends DCLogic {
       { q: 'Kutudan ne çıkıyor?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' },
       { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. İkisi de telefona Bluetooth ile bağlanır; çalan ninni lambadan gelir.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
-      { q: 'Kargo ne zaman gelir?', a: 'Siparişin 1 iş gününde kargoya verilir, Türkiye geneline 3–7 günde ulaşır.' },
+      { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
@@ -778,7 +799,9 @@ JS = """class Component extends DCLogic {
       onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
       onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
-      kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac,
+      dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
       yolCls: S.yolAc ? 'yol on' : 'yol', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
@@ -789,5 +812,5 @@ JS = """class Component extends DCLogic {
 
 # Diğer ürün sayfaları (luna_usb.py) bu dosyadaki CSS ve parçaları içe aktarır; yazma yalnız doğrudan çalıştırınca
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6110)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6152)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

@@ -85,7 +85,7 @@ TASLAK = '<p class="taslak">Taslak metin: köşeli yerler doldurulup hukukçuya 
 
 POLITIKA = {
     'Politika-Kargo.dc.html': ('Ayluna · Kargo ve teslimat', 'Kargo ve<br>teslimat', 'Kargo ücretsiz; 1 iş gününde kargoda.', [
-        kart('Süreler', L('<b>Kargoya veriliş:</b> sipariş 1 iş günü içinde kargoya verilir (hafta sonu ve resmî tatiller hariç). Kesim saati [16.00, teyit].',
+        kart('Süreler', L('<b>Kargoya veriliş:</b> iş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir (hafta sonu ve resmî tatiller hariç).',
                          '<b>Teslim:</b> Türkiye geneli 3–7 iş günü.', '<b>Hızlı Kargo (₺79,99):</b> sepette seçilirse sipariş öncelikli hazırlanır, aynı gün kargoya verilir.',
                          'Yasal üst sınır: sipariş en geç 30 gün içinde teslim edilir; gecikirse sana haber verir, istersen siparişi iptal ederiz.')),
         kart('Ücretler', L('Kargo tüm siparişlerde ücretsiz.', '<b>Kapıda ödeme ücreti ₺80.</b> Kartla ödemede bu ücret yoktur, üstelik %5 indirim uygulanır.')),

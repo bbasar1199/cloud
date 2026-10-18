@@ -42,4 +42,4 @@ Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, 
 Tema teslim edilmeden önce aynı akışlar canlı temada (önizleme temasında) denenir: her sayfa açılır ve taşmaz; her bağlantı bir yere gider; ürün → sepet → ödeme; ürün → kapıda formu; paket/model/seçenek doğru varyantla sepette; sepet adedi/kaldır/ek teklif/teslimat; boş sepet; menü, arama, 404, formlar, politikalar; 320px.
 
 ## Hâlâ teyit bekleyenler (sayfalarda köşeli)
-Ticaret unvanı, adres, MERSİS, telefon, KEP, WhatsApp numarası · kargo kesim saati (16.00?), firmalar · kapıda ödeme ücretinin iadesi · kapıda kartla ödeme · disk sayıları (Galaksi 12/13) · AyFeneri pil/sensör/ölçü · ürün garantisi · stok [N] · politika metinleri için hukukçu onayı.
+Ticaret unvanı, adres, MERSİS, telefon, KEP, WhatsApp numarası · Cumartesi kargo var mı, kargo firmaları, Hızlı Kargo (₺79,99) aynı gün kargoda iken farkı ne, dün satılan sayısı [X] · kapıda ödeme ücretinin iadesi · kapıda kartla ödeme · disk sayıları (Galaksi 12/13) · AyFeneri pil/sensör/ölçü · ürün garantisi · stok [N] · politika metinleri için hukukçu onayı.

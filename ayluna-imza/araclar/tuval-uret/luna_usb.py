@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS
+from ortak import TAIL, TL_JS, KARGO_JS
 import luna_e as E
 import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
@@ -242,9 +242,23 @@ CSS = r"""
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}
 .on .nokta i{opacity:1;transform:none}
 .kurdele{position:absolute;right:14px;top:-11px;padding:2px 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
-.disk-not{display:flex;align-items:center;gap:12px;margin:14px 0 0;font-size:14px;font-weight:600}
-.disk-not .dn img{width:30px;height:30px;margin-left:-12px}
-.disk-not .dn img:first-child{margin-left:0}
+/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok */
+.dun{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:14px;color:var(--soluk)}
+.dun b{color:var(--lac);font-variant-numeric:tabular-nums}
+.dun svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v2);stroke-width:1.8;stroke-linecap:round}
+/* Dönen satır (kullanıcı, 18 Eki): "Her kutuda 12 film diski" ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde;
+   dönerken yükseklik değişmez. Giren alttan, çıkan yukarı. Hareket azaltılmışsa ikisi alt alta. */
+.donen{position:relative;display:grid;margin:14px 0 0;font-size:14px;font-weight:600;overflow:hidden}
+.dn-s{grid-area:1/1;display:flex;align-items:center;gap:12px;min-height:30px;opacity:0;transform:translateY(80%);transition:opacity .36s var(--ease),transform .36s var(--ease)}
+.dn-s.on{opacity:1;transform:none}.dn-s.ust{transform:translateY(-80%)}
+.donen .dn img{width:30px;height:30px;margin-left:-12px}
+.donen .dn img:first-child{margin-left:0}
+.dn-ik{flex:none;width:30px;height:30px;border-radius:50%;background:var(--lac);display:grid;place-items:center}
+.dn-ik svg{width:18px;height:18px;fill:none;stroke:var(--v);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dn-m{flex:1;min-width:0;font-size:13px;line-height:1.3}
+.dn-sy{flex:none;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.dn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.donen{row-gap:10px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
 /* Baskı: tek satır, butonun hemen üstünde; stok elle yazılır, veri yoksa satır gizlenir */
 .stok{display:flex;align-items:center;gap:10px;margin:22px 0 0;font-size:14px;font-weight:600}
 .ping{position:relative;flex:none;width:10px;height:10px;margin:0 2px;border-radius:50%;background:var(--v2)}
@@ -399,6 +413,9 @@ def disk_yigin():
     return '<span class="dn" aria-hidden="true"><img src="%s" alt=""><img src="%s" alt=""><img src="%s" alt=""></span>' % (D['Sarmal galaksi'], D['Kuzey ışığı'], D['Denizanası'])
 
 
+# Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir (bölüm ayarı ya da Shopify Flow metafield'ı); boşsa satır gizlenir.
+DUN = '[X]'
+DUN_SATIR = ('    <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 SAAT = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>'
 WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>'
 # Güven: kartla ödeme kapıda ödemenin önünde (iade kapıda %28,6, ön ödemede %0,8). ₺80 kapıda ücreti formda ve SSS'de.
@@ -439,6 +456,7 @@ AL = ("""
     <p class="alt-b">2'si 1 arada: galaksi projektörü ve gece lambası.</p>
     <!-- Üstü çizili fiyat için son 10 günün fiyat kaydı gerekir (mevzuat kural 1b); teyit bekliyor -->
     <p class="fiyat" aria-label="₺1.599,00, önceki fiyat ₺1.999,00, %20 indirim"><b aria-hidden="true">₺1.599,00</b><s aria-hidden="true">₺1.999,00</s><span class="rozet" aria-hidden="true">%20 indirim</span></p>
+""" + DUN_SATIR + """
 
     <div class="ozler">
       <div class="oz"><span class="gz" aria-hidden="true"><span class="port"></span>""" + FIS + """</span><b>USB tak, çalıştır</b><span class="t">Laptop, powerbank ya da şarj başlığı.</span></div>
@@ -452,8 +470,10 @@ AL = ("""
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
       <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if><span class="{{b.gCls}}"><img src=\"""" + KES + """\" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src=\"""" + KES + """\" alt=""></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-s"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if><span>{{b.unit}}</span></span><span class="nokta"><i></i></span></button>
     </sc-for></div>
-    <p class="disk-not">""" + disk_yigin() + """<span>Her kutuda 12 film diski</span></p>
-    <!-- Baskı: tek satır, butonun üstünde. Stok ELLE girilir (kullanıcı, 18 Eki: "stoklar elle girilecek"): Shopify'da bölüm ayarı sayı + aç/kapa; Shopify stoğuna bağlı değil, boşsa satır gizlenir. "Dün X" yalnız gerçek veriyle. -->
+    <!-- Dönen satır (kullanıcı, 18 Eki: LunaDream'deki baskı USB'de de): önce disk, sonra aynı gün kargo + 16.00 sayacı (4 sn / 6 sn).
+         16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
+    <p class="donen"><span class="dn-sr">Her kutuda 12 film diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true">""" + disk_yigin() + """<span>Her kutuda 12 film diski</span></span><span class="{{dnB}}" aria-hidden="true"><span class="dn-ik">""" + SAAT + """</span><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
+    <!-- Baskı: tek satır, butonun üstünde. Stok ELLE girilir (kullanıcı, 18 Eki: "stoklar elle girilecek"): Shopify'da bölüm ayarı sayı + aç/kapa; Shopify stoğuna bağlı değil, boşsa satır gizlenir. "Dün [X]" fiyatın altında. -->
     <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
@@ -579,17 +599,19 @@ def sayfa(tema, kesit=None):
 
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 3, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 3, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Hareket azaltılmışsa kendiliğinden geçişler kapalı
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ gOto: false, dOto: false, kOto: false });
-    // Tek saat: sayaç, galeri (5 sn), disk (3 sn), oda kartı (5 sn)
+    var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (azH) this.setState({ gOto: false, dOto: false, kOto: false });
+    // Tek saat: sayaçlar, galeri (5 sn), disk (3 sn), oda kartı (5 sn), dönen satır (disk 4 sn, kargo 6 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
       if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % """ + str(len(GAL)) + """);
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % """ + str(len(KIM)) + """; o.kBas = t; }
+      if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
       self.setState(o);
     }, 1000);
   }
@@ -624,8 +646,8 @@ JS = """class Component extends DCLogic {
       on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, onPrice = TL(online, true);
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
-    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
-    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    """ + KARGO_JS + """
+    var KG = KARGO(S.now || Date.now()), kd = KG.gun;
     var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
     function IKI(n) { return n < 10 ? '0' + n : String(n); }
@@ -638,7 +660,7 @@ JS = """class Component extends DCLogic {
       { q: 'Gece lambası olarak da kullanılır mı?', a: 'Evet, 2’si 1 arada: gövdesi yumuşak ışıkla yanar. [Işık modları teyit edilecek.]' },
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
       { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.] Zorlanırsan WhatsApp’tan yaz.' },
-      { q: 'Kargo ne zaman gelir?', a: 'Siparişin 1 iş gününde kargoya verilir, Türkiye geneline 3–7 günde ulaşır. Takip bağlantısı sana gönderilir.' },
+      { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır. Takip bağlantısı sana gönderilir.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün WhatsApp’tan fotoğrafını gönder. [Değişim süreci teyit edilecek.]' }
@@ -661,7 +683,9 @@ JS = """class Component extends DCLogic {
       kNext: function () { self.setState({ kim: (S.kim + 1) % KIM.length, kBas: S.t }); },
       paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,
-      kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac,
+      dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
       alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length
     };
@@ -672,7 +696,7 @@ JS = """class Component extends DCLogic {
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7120))
+    h = int(os.environ.get('U_H', 7155))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(sayfa(ANA_TEMA) + TAIL.format(h=h, js=JS))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
