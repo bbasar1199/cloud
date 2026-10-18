@@ -475,6 +475,45 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 20 · E "Işık": daha güzel arayüz (18 Ekim)
+- Kullanıcı: "Daha güzel bir UI yapmanı istiyorum." (Önceki istek: Bir gece için "UI tasarım istiyorum".)
+- Üreteç `araclar/tuval-uret/luna_e.py` → `canvas/LunaDreamE.dc.html`. D'nin kopyası; D'nin içeriği, bölüm sırası, rengi ve yazısı korunur, D dosyası değişmez.
+- **Değişenler (bölüm = ürüne özgü arayüz parçası):**
+  - Ad levhası fotoğrafın üstüne 24px biner, üst köşeler 28.
+  - Sihirli: seçili modelin lambası kendi ışığında ortada. Dört özellik köşelerde, ince yörüngeye bağlı. Parça yeri iddia edilmez; çizgiler yörüngeye gider.
+  - Model kartı dikey: lamba kesimi dairenin üstünden taşar, seçilince ışık ve işaret.
+  - Buton notları ve teslim çizelgesi yerine **sipariş fişi**:
+    - içerik: seçim, disk, kartla ve kapıda toplam, ay evreli teslim satırları ("Kapında (tahmini)")
+    - görünüm: tırtıklı kâğıt; telefonda kaydırınca yarıktan basılır
+  - Diskler: tavanda soluk yıldızlar; metin "Diske dokun, desenini gör." Gerçek tavan fotoğrafı gelince eski metne dönülür.
+  - Kutu listesi ikonlu. Yorumlarda baş harfli açık daire. 30 gün ay evreli mühür.
+  - **Bir gece kadranı:**
+    - Yuvarlak fotoğraf penceresinin çevresindeki yayda 5 saat; ay seçili ana yay boyunca gider.
+    - Gök durumları: 20:00 ışıklı duvar, 20:30 sıcak alacakaranlık, 20:45–21:00 gece, 07:30 sabah.
+    - Gezinme: yaydaki nokta ya da saat yazısı, yanlardaki oklar, telefonda kaydırma (adım 48vh).
+    - Telefonda kadran ekranı doldurur (`--gh`), tuvalde 468px.
+  - Kapanışta "ya da kapıda öde" bağlantısı.
+- **Denetim:**
+  - Eleştirmen: güzellik D 6 → E 8, satış 7 → 7. En beğendiği üç parça: gece kadranı, sipariş fişi, Sihirli yörüngesi ile dikey model kartları.
+  - Eleştirmen düzeltmeleri işlendi:
+    - Alt başlık kaldırıldı (kullanıcı 17 Ekim'de silmişti; §10'a ders yazıldı).
+    - Sihirli ve model kartı kısaldı.
+    - Kadran kontrastı düzeltildi.
+    - Fişte kart farkı gösterildi.
+  - design-review düzeltmeleri işlendi:
+    - Saat yazısı dokunulur.
+    - Koyu durumda odak halkası Lamba.
+    - Kadranın altındaki boşluk giderildi.
+    - Ay yay boyunca gider.
+    - Yapışkan çubuk yarı saydam kalmaz; zaman çizelgesi desteklemeyen tarayıcı için gözlemci yedeği eklendi.
+    - Fiş tekrarı giderildi; geçersiz `dl` düzeltildi.
+- **Kullanıcıya sorulacak:**
+  - Sihirli, seçilmiş V1 2×2 düzeninden bilinçli olarak ayrıldı.
+  - D ve E'nin yazısı (Literata + Atkinson) ve rengi Main'den farklı.
+  - Teslim tarihi hesabı resmî tatilleri bilmiyor.
+  - Yapışkan çubukta kapıda ödeme seçeneği yok.
+- Tuval (Sürüm 62), Güncel sayfası: B+ (x=0), C2 (470), D (940), E (1410, h 6858), D-BirGece (1880).
+
 ## Sıradaki işler (17 Ekim, güncel)
 1. Kullanıcı B+ tam sayfayı onaylasın; sonra sıfırdan tema (`ayluna-tema/`) ve LunaDream şablonu B+'dan.
 2. **Sıfırdan Ayluna teması** (`ayluna-tema/`): layout, değişkenler, fontlar, üst menü, alt bilgi; sonra LunaDream ürün şablonu v2'den. Eski `shopify/*.txt` dosyaları iskelet.html'den geliyor ve artık kullanılmayacak.

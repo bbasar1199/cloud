@@ -74,7 +74,7 @@ CSS = r"""
 :where(.pg) button{font:inherit;color:inherit}
 .pg button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .pg :focus-visible{outline:2px solid var(--gece);outline-offset:2px}
-.koyu :focus-visible{outline-color:var(--lamba)}
+.koyu :focus-visible,.an2 :focus-visible,.an3 :focus-visible{outline-color:var(--lamba)}
 .lit{font-family:"Literata",Georgia,serif;font-weight:500;letter-spacing:-.005em}
 .tab{font-variant-numeric:tabular-nums}
 .ik{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -96,14 +96,19 @@ CSS = r"""
 /* Kapsayıcı overflow:clip (hidden değil): kaydırma kabı oluşmaz, yapışkan çubuk ve view() zaman çizelgesi çalışır.
    Bir gece satırları bant olduğu için orada yalnız satır içerikleri hareket eder (bant soluklaşmaz). */
 @supports (animation-timeline: view()){
-  .gir > *,.gir2 .gece-bas > *{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  .gir > *{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
   @keyframes gir{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   /* Yapışkan çubuk: fiyat bandı ekrandan çıkınca gelir (ilk ekranda güven satırını örtmez). Canlıda 5. bölüm ekrandayken de gizlenir (IntersectionObserver). */
   .ad{view-timeline-name:--fiyat}
   .yapis{animation:yapis-gir linear both;animation-timeline:--fiyat;animation-range:exit 0% exit 100%}
-  @keyframes yapis-gir{from{opacity:0;transform:translateY(100%);visibility:hidden}to{opacity:1;transform:none;visibility:visible}}
+  @keyframes yapis-gir{from{transform:translateY(100%);visibility:hidden}to{transform:none;visibility:visible}}
   /* İmza an ilk kez sahne ekrana girerken oynar */
   .yans.on.ilk,.yans.on.ilk .hal{animation-timeline:view();animation-range:entry 30% cover 45%;animation-delay:0s}
+}
+
+@supports not (animation-timeline: view()){
+  .yapis{transform:translateY(100%);visibility:hidden;transition:transform .32s var(--e),visibility .32s}
+  .yapis.ac{transform:none;visibility:visible}
 }
 
 /* 1 · Sayaç şeridi (Lamba): her gece 23:59'da (İstanbul) sıfırlanır */
@@ -246,9 +251,9 @@ CSS = r"""
 .fis-alan{margin-top:28px}
 .fis-yuva{position:relative;z-index:2;height:10px;margin:0 4px;border-radius:999px;background:var(--gece)}
 .fis-kap{margin:-5px 16px 0;overflow:clip;padding-bottom:2px;view-timeline-name:--fis}
-.fis{position:relative;padding:20px 16px 26px;background:var(--duvar);color:var(--gece);
-  -webkit-mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/14px 100% repeat-x;
-  mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/14px 100% repeat-x}
+.fis{position:relative;padding:20px 16px 26px;background:var(--duvar);color:var(--gece);box-shadow:inset 0 0 0 1.5px var(--cizgi);
+  -webkit-mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/calc(100% / 22) 100% repeat-x;
+  mask:conic-gradient(from -45deg at 50% 100%,#0000,#000 1deg 89deg,#0000 90deg) 50% 100%/calc(100% / 22) 100% repeat-x}
 .fis-bas{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:1.5px dashed rgba(26,33,66,.3)}
 .fis-bas b{font-size:17px}
 .fis-bas span{font-size:13px;color:var(--sis)}
@@ -256,10 +261,10 @@ CSS = r"""
 .fis-sat{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;font-size:14px}
 .fis-sat dt{color:var(--sis)}
 .fis-sat dd{margin:0;font-weight:700;text-align:right}
-.fis-sat.ana dd{font-size:17px}
+.fis-sat.ana dd{font-size:20px}
 .fis-sat dd small{display:block;font-size:12px;font-weight:400;color:var(--sis)}
 .fis-sat dd small.fark{font-weight:700;color:var(--kehribar)}
-.fis-cizik{height:0;margin:4px 0;border-top:1.5px dashed rgba(26,33,66,.3)}
+.fis-sat.ust{margin-top:4px;padding-top:12px;border-top:1.5px dashed rgba(26,33,66,.3)}
 /* Teslim satırlarında ay evresi: hilal (bugün), yarım (kargoda), dolunay (kapında) */
 .fis-sat dt svg{width:16px;height:16px;margin-right:8px;vertical-align:-3px}
 .fis-sat dt circle{fill:none;stroke:var(--gece);stroke-opacity:.45;stroke-width:1.5}
@@ -346,20 +351,22 @@ CSS = r"""
    Ortada yuvarlak fotoğraf penceresi; çevresindeki yayda beş an. Ay seçili ana gider, gök o saatin rengine geçer
    (20:00 ışıklı duvar → 20:30 alacakaranlık → 20:45 ve 21:00 gece → 07:30 sabah). Yaydaki noktaya, oklara dokununca
    ya da telefonda kaydırınca ilerler. Sahne yapışık. Durum tek sınıfta (.an0–.an4). Yalnız transform/opacity. */
-.gece-bolum{position:relative;background:var(--carsaf)}
+.gece-bolum{--gh:468px;position:relative;background:var(--carsaf)}
+@media (max-height:1599px){.gece-bolum{--gh:clamp(468px,calc(100vh - 64px),640px)}}
 .gece-bas{padding:32px 20px 16px}
-.gece-cerceve{position:sticky;top:0;height:468px;overflow:hidden;isolation:isolate;background:var(--duvar);color:var(--gece)}
+.gece-cerceve{position:sticky;top:0;height:var(--gh);overflow:hidden;isolation:isolate;background:var(--duvar);color:var(--gece)}
 .gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s var(--e)}
 .gk-aksam{background:var(--gece);opacity:0}
 .gk-sabah{background:var(--carsaf);opacity:0}
-.gk-alaca{background:linear-gradient(180deg,rgba(26,33,66,.42),rgba(26,33,66,.1) 50%,rgba(26,33,66,0) 80%);opacity:0}
-.gk-isik{background:radial-gradient(250px 250px at 195px 216px,rgba(242,166,90,.75),rgba(242,166,90,0));opacity:.55}
-.gk-gunes{background:radial-gradient(300px 260px at 348px 184px,rgba(242,166,90,.5),rgba(242,166,90,0));opacity:0}
+.gk-alaca{background:linear-gradient(180deg,rgba(242,166,90,.22),rgba(242,166,90,0) 60%),linear-gradient(180deg,rgba(26,33,66,.34),rgba(26,33,66,.08) 50%,rgba(26,33,66,0) 80%);opacity:0}
+.g-ic{position:absolute;left:0;top:50%;width:390px;height:468px;margin-top:-234px}
+.gk-isik{background:radial-gradient(200px 200px at 195px calc(50% - 18px),rgba(242,166,90,.75),rgba(242,166,90,0));opacity:.55}
+.gk-gunes{background:radial-gradient(300px 260px at 348px calc(50% - 50px),rgba(242,166,90,.5),rgba(242,166,90,0));opacity:0}
 .gk-yildiz{opacity:0}
 .gk-yildiz circle{fill:var(--carsaf)}
 .an1 .gk-alaca{opacity:1}.an2 .gk-aksam,.an3 .gk-aksam{opacity:1}
 .an4 .gk-sabah{opacity:1}.an4 .gk-gunes{opacity:1}
-.an0 .gk-isik{opacity:.55}.an1 .gk-isik{opacity:.85}.an2 .gk-isik{opacity:.5}.an3 .gk-isik{opacity:.32}.an4 .gk-isik{opacity:0}
+.an0 .gk-isik{opacity:.38}.an1 .gk-isik{opacity:.85}.an2 .gk-isik{opacity:.5}.an3 .gk-isik{opacity:.32}.an4 .gk-isik{opacity:0}
 .an2 .gk-yildiz{opacity:.7}.an3 .gk-yildiz{opacity:1}
 /* Yay ve pencere halkası: açık ve koyu sürüm üst üste, gökle birlikte soluklaşır */
 .kadran{position:absolute;left:0;top:0;width:390px;height:468px;fill:none;pointer-events:none}
@@ -370,16 +377,18 @@ CSS = r"""
 .an2 .kadran .acik,.an3 .kadran .acik{opacity:0}
 .an2 .kadran .koyu-c,.an3 .kadran .koyu-c{opacity:1}
 /* Yaydaki anlar: 48px dokunma alanı, 10px nokta; seçili anın noktası ayın altında kalır */
-.g-nokta{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--gece)}
+.g-nokta{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--gece)}
 .g-nokta i{width:10px;height:10px;border-radius:50%;border:1.5px solid currentColor;background:var(--duvar);transition:transform .32s var(--e),opacity .32s var(--e)}
 .g-nokta[aria-pressed="true"] i{opacity:0;transform:scale(.4)}
-.g-saat{position:absolute;transform:translate(-50%,-50%);font-size:13px;font-weight:700;color:var(--sis);pointer-events:none;white-space:nowrap}
+.g-noktalar{position:absolute;inset:0;pointer-events:none}.g-noktalar button{pointer-events:auto}
+.g-saat{position:absolute;min-width:48px;min-height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;transform:translate(-50%,-50%);font-size:13px;font-weight:700;color:var(--sis);white-space:nowrap;cursor:pointer}
 .an2 .g-nokta,.an3 .g-nokta{color:var(--carsaf)}
 .an2 .g-nokta i,.an3 .g-nokta i{background:var(--gece)}
 .an2 .g-saat,.an3 .g-saat{color:rgba(255,248,240,.72)}
 .g-saat.on,.an1 .g-saat{color:var(--gece)}.an2 .g-saat.on,.an3 .g-saat.on{color:var(--carsaf)}
 /* Ay: seçili ana gider (yay boyunca); sabah soluklaşır */
-.g-ay{position:absolute;left:0;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;display:grid;place-items:center;pointer-events:none;transition:transform .64s var(--e),opacity .64s var(--e)}
+.g-ay-kol{position:absolute;left:195px;top:216px;width:0;height:0;transition:transform .64s var(--e)}
+.g-ay{position:absolute;left:156px;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;display:grid;place-items:center;pointer-events:none;transition:transform .64s var(--e),opacity .64s var(--e)}
 .g-ay::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.55),rgba(242,166,90,0) 68%)}
 .g-ay svg{position:relative;width:30px;height:30px;fill:var(--lamba)}
 .an4 .g-ay{opacity:.45}
@@ -389,8 +398,9 @@ CSS = r"""
 .g-yazi{position:absolute;left:72px;right:72px;top:334px;height:112px;text-align:center}
 .g-an{position:absolute;inset:0;opacity:0;transform:translateY(12px);transition:opacity .32s var(--e),transform .32s var(--e)}
 .g-an .saat{display:block;font-size:20px;line-height:1.2;color:var(--kehribar)}
-.g-an h3{margin:2px 0 0;font-size:22px;line-height:1.25}
+.g-an h3{margin:2px 0 0;font-size:20px;line-height:1.25}
 .g-an p{margin:4px 0 0;font-size:15px;line-height:1.45;color:var(--gece)}
+.an1 .g-an .saat{color:var(--gece)}
 .g-an.koyu{color:var(--carsaf)}.g-an.koyu .saat{color:var(--lamba)}.g-an.koyu p{color:rgba(255,248,240,.72)}
 .an0 .g-foto img:nth-child(1),.an1 .g-foto img:nth-child(2),.an2 .g-foto img:nth-child(3),.an3 .g-foto img:nth-child(4),.an4 .g-foto img:nth-child(5){opacity:1;transform:none}
 .an0 .g-an:nth-child(1),.an1 .g-an:nth-child(2),.an2 .g-an:nth-child(3),.an3 .g-an:nth-child(4),.an4 .g-an:nth-child(5){opacity:1;transform:none;transition-delay:.12s}
@@ -400,11 +410,10 @@ CSS = r"""
 .an2 .g-alt,.an3 .g-alt{color:var(--carsaf)}
 .g-ok{width:48px;height:48px;padding:0;border:1.5px solid currentColor;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;transition:transform .16s var(--e)}
 .g-ok:active{transform:scale(.94)}
-.g-ok:disabled{opacity:.3;cursor:default}
 /* Kaydırma adımları: canlıda her an ~70vh kaydırma; sahne bu sürede yapışık kalır. Uzun görüntü alanında (tuval, 1600px+) adım yok, noktalar ve oklarla gezilir. */
-.gece-adimlar{margin-top:-468px}
+.gece-adimlar{margin-top:calc(-1 * var(--gh))}
 .gece-adim{height:48vh}
-.gece-adim:first-child{height:calc(468px + 10vh)}
+.gece-adim:first-child{height:calc(var(--gh) + 30vh)}
 @media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 .gece-ipucu{margin:4px 0 0;font-size:14px;color:var(--sis)}
 
@@ -417,7 +426,7 @@ CSS = r"""
 .muhur .mh-bos{fill:none;stroke:var(--gece);stroke-opacity:.45;stroke-width:3}
 .muhur path{fill:var(--kehribar)}
 .muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.muhur-say b{font-size:28px;color:var(--kehribar)}
+.muhur-say b{font-size:32px;color:var(--kehribar)}
 .muhur-say span{margin-top:2px;font-size:12px;font-weight:700}
 .otuz span > b{display:block;font-size:15px;font-weight:700}
 .otuz p{margin:2px 0 0;font-size:14px;color:var(--sis)}
@@ -464,7 +473,7 @@ CSS = r"""
   .yans{transition:opacity .2s!important}
 }
 """
-CSS += ''.join('.an%d .g-ay{transform:translate(%spx,%spx)}' % (i, x, y) for i, (x, y) in enumerate(KAD_P)) + '\n'
+CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:rotate(%ddeg)}' % (i, a, i, a) for i, a in enumerate(KAD_A)) + '\n'
 
 DISK_IDS = [('Ay ve yıldız', '4a3a69e8c1d8dddad8c33f8f463b8a0e'), ('Okyanus', 'a24f13e032569f76d64b9b0fbe8d74f7'),
             ('Uzay', 'b088d2c82561b76f6db997fbc3944059'), ('Deniz kızı', '04ed9ce4ae8a36619975caa7d2de9ad8'),
@@ -540,10 +549,8 @@ HTML = """<div class="pg">
     <!-- Stok satırı: satıcı elle yazar ve açıp kapatır (Shopify stoğuna bağlı değil). Şimdilik 18. -->
     <p class="stok-satir"><span class="nokta"></span><span>Stokta son <b>18</b> adet</span></p>
     <button class="btn-ana" type="button">""" + ikon('kilit') + """<span>Güvenli Ödeme İle Al</span><span class="fy tab">{{onPrice}}</span></button>
-    <p class="btn-not tab">{{onNote}}</p>
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar (ek ürünler ve ₺80 ücret orada) -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
-    <p class="btn-not tab">{{kpNote}}</p>
     <!-- Sipariş fişi: seçimle güncellenir; canlıda kaydırınca bir kez yarıktan basılır -->
     <div class="fis-alan">
       <div class="fis-yuva" aria-hidden="true"></div>
@@ -553,11 +560,9 @@ HTML = """<div class="pg">
           <dl>
             <div class="fis-sat"><dt>LunaDream</dt><dd>{{adetName}}</dd></div>
             <div class="fis-sat"><dt>Masal diski</dt><dd class="tab">{{fisDisk}}</dd></div>
-            <div class="fis-cizik"></div>
-            <div class="fis-sat ana"><dt>Kartla öde</dt><dd class="tab">{{onPrice}}<small class="fark">{{kartFark}} daha az</small></dd></div>
-            <div class="fis-sat"><dt>Kapıda öde</dt><dd class="tab">{{kpPrice}}</dd></div>
-            <div class="fis-cizik"></div>
-            """ + FIS_TESLIM + """
+            <div class="fis-sat ana ust"><dt>Kartla öde</dt><dd class="tab">{{onPrice}}<small class="fark">%5 indirimli · {{kartFark}} daha az</small></dd></div>
+            <div class="fis-sat"><dt>Kapıda öde</dt><dd class="tab">{{kpPrice}}<small>+₺80 kapıda ödeme ücreti dahil</small></dd></div>
+            """ + FIS_TESLIM.replace('<div class="fis-sat">', '<div class="fis-sat ust">', 1) + """
           </dl>
           <p class="fis-alt">Kargo ücretsiz · 30 gün iade</p>
         </div>
@@ -620,13 +625,15 @@ HTML = """<div class="pg">
       <span class="gk gk-alaca" aria-hidden="true"></span>
       <span class="gk gk-isik" aria-hidden="true"></span>
       <span class="gk gk-gunes" aria-hidden="true"></span>
-      <svg class="gk gk-yildiz" viewBox="0 0 390 468" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle></svg>
+      <svg class="gk gk-yildiz" viewBox="0 0 390 468" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle></svg>
+      <div class="g-ic">
       <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay acik" d="M39 216A156 156 0 0 1 351 216"></path><path class="yay koyu-c" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka acik" cx="195" cy="216" r="96"></circle><circle class="halka koyu-c" cx="195" cy="216" r="96"></circle></svg>
       <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
-      <sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><span class="{{a.saatCls}}" style="left: {{a.lx}}px; top: {{a.ly}}px" aria-hidden="true">{{a.t}}</span><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for>
-      <span class="g-ay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span>
+      <div class="g-noktalar" role="group" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button class="{{a.saatCls}}" type="button" tabindex="-1" aria-hidden="true" style="left: {{a.lx}}px; top: {{a.ly}}px" onClick="{{a.pick}}">{{a.t}}</button><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><i></i></button></sc-for></div>
+      <span class="g-ay-kol" aria-hidden="true"><span class="g-ay"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span>
       <div class="g-yazi" aria-live="polite"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="{{a.cls}}" aria-hidden="{{a.gizli}}"><span class="saat lit tab">{{a.t}}</span><h3 class="lit">{{a.title}}</h3><p>{{a.text}}</p></div></sc-for></div>
       <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an">""" + ikon('sol') + """</button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an">""" + ikon('sag') + """</button></div>
+      </div>
     </div>
     <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
@@ -659,7 +666,7 @@ HTML = """<div class="pg">
     <p class="kdv">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
   </footer>
 
-  <div class="yapis">
+  <div class="{{yapisCls}}">
     <span class="yapis-foto" aria-hidden="true"><img src="{{yapisSrc}}" alt=""><sc-if value="{{yapisIki}}" hint-placeholder-val="{{true}}"><img class="iki" src="{{yapisSrc2}}" alt=""></sc-if></span>
     <span class="yapis-yazi tab"><b>{{onPrice}}</b><span>{{adetName}}, kartla · {{cdShort}}</span></span>
     <button class="btn-ana" type="button">Satın al</button>
@@ -673,6 +680,11 @@ JS = """class Component extends DCLogic {
     var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
     // Bir gece: kaydırma adımları ekranın ortasına gelince an değişir. Uzun görüntü alanında (tuval) adım yok; şeritle gezilir.
     if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600) this.geceBagla();
+    // Zaman çizelgesi yoksa yapışkan çubuk fiyat bandı ekrandan çıkınca açılır
+    if (typeof CSS !== 'undefined' && CSS.supports && !CSS.supports('animation-timeline', 'view()') && typeof IntersectionObserver !== 'undefined') {
+      var ad = document.querySelector('.ad');
+      if (ad) { this.yio = new IntersectionObserver(function (es) { var ac = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; if (ac !== !!self.state.yapisAc) self.setState({ yapisAc: ac }); }); this.yio.observe(ad); }
+    }
   }
   geceBagla() {
     var self = this, adim = document.querySelectorAll('[data-adim]');
@@ -685,7 +697,7 @@ JS = """class Component extends DCLogic {
     this.adimIlk = adim[0];
   }
   componentDidUpdate() { if (this.io && this.adimIlk && !this.adimIlk.isConnected) this.geceBagla(); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.io) this.io.disconnect(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.io) this.io.disconnect(); if (this.yio) this.yio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -813,10 +825,10 @@ JS = """class Component extends DCLogic {
       kutuSay: kutuSay, kutuNot: S.adet === 2 ? 'Her kutuda bunların hepsi var.' : 'Hepsi tek kutuda.',
       eldeSrc: tumErkek ? ERKEK : B + '8f8d1462c27c62b0bbd3066d72c92025', eldeAlt: tumErkek ? 'LunaDream Erkek (Uzay Kaşifi)' : 'Elde tutulan LunaDream Kız', eldeNot: tumErkek ? 'Erkek modeli' : 'Kız modeli, elde', eldePos: tumErkek ? '50% 62%' : '40% 50%',
       vids: vids, mfoto: mfoto, topics: topics, revs: revs, moments: moments, geceCls: 'gece-cerceve an' + gece, shop: shop, shopCount: PR.length, faq: faq,
-      geceNo: gece + 1, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); },
+      gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); },
       sahneCls: 'sahne-lamba ' + (kiz ? 'k' : 'e'),
       fisTarih: fisTarih, fisAdet: S.adet === 2 ? '2 Adet' : '1 Adet', fisDisk: S.adet === 2 ? '2 × (6 + 6 hediye)' : '6 + 6 hediye', kpPrice: TL(kapida, true), kartFark: TL(kapida - online, true),
-      yapisSrc: S.adet === 2 ? kes(l1) : kes(S.model), yapisSrc2: kes(l2), yapisIki: S.adet === 2 && l1 !== l2
+      yapisCls: S.yapisAc ? 'yapis ac' : 'yapis', yapisSrc: S.adet === 2 ? kes(l1) : kes(S.model), yapisSrc2: kes(l2), yapisIki: S.adet === 2 && l1 !== l2
     };
   }
 }"""
@@ -846,5 +858,5 @@ TAIL = """</x-dc>
 </body>
 </html>
 """
-open(OUT, 'w', encoding='utf-8').write(HEAD + HTML + TAIL % (int(os.environ.get('E_H', 6800)), JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD + HTML + TAIL % (int(os.environ.get('E_H', 6858)), JS))
 print('yazıldı:', os.path.abspath(OUT))
