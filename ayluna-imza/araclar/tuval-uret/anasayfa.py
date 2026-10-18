@@ -40,9 +40,9 @@ ANA_SAY = 8  # ana sayfada ilk 8 ürün, gerisi "Tüm ürünler"
 
 # Slayt: yazısız görsel + HTML yazı (görsele gömülü yazı yok). LunaDream ve USB görselleri tuvalde zaten var.
 SLAYT = [
-    ('fd0bca1b99cf3837b69fb025cc4e2cd9', '50% 55%', 'LunaDream Gece Lambası', 'Masal gibi<br>geceler.', 'Ninni çalar, duvara ay ve yıldız yansıtır.', 'LunaDream\'i incele', 'Gece çocuk odası, komodinde yanan LunaDream'),
+    ('fd0bca1b99cf3837b69fb025cc4e2cd9', '50% 55%', 'LunaDream Gece Lambası', 'Masal gibi<br>geceler.', 'Ninni çalar; kutuda 6 + 6 hediye disk.', 'LunaDream\'i incele', 'Gece çocuk odası, komodinde yanan LunaDream'),
     ('7d5f80214a0664a51946b0ece044e8cb', '50% 30%', 'Galaxy USB Projektör', 'Tavanı<br>sahneye çevir.', 'Bir USB girişi, 12 film diski.', 'Galaxy USB\'yi incele', 'Komodinde beyaz Galaxy USB projektör'),
-    (BL['ayfeneri-kare.jpg'], '50% 30%', 'Ayluna AyFeneri', 'Ay ışığını<br>evine getir.', 'Duvara ay yansıtan deniz feneri.', 'AyFeneri\'ni incele', 'Duvara ay yansıtan AyFeneri deniz feneri lamba'),
+    (BL['ayfeneri-kare.jpg'], '50% 30%', 'Ayluna AyFeneri', 'Duvara<br>ay yansıt.', 'Sensörlü, kumandalı, şarjlı deniz feneri.', 'AyFeneri\'ni incele', 'Duvara ay yansıtan AyFeneri deniz feneri lamba'),
 ]
 # Loox yorumları: canlı ana sayfa karuselinden, kelimesi kelimesine (m.28/B: Shopify'da Loox bölümü hepsini otomatik gösterir).
 # "Doğrulanmış" ve yıldız yazılmaz: envantere göre bazı ürünlerde yorumlar ürünün eklendiği gün yazılmış, doğrulama etiketi yok.
@@ -69,7 +69,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .ust .sag{display:flex}
 .ikon{position:relative;width:48px;height:48px;display:grid;place-items:center;border:0;background:transparent;color:var(--lac)}
 .ikon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ikon i{position:absolute;right:8px;top:8px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--lac);color:#fff;font-style:normal;font-size:11px;font-weight:700;line-height:17px;text-align:center}
+.ikon i{position:absolute;right:8px;top:8px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--lac);color:#fff;font-style:normal;font-size:12px;font-weight:700;line-height:17px;text-align:center}
 .marka{display:flex;align-items:center;gap:6px;color:var(--lac)}
 .marka b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;letter-spacing:-.01em}
 /* Slayt: kaydırılır, 5 sn'de geçer; altta ay evreleri dolar (ürün sayfalarındaki galeriyle aynı dil) */
@@ -94,7 +94,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .ay-iz .lit path{opacity:1;transform:none}.ay-iz .on{transform:scale(1.4)}.ay-iz .on circle{stroke:#FFFDF9}
 /* Bölüm başlığı */
 .bb{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:40px 16px 0}
-.bb a{flex:none;display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:700;color:var(--lac);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--cizgi)}
+.bb a{flex:none;display:inline-flex;align-items:center;min-height:48px;font-size:14px;font-weight:700;color:var(--lac);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--cizgi)}
 /* Loox yorumları */
 .yorum-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
 .yorum-serit::-webkit-scrollbar{display:none}
@@ -144,16 +144,16 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 /* Alt bilgi */
 .alt{margin-top:40px;padding:34px 16px 110px;border-radius:28px 28px 0 0;background:var(--lac);color:#B9BED6}
 .alt .sut{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
-.alt h3{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.06em;color:#FFFDF9}
-.alt a{display:flex;align-items:center;min-height:44px;font-size:14px;color:#FFFDF9}
+.alt h3{margin:0 0 4px;font-size:13px;font-weight:700;color:#FFFDF9}
+.alt a{display:flex;align-items:center;min-height:48px;font-size:14px;color:#FFFDF9}
 .alt .yasal{margin:18px 0 0;font-size:13px;line-height:1.55}
-.odeme{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
-.odeme span{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:rgba(255,253,249,.08);color:#FFFDF9;font-size:12px;font-weight:800;letter-spacing:.02em}
+.kart-logo{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.kart-logo span{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:rgba(255,253,249,.08);color:#FFFDF9;font-size:12px;font-weight:800;letter-spacing:.02em}
 .alt .imza{display:flex;align-items:center;gap:12px;margin-top:26px;color:#FFFDF9}
 .alt .imza span{font-family:"Young Serif",Georgia,serif;font-size:58px;line-height:.8;letter-spacing:-.045em}
 .alt .telif{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,253,249,.12);font-size:12px}
 /* Yukarı çık (canlıda var): 400px kaydırınca görünür */
-.yukari{position:sticky;bottom:18px;z-index:5;display:grid;place-items:center;width:48px;height:48px;margin:-66px 18px 18px auto;border:0;border-radius:50%;background:#FFFDF9;color:var(--lac);box-shadow:0 6px 18px -6px rgba(12,16,39,.45)}
+.yukari{position:sticky;bottom:18px;z-index:5;display:grid;place-items:center;width:48px;height:48px;margin:-66px 18px 18px auto;border:0;border-radius:50%;background:#FFFDF9;color:var(--lac);box-shadow:inset 0 0 0 1.5px var(--lac)}
 .yukari svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 """
 
@@ -175,7 +175,7 @@ def urun_kart(h, ad, p, c, var):
 
 GUVEN = [('<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle>', 'Ücretsiz kargo', 'Türkiye geneline, takip numarasıyla.'),
          ('<path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path>', '30 gün iade', 'Beğenmezsen geri gönder, kargosu ücretsiz.'),
-         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez. Kapıda ödeme de var.'),
+         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez. Kapıda ödemede +₺80.'),
          ('<path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path>', 'WhatsApp destek', 'Ortalama 2 saatte yanıt.')]
 
 HTML = ('<div class="pg" style="padding-bottom: 0">\n'
@@ -192,7 +192,7 @@ HTML = ('<div class="pg" style="padding-bottom: 0">\n'
         '  <!-- Loox yorumları: Shopify\'da Loox karusel bölümü (gerçek yorumlar, hepsi). Burada canlı karuselden beşi, kelimesi kelimesine. -->\n'
         '  <div class="bb"><h2 class="h2">Alanlar ne<br>diyor<span class="n">?</span></h2></div>\n'
         '  <div class="yorum-serit">' + ''.join('<div class="yk"><p>“%s”</p><span>%s</span></div>' % (t, n) for n, t in YORUM) + '<span aria-hidden="true" style="flex: 0 0 4px"></span></div>\n'
-        '  <p class="y-not">Yorumlar Loox\'tan; tamamı gösterilir. [Ürün eklendiği gün yazılmış, etiketsiz yorumlar teyit edilmeli]</p>\n'
+        '  <!-- Teyit: bazı ürünlerde yorumlar ürünün eklendiği gün yazılmış ve etiketsiz (ogrenme/urun-envanter.md) -->\n  <p class="y-not">Yorumlar Loox\'tan; tamamı gösterilir.</p>\n'
         '  <!-- Öne çıkan ürünler (canlıda "Bunlarıda sevebilirsin", 9/15 ürün): burada 15 ürün; ilk 8\'i ana sayfada -->\n'
         '  <div class="bb"><h2 class="h2">Odana bir<br>gökyüzü<span class="n">.</span></h2><a href="#">Tümünü gör</a></div>\n'
         '  <div class="izgara">' + ''.join(urun_kart(*u) for u in URUN[:ANA_SAY]) + '</div>\n'
@@ -206,13 +206,13 @@ HTML = ('<div class="pg" style="padding-bottom: 0">\n'
         '<div class="cipler"><span>Gerçek ay yansıması</span><span>Otomatik sensör</span><span>Kumanda</span><span>Şarjlı</span></div>'
         '<a href="#">AyFeneri\'ni incele · ₺1.649,99' + OK.replace('<svg ', '<svg style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round" ') + '</a></div></section>\n'
         '  <!-- Bülten (canlıda "%5 İNDİRM KAZANMAK İÇİN ABONE OL"): %5 kodunun gerçekten gönderildiği teyit edilmeli -->\n'
-        '  <section class="bulten"><h2 class="h2">%5 indirim için<br>abone ol<span class="n">.</span></h2><p>Yeni ürünlerden ilk sen haberdar ol. [İndirim kodu e-postayla gönderiliyor mu? Teyit]</p>'
+        '  <section class="bulten"><h2 class="h2">%5 indirim için<br>abone ol<span class="n">.</span></h2><p>Yeni ürünlerden ilk sen haberdar ol.</p><!-- Teyit: %5 kodu e-postayla gerçekten gönderiliyor mu? -->'
         '<form onSubmit="{{dur}}"><label style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)" for="b-eposta">E-posta</label><input id="b-eposta" type="email" placeholder="E-posta adresin" autocomplete="email"><button type="submit">Kayıt ol</button></form></section>\n'
         '  <footer class="alt"><div class="sut">'
-        '<div><h3>MAĞAZA</h3><a href="#">Ana sayfa</a><a href="#">Tüm ürünler</a><a href="#">Kargo takip</a><a href="#">İletişim</a></div>'
-        '<div><h3>POLİTİKALAR</h3><a href="#">İade politikası</a><a href="#">Kargo politikası</a><a href="#">Gizlilik</a><a href="#">Hizmet şartları</a><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a></div></div>'
+        '<div><h3>Mağaza</h3><a href="#">Ana sayfa</a><a href="#">Tüm ürünler</a><a href="#">Kargo takip</a><a href="#">İletişim</a></div>'
+        '<div><h3>Politikalar</h3><a href="#">İade politikası</a><a href="#">Kargo politikası</a><a href="#">Gizlilik</a><a href="#">Hizmet şartları</a><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a></div></div>'
         '<p class="yasal">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [telefon]<br>ecom11001@gmail.com · KEP [adres]</p>'
-        '<div class="odeme" aria-label="Kabul edilen kartlar"><span>VISA</span><span>Mastercard</span><span>Troy</span></div>'
+        '<div class="kart-logo" aria-label="Kabul edilen kartlar"><span>VISA</span><span>Mastercard</span><span>Troy</span></div>'
         '<div class="imza" aria-label="Ayluna">' + E.isaret(48) + '<span aria-hidden="true">Ayluna</span></div>'
         '<p class="telif">Fiyatlara KDV dahildir. © 2026 Ayluna</p></footer>\n'
         '  <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>\n'
@@ -245,5 +245,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4340)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4290)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

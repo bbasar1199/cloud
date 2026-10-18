@@ -28,7 +28,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
 .odeme:active{transform:scale(.98)}
 .not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
-.pg{background:#FFFFFF;font-family:"Onest",ui-sans-serif,system-ui,sans-serif;font-size:15px;--lac:#1A2142;--soluk:#5C6078;--cizgi:#E6E8EE;--zemin:#F4F5F7;--ease:cubic-bezier(.2,.7,.2,1)}
+.pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,sans-serif;font-size:15px;--lac:#1A2142;--soluk:#5C6078;--cizgi:#E3D8C7;--zemin:#EFE6D8;--ease:cubic-bezier(.2,.7,.2,1)}
 .pg button{font:inherit;color:inherit;cursor:pointer}
 .pg button:focus-visible{outline:2px solid #1A2142;outline-offset:3px}
 /* Üst: başlık + kapat */
@@ -38,27 +38,26 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .kapat{width:48px;height:48px;display:grid;place-items:center;border:0;background:transparent}
 .kapat svg,.ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .kargo-serit{display:flex;align-items:center;gap:8px;margin:12px 16px 0;padding:10px 12px;border-radius:12px;background:var(--zemin);font-size:13px;font-weight:600}
-.kargo-serit svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;animation:kamyon 2.6s ease-in-out infinite}
-@keyframes kamyon{0%,100%{transform:translateX(-1px)}50%{transform:translateX(2px)}}
+.kargo-serit svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 /* Ürün satırı */
 .urun{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;margin:14px 16px 0;padding-bottom:16px;border-bottom:1px solid var(--cizgi)}
 .urun img{width:76px;height:76px;border-radius:12px;object-fit:cover;background:var(--zemin)}
 .urun b{display:block;font-size:15px;line-height:1.3}
 .urun small{display:block;margin-top:2px;font-size:13px;color:var(--soluk)}
 .urun-alt{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.adet{display:inline-flex;align-items:center;height:40px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
-.adet button{width:44px;height:40px;border:0;background:transparent;font-size:18px}
+.adet{display:inline-flex;align-items:center;height:48px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.adet button{width:48px;height:48px;border:0;background:transparent;font-size:18px}
 .adet span{min-width:22px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
 .urun-fiyat{text-align:right;font-variant-numeric:tabular-nums}
 .urun-fiyat b{font-size:16px}
-.sil{display:inline-flex;align-items:center;min-height:32px;margin-top:4px;padding:0;border:0;background:transparent;font-size:13px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
+.sil{display:inline-flex;align-items:center;min-height:48px;margin-top:0;padding:0;border:0;background:transparent;font-size:13px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
 /* Siparişine özel: dokununca eklenir, ay dolar */
 .blok-bas{display:flex;align-items:baseline;justify-content:space-between;margin:22px 16px 10px}
 .blok-bas b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;letter-spacing:-.01em}
 .blok-bas span{font-size:12px;color:var(--soluk)}
-.teklif{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;width:calc(100% - 32px);margin:0 16px 10px;padding:10px 12px 10px 10px;border:0;border-radius:16px;background:#fff;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
+.teklif{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;width:calc(100% - 32px);margin:0 16px 10px;padding:10px 12px 10px 10px;border:0;border-radius:16px;background:#FFFDF9;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
 .teklif:active{transform:scale(.985)}
-.teklif.on{box-shadow:inset 0 0 0 2px var(--lac);background:#F8F9FC}
+.teklif.on{box-shadow:inset 0 0 0 2px var(--lac);background:#FFFDF9}
 .teklif img{width:56px;height:56px;border-radius:12px;object-fit:cover;background:var(--zemin)}
 .teklif b{display:block;font-size:14px;line-height:1.3}
 .teklif small{display:block;margin-top:2px;font-size:12px;color:var(--soluk)}
@@ -70,7 +69,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .on .ekle{background:var(--lac);color:#fff}
 .on .ekle svg circle{stroke:#fff}.on .ekle svg path{fill:#fff;opacity:1;transform:none}
 /* Teslimat seçimi */
-.tes{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;width:calc(100% - 32px);margin:0 16px 10px;padding:14px 14px 14px 12px;border:0;border-radius:16px;background:#fff;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.tes{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;width:calc(100% - 32px);margin:0 16px 10px;padding:14px 14px 14px 12px;border:0;border-radius:16px;background:#FFFDF9;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
 .tes.on{box-shadow:inset 0 0 0 2px var(--lac)}
 .tes b{display:block;font-size:15px}
 .tes small{display:block;margin-top:2px;font-size:13px;color:var(--soluk);line-height:1.4}
@@ -86,13 +85,13 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .ozet .top{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px dashed var(--cizgi);color:var(--lac)}
 .ozet .top span{font-size:15px;font-weight:600}
 .ozet .top b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-.02em}
-.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:62px;margin:16px 16px 0;padding:8px 16px;border:0;border-radius:16px;background:var(--lac);box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:62px;margin:16px 16px 0;padding:8px 16px;border:0;border-radius:16px;background:var(--lac);transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px)}
 .btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
 .btn1 .b-ic>span{font-size:16px;font-weight:700}
 .btn1 .b-ic small{margin-top:2px;font-size:12px;font-weight:600;color:#C9D2EC}
-.btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) infinite}
+.btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) 1s 3}
 @keyframes durt{0%,58%,100%{transform:none}68%{transform:translateX(5px)}78%{transform:none}86%{transform:translateX(3px)}94%{transform:none}}
 .btn2{display:flex;align-items:center;justify-content:center;width:calc(100% - 32px);min-height:56px;margin:12px 16px 0;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 .guven{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 16px 24px;text-align:center}
@@ -136,7 +135,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1290}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { adet: 1, ek: {}, hizli: false }; }
   renderVals() {
