@@ -9,11 +9,11 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Figtree:wght@400;500;600;700&amp;family=Young+Serif&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600;700&amp;family=Young+Serif&amp;display=swap">
 <style>
 body{margin:0;background:#F2F4F8}
-.pg{--v:#D3DCEE;--v2:#56658A;--zemin:#F4F5F7;--cizgi:#E1E4EA;--fb:"Fraunces",ui-sans-serif,system-ui,sans-serif;--fg:"Figtree",ui-sans-serif,system-ui,sans-serif;--bk:600;--bls:-.02em}
-.hero-y .bas-y em{font-style:italic;font-weight:500;letter-spacing:-.01em}
+.pg{--v:#D3DCEE;--v2:#56658A;--zemin:#F4F5F7;--cizgi:#E1E4EA;--fb:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--fg:"Figtree",ui-sans-serif,system-ui,sans-serif;--bk:800;--bls:-.035em}
+.hero-y .bas-y em{font-weight:500;letter-spacing:-.02em}
 
 .pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--yuzey:#FFFFFF;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
   width:390px;margin:0 auto;background:var(--zemin);color:var(--lac);font-family:var(--fg);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:clip;position:relative}
@@ -199,6 +199,16 @@ body{margin:0;background:#F2F4F8}
 @keyframes yk2{0%,26%{opacity:0;transform:scale(.3)}33%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 @keyframes yk3{0%,57%{opacity:0;transform:scale(.3)}64%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 
+/* Bu gece tavanda ne olsun? (Yön A'dan, kullanıcı istedi): yaşam fotoğrafı, yazı görselin içinde; fotoğraflar yavaşça süzülür */
+.sahne-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
+.sk{position:relative;flex:0 0 272px;height:380px;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:#000}
+.sk img{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;animation:suz 16s ease-in-out infinite alternate}
+.sk:nth-child(2) img{animation-delay:-4s}.sk:nth-child(3) img{animation-delay:-8s}.sk:nth-child(4) img{animation-delay:-12s}
+@keyframes suz{from{transform:scale(1) translateX(-2%)}to{transform:scale(1.06) translateX(2%)}}
+.sk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,54,0) 55%,rgba(20,26,54,.88) 100%)}
+.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:28px;letter-spacing:-.03em;color:#fff}
+.sk span{position:absolute;left:16px;bottom:14px;z-index:1;font-size:13px;color:#D5DBEA}
+
 /* 12 disk: seçilen disk tavana düşer; kendiliğinden sırayla gezer, dokununca durur. Yazı görselin içinde. */
 .dk-sahne{position:relative;height:330px;margin-top:6px;overflow:hidden}
 .dk-yansi{position:absolute;left:50%;top:4px;width:236px;height:236px;margin-left:-118px;animation:nefes 6s ease-in-out infinite alternate}
@@ -339,7 +349,9 @@ body{margin:0;background:#F2F4F8}
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section>
 
-  <section class="px" style="padding-bottom: 44px">
+  <section class="koyu bolum" style="padding-bottom: 36px"><div class="px"><h2 class="bas-y h2">Bu gece tavanda<br>ne olsun<span class="n">?</span></h2></div><div class="sahne-serit noscroll"><div class="sk"><img src="/_blob/a2010776792420e44288cfaf26ea36cf" alt="Ay yansıması" style="object-position: 50% 40%"><b>Ay</b><span>Disk değiştir, tavan değişsin</span></div><div class="sk"><img src="/_blob/10b5c03a83fd85a3eb15b3374830001e" alt="Satürn yansıması" style="object-position: 55% 40%"><b>Satürn</b><span>Disk değiştir, tavan değişsin</span></div><div class="sk"><img src="/_blob/db2afb7bdda9b8175ad05543628d075b" alt="Denizanası yansıması" style="object-position: 50% 35%"><b>Denizanası</b><span>Disk değiştir, tavan değişsin</span></div><div class="sk"><img src="/_blob/eae251a225996e67cae4ea4b714d7513" alt="Kuzey ışığı yansıması" style="object-position: 50% 40%"><b>Kuzey ışığı</b><span>Disk değiştir, tavan değişsin</span></div><span aria-hidden="true" style="flex: 0 0 6px"></span></div><p class="alt-not px">Görseller temsilîdir; desen kutudaki 12 diskten birine göre değişir, büyüklük odaya ve mesafeye göre.</p></section>
+
+  <section class="bolum px">
     <h2 class="bas-y h2">İçin rahat<br>olsun<span class="n">.</span></h2>
     <div class="ozler dort"><div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span><b>Ücretsiz kargo</b><span class="t">1 iş gününde kargoda, adım adım takip.</span></div><div class="oz"><span class="gz"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></span><b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="oz"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span><b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div><div class="oz"><span class="gz"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span></span><b>WhatsApp destek</b><span class="t">Ortalama 2 saatte yanıt.</span></div></div><div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span>[Ödeme altyapısı]</span></div>
   </section>
@@ -430,7 +442,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6480}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7120}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 3, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {

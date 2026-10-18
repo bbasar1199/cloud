@@ -44,7 +44,11 @@ TEMA = {
                   fb='"Fraunces"', fg='"Figtree"', bk=600, bls='-.02em', font='family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Figtree:wght@400;500;600;700',
                   ek='.hero-y .bas-y em{font-style:italic;font-weight:500;letter-spacing:-.01em}'),
 }
-ANA_TEMA = os.environ.get('U_TEMA', 'gumus')
+# Kullanıcı (18 Eki): "Oradaki (Yön A) tasarım dili daha güzeldi; oradaki yazı fontu… sadece o section'u ve yazı fontunu al." → Ay gümüşü renkleri + Yön A yazı tipi
+TEMA['gumus-a'] = dict(TEMA['gumus'], ad='Ay gümüşü · Yön A yazısı', alt='Gümüş ve lacivert, Bricolage Grotesque + Figtree (Yön A)', fb='"Bricolage Grotesque"', fg='"Figtree"', bk=800, bls='-.035em',
+                       font='family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700',
+                       ek='.hero-y .bas-y em{font-weight:500;letter-spacing:-.02em}')
+ANA_TEMA = os.environ.get('U_TEMA', 'gumus-a')
 
 GAL = [('oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30%'), ('urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'),
        ('bas', 'Projektör başlığı yakından', '50% 40%')]
@@ -269,6 +273,16 @@ CSS = r"""
 @keyframes yk2{0%,26%{opacity:0;transform:scale(.3)}33%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 @keyframes yk3{0%,57%{opacity:0;transform:scale(.3)}64%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 
+/* Bu gece tavanda ne olsun? (Yön A'dan, kullanıcı istedi): yaşam fotoğrafı, yazı görselin içinde; fotoğraflar yavaşça süzülür */
+.sahne-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
+.sk{position:relative;flex:0 0 272px;height:380px;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:#000}
+.sk img{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;animation:suz 16s ease-in-out infinite alternate}
+.sk:nth-child(2) img{animation-delay:-4s}.sk:nth-child(3) img{animation-delay:-8s}.sk:nth-child(4) img{animation-delay:-12s}
+@keyframes suz{from{transform:scale(1) translateX(-2%)}to{transform:scale(1.06) translateX(2%)}}
+.sk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,54,0) 55%,rgba(20,26,54,.88) 100%)}
+.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:28px;letter-spacing:-.03em;color:#fff}
+.sk span{position:absolute;left:16px;bottom:14px;z-index:1;font-size:13px;color:#D5DBEA}
+
 /* 12 disk: seçilen disk tavana düşer; kendiliğinden sırayla gezer, dokununca durur. Yazı görselin içinde. */
 .dk-sahne{position:relative;height:330px;margin-top:6px;overflow:hidden}
 .dk-yansi{position:absolute;left:50%;top:4px;width:236px;height:236px;margin-left:-118px;animation:nefes 6s ease-in-out infinite alternate}
@@ -439,6 +453,13 @@ AL = ("""
   </section>
 """)
 
+# Sahneler: kutudaki disklerle örtüşenler (Ay, Satürn ≈ halkalı gezegen, Denizanası, Kuzey ışığı). Kelebek ve kara delik kutuda yok, alınmadı.
+SAHNE = [('Ay', 'ay', '50% 40%'), ('Satürn', 'saturn', '55% 40%'), ('Denizanası', 'denizanasi', '50% 35%'), ('Kuzey ışığı', 'cift', '50% 40%')]
+SAHNELER = ('\n  <section class="koyu bolum" style="padding-bottom: 36px"><div class="px"><h2 class="bas-y h2">Bu gece tavanda<br>ne olsun<span class="n">?</span></h2></div>'
+            '<div class="sahne-serit noscroll">' + ''.join('<div class="sk"><img src="%s%s" alt="%s yansıması" style="object-position: %s"><b>%s</b><span>Disk değiştir, tavan değişsin</span></div>' % (B, I[k], n, pos, n) for n, k, pos in SAHNE) +
+            '<span aria-hidden="true" style="flex: 0 0 6px"></span></div>'
+            '<p class="alt-not px">Görseller temsilîdir; desen kutudaki 12 diskten birine göre değişir, büyüklük odaya ve mesafeye göre.</p></section>\n')
+
 DISKLER = ("""
   <!-- 12 disk: görseller kullanıcının paylaştığı mağaza afişinden kırpılıp büyütüldü (desen aynı). Seçilen disk tavana düşer. -->
   <section class="koyu bolum" id="diskler">
@@ -455,7 +476,7 @@ DISKLER = ("""
 """)
 
 GERISI = ("""
-  <section class="px" style="padding-bottom: 44px">
+  <section class="bolum px">
     <h2 class="bas-y h2">İçin rahat<br>olsun<span class="n">.</span></h2>
     """ + GUVEN + """
   </section>
@@ -545,7 +566,7 @@ def sayfa(tema, kesit=None):
     if kesit:
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
-        govde = '<div class="pg">\n  ' + SERIT + HERO + AL + GERISI + '</div>\n'
+        govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
     return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS, t['font']) + govde
 
 
@@ -636,7 +657,7 @@ JS = """class Component extends DCLogic {
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 6480))
+    h = int(os.environ.get('U_H', 7120))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(sayfa(ANA_TEMA) + TAIL.format(h=h, js=JS))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
