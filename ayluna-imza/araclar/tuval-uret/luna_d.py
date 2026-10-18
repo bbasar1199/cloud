@@ -73,7 +73,7 @@ CSS = r"""
 /* Kapsayıcı overflow:clip (hidden değil): kaydırma kabı oluşmaz, yapışkan çubuk ve view() zaman çizelgesi çalışır.
    Bir gece satırları bant olduğu için orada yalnız satır içerikleri hareket eder (bant soluklaşmaz). */
 @supports (animation-timeline: view()){
-  .gir > *,.gir2 .gece-bas > *,.gir2 .an > *{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  .gir > *,.gir2 .gece-bas > *{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
   @keyframes gir{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   /* Yapışkan çubuk: fiyat bandı ekrandan çıkınca gelir (ilk ekranda güven satırını örtmez). Canlıda 5. bölüm ekrandayken de gizlenir (IntersectionObserver). */
   .ad{view-timeline-name:--fiyat}
@@ -279,7 +279,7 @@ CSS = r"""
 /* 10 · Bir gece, beş an: her satır kendi bandı; akşam kararır, sabah açılır. Soldaki saat rayı satırları bağlar */
 .gece-bas{padding:32px 20px 8px}
 .an{position:relative;display:grid;grid-template-columns:52px 9px minmax(0,1fr) 72px;gap:12px;align-items:center;padding:16px 20px}
-.an::before{content:"";position:absolute;left:87.75px;top:0;bottom:0;width:1.5px;background:var(--cizgi)}
+.an::before{content:"";position:absolute;z-index:1;left:87.75px;top:0;bottom:0;width:1.5px;background:var(--cizgi);transform-origin:50% 0;transition:transform .64s var(--e)}
 .an.koyu::before{background:rgba(255,248,240,.24)}
 .an.ilk::before{top:50%}
 .an.son::before{bottom:50%}
@@ -291,6 +291,22 @@ CSS = r"""
 .an p{margin:2px 0 0;font-size:14px;color:var(--sis);line-height:1.4}
 .an.koyu p{color:rgba(255,248,240,.72)}
 .an img{width:72px;height:96px;border-radius:20px;object-fit:cover;display:block}
+/* Kaydırıldıkça açılır (kullanıcı isteği): her an ekrana girince (IntersectionObserver, %35) bir kez açılır.
+   Ray o satırda yukarıdan aşağı çizilir, nokta belirir; saat soldan, metin aşağıdan, fotoğraf sağdan açılır.
+   20:45'te gece çöker (açık perde söner), 07:30'da sabah olur (gece perdesi söner). Yalnız transform/opacity, tek eğri.
+   Gözlemci kurulamazsa ya da azaltılmış hareket açıksa satırlar hiç kapanmaz. */
+.an > *{position:relative;z-index:1}
+.an > .perde{position:absolute;inset:0;z-index:0;transition:opacity .64s var(--e) .08s}
+.an:not(.kapali) > .perde{opacity:0}
+.an .saat{transition:opacity .4s var(--e) .12s,transform .4s var(--e) .12s}
+.an .nok{transition:transform .32s var(--e) .24s}
+.an .an-yazi{transition:opacity .4s var(--e) .2s,transform .4s var(--e) .2s}
+.an img{transform-origin:100% 50%;transition:opacity .48s var(--e) .28s,transform .48s var(--e) .28s}
+.an.kapali::before{transform:scaleY(0)}
+.an.kapali .saat{opacity:0;transform:translateX(-12px)}
+.an.kapali .nok{transform:scale(0)}
+.an.kapali .an-yazi{opacity:0;transform:translateY(12px)}
+.an.kapali img{opacity:0;transform:translateX(12px) scale(.86)}
 
 /* 11 · 30 gün iade (Çarşaf) */
 .otuz{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
@@ -463,7 +479,7 @@ HTML = """<div class="pg">
   <!-- 10 · Bir gece, beş an: her an kendi bandında; akşam kararır (20:45 ve 21:00 gece), sabah açılır -->
   <section aria-labelledby="gece-bas" class="gir2">
     <div class="gece-bas b-c"><h2 class="h2 lit" id="gece-bas">Bir gece, beş an</h2></div>
-    <sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="{{a.cls}}"><span class="saat lit tab">{{a.t}}</span><i class="nok" aria-hidden="true"></i><span><b>{{a.title}}</b><p>{{a.text}}</p></span><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"></div></sc-for>
+    <sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="{{a.cls}}" data-an="{{a.i}}"><sc-if value="{{a.perdeVar}}" hint-placeholder-val="{{false}}"><span class="perde" aria-hidden="true" style="background: {{a.perde}}"></span></sc-if><span class="saat lit tab">{{a.t}}</span><i class="nok" aria-hidden="true"></i><span class="an-yazi"><b>{{a.title}}</b><p>{{a.text}}</p></span><img src="{{a.src}}" alt="{{a.alt}}" style="object-position: {{a.pos}}"></div></sc-for>
   </section>
 
   <!-- 11 · 30 gün iade: yasal 14 gün özel avantaj gibi sunulmaz -->
@@ -502,9 +518,28 @@ HTML = """<div class="pg">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 0, eski: -1, now: Date.now() }; }
-  componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }
-  componentWillUnmount() { clearInterval(this.iv); }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: 2, l1: null, l2: null, topic: 'Tümü', disc: 0, eski: -1, anHazir: false, anBit: 0, now: Date.now() }; }
+  componentDidMount() {
+    var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
+    // Bir gece: satırlar ekrana girdikçe açılır. Gözlemci yoksa ya da azaltılmış hareket açıksa hiç kapanmaz.
+    var azalt = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof IntersectionObserver !== 'undefined' && !azalt && this.anBagla()) this.setState({ anHazir: true });
+  }
+  anBagla() {
+    var self = this, rows = document.querySelectorAll('[data-an]');
+    if (!rows.length) return false;
+    if (this.io) this.io.disconnect();
+    this.io = new IntersectionObserver(function (es) {
+      var bit = self.state.anBit;
+      es.forEach(function (e) { if (e.isIntersecting) bit |= 1 << Number(e.target.getAttribute('data-an')); });
+      if (bit !== self.state.anBit) self.setState({ anBit: bit });
+    }, { threshold: 0.35 });
+    rows.forEach(function (r) { self.io.observe(r); });
+    this.anIlk = rows[0];
+    return true;
+  }
+  componentDidUpdate() { if (this.io && this.anIlk && !this.anIlk.isConnected) this.anBagla(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.io) this.io.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -584,12 +619,14 @@ JS = """class Component extends DCLogic {
     var M = [
       { t: '20:00', b: 'b-c', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: '8b1f621be2cb3b6133b7b78bc14e1963', alt: 'Elde tutulan, yanan LunaDream', pos: '50% 30%' },
       { t: '20:30', b: 'b-d', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', id: '5b284c77c252b08a2974bde8e43de126', alt: 'Kubbesi açık LunaDream ve diskler', pos: '50% 40%' },
-      kiz ? { t: '20:45', b: 'b-g koyu', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
-          : { t: '20:45', b: 'b-g koyu', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
+      kiz ? { t: '20:45', b: 'b-g koyu', perde: 'var(--duvar)', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
+          : { t: '20:45', b: 'b-g koyu', perde: 'var(--duvar)', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
       { t: '21:00', b: 'b-g koyu', title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', id: kiz ? '3d214a1ba100aaf3d85bb18a27325237' : '49da18af3a87a3c97bb59cb9dbe8817f', alt: 'Gece yatak başında yanan LunaDream, duvarda yıldızlar', pos: '50% 55%' },
-      { t: '07:30', b: 'b-d', title: 'Sabah şarja', text: 'Gündüz şarja tak.', id: kiz ? '2288b7fbcc230bd9d47e25ef6550ce78' : 'cbd70711defa628872683fa471fcac61', alt: 'Gündüz komodinde LunaDream', pos: '50% 72%' }
+      { t: '07:30', b: 'b-d', perde: 'var(--gece)', title: 'Sabah şarja', text: 'Gündüz şarja tak.', id: kiz ? '2288b7fbcc230bd9d47e25ef6550ce78' : 'cbd70711defa628872683fa471fcac61', alt: 'Gündüz komodinde LunaDream', pos: '50% 72%' }
     ];
-    var moments = M.map(function (a, i) { return { t: a.t, title: a.title, text: a.text, src: B + a.id, alt: a.alt, pos: a.pos, cls: 'an ' + a.b + (i === 0 ? ' ilk' : '') + (i === M.length - 1 ? ' son' : '') }; });
+    // anBit: açılmış satırlar (bit maskesi). anHazir değilse (gözlemci kurulmadı) hepsi açık.
+    var moments = M.map(function (a, i) { var kapali = S.anHazir && !(S.anBit & (1 << i)); return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: a.alt, pos: a.pos,
+      perdeVar: !!a.perde, perde: a.perde || '', cls: 'an ' + a.b + (i === 0 ? ' ilk' : '') + (i === M.length - 1 ? ' son' : '') + (kapali ? ' kapali' : '') }; });
     var PR = [
       { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'f3f3e14eee224ef5534b9b897030ff58' },
       { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '2b381f338377f23e32074d6dbb452587' },
