@@ -219,6 +219,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 
 ## Teslim: çalışan site
+- Köşeli yer tutucular sitede kalır, kullanıcı gerekirse doldurur; teyit için ısrar edilmez. Site tek dosya `index.html` olarak da verilir (`python3 araclar/site/site_uret.py` → `site-tek/index.html`).
 - Kullanıcı (18 Eki) "tüm iskelet, her kısım tam çalışsın" der: önce denetim (bağlantı, düğme, form, sepet, ödeme, kapıda, boş hâller, politikalar, 320px), eksik listesi, hepsini düzelt; gerçek tarayıcıda uçtan uca tıklama testi geçmeden gönderme. Seçilen paket/model/seçenek sepete aynen gider. Shopify teması da aynı listeyle test edilir (`ogrenme/site-denetimi.md`).
 
 ## Shopify

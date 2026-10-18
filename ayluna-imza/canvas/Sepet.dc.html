@@ -186,7 +186,7 @@ class Component extends DCLogic {
       teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · aynı gün kargoda' : 'Kargo ücretsiz · ' + kd.getDate() + ' ' + AY[kd.getMonth()] + ' kargoda',
       araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
       indirim: TL(indirim, true), toplam: TL(toplam, true),
-      kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.git(document.referrer && document.referrer.indexOf(location.host) >= 0 ? document.referrer : './'); },
+      kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.geri(); },
       odeme: function () { if (window.Ayluna) window.Ayluna.odemeyeGec(); },
       kapida: function () { if (window.Ayluna) window.Ayluna.kapidaAc(); },
       urunlere: function () { if (window.Ayluna) window.Ayluna.git('tum-urunler.html'); },

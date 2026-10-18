@@ -155,5 +155,71 @@ def main():
     print('sayfa:', len(SAYFALAR), '· görsel:', len(yol), '· eksik görsel:', sorted(eksik) or 'yok', '· boyut: %.1f MB' % (toplam / 1e6))
 
 
+TEK_SABLON = '''<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1A2142">
+<title>Ayluna Mağazası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+%(fontlar)s
+<style>%(ortak_css)s</style>
+<style id="sayfa-css"></style>
+</head>
+<body>
+%(sablonlar)s
+<div id="kok"></div>
+<script>window.AYLUNA_TEK = true;</script>
+<script>%(veri)s</script>
+<script>%(runtime)s</script>
+<script>
+window.AYLUNA_SAYFALAR = {};
+%(sayfalar)s
+Ayluna.baslatTek();
+</script>
+</body>
+</html>
+'''
+
+
+def tek():
+    # Tek dosya: bütün sayfalar <template>, CSS'leri sayfaya girince takılır, görseller data: URI (800px)
+    import base64, io
+    V = veri()
+    fontlar, sablonlar, sayfalar, ids = set(), [], [], set()
+    for dosya, kaynak, tur, urun, title in SAYFALAR:
+        f, css, govde, js = parcala(kaynak)
+        for l in f.split('\n'):
+            if l.strip(): fontlar.add(l.strip())
+        ad = dosya[:-5]
+        for i in re.findall(r'(?<![0-9a-f])([0-9a-f]{32})(?![0-9a-f])', govde + js + css):
+            if blob_yolu(i): ids.add(i)
+        z = re.search(r'--zemin:(#[0-9A-Fa-f]{6})', css)
+        sablonlar.append('<template id="T-%s">%s</template>' % (ad, govde))
+        sayfalar.append('AYLUNA_SAYFALAR[%s] = { tur: %s, urun: %s, title: %s, zemin: %s, css: %s, js: function () {\n%s\nreturn Component; } };'
+                        % (json.dumps(ad), json.dumps(tur), json.dumps(urun or ''), json.dumps(title), json.dumps(z.group(1) if z else '#F6F1E9'), json.dumps(css, ensure_ascii=False), js))
+    for u in V['urun'].values(): ids.add(u['img'][7:])
+    for e in V['ekler']: ids.add(e['img'][7:])
+    blob = {}
+    for i in sorted(ids):
+        p = blob_yolu(i)
+        if not p: continue
+        im = Image.open(p).convert('RGB')
+        if im.width > 800: im = im.resize((800, round(im.height * 800 / im.width)), Image.LANCZOS)
+        b = io.BytesIO(); im.save(b, 'JPEG', quality=72, optimize=True, progressive=True)
+        blob[i] = 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode()
+    V['blob'] = blob
+    css = open(os.path.join(KAYNAK, 'ayluna.css'), encoding='utf-8').read() + '\nbody{background:var(--ay-zemin,#F6F1E9)}'
+    fontlar = sorted(fontlar) + ['<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">']
+    html = TEK_SABLON % dict(fontlar='\n'.join(fontlar), ortak_css=css, sablonlar='\n'.join(sablonlar), veri='window.AYLUNA_VERI = ' + json.dumps(V, ensure_ascii=False) + ';',
+                             runtime=open(os.path.join(KAYNAK, 'ayluna.js'), encoding='utf-8').read(), sayfalar='\n'.join(sayfalar))
+    os.makedirs(os.path.join(KOK, 'site-tek'), exist_ok=True)
+    yol = os.path.join(KOK, 'site-tek', 'index.html')
+    open(yol, 'w', encoding='utf-8').write(html)
+    print('tek dosya:', yol, '· %.1f MB' % (os.path.getsize(yol) / 1e6), '· görsel:', len(blob))
+
+
 if __name__ == '__main__':
     main()
+    tek()

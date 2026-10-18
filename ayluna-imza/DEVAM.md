@@ -481,7 +481,9 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - **Nasıl:** tuval sayfaları (.dc.html) değişmeden kullanılır; `araclar/site/ayluna.js` onları çalıştırır (şablon + DOM yaması) ve siteyi bağlar: yönlendirme, menü, arama, sepet deposu (localStorage), sepet çekmecesi (sepet.html iframe; açılmazsa sepet sayfası), kapıda ödeme formu (EasySell kurgusu), ödeme önizlemesi, sipariş alındı. Ürün verisi `veri.js` (fiyat, paket, seçenek, görsel).
 - **Yeni sayfalar** (`sayfalar2.py`, tuvalde "Site: eksik sayfalar"): Ödeme, Sipariş alındı, Arama, 404, Hesap, 5 politika (kargo, KVKK, mesafeli satış, ön bilgilendirme, hizmet şartları; taslak). `sepet.py` gerçek sepetten okur, boş hâl içinde.
 - Denetim raporu ve Shopify test listesi: `ogrenme/site-denetimi.md` (20 eksik, hepsi düzeltildi).
-- **Sırada:** Shopify teması (sıfırdan Ayluna teması), aynı test listesiyle; Flow görselleri; teyitler.
+- **Tek dosya:** `site-tek/index.html` (≈11 MB; bütün sayfalar, görseller 800px data URI, kod içinde; adres `#sayfa`; sunucusuz ve dosyadan açılır). Test: `araclar/site/test-tek.js`. Kullanıcı bu dosyaya bakıp eksik listesi çıkaracak.
+- Kullanıcı: köşeli yer tutucuları kendisi dolduracak, sitede kalsın; teyit için sorulmaz.
+- **Sırada:** kullanıcının eksik listesi, sonra Shopify teması (aynı test listesiyle); Flow görselleri.
 
 ## AyFeneri ve Galaksi Night · imza sayfaları (18 Ekim, en güncel)
 - Kullanıcı: "AyLuna AyFeneri ve Galaksi Night Projector için özel sayfa tasarla"; Galaksi Night için referans pococo.com/products/galaxy-projector-star-projector-silver.

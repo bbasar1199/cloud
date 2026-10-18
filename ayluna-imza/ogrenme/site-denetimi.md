@@ -3,6 +3,7 @@
 Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, tüm eksik kısımları düzelt; sepet vesaire her kısım tam çalışsın; Shopify için düzenlerken de aynı şekilde."
 
 - Çalışan önizleme: `site/` (üret: `python3 araclar/site/site_uret.py`; yayın: claude.ai artifact "Ayluna Mağazası").
+- Tek dosya: `site-tek/index.html` (aynı üreticiden; test `araclar/site/test-tek.js <url|file://>`).
 - Test: `(cd site && python3 -m http.server 8765 &)` sonra `NODE_PATH=$(npm root -g) node araclar/site/test.js`. 31 sayfa + 60'a yakın akış adımı; son koşu: **hepsi tamam, konsol hatası yok, eksik görsel yok**.
 
 ## Denetimde bulunan eksikler → yapılan

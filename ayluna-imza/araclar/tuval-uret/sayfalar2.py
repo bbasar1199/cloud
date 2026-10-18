@@ -165,7 +165,7 @@ ARAMA = ("""
 ARAMA_EK = """
     var U = """ + json.dumps([dict(ad=u['ad'], p=u['p'], kat=u['kat'], src=u['src'], var=u['var']) for u in SY.URUNLER], ensure_ascii=False) + """;
     function N(s) { return (s || '').toLocaleLowerCase('tr'); }
-    var q = S.q === undefined ? (decodeURIComponent((location.search.match(/[?&]q=([^&]*)/) || [])[1] || '')) : S.q;
+    var q = S.q === undefined ? (decodeURIComponent(((location.search + location.hash).match(/[?&]q=([^&]*)/) || [])[1] || '')) : S.q;
     var BUL = U.filter(function (u) { return !q || N(u.ad + ' ' + u.kat).indexOf(N(q).replace(/ları$|leri$/, '')) >= 0 || (N(q) === 'projektör' && u.kat === 'Projektörler') || (N(q) === 'nemlendirici' && u.kat === 'Nemlendiriciler') || (N(q) === 'gece lambası' && u.kat === 'Gece lambaları'); });
     var cip = ['Gece lambası', 'Projektör', 'Nemlendirici', 'LunaDream'].map(function (n) { var on = N(n) === N(q); return { n: n, cls: on ? 'on' : '', pick: function () { self.setState({ q: n }); } }; });
 """

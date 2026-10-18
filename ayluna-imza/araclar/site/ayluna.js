@@ -8,6 +8,9 @@
   var V = window.AYLUNA_VERI || { urun: {}, sira: [] };
   var TL = function (n) { var s = (Math.round(n * 100) / 100).toFixed(2).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + s[1]; };
   var HTMLNS = 'http://www.w3.org/1999/xhtml';
+  // Tek dosya kipi (site-tek/index.html): bütün sayfalar tek dosyada, adres #sayfa ile değişir
+  var TEK = !!window.AYLUNA_TEK;
+  function gorsel(u) { return String(u || '').replace(/\/_blob\/([0-9a-f]{32})/g, function (m, i) { return (V.blob && V.blob[i]) || m; }); }
 
   /* ---------- 1. Şablon motoru ---------- */
   var kok = null, sablon = null, C = null, planli = false, ilk = true;
@@ -152,7 +155,13 @@
         '<ul>' + MENU.map(function (m) { return '<li><a href="' + m[1] + '">' + m[0] + '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></a></li>'; }).join('') + '</ul>' +
         '<a class="ay-wa" href="' + (V.wa || '#') + '" data-wa>WhatsApp destek · ortalama 2 saatte yanıt</a></nav></div>');
       document.body.appendChild(menu);
-      menu.addEventListener('click', function (e) { if (e.target.closest('[data-kapat]')) menuKapat(); });
+      menu.addEventListener('click', function (e) {
+        if (e.target.closest('[data-kapat]')) { menuKapat(); return; }
+        var a = e.target.closest('a[href]'); if (!a) return;
+        e.preventDefault();
+        if (a.hasAttribute('data-wa')) { bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); return; }
+        menuKapat(); git(a.getAttribute('href'));
+      });
     }
     menu.classList.add('on'); kilit(1);
     setTimeout(function () { var a = menu.querySelector('a'); if (a) a.focus(); }, 60);
@@ -162,6 +171,7 @@
   // Sepet çekmecesi: sepet.html sayfası iframe'de (aynı sepet bileşeni)
   var cek = null;
   function cekmeceAc() {
+    if (TEK) { git('sepet.html'); return; }
     var u_ = ust(); if (u_) { u_.Ayluna.cekmeceAc(); return; }
     if (!cek) {
       cek = el('<div class="ay-katman ay-cek" role="dialog" aria-modal="true" aria-label="Sepet"><div class="ay-perde" data-kapat></div><div class="ay-panel sag"><iframe title="Sepet" src="sepet.html"></iframe></div></div>');
@@ -219,7 +229,7 @@
   }
   function kfDoldur() {
     var s = Sepet.oku(), t = Sepet.toplam('kapida');
-    kf.querySelector('.kf-ozet').innerHTML = s.satirlar.map(function (x) { return '<div class="kf-s"><img src="' + x.img + '" alt=""><span><b>' + x.ad + '</b><small>' + x.varyant + (x.adet > 1 ? ' · ×' + x.adet : '') + '</small></span><em>' + TL(x.birim * x.adet) + '</em></div>'; }).join('');
+    kf.querySelector('.kf-ozet').innerHTML = s.satirlar.map(function (x) { return '<div class="kf-s"><img src="' + gorsel(x.img) + '" alt=""><span><b>' + x.ad + '</b><small>' + x.varyant + (x.adet > 1 ? ' · ×' + x.adet : '') + '</small></span><em>' + TL(x.birim * x.adet) + '</em></div>'; }).join('');
     kf.querySelector('.kf-ek').innerHTML = '<p class="kf-ek-b">Siparişine ekle</p>' + EKLER.map(function (e) { var on = s.ekler && s.ekler[e.k]; return '<button type="button" class="kf-ekb' + (on ? ' on' : '') + '" data-ek="' + e.k + '" aria-pressed="' + !!on + '"><i></i><span>' + e.n + '</span><em>' + TL(e.p) + '</em></button>'; }).join('') +
       '<button type="button" class="kf-ekb' + (s.hizli ? ' on' : '') + '" data-ek="__hizli" aria-pressed="' + !!s.hizli + '"><i></i><span>Hızlı Kargo · aynı gün kargoda</span><em>' + TL(HIZLI) + '</em></button>';
     kf.querySelector('.kf-top').innerHTML = '<p><span>Ürünler</span><b>' + TL(t.urun + t.ek) + '</b></p><p><span>Kargo</span><b>' + (t.kargo ? TL(t.kargo) : 'Ücretsiz') + '</b></p><p><span>Kapıda ödeme ücreti</span><b>' + TL(t.kapida) + '</b></p><p class="kf-t"><span>Kapıda ödenecek</span><b>' + TL(t.toplam) + '</b></p>';
@@ -236,7 +246,9 @@
   }
 
   /* ---------- 4. Yönlendirme ---------- */
-  function git(u) { kokP().location.href = u; }
+  function tekHash(u) { if (!u || u === './' || u === 'index.html') return '#'; var m = String(u).match(/^([\w-]+)\.html(\?.*)?$/); return m ? '#' + m[1] + (m[2] || '') : u; }
+  function git(u) { if (TEK) { var h = tekHash(u); if (location.hash === h || (h === '#' && !location.hash)) rota(); else location.hash = h; return; } kokP().location.href = u; }
+  function geri() { if (TEK) { if (history.length > 1) history.back(); else git('./'); return; } git(document.referrer && document.referrer.indexOf(location.host) >= 0 ? document.referrer : './'); }
   function norm(s) { return (s || '').toLocaleLowerCase('tr').replace(/\s+/g, ' ').trim(); }
   var ADLAR = [];
   Object.keys(V.urun).forEach(function (h) { (V.urun[h].adlar || [V.urun[h].ad]).forEach(function (a) { ADLAR.push([norm(a), h]); }); });
@@ -280,7 +292,7 @@
     // Koleksiyon / kartlardaki "Sepete ekle"
     if (a.tagName === 'BUTTON' && /sepete ekle/i.test(m)) { var kart = a.closest('.uk,.kart'); var hh = kart && urunBul(kart.textContent); if (hh) { e.preventDefault(); sepeteAt(hh, 'kart'); } return; }
     if (a.tagName !== 'A') return;
-    if (href && href !== '#' && href.charAt(0) === '#') return;  // sayfa içi çapa
+    if (href && href !== '#' && href.charAt(0) === '#') { if (TEK) { e.preventDefault(); var hed = document.getElementById(href.slice(1)); if (hed) hed.scrollIntoView({ behavior: 'smooth', block: 'start' }); } return; }  // sayfa içi çapa
     e.preventDefault();
     var h2 = urunBul(m) || urunBul(a.getAttribute('aria-label'));
     var y = metinYonu(m);
@@ -320,7 +332,24 @@
   }
   window.addEventListener('scroll', function () { document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400); }, { passive: true });
 
+  function rota() {
+    var h = location.hash.slice(1), ad = decodeURIComponent(h.split('?')[0] || 'index'), T = window.AYLUNA_SAYFALAR || {};
+    var P = T[ad] || T['404'];
+    if (C && C.componentWillUnmount) try { C.componentWillUnmount(); } catch (e) {}
+    menuKapat(); kapidaKapat();
+    document.getElementById('sayfa-css').textContent = P.css;
+    document.documentElement.style.setProperty('--ay-zemin', P.zemin);
+    document.body.style.setProperty('--ay-zemin', P.zemin);
+    document.title = P.title;
+    kok = document.getElementById('kok'); kok.setAttribute('data-sayfa', P.tur); kok.setAttribute('data-urun', P.urun || '');
+    SAYFA = P.tur; URUN = P.urun || '';
+    sablon = document.getElementById('T-' + (T[ad] ? ad : '404')).content;
+    while (kok.firstChild) kok.removeChild(kok.firstChild);
+    ilk = true; planli = false; C = new (P.js())({}); window.scrollTo(0, 0); ciz();
+  }
+
   window.Ayluna = {
+    tek: TEK, geri: geri, gorsel: gorsel, baslatTek: function () { window.addEventListener('hashchange', rota); rota(); },
     baslat: function (Comp) {
       kok = document.getElementById('kok'); sablon = document.getElementById('T').content;
       C = new Comp({}); ciz();
