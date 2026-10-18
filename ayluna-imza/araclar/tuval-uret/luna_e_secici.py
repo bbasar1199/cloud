@@ -1,0 +1,270 @@
+# LunaDream · E için seçici seçenekleri (Tur 25). Çalıştır: python3 luna_e_secici.py
+# Kullanıcı: "Hâlâ seçiciler çok kötü; bundle ve aralarında bir uyum yok; lamba seçim kısmı da güzel değil."
+# Sorun: model (kemerli pencere, çerçeve), paket (yatay satır, dolu lacivert) ve 2'li lamba seçimi (hap segment)
+# üç ayrı dil. Her seçenek model + paket + ikinci lamba + iki butonu tek dille kurar. B+ dili:
+# Young Serif + Onest, krem/lacivert, tek amber (ışık ve ana buton), ay evresi işareti, stüdyo kesimi küçük görseller.
+# Eleştirmen dört seçenekten üçünü seçti (Vitrin 4/10, reddedildi: şablon segment, satış argümanı gizli):
+#   1 · Satır kartlar (7/10): model yan yana iki yarım kart, paket alt alta satır; 2 Adet açılınca içinde "2. lamba"
+#   2 · Yuvarlak örnek (7/10): model iki büyük yuvarlak örnek; paket görselsiz satır; 2. lamba aynı örnek küçük
+#   3 · Önce paket, sonra model (6/10): paket satırları; altında adede göre model kareleri (2 Kız / Kız + Erkek / 2 Erkek).
+#       Sıra değişir (17 Eki kararı: model paketin üstünde); kullanıcıya açıkça sorulur.
+# Ortak: seçili = 2px lacivert çerçeve + amber dolunay noktası; dolu lacivert yok. Renk değişimi anlık,
+# hareket yalnız noktada (opacity/transform). Hediye "her kutuda +6" (çıplak "12 disk" yazılmaz).
+import os, sys
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+from ortak import HEAD, TAIL, TL_JS
+OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE-Secici.dc.html')
+
+
+def ay(f, r=9, c=12):
+    rx = abs(1 - 2 * f) * r
+    return 'M%d %dA%d %d 0 0 1 %d %dA%.2f %d 0 0 %d %d %dZ' % (c, c - r, r, r, c, c + r, rx, r, 0 if f < .5 else 1, c, c - r)
+
+
+def evre(f, cls='evre'):
+    return '<svg class="%s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="%s"></path></svg>' % (cls, ay(f))
+
+
+# Dolunay noktası: boşta ince halka; seçilince lacivert halka + amber dolunay
+AYR = '<svg class="ayr" viewBox="0 0 24 24" aria-hidden="true"><circle class="h" cx="12" cy="12" r="9"></circle><circle class="d" cx="12" cy="12" r="5"></circle></svg>'
+HEDIYE = evre(.22, 'evre hd')
+
+CSS = r""".pg{background:#F6F1E9;font-size:15px}
+.tab{font-variant-numeric:tabular-nums}
+.sec{padding:0 16px 34px}
+.oneri{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding-top:16px;border-top:1px dashed #D6CAB6;font-size:12px;font-weight:700;color:#A05A1C}
+.oneri .evre{width:14px;height:14px}
+.oneri-alt{margin:0 0 18px;font-size:13px;color:#5C6078;text-wrap:balance}
+.evre circle{fill:none;stroke:#1A2142;stroke-width:1.6}
+.evre path{fill:#F2A65A}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 10px;font-size:13px;font-weight:700;color:#A05A1C}
+.etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;color:#A05A1C}
+.etiket span+span{font-weight:600;color:#1A2142}
+.etiket+.liste.pk,.etiket+.kare-iz{margin-top:16px}
+.ara{height:22px}
+.ayr{width:22px;height:22px;flex:none}
+.ayr .h{fill:#FFFDF9;stroke:#D6CAB6;stroke-width:1.6}
+.ayr .d{fill:#F2A65A;opacity:0;transform:scale(.3);transform-origin:12px 12px;transition:opacity .25s cubic-bezier(.2,.7,.2,1),transform .25s cubic-bezier(.2,.7,.2,1)}
+.on .ayr .h{stroke:#1A2142}
+.on .ayr .d{opacity:1;transform:none}
+/* Kartın içindeki küçük seçim (2. lamba) yalnız kendi durumuna bakar */
+.ek .secim .ayr .h{stroke:#D6CAB6}.ek .secim .ayr .d{opacity:0;transform:scale(.3)}
+.ek .secim.on .ayr .h{stroke:#1A2142}.ek .secim.on .ayr .d{opacity:1;transform:none}
+.hd{width:16px;height:16px;flex:none}
+/* Ortak kart: yüzey, 1,5px çizgi, 20px köşe; seçilince 2px lacivert (iç gölgeyle, yer kaymaz). Renk anlık değişir. */
+.kt{position:relative;display:block;width:100%;padding:0;border:1.5px solid #E3D8C7;border-radius:20px;background:#FFFDF9;color:#1A2142;font:inherit;text-align:left;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.kt.on{border-color:#1A2142;box-shadow:inset 0 0 0 .5px #1A2142}
+button.kt:active,.kt>button:active{transform:scale(.985)}
+.pg button:focus-visible{outline:2px solid #1A2142;outline-offset:3px}
+.kurdele{position:absolute;right:14px;top:-11px;z-index:1;padding:2px 10px;border-radius:999px;background:#1A2142;color:#FFFDF9;font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
+.tl{position:relative;flex:none;width:56px;height:64px;border-radius:14px;background:#F1E8DA;overflow:hidden}
+.tl img{position:absolute;left:50%;bottom:6px;height:50px;width:auto;transform:translateX(-50%)}
+.tl.cift{width:64px}
+.tl.cift img{height:44px}
+.tl.cift img:nth-child(1){left:33%}.tl.cift img:nth-child(2){left:69%}
+.ad{display:block;font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.alt{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:13px;color:#5C6078;line-height:1.3}
+.alt.hd-y{color:#A05A1C;font-weight:600}
+.fiyat{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.eski{display:block;margin-top:2px;font-size:13px;color:#5C6078}
+.hediye-sat{display:flex;align-items:center;gap:8px;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#F1E8DA;font-size:14px;font-weight:700;color:#A05A1C}
+.btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
+.btn-on:active{transform:translateY(4px)}
+.btn-kp{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:14px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+
+/* Satır (1 ve 3'te paket, 1'de model) */
+.liste{display:flex;flex-direction:column;gap:16px}
+.sat{display:flex;align-items:center;gap:10px;width:100%;min-height:80px;padding:8px 14px 8px 8px;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:18px}
+.sat-orta{flex:1;min-width:0}
+.sat-sag{display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+.ek{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 14px;padding:10px 0 12px;border-top:1px solid #E3D8C7}
+.ek-ad{font-size:13px;font-weight:700;color:#1A2142;white-space:nowrap}
+
+/* 1 · Satır kartlar: model yan yana iki yarım kart */
+.yarim-iz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.yarim{min-height:72px;padding:8px 10px 8px 8px}
+.yarim .tl{width:48px;height:56px}
+.yarim .tl img{height:44px}
+.cipler{display:flex;gap:8px}
+.cip{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 8px 0 4px;border:1.5px solid #E3D8C7;border-radius:999px;background:#FFFDF9;font:inherit;font-size:14px;font-weight:600;color:#1A2142;cursor:pointer}
+.cip.on{border-color:#1A2142;box-shadow:inset 0 0 0 .5px #1A2142}
+.cip .ayr{width:18px;height:18px}
+.cip-y{position:relative;width:36px;height:36px;border-radius:50%;background:#F1E8DA;overflow:hidden}
+.cip-y img{position:absolute;left:50%;bottom:3px;height:29px;width:auto;transform:translateX(-50%)}
+
+/* 2 · Yuvarlak örnek: iki büyük örnek satırı doldurur */
+.orn-iz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.orn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font:inherit;color:#1A2142;cursor:pointer}
+.orn-y{position:relative;width:112px;height:112px;border-radius:50%;background:#F1E8DA;box-shadow:0 0 0 1.5px #E3D8C7}
+.orn-y .kes{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.orn-y img{position:absolute;left:50%;bottom:8px;height:88px;width:auto;transform:translateX(-50%)}
+.orn.on .orn-y{box-shadow:0 0 0 2px #F6F1E9,0 0 0 4px #1A2142}
+.orn .ayr{position:absolute;right:2px;top:2px;width:26px;height:26px;opacity:0;transform:scale(.6);transition:opacity .2s cubic-bezier(.2,.7,.2,1),transform .2s cubic-bezier(.2,.7,.2,1)}
+.orn.on .ayr{opacity:1;transform:none}
+.orn-yazi{display:flex;flex-direction:column;align-items:center;line-height:1.25}
+.orn-ad{font-size:15px;font-weight:700}
+.orn-alt{font-size:13px;color:#5C6078}
+.orn.kucuk{flex-direction:row;gap:10px}
+.orn.kucuk .orn-y{width:52px;height:52px}
+.orn.kucuk .orn-y img{height:40px;bottom:4px}
+.orn.kucuk .orn-ad{font-size:14px}
+.orn.kucuk .ayr{width:18px;height:18px;right:-3px;top:-3px}
+.s2-sat{display:flex;align-items:center;gap:12px;width:100%;min-height:76px;padding:12px 14px;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:18px}
+.s2-ek{display:flex;align-items:center;gap:18px;margin:0 14px;padding:12px 0 14px;border-top:1px solid #E3D8C7}
+
+/* 3 · Önce paket: model kareleri */
+.kare-iz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kare-iz.uc{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kare{padding:7px 7px 10px}
+.kare-tl{position:relative;display:flex;align-items:flex-end;justify-content:center;height:96px;border-radius:14px;background:#F1E8DA;overflow:hidden}
+.kare-tl img{position:relative;height:74px;width:auto;margin:0 -6px 8px}
+.uc .kare-tl img{height:62px;margin:0 -7px 8px}
+.kare .ayr{position:absolute;right:7px;top:7px}
+.kare-ad{display:block;padding:9px 4px 0;font-size:15px;font-weight:700;line-height:1.2;text-align:center}
+"""
+
+PAKET_SATIR = """<sc-for list="{{%s.paket}}" as="b" hint-placeholder-count="2">
+        <div class="{{b.cls}}">
+          <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if>
+          <button class="sat" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><span class="{{b.tlCls}}"><img src="{{b.src1}}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src="{{b.src2}}" alt=""></sc-if></span><span class="sat-orta"><span class="ad">{{b.t}}</span><span class="alt tab">{{b.sub}}</span></span><span class="sat-sag tab"><span class="fiyat">{{b.p}}</span><span class="eski"><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if>{{b.unit}}</span></span>""" + AYR + """</button>
+          %s
+        </div>
+      </sc-for>"""
+
+S1_EK = """<sc-if value="{{b.ac}}" hint-placeholder-val="{{false}}"><div class="ek" role="group" aria-label="2. lambanın modeli"><span class="ek-ad">2. lamba</span><span class="cipler"><sc-for list="{{s1.ikinci}}" as="c" hint-placeholder-count="2"><button class="{{c.cls}}" onClick="{{c.pick}}" aria-pressed="{{c.on}}"><span class="cip-y"><img src="{{c.src}}" alt=""></span>{{c.n}}""" + AYR + """</button></sc-for></span></div></sc-if>"""
+
+HTML = """<div class="pg">
+  <div style="padding: 18px 16px 10px">
+    <h1 class="h2" style="font-size: 22px">Seçiciler · üç seçenek</h1>
+    <p style="margin: 6px 0 0; font-size: 13px; color: #5C6078">Model, paket ve 2. lamba aynı dille. Her seçenek dokunulabilir. Fiyatlar canlı sitedeki gibi.</p>
+  </div>
+
+  <!-- 1 · Satır kartlar -->
+  <section class="sec">
+    <p class="oneri">""" + evre(.22) + """Seçenek 1 · Satır kartlar</p>
+    <p class="oneri-alt">Model ve paket aynı kart. 2 Adet açılınca kartın içinde 2. lamba.</p>
+    <div class="etiket"><span>{{s1.etiket}}</span></div>
+    <div class="yarim-iz">
+      <sc-for list="{{s1.models}}" as="m" hint-placeholder-count="2">
+        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="sat yarim"><span class="tl"><img src="{{m.src}}" alt=""></span><span class="sat-orta"><span class="ad">{{m.n}}</span><span class="alt">{{m.sub}}</span></span>""" + AYR + """</span></button>
+      </sc-for>
+    </div>
+    <div class="ara"></div>
+    <div class="etiket"><span>Paket</span><span>Kampanya · 1–31 Ekim</span></div>
+    <div class="liste pk">
+      """ + PAKET_SATIR % ('s1', S1_EK) + """
+    </div>
+    <p class="hediye-sat">""" + HEDIYE + """Her kutuda +6 hediye masal diski</p>
+    <button class="btn-on" type="button">{{s1.onLabel}}</button>
+    <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+  </section>
+
+  <!-- 2 · Yuvarlak örnek -->
+  <section class="sec">
+    <p class="oneri">""" + evre(.5) + """Seçenek 2 · Yuvarlak örnek</p>
+    <p class="oneri-alt">Model iki büyük yuvarlak örnek; paket görselsiz satır. 2 Adet'te aynı örnek küçük hâliyle.</p>
+    <div class="etiket"><span>{{s2.etiket}}</span></div>
+    <div class="orn-iz">
+      <sc-for list="{{s2.models}}" as="m" hint-placeholder-count="2">
+        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="orn-y"><span class="kes"><img src="{{m.src}}" alt=""></span>""" + AYR + """</span><span class="orn-yazi"><span class="orn-ad">{{m.n}}</span><span class="orn-alt">{{m.sub}}</span></span></button>
+      </sc-for>
+    </div>
+    <div class="ara"></div>
+    <div class="etiket"><span>Paket</span><span>Kampanya · 1–31 Ekim</span></div>
+    <div class="liste pk">
+      <sc-for list="{{s2.paket}}" as="b" hint-placeholder-count="2">
+        <div class="{{b.cls}}">
+          <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">En avantajlı</span></sc-if>
+          <button class="s2-sat" onClick="{{b.pick}}" aria-pressed="{{b.on}}">""" + AYR + """<span class="sat-orta"><span class="ad">{{b.t}}</span><span class="alt hd-y">""" + HEDIYE + """{{b.hediye}}</span></span><span class="sat-sag tab"><span class="fiyat">{{b.p}}</span><span class="eski"><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if>{{b.unit}}</span></span></button>
+          <sc-if value="{{b.ac}}" hint-placeholder-val="{{false}}"><div class="s2-ek" role="group" aria-label="2. lambanın modeli"><span class="ek-ad">2. lamba</span><sc-for list="{{s2.ikinci}}" as="c" hint-placeholder-count="2"><button class="{{c.cls}}" onClick="{{c.pick}}" aria-pressed="{{c.on}}"><span class="orn-y"><span class="kes"><img src="{{c.src}}" alt=""></span>""" + AYR + """</span><span class="orn-ad">{{c.n}}</span></button></sc-for></div></sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <button class="btn-on" type="button">{{s2.onLabel}}</button>
+    <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+  </section>
+
+  <!-- 3 · Önce paket, sonra model -->
+  <section class="sec">
+    <p class="oneri">""" + evre(1) + """Seçenek 3 · Önce paket, sonra model</p>
+    <p class="oneri-alt">Paket üstte. Altındaki model kareleri adede göre değişir; ayrı lamba seçimi yok. Sıra değişir: model paketin altına iner.</p>
+    <div class="etiket"><span>Paket</span><span>Kampanya · 1–31 Ekim</span></div>
+    <div class="liste pk">
+      """ + PAKET_SATIR % ('s3', '') + """
+    </div>
+    <p class="hediye-sat">""" + HEDIYE + """Her kutuda +6 hediye masal diski</p>
+    <div class="ara"></div>
+    <div class="etiket"><span>{{s3.etiket}}</span></div>
+    <div class="{{s3.izCls}}">
+      <sc-for list="{{s3.models}}" as="m" hint-placeholder-count="2">
+        <button class="{{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}"><span class="kare-tl"><img src="{{m.src1}}" alt=""><sc-if value="{{m.two}}" hint-placeholder-val="{{false}}"><img src="{{m.src2}}" alt=""></sc-if>""" + AYR + """</span><span class="kare-ad">{{m.n}}</span></button>
+      </sc-for>
+    </div>
+    <button class="btn-on" type="button">{{s3.onLabel}}</button>
+    <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+  </section>
+</div>
+"""
+
+JS = """class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { m1: 'kiz', a1: 2, i1: null, m2: 'kiz', a2: 2, i2: null, m3: 'kk', a3: 2 }; }
+  renderVals() {
+    """ + TL_JS + """
+    var self = this, S = this.state, B = '/_blob/';
+    var KES_K = B + 'b823966c39ff35824b4d6e74757646ec', KES_E = B + '20f90021119e4c3bdbc930b283e3635a';
+    function SRC(m) { return m === 'kiz' ? KES_K : KES_E; }
+    var MOD = { kiz: { n: 'Kız', sub: 'Tavşanlı' }, erkek: { n: 'Erkek', sub: 'Robot' } };
+    // Paket: canlı sitedeki fiyatlar. 1 Adet ₺1.699,99 (₺1.999), 2 Adet ₺2.749,99 (tanesi ₺1.374,99; iki ayrı almaya göre ₺649,99 kazanç)
+    var P1 = 1699.99, P2 = 2749.99, C1 = 1999;
+    function onLabel(adet) { return 'Güvenli Ödeme ile Al · ' + TL(Math.round((adet === 2 ? P2 : P1) * 0.95 * 100) / 100, true); }
+    function set(o) { return function () { self.setState(o); }; }
+    function paketVeri(adet, ikiliSrc, tek, pick) {
+      return [
+        { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), unit: '', sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', hediye: '+6 hediye disk', rib: false },
+        { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(Math.floor(P2 / 2 * 100) / 100, true), sub: TL(2 * P1 - P2, true) + ' kazanç', hediye: 'Her kutuda +6 hediye', rib: true }
+      ].map(function (b) { var on = adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit, sub: b.sub, hediye: b.hediye, rib: b.rib, two: b.n === 2,
+        src1: b.n === 2 ? ikiliSrc[0] : tek, src2: ikiliSrc[1], tlCls: b.n === 2 ? 'tl cift' : 'tl', on: on ? 'true' : 'false', ac: on && b.n === 2, cls: on ? 'kt on' : 'kt', pick: pick(b.n) }; });
+    }
+    function iki(secili, key, cls) {
+      return ['kiz', 'erkek'].map(function (id) { var on = secili === id, o = {}; o[key] = id; return { n: MOD[id].n, src: SRC(id), on: on ? 'true' : 'false', cls: on ? cls + ' on' : cls, pick: set(o) }; });
+    }
+
+    // 1 · Satır kartlar: 1. lamba = model; 2 Adet'te kartın içinde 2. lamba
+    var i1 = S.i1 || S.m1;
+    var s1 = {
+      etiket: S.a1 === 2 ? '1. lamba' : 'Model',
+      models: ['kiz', 'erkek'].map(function (id) { var on = S.m1 === id; return { n: MOD[id].n, sub: MOD[id].sub, src: SRC(id), on: on ? 'true' : 'false', cls: on ? 'kt on' : 'kt', pick: set({ m1: id, i1: null }) }; }),
+      paket: paketVeri(S.a1, [SRC(S.m1), SRC(i1)], SRC(S.m1), function (n) { return set({ a1: n }); }),
+      ikinci: iki(i1, 'i1', 'cip secim'),
+      onLabel: onLabel(S.a1)
+    };
+
+    // 2 · Yuvarlak örnek: 1. lamba = model; 2 Adet'te satırın içinde küçük örnekle 2. lamba
+    var i2 = S.i2 || S.m2;
+    var s2 = {
+      etiket: S.a2 === 2 ? '1. lamba' : 'Model',
+      models: ['kiz', 'erkek'].map(function (id) { var on = S.m2 === id; return { n: MOD[id].n, sub: MOD[id].sub, src: SRC(id), on: on ? 'true' : 'false', cls: on ? 'orn on' : 'orn', pick: set({ m2: id, i2: null }) }; }),
+      paket: paketVeri(S.a2, [SRC(S.m2), SRC(i2)], SRC(S.m2), function (n) { return set({ a2: n }); }),
+      ikinci: iki(i2, 'i2', 'orn kucuk secim'),
+      onLabel: onLabel(S.a2)
+    };
+
+    // 3 · Önce paket: model kareleri adede göre (1 Adet: Kız / Erkek; 2 Adet: 2 Kız / Kız + Erkek / 2 Erkek). Varsayılan 2 Kız.
+    var M3 = S.a3 === 2 ? [{ id: 'kk', n: '2 Kız', a: 'kiz', b: 'kiz' }, { id: 'kz', n: 'Kız + Erkek', a: 'kiz', b: 'erkek' }, { id: 'ee', n: '2 Erkek', a: 'erkek', b: 'erkek' }]
+                        : [{ id: 'k', n: 'Kız', a: 'kiz' }, { id: 'e', n: 'Erkek', a: 'erkek' }];
+    var m3 = S.m3; if (!M3.some(function (m) { return m.id === m3; })) m3 = S.a3 === 2 ? 'kk' : 'k';
+    var sec3 = M3.filter(function (m) { return m.id === m3; })[0];
+    function cevir(adet) { return adet === 2 ? ({ k: 'kk', e: 'ee' }[m3] || m3) : ({ kk: 'k', ee: 'e', kz: 'k' }[m3] || m3); }
+    var s3 = {
+      paket: paketVeri(S.a3, [SRC(sec3.a), SRC(sec3.b || sec3.a)], SRC(sec3.a), function (n) { return set({ a3: n, m3: cevir(n) }); }),
+      etiket: S.a3 === 2 ? 'İki lambanın modeli' : 'Model',
+      izCls: S.a3 === 2 ? 'kare-iz uc' : 'kare-iz',
+      models: M3.map(function (m) { var on = m.id === m3; return { n: m.n, src1: SRC(m.a), src2: SRC(m.b || m.a), two: !!m.b, on: on ? 'true' : 'false', cls: on ? 'kt kare on' : 'kt kare', pick: set({ m3: m.id }) }; }),
+      onLabel: onLabel(S.a3)
+    };
+    return { s1: s1, s2: s2, s3: s3 };
+  }
+}"""
+
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E seçici seçenekleri', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('S_H', 2260)), js=JS))
+print('yazıldı:', os.path.abspath(OUT))

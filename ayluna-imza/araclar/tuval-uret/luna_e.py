@@ -80,8 +80,6 @@ CSS = r""".pg{background:#F6F1E9}
   .gir{animation:gir linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
   @keyframes gir{from{opacity:.001;transform:translateY(20px)}to{opacity:1;transform:none}}
 }
-.guven-ust{display:flex;flex-wrap:wrap;gap:4px 10px;margin:10px 0 0;font-size:13px;font-weight:600;color:#1A2142}
-.guven-ust span+span::before{content:"·";margin-right:10px;color:#F2A65A}
 .lamba-sec{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
 .ls{display:flex;align-items:center;gap:6px}
 .ls-no{font-size:13px;font-weight:600;color:#5C6078;white-space:nowrap}
@@ -149,42 +147,37 @@ CSS = r""".pg{background:#F6F1E9}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
 .btn-kp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;min-height:56px;margin-top:14px;border:1.5px solid #1A2142;border-radius:20px;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
-.btn-kp small{font-size:12px;font-weight:500;color:#5C6078}
 .yol{position:relative;list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:14px;border-top:1.5px dashed #D6CAB6}
 .yol li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
 .yol .evre{position:relative;width:28px;height:28px;margin-bottom:6px;background:#F6F1E9;border-radius:50%}
 .yol .evre circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:1.4}
 .yol .evre path{fill:#F2A65A;transform-origin:12px 12px}
-/* Kargo takibi (kullanıcı: "verildiden başlasın, soft bir animasyonla çalışsın"): ekrana girince bir kez.
-   0,1 sn "Sipariş verildi" hilali dolar → 0,4–1,4 sn amber çizgi Kargoda'ya akar, küçük paket noktası onunla gider →
-   1,4 sn yarım ay → 1,7–2,7 sn çizgi Kapında'ya → 2,7 sn dolunay ve tek seferlik ışık halkası. Yalnız transform/opacity. */
+/* Kargo takibi (kullanıcı: "verildiden başlasın, soft bir animasyonla çalışsın"; Tur 25: "animasyon çalışmıyor").
+   Tek seferlik oynatma, tuvalde pano açılır açılmaz kimse bakmadan bitiyordu. Artık 8 sn'lik sakin döngü:
+   "Bugün" hilali hep dolu → çizgi ve paket noktası Kargoda'ya akar → yarım ay → Kapında'ya akar → dolunay ve ışık halkası →
+   bekler, söner, baştan. Ekrana girene kadar ilk karede durur. Yazılar hep okunur; yalnız transform/opacity. */
 .yol li{z-index:1}
-.yol .evre path{opacity:0;transform:scale(.4) rotate(-40deg);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
-.yol li b,.yol li span{opacity:.45;transition:opacity .4s cubic-bezier(.2,.7,.2,1)}
 .yol-akis{position:absolute;left:16.6%;right:16.6%;top:13.25px;height:1.5px;z-index:0}
-.yol-akis i{position:absolute;top:0;height:1.5px;width:50%;background:#F2A65A;transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.4,.1,.3,1)}
+.yol-akis i{position:absolute;top:0;height:1.5px;width:50%;background:#F2A65A;transform-origin:0 50%}
 .yol-akis i:nth-child(1){left:0}.yol-akis i:nth-child(2){left:50%}
-.yol-paket{position:absolute;left:0;top:-3.25px;width:10px;height:10px;margin-left:-5px;margin-top:-1px;border-radius:50%;background:#1A2142;box-shadow:0 0 0 2px #F6F1E9,0 0 0 3.5px #F2A65A;opacity:0}
-/* Paket noktası çizgiyle birlikte gider, Kargoda'da bekler; Kapında'da dolunayın arkasında kalır (çizgi genişliği 358 × %66,8 ≈ 239px) */
-@keyframes yol-paket{0%{opacity:1;transform:none}43.5%{transform:translateX(119.5px)}56.5%{transform:translateX(119.5px)}100%{opacity:1;transform:translateX(239px)}}
-.yol li:nth-child(4) .evre{position:relative}
-.yol.on .evre path{opacity:1;transform:none}
-.yol.on li b,.yol.on li span{opacity:1}
-.yol.on li:nth-child(2) .evre path,.yol.on li:nth-child(2) b,.yol.on li:nth-child(2) span{transition-delay:.1s}
-.yol.on li:nth-child(3) .evre path,.yol.on li:nth-child(3) b,.yol.on li:nth-child(3) span{transition-delay:1.4s}
-.yol.on li:nth-child(4) .evre path,.yol.on li:nth-child(4) b,.yol.on li:nth-child(4) span{transition-delay:2.7s}
-.yol.on .yol-akis i:nth-child(1){transform:scaleX(1);transition-delay:.4s}
-.yol.on .yol-akis i:nth-child(2){transform:scaleX(1);transition-delay:1.7s}
-.yol.on .yol-paket{animation:yol-paket 2.3s cubic-bezier(.4,.1,.3,1) .4s both}
-@keyframes yol-hale{0%{opacity:0;transform:scale(.6)}40%{opacity:.9}100%{opacity:0;transform:scale(1.7)}}
+/* Paket noktası: çizgi genişliğinde bir taşıyıcı; %50 = Kargoda, %100 = Kapında (ekran genişliğinden bağımsız) */
+.yol-paket{position:absolute;left:0;top:0;width:100%;height:0}
+.yol-paket::before{content:"";position:absolute;left:-5px;top:-4.25px;width:10px;height:10px;border-radius:50%;background:#1A2142;box-shadow:0 0 0 2px #F6F1E9,0 0 0 3.5px #F2A65A}
 .yol li:nth-child(4) .evre::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2px rgba(242,166,90,.6);opacity:0}
-.yol.on li:nth-child(4) .evre::after{animation:yol-hale 1.2s cubic-bezier(.2,.7,.2,1) 2.9s both}
-@media (prefers-reduced-motion:reduce){.yol .evre path,.yol li b,.yol li span,.yol-akis i{transition:none!important}.yol-paket{display:none}.yol li:nth-child(4) .evre::after{animation:none!important}}
+@keyframes yk-cizgi1{0%,6%{transform:scaleX(0);opacity:1}26%{transform:scaleX(1);opacity:1}88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
+@keyframes yk-cizgi2{0%,38%{transform:scaleX(0);opacity:1}57%{transform:scaleX(1);opacity:1}88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
+@keyframes yk-paket{0%,4%{transform:none;opacity:0}6%{transform:none;opacity:1}26%{transform:translateX(50%)}38%{transform:translateX(50%)}57%{transform:translateX(100%);opacity:1}60%,100%{transform:translateX(100%);opacity:0}}
+@keyframes yk-ay2{0%,26%{opacity:0;transform:scale(.4) rotate(-40deg)}33%{opacity:1;transform:none}88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes yk-ay3{0%,57%{opacity:0;transform:scale(.4) rotate(-40deg)}64%{opacity:1;transform:none}88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes yk-hale{0%,59%{opacity:0;transform:scale(.6)}66%{opacity:.9}80%,100%{opacity:0;transform:scale(1.7)}}
+.yol-akis i,.yol-paket,.yol li:nth-child(3) .evre path,.yol li:nth-child(4) .evre path,.yol li:nth-child(4) .evre::after{animation-duration:8s;animation-timing-function:cubic-bezier(.2,.7,.2,1);animation-iteration-count:infinite;animation-fill-mode:both;animation-play-state:paused}
+.yol-akis i:nth-child(1){animation-name:yk-cizgi1}.yol-akis i:nth-child(2){animation-name:yk-cizgi2}.yol-paket{animation-name:yk-paket}
+.yol li:nth-child(3) .evre path{animation-name:yk-ay2}.yol li:nth-child(4) .evre path{animation-name:yk-ay3}.yol li:nth-child(4) .evre::after{animation-name:yk-hale}
+.yol.on .yol-akis i,.yol.on .yol-paket,.yol.on li:nth-child(3) .evre path,.yol.on li:nth-child(4) .evre path,.yol.on li:nth-child(4) .evre::after{animation-play-state:running}
+@media (prefers-reduced-motion:reduce){.yol-akis i,.yol .evre path,.yol li:nth-child(4) .evre::after{animation:none!important}.yol-paket{display:none}}
 .yol b{font-size:14px;font-weight:700}
 .yol span{font-size:13px;color:#5C6078}
-.guven{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:20px;padding:12px 0;border-top:1px solid #E3D8C7;border-bottom:1px solid #E3D8C7;font-size:13px;font-weight:600}
-.guven span+span::before{content:"·";margin-right:14px;color:#F2A65A}
 /* Fiyat düşüşü: 0–0,7 sn ₺1.999,00 büyük; 0,7 sn çizilir; 1,1 sn sağa kayıp küçülür ve söner, yerine soluk eski fiyat gelir;
    aynı anda indirimli fiyat 10px yukarıdan düşer; 1,6 sn rozet belirir. Yalnız transform/opacity, bir kez. */
 .fiyat-satir{position:relative;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:8px 0 0;min-height:28px;font-variant-numeric:tabular-nums}
@@ -373,7 +366,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <h1 class="dev">LunaDream<span>.</span></h1>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
     <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span></p>
-    <p class="guven-ust"><span>Ücretsiz kargo</span><span>30 gün iade</span><span>Güvenli ödeme</span></p>
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
@@ -413,8 +405,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <li><i style="background: #A05A1C"></i><span>Stokta son <b>18</b> adet</span></li>
     </ul>
     <button class="btn-on" type="button">{{onLabel}}</button>
-    <!-- Canlıda kapıda ödeme uygulamasının formunu açar (uygulama korunur; ek ürünler ve ₺80 ücret orada). -->
-    <button class="btn-kp" type="button"><span>Kapıda Ödeme ile Sipariş Ver</span><small class="tab">{{kpPrice}} · ₺80 kapıda ödeme ücreti dahil</small></button>
+    <!-- Canlıda kapıda ödeme uygulamasının formunu açar. Butonda fiyat yok (kullanıcı, Tur 25); ₺80 ücret ve toplam,
+         sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
+    <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"></span></span>""" + YOL + """</ol>
   </section>
 
@@ -540,7 +533,7 @@ JS = """class Component extends DCLogic {
     var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
     // Bir gece: kaydırma adımı ekranın ortasına gelince an değişir. Uzun görüntü alanında (tuval) adım yok; yay ve oklarla gezilir.
     if (typeof IntersectionObserver !== 'undefined' && window.innerHeight < 1600) this.geceBagla();
-    // Kargo takibi: çizelge ekrana girince bir kez oynar (gözlemci yoksa hemen)
+    // Kargo takibi: çizelge ekrana girince döngü başlar (gözlemci yoksa hemen)
     var yol = document.querySelector('.yol');
     if (yol && typeof IntersectionObserver !== 'undefined') {
       this.yolio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { self.setState({ yolAc: true }); self.yolio.disconnect(); } }, { threshold: .6 });
@@ -695,10 +688,9 @@ JS = """class Component extends DCLogic {
     return {
       gal: gal, gNo: S.g + 1, gCount: G.length, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, lambaSec: lambaSec, ikiliAcik: S.adet === 2, adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
-      onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true), kpPrice: TL(kapida, true),
+      onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
       onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
-      kpNote: '+₺80 kapıda ödeme ücreti · ' + TL(kapida, true),
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
@@ -708,5 +700,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5893)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 5864)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))

@@ -475,6 +475,23 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Tur 25 · Kargo döngüsü, kapıda butonu, güven satırı, seçici seçenekleri (18 Ekim)
+- Kullanıcı (E'ye bakarak):
+  - "Animasyon çalışmıyor" (kargo takibi)
+  - "Kapıda Ödeme ile Sipariş Ver'de fiyat yazmasın"
+  - fiyatın altındaki "Ücretsiz kargo · 30 gün iade · Güvenli ödeme" satırı "çok kötü duruyor", kalksın
+  - "Hâlâ seçiciler çok kötü; bundle ve aralarında bir uyum yok; lamba seçim kısmı da güzel değil"
+- E'de yapılanlar (tuval Sürüm 68, h 5864):
+  - **Kargo takibi:** tek seferlik oynatma, tuvalde pano açılır açılmaz bakan olmadan bitiyordu. Artık 8 sn'lik sakin döngü: "Bugün" hilali hep dolu; çizgi ve paket noktası Kargoda'ya akar, yarım ay; Kapında'ya akar, dolunay ve ışık halkası; bekler, söner, baştan. Ekrana girene kadar ilk karede durur. Yazılar hep okunur. Paket noktası yüzdeyle gider (ekran genişliğinden bağımsız).
+  - **Kapıda butonu:** yalnız "Kapıda Ödeme ile Sipariş Ver". ₺80 ücret ve toplam kapıda ödeme formunun özetinde ve SSS'de yazar (mevzuat: ek ücret sipariş onayından önce bildirilir; formda görünmesi yeter).
+  - **Güven satırı** fiyatın altından kalktı (CSS'i de).
+- **Seçici seçenekleri** ayrı panoda: `canvas/LunaDreamE-Secici.dc.html` (`luna_e_secici.py`), tuvalde x=2350, y=700. Dört seçenek yapıldı; eleştirmen üçünü seçti, Vitrin'i (segment, 4/10) reddetti. Ortak dil: 2px lacivert çerçeve + amber dolunay noktası, dolu lacivert yok; renk anlık değişir, yalnız nokta hareket eder; hediye "her kutuda +6".
+  1. Satır kartlar (7/10): model yan yana iki yarım kart; paket alt alta satır (2 Adet'te "₺649,99 kazanç", "tanesi"); 2 Adet açılınca kartın içinde 2. lamba çipleri; altta tek hediye şeridi.
+  2. Yuvarlak örnek (7/10): model iki büyük yuvarlak örnek; paket görselsiz satır; 2. lamba aynı örneğin küçüğü.
+  3. Önce paket, sonra model (6/10): paket satırları üstte; model kareleri adede göre (2 Kız / Kız + Erkek / 2 Erkek), ayrı lamba seçimi yok. Sırayı değiştirir (17 Eki: model paketin üstünde). Varsayılan 2 Kız.
+- Eleştirmen ₺80'in kapıda butonunda kalmasını istedi; kullanıcının açık isteği öncelikli, uygulanmadı.
+- Kullanıcı seçince E'ye işlenecek.
+
 ## Tur 24 · Fiyat düşüşü, gece penceresi, dolan ay, kargo animasyonu, yeni bölümler (18 Ekim)
 - Kullanıcı:
   - fiyat önce 1999 olsun, indirimliye düşsün
