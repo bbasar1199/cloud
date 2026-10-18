@@ -81,7 +81,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Seçilen yönün düzeni korunur** (18 Eki): kullanıcı bir yönü seçtiyse sonraki turlar yalnız istenen parçayı ekler; düzeni baştan kurmak "yabancı" durur.
 - **Ödeme düğmesi:** kartla %5 indirim ana butonun içinde ikinci satır ("Kartla %5 indirim dahil"); güven kutusunda kapıda ödeme övülmez, "Kartla güvenli öde" yazar.
 - **Baskı:** tek satır, butonun hemen üstünde ("Stokta son [N] adet", elle; veri yoksa gizli). Tek sayaç üst şeritte; kart içinde ya da yapışkan çubukta ikinci sayaç yok.
-- **Disk görselleri net:** afiş kırpıntısı küçükse desen değiştirilmeden büyütülür (Higgsfield upscale, 4×3 ızgara), 384px.
+- **Sahne kartı:** ana nesne (ay, ürün) kırpılmaz; yazı onu örtecekse kartın alt şeridine iner. Işık aç/kapa sahnesinde kapalıyken yansıma görünmez.
+- **İmza ürün sayfasında oda sahneleri:** yazısı görselin içinde kartlar (oda adı + o odadaki an) ve bir büyük görsel kart (hediye / avucuna sığar).
+- **Disk görselleri net:** afiş kırpıntısı küçükse desen değiştirilmeden büyütülür (Flow ile; Higgsfield kullanılmaz), 384px.
 - **Yeni ürün sayfasından önce canlı sayfa telefonda incelenir;** satan kalıplar (yaşam fotoğrafları, kare galeri, "Çok al az öde", büyük butonlar) korunur, çelişkili sayı ve sağlık iddiası alınmaz.
 - **Bütünlük (18 Eki, kullanıcı: "her şey çok yabancı duruyor, bir bütün ve uyum yakala"):**
   - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
@@ -212,6 +214,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 ## Görsel
 - Ürün asla sıfırdan üretilmez. Gerçek fotoğraf referans alınır, sahne ve ışık değişir.
 - Araç: Google Flow (Nano Banana Pro). İş akışı DEVAM.md'de.
+- **Higgsfield'da üretim, düzenleme ya da büyütme yapılmaz, kredi harcanmaz** (kullanıcı, 18 Eki: "görselleri Flow'dan üreteceksin, Higgsfield'dan üretme"). Flow'a erişim yoksa başka araca geçilmez: istem + referans hazırlanır, kullanıcıya sorulur.
 - Görselde yazı üretilmez; metin HTML'de eklenir.
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 

@@ -475,6 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## AyFeneri ve Galaksi Night · imza sayfaları (18 Ekim, en güncel)
+- Kullanıcı: "AyLuna AyFeneri ve Galaksi Night Projector için özel sayfa tasarla"; Galaksi Night için referans pococo.com/products/galaxy-projector-star-projector-silver.
+- Yön panoları `ozel_yon.py` (arşivde): AyFeneri A Liman feneri / B Kıyı masalı; Galaksi A Planetaryum / B Gözlemevi (Pococo öğeleri). Eleştirmen raporu kullanıcı seçtikten sonra geldi (AyFeneri B 7, A 5; Galaksi A 7, B 5).
+- **Seçim: ikisinde de Yön A.** AyFeneri'nde çıkarılabilir taban kutusu çıktı. "Oda karanlık / Duvarda ay" düzeldi: sahne tam görünür (fener + ay), yazı ve anahtar alt şeritte; kapalıyken ay örtülü, açınca ışık fenerden yayılır (2 sn kapalı → 7 sn açık, dokununca durur).
+- Tam sayfalar `ozel_sayfa.py` → `canvas/AyFeneri.dc.html`, `canvas/GalaksiNight.dc.html` (tuvalde "AyFeneri + Galaksi Night" sayfası). Yeni: yazısı görselin içinde oda sahneleri (AyFeneri: yatak odası, uyku, müzik, raf; Galaksi: salon, yatak, çocuk, genç), "Kutusu hazır" ve "Avucuna sığar" büyük kartları, Loox satırı ve alıcı fotoğrafları (iki üründe), Galaksi'de 3 adımlı kurulum.
+- Görseller `canvas/ozel/` (kaynak notu `KAYNAK.md`). 10 görsel (yazısı silinmiş afişler + 3 oda sahnesi) Higgsfield'da üretildi; kullanıcı ardından "görseller Flow'dan, Higgsfield'da kredi harcama" dedi, bu görseller "şimdilik kullan" kararıyla **geçici**. Flow istemleri `ogrenme/flow-istemleri-ayfeneri-galaksi.md`; kullanıcı Flow'da üretip yükleyecek, aynı adla değiştirilecek.
+- Teyit bekleyen: AyFeneri pil (canlı sayfa "2400 mAh şarjlı" diyor), sensör, 24,2 / 7,2 cm, USB kablo; Galaksi disk sayısı (12 mi, Ay ile 13 mü), 15 × 9 cm, USB adaptör, garanti.
+- Ana sayfa AyFeneri slaytındaki teyitsiz "sensörlü, şarjlı" çıkarıldı.
+
 ## NİHAİ TASARIM: LunaDream E (18 Ekim)
 - Kullanıcı: "Tamam, nihai tasarımımız bu olacak." Seçilen tasarım artık `canvas/LunaDreamE.dc.html` (üretici `araclar/tuval-uret/luna_e.py`). `Main.dc.html` eskidi.
   - `CLAUDE.md` ("Seçilen tasarım `canvas/Main.dc.html`") ve eleştirmen ajanı (`.claude/agents/ayluna-elestirmen.md`) hâlâ Main.dc'yi gösteriyor; güncellenmeli (kullanıcı onayıyla).
