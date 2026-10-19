@@ -307,7 +307,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')
 
     # 8) Zip
-    zyol = os.environ.get('TEMA_ZIP') or os.path.join(KOK, 'tema-zip', 'ayluna-tema-%s.zip' % SURUM)
+    zyol = os.environ.get('TEMA_ZIP') or os.path.join(KOK, 'tema-zip', 'ayluna-SHOPIFY-TEMA-%s.zip' % SURUM)
     os.makedirs(os.path.dirname(zyol), exist_ok=True)
     with zipfile.ZipFile(zyol, 'w', zipfile.ZIP_DEFLATED) as z:
         for dp, _, fs in os.walk(CIKTI):

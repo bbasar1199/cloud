@@ -1,10 +1,10 @@
 # Ayluna teması 1.0.0 · kurulum
 
-Zip: `tema-zip/ayluna-tema-1.0.0.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.0.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi; kapıda ödeme EasySell'de.
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-tema-1.0.0.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.0.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
 
 ## 2. Sayfalar (bir kez)
