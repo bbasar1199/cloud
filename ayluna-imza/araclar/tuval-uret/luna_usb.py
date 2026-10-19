@@ -18,13 +18,16 @@ import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
 I = dict(Y.I, bas='7e1339aefa8d185cd41f6c37b16853c5', kesim='5782766948fef68b7273c061529d6324', afis='be86b4a93cb896b0ad69042a2e915e68')
-# Kutudaki 12 film diski (kullanıcının paylaştığı afişin sırası). Afişten kırpıldı, Higgsfield ile 4K büyütüldü (desen aynı), 384px. Adlar desenin tarifidir.
-DISK = [('Hilal ve bulutlar', '3966dd40e4ad197b240bee587f2f3c53'), ('Kızıl yıldız', 'f59c74007d5decf352040bde12619017'),
-        ('Mavi nebula', '80696da4e0a6cd338d881afa47afd6a0'), ('Kuzey ışığı', '1bc307933815c7618200af85edb0279a'),
-        ('Pembe nebula', '8a3d874befb7e043b435c052e811fbd4'), ('Sarmal galaksi', 'bc7b40f5daa14441c8b8eb53f575783d'),
-        ('Kozmik göz', '31a0391fbe83323ca017666b3ff6e791'), ('Halkalı gezegen', 'cf986d825d9ff793dc49c28dfcd50946'),
-        ('Samanyolu', '87a8e831f6bfc2b2904344cef8ca0db9'), ('Ay ve bulutlar', 'c061d46f449f236fa124e0fd5db599bb'),
-        ('Denizanası', '70a65e38024f6dd856edc5da1b822c08'), ('Jüpiter', '0e59d26e798205616eaccafa60267877')]
+# Kutudaki 12 film diski (kullanıcı, 19 Eki: "USB'nin diskleri böyle", iki ürün görseli): 6 renkli + 6 siyah-beyaz; Ay, Satürn gibi
+# doğası beyaz olanlar tavanda da beyaz. Kullanıcının görsellerinden kırpıldı (canvas/usb/k-*.webp, yerelde büyütme, üretim yok);
+# renkli altısının kaynağı ~50 px, büyütünce kareli olmasın diye tavandaki yansıma gibi yumuşatıldı (asıl görsel gelirse değişir).
+# Eski 12 disk (afişten, d01–d12) kutuyla örtüşmediği için kalktı. Adlar desenin tarifidir.
+DISK = [('Kızıl sarmal', '298ae74db19f9db800b9e9036f8da560'), ('Mavi nebula', 'b9827fcce5c63d62332bae79435b337a'),
+        ('Ay yüzeyi', '877983233d8c1e6644d73c1923e72595'), ('Yıldız yağmuru', 'af1815158d14c5b764fad7776e10284c'),
+        ('Mavi galaksi', '9665b9b2418d5356d09a0e49b65225a7'), ('Yıldız kuşağı', '093b2415a406f8c3029e9fc3ab073eaf'),
+        ('Dolunay', 'e3900cbd48390901b17932d8912b6b44'), ('Satürn', '62e0ed0370f3e64bee9916a776621abf'),
+        ('Uzay balinası', 'ac1f2ab95a1b0b8a819f04095305f179'), ('Samanyolu', '14c1fb57790b4d352192307e2266071e'),
+        ('Bulut sarmalı', '3b7f66c3091c4a32ba836ca875d7f4f3'), ('Uzak galaksi', 'f5f8b6e9da726943b0ca3bea161462e8')]
 D = dict((n, B + i) for n, i in DISK)
 KES = B + I['kesim']
 
@@ -55,10 +58,11 @@ GAL = [('oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30
        # Mağazanın ürün afişi (yalnız teyitli bilgiler: 360°, USB, 4 cm, 23,5 cm). Diğer afişler 5K, lens sayısı ya da uydurma yorum taşıdığı için alınmadı.
        ('afis', 'Galaxy USB: esnek gövde, 360° döner başlık; başlık 4 cm, toplam boy 23,5 cm', '50% 50%')]
 # Herkesin odasına: hikâye kartı. Disk, kutudaki 12 diskten o odaya önerilen.
-KIM = [('Çocuk odası', 'cocuk', 'Masaldan sonra galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Hilal ve bulutlar', '32% 40%'),
-       ('Genç odası', 'denizanasi', 'Odan, kurallar senin.', 'Işığı kapat, oda başka bir yere dönsün.', 'Denizanası', '62% 40%'),
-       ('İkimiz için', 'cift', 'Bu akşam sahne tavanda.', 'Film yerine tavanda bir akşam.', 'Kuzey ışığı', '44% 40%'),
-       ('Kendine zaman', 'saturn', 'Ekran yok, sadece gökyüzü.', 'Gün sonunda telefonu bırak, tavana bak.', 'Halkalı gezegen', '52% 40%')]
+# 19 Eki: "Genç odası" (denizanası) ve "İkimiz için" (kuzey ışığı) fotoğrafları kutuda olmayan desen gösterdiği için kalktı;
+# yerlerine kutudaki disklerle Flow'da yeni oda fotoğrafı üretilebilir (ogrenme/flow-istemleri-usb-oda.md).
+KIM = [('Çocuk odası', 'cocuk', 'Masaldan sonra galaksi.', 'Uyumadan önce tavana birlikte bakın.', 'Uzay balinası', '32% 40%'),
+       ('Kendine zaman', 'saturn', 'Ekran yok, sadece gökyüzü.', 'Gün sonunda telefonu bırak, tavana bak.', 'Satürn', '52% 40%'),
+       ('Dolunay gecesi', 'ay', 'Ay odanda doğsun.', 'Işığı kapat, dolunay tavanda.', 'Dolunay', '50% 40%')]
 
 IK = Y.IK
 OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>'
@@ -427,7 +431,7 @@ CSS = r"""
 
 
 def disk_yigin():
-    return '<span class="dn" aria-hidden="true"><img src="%s" alt=""><img src="%s" alt=""><img src="%s" alt=""></span>' % (D['Sarmal galaksi'], D['Kuzey ışığı'], D['Denizanası'])
+    return '<span class="dn" aria-hidden="true"><img src="%s" alt=""><img src="%s" alt=""><img src="%s" alt=""></span>' % (D['Kızıl sarmal'], D['Dolunay'], D['Mavi galaksi'])
 
 
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir (bölüm ayarı ya da Shopify Flow metafield'ı); boşsa satır gizlenir.
@@ -502,15 +506,15 @@ AL = ("""
   </section>
 """)
 
-# Sahneler: kutudaki disklerle örtüşenler (Ay, Satürn ≈ halkalı gezegen, Denizanası, Kuzey ışığı). Kelebek ve kara delik kutuda yok, alınmadı.
-SAHNE = [('Ay', 'ay', '50% 40%'), ('Satürn', 'saturn', '55% 40%'), ('Denizanası', 'denizanasi', '50% 35%'), ('Kuzey ışığı', 'cift', '50% 40%')]
+# Sahneler: yalnız kutudaki disklerle örtüşenler (Dolunay, Satürn, renkli sarmal galaksi). Denizanası, kuzey ışığı, kelebek, kara delik kutuda yok.
+SAHNE = [('Dolunay', 'ay', '50% 40%'), ('Satürn', 'saturn', '55% 40%'), ('Galaksi', 'oda', '50% 22%')]
 SAHNELER = ('\n  <section class="koyu bolum" style="padding-bottom: 36px"><div class="px"><h2 class="bas-y h2">Bu gece tavanda<br>ne olsun<span class="n">?</span></h2></div>'
             '<div class="sahne-serit noscroll">' + ''.join('<div class="sk"><img src="%s%s" alt="%s yansıması" style="object-position: %s"><b>%s</b><span>Disk değiştir, tavan değişsin</span></div>' % (B, I[k], n, pos, n) for n, k, pos in SAHNE) +
             '<span aria-hidden="true" style="flex: 0 0 6px"></span></div>'
             '<p class="alt-not px">Görseller temsilîdir; desen kutudaki 12 diskten birine göre değişir, büyüklük odaya ve mesafeye göre.</p></section>\n')
 
 DISKLER = ("""
-  <!-- 12 disk: görseller kullanıcının paylaştığı mağaza afişinden kırpılıp büyütüldü (desen aynı). Seçilen disk tavana düşer. -->
+  <!-- 12 disk: kullanıcının paylaştığı ürün görsellerinden (6 renkli, 6 siyah-beyaz). Seçilen disk tavana düşer. -->
   <section class="koyu bolum" id="diskler">
     <div class="px"><h2 class="bas-y h2">Kutuda 12<br>film diski<span class="n">.</span></h2><p class="alt-b">Diski tak, tavan değişsin. Birine dokun, tavanda gör.</p></div>
     <div class="dk-sahne" aria-hidden="true">
@@ -520,7 +524,7 @@ DISKLER = ("""
       <span class="dk-ad"><span>Disk {{dNo}} / 12</span><b>{{dAd}}</b></span>
     </div>
     <div class="px"><div class="dk-iz"><sc-for list="{{disk}}" as="d" hint-placeholder-count="12"><button class="{{d.bcls}}" onClick="{{d.pick}}" aria-label="{{d.n}}" aria-pressed="{{d.on}}"><img src="{{d.src}}" alt=""></button></sc-for></div>
-    <p class="alt-not">Disk görselleri mağaza afişinden. Tavanda daha yumuşak görünür; netlik odanın karanlığına ve mesafeye göre değişir.</p></div>
+    <p class="alt-not">Kutudaki 12 disk: 6'sı renkli, 6'sı Ay ve Satürn gibi beyaz. Tavanda daha yumuşak görünür; netlik odanın karanlığına ve mesafeye göre değişir.</p></div>
   </section>
 """)
 
@@ -620,7 +624,7 @@ def sayfa(tema, kesit=None):
 
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 3, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Hareket azaltılmışsa kendiliğinden geçişler kapalı
@@ -660,7 +664,7 @@ JS = """class Component extends DCLogic {
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: B + d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var DS = {}; DISK.forEach(function (d) { DS[d[0]] = B + d[1]; });
     var KIM = """ + str([list(x) for x in KIM]) + """;
-    var KISA = ['Çocuk', 'Genç', 'İkimiz', 'Kendime'];
+    var KISA = ['Çocuk', 'Kendime', 'Dolunay'];
     var kim = KIM.map(function (k, i) { var on = i === S.kim; return { n: k[0], kisa: KISA[i], src: B + I[k[1]], bas: k[2], t: k[3], disk: k[4], dsrc: DS[k[4]], pos: k[5], alt: on ? k[0] + ': ' + k[3] : '', on: on ? 'true' : 'false',
       fcls: on ? 'hk-f on' : 'hk-f', ycls: on ? 'hk-y on' : 'hk-y', scls: on ? 'on' : '', ccls: i < S.kim ? 'bitti' : (on ? (S.kOto ? 'on' : 'dur') : ''),
       pick: function () { self.setState({ kim: i, kBas: S.t, kOto: false }); } }; });
@@ -723,7 +727,7 @@ JS = """class Component extends DCLogic {
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7142))
+    h = int(os.environ.get('U_H', 7160))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(sayfa(ANA_TEMA) + TAIL.format(h=h, js=JS))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
