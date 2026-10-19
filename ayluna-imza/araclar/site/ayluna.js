@@ -102,6 +102,12 @@
       if (var_) var_.adet += sat.adet || 1; else s.satirlar.push(Object.assign({ id: id, adet: 1 }, sat, { id: id }));
       yaz(s); return s;
     },
+    // Ürün sayfasındaki satın alma butonları: o ürünün satırı seçili hâliyle tek kalır (kartla dene → geri dön → kapıda: ×2 olmaz)
+    koy: function (sat) {
+      var s = oku(), id = sat.h + '|' + (sat.varyant || '') + '|' + (sat.paket || 1);
+      s.satirlar = s.satirlar.filter(function (x) { return x.h !== sat.h; });
+      s.satirlar.push(Object.assign({ adet: 1 }, sat, { id: id })); yaz(s); return s;
+    },
     adet: function (id, n) { var s = oku(); s.satirlar.forEach(function (x) { if (x.id === id) x.adet = Math.max(1, Math.min(9, n)); }); yaz(s); },
     sil: function (id) { var s = oku(); s.satirlar = s.satirlar.filter(function (x) { return x.id !== id; }); if (!s.satirlar.length) s.ekler = {}; yaz(s); },
     ek: function (k, on) { var s = oku(); s.ekler = s.ekler || {}; s.ekler[k] = on === undefined ? !s.ekler[k] : !!on; yaz(s); },
@@ -125,7 +131,8 @@
     var U = V.urun[h]; if (!U) return null;
     var S = (C && C.state) || {}, n = S.adet || S.pk || 1;
     var pk = (U.paket || []).filter(function (b) { return b.n === n; })[0];
-    var birim = pk ? pk.p : U.p * n, eski = pk && pk.c ? pk.c : (U.c ? U.c * n : null), varyant = [];
+    // Paket ve çoklu adette üstü çizili "2 × eski fiyat" yok (TASARIM-BILGISI §7 kural 2)
+    var birim = pk ? pk.p : U.p * n, eski = n === 1 ? (pk && pk.c ? pk.c : U.c || null) : null, varyant = [];
     varyant.push(n > 1 ? n + ' adet' : '1 adet');
     if (h === 'lunadream-gece-lambasi') { var M = { kiz: 'Kız (Tavşanlı)', erkek: 'Erkek (Robot)' }; varyant.push(n === 2 ? M[S.model || 'kiz'] + ' + ' + M[S.l2 || S.model || 'kiz'] : M[S.model || 'kiz']); }
     else if (U.secenek && U.secenek.length) varyant.push(U.secenek[S.sec || 0]);
@@ -287,7 +294,7 @@
     if (V2.stok === false) { bildir('Bu ürün şu an tükendi'); return; }
     var s = satir(h); if (!s) return;
     if (h !== URUN) { s.paket = 1; s.birim = V2.p; s.eski = V2.c; s.varyant = '1 adet' + (V2.secenek && V2.secenek.length ? ' · ' + V2.secenek[0] : ''); }
-    Sepet.ekle(s);
+    if (h === URUN) Sepet.koy(s); else Sepet.ekle(s);
     if (yolu === 'kapida') kapidaAc(); else { cekmeceAc(); }
   }
 

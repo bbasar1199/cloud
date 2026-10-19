@@ -264,7 +264,7 @@ KURULUM_GN = ("""
 
 
 def gerisi(u):
-    kapanis = 'Bu gece duvarında<br>ay olsun' if u == 'af' else 'Bu gece tavanın<br>gökyüzü olsun'
+    kapanis = 'Bu gece duvarında <br>ay olsun' if u == 'af' else 'Bu gece tavanın <br>gökyüzü olsun'
     karo = 'af-ay-yakin' if u == 'af' else 'gn-isik'
     return ("""
   <section class="bolum px">

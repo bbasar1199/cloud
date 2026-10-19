@@ -85,11 +85,11 @@ img{max-width:100%}
   .ay-logo svg{width:26px;height:26px}
   .ay-logo b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:25px;letter-spacing:-.02em}
   .ay-masa nav{display:flex;gap:26px;margin:0 auto}
-  .ay-masa nav a{color:#C9CFE2;text-decoration:none;font-size:15px;font-weight:500;padding:24px 0 22px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s}
+  .ay-masa nav a{color:#C9CFE2;text-decoration:none;font-size:15px;font-weight:500;padding:24px 0 22px;border-bottom:2px solid transparent;white-space:nowrap}
   .ay-masa nav a:hover{color:#fff}
   .ay-masa nav a[aria-current]{color:#fff;border-bottom-color:#F2A65A}
   .ay-masa-sag{display:flex;gap:2px;flex:none}
-  .ay-masa-sag a,.ay-masa-sag button{width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
+  .ay-masa-sag a,.ay-masa-sag button{width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
   .ay-masa-sag a:hover,.ay-masa-sag button:hover{background:rgba(255,255,255,.09)}
   .ay-masa .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .ay-masa [data-ay-adet]::after{top:3px;right:1px;background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
@@ -105,7 +105,7 @@ img{max-width:100%}
   #kok .pg>.duyuru~.u-serit{margin-top:0!important}
 
   /* Ürün sayfası: üstte iki sütun (.urun-ust: solda yapışkan kare galeri, sağda satın alma), altta ortada bölümler */
-  html[data-ay-tur=urun] .pg{max-width:1200px!important;padding:0 32px 48px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=urun] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
   html[data-ay-tur=urun] .urun-ust{display:grid;grid-template-columns:minmax(0,1fr) 440px;column-gap:56px;align-items:start;margin-top:28px}
   html[data-ay-tur=urun] .urun-ust>.sahne,html[data-ay-tur=urun] .urun-ust>.hero,html[data-ay-tur=urun] .urun-ust>.ust-sol{grid-column:1;position:sticky;top:96px}
   html[data-ay-tur=urun] .urun-ust>#siparis,html[data-ay-tur=urun] .urun-ust>.ust-sag{grid-column:2;margin-top:0!important}
@@ -200,6 +200,16 @@ img{max-width:100%}
   html[data-ay-tur=sepet] .s-sag .ozet{border-top:0;padding-top:0;margin-top:0}
   html[data-ay-tur=sepet] .s-sag .btn1,html[data-ay-tur=sepet] .s-sag .btn2,html[data-ay-tur=sepet] .s-sol>button{width:100%!important}
   html[data-ay-tur=sepet] .bos-s{max-width:480px;margin:48px auto!important}
+  /* Ürün sayfası alt bilgisi (imza sayfaları, footer.alt-bilgi): solda kapanış + buton, sağda bağlantılar ve yasal bilgi */
+  #kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
+  #kok .pg>footer.alt-bilgi>.px{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas link" "btn yasal" "imza ." "telif telif";column-gap:64px;align-items:start;padding:0 max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:40px!important}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(1) br{display:none}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(2){grid-area:btn;justify-self:start;width:440px!important;max-width:100%}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(3){grid-area:link;margin-top:0!important}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(4){grid-area:yasal}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(5){grid-area:imza;margin-top:40px!important}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(6){grid-area:telif;margin-top:32px!important}
   /* Alt bilgi (ana sayfa ve içerik sayfaları): kenardan kenara, solda imza, sağda bağlantılar */
   #kok .pg>footer.alt{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:96px;box-sizing:border-box;padding:56px max(32px,calc(50vw - 568px)) 40px;border-radius:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"imza sut" "yasal sut" "kart sut" "telif telif";column-gap:64px;align-content:start}
   #kok .pg>footer.alt .imza{grid-area:imza;margin-top:0}
@@ -208,5 +218,4 @@ img{max-width:100%}
   #kok .pg>footer.alt .yasal{grid-area:yasal}
   #kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
   #kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
-  #kok .pg>footer.alt a{min-height:40px}
 }

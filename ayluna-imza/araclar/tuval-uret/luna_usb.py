@@ -598,7 +598,7 @@ GERISI = ("""
 
   <footer class="alt-bilgi">
     <div class="px">
-      <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanda<br>galaksi olsun<span class="n" style="color: var(--v)">.</span></h2>
+      <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanda <br>galaksi olsun<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span>""" + OK + """</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>

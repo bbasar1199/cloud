@@ -172,6 +172,17 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(r.n === liste.length && Math.abs(r.oran - 1) < .02, `${h}: galeri ${r.n}/${liste.length} görsel, oran ${r.oran}`);
   }
 
+  // Satın alma butonları sepeti katlamaz (kartla dene → kapat → kapıda), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
+  await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);
+  await pg.evaluate(() => { AylunaSepet.koy({ h: 'galayx-usb-projektor', ad: 'Galaxy USB', varyant: '2 adet', paket: 2, birim: 2279.99, eski: null }); });
+  await pg.locator('#siparis .btn2').click(); await pg.waitForTimeout(500);
+  await pg.evaluate(() => Ayluna.kapidaKapat()); await pg.locator('#siparis .btn2').click(); await pg.waitForTimeout(500);
+  { const s = await pg.evaluate(() => AylunaSepet.oku().satirlar.filter(x => x.h === 'galayx-usb-projektor'));
+    not(s.length === 1 && s[0].adet === 1, `Galaxy USB: iki kez Kapıda → sepette tek satır (${s.length} satır, adet ${s[0] && s[0].adet})`);
+    const p = await pg.evaluate(() => { const s = AylunaSepet.oku(); return s.satirlar.map(x => x.eski); });
+    not(p.every(e => e === null || e === undefined) || (await pg.evaluate(() => AylunaSepet.oku().satirlar[0].paket)) === 1, 'paket satırında üstü çizili eski fiyat yok'); }
+  await pg.evaluate(() => Ayluna.kapidaKapat());
+
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
   const mp = await mctx.newPage(); mp.on('pageerror', e => loglar.push('pageerror masaüstü: ' + e.message));

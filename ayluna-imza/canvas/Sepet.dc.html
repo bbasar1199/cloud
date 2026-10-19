@@ -161,7 +161,7 @@ class Component extends DCLogic {
     var T = [{"k": "astronot", "n": "Astronot Nemlendirici", "alt": "Mağazada ₺799,00", "p": 749.0, "img": "ec1ada6af6ab5b345bc0a6c49e46d7be"}, {"k": "kum", "n": "Kum Saati Lamba", "alt": "Mağazada ₺799,00", "p": 699.99, "img": "ceaf4cf66048150f068cf32120aa9eb1"}, {"k": "nem", "n": "Yıldız Işığı Nemlendirici", "alt": "Mağazada ₺849,99", "p": 749.99, "img": "bf1b4c56f2b7c2d2e4b44ece808b0887"}];
     var teklif = T.map(function (t) { var on = !!ekler[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
       pick: function () { if (SP) SP.ek(t.k); else demo(function (d) { d.ekler[t.k] = !d.ekler[t.k]; }); } }; });
-    var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim), eski: x.eski ? TL(x.eski * x.adet, true) : '',
+    var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim && (x.paket || 1) === 1 && x.adet === 1), eski: x.eski ? TL(x.eski, true) : '',
       azalt: function () { if (x.adet > 1) { if (SP) SP.adet(x.id, x.adet - 1); else demo(function (d) { d.satirlar[0].adet--; }); } },
       arttir: function () { if (x.adet < 9) { if (SP) SP.adet(x.id, x.adet + 1); else demo(function (d) { d.satirlar[0].adet++; }); } },
       sil: function () { if (SP) SP.sil(x.id); else demo(function (d) { d.satirlar = []; }); } }; });
