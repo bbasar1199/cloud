@@ -155,7 +155,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     await sp.clock.runFor(4500); not((await on()).includes(ilk), f + ': başa döndü');
     not((await sp.locator('.yol li').nth(1).textContent()).includes('Bugün'), f + ': yolda kargo tarihi Bugün');
     { await sp.locator('.al-on').scrollIntoViewIfNeeded(); await sp.clock.runFor(600); const kd = await sp.locator('.stok-kd.on').textContent();
-      not(/^Son (18|\[N\]) adet$/.test(kd) && await sp.locator('#siparis .canli, #siparis p.stok').count() === 0, f + ': stok kurdelesi butonda "' + kd + '", eski stok satırı yok'); }
+      not(/^Son (18|23) adet$/.test(kd) && await sp.locator('#siparis .canli, #siparis p.stok').count() === 0, f + ': stok kurdelesi butonda "' + kd + '", eski stok satırı yok'); }
     await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(11000); // 16.30
     const geç = await sp.locator('.donen .dn-s').nth(1).textContent();
     not(geç.includes('yarın kargoda') && await sp.locator('.dn-sy').count() === 0, f + ': 16.00 sonrası "' + geç + '", sayaç yok');

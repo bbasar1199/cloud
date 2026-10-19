@@ -433,7 +433,7 @@ def disk_yigin():
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir (bölüm ayarı ya da Shopify Flow metafield'ı); boşsa satır gizlenir.
 DUN = '62'  # kullanıcı, 18 Eki: LunaDream'deki gibi
 # Stok kurdelesi (kullanıcı, 18 Eki: LunaDream'deki C USB'ye de): butonun üst kenarında "Son N adet"; sayı elle, boşsa yok.
-STOK = '[N]'
+STOK = '23'  # kullanıcı, 18 Eki
 AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % E.ay(.15)
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
