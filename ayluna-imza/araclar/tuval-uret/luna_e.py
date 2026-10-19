@@ -390,24 +390,34 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .vid-alt b{font-size:14px}
 .vid-alt span{font-size:13px;color:#B9BED6}
 .vid-etiket{position:absolute;left:10px;top:10px;z-index:1;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(12,16,39,.6)}
-/* Yorum duvarı: müşteri fotoğrafları + konu çipleri + kaydırmalı yorum kartları (metinler Loox'tan birebir) */
+/* Müşteri kanıtı tek bölüm (kullanıcı, 19 Eki: "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım"; B · Tek akış seçildi) */
+.ynot{margin:12px 0 0;font-size:13px;color:#5C6078;text-align:center;line-height:1.45}
+.yhep{display:flex;justify-content:center;width:100%;margin-top:16px;text-decoration:none}
+.yr{margin:0;padding:16px 0;border-bottom:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px}
+.yr q{font-family:"Young Serif",Georgia,serif;font-size:17px;line-height:1.32;quotes:none;color:#1A2142}
+.yr figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
+.yr .dog,.yone .dog{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#2E6B4F}
+.yl{margin-top:4px}
+.yone{margin:18px 16px 0;padding:18px;border-radius:20px;background:#FFFDF9}
+.yone .tirnak{display:block;height:20px;font-family:"Young Serif",Georgia,serif;font-size:36px;line-height:.7;color:#1A2142;opacity:.35}
+.yone q{display:block;margin-top:4px;font-family:"Young Serif",Georgia,serif;font-size:21px;line-height:1.28;quotes:none;color:#1A2142}
+.yone figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;font-size:13px}
+.yara{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 0;font-size:15px;font-weight:700;color:#1A2142}
+.yara span{font-size:13px;font-weight:500;color:#5C6078}
+.karma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:12px 16px 2px;scrollbar-width:none}
+.karma::-webkit-scrollbar{display:none}
+.karma button{flex:none;display:block;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.karma button{height:280px}
+.k-msj{aspect-ratio:9/16}.k-foto{aspect-ratio:3/4}
+.karma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 /* Müşteri fotoğrafları (19 Eki): küçük kare yerine dikey kart, dokununca büyür */
 .mf{flex:none;width:150px;aspect-ratio:3/4;padding:0;border:0;border-radius:18px;overflow:hidden;background:#F1E8DA;cursor:pointer}
-/* Sizden gelen mesajlar: telefon ekranı oranında kartlar */
-.msj-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 2px}
-.msj{flex:0 0 228px;aspect-ratio:9/16;scroll-snap-align:start;padding:0;border:1px solid #E3D8C7;border-radius:20px;overflow:hidden;background:#FFFDF9;cursor:pointer}
-.msj img,.mf img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-.msj:active,.mf:active{transform:scale(.98)}
+.mf img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mf:active,.karma button:active{transform:scale(.98)}
 .buyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
 .buyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
 .buyuk-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
 .buyuk-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
-.yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
-.yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#F2A65A;height:20px}
-.yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
-.yk2 figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
-.yk2 .dog{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2E6B4F}
-.yk2 .konu{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#F1E8DA;color:#5C6078}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}"""
 CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:rotate(%ddeg)}' % (i, a, i, a) for i, a in enumerate(KAD_A))
 
@@ -428,6 +438,20 @@ def isaret(boy, cizgi='rgba(255,253,249,.55)'):
 
 
 LOGO = isaret(22)
+
+# Müşteri kanıtı tek bölüm (19 Eki, B · Tek akış)
+YORUM_HTML = ("""  <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım"). Üç yön gösterildi (A sekmeli, B tek akış, C duvar); eleştirmen B 8/10, kullanıcı B'yi seçti:
+       puan → öne çıkan tek yorum → fotoğraf ve mesajlar tek karışık şerit (aynı yükseklik, fotoğrafla başlar) → kısa yorum listesi → hepsini oku.
+       Konu çipleri ve ayrı "Sizden gelen mesajlar" bölümü kalktı. -->
+  <section id="yorumlar" class="bolum gir yorum-b">
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <figure class="px yone"><span class="tirnak" aria-hidden="true">“</span><q>{{oneQ.q}}</q><figcaption><b>{{oneQ.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure>
+    <p class="px yara">Sizden gelenler<span>Dokun, büyüsün</span></p>
+    <div class="noscroll karma"><sc-for list="{{karma}}" as="k" hint-placeholder-count="4"><button class="{{k.cls}}" type="button" onClick="{{k.ac}}" aria-label="{{k.n}}, büyüt"><img src="{{k.src}}" alt="{{k.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="px yl"><sc-for list="{{revRest}}" as="r" hint-placeholder-count="3"><figure class="yr"><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure></sc-for><a href="#" class="cip yhep">{{reviews}} yorumun hepsini oku</a><p class="ynot">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı.</p></div>
+  </section>
+
+""").replace('{{tik}}', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>')
 
 HTML = """<div class="pg" style="padding-bottom: 0">
   <!-- Üst şerit: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
@@ -528,36 +552,8 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
 
-  <!-- Yorum duvarı: puan ve sayı Loox'tan; kartlar Loox'taki gerçek yorumlardan birebir seçilir (blok). "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından. -->
-  <section id="yorumlar" class="bolum gir">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
-    <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
-      <sc-for list="{{mfoto}}" as="f" hint-placeholder-count="5"><button class="mf" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for>
-    </div>
-    <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
-      <sc-for list="{{topics}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}">{{t.n}}</button></sc-for>
-    </div>
-    <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 2px">
-      <sc-for list="{{revs}}" as="r" hint-placeholder-count="3">
-        <figure class="yk2"><span class="konu">{{r.tags}}</span><span class="tirnak" aria-hidden="true">“</span><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Satın aldı</span></figcaption></figure>
-      </sc-for>
-      <span aria-hidden="true" style="flex: 0 0 6px"></span>
-    </div>
-    <div class="px"><a href="#" class="cip" style="display: flex; justify-content: center; margin-top: 14px; text-decoration: none">{{reviews}} yorumun hepsini oku</a>
-    <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır; hepsi yayımlanır.</p></div>
-  </section>
-
-  <!-- Sizden gelen mesajlar (kullanıcı, 19 Eki: eski sitedeki "gelen mesajlar" bölümü): müşterilerin izniyle paylaşılan gerçek sohbet
-       ekran görüntüleri (canvas/musteri). Kaydırılır, dokununca büyür. Eski sitedeki "Gün boyu konfor" ve "Binlerce mutlu kullanıcı" metinleri alınmadı. -->
-  <section class="bolum gir" id="mesajlar">
-    <div class="px"><h2 class="h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 15px; color: #5C6078">Müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
-    <div class="noscroll msj-serit">
-      <sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for>
-      <span aria-hidden="true" style="flex: 0 0 6px"></span>
-    </div>
-  </section>
-
-  <!-- Büyük görünüm: müşteri fotoğrafı ya da mesaj; dokununca ya da Esc ile kapanır -->
+  <!-- Puan ve sayı Loox'tan; yorumlar Loox'taki gerçek yorumlardan birebir. "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından ve müşteri hikâyesinden. -->
+""" + YORUM_HTML + """  <!-- Büyük görünüm: müşteri fotoğrafı ya da mesaj; dokununca ya da Esc ile kapanır -->
   <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="buyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="buyuk-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
 
   <!-- Diskler: tavana yansıt -->
@@ -624,7 +620,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #2A3260"><img class="kesim" src="{{modelSrc}}" alt="" style="height: 38px; bottom: 4px"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">{{onPrice}}</b><span style="font-size: 12px; color: #B9BED6">{{adetName}} · kartla</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{adetName}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">Satın al</button>
   </div>
 </div>
@@ -789,6 +785,7 @@ JS = """class Component extends DCLogic {
     var MSJ = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e',
       '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'];
     var mesajlar = MSJ.map(function (id, i) { var n = 'Müşteri mesajı ' + (i + 1); return { src: B + id, n: n, ac: buyut(B + id, n) }; });
+    // Müşteri kanıtı: öne çıkan yorum + fotoğraf ve mesajların karışık şeridi + kısa yorum listesi
     var mfoto = [['f17eea08d28f448f84ae69364c4320a3', 'LunaDream ile oynayan küçük kız (müşterinin paylaştığı hikâye)'], ['4323cd781a0d687b528b3059505be48c', 'LunaDream’e sarılan küçük kız'], ['7ad3cbbe71680f4ed3027dbd056e391f', 'Çocuk odasında yanan LunaDream'], ['f060b12bc3353fae64eedf62798c5711', 'Duvara yansıyan deniz deseni'], ['ec3c3976bbe8f18e5660f4a4c355ebf7', 'Karanlıkta yanan LunaDream']]
       .map(function (f) { var a = 'Müşteri fotoğrafı: ' + f[1]; return { src: B + f[0], alt: a, ac: buyut(B + f[0], a) }; });
     var REV = [
@@ -798,8 +795,11 @@ JS = """class Component extends DCLogic {
       { tags: ['Hediye', 'Kalite'], name: 'Abdülkerim T.', q: 'Reklamında nasıl ise aynısı, hatta daha iyisi. Çocuklar için mükemmel bir hediye.' },
       { tags: ['Kalite'], name: 'Mehmet C.', q: 'Anlatıldığı ve gösterildiği gibi çıktı. Bu kadar iyi olmasını beklemiyordum.' }
     ];
-    var topics = ['Tümü', 'Uyku', 'Hediye', 'Kalite'].map(function (t) { var on = S.topic === t; return { n: t, cls: on ? 'cip on' : 'cip', on: on ? 'true' : 'false', pick: function () { self.setState({ topic: t }); } }; });
-    var revs = REV.filter(function (r) { return S.topic === 'Tümü' || r.tags.indexOf(S.topic) > -1; }).map(function (r) { return { q: r.q, name: r.name, tags: r.tags.join(' · ') }; });
+    var revAll = REV.map(function (r) { return { q: r.q, name: r.name }; });
+    var oneQ = revAll[3], revRest = revAll.filter(function (r, i) { return i !== 3; });
+    // Karışık şerit: fotoğrafla başlar (lambaya sarılan kız; küçükken okunmayan sohbet ekranı ilk görünmesin), sonra mesaj ve fotoğraf sırayla
+    var karma = [], fsira = [mfoto[1], mfoto[0], mfoto[2], mfoto[3], mfoto[4]];
+    mesajlar.forEach(function (m, i) { if (fsira[i]) karma.push({ cls: 'k-foto', src: fsira[i].src, n: fsira[i].alt, ac: fsira[i].ac }); karma.push({ cls: 'k-msj', src: m.src, n: m.n, ac: m.ac }); });
     // Diskler: mağazadaki 1024px tema afişinden kesildi, Real-ESRGAN (çizim modeli) ile x4 netleştirildi, 512px (araclar/disk/disk_kes.py --sr). Unicorn ve 2025 kutuda yok, alınmadı.
     var DISCS = [
       { n: 'Ay ve yıldız', id: '4a3a69e8c1d8dddad8c33f8f463b8a0e' }, { n: 'Okyanus', id: 'a24f13e032569f76d64b9b0fbe8d74f7' },
@@ -852,7 +852,8 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      oneQ: oneQ, revRest: revRest, karma: karma,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
     };

@@ -230,7 +230,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - WhatsApp ve şirket bilgisi (unvan, MERSİS, adres, KEP, telefon) şimdilik sitede yok; kullanıcı kendisi ekleyecek. "Bize yaz" İletişim sayfasına gider. Yayından önce şirket bilgisi yasal zorunluluk (hatırlat, ekleme).
 - Ürün sayfasında açılışta paket seçili gelmez (seçimsiz alım 1 adet). Kapıda ödeme düğmesini kullanıcı EasySell ile koyar; tema koymaz, yalnız satın al düğmesinin altında yuva bırakır. Paket indirimi Kaching'te: tasarımdaki kartlar görünür, Kaching kutusu gizli ve kartlarla eşlenir; kartla ödemede satırlara Kaching özelliği yazılır.
 - Yapay zekâ ile üretilmiş görsel "müşteri", "mutlu kullanıcı" diye gösterilmez; sosyal kanıt yalnız gerçek müşteri içeriği (izinli mesaj ekran görüntüsü, müşteri fotoğrafı/videosu, Loox).
-- "Güvenli Ödeme ile Al" düğmesinde fiyat yazmaz; fiyat paket kartlarında.
+- "Güvenli Ödeme ile Al" düğmesinde ve telefondaki alt çubukta fiyat yazmaz; fiyat paket kartlarında.
+- Müşteri kanıtı tek bölümde tek akış: puan → öne çıkan tek yorum → fotoğraf ve mesajlar aynı yükseklikte tek şerit (fotoğrafla başlar) → kısa yorum listesi → hepsini oku. Konu çipi, sekme ve üst üste birden çok şerit yok.
 - Müşteri mesajı ekran görüntüleri yalnız konu oldukları ürünün sayfasına konur; sayfanın vaadiyle (kargo süresi, kutu içeriği) çelişen mesaj seçilmez.
 - Tema mağazada yayınlanmış temada değil, yayınlanmamış temanın Önizleme'sinde denenir (satış sürerken sipariş kaçmaz).
 

@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.3 · düğmede fiyat yok, müşteri mesajları (19 Ekim, en güncel)
+## Tema 1.0.4 · yorum kısımları tek akış, alt çubukta fiyat yok (19 Ekim, en güncel)
+- Kullanıcı: telefondaki alt çubukta fiyat ("evet görünüyor") ve "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım".
+- Alt çubuk (LunaDream, USB, AyFeneri, Galaksi Night): fiyat yerine ürün adı + seçim ("1 Adet"), Satın al.
+- Müşteri kanıtı: üç yön (A sekmeli, B tek akış, C duvar) ekran görüntüsüyle gösterildi; eleştirmen B 8/10, A 5/10 (fotoğraf/mesaj sekmede gizli, Loox eklentisine benziyor), C 4/10 (en uzun, dar sütunda okunmuyor). **Kullanıcı B'yi seçti.**
+  - `#yorumlar`: puan → öne çıkan yorum (Abdülkerim T., çerçevesiz kart, lacivert tırnak) → "Sizden gelenler" şeridi (5 fotoğraf + 6 mesaj, 280 px aynı yükseklik, fotoğrafla başlar, dokununca büyük görünüm) → 4 kısa yorum → hepsini oku → "Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı."
+  - Konu çipleri, eski kaydırmalı yorum kartları (.yk2) ve ayrı `#mesajlar` bölümü kalktı. Masaüstünde şerit tek satır kayar (kartlar 360 px).
+- Eleştirmen notu: "4,7 · 62 yorum" ve "Dün 62 kişi" sayıları Loox'tan teyit edilmeli (yayından önce).
+- E_H=6542. Site testleri (müşteri kanıtı tek bölüm denetimi dahil), tema benzetimi HEPSİ TAMAM; Theme Check yalnız RemoteAsset.
+
+## Tema 1.0.3 · düğmede fiyat yok, müşteri mesajları (19 Ekim)
 - Kullanıcı: "Güvenli Ödeme ile Al'da fiyat yazmasın (%5 fark zaten 80 lira az ödemek)" ve "bahsettiğim yorum kısımlarını yapmamışız".
 - Kartla öde düğmesi bütün ürün sayfalarında yalnız "Güvenli Ödeme ile Al"; masaüstü çubuğu da (düğme metnini kopyalıyor).
 - LunaDream: "Sizden gelen mesajlar" bölümü (yorumların altında): eski sitedeki 8 sohbetten 6'sı (`canvas/musteri/mesaj-*.jpg`, tuval asset'i, `blob-yerel.json`); telefonda kayan dikey kartlar, masaüstünde tek satır şerit; dokununca büyük görünüm (Esc/dokunuş kapatır, sayfa kaymaz, odak kapat düğmesinde, 48 px).
