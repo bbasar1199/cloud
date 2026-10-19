@@ -796,7 +796,7 @@ class Component extends DCLogic {
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
     var PR = [["LunaDream Gece Lambası", 1699.99, 1999, "/_blob/f4f724c3d02ba1e40788a962f9e3fe77"], ["Galaxy USB Projektör", 1599, 1999, "/_blob/88c17ac1f221cab147f23e1a46b7f55e"], ["Ayluna AyFeneri", 1649.99, 2499, "/_blob/d326933d74a22adce90d7f6ac3eabf43"], ["Galaksi Ambiyans Işığı", 1499, 2898, "/_blob/9e6102bb76acbfeb101fca8e2fc1024e"], ["Yıldız Işığı Nemlendirici", 849.99, 1099, "/_blob/c91c0730a3e7924eb99ad263ae4ea6df"], ["Ayluna Kum Saati Lamba", 799, 999, "/_blob/0307a2c24e8297579b82099467f001d9"]];
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
-    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
     return { masa: MASA, tel: !MASA,
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,

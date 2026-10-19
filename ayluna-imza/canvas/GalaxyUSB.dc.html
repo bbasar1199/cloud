@@ -595,7 +595,7 @@ class Component extends DCLogic {
       { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' }
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
-    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
     return { masa: MASA, tel: !MASA,
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay,
       disk: disk, dNo: S.disk + 1, dAd: DISK[S.disk][0],

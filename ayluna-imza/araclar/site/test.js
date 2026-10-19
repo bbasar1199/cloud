@@ -183,6 +183,9 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(p.every(e => e === null || e === undefined) || (await pg.evaluate(() => AylunaSepet.oku().satirlar[0].paket)) === 1, 'paket satırında üstü çizili eski fiyat yok'); }
   await pg.evaluate(() => Ayluna.kapidaKapat());
 
+  await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
+  not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0 && await pg.locator('.g-liste').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü listesi yok');
+
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
   const mp = await mctx.newPage(); mp.on('pageerror', e => loglar.push('pageerror masaüstü: ' + e.message));
@@ -208,6 +211,12 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
   await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
   not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
+  // Bir gece masaüstünde: liste anı seçer, sayfa kaydırması seçimi değiştirmez; özellik kartları sol sütunda tek kopya
+  await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.waitForTimeout(800);
+  not(await mp.locator('.sol-oz .sih').count() === 1 && await mp.locator('.sih').count() === 1, 'masaüstü: Sihirli Özellikler galerinin altında, tek kopya');
+  await mp.locator('#bir-gece .g-li').nth(3).click(); await mp.waitForTimeout(400);
+  await mp.evaluate(() => window.scrollBy(0, 400)); await mp.waitForTimeout(500);
+  not(await mp.locator('#bir-gece .g-li.on').textContent().then(t => t.includes('21:00')) && await mp.locator('.gece-cerceve.an3').count() === 1, 'masaüstü Bir gece: listeden 21:00 seçildi, kaydırınca değişmedi');
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

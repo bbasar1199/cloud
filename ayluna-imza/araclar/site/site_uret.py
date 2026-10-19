@@ -117,6 +117,8 @@ def parcala(ad):
     fontlar = '\n'.join(re.findall(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com[^>]*>', helmet))
     css = re.search(r'<style>(.*?)</style>', helmet, re.S).group(1)
     govde = s.split('</helmet>')[1].split('</x-dc>')[0]
+    # Başlıklardaki telefon satır kırılımı masaüstünde gizlenir (ayluna.css); kelimeler birleşmesin diye <br> önüne boşluk
+    govde = re.sub(r'(<h[12][^>]*>)(.*?)(</h[12]>)', lambda m: m.group(1) + re.sub(r'(?<=[^\s>])<br>', ' <br>', m.group(2)) + m.group(3), govde, flags=re.S)
     js = re.search(r'data-dc-script[^>]*>(.*?)</script>', s, re.S).group(1)
     return fontlar, css, govde, js
 

@@ -70,7 +70,7 @@ def canli_galeri(handle):
 # tek sarmalayıcıda (.urun-ust); solda galeri, sağda satın alma. Telefonda etkisiz.
 # oz: satın alma kutusundaki özellik kartları. Masaüstünde galerinin altına geçer (eleştirmen önerisi, kullanıcı seçti 19 Eki):
 # DOM'da her an tek kopya olur; renderVals'taki masa/tel bayrağı hangisinin çizileceğini seçer (tuvalde telefon yeri).
-MASA_JS = "    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);\n    return { masa: MASA, tel: !MASA,"
+MASA_JS = "    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon\n    return { masa: MASA, tel: !MASA,"
 
 
 def masa_bayrak(js):

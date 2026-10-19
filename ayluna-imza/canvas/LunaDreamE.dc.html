@@ -492,6 +492,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
         <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
       </div></div>
     </div>
+    <!-- Masaüstü (19 Eki, kullanıcı eleştirmenin önerisini seçti): kadran solda, beş an sağda tıklanır liste; kaydırma adımı yok -->
+    <sc-if value="{{masa}}" hint-placeholder-val="{{false}}"><ol class="g-liste" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><li><button class="{{a.lcls}}" type="button" onClick="{{a.pick}}" aria-pressed="{{a.on}}"><span class="saat">{{a.t}}</span><span class="g-li-y"><b>{{a.title}}</b><span>{{a.text}}</span></span></button></li></sc-for></ol></sc-if>
     <div class="gece-iz" aria-hidden="true"><sc-for list="{{izler}}" as="z" hint-placeholder-count="1"><i data-iz="{{z.i}}" style="top: {{z.y}}px"></i></sc-for></div>
     <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
@@ -623,6 +625,7 @@ class Component extends DCLogic {
       if (self.raf) return;
       self.raf = requestAnimationFrame(function () {
         self.raf = 0;
+        if (window.matchMedia && matchMedia('(min-width: 1024px)').matches) return;  // masaüstünde kaydırma adımı yok; liste ve oklar seçer
         var adim = document.querySelectorAll('[data-adim]'), orta = window.innerHeight / 2, an = 0;
         for (var k = 0; k < adim.length; k++) if (adim[k].getBoundingClientRect().top <= orta) an = k;
         if (adim.length) self.anSec(an);
@@ -719,7 +722,7 @@ class Component extends DCLogic {
     var EV = ['M12 3A9 9 0 0 1 12 21A6.48 9 0 0 0 12 3Z', 'M12 3A9 9 0 0 1 12 21A2.88 9 0 0 0 12 3Z', 'M12 3A9 9 0 0 1 12 21A0.90 9 0 0 1 12 3Z', 'M12 3A9 9 0 0 1 12 21A5.40 9 0 0 1 12 3Z', 'M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z'];
     var gece = S.gece || 0, KP = [[42.4, 183.6], [99.0, 93.1], [195.0, 60.0], [291.0, 93.1], [347.6, 183.6]], KL = [[76.6, 190.8], [120.5, 120.7], [195.0, 95.0], [269.5, 120.7], [313.4, 190.8]];
     var moments = M.map(function (a, i) { var on = i === gece; return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: on ? a.alt : '', pos: a.pos,
-      x: KP[i][0], y: KP[i][1], lx: KL[i][0], ly: KL[i][1], evre: EV[i], saatCls: 'g-saat' + (on ? ' on' : ''), on: on ? 'true' : 'false', gizli: on ? 'false' : 'true',
+      x: KP[i][0], y: KP[i][1], lx: KL[i][0], ly: KL[i][1], evre: EV[i], saatCls: 'g-saat' + (on ? ' on' : ''), lcls: 'g-li' + (on ? ' on' : ''), on: on ? 'true' : 'false', gizli: on ? 'false' : 'true',
       pick: function () { self.setState({ gece: i }); } }; });
     // Bugünkü fiyat sayacı (kullanıcı kararı): her gece 23:59'da (İstanbul) sıfırlanır. Gerçek olması için:
     // toptancı zammı gün içinde gelse bile o günün fiyatı 23:59'a kadar korunur, yeni fiyat ertesi gün başlar.
@@ -795,7 +798,7 @@ class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
-    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
     return { masa: MASA, tel: !MASA,
       gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',

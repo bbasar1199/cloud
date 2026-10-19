@@ -511,6 +511,8 @@ HTML = """<div class="pg" style="padding-bottom: 0">
         <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
       </div></div>
     </div>
+    <!-- Masaüstü (19 Eki, kullanıcı eleştirmenin önerisini seçti): kadran solda, beş an sağda tıklanır liste; kaydırma adımı yok -->
+    <sc-if value="{{masa}}" hint-placeholder-val="{{false}}"><ol class="g-liste" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><li><button class="{{a.lcls}}" type="button" onClick="{{a.pick}}" aria-pressed="{{a.on}}"><span class="saat">{{a.t}}</span><span class="g-li-y"><b>{{a.title}}</b><span>{{a.text}}</span></span></button></li></sc-for></ol></sc-if>
     <div class="gece-iz" aria-hidden="true"><sc-for list="{{izler}}" as="z" hint-placeholder-count="1"><i data-iz="{{z.i}}" style="top: {{z.y}}px"></i></sc-for></div>
     <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
   </section>
@@ -642,6 +644,7 @@ JS = """class Component extends DCLogic {
       if (self.raf) return;
       self.raf = requestAnimationFrame(function () {
         self.raf = 0;
+        if (window.matchMedia && matchMedia('(min-width: 1024px)').matches) return;  // masaüstünde kaydırma adımı yok; liste ve oklar seçer
         var adim = document.querySelectorAll('[data-adim]'), orta = window.innerHeight / 2, an = 0;
         for (var k = 0; k < adim.length; k++) if (adim[k].getBoundingClientRect().top <= orta) an = k;
         if (adim.length) self.anSec(an);
@@ -727,7 +730,7 @@ JS = """class Component extends DCLogic {
     var EV = """ + str([ay(f) for f in EVRE]) + """;
     var gece = S.gece || 0, KP = """ + str(KAD_P) + """, KL = """ + str(KAD_L) + """;
     var moments = M.map(function (a, i) { var on = i === gece; return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: on ? a.alt : '', pos: a.pos,
-      x: KP[i][0], y: KP[i][1], lx: KL[i][0], ly: KL[i][1], evre: EV[i], saatCls: 'g-saat' + (on ? ' on' : ''), on: on ? 'true' : 'false', gizli: on ? 'false' : 'true',
+      x: KP[i][0], y: KP[i][1], lx: KL[i][0], ly: KL[i][1], evre: EV[i], saatCls: 'g-saat' + (on ? ' on' : ''), lcls: 'g-li' + (on ? ' on' : ''), on: on ? 'true' : 'false', gizli: on ? 'false' : 'true',
       pick: function () { self.setState({ gece: i }); } }; });
     // Bugünkü fiyat sayacı (kullanıcı kararı): her gece 23:59'da (İstanbul) sıfırlanır. Gerçek olması için:
     // toptancı zammı gün içinde gelse bile o günün fiyatı 23:59'a kadar korunur, yeni fiyat ertesi gün başlar.
