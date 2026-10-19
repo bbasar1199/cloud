@@ -30,7 +30,6 @@ img{max-width:100%}
 .ay-menu ul{list-style:none;margin:0;padding:6px 0;overflow:auto}
 .ay-menu li a{display:flex;align-items:center;justify-content:space-between;min-height:54px;padding:0 18px;border-bottom:1px solid #EADFCF;color:#1A2142;text-decoration:none;font-size:16px;font-weight:600}
 .ay-menu li svg{width:18px;height:18px;color:#5C6078}
-.ay-wa{display:flex;align-items:center;justify-content:center;min-height:52px;margin:16px 18px 24px;border-radius:14px;box-shadow:inset 0 0 0 1.5px #1A2142;color:#1A2142;text-decoration:none;font-size:14px;font-weight:700;text-align:center;padding:0 12px}
 .ay-katman a:focus-visible,.ay-katman button:focus-visible,.ay-katman input:focus-visible,.ay-katman select:focus-visible,.ay-katman textarea:focus-visible{outline:2px solid #1A2142;outline-offset:2px}
 
 /* Kapıda ödeme formu */
@@ -120,17 +119,14 @@ img{max-width:100%}
   html[data-ay-tur=urun] .sahne .kare-foto{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:1/1;border-radius:24px;overflow-x:auto}
   html[data-ay-tur=urun] .sahne .kf{flex:0 0 100%!important;height:auto!important}
   html[data-ay-tur=urun] .sahne .kare-foto img{top:0!important;height:100%!important}
-  html[data-ay-tur=urun] .sahne .seritler{position:static!important;margin-top:16px}
-  html[data-ay-tur=urun] .sahne .ay-iz circle{fill:transparent;stroke:#1A2142}
-  html[data-ay-tur=urun] .sahne .ay-iz .on circle{stroke:#1A2142}
+  /* Galeri göstergesi masaüstünde de fotoğrafın içinde (kullanıcı, 19 Eki: "gömülü olsun"); altında satır yok */
+  html[data-ay-tur=urun] .sahne .seritler{bottom:10px}
   html[data-ay-tur=urun] .levha{border-radius:0!important;background:transparent!important;padding-top:0!important}
   html[data-ay-tur=urun] .hero.kare{background:transparent!important;padding-bottom:0!important}
   html[data-ay-tur=urun] .hero.kare .h-iz{border-radius:24px}
-  html[data-ay-tur=urun] .hero.kare .h-alt{position:static!important;margin-top:16px;color:var(--lac,#1A2142)}
-  html[data-ay-tur=urun] .hero.kare .d-iz svg,html[data-ay-tur=urun] .hero.kare .h-alt svg{stroke:#1A2142}
-  html[data-ay-tur=urun] .hero.kare .h-alt small{color:#5C6078}
+  html[data-ay-tur=urun] .hero.kare .h-alt{bottom:10px}
   html[data-ay-tur=urun] .ust-sol .gal{margin:0!important;border-radius:24px}
-  html[data-ay-tur=urun] .ust-sol .g-alt{margin-top:16px}
+  html[data-ay-tur=urun] .ust-sol .g-alt{bottom:10px}
   html[data-ay-tur=urun] .yol{overflow-x:clip}
   html[data-ay-tur=urun] .al{padding-left:0!important;padding-right:0!important}
   html[data-ay-tur=urun] #siparis.px,html[data-ay-tur=urun] .ust-sag>*{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}

@@ -83,9 +83,13 @@ body{margin:0;background:#F2F4F8}
 .hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
 .hero.kare .hs::after{display:none}
 .hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
-.hero.kare .h-alt{position:relative;left:auto;right:auto;bottom:auto;margin:12px 16px 0}
-.hero.kare .d-iz svg{stroke:rgba(26,33,66,.35)}.hero.kare .d-iz .lit{stroke:var(--lac)}.hero.kare .d-iz .lit .ic{fill:var(--lac)}
-.hero.kare .h-alt .sira,.hero.kare .h-alt .sira small{color:var(--soluk)}
+/* Kullanıcı (19 Eki): "o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" → gösterge fotoğrafın içinde,
+   en alt kenarda ortada ince çizgiler (her fotoğrafa bir; geçilenler beyaz). Simgeler afişlerin alt yazısına biniyordu; çizgi binmez.
+   Altında satır ya da "Temsilî görseller" yok. AyFeneri ve Galaksi Night da bunu kullanır. */
+.hero.kare .h-alt{left:0;right:0;bottom:6px;justify-content:center}
+.hero.kare .d-iz{gap:4px;filter:drop-shadow(0 1px 1.5px rgba(12,16,39,.5))}
+.hero.kare .d-iz i{display:block;width:16px;height:3px;border-radius:2px;background:rgba(255,253,249,.4);transition:background-color .3s var(--ease)}
+.hero.kare .d-iz .lit{background:#FFFDF9}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
@@ -315,8 +319,6 @@ body{margin:0;background:#F2F4F8}
 .kur em{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lac);color:var(--v);font-style:normal;font-family:var(--fb);font-weight:var(--bk);font-size:18px}
 .kur b{display:block;font-size:16px;line-height:1.3;margin-top:2px}
 .kur li>span>span{display:block;margin-top:2px;font-size:14px;color:var(--soluk)}
-.wa{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;margin-top:16px;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1.5px var(--lac);font-size:15px;font-weight:700;text-decoration:none}
-.wa svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
 .yer{margin:16px 0 0;padding:20px 16px;border:1.5px dashed #B8C0D2;border-radius:18px;font-size:14px;color:var(--soluk);text-align:center}
 
@@ -574,7 +576,6 @@ body{margin:0;background:#F2F4F8}
 
 /* AyFeneri göstergesi büyüdü (18×28), huzme 4 sn'de bir salınır, tepe ışığı opaklıkla yanar */
 .f-iz{gap:16px}
-.hero.kare .f-iz svg{stroke:rgba(26,33,66,.45)}.hero.kare .f-iz .lit{stroke:var(--lac)}.hero.kare .y-iz .gz{fill:rgba(26,33,66,.3)}.hero.kare .y-iz .yr{stroke:rgba(26,33,66,.35)}.hero.kare .y-iz .ay{fill:var(--lac)}
 .f-iz svg{width:18px;height:28px}
 .f-iz .fn{fill:var(--v);opacity:0;transition:opacity .4s var(--ease)}
 .f-iz .lit .fn{opacity:1;fill:var(--v)}
@@ -644,7 +645,7 @@ body{margin:0;background:#F2F4F8}
   <div class="urun-ust"><div class="urun-sol"><section class="hero kare" aria-label="Ayluna Galaksi Night Projektör fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
-    <div class="h-alt"><span class="y-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 20 20"><circle class="yr" cx="10" cy="10" r="8"></circle><circle class="gz" cx="10" cy="10" r="3.2"></circle><g class="yo"><circle class="ay" cx="18" cy="10" r="1.6"></circle></g></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 
   
@@ -669,7 +670,7 @@ body{margin:0;background:#F2F4F8}
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section></div>
 
-  <section class="koyu bolum" style="padding-bottom: 36px" id="odalar"><div class="px"><h2 class="bas-y h2">Hangi odada<br>nasıl görünür<span class="n">?</span></h2><p class="alt-b">Salonda duvara, yatak odasında tavana: diski seç, ışığı kapat.</p></div><div class="oda-serit noscroll"><div class="oda-k"><img src="/_blob/8ca9e9e52398f6922370ce154e601204" alt="Salonda: Film gecesi yerine duvarda galaksi." style="object-position: 70% 50%"><b>Salonda</b><span>Film gecesi yerine duvarda galaksi.</span></div><div class="oda-k"><img src="/_blob/57f532f706a33b66f8157521970f6ad1" alt="Yatak odasında: Bulutsu tavanda ağır ağır döner." style="object-position: 50% 40%"><b>Yatak odasında</b><span>Bulutsu tavanda ağır ağır döner.</span></div><div class="oda-k"><img src="/_blob/8b872d6d345e3856671faf73641c0d97" alt="Çocuk odasında: Masaldan sonra tavanda dolunay." style="object-position: 50% 40%"><b>Çocuk odasında</b><span>Masaldan sonra tavanda dolunay.</span></div><div class="oda-k"><img src="/_blob/5284c6d153cf493912cc181c5d59b399" alt="Genç odasında: Kuzey ışığı tavanda, kurallar senin." style="object-position: 50% 40%"><b>Genç odasında</b><span>Kuzey ışığı tavanda, kurallar senin.</span></div><span aria-hidden="true" style="flex: 0 0 6px"></span></div><p class="alt-not px">Görseller temsilîdir; ışığın büyüklüğü odaya ve uzaklığa göre değişir.</p></section>
+  <section class="koyu bolum" style="padding-bottom: 36px" id="odalar"><div class="px"><h2 class="bas-y h2">Hangi odada<br>nasıl görünür<span class="n">?</span></h2><p class="alt-b">Salonda duvara, yatak odasında tavana: diski seç, ışığı kapat.</p></div><div class="oda-serit noscroll"><div class="oda-k"><img src="/_blob/8ca9e9e52398f6922370ce154e601204" alt="Salonda: Film gecesi yerine duvarda galaksi." style="object-position: 70% 50%"><b>Salonda</b><span>Film gecesi yerine duvarda galaksi.</span></div><div class="oda-k"><img src="/_blob/57f532f706a33b66f8157521970f6ad1" alt="Yatak odasında: Bulutsu tavanda ağır ağır döner." style="object-position: 50% 40%"><b>Yatak odasında</b><span>Bulutsu tavanda ağır ağır döner.</span></div><div class="oda-k"><img src="/_blob/8b872d6d345e3856671faf73641c0d97" alt="Çocuk odasında: Masaldan sonra tavanda dolunay." style="object-position: 50% 40%"><b>Çocuk odasında</b><span>Masaldan sonra tavanda dolunay.</span></div><div class="oda-k"><img src="/_blob/5284c6d153cf493912cc181c5d59b399" alt="Genç odasında: Kuzey ışığı tavanda, kurallar senin." style="object-position: 50% 40%"><b>Genç odasında</b><span>Kuzey ışığı tavanda, kurallar senin.</span></div><span aria-hidden="true" style="flex: 0 0 6px"></span></div></section>
 
   <!-- Tavanda dönen gök: seçilen disk yavaşça döner (70 sn'de bir tur). 4 sn'de kendiliğinden gezer, dokununca durur. -->
   <section class="koyu bolum" id="diskler">
@@ -700,12 +701,11 @@ body{margin:0;background:#F2F4F8}
       <li><em>2</em><span><b>Diski yuvaya yerleştir</b><span>Elle takılıp çıkar, alet gerekmez.</span></span></li>
       <li><em>3</em><span><b>Başlığı çevir, halkayı ayarla</b><span>Tavana ya da duvara çevir; netlik halkasını yavaşça döndür.</span></span></li>
     </ol>
-    <a class="wa" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>Takılırsan WhatsApp'tan yaz</a>
   </section>
 
   <section class="bolum px">
     <h2 class="bas-y h2">İçin rahat<br>olsun<span class="n">.</span></h2>
-    <div class="ozler dort"><div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span><b>Ücretsiz kargo</b><span class="t">1 iş gününde kargoda, adım adım takip.</span></div><div class="oz"><span class="gz"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></span><b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="oz"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span><b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div><div class="oz"><span class="gz"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span></span><b>WhatsApp destek</b><span class="t">Ortalama 2 saatte yanıt.</span></div></div><div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span>[Ödeme altyapısı]</span></div>
+    <div class="ozler dort"><div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span><b>Ücretsiz kargo</b><span class="t">1 iş gününde kargoda, adım adım takip.</span></div><div class="oz"><span class="gz"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></span><b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="oz"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span><b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div><div class="oz"><span class="gz"><span class="gv-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span></span><b>Kapıda ödeme</b><span class="t">Ürün gelince öde; ₺80 kapıda ödeme ücreti eklenir.</span></div></div><div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span>[Ödeme altyapısı]</span></div>
   </section>
 
   <!-- Yorumlar: yalnız bu ürünün Loox yorumları, hepsi (m.28/B); olumsuzlar da görünür. Afişteki uydurma yorum kartları yok. -->
@@ -737,7 +737,6 @@ body{margin:0;background:#F2F4F8}
       <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanın <br>gökyüzü olsun<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
-      <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
       <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
@@ -751,12 +750,13 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7108}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6906}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 1, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ gOto: false, yOto: false, hOto: false, dOto: false, yak: true });
+    // Hareket azaltılmışsa fener, huzme ve disk durur; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ yOto: false, hOto: false, dOto: false, yak: true });
     // Tek saat: sayaç, galeri (5 sn), fener (2 sn kapalı → 7 sn açık), huzme (3 sn), disk (4 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
@@ -767,7 +767,7 @@ class Component extends DCLogic {
       self.setState(o);
     }, 1000);
   }
-  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
   componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
   renderVals() {
@@ -809,7 +809,7 @@ class Component extends DCLogic {
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
       yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
-      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa WhatsApp'tan yaz; ortalama 2 saatte yanıt veriyoruz."}, {"q": "Şarjlı mı?", "a": "Hayır. USB-C kabloyla prize ya da USB çıkışına takılı çalışır. USB adaptör kutuda mı [teyit]."}, {"q": "Diskler nasıl değişir?", "a": "Disk başlıktaki yuvaya elle takılıp çıkarılır, alet gerekmez."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}], shop: shop, shopCount: PR.length
+      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}, {"q": "Şarjlı mı?", "a": "Hayır. USB-C kabloyla prize ya da USB çıkışına takılı çalışır. USB adaptör kutuda mı [teyit]."}, {"q": "Diskler nasıl değişir?", "a": "Disk başlıktaki yuvaya elle takılıp çıkarılır, alet gerekmez."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}], shop: shop, shopCount: PR.length
     };
   }
 }

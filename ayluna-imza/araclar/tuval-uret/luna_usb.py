@@ -163,9 +163,13 @@ CSS = r"""
 .hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
 .hero.kare .hs::after{display:none}
 .hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
-.hero.kare .h-alt{position:relative;left:auto;right:auto;bottom:auto;margin:12px 16px 0}
-.hero.kare .d-iz svg{stroke:rgba(26,33,66,.35)}.hero.kare .d-iz .lit{stroke:var(--lac)}.hero.kare .d-iz .lit .ic{fill:var(--lac)}
-.hero.kare .h-alt .sira,.hero.kare .h-alt .sira small{color:var(--soluk)}
+/* Kullanıcı (19 Eki): "o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" → gösterge fotoğrafın içinde,
+   en alt kenarda ortada ince çizgiler (her fotoğrafa bir; geçilenler beyaz). Simgeler afişlerin alt yazısına biniyordu; çizgi binmez.
+   Altında satır ya da "Temsilî görseller" yok. AyFeneri ve Galaksi Night da bunu kullanır. */
+.hero.kare .h-alt{left:0;right:0;bottom:6px;justify-content:center}
+.hero.kare .d-iz{gap:4px;filter:drop-shadow(0 1px 1.5px rgba(12,16,39,.5))}
+.hero.kare .d-iz i{display:block;width:16px;height:3px;border-radius:2px;background:rgba(255,253,249,.4);transition:background-color .3s var(--ease)}
+.hero.kare .d-iz .lit{background:#FFFDF9}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
@@ -395,8 +399,6 @@ CSS = r"""
 .kur em{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lac);color:var(--v);font-style:normal;font-family:var(--fb);font-weight:var(--bk);font-size:18px}
 .kur b{display:block;font-size:16px;line-height:1.3;margin-top:2px}
 .kur li>span>span{display:block;margin-top:2px;font-size:14px;color:var(--soluk)}
-.wa{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;margin-top:16px;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1.5px var(--lac);font-size:15px;font-weight:700;text-decoration:none}
-.wa svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
 .yer{margin:16px 0 0;padding:20px 16px;border:1.5px dashed #B8C0D2;border-radius:18px;font-size:14px;color:var(--soluk);text-align:center}
 
@@ -453,7 +455,6 @@ AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r=
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 SAAT = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>'
-WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>'
 # Güven: kartla ödeme kapıda ödemenin önünde (iade kapıda %28,6, ön ödemede %0,8). ₺80 kapıda ücreti formda ve SSS'de.
 GUVEN = ('<div class="ozler dort">'
          '<div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span>'
@@ -462,8 +463,8 @@ GUVEN = ('<div class="ozler dort">'
          '<b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div>'
          '<div class="oz"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span>'
          '<b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div>'
-         '<div class="oz"><span class="gz"><span class="gv-ik yaz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><circle cx="8.5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="15.5" cy="12" r="1.2"></circle></svg></span></span>'
-         '<b>WhatsApp destek</b><span class="t">Ortalama 2 saatte yanıt.</span></div></div>'
+         '<div class="oz"><span class="gz"><span class="gv-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span></span>'
+         '<b>Kapıda ödeme</b><span class="t">Ürün gelince öde; ₺80 kapıda ödeme ücreti eklenir.</span></div></div>'
          '<div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span>[Ödeme altyapısı]</span></div>')
 
 TAK = ('<div class="tak">'
@@ -482,7 +483,7 @@ HERO = ("""
   <section class="hero kare" aria-label="Galaxy USB fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     """ + Y.ust('rgba(238,242,250,.6)') + """
-    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 """)
 
@@ -522,7 +523,7 @@ SAHNE = [('Dolunay', 'ay', '50% 40%'), ('Satürn', 'saturn', '55% 40%'), ('Galak
 SAHNELER = ('\n  <section class="koyu bolum" style="padding-bottom: 36px"><div class="px"><h2 class="bas-y h2">Bu gece tavanda<br>ne olsun<span class="n">?</span></h2></div>'
             '<div class="sahne-serit noscroll">' + ''.join('<div class="sk"><img src="%s%s" alt="%s yansıması" style="object-position: %s"><b>%s</b><span>Disk değiştir, tavan değişsin</span></div>' % (B, I[k], n, pos, n) for n, k, pos in SAHNE) +
             '<span aria-hidden="true" style="flex: 0 0 6px"></span></div>'
-            '<p class="alt-not px">Görseller temsilîdir; desen kutudaki 12 diskten birine göre değişir, büyüklük odaya ve mesafeye göre.</p></section>\n')
+            '</section>\n')
 
 DISKLER = ("""
   <!-- 12 disk: kullanıcının paylaştığı ürün görsellerinden (6 renkli, 6 siyah-beyaz). Seçilen disk tavana düşer. -->
@@ -557,7 +558,6 @@ GERISI = ("""
       <button class="hk-git ileri" type="button" onClick="{{kNext}}" aria-label="Sonraki oda"></button>
       <sc-for list="{{kim}}" as="k" hint-placeholder-count="2"><div class="{{k.ycls}}"><p class="bas-y">{{k.bas}}</p><p>{{k.t}}</p><span class="hk-disk"><img src="{{k.dsrc}}" alt="">Önerilen disk: {{k.disk}}</span></div></sc-for>
     </div>
-    <p class="alt-not">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
   </section>
 
   <section class="koyu bolum px">
@@ -572,7 +572,6 @@ GERISI = ("""
       <li><em>2</em><span><b>Diski yerleştir</b><span>Diski başlığa tak, başlığı tavana çevir. [Adımlar teyit edilecek]</span></span></li>
       <li><em>3</em><span><b>Halkayı yavaşça çevir</b><span>Ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin.</span></span></li>
     </ol>
-    <a class="wa" href="#">""" + WA + """Takılırsan WhatsApp'tan yaz</a>
   </section>
 
   <!-- Yorumlar: yalnız bu ürünün Loox yorumları, hepsi (m.28/B). Başka ürünün yorumu ya da afişteki kart yok. -->
@@ -604,7 +603,6 @@ GERISI = ("""
       <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanda <br>galaksi olsun<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span>""" + OK + """</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
-      <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff">""" + E.isaret(48) + """<span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
       <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
@@ -638,9 +636,9 @@ JS = """class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    // Hareket azaltılmışsa kendiliğinden geçişler kapalı
+    // Hareket azaltılmışsa disk ve oda kartı kendiliğinden geçmez; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (azH) this.setState({ gOto: false, dOto: false, kOto: false });
+    if (azH) this.setState({ dOto: false, kOto: false });
     // Tek saat: sayaçlar, galeri (5 sn), disk (3 sn), oda kartı (5 sn), dönen satır (disk 4 sn, kargo 6 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
@@ -658,7 +656,7 @@ JS = """class Component extends DCLogic {
     } else this.setState({ stokAc: true });
   }
   // Galeri: kaydırma kabını bir sonraki fotoğrafa götür (kabı yoksa durumu değiştir)
-  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
   // Çizim sonrası kap başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
   componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
@@ -701,11 +699,11 @@ JS = """class Component extends DCLogic {
       { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB-A girişli bir şarj başlığı yeter.' },
       { q: 'Gece lambası olarak da kullanılır mı?', a: 'Evet, 2’si 1 arada: gövdesi yumuşak ışıkla yanar. [Işık modları teyit edilecek.]' },
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
-      { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.] Zorlanırsan WhatsApp’tan yaz.' },
+      { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.]' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır. Takip bağlantısı sana gönderilir.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
-      { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün WhatsApp’tan fotoğrafını gönder. [Değişim süreci teyit edilecek.]' }
+      { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün fotoğrafıyla bize yaz. [Değişim süreci teyit edilecek.]' }
     ];
     var PR = [
       { n: 'LunaDream Gece Lambası', p: 1699.99, c: 1999, id: 'e02351b3be4a1c555c5d760d0bbda723' },

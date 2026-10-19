@@ -62,7 +62,7 @@ def sayfa(govde, baslik):
     return ('<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>%s</title>'
             '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Onest:wght@400;500;600;700&display=swap"><style>%s</style>'
             '<script>window.AYLUNA_GORSEL = %s;</script><script>window.AYLUNA_CANLI = %s; window.AYLUNA_SEPET = %s;</script>'
-            '<script>window.AYLUNA_SHOPIFY = true; window.AYLUNA_AYAR = { wa: "https://wa.me/905000000000", takip: "/apps/track123" };</script>'
+            '<script>window.AYLUNA_SHOPIFY = true; window.AYLUNA_AYAR = { takip: "/apps/track123" };</script>'
             '<script src="/assets/ayluna-veri.js" defer></script><script src="/assets/ayluna.js" defer></script></head><body>%s</body></html>'
             % (baslik, css, json.dumps(GORSEL), json.dumps(CANLI, ensure_ascii=False), json.dumps(sepet_json(), ensure_ascii=False), govde))
 

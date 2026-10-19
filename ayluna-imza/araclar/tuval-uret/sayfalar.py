@@ -19,7 +19,6 @@ UST = re.search(r'  <header class="ust">.*?</header>\n', A.HTML, re.S).group(0)
 ALT = re.search(r'  <footer class="alt">.*?</footer>\n', A.HTML, re.S).group(0)
 YUKARI = re.search(r'  <button class="yukari".*?</button>\n', A.HTML, re.S).group(0)
 OK = A.OK
-WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>'
 
 CSS = A.CSS + r"""
 .sb{padding:28px 16px 0}
@@ -125,8 +124,7 @@ def sayfa(ad, title, govde, h, state='{}', ek='', don=''):
 ILETISIM = ("""
   <!-- Canlıda iki ayrı sayfa (/pages/contact ve "Biz Burdayız" kopyası) yalnız formdu: kanal, saat, adres yoktu. Tek sayfada birleşti. -->
   <section class="sb"><h1>Bize ulaş<span>.</span></h1><p>Sipariş, kargo, iade ve değişim için buradayız.</p></section>
-  <div class="kart-k"><h2>WhatsApp</h2><p>En hızlı yol. Ortalama 2 saatte yanıt, 09.00–18.00.</p><a class="btn-l" href="#">""" + WA + """WhatsApp'tan yaz</a><p style="margin-top: 10px; font-size: 13px">[WhatsApp numarası]</p></div>
-  <div class="kart-k"><h2>Diğer yollar</h2><ul class="satirlar">
+  <div class="kart-k"><h2>İletişim bilgileri</h2><ul class="satirlar">
     <li><span>E-posta</span><b>ecom11001@gmail.com</b></li>
     <li><span>Kargo takip</span><b><a href="#" style="color: var(--lac)">Siparişin nerede?</a></b></li>
     <li><span>Çalışma saatleri</span><b>Hafta içi 09.00–18.00</b></li>
@@ -141,7 +139,6 @@ ILETISIM = ("""
       <label class="onay"><input type="checkbox">Kişisel verilerimin işlenmesine ilişkin <u>Aydınlatma Metni</u>'ni okudum.</label>
       <button class="btn-l" type="submit" style="margin-top: 2px">Gönder</button>
     </form></div>
-  <p class="y-not" style="margin-top: 14px">[Ticaret unvanı] · MERSİS [no] · [Adres] · [telefon] · KEP [adres]</p>
 """)
 
 # ——— Tüm ürünler ———
@@ -187,7 +184,7 @@ TAKIP = ("""
       <sc-if value="{{takiple}}" hint-placeholder-val="{{false}}"><label>Takip numarası<input type="text" placeholder="Kargo takip numarası"></label></sc-if>
       <button class="btn-l" type="submit">Siparişini takip et</button>
     </form></div>
-  <div class="kart-k"><h2>Bulamadın mı?</h2><p>Sipariş numaranla WhatsApp'tan yaz; kargonun nerede olduğunu biz bakalım.</p><a class="btn-c" href="#">""" + WA.replace('<svg ', '<svg style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round" ') + """WhatsApp'tan yaz</a>
+  <div class="kart-k"><h2>Bulamadın mı?</h2><p>Sipariş numaranla bize yaz; kargonun nerede olduğunu biz bakalım.</p><a class="btn-c" href="#">Bize yaz</a>
     <ul class="satirlar"><li><span>Kargoya veriliş</span><b>16.00’ya kadar aynı gün</b></li><li><span>Teslim</span><b>Türkiye geneli 3–7 gün</b></li><li><span>Firmalar</span><b>Aras, DHL, PTT [Yol?]</b></li></ul></div>
 """)
 
@@ -197,10 +194,10 @@ POLITIKA = ("""
   <section class="sb"><h1>İade ve<br>değişim<span>.</span></h1><p>Beğenmezsen 30 gün içinde geri gönder.</p></section>
   <div class="ozet3"><div><b>30</b><span>gün iade</span></div><div><b>₺0</b><span>iade kargosu</span></div><div><b>[10]</b><span>iş günü içinde para iadesi</span></div></div>
   <div class="kart-k"><h2>Nasıl iade ederim?</h2><ol class="adim">
-    <li><em>1</em><span><b>Bize yaz</b><span>WhatsApp ya da e-postayla sipariş numaranı gönder.</span></span></li>
+    <li><em>1</em><span><b>Bize yaz</b><span>E-postayla ya da iletişim formundan sipariş numaranı gönder.</span></span></li>
     <li><em>2</em><span><b>İade kodunu al</b><span>Sana iade kodu ve kargo yönlendirmesi gönderiyoruz.</span></span></li>
     <li><em>3</em><span><b>Kargoya ver</b><span>Kodla kargoya bırak; ücret ödemezsin. Ürün bize ulaşınca paran iade edilir.</span></span></li></ol>
-    <a class="btn-l" href="#">""" + WA + """İade için yaz</a></div>
+    <a class="btn-l" href="#">İade için yaz</a></div>
   <div class="kart-k"><h2>Bilmen gerekenler</h2><ul class="metin">
     <li>İlk 14 gün yasal cayma hakkındır; Ayluna bu süreyi 30 güne uzatır.</li>
     <li>Ürün kutusu ve parçaları eksiksiz olmalı. [Kullanılmış ürün şartı: teyit]</li>

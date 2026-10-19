@@ -2,7 +2,8 @@
 # Kullanıcı: "Tüm iskeleti index olarak gönder; önce eksiklerini kontrol et, tüm eksik kısımları düzelt; sepet vesaire her kısım tam çalışsın."
 # Denetimde eksik çıkanlar: alt bilgideki politika bağlantılarının sayfası yoktu (kargo, KVKK, mesafeli satış, ön bilgilendirme, hizmet şartları),
 # arama sonucu göstermiyordu, 404/arama/boş sepet tek panodaydı, hesap sayfası yoktu, ödeme ve "sipariş alındı" ekranı yoktu.
-# Politika metinleri TASLAK: köşeli yerler (unvan, adres, MERSİS, KEP…) doldurulmadan ve hukukçu onayı olmadan yayına girmez.
+# Politika metinleri TASLAK: köşeli yerler doldurulmadan ve hukukçu onayı olmadan yayına girmez. Şirket bilgisi (unvan, adres, MERSİS, KEP)
+# kullanıcı isteğiyle şimdilik yok (19 Eki: "şirketi de kaldır, sonra kendim ekleyeceğim"); yayından önce eklenmeli (KURULUM.md).
 # Ödeme ekranı Shopify'ın kendi ödeme sayfasının önizlemesidir (Shopify'da tema bunu çizmez); kart bilgisi alınmaz.
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -11,8 +12,6 @@ import sepet as SP
 from ortak import HEAD, TAIL, TL_JS
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 OK = SY.OK
-WA = SY.WA
-SATICI = '[Ticaret unvanı] · [Adres] · MERSİS [no] · Tel [telefon] · E-posta ecom11001@gmail.com · KEP [adres]'
 
 EK_CSS = r"""
 .taslak{margin:12px 16px 0;padding:10px 12px;border-radius:12px;background:#FFF4E5;box-shadow:inset 0 0 0 1px #F2C98F;font-size:13px;color:#7A4A12}
@@ -90,12 +89,11 @@ POLITIKA = {
                          'Yasal üst sınır: sipariş en geç 30 gün içinde teslim edilir; gecikirse sana haber verir, istersen siparişi iptal ederiz.')),
         kart('Ücretler', L('Kargo tüm siparişlerde ücretsiz.', '<b>Kapıda ödeme ücreti ₺80.</b> Kartla ödemede bu ücret yoktur, üstelik %5 indirim uygulanır.')),
         kart('Kargo firmaları ve takip', L('Aras Kargo, DHL, PTT [hangisi ne zaman kullanılıyor: teyit].', 'Kargoya verilince takip numarası SMS ve e-postayla gelir; "Kargo takip" sayfasından da bakabilirsin.')),
-        kart('Teslimatta', L('Paket hasarlıysa kargo görevlisine tutanak tutturup teslim almayabilirsin.', 'Kırık ya da eksik ürün için teslim aldığın gün fotoğrafla WhatsApp\'tan yaz; değişim ya da iade ücretsiz.',
+        kart('Teslimatta', L('Paket hasarlıysa kargo görevlisine tutanak tutturup teslim almayabilirsin.', 'Kırık ya da eksik ürün için teslim aldığın gün fotoğrafla bize yaz; değişim ya da iade ücretsiz.',
                              'Adreste bulunamazsan paket kargo şubesinde [X] gün bekler.', 'Yurt dışına gönderim yapılmıyor.')),
     ]),
     'Politika-KVKK.dc.html': ('Ayluna · Gizlilik ve KVKK', 'Gizlilik ve<br>KVKK', 'Kişisel verilerini neden ve nasıl işliyoruz.', [
         TASLAK,
-        kart('Veri sorumlusu', P(SATICI)),
         kart('Hangi verileri işliyoruz?', L('Kimlik ve iletişim: ad soyad, telefon, e-posta.', 'Teslimat: adres, il, ilçe.', 'Sipariş: aldığın ürünler, tutar, ödeme yolu, sipariş geçmişi.',
                                            'Kart bilgilerin bize gelmez; ödeme kuruluşunun güvenli sayfasında işlenir.', 'Site kullanımı: çerezler ve benzeri teknolojiler (izin verdiğin ölçüde).')),
         kart('Neden işliyoruz? (hukuki sebep)', L('Siparişini almak, göndermek ve iade/değişimini yapmak: sözleşmenin kurulması ve ifası (KVKK m.5/2-c).',
@@ -106,19 +104,19 @@ POLITIKA = {
         kart('Ne kadar saklıyoruz?', P('Sipariş ve fatura kayıtları ilgili kanunlardaki süre boyunca [10 yıl, teyit]; pazarlama izinleri geri alınana kadar; diğerleri amaç bitince silinir ya da anonimleştirilir.')),
         kart('Hakların (KVKK m.11)', L('Verinin işlenip işlenmediğini öğrenme, bilgi isteme.', 'Yanlışsa düzeltilmesini, gerekmiyorsa silinmesini isteme.', 'Aktarıldığı kişileri öğrenme.',
                                       'Otomatik analizle aleyhine sonuca itiraz etme.', 'Zarar varsa giderilmesini isteme.'),
-             P('Başvuru: ecom11001@gmail.com ya da KEP [adres]. En geç 30 gün içinde yanıtlıyoruz.')),
+             P('Başvuru: ecom11001@gmail.com. En geç 30 gün içinde yanıtlıyoruz.')),
         kart('Çerezler', P('Zorunlu çerezler sepet ve ödeme için kullanılır. Ölçüm ve reklam çerezleri (Meta pikseli gibi) yalnız izin verirsen çalışır. [Çerez izin bandı: Shopify müşteri gizliliği ayarı]')),
     ]),
     'Politika-Mesafeli.dc.html': ('Ayluna · Mesafeli satış sözleşmesi', 'Mesafeli satış<br>sözleşmesi', '6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği uyarınca.', [
         TASLAK,
-        kart('1. Taraflar', P('<b>Satıcı:</b> ' + SATICI), P('<b>Alıcı:</b> siparişte bilgilerini yazan kişi (ad soyad, adres, telefon, e-posta sipariş özetindedir).')),
+        kart('1. Taraflar', P('<b>Satıcı:</b> Ayluna (ayluna.shop)'), P('<b>Alıcı:</b> siparişte bilgilerini yazan kişi (ad soyad, adres, telefon, e-posta sipariş özetindedir).')),
         kart('2. Konu', P('Alıcının ayluna.shop üzerinden elektronik ortamda siparişini verdiği ürünün satışı ve teslimine ilişkin hak ve yükümlülükler.')),
         kart('3. Ürün ve fiyat', L('Ürünün temel nitelikleri, adedi, satış fiyatı (KDV dahil) ve varsa ek ürünler sipariş özetinde ve ürün sayfasında yazar.',
                                   'Kartla ödemede %5 indirim uygulanır. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir. Kargo ücretsizdir; Hızlı Kargo seçilirse ₺79,99.')),
         kart('4. Teslimat', L('Ürün alıcının yazdığı adrese kargoyla teslim edilir; sipariş 1 iş gününde kargoya verilir, teslim 3–7 iş günüdür.', 'Teslim süresi yasal 30 günü geçemez.',
                              'Hasarlı paket kargo görevlisine tutanakla bildirilir.')),
         kart('5. Cayma hakkı', L('Alıcı, ürünü teslim aldığı günden itibaren <b>14 gün</b> içinde gerekçe göstermeden ve cezai şart ödemeden cayabilir. Ayluna bu süreyi <b>30 güne</b> uzatır.',
-                                'Cayma bildirimi WhatsApp, e-posta (ecom11001@gmail.com) ya da KEP ile yapılır. Satıcı iade kodu gönderir; iade kargosu ücretsizdir.',
+                                'Cayma bildirimi e-postayla (ecom11001@gmail.com) yapılır. Satıcı iade kodu gönderir; iade kargosu ücretsizdir.',
                                 'Ürün, bildirimden sonra 10 gün içinde eksiksiz geri gönderilir. Bedel, ürün satıcıya ulaştıktan sonra en geç 14 gün içinde ödeme yöntemine göre iade edilir.',
                                 'Kapıda ödeme ücretinin iadesi: [teyit].')),
         kart('6. Cayma hakkının kullanılamadığı durumlar', P('Yönetmelik m.15\'te sayılan hâller (ör. alıcının isteğiyle kişiye özel hazırlanan ürünler). Ayluna ürünlerinde bu istisna [yok, teyit].')),
@@ -127,12 +125,11 @@ POLITIKA = {
     ]),
     'Politika-OnBilgi.dc.html': ('Ayluna · Ön bilgilendirme formu', 'Ön bilgilendirme<br>formu', 'Siparişini onaylamadan önce bilmen gerekenler.', [
         TASLAK,
-        kart('Satıcı', P(SATICI)),
         kart('Ürün ve ödeme', L('Ürünün temel nitelikleri ürün sayfasında, toplam fiyatı (KDV dahil) sipariş özetinde yazar.', 'Ödeme: kartla (%5 indirimli) ya da kapıda (₺80 kapıda ödeme ücretiyle).',
                                'Kargo ücretsiz; Hızlı Kargo ₺79,99.')),
         kart('Teslimat', P('1 iş gününde kargoda, Türkiye geneli 3–7 iş gününde teslim; en geç 30 gün.')),
         kart('Cayma hakkı', P('Teslimden itibaren 14 gün yasal cayma hakkın var; Ayluna bunu 30 güne uzatır. İade kargosu ücretsizdir. Ayrıntı: Mesafeli Satış Sözleşmesi ve İade sayfası.')),
-        kart('Şikâyet', P('WhatsApp ya da e-postayla bize yaz. Çözülmezse Tüketici Hakem Heyeti ya da Tüketici Mahkemesine başvurabilirsin.')),
+        kart('Şikâyet', P('E-postayla bize yaz. Çözülmezse Tüketici Hakem Heyeti ya da Tüketici Mahkemesine başvurabilirsin.')),
     ]),
     'Politika-Hizmet.dc.html': ('Ayluna · Hizmet şartları', 'Hizmet<br>şartları', 'ayluna.shop\'u kullanma koşulları.', [
         TASLAK,
@@ -263,8 +260,8 @@ TAMAM_EK = """
     (o.ekler || []).forEach(function (e) { if (o.sepet.ekler && o.sepet.ekler[e.k]) sat.push({ ad: e.n, tutar: TL(e.p, true) }); });
     var a = o.adres || {};
 """
-TAMAM_DON = ("no: o.no, yolYazi: kp ? 'Ödemeyi ürün kapına gelince yapacaksın.' : 'Ödemen alındı.', adim1: kp ? 'WhatsApp onayı' : 'E-posta onayı', "
-             "adim1t: kp ? 'Siparişini onaylamak için WhatsApp\\'tan yazacağız; onaylayınca hazırlanır.' : 'Sipariş özetin e-postana gönderildi.', "
+TAMAM_DON = ("no: o.no, yolYazi: kp ? 'Ödemeyi ürün kapına gelince yapacaksın.' : 'Ödemen alındı.', adim1: kp ? 'Sipariş onayı' : 'E-posta onayı', "
+             "adim1t: kp ? 'Siparişin onaylanınca hazırlanıp kargoya verilir.' : 'Sipariş özetin e-postana gönderildi.', "
              "adim3: kp ? 'Kapıda ' + TL(o.toplam.toplam, true) + ' ödersin (nakit ya da kart).' : 'Beğenmezsen 30 gün içinde ücretsiz iade.', "
              "satirlar: sat, kargo: o.toplam.kargo ? TL(o.toplam.kargo, true) : 'Ücretsiz', kapidaVar: kp, indVar: !kp && o.toplam.indirim > 0, ind: TL(o.toplam.indirim || 0, true), toplam: TL(o.toplam.toplam, true), "
              "adres: [((a.ad || '') + ' ' + (a.soyad || '')).trim(), a.ilce, a.il].filter(Boolean).join(' · ')")

@@ -13,7 +13,6 @@
   var TUVAL_FIYAT = {};
   if (SHOP) {
     if (window.AYLUNA_GORSEL) V.blob = window.AYLUNA_GORSEL;
-    if (AYAR.wa) V.wa = AYAR.wa;
     var CANLI = window.AYLUNA_CANLI || {};
     Object.keys(V.urun).forEach(function (h) {
       var u = V.urun[h], c = CANLI[h]; TUVAL_FIYAT[h] = u.p;
@@ -96,7 +95,8 @@
     var vals = C.renderVals(), out = [];
     for (var c = sablon.firstChild; c; c = c.nextSibling) vyap(c, vals, out);
     cocuklar(kok, out);
-    suslen();
+    // Süsleme (rozet, EasySell işareti, gizli form) hata verse de sayfanın hareketleri (galeri, kaydırma) başlasın
+    try { suslen(); } catch (e) { if (window.console) console.warn('Ayluna: süsleme', e); }
     if (ilk) { ilk = false; if (C.componentDidMount) C.componentDidMount(); }
     else if (C.componentDidUpdate) C.componentDidUpdate();
   }
@@ -225,7 +225,6 @@
     tost.textContent = m; tost.classList.add('on'); clearTimeout(tost.__z); tost.__z = setTimeout(function () { tost.classList.remove('on'); }, 2600);
   }
   Sepet.bildir = bildir;
-  function waAc() { if (SHOP && V.wa && V.wa !== '#') window.open(V.wa, '_blank', 'noopener'); else bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); }
 
   // Menü
   var MENU = [['Ana sayfa', './'], ['Tüm ürünler', 'tum-urunler.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
@@ -235,14 +234,12 @@
     if (!menu) {
       menu = el('<div class="ay-katman ay-menu" role="dialog" aria-modal="true" aria-label="Menü"><div class="ay-perde" data-kapat></div><nav class="ay-panel sol">' +
         '<div class="ay-p-ust"><b>Ayluna</b><button type="button" class="ay-x" data-kapat aria-label="Menüyü kapat"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>' +
-        '<ul>' + MENU.map(function (m) { return '<li><a href="' + adres(m[1]) + '">' + m[0] + '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></a></li>'; }).join('') + '</ul>' +
-        '<a class="ay-wa" href="' + (V.wa || '#') + '" data-wa>WhatsApp destek · ortalama 2 saatte yanıt</a></nav></div>');
+        '<ul>' + MENU.map(function (m) { return '<li><a href="' + adres(m[1]) + '">' + m[0] + '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></a></li>'; }).join('') + '</ul></nav></div>');
       document.body.appendChild(menu);
       menu.addEventListener('click', function (e) {
         if (e.target.closest('[data-kapat]')) { menuKapat(); return; }
         var a = e.target.closest('a[href]'); if (!a) return;
         e.preventDefault();
-        if (a.hasAttribute('data-wa')) { waAc(); return; }
         menuKapat(); git(a.getAttribute('href'));
       });
     }
@@ -344,7 +341,7 @@
         '<div class="kf-ek"></div><div class="kf-top"></div>' +
         '<p class="kf-hata" role="alert"></p>' +
         '<button class="ay-btn" type="submit">Siparişi tamamla</button>' +
-        '<p class="kf-not">Ödemeyi ürün kapına geldiğinde nakit ya da kartla yaparsın. Siparişin WhatsApp\'tan onaylanır.</p></div></form>' +
+        '<p class="kf-not">Ödemeyi ürün kapına geldiğinde nakit ya da kartla yaparsın.</p></div></form>' +
         '<div class="kf-bekle" hidden><div><b>Bekle!</b><p>Kartla ödersen %5 indirim kazanırsın, kapıda ödeme ücreti de olmaz.</p>' +
         '<button type="button" class="ay-btn" data-karta>Kartla öde, %5 kazan</button><button type="button" class="ay-btn2" data-devam>Kapıda ödemeye devam</button><button type="button" class="ay-lnk" data-kapat>Vazgeç</button></div></div></div>');
       document.body.appendChild(kf);
@@ -407,7 +404,7 @@
   Object.keys(V.urun).forEach(function (h) { (V.urun[h].adlar || [V.urun[h].ad]).forEach(function (a) { ADLAR.push([norm(a), h]); }); });
   ADLAR.sort(function (a, b) { return b[0].length - a[0].length; });
   function urunBul(metin) { var m = norm(metin); for (var i = 0; i < ADLAR.length; i++) if (m.indexOf(ADLAR[i][0]) >= 0) return ADLAR[i][1]; return null; }
-  var YON = [[/whatsapp|iade için yaz/, 'wa'], [/ana sayfa/, './'], [/tüm ürünler|tümünü gör|ürünlere (bak|dön)|alışverişe devam/, 'tum-urunler.html'],
+  var YON = [[/bize yaz|iade için yaz/, 'iletisim.html'], [/ana sayfa/, './'], [/tüm ürünler|tümünü gör|ürünlere (bak|dön)|alışverişe devam/, 'tum-urunler.html'],
     [/kargo takip|siparişin nerede/, 'kargo-takip.html'], [/kargo politikası/, 'kargo.html'], [/iade/, 'iade.html'], [/gizlilik|kvkk|aydınlatma/, 'kvkk.html'],
     [/mesafeli/, 'mesafeli-satis.html'], [/ön bilgilendirme/, 'on-bilgilendirme.html'], [/hizmet şartları/, 'hizmet-sartlari.html'], [/iletişim/, 'iletisim.html'],
     [/hesabına giriş|giriş yap/, 'hesap.html']];
@@ -442,12 +439,11 @@
     if (al === 'Yukarı çık') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     if (a.classList.contains('marka') || al === 'Ayluna ana sayfa') { e.preventDefault(); git('./'); return; }
     var du = a.getAttribute('data-url'); if (du) { e.preventDefault(); git(du); return; }
-    if (a.hasAttribute('data-wa') || /whatsapp/i.test(m) && (href === '#' || (a.tagName === 'BUTTON' && !a.closest('form')))) { e.preventDefault(); waAc(); return; }
     // Ürün sayfası: satın alma butonları
     if (a.tagName === 'BUTTON' && URUN && SAYFA === 'urun') {
       if (a.disabled) return;
       if (a.matches('.btn2,.btn-kp')) {
-        if (/haber ver/i.test(m)) { e.preventDefault(); bildir(SHOP ? 'Stok gelince haber vermek için bize WhatsApp\'tan yaz' : 'Gelince haber vereceğiz (önizleme)'); return; }
+        if (/haber ver/i.test(m)) { e.preventDefault(); bildir(SHOP ? 'Stok gelince haber vermek için İletişim sayfasından yaz' : 'Gelince haber vereceğiz (önizleme)'); return; }
         if (SHOP) { formEsitle(); if (!easySell()) { e.preventDefault(); sepeteAt(URUN, 'kart'); } return; }
         e.preventDefault(); sepeteAt(URUN, 'kapida'); return;
       }
@@ -460,7 +456,6 @@
     e.preventDefault();
     var h2 = urunBul(m) || urunBul(a.getAttribute('aria-label'));
     var y = metinYonu(m);
-    if (y === 'wa') { waAc(); return; }
     if (/^(gece lambası|projektör|nemlendirici|lunadream)$/i.test(norm(m))) { git('arama.html?q=' + encodeURIComponent(m.trim())); return; }
     if (h2 && !y) { git(h2 + '.html'); return; }
     if (y) { git(y); return; }

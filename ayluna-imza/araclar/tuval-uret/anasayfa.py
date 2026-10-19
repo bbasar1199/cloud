@@ -175,8 +175,8 @@ def urun_kart(h, ad, p, c, var):
 
 GUVEN = [('<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle>', 'Ücretsiz kargo', 'Türkiye geneline, takip numarasıyla.'),
          ('<path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path>', '30 gün iade', 'Beğenmezsen geri gönder, kargosu ücretsiz.'),
-         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez. Kapıda ödemede +₺80.'),
-         ('<path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path>', 'WhatsApp destek', 'Ortalama 2 saatte yanıt.')]
+         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez.'),
+         ('<path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path>', 'Kapıda ödeme', 'Ürün gelince öde; +₺80 kapıda ödeme ücreti.')]
 
 HTML = ('<div class="pg" style="padding-bottom: 0">\n'
         '  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cd}}</b></div>\n'
@@ -211,7 +211,6 @@ HTML = ('<div class="pg" style="padding-bottom: 0">\n'
         '  <footer class="alt"><div class="sut">'
         '<div><h3>Mağaza</h3><a href="#">Ana sayfa</a><a href="#">Tüm ürünler</a><a href="#">Kargo takip</a><a href="#">İletişim</a></div>'
         '<div><h3>Politikalar</h3><a href="#">İade politikası</a><a href="#">Kargo politikası</a><a href="#">Gizlilik</a><a href="#">Hizmet şartları</a><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a></div></div>'
-        '<p class="yasal">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [telefon]<br>ecom11001@gmail.com · KEP [adres]</p>'
         '<div class="kart-logo" aria-label="Kabul edilen kartlar"><span>VISA</span><span>Mastercard</span><span>Troy</span></div>'
         '<div class="imza" aria-label="Ayluna">' + E.isaret(48) + '<span aria-hidden="true">Ayluna</span></div>'
         '<p class="telif">Fiyatlara KDV dahildir. © 2026 Ayluna</p></footer>\n'

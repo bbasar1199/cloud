@@ -475,7 +475,20 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Shopify teması 1.0.0 (19 Ekim, en güncel)
+## Tema 1.0.1 · gösterge gömülü, WhatsApp ve şirket bilgisi yok (19 Ekim, en güncel)
+- Kullanıcı (LunaDream galerisi ve "Bir gece" ekran görüntüleriyle): "burası böyle kalıyor ve burası böyle kalıyor" → "aynı sorun tüm sayfalarda var, o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" → "temsili görseller yazısı da duruyor hâlâ" → "WhatsApp zımbırtılarını ve şirketi de kaldır, ben onları sonra kendim ekleyeceğim".
+- **Galeri göstergesi fotoğrafın içinde:** bütün ürün sayfalarında (4 imza + 13 sade) fotoğrafın en alt kenarında ortada ince çizgiler; her fotoğrafa bir, geçilenler ve o anki beyaz, sıradakiler soluk; hafif gölge. Ay/disk/fener simgeleri kalktı: gömülünce Galaksi Night'ta afişin sarı bandına biniyor, AyFeneri'de kalabalık duruyordu. Masaüstünde de aynı (alt kenardan 10 px).
+- **"Temsilî görseller" ve "Görseller temsilîdir…" notları kalktı** (galeri altı, oda/sahne şeritleri). Yalnız Hizmet şartları sayfasındaki "Görseller" maddesi kaldı (politika metni).
+- **Galeri neden duruyordu:** cihazda "animasyonları azalt" açıksa (Windows'ta Animasyon efektleri kapalı) bütün sayfalarda kendiliğinden geçiş kapalıydı. Artık yine 5 sn'de geçer, kaymadan anında.
+- **Bir gece:** tuvalin geniş Oynat penceresinde (1024 px+) kaydırınca an değişmiyordu (masaüstü koruması sitede olmayan panoda da çalışıyordu). Koruma yalnız sitenin masaüstü düzeninde.
+- **Sağlamlık:** mağazada bir eklenti yüzünden süsleme adımı hata verirse galeri ve kaydırma yine başlar (`ayluna.js` ciz).
+- **WhatsApp yok:** menü satırı, iletişim kartı, kargo takip ve iade düğmeleri ("Bize yaz", "İade için yaz" → İletişim), USB ve AyFeneri/Galaksi Night "Takılırsan WhatsApp'tan yaz", ana sayfa/USB/sepet güven kartı (yerine Kapıda ödeme / Ücretsiz kargo), SSS ve politika metinleri, kapıda formu notu, tema ayarı. Kullanıcı sonra kendisi ekleyecek.
+- **Şirket bilgisi yok:** alt bilgideki unvan/MERSİS/adres/KEP satırları, iletişim notu, politika sayfalarındaki "Veri sorumlusu" ve "Satıcı" kartları (Taraflar: "Ayluna (ayluna.shop)"). Yasal zorunluluk: yayından önce eklenmeli (KURULUM.md).
+- Pano yükseklikleri yeniden ölçüldü: `E_H=6024 U_H=6851 S_H_af=6430 S_H_gn=6906` (LunaDream 1700 px yüksek pencerede ölçülür; Bir gece adımları tuvalde kapanır).
+- Test: `araclar/site/test.js` yeni denetimler (gösterge fotoğrafın içinde, "temsilî" yok, azaltılmış harekette galeri geçer, hiçbir sayfada WhatsApp/şirket yok) dahil HEPSİ TAMAM; tema benzetimi HEPSİ TAMAM; Theme Check yalnız RemoteAsset uyarıları.
+- Açık: kullanıcının "Bir gece" görüntüsünde neyi kastettiği (takılma mı, kart kenarları mı) netleşmedi; takılma iki yoldan düzeltildi.
+
+## Shopify teması 1.0.0 (19 Ekim)
 - Kullanıcı: "Sen bana artık siteyi gönder bakalım bi" → "tema dosyası olarak son halini".
 - Önizleme sitesi Shopify teması değildi; `shopify/` altındaki eski bölümler ilk LunaDream tasarımından. Tema sıfırdan kuruldu: `araclar/tema/tema_uret.py` → `tema/` + `tema-zip/ayluna-tema-1.0.0.zip` (241 dosya, 13 MB; ikisi de git dışında, betikle yeniden üretilir).
 - Yapı: `layout/theme.liquid`; bölümler `ayluna-sayfa` (ana, koleksiyon, sepet, arama, 404), `ayluna-urun` (ürün adresine göre pano, yoksa sade sayfa + EasySell için gizli ürün formu), `ayluna-icerik` (iletişim ve yasal sayfalar adrese göre, diğerleri sade), `ayluna-sifre`; her pano bir snippet (`ay-*.liquid`); müşteri sayfaları sade.

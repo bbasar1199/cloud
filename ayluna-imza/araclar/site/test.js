@@ -170,7 +170,28 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     await pg.goto(KOK + h + '.html'); await pg.waitForTimeout(400);
     const r = await pg.evaluate(() => { const s = [...document.querySelectorAll('.kare-foto .kf, .h-iz .hs, .g-iz .gs')]; const i = s[0] && s[0].querySelector('img').getBoundingClientRect(); return { n: s.length, oran: i && i.height ? Math.round(i.width / i.height * 100) / 100 : 0 }; });
     not(r.n === liste.length && Math.abs(r.oran - 1) < .02, `${h}: galeri ${r.n}/${liste.length} görsel, oran ${r.oran}`);
+    // Gösterge fotoğrafın içinde (kullanıcı, 19 Eki: "gömülü olsun"), altında "Temsilî görseller" yok
+    const g = await pg.evaluate(() => { const f = document.querySelector('.kare-foto, .h-iz, .g-iz').getBoundingClientRect(), z = document.querySelector('.ay-iz, .d-iz, .g-alt').getBoundingClientRect();
+      return { ic: z.top >= f.top && z.bottom <= f.bottom + .5 && z.left >= f.left && z.right <= f.right, temsil: /temsil/i.test(document.querySelector('#kok').textContent) }; });
+    not(g.ic && !g.temsil, `${h}: gösterge fotoğrafın içinde, "temsilî" yazısı yok`);
   }
+  // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı) galeriyi durdurmaz; kaymadan geçer
+  { const rm = await b.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' }); const rp = await rm.newPage();
+    for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ask-saati']) {
+      await rp.goto(KOK + f + '.html'); await rp.waitForTimeout(6300);
+      const x = await rp.evaluate(() => { const e = document.querySelector('.kare-foto, .h-iz, .g-iz'); return Math.round(e.scrollLeft / e.clientWidth); });
+      not(x === 1, `${f}: azaltılmış harekette galeri 5 sn'de geçti (${x})`);
+    }
+    await rm.close(); }
+  // WhatsApp ve şirket bilgisi şimdilik yok (kullanıcı, 19 Eki: "sonra kendim ekleyeceğim")
+  { const kalan = [];
+    for (const f of SAYFALAR) { await pg.goto(KOK + f); await pg.waitForTimeout(250);
+      const t = await pg.evaluate(() => document.body.textContent + [...document.querySelectorAll('a')].map(a => a.href).join(' '));
+      if (/whatsapp|wa\.me|ticaret unvan|mersis|\bKEP\b/i.test(t)) kalan.push(f); }
+    await pg.locator('#kok [aria-label="Menü"]').first().click(); await pg.waitForTimeout(300);
+    if (/whatsapp/i.test(await pg.locator('.ay-menu').textContent())) kalan.push('menü');
+    await pg.keyboard.press('Escape');
+    not(!kalan.length, 'WhatsApp ve şirket bilgisi hiçbir sayfada yok' + (kalan.length ? ': ' + kalan.join(', ') : '')); }
 
   // Satın alma butonları sepeti katlamaz (kartla dene → kapat → kapıda), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);

@@ -39,7 +39,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
 /* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): görsel logo bandının altında tam kare, üstüne gölge ya da yüzen öğe binmez; ay göstergesi altında. */
 /* Kullanıcı (19 Eki, "bu altında görsellerin böyle kalmayacak değil mi" → "Şerit kalksın"): fotoğrafın altındaki koyu bant yok; logo bandı koyu kalır,
-   fotoğraf kenardan kenara kare, gösterge altında sayfanın kendi zemininde. */
+   fotoğraf kenardan kenara kare. Sonra: "o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" →
+   gösterge fotoğrafın içinde, en alt kenarda ortada ince çizgiler (her fotoğrafa bir; geçilenler beyaz). Ay simgeleri afişlerin alt yazısına
+   biniyordu, çizgi hiçbir afişte yazıya değmez. Altında satır, not ya da "Temsilî görseller" yok. */
 .sahne{position:relative;background:transparent;overflow:hidden}
 .sahne header{position:relative;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;background:#0C1027;color:#FFFDF9}
 .sahne .kare-foto{position:relative;width:100%;aspect-ratio:1/1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
@@ -50,16 +52,12 @@ a{color:#1A2142}a:hover{color:#2B3463}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
 .yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
-.seritler{position:relative;margin:12px 16px 0;display:flex;align-items:center;gap:8px}
+.seritler{position:absolute;left:0;right:0;bottom:6px;z-index:2;display:flex;justify-content:center;pointer-events:none}
 /* Galeri göstergesi (küçük resimlerin yerine, kullanıcı: "görünmesin, kaydırılır olsun; altlarına ay animasyonu, sayfa geçtikçe tamamlanıyor gibi"):
    her fotoğrafa bir ay; geçtikçe evreler yanar, son fotoğrafta dolunay. Hareket yalnız transform/opacity. */
-.ay-iz{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
-.ay-iz svg{width:15px;height:15px;flex:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-.ay-iz circle{fill:transparent;stroke:rgba(26,33,66,.35);stroke-width:1.6}
-.ay-iz path{fill:#F2A65A;opacity:0;transform-origin:12px 12px;transform:scale(.5);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
-.ay-iz .lit path{opacity:1;transform:none}
-.ay-iz .on{transform:scale(1.4)}
-.ay-iz .on circle{stroke:#1A2142}
+.ay-iz{display:flex;gap:4px;filter:drop-shadow(0 1px 1.5px rgba(12,16,39,.5))}
+.ay-iz i{display:block;width:16px;height:3px;border-radius:2px;background:rgba(255,253,249,.4);transition:background-color .3s cubic-bezier(.2,.7,.2,1)}
+.ay-iz .lit{background:#FFFDF9}
 .sira{flex:none;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;padding:4px 9px;border-radius:999px;background:#0C1027}
 .levha{position:relative;z-index:4;background:#F6F1E9;padding-top:4px}
 /* Yazı ölçeği (Tur 11, kullanıcı: "yazı bazı yerlerde çok büyük, düzensiz"):
@@ -400,9 +398,9 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   <div class="urun-ust"><div class="urun-sol"><section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
-    <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
+    <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; fotoğrafın en altında ince çizgiler, geçtikçe beyazlar. -->
     <div class="seritler">
-      <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></span>
+      <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><i class="{{f.acls}}"></i></sc-for></span>
       <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span>
     </div>
   </section>
@@ -544,7 +542,6 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
     <div class="b-say" aria-hidden="true"><i class="{{nokta0}}"></i><i class="{{nokta1}}"></i></div>
-    <p class="temsil">Görseller temsilîdir; tavandaki desen seçtiğin diske göre değişir.</p>
   </section>
 
   <!-- 30 gün iade -->
@@ -576,7 +573,6 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
       <h2 class="h2" style="color: #FFFDF9">İlk geceyi <br>birlikte izleyin<span class="n">.</span></h2>
       <button class="btn-on" type="button" style="margin-top: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">{{onLabel}}</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
-      <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
       <div aria-label="Ayluna" style="margin-top: 22px; display: flex; align-items: center; gap: 12px; color: #FFFDF9"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" aria-hidden="true" style="font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
       <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,253,249,.12); font-size: 12px; color: #B9BED6">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
@@ -590,12 +586,13 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6160}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6024}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; if (azH) this.state.gOto = false;
+    // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
+    var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
@@ -627,7 +624,7 @@ class Component extends DCLogic {
       if (self.raf) return;
       self.raf = requestAnimationFrame(function () {
         self.raf = 0;
-        if (window.matchMedia && matchMedia('(min-width: 1024px)').matches) return;  // masaüstünde kaydırma adımı yok; liste ve oklar seçer
+        if (window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches) return;  // sitenin masaüstünde kaydırma adımı yok; liste ve oklar seçer (tuvalin geniş Oynat penceresi telefon düzeninde kalır)
         var adim = document.querySelectorAll('[data-adim]'), orta = window.innerHeight / 2, an = 0;
         for (var k = 0; k < adim.length; k++) if (adim[k].getBoundingClientRect().top <= orta) an = k;
         if (adim.length) self.anSec(an);
@@ -664,7 +661,7 @@ class Component extends DCLogic {
     // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
-  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
+  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
   componentWillUnmount() { clearInterval(this.iv); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';

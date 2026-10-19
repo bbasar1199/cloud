@@ -22,17 +22,15 @@ YUK = json.load(open(os.path.join(CANVAS, 'urunler', 'yukseklik.json'))) if os.p
 CSS = SY.CSS + r"""
 .pg{--v:#F2A65A}
 .u-serit{display:flex;align-items:center;justify-content:center;min-height:38px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--lac);text-align:center;line-height:1.35}
-/* Galeri: kaydırılır, 5 sn'de geçer; altında ürün renginde ay evreleri */
+/* Galeri: kaydırılır, 5 sn'de geçer; fotoğrafın en altında ince çizgiler, geçilenler beyaz (kullanıcı, 19 Eki: "gömülü olsun") */
 .gal{position:relative;margin:0 12px;border-radius:22px;overflow:hidden;background:#EFE6D8;aspect-ratio:1/1}
 .g-iz{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .g-iz::-webkit-scrollbar{display:none}
 .gs{position:relative;flex:0 0 100%;scroll-snap-align:start}
 .gs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.g-alt{display:flex;justify-content:center;gap:8px;padding:12px 0 0}
-.g-alt svg{width:14px;height:14px;transition:transform .45s var(--ease)}
-.g-alt circle{fill:#FFFDF9;stroke:#C9BCA8;stroke-width:1.6}
-.g-alt path{fill:var(--v);opacity:0;transform-origin:12px 12px;transform:scale(.5);transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.g-alt .lit path{opacity:1;transform:none}.g-alt .on{transform:scale(1.4)}.g-alt .on circle{stroke:var(--lac)}
+.g-alt{position:absolute;left:0;right:0;bottom:8px;z-index:1;display:flex;justify-content:center;gap:4px;pointer-events:none;filter:drop-shadow(0 1px 1.5px rgba(12,16,39,.5))}
+.g-alt i{display:block;width:16px;height:3px;border-radius:2px;background:rgba(255,253,249,.4);transition:background-color .3s var(--ease)}
+.g-alt .lit{background:#FFFDF9}
 /* Ad, fiyat */
 .bilgi{padding:18px 16px 0}
 .bilgi h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1.08;letter-spacing:-.02em;color:var(--lac)}
@@ -131,8 +129,8 @@ def govde(u):
     return ad, gal, (serit +
         '  <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn\'de geçer -->\n'
         '  <div class="urun-ust"><div class="ust-sol">\n'  # masaüstünde sol sütun (galeri); telefonda etkisiz
-        '  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div></div>\n'
-        '  <div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></div>\n'
+        '  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div>'
+        '<div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.acls}}"></i></sc-for></div></div>\n'
         '  </div><div class="ust-sag">\n'  # masaüstünde sağ sütun (satın alma)
         '  <section class="bilgi" id="siparis"><h1>%s<span>.</span></h1><p class="kisa">%s</p>'
         '<p class="fiyat"><b>%s</b>%s%s</p></section>\n' % (ad, u['kisa'], tl(u['fiyat']), '<s>%s</s>' % tl(eski) if eski else '', rozet) +
@@ -168,9 +166,9 @@ def js(u, gal):
     base = SY.js(st, ek, don)
     # Galeri: kendiliğinden geçiş (5 sn) ve kaydırma kabını durumda tutma
     base = base.replace("componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }",
-        "componentDidMount() { var self = this; if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.gOto = false;\n"
+        "componentDidMount() { var self = this;\n"
         "    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % " + str(max(1, len(gal))) + "); self.setState({ now: Date.now() }); }, 1000); }\n"
-        "  git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }\n"
+        "  git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }\n"
         "  componentDidUpdate() { var el = document.querySelector('.g-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }")
     assert 'git(i)' in base
     return base

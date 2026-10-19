@@ -55,7 +55,6 @@ CSS = r"""
 
 /* AyFeneri göstergesi büyüdü (18×28), huzme 4 sn'de bir salınır, tepe ışığı opaklıkla yanar */
 .f-iz{gap:16px}
-.hero.kare .f-iz svg{stroke:rgba(26,33,66,.45)}.hero.kare .f-iz .lit{stroke:var(--lac)}.hero.kare .y-iz .gz{fill:rgba(26,33,66,.3)}.hero.kare .y-iz .yr{stroke:rgba(26,33,66,.35)}.hero.kare .y-iz .ay{fill:var(--lac)}
 .f-iz svg{width:18px;height:28px}
 .f-iz .fn{fill:var(--v);opacity:0;transition:opacity .4s var(--ease)}
 .f-iz .lit .fn{opacity:1;fill:var(--v)}
@@ -127,14 +126,13 @@ AD = {'af': 'Ayluna AyFeneri', 'gn': 'Ayluna Galaksi Night Projektör'}
 
 
 def hero(u):
-    gost = ('<span class="f-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5">' + FENER_SVG + '</sc-for></span>') if u == 'af' else \
-           ('<span class="y-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4">' + O.YORUNGE_SVG + '</sc-for></span>')
+    gost = '<span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5"><i class="{{f.dcls}}"></i></sc-for></span>'  # galeri çizgisi (luna_usb CSS)
     return ("""
   <!-- Galeri: kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur); başlık yalnız ilk fotoğrafta; küçük resim ve sayı yok -->
   <section class="hero kare" aria-label="%s fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     %s
-    <div class="h-alt">%s<span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
+    <div class="h-alt">%s<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 """ % (AD[u], Y.ust('rgba(238,242,250,.6)'), gost))
 
@@ -185,7 +183,7 @@ def odalar(u, bas, alt):
                    % (I(k), n, t, pos, n, t) for n, k, t, pos in ODA[u])
     return ('\n  <section class="koyu bolum" style="padding-bottom: 36px" id="odalar"><div class="px"><h2 class="bas-y h2">%s</h2><p class="alt-b">%s</p></div>'
             '<div class="oda-serit noscroll">%s<span aria-hidden="true" style="flex: 0 0 6px"></span></div>'
-            '<p class="alt-not px">Görseller temsilîdir; ışığın büyüklüğü odaya ve uzaklığa göre değişir.</p></section>\n' % (bas, alt, kart))
+            '</section>\n' % (bas, alt, kart))
 
 
 FENERI_YAK = """
@@ -203,7 +201,6 @@ FENERI_YAK = """
       <div class="yak-alt"><div><p class="bas-y"><span>Oda karanlık.</span><span>{{yakYazi}}</span></p><small>Tek dokunuş: fener yanar, duvara ay düşer.</small></div>
         <button class="anahtar" type="button" role="switch" aria-checked="{{yakOn}}" onClick="{{yakSw}}"><b>{{yakEt}}</b><i></i></button></div>
     </div>
-    <p class="alt-not">Görsel temsilîdir; ayın büyüklüğü duvara uzaklığa göre değişir.</p>
   </section>
 """
 
@@ -259,7 +256,6 @@ KURULUM_GN = ("""
       <li><em>2</em><span><b>Diski yuvaya yerleştir</b><span>Elle takılıp çıkar, alet gerekmez.</span></span></li>
       <li><em>3</em><span><b>Başlığı çevir, halkayı ayarla</b><span>Tavana ya da duvara çevir; netlik halkasını yavaşça döndür.</span></span></li>
     </ol>
-    <a class="wa" href="#">""" + U.WA + """Takılırsan WhatsApp'tan yaz</a>
   </section>
 """)
 
@@ -302,7 +298,6 @@ def gerisi(u):
       <h2 class="bas-y" style="font-size: 34px; color: #fff">""" + kapanis + """<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span>""" + U.OK + """</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
-      <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5">[Ticaret unvanı] · MERSİS [no]<br>[Adres] · [e-posta] · [telefon] · KEP [adres]</p>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff">""" + E.isaret(48) + """<span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
       <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
     </div>
@@ -350,7 +345,8 @@ def js(u):
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 1, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ gOto: false, yOto: false, hOto: false, dOto: false, yak: true });
+    // Hareket azaltılmışsa fener, huzme ve disk durur; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ yOto: false, hOto: false, dOto: false, yak: true });
     // Tek saat: sayaç, galeri (5 sn), fener (2 sn kapalı → 7 sn açık), huzme (3 sn), disk (4 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
@@ -361,7 +357,7 @@ def js(u):
       self.setState(o);
     }, 1000);
   }
-  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
   componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
   renderVals() {

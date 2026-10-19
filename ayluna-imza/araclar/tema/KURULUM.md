@@ -1,10 +1,10 @@
-# Ayluna teması 1.0.0 · kurulum
+# Ayluna teması 1.0.1 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.0.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.1.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi; kapıda ödeme EasySell'de.
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.0.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.1.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
 
 ## 2. Sayfalar (bir kez)
@@ -32,7 +32,6 @@ Menüleri ayrıca kurmana gerek yok; üst menü ve alt bilgi temanın içinde.
 
 ## 4. Tema ayarları
 Özelleştir → Tema ayarları → Ayluna:
-- **WhatsApp bağlantısı:** `https://wa.me/905XXXXXXXXX` (boşsa WhatsApp düğmeleri numara yok uyarısı verir).
 - **Kargo takip adresi:** `/apps/track123`.
 
 ## 5. Yayınlamadan önce dene (telefonda ve bilgisayarda)
@@ -42,7 +41,7 @@ Menüleri ayrıca kurmana gerek yok; üst menü ve alt bilgi temanın içinde.
 - [ ] Kapıda Ödeme düğmesi EasySell formunu açıyor; formda doğru ürün/adet; ₺80 kapıda ücreti doğru.
 - [ ] Sepet: adet değiştir, sil, "Siparişine özel" ekle-çıkar; rozet adedi doğru.
 - [ ] İletişim formu ve bülten kaydı yönetimde görünüyor (Müşteriler / E-posta). Bültende vaat edilen %5 kodu gerçekten gidiyor mu?
-- [ ] Politika sayfalarındaki köşeli yer tutucular ([Ticaret unvanı], MERSİS, adres, KEP, telefon) dolduruldu. **Dolmadan yayınlama** (yasal zorunluluk).
+- [ ] Şirket bilgisi (ticaret unvanı, adres, MERSİS, KEP, telefon) sitede şimdilik yok (senin isteğin, 19 Eki). Mesafeli Satış, Ön Bilgilendirme ve KVKK'da satıcı bilgisi yasal zorunluluk: **eklemeden yayınlama.** WhatsApp da yok; eklemek istediğinde bana yaz.
 - [ ] Meta/TikTok pikseli ve Google etiketleri (uygulama ya da Müşteri etkinlikleri) yeni temada da çalışıyor.
 
 ## 6. Bu sürümün sınırları (sonraki sürüm)

@@ -191,7 +191,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 ## İş verisi → tasarım kuralı
 - Kapıda ödemede iade %28,6, ön ödemede %0,8. İadelerin %92'si "alıcı bulunamadı".
   - Kartla öde varsayılan ve indirimli.
-  - Kapıda seçilirse toplam, teslim aralığı ve WhatsApp onayı formda görünür.
+  - Kapıda seçilirse toplam ve teslim aralığı formda görünür (WhatsApp şimdilik yok, 19 Eki).
   - "Kartla öde, ₺X daha az öde" hatırlatması gösterilir.
 - PTT'de iade %40. PTT öne çıkarılmaz.
 - Gerçek dönüşüm sipariş ÷ oturum (≈%1,7); Shopify'ın oranı kapıda ödemeyi saymaz. Başarı teslim edilen ciroyla ölçülür.
@@ -226,7 +226,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Kullanıcı (18 Eki) "tüm iskelet, her kısım tam çalışsın" der: önce denetim (bağlantı, düğme, form, sepet, ödeme, kapıda, boş hâller, politikalar, 320px), eksik listesi, hepsini düzelt; gerçek tarayıcıda uçtan uca tıklama testi geçmeden gönderme. Seçilen paket/model/seçenek sepete aynen gider. Shopify teması da aynı listeyle test edilir (`ogrenme/site-denetimi.md`).
 
 ## Galeri (19 Ekim)
-- Ürün galerisi Shopify'daki gibi: mağazanın görselleri, aynı sıra, kare, kenardan kenara. Fotoğrafın altında koyu bant yok; gösterge ve "Temsilî görseller" sayfanın zemininde. Üstte koyu logo bandı kalır; şeffaf yapılmaz, fotoğrafın üstüne başlık binmez.
+- Ürün galerisi Shopify'daki gibi: mağazanın görselleri, aynı sıra, kare, kenardan kenara. Fotoğrafın altında bant, satır ya da not yok. Gösterge fotoğrafın içine gömülü: en alt kenarda ortada ince çizgiler (her fotoğrafa bir, geçilenler beyaz); simge (ay, disk) kullanılmaz, afiş yazısına biner. "Temsilî görseller" notu fotoğraf altına yazılmaz. "Animasyonları azalt" açıkken de galeri geçer (anında). Üstte koyu logo bandı kalır; şeffaf yapılmaz, fotoğrafın üstüne başlık binmez.
+- WhatsApp ve şirket bilgisi (unvan, MERSİS, adres, KEP, telefon) şimdilik sitede yok; kullanıcı kendisi ekleyecek. "Bize yaz" İletişim sayfasına gider. Yayından önce şirket bilgisi yasal zorunluluk (hatırlat, ekleme).
 
 ## Masaüstü (19 Ekim)
 - Telefon düzeni değişmez; masaüstü 1024 px ve üstünde ayrı katman. Ortak lacivert üst menü; telefon başlıkları gizli; duyuru şeridi ve alt bilgi kenardan kenara.

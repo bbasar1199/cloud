@@ -139,7 +139,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <div class="guven">
     <span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg>30 gün iade</span>
     <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg>Kart bilgin bize gelmez</span>
-    <span><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>WhatsApp destek</span>
+    <span><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg>Ücretsiz kargo</span>
   </div>
   </div></div></sc-if>
 </div>

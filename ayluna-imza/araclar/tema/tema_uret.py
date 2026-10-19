@@ -9,7 +9,7 @@ KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(KOK, 'araclar', 'site'))
 import site_uret as S
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.0'
+SURUM = '1.0.1'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
@@ -129,7 +129,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
   {% render 'ay-canli' %}
   <script>
     window.AYLUNA_SHOPIFY = true;
-    window.AYLUNA_AYAR = { wa: {{ settings.whatsapp_url | json }}, takip: {{ settings.kargo_takip_url | default: '/apps/track123' | json }} };
+    window.AYLUNA_AYAR = { takip: {{ settings.kargo_takip_url | default: '/apps/track123' | json }} };
   </script>
   <script src="{{ 'ayluna-veri.js' | asset_url }}" defer></script>
   <script src="{{ 'ayluna.js' | asset_url }}" defer></script>
@@ -301,7 +301,6 @@ window.AYLUNA_SEPET = {{ cart | json }};
         {'name': 'theme_info', 'theme_name': 'Ayluna', 'theme_version': SURUM, 'theme_author': 'Ayluna', 'theme_documentation_url': 'https://ayluna.shop', 'theme_support_url': 'https://ayluna.shop'},
         {'name': 'Ayluna', 'settings': [
             {'type': 'paragraph', 'content': 'Kapıda ödeme: EasySell ayarlarında özel düğme seçicisine [data-ay-kapida] yazın. Paket fiyatları için Kaching Bundles ya da otomatik indirim tanımlı olmalı (KURULUM).'},
-            {'type': 'url', 'id': 'whatsapp_url', 'label': 'WhatsApp bağlantısı', 'info': 'Örnek: https://wa.me/905XXXXXXXXX'},
             {'type': 'text', 'id': 'kargo_takip_url', 'label': 'Kargo takip adresi', 'default': '/apps/track123'}]}], ensure_ascii=False, indent=2) + '\n')
     yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123'}}, indent=2) + '\n')
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')

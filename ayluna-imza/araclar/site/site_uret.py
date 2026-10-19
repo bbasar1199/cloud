@@ -67,7 +67,7 @@ def veri():
         else: pk = [dict(n=b['adet'], p=b['fiyat'], c=b.get('eski') if b.get('eski') and b['eski'] > b['fiyat'] else None) for b in (ic.get('paket') or [])]
         sec = ((ic.get('secenek') or [{}])[0] or {}).get('degerler', []) if ic.get('secenek') else []
         U[h] = dict(ad=ad, p=p, c=c if c and c > p else None, stok=bool(var), img='/_blob/' + BA['u-%s.jpg' % h], kat=SY.KAT[h], adlar=ADLAR[h], paket=pk, secenek=sec)
-    return dict(urun=U, sira=[h for h, *_ in A.URUN], ekler=[dict(k=e['k'], n=e['n'], p=e['p'], h=e['h'], img='/_blob/' + e['img']) for e in SP.EKLER], wa='#')
+    return dict(urun=U, sira=[h for h, *_ in A.URUN], ekler=[dict(k=e['k'], n=e['n'], p=e['p'], h=e['h'], img='/_blob/' + e['img']) for e in SP.EKLER])
 
 
 SAYFALAR = [('index.html', 'Ayluna-Anasayfa', 'ana', None, 'Ayluna · Gece lambaları ve galaksi projektörleri')]
