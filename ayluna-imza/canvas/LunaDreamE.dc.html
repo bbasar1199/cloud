@@ -386,7 +386,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .yr figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yr .dog,.yone .dog{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#2E6B4F}
 .yl{margin-top:4px}
-.yone{margin:18px 16px 0;padding:18px;border-radius:20px;background:#FFFDF9}
+.yone{margin:20px 16px 0;padding:18px;border-radius:20px;background:#FFFDF9}
 .yone .tirnak{display:block;height:20px;font-family:"Young Serif",Georgia,serif;font-size:36px;line-height:.7;color:#1A2142;opacity:.35}
 .yone q{display:block;margin-top:4px;font-family:"Young Serif",Georgia,serif;font-size:21px;line-height:1.28;quotes:none;color:#1A2142}
 .yone figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;font-size:13px}
@@ -395,7 +395,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .karma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:12px 16px 2px;scrollbar-width:none}
 .karma::-webkit-scrollbar{display:none}
 .karma button{flex:none;display:block;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
-.karma button{height:280px}
+.karma button{height:320px}
+.karma.kucuk button{height:200px}
 .k-msj{aspect-ratio:9/16}.k-foto{aspect-ratio:3/4}
 .karma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 /* Müşteri fotoğrafları (19 Eki): küçük kare yerine dikey kart, dokununca büyür */
@@ -521,13 +522,17 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 
   <!-- Puan ve sayı Loox'tan; yorumlar Loox'taki gerçek yorumlardan birebir. "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından ve müşteri hikâyesinden. -->
   <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım"). Üç yön gösterildi (A sekmeli, B tek akış, C duvar); eleştirmen B 8/10, kullanıcı B'yi seçti:
-       puan → öne çıkan tek yorum → fotoğraf ve mesajlar tek karışık şerit (aynı yükseklik, fotoğrafla başlar) → kısa yorum listesi → hepsini oku.
+       puan → mesajlar şeridi → öne çıkan tek yorum → fotoğraf şeridi → kısa yorum listesi → hepsini oku (mesajlar karışık şeritte kaybolduğu için ayrıldı).
        Konu çipleri ve ayrı "Sizden gelen mesajlar" bölümü kalktı. -->
   <section id="yorumlar" class="bolum gir yorum-b">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span></span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <!-- Kullanıcı (19 Eki): "WP mesajları falan gidiyor" → mesajlar karışık şeritte kayboluyordu; bölümün başında kendi başlıklı şeridi,
+         fotoğraflar ayrı ve küçük şeritte -->
+    <p class="px yara">Sizden gelen mesajlar<span>Dokun, büyüsün</span></p>
+    <div class="noscroll karma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="k-msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
     <figure class="px yone"><span class="tirnak" aria-hidden="true">“</span><q>{{oneQ.q}}</q><figcaption><b>{{oneQ.name}}</b><span class="dog"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Satın aldı</span></figcaption></figure>
-    <p class="px yara">Sizden gelenler<span>Dokun, büyüsün</span></p>
-    <div class="noscroll karma"><sc-for list="{{karma}}" as="k" hint-placeholder-count="4"><button class="{{k.cls}}" type="button" onClick="{{k.ac}}" aria-label="{{k.n}}, büyüt"><img src="{{k.src}}" alt="{{k.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <p class="px yara">Evlerinizden<span>Müşteri fotoğrafları</span></p>
+    <div class="noscroll karma kucuk"><sc-for list="{{fsira}}" as="f" hint-placeholder-count="4"><button class="k-foto" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
     <div class="px yl"><sc-for list="{{revRest}}" as="r" hint-placeholder-count="3"><figure class="yr"><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Satın aldı</span></figcaption></figure></sc-for><a href="#" class="cip yhep">{{reviews}} yorumun hepsini oku</a><p class="ynot">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı.</p></div>
   </section>
 
@@ -603,7 +608,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6542}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6844}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
@@ -786,9 +791,8 @@ class Component extends DCLogic {
     ];
     var revAll = REV.map(function (r) { return { q: r.q, name: r.name }; });
     var oneQ = revAll[3], revRest = revAll.filter(function (r, i) { return i !== 3; });
-    // Karışık şerit: fotoğrafla başlar (lambaya sarılan kız; küçükken okunmayan sohbet ekranı ilk görünmesin), sonra mesaj ve fotoğraf sırayla
-    var karma = [], fsira = [mfoto[1], mfoto[0], mfoto[2], mfoto[3], mfoto[4]];
-    mesajlar.forEach(function (m, i) { if (fsira[i]) karma.push({ cls: 'k-foto', src: fsira[i].src, n: fsira[i].alt, ac: fsira[i].ac }); karma.push({ cls: 'k-msj', src: m.src, n: m.n, ac: m.ac }); });
+    // Fotoğraf şeridi lambaya sarılan kızla başlar
+    var fsira = [mfoto[1], mfoto[0], mfoto[2], mfoto[3], mfoto[4]];
     // Diskler: mağazadaki 1024px tema afişinden kesildi, Real-ESRGAN (çizim modeli) ile x4 netleştirildi, 512px (araclar/disk/disk_kes.py --sr). Unicorn ve 2025 kutuda yok, alınmadı.
     var DISCS = [
       { n: 'Ay ve yıldız', id: '4a3a69e8c1d8dddad8c33f8f463b8a0e' }, { n: 'Okyanus', id: 'a24f13e032569f76d64b9b0fbe8d74f7' },
@@ -843,7 +847,7 @@ class Component extends DCLogic {
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
       yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, vids: vids, mfoto: mfoto, mesajlar: mesajlar,
-      oneQ: oneQ, revRest: revRest, karma: karma,
+      oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
     };

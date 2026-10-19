@@ -188,13 +188,13 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       const t = await pg.evaluate(() => [...document.querySelectorAll('#kok .btn-on, #kok .btn1')].map(b => (b.querySelector('.b-ic>span') || b).textContent.trim()));
       if (t.some(x => /₺/.test(x))) fiyatli.push(f + ': ' + t.join(' | ')); }
     not(!fiyatli.length, 'Güvenli Ödeme düğmelerinde fiyat yok' + (fiyatli.length ? ': ' + fiyatli.join('; ') : '')); }
-  // Müşteri kanıtı tek bölüm (19 Eki, B · Tek akış): öne çıkan yorum, 5 fotoğraf + 6 mesaj tek şeritte (fotoğrafla başlar), çip yok;
+  // Müşteri kanıtı tek bölüm (19 Eki, B · Tek akış): önce 6 mesajlık şerit (kendi başlığıyla), öne çıkan yorum, 5 fotoğraflık şerit; çip yok;
   // dokununca büyür, Esc kapatır
   await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
   { const k = await pg.evaluate(() => [...document.querySelectorAll('#yorumlar .karma button')].map(b => b.className));
     await pg.locator('#yorumlar .karma button').first().click(); await pg.waitForTimeout(300);
     const acik = await pg.locator('.buyuk img').count(); await pg.keyboard.press('Escape'); await pg.waitForTimeout(300);
-    not(k.filter(c => c === 'k-msj').length === 6 && k.filter(c => c === 'k-foto').length === 5 && k[0] === 'k-foto' && await pg.locator('#yorumlar .yone').count() === 1
+    not(k.filter(c => c === 'k-msj').length === 6 && k.filter(c => c === 'k-foto').length === 5 && k[0] === 'k-msj' && await pg.locator('#yorumlar .yone').count() === 1
       && await pg.locator('#yorumlar .cip[aria-pressed]').count() === 0 && await pg.locator('#mesajlar').count() === 0 && acik === 1 && await pg.locator('.buyuk').count() === 0,
       `müşteri kanıtı tek bölüm: ${k.length} görsel (ilk ${k[0]}), büyük görünüm açılıp Esc ile kapandı`); }
   // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı) galeriyi durdurmaz; kaymadan geçer

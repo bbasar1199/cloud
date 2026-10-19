@@ -345,6 +345,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 19 Eki | "Bahsettiğim yorum kısımlarını yapmamışız." | **LunaDream'de "Sizden gelen mesajlar"** (gerçek, izinli sohbet ekran görüntüleri; dokununca büyür) ve "Aileler ne diyor?"da büyük müşteri fotoğrafları (gerçek hikâye eklendi). Sayfanın vaadiyle çelişen mesaj konmaz ("gümrükte", "hayvanlar çıkmadı"). Mesajlar yalnız konu oldukları ürünün sayfasında (eski sitede Galaksi Night'ta da LunaDream mesajları vardı). |
 | 19 Eki | "Evet görünüyor" (telefondaki alt çubukta kartla fiyat) | **Telefondaki alt çubukta da fiyat yok:** ürün adı + seçim ("LunaDream / 1 Adet") ve Satın al. |
 | 19 Eki | "Şu yorum kısımlarının hepsi karmaşık görünüyor, onlar için bir düzen oturtalım." Üç yön gösterildi (A sekmeli 5/10, B tek akış 8/10, C duvar 4/10); kullanıcı **B**'yi seçti. | **Müşteri kanıtı tek bölüm, tek akış:** puan → öne çıkan tek yorum (çerçevesiz kart) → fotoğraf ve mesajlar aynı yükseklikte tek şerit (fotoğrafla başlar, dokununca büyür) → kısa yorum listesi → hepsini oku → kısa not. Konu çipleri, ayrı mesaj bölümü ve üst üste birden çok şerit yok; fotoğraf ve mesaj sekmeye saklanmaz. |
+| 19 Eki | (B düzenine) "E ama WP mesajları falan gidiyor." | **Müşteri mesajları karışık şeritte kaybolmaz:** bölümün başında kendi başlıklı şeridi ("Sizden gelen mesajlar", büyük kart), sonra öne çıkan yorum, sonra ayrı küçük fotoğraf şeridi ("Evlerinizden"), sonra kısa yorumlar. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

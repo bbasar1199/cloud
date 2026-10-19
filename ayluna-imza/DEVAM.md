@@ -475,7 +475,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.4 · yorum kısımları tek akış, alt çubukta fiyat yok (19 Ekim, en güncel)
+## Tema 1.0.5 · mesajlar kendi şeridinde (19 Ekim, en güncel)
+- Kullanıcı (B düzenine): "E ama WP mesajları falan gidiyor." Karışık şeritte mesajlar fotoğrafların arasında kayboluyordu.
+- `#yorumlar` sırası: puan → "Sizden gelen mesajlar" (6 mesaj, 320 px kart, dokununca büyür) → öne çıkan yorum → "Evlerinizden" (5 müşteri fotoğrafı, 200 px) → 4 kısa yorum → hepsini oku → not. Masaüstünde 400/260 px.
+- E_H=6844. Site testleri ve tema benzetimi HEPSİ TAMAM.
+
+## Tema 1.0.4 · yorum kısımları tek akış, alt çubukta fiyat yok (19 Ekim)
 - Kullanıcı: telefondaki alt çubukta fiyat ("evet görünüyor") ve "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım".
 - Alt çubuk (LunaDream, USB, AyFeneri, Galaksi Night): fiyat yerine ürün adı + seçim ("1 Adet"), Satın al.
 - Müşteri kanıtı: üç yön (A sekmeli, B tek akış, C duvar) ekran görüntüsüyle gösterildi; eleştirmen B 8/10, A 5/10 (fotoğraf/mesaj sekmede gizli, Loox eklentisine benziyor), C 4/10 (en uzun, dar sütunda okunmuyor). **Kullanıcı B'yi seçti.**
