@@ -225,6 +225,14 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Köşeli yer tutucular sitede kalır, kullanıcı gerekirse doldurur; teyit için ısrar edilmez. Site tek dosya `index.html` olarak da verilir (`python3 araclar/site/site_uret.py` → `site-tek/index.html`).
 - Kullanıcı (18 Eki) "tüm iskelet, her kısım tam çalışsın" der: önce denetim (bağlantı, düğme, form, sepet, ödeme, kapıda, boş hâller, politikalar, 320px), eksik listesi, hepsini düzelt; gerçek tarayıcıda uçtan uca tıklama testi geçmeden gönderme. Seçilen paket/model/seçenek sepete aynen gider. Shopify teması da aynı listeyle test edilir (`ogrenme/site-denetimi.md`).
 
+## Masaüstü (19 Ekim)
+- Telefon düzeni değişmez; masaüstü 1024 px ve üstünde ayrı katman. Ortak lacivert üst menü; telefon başlıkları gizli; duyuru şeridi ve alt bilgi kenardan kenara.
+- Ürün sayfası: solda kare galeri + özellik kartları, sağda satın alma (ad, fiyat, Dün, seçiciler, kargo, iki buton). Ödeme butonu ilk ekranda görünür.
+- Satın alma butonu ekrandan çıkınca menünün altından ince lacivert çubuk iner: ürün, seçim, kart butonu (sayfadaki etiketin aynısı), fiyatsız "Kapıda ödeme". Sayaç yok.
+- Koyu bölümler masaüstünde kenardan kenara gece bandı (içerik 1136 px); telefona göre kurulu bölümler küçük kart olarak ortada bırakılmaz, iki sütuna açılır. Kaydırmalı şeritler masaüstünde ızgara (fareyle kaydırma beklenmez).
+- Ana sayfa: geniş slayt, ürünler 4 sütun; koleksiyon ve arama 4 sütun; sepet iki sütun (sağda yapışkan özet).
+- Masaüstü taşma, galeri yeri ve çubuk test.js'te denenir; teslimden önce 1440 px ekran görüntüsüne bakılır.
+
 ## Shopify
 - **Sıfırdan Ayluna teması** (kullanıcı kararı, 17 Ekim). Hiçbir hazır tema (Horizon, Dawn…) kopyalanmaz ya da temel alınmaz; her parça benzersiz yazılır.
 - İlk kurulum zip ile yapılır, sonraki değişiklikler `.txt` olarak verilir. Şu an canlıda ChatGPT ile yapılmış bir sürüm var; o da değiştirilecek.
