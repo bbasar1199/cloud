@@ -499,7 +499,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - **Sağlamlık:** mağazada bir eklenti yüzünden süsleme adımı hata verirse galeri ve kaydırma yine başlar (`ayluna.js` ciz).
 - **WhatsApp yok:** menü satırı, iletişim kartı, kargo takip ve iade düğmeleri ("Bize yaz", "İade için yaz" → İletişim), USB ve AyFeneri/Galaksi Night "Takılırsan WhatsApp'tan yaz", ana sayfa/USB/sepet güven kartı (yerine Kapıda ödeme / Ücretsiz kargo), SSS ve politika metinleri, kapıda formu notu, tema ayarı. Kullanıcı sonra kendisi ekleyecek.
 - **Şirket bilgisi yok:** alt bilgideki unvan/MERSİS/adres/KEP satırları, iletişim notu, politika sayfalarındaki "Veri sorumlusu" ve "Satıcı" kartları (Taraflar: "Ayluna (ayluna.shop)"). Yasal zorunluluk: yayından önce eklenmeli (KURULUM.md).
-- Pano yükseklikleri yeniden ölçüldü: `E_H=6024 U_H=6851 S_H_af=6430 S_H_gn=6906` (LunaDream 1700 px yüksek pencerede ölçülür; Bir gece adımları tuvalde kapanır).
+- Pano yükseklikleri yeniden ölçüldü: `E_H=5953 U_H=6851 S_H_af=6430 S_H_gn=6906` (LunaDream 1700 px yüksek pencerede ölçülür; Bir gece adımları tuvalde kapanır).
 - Test: `araclar/site/test.js` yeni denetimler (gösterge fotoğrafın içinde, "temsilî" yok, azaltılmış harekette galeri geçer, hiçbir sayfada WhatsApp/şirket yok) dahil HEPSİ TAMAM; tema benzetimi HEPSİ TAMAM; Theme Check yalnız RemoteAsset uyarıları.
 - Açık: kullanıcının "Bir gece" görüntüsünde neyi kastettiği (takılma mı, kart kenarları mı) netleşmedi; takılma iki yoldan düzeltildi.
 
