@@ -164,6 +164,14 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     await sp.close();
   }
 
+  // Galeriler Shopify'daki gibi (19 Eki): görsel sayısı ogrenme/galeri-canli.json ile aynı, kare
+  const GC = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'ogrenme', 'galeri-canli.json'), 'utf8'));
+  for (const [h, liste] of Object.entries(GC)) {
+    await pg.goto(KOK + h + '.html'); await pg.waitForTimeout(400);
+    const r = await pg.evaluate(() => { const s = [...document.querySelectorAll('.kare-foto .kf, .h-iz .hs, .g-iz .gs')]; const i = s[0] && s[0].querySelector('img').getBoundingClientRect(); return { n: s.length, oran: i && i.height ? Math.round(i.width / i.height * 100) / 100 : 0 }; });
+    not(r.n === liste.length && Math.abs(r.oran - 1) < .02, `${h}: galeri ${r.n}/${liste.length} görsel, oran ${r.oran}`);
+  }
+
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));
   console.log(hata ? `\n${hata} HATA` : '\nHEPSİ TAMAM');
   await b.close();

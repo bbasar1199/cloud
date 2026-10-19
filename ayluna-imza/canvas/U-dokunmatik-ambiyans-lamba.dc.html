@@ -316,7 +316,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/2200b666b11ca7cf930c7b7ea0f14b1c", "/_blob/61d762994fb78ea36e488508495207ea", "/_blob/f19ad805110e0706f5bd946abbfd5a35", "/_blob/df90676d80301c08a1eee05041026cfe", "/_blob/3017c09c0c3a355b7cd7c9f761360cd2", "/_blob/f5a90588558b4b8db0697b566d31d64a"], AD = "Dokunmatik Ambiyans Lamba";
+    var GAL = ["/_blob/61d762994fb78ea36e488508495207ea", "/_blob/df90676d80301c08a1eee05041026cfe", "/_blob/f19ad805110e0706f5bd946abbfd5a35", "/_blob/2200b666b11ca7cf930c7b7ea0f14b1c", "/_blob/3017c09c0c3a355b7cd7c9f761360cd2", "/_blob/f5a90588558b4b8db0697b566d31d64a"], AD = "Dokunmatik Ambiyans Lamba";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

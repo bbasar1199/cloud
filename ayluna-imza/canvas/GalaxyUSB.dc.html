@@ -75,6 +75,14 @@ body{margin:0;background:#F2F4F8}
 .hero-y .bas-y em{font-style:normal;color:var(--v)}
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
+/* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): logo bandının altında tam kare görsel; üstüne başlık ya da gölge binmez, gösterge altta.
+   AyFeneri ve Galaksi Night da bunu kullanır (ozel_sayfa.py, U.CSS). */
+.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:44px}
+.hero.kare .u-ust{order:-1}
+.hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
+.hero.kare .hs::after{display:none}
+.hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
+.hero.kare .h-alt{bottom:14px}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
@@ -352,10 +360,10 @@ body{margin:0;background:#F2F4F8}
 </helmet>
 <div class="pg">
   <div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>
-  <!-- Sinema galeri (Yön A): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur). Başlık yalnız ilk fotoğrafta.
+  <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
-  <section class="hero" aria-label="Galaxy USB fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div></sc-if></div></sc-for></div>
+  <section class="hero kare" aria-label="Galaxy USB fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
@@ -483,7 +491,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7160}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7086}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
@@ -494,7 +502,7 @@ class Component extends DCLogic {
     // Tek saat: sayaçlar, galeri (5 sn), disk (3 sn), oda kartı (5 sn), dönen satır (disk 4 sn, kargo 6 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % 4);
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % 3);
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % 3; o.kBas = t; }
       if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
@@ -516,8 +524,8 @@ class Component extends DCLogic {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
     var I = {'cift': 'eae251a225996e67cae4ea4b714d7513', 'saturn': '10b5c03a83fd85a3eb15b3374830001e', 'kelebek': '1697cee7971bbb267fb51dea65064134', 'ay': 'a2010776792420e44288cfaf26ea36cf', 'karadelik': 'ef1770a1ec7be78054cd32a386216a3a', 'denizanasi': 'db2afb7bdda9b8175ad05543628d075b', 'siyah1': 'ca8e068a09abcce3cee3b6b52014e5d4', 'siyah2': '778e6089a2699acbac7bdf05cab5eae1', 'cocuk': 'f2da40fb1654492417c640086532631f', 'urun': '192e0198aa722e532541f454e8278561', 'oda': '7d5f80214a0664a51946b0ece044e8cb', 'bas': '7e1339aefa8d185cd41f6c37b16853c5', 'kesim': '5782766948fef68b7273c061529d6324', 'afis': 'be86b4a93cb896b0ad69042a2e915e68'};
-    var GAL = [['oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30%'], ['urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'], ['bas', 'Projektör başlığı yakından', '50% 40%'], ['afis', 'Galaxy USB: esnek gövde, 360° döner başlık; başlık 4 cm, toplam boy 23,5 cm', '50% 50%']];
-    var gal = GAL.map(function (g, i) { var on = i === S.g, afis = g[0] === 'afis'; return { src: B + I[g[0]], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (afis ? ' afis' : '') + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    var GAL = [['153dd8a1b6a1359501859ced79c0a784', 'Galaxy USB projektör görseli 1', '50% 50%'], ['08ad55fd9db11d3f53cd191d9866f207', 'Galaxy USB projektör görseli 2', '50% 50%'], ['be86b4a93cb896b0ad69042a2e915e68', 'Galaxy USB projektör görseli 3', '50% 50%']];
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: B + g[0], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     // Kaydırma: hangi fotoğraf ortadaysa o; elle kaydırılınca kendiliğinden geçiş durur
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

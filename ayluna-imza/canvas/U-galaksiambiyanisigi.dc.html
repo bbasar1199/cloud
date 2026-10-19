@@ -318,7 +318,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/fa86ef1819880a57734f70511ac41991", "/_blob/3477e9da4f43485bbe4ef1352cf534dc", "/_blob/e7d807c474d5d7ec31bc2def5c0e5aa0", "/_blob/aef6f4bd87d1566c91fe3f8ed220c9c5", "/_blob/c12bce578bb972b51b2b02faf942d320"], AD = "Galaksi Ambiyans Işığı";
+    var GAL = ["/_blob/3477e9da4f43485bbe4ef1352cf534dc", "/_blob/aef6f4bd87d1566c91fe3f8ed220c9c5", "/_blob/e7d807c474d5d7ec31bc2def5c0e5aa0", "/_blob/c12bce578bb972b51b2b02faf942d320", "/_blob/fa86ef1819880a57734f70511ac41991"], AD = "Galaksi Ambiyans Işığı";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

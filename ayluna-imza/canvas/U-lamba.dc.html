@@ -318,7 +318,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/24d14af6e5a5ee18a665b2aeeeeae7d0", "/_blob/5da9263f71b1e9e60eceb76d7a8567ff", "/_blob/b564e6465b39d2f6ef4f344f8a4f2c49", "/_blob/4323e55c8041eb611ac27cfd64a6fc1c", "/_blob/5a6ed3361cab0e120efa1d2b829d812c", "/_blob/c216b32644465c05a6ee9a3e0e4b83a7", "/_blob/743c90687958f10061e5345b0da3415b"], AD = "Ayluna AyFeneri";
+    var GAL = ["/_blob/4323e55c8041eb611ac27cfd64a6fc1c", "/_blob/c216b32644465c05a6ee9a3e0e4b83a7", "/_blob/24d14af6e5a5ee18a665b2aeeeeae7d0", "/_blob/5a6ed3361cab0e120efa1d2b829d812c", "/_blob/743c90687958f10061e5345b0da3415b", "/_blob/5da9263f71b1e9e60eceb76d7a8567ff", "/_blob/b564e6465b39d2f6ef4f344f8a4f2c49"], AD = "Ayluna AyFeneri";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri
 import luna_e as E
 import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
@@ -54,10 +54,9 @@ TEMA['gumus-a'] = dict(TEMA['gumus'], ad='Ay gümüşü · Yön A yazısı', alt
                        ek='.hero-y .bas-y em{font-weight:500;letter-spacing:-.02em}')
 ANA_TEMA = os.environ.get('U_TEMA', 'gumus-a')
 
-GAL = [('oda', 'Komodinde beyaz Galaxy USB projektör, tavanda galaksi', '50% 30%'), ('urun', 'Galaxy USB projektör tavana galaksi yansıtıyor', '50% 30%'),
-       ('bas', 'Projektör başlığı yakından', '50% 40%'),
-       # Mağazanın ürün afişi (yalnız teyitli bilgiler: 360°, USB, 4 cm, 23,5 cm). Diğer afişler 5K, lens sayısı ya da uydurma yorum taşıdığı için alınmadı.
-       ('afis', 'Galaxy USB: esnek gövde, 360° döner başlık; başlık 4 cm, toplam boy 23,5 cm', '50% 50%')]
+# Galeri Shopify'daki gibi (kullanıcı, 19 Eki): canlı mağazanın görselleri, aynı sıra, kare (ogrenme/galeri-canli.json).
+# Çıkarılanlar: "12 farklı galaksi teması" (kutuda olmayan eski diskler), "Uyku öncesi" (uydurma yorum kartı).
+GAL = [(i, 'Galaxy USB projektör görseli %d' % (k + 1), '50% 50%') for k, i in enumerate(canli_galeri('galayx-usb-projektor'))]
 # Herkesin odasına: hikâye kartı. Disk, kutudaki 12 diskten o odaya önerilen.
 # 19 Eki: "Genç odası" (denizanası) ve "İkimiz için" (kuzey ışığı) fotoğrafları kutuda olmayan desen gösterdiği için kalktı;
 # yerlerine kutudaki disklerle Flow'da yeni oda fotoğrafı üretilebilir (ogrenme/flow-istemleri-usb-oda.md).
@@ -156,6 +155,14 @@ CSS = r"""
 .hero-y .bas-y em{font-style:normal;color:var(--v)}
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
+/* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): logo bandının altında tam kare görsel; üstüne başlık ya da gölge binmez, gösterge altta.
+   AyFeneri ve Galaksi Night da bunu kullanır (ozel_sayfa.py, U.CSS). */
+.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:44px}
+.hero.kare .u-ust{order:-1}
+.hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
+.hero.kare .hs::after{display:none}
+.hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
+.hero.kare .h-alt{bottom:14px}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
@@ -467,10 +474,10 @@ OTUZ = ''.join('<i style="transform: rotate(%ddeg); animation-delay: %.2fs"></i>
 SERIT = '<div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>'
 
 HERO = ("""
-  <!-- Sinema galeri (Yön A): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur). Başlık yalnız ilk fotoğrafta.
+  <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
-  <section class="hero" aria-label="Galaxy USB fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y"><span><i>Tavanı</i></span><span><i>sahneye <em>çevir.</em></i></span></h2><p>Bir USB girişi, koca bir gökyüzü.</p></div></sc-if></div></sc-for></div>
+  <section class="hero kare" aria-label="Galaxy USB fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     """ + Y.ust('rgba(238,242,250,.6)') + """
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
@@ -657,7 +664,7 @@ JS = """class Component extends DCLogic {
     """ + TL_JS + """
     var I = """ + str(I) + """;
     var GAL = """ + str([list(x) for x in GAL]) + """;
-    var gal = GAL.map(function (g, i) { var on = i === S.g, afis = g[0] === 'afis'; return { src: B + I[g[0]], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (afis ? ' afis' : '') + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: B + g[0], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     // Kaydırma: hangi fotoğraf ortadaysa o; elle kaydırılınca kendiliğinden geçiş durur
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
@@ -728,7 +735,7 @@ JS = """class Component extends DCLogic {
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7160))
+    h = int(os.environ.get('U_H', 7086))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(sayfa(ANA_TEMA) + TAIL.format(h=h, js=JS))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))

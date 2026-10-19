@@ -75,6 +75,14 @@ body{margin:0;background:#F2F4F8}
 .hero-y .bas-y em{font-style:normal;color:var(--v)}
 @keyframes satir{from{transform:translateY(105%)}to{transform:none}}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
+/* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): logo bandının altında tam kare görsel; üstüne başlık ya da gölge binmez, gösterge altta.
+   AyFeneri ve Galaksi Night da bunu kullanır (ozel_sayfa.py, U.CSS). */
+.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:44px}
+.hero.kare .u-ust{order:-1}
+.hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
+.hero.kare .hs::after{display:none}
+.hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
+.hero.kare .h-alt{bottom:14px}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
@@ -200,7 +208,7 @@ body{margin:0;background:#F2F4F8}
 /* Stok kurdelesi: buton lacivert olduğu için kurdele ay gümüşü, yazı lacivert (paket kurdelesinin tersi). Dokunmayı engellemez,
    buton ekrana girince bir kez 8px aşağıdan gelir. */
 .al-on{position:relative;margin-top:24px}
-.al-on .btn1{margin-top:0}
+.al-on .btn1{margin-top:0;min-height:68px;padding-top:16px}  /* iki satırlı buton: yazı kurdelenin altında kalmasın */
 .stok-kd{position:absolute;left:18px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:var(--v);color:var(--lac);box-shadow:0 0 0 2px var(--zemin);font-size:12px;font-weight:700;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .stok-kd.on{opacity:1;transform:none}
 .stok-kd svg{width:14px;height:14px;flex:none}.stok-kd circle{fill:none;stroke:rgba(26,33,66,.55);stroke-width:1.6}.stok-kd path{fill:var(--lac)}
@@ -629,8 +637,8 @@ body{margin:0;background:#F2F4F8}
 <div class="pg">
   <div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>
   <!-- Galeri: kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur); başlık yalnız ilk fotoğrafta; küçük resim ve sayı yok -->
-  <section class="hero" aria-label="Ayluna AyFeneri fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y"><span><i>Duvarına</i></span><span><i><em>ay</em> doğsun.</i></span></h2><p>Deniz feneri biçiminde gece lambası: duvara ay yansıtır, müzik çalar.</p></div></sc-if></div></sc-for></div>
+  <section class="hero kare" aria-label="Ayluna AyFeneri fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="h-alt"><span class="f-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5"><svg class="{{f.dcls}}" viewBox="0 0 14 22"><path class="hz" d="M8 6.5 L22 2 L22 11 Z"></path><path d="M4 5 L7 2 L10 5 Z"></path><rect x="4.5" y="5" width="5" height="3"></rect><rect class="fn" x="4.5" y="5" width="5" height="3"></rect><path d="M4.5 8 H9.5 L10.5 20 H3.5 Z"></path><path d="M2 20.5 H12"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
@@ -735,7 +743,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6670}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6596}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 1, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
@@ -744,7 +752,7 @@ class Component extends DCLogic {
     // Tek saat: sayaç, galeri (5 sn), fener (2 sn kapalı → 7 sn açık), huzme (3 sn), disk (4 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % 5);
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % 7);
       if (S.yOto && t - S.yBas >= (S.yak ? 7 : 2)) { o.yak = !S.yak; o.yBas = t; }
       if (S.hOto && t % 3 === 0) o.hz = (S.hz + 1) % 4;
       if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % 12;
@@ -757,7 +765,7 @@ class Component extends DCLogic {
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
-    var GAL = [["/_blob/ed20733d347d456e916a7cbf02e88ea0", "Komodinde AyFeneri, arkadaki duvarda ay yansıması", "50% 40%"], ["/_blob/a6734b5e8d20ce2892dbf1bdf85d03ae", "Yatak odasında AyFeneri, duvarda ay, masada kumanda", "55% 50%"], ["/_blob/ab2ee2621abe634bbdf9955d3847023d", "AyFeneri ve yanında müzik çalan telefon", "50% 50%"], ["/_blob/14eba68a6836a5984e65570b3c3bb8fb", "AyFeneri ve kutusu", "40% 50%"], ["/_blob/a48a2c3c1ba2fe86fdd56f52d02bda64", "AyFeneri gövdesi ve çıkarılabilir tabanı", "50% 40%"]];
+    var GAL = [["/_blob/4323e55c8041eb611ac27cfd64a6fc1c", "Ayluna AyFeneri görseli 1", "50% 50%"], ["/_blob/c216b32644465c05a6ee9a3e0e4b83a7", "Ayluna AyFeneri görseli 2", "50% 50%"], ["/_blob/24d14af6e5a5ee18a665b2aeeeeae7d0", "Ayluna AyFeneri görseli 3", "50% 50%"], ["/_blob/5a6ed3361cab0e120efa1d2b829d812c", "Ayluna AyFeneri görseli 4", "50% 50%"], ["/_blob/743c90687958f10061e5345b0da3415b", "Ayluna AyFeneri görseli 5", "50% 50%"], ["/_blob/5da9263f71b1e9e60eceb76d7a8567ff", "Ayluna AyFeneri görseli 6", "50% 50%"], ["/_blob/b564e6465b39d2f6ef4f344f8a4f2c49", "Ayluna AyFeneri görseli 7", "50% 50%"]];
     var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

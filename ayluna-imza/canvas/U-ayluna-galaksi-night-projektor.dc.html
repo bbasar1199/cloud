@@ -303,7 +303,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: 2, sec: 0 }); }
   componentDidMount() { var self = this; if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.gOto = false;
-    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 5); self.setState({ now: Date.now() }); }, 1000); }
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 7); self.setState({ now: Date.now() }); }, 1000); }
   git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
   componentDidUpdate() { var el = document.querySelector('.g-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
@@ -318,7 +318,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/3245dcee1a702bb740a24ab347213bb4", "/_blob/1ed7be4368e185515c37a6a297a8ba2e", "/_blob/99072d288859abecc11e64d202db0907", "/_blob/0d7bd95f814f808de1bfb35244337030", "/_blob/db433bcba7fc92bdc1db618ae86f6a2f"], AD = "Galaksi Night Projektör";
+    var GAL = ["/_blob/db433bcba7fc92bdc1db618ae86f6a2f", "/_blob/99072d288859abecc11e64d202db0907", "/_blob/eefd5c7bfd1af9008e633b4dac12de71", "/_blob/157029fec84dc37ce0d893ddc3a11e3c", "/_blob/0d7bd95f814f808de1bfb35244337030", "/_blob/3245dcee1a702bb740a24ab347213bb4", "/_blob/1ed7be4368e185515c37a6a297a8ba2e"], AD = "Galaksi Night Projektör";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

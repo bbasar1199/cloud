@@ -56,3 +56,11 @@ KARGO_JS = """function KARGO(ms) {
         metin: bugun ? 'Bugün 16.00’ya kadar verilen siparişler aynı gün kargoda' : 'Bugün verilen siparişler ' + (fark === 1 ? 'yarın' : GUN[gun.getDay()]) + ' kargoda',
         aria: bugun ? 'Aynı gün kargo için ' + hh + ' saat ' + mi + ' dakika kaldı' : '' };
     }"""
+
+
+# Ürün galerisi Shopify'daki gibi (kullanıcı, 19 Eki: "fotoğraf kısmını Shopify'daki ile aynı şekle getir"): canlı sıra, kare görsel.
+# Liste araclar/canli_galeri.py ile üretilir (uydurma yorum, sağlık iddiası, kutuda olmayan şey çıkarılır).
+def canli_galeri(handle):
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'ogrenme', 'galeri-canli.json')
+    return [x['id'] for x in json.load(open(p))[handle]]

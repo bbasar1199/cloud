@@ -101,6 +101,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - **Marka işareti:** ince daire içinde amber hilal (evre çizimi). Başta ve alt bilgide aynı kilitle kullanılır. Sayacın yanında gün bittikçe söner.
   - **Seçili durum (Tur 25):** model, paket ve 2. lamba aynı dille seçilir: 2px lacivert çerçeve ve amber dolunay noktası. Dolu lacivert seçili kart yok (kullanıcı: "bundle ve aralarında uyum yok"). Renk değişimi anlık; yalnız nokta hareket eder.
   - **Küçük ürün görselleri:** her yerde arka planı temizlenmiş stüdyo kesimi kullanılır, bej kare kullanılmaz.
+  - **Ürün galerisi Shopify ile aynı:** canlı mağazanın görselleri, aynı sıra, kare; kullanıcının yazılı afiş tarzı korunur. Çıkarılanlar yalnız uydurma yorum/rozet, sağlık-güvenlik iddiası, kutuda olmayan şey (`araclar/canli_galeri.py`).
   - **Küçük görsel gerçekten büyütülür:** önce büyük aslı aranır (canlı mağaza `/products/<handle>.json`); yoksa yerelde Real-ESRGAN x4plus (`araclar/gorsel/sr.py`, ücretsiz). Yumuşatıp bırakmak yetmez; Higgsfield yok.
   - **Kesimler saydam kalır:** arka planı temizlenmiş görsel hiçbir çıktıda JPEG'e çevrilmez (saydamlık siyah olur); sitede WebP, Shopify'da PNG/WebP. Teslimden önce gerçek çıktıda seçim kartlarına bakılır.
   - **Fiyat düşüşü** (kullanıcı isteği): açılışta bir kez ₺1.999,00 → çizilir → indirimli fiyat yukarıdan düşer → rozet. Sayan rakam kuralının tek istisnasıdır.

@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS
+from ortak import TAIL, TL_JS, canli_galeri
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -128,15 +128,14 @@ AD = {'af': 'Ayluna AyFeneri', 'gn': 'Ayluna Galaksi Night Projektör'}
 def hero(u):
     gost = ('<span class="f-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5">' + FENER_SVG + '</sc-for></span>') if u == 'af' else \
            ('<span class="y-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4">' + O.YORUNGE_SVG + '</sc-for></span>')
-    bas, alt = BASLIK[u]
     return ("""
   <!-- Galeri: kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur); başlık yalnız ilk fotoğrafta; küçük resim ve sayı yok -->
-  <section class="hero" aria-label="%s fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"><sc-if value="{{f.ilk}}" hint-placeholder-val="{{true}}"><div class="hero-y"><h2 class="bas-y">%s</h2><p>%s</p></div></sc-if></div></sc-for></div>
+  <section class="hero kare" aria-label="%s fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     %s
     <div class="h-alt">%s<span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
-""" % (AD[u], bas, alt, Y.ust('rgba(238,242,250,.6)'), gost))
+""" % (AD[u], Y.ust('rgba(238,242,250,.6)'), gost))
 
 
 def ozler(u):
@@ -336,7 +335,8 @@ def faq(u):
 
 def js(u):
     d = O.URUN[u]
-    gal = [[I(k), n, pos] for k, n, pos in GAL[u]]
+    # Galeri Shopify'daki gibi (kullanıcı, 19 Eki): canlı mağazanın görselleri, aynı sıra, kare (ogrenme/galeri-canli.json)
+    gal = [[B + i, '%s görseli %d' % (AD[u], k + 1), '50% 50%'] for k, i in enumerate(canli_galeri({'af': 'lamba', 'gn': 'ayluna-galaksi-night-projektor'}[u]))]
     hz = [['Duvara ay', 'Fenerin tepesinden ay yansır.'], ['Müzik çalar', 'Bluetooth ile telefondan.'], ['Deniz sesi', 'Dahili ses modu.'], ['Kumandalı', 'Işığı ve modu uzaktan seç.']]
     disk = [[n, I(k)] for n, k in O.GDISK]
     kendi = 'lamba' if u == 'af' else 'ayluna-galaksi-night-projektor'
@@ -419,6 +419,6 @@ def sayfa(u):
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
-        h = int(os.environ.get('S_H_' + u, 7000))
+        h = int(os.environ.get('S_H_' + u, {'af': 6596, 'gn': 7108}[u]))  # ölçülen pano boyu (19 Eki, kare galeri)
         open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(sayfa(u) + TAIL.format(h=h, js=js(u)))
         print('yazıldı:', dosya, h)

@@ -8,7 +8,7 @@
 # Ürün adları mağazadaki gibi (içerik dosyasındaki ad önerileri kullanıcıya soruldu).
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS
+from ortak import HEAD, TAIL, TL_JS, canli_galeri
 import anasayfa as A
 import sayfalar as SY
 ROOT = os.path.join(HERE, '..', '..')
@@ -106,7 +106,7 @@ def tl(x):
 
 def govde(u):
     h = u['handle']; ad = AD.get(h, u['ad'])
-    gal = [B + BLOB[g['dosya']] for g in u['gorseller'] if g['dosya'] in BLOB]
+    gal = [B + i for i in canli_galeri(u['handle'])]  # Shopify sırası (araclar/canli_galeri.py)
     eski = u['eski'] if u['eski'] and u['eski'] > u['fiyat'] else None
     rozet = '<em class="yok">Tükendi</em>' if not u['stokta'] else ('<em>%%%d indirim</em>' % round((1 - u['fiyat'] / eski) * 100) if eski else '')
     serit = ('  <p class="u-serit" style="background: %s2E">%s</p>\n' % (u['renk']['vurgu'], u['duyuru'])) if u.get('duyuru') else ''

@@ -475,6 +475,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Galeriler Shopify'daki gibi + masaüstü (19 Ekim, en güncel)
+- Kullanıcı: "Benim şu anda kullandığım ürün görselleri tarzında yapmayı düşünüyorum, yazısı vesaire. Fotoğraf kısmını Shopify'daki ile aynı şekle getir. Bir de mağazanın masaüstü görünüşünü yapmak lazım."
+- `araclar/canli_galeri.py`: canlı `/products.json` (`ogrenme/canli-urunler.json`) → `ogrenme/galeri-canli.json` (Shopify sırası, çıkarılanlar ve kontrol listesi kodda). `ortak.canli_galeri(handle)` tüm üreticilerde.
+- LunaDream, USB, AyFeneri, Galaksi Night galerileri kare (`.hero.kare`, LunaDream `.sahne`); oda sahneleri galeriden çıktı (sayfanın diğer bölümlerinde duruyor). Basit sayfalar aynı listeyi kullanıyor. test.js her ürünün galeri sayısını ve kareliğini dener.
+- Çıkarılan afişler (22): uydurma yorum kartları/kolajları, "2.400+ satış" rozeti, göz/uyku/cilt iddiaları, araçta kullanım, başka cihaz, LunaDream "Temalar" (unicorn, 2025), USB "12 farklı galaksi teması" (eski diskler) ve "Uyku öncesi" (yorum kartı).
+- Sıradaki: masaüstü görünüm (önce ana sayfa + ürün sayfası yönü).
+
 ## Baskı satırları: aynı gün kargo + Dün satılan (18 Ekim, en güncel)
 - Kullanıcı (LunaDream ekran görüntüleriyle): "şu kısım dönsün, ilk hali öyle başlasın; sonra bugün 16'ya kadar verilen siparişler aynı gün kargoda, orada bir sayaç dönsün. Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı yapalım. Diğer USB için de bu baskılayıcıları koyabiliriz."
 - LunaDream (`luna_e.py`) ve Galaxy USB (`luna_usb.py`):

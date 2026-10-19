@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri
 
 # Bir gece kadranı: fotoğraf penceresinin merkezi (195, 216), yay yarıçapı 156; 5 an yayda (açı, derece)
 KAD_X, KAD_Y, KAD_R = 195, 216, 156
@@ -49,18 +49,18 @@ CSS = r""".pg{background:#F6F1E9}
 /* Sahne (Tur 8, kullanıcı: "görsel kısmı Main'deki gibi, ama bizim ürün görsellerimiz"): gece laciverti zemin, üstte logo,
    kare ürün fotoğrafı kırpılmadan tam genişlik, alt kenarı geceye karışır; diskler fotoğrafın kenarlarında yavaşça süzülür;
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
-.sahne{position:relative;height:476px;background:#0C1027;overflow:hidden;color:#FFFDF9}
+/* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): görsel logo bandının altında tam kare, üstüne gölge ya da yüzen öğe binmez; ay göstergesi altında. */
+.sahne{position:relative;height:516px;background:#0C1027;overflow:hidden;color:#FFFDF9}
 .sahne header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;text-shadow:0 1px 8px rgba(12,16,39,.5)}
 .sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:446px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .sahne .kare-foto::-webkit-scrollbar{display:none}
 .kf{position:relative;flex:0 0 390px;height:446px;scroll-snap-align:start}
 .sahne .gec{position:absolute;top:0;bottom:0;width:50%;z-index:1;padding:0;border:0;background:transparent;cursor:pointer}
 .sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover}
-.sahne .kf::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,16,39,.72) 0,rgba(12,16,39,.25) 14%,rgba(12,16,39,0) 24%,rgba(12,16,39,0) 78%,rgba(12,16,39,.97) 86.5%,#0C1027 89%);pointer-events:none}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
 .yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
-.seritler{position:absolute;left:16px;right:16px;bottom:42px;z-index:3;display:flex;align-items:flex-end;gap:8px}
+.seritler{position:absolute;left:16px;right:16px;bottom:38px;z-index:3;display:flex;align-items:flex-end;gap:8px}
 /* Galeri göstergesi (küçük resimlerin yerine, kullanıcı: "görünmesin, kaydırılır olsun; altlarına ay animasyonu, sayfa geçtikçe tamamlanıyor gibi"):
    her fotoğrafa bir ay; geçtikçe evreler yanar, son fotoğrafta dolunay. Hareket yalnız transform/opacity. */
 .ay-iz{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
@@ -411,6 +411,7 @@ STOK = '18'
 AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % ay(.15)
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
+AD_LD = {'211acb76d908e8ed6d4f5fcddc987893': 'Masalsı gece ışığı', '652e1893a0ae33a24ee0e3d53edab757': 'Müşteri paylaşımı: çocuk odasında LunaDream', 'a08890007843d79d94bfffc397a3d0ac': 'Gece modu', 'd4efe7e83c74524ece75e962161f7fff': 'Deniz altı', '3ddd8b8b95f040d436d5d0ea350924b8': 'Hediyeye hazır', '98db755893dbcebe192c69e73ae5afff': 'Uzay macerası'}
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
     # Marka işareti: ay evresi çizimi (ince daire + amber hilal); teslim çizgisi ve mühürle aynı çizim
@@ -426,8 +427,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px">""" + LOGO + """<span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></div></sc-for></div>
-    <!-- Süzülen hediye diskleri: fotoğrafın kenarlarında, ürünü kapatmaz -->
-    <sc-for list="{{tiles}}" as="t" hint-placeholder-count="2"><span class="yuzen" aria-hidden="true" style="left: {{t.x}}px; top: {{t.y}}px; width: {{t.s}}px; height: {{t.s}}px; --r: {{t.r}}deg; animation-delay: {{t.d}}s"><img src="{{t.src}}" alt=""></span></sc-for>
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
     <div class="seritler">
       <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></span>
@@ -684,30 +683,14 @@ JS = """class Component extends DCLogic {
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
-    // Galeri = Shopify ana ürün medyası ("Elif K." kartı ve yorum kolajı mevzuat gereği hariç)
-    // Galeri: önce profesyonel oda sahneleri (gerçek üründen Flow ile; ürün değiştirilmedi), sonra Shopify'daki ana ürün afişleri
-    var G = [
-      { id: 'fd0bca1b99cf3837b69fb025cc4e2cd9', n: 'Gece çocuk odası, LunaDream Kız duvara ay ve yıldız yansıtıyor', pos: '50% 60%', oda: true },
-      { id: '31751eb35473aca04420825deb3c3ce0', n: 'Gece çocuk odası, LunaDream Erkek (Uzay Kaşifi)', pos: '50% 62%', oda: true },
-      { id: 'cbd70711defa628872683fa471fcac61', n: 'Gündüz çocuk odası, komodinde LunaDream Erkek', pos: '50% 70%', oda: true },
-      { id: '211acb76d908e8ed6d4f5fcddc987893', n: 'Masalsı gece ışığı', pos: '50% 50%' },
-      // 'Temalar' afişi (ec0a99…) çıkarıldı: kutuda olmayan diskler (unicorn, 2025) gösteriyor; afiş düzelince geri gelir
-      { id: '652e1893a0ae33a24ee0e3d53edab757', n: 'Müşteri paylaşımı: çocuk odasında LunaDream', pos: '50% 50%' },
-      { id: 'a08890007843d79d94bfffc397a3d0ac', n: 'Gece modu', pos: '50% 50%' },
-      { id: 'd4efe7e83c74524ece75e962161f7fff', n: 'Deniz altı', pos: '50% 50%' },
-      { id: '3ddd8b8b95f040d436d5d0ea350924b8', n: 'Hediye', pos: '50% 50%' },
-      { id: '98db755893dbcebe192c69e73ae5afff', n: 'Uzay Kaşifi', pos: '50% 50%' }
-    ];
+    // Galeri Shopify'daki gibi (kullanıcı, 19 Eki): canlı mağazanın görselleri, aynı sıra, kare (ogrenme/galeri-canli.json).
+    // Çıkarılanlar: 'Temalar' afişi (kutuda olmayan diskler), 'Elif K.' kartı ve yorum kolajı (uydurma yorum).
+    var G = """ + str([{'id': i, 'n': AD_LD.get(i, 'LunaDream görseli')} for i in canli_galeri('lunadream-gece-lambasi')]) + """;
     // Ay göstergesi: i. fotoğrafın evresi (i+1)/N; geçilenler ve o anki yanar, son fotoğrafta dolunay
     function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
-    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: g.pos, top: g.oda ? 0 : 56, h: g.oda ? 446 : 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: '50% 50%', top: 56, h: 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto !== false && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
-    // Süzülen hediye diskleri: fotoğrafın kenarında, yavaş (7 sn), yalnız transform
-    var tiles = [
-      { id: 'a24f13e032569f76d64b9b0fbe8d74f7', x: -16, y: 330, s: 46, r: -12, d: 0 },
-      { id: 'b088d2c82561b76f6db997fbc3944059', x: 364, y: 340, s: 38, r: 8, d: -2.3 }
-    ].map(function (t) { return { src: B + t.id, x: t.x, y: t.y, s: t.s, r: t.r, d: t.d }; });
     var kiz = S.model === 'kiz';
     var KIZ = B + 'e02351b3be4a1c555c5d760d0bbda723', ERKEK = B + '0033dfea6282c5bc479c385213661c00';
     // Küçük ürün görselleri tek dil: stüdyo fotoğrafından arka planı temizlenmiş kesim (model, paket, yapışkan çubuk)
@@ -821,7 +804,7 @@ JS = """class Component extends DCLogic {
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
     return {
-      gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, tiles: tiles, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
+      gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
@@ -839,5 +822,5 @@ JS = """class Component extends DCLogic {
 
 # Diğer ürün sayfaları (luna_usb.py) bu dosyadaki CSS ve parçaları içe aktarır; yazma yalnız doğrudan çalıştırınca
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6120)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('E_H', 6160)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

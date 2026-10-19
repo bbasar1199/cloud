@@ -303,7 +303,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: 2, sec: 0 }); }
   componentDidMount() { var self = this; if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.gOto = false;
-    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 3); self.setState({ now: Date.now() }); }, 1000); }
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 4); self.setState({ now: Date.now() }); }, 1000); }
   git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ g: i }); }
   componentDidUpdate() { var el = document.querySelector('.g-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
   componentWillUnmount() { clearInterval(this.iv); }
@@ -318,7 +318,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/0fe15922efcc325bd8315cea039c86a8", "/_blob/425c8b299dd6af4c42491b00c73eff37", "/_blob/9eefec1fe0bc084b8205fde57c4eeb85"], AD = "Yıldız Işığı Nemlendirici";
+    var GAL = ["/_blob/0fe15922efcc325bd8315cea039c86a8", "/_blob/425c8b299dd6af4c42491b00c73eff37", "/_blob/14974d0e30e5b51941dfbd53225ecd92", "/_blob/9eefec1fe0bc084b8205fde57c4eeb85"], AD = "Yıldız Işığı Nemlendirici";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

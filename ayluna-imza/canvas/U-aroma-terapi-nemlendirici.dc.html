@@ -316,7 +316,7 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/b10b74422a3d308ccdf02021a86bdee2", "/_blob/608de0999ad24d0346e2e64dea7b4e89", "/_blob/a1640a4ba2b5bb49afb70e1a803b3044", "/_blob/1ba7af884ae574e7fea67912d50d5903", "/_blob/b8c39a324e972c42c896ffd9b29ff011", "/_blob/c57862966de4d622e28448aca545da1c"], AD = "Aroma Terapi Nemlendirici";
+    var GAL = ["/_blob/b10b74422a3d308ccdf02021a86bdee2", "/_blob/b8c39a324e972c42c896ffd9b29ff011", "/_blob/1ba7af884ae574e7fea67912d50d5903", "/_blob/608de0999ad24d0346e2e64dea7b4e89", "/_blob/a1640a4ba2b5bb49afb70e1a803b3044", "/_blob/c57862966de4d622e28448aca545da1c"], AD = "Aroma Terapi Nemlendirici";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
