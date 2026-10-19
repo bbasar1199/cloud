@@ -486,6 +486,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   3. Alt bölümler masaüstüne açılır: koyu bölümler kenardan kenara gece bandı, Bir gece iki sütun, odalar yan yana, kaydırmalı şeritler ızgara.
 - Uygulandı (19 Eki): çubuk `ayluna.js cubukKur` (satın alma butonu ekranın üstünden çıkınca iner); özellik kartları `ortak.urun_ust(..., oz)` + renderVals `masa/tel` bayrağı (yalnız sitede, `window.Ayluna` varken; tuval hep telefon); Bir gece masaüstünde `.g-liste` (kaydırma adımı yok); koyu bölümler gece bandı, diskler iki sütun, odalar yan yana, şeritler ızgara (`ayluna.css`). Başlıklardaki `<br>` masaüstünde gizli; `site_uret.parcala` önüne boşluk koyar.
 - Shopify'a taşırken: aynı masaüstü kuralları bölüm CSS'ine `@media (min-width:1024px)` olarak girer; özellik kartlarının iki yeri Liquid'de iki kopya + CSS ile değil, tek kopya + masaüstünde grid alanıyla çözülmeli (bakılacak).
+- İmza sayfalarının telefondaki koyu başlık bandı şeffaf denendi (A: sayfa zemininde, B: fotoğrafın üstünde; B afişin kendi logosu ve başlığıyla çakışıyor). Kullanıcı: "boşver kalsın" → koyu bant kalır, tekrar önerilmez.
 - Bekleyen eleştirmen önerileri (seçilmedi, sırada): yatay slayt görseli (Flow), koleksiyonda LunaDream için "Seç", slayt noktaları tıklanır, ödeme sayfası iki sütun, % rozeti posterden fiyata, ana sayfaya Loox puanı.
 
 ## Galeriler Shopify'daki gibi + masaüstü (19 Ekim)
