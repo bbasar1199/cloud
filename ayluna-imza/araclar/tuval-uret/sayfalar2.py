@@ -163,7 +163,7 @@ ARAMA = ("""
   <div class="izg"><sc-for list="{{bulunan}}" as="u" hint-placeholder-count="4"><a href="#"><img src="{{u.src}}" alt="{{u.ad}}"><span>{{u.ad}}<em>{{u.p}}</em></span></a></sc-for></div>
 """)
 ARAMA_EK = """
-    var U = """ + json.dumps([dict(ad=u['ad'], p=u['p'], kat=u['kat'], src=u['src'], var=u['var']) for u in SY.URUNLER], ensure_ascii=False) + """;
+    var U = """ + json.dumps([dict(h=u['h'], ad=u['ad'], p=u['p'], kat=u['kat'], src=u['src'], var=u['var']) for u in SY.URUNLER], ensure_ascii=False) + """; if (window.Ayluna && window.Ayluna.fiyat) U = window.Ayluna.fiyat(U);
     function N(s) { return (s || '').toLocaleLowerCase('tr'); }
     var q = S.q === undefined ? (decodeURIComponent(((location.search + location.hash).match(/[?&]q=([^&]*)/) || [])[1] || '')) : S.q;
     var BUL = U.filter(function (u) { return !q || N(u.ad + ' ' + u.kat).indexOf(N(q).replace(/ları$|leri$/, '')) >= 0 || (N(q) === 'projektör' && u.kat === 'Projektörler') || (N(q) === 'nemlendirici' && u.kat === 'Nemlendiriciler') || (N(q) === 'gece lambası' && u.kat === 'Gece lambaları'); });

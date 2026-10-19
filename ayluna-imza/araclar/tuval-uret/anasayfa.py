@@ -169,8 +169,8 @@ def urun_kart(h, ad, p, c, var):
         return '₺' + n + t + ',' + s[1]
     rozet = '<em class="tukendi">Tükendi</em>' if not var else ('<em>%%%d</em>' % round((1 - p / c) * 100) if c and c > p else '')
     eski = '<s>%s</s>' % tl(c) if c and c > p else ''
-    return ('<a class="uk%s" href="#"><span><img src="%s%s" alt="%s">%s</span><span><b>%s</b><span class="f"><strong>%s</strong>%s</span></span></a>'
-            % ('' if var else ' yok', B, U(h), ad, rozet, ad, tl(p), eski))
+    return ('<a class="uk%s" href="#" data-h="%s"><span><img src="%s%s" alt="%s">%s</span><span><b>%s</b><span class="f"><strong>%s</strong>%s</span></span></a>'
+            % ('' if var else ' yok', h, B, U(h), ad, rozet, ad, tl(p), eski))
 
 
 GUVEN = [('<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle>', 'Ücretsiz kargo', 'Türkiye geneline, takip numarasıyla.'),

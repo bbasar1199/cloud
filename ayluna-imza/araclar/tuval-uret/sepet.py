@@ -119,11 +119,11 @@ HTML = """<div class="pg" style="padding-bottom: 0">
         <span class="urun-fiyat"><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
 
   <!-- Siparişine özel: canlı sepetteki üç teklif. Dokununca eklenir; ay dolar. Mağaza fiyatı düz yazı (üstü çizili değil). -->
-  <div class="blok-bas"><b>Siparişine özel</b><span>Yalnız bu siparişte</span></div>
-  <sc-for list="{{teklif}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}"><img src="{{t.src}}" alt=""><span><b>{{t.n}}</b><small>{{t.alt}}</small><span class="tf">{{t.p}}</span></span><span class="ekle">""" + AY + """{{t.btn}}</span></button></sc-for>
+  <sc-if value="{{teklifVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas"><b>Siparişine özel</b><span>{{teklifNot}}</span></div>
+  <sc-for list="{{teklif}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}"><img src="{{t.src}}" alt=""><span><b>{{t.n}}</b><small>{{t.alt}}</small><span class="tf">{{t.p}}</span></span><span class="ekle">""" + AY + """{{t.btn}}</span></button></sc-for></sc-if>
 
-  <div class="blok-bas" style="margin-top: 18px"><b>Teslimat</b></div>
-  <sc-for list="{{teslimat}}" as="d" hint-placeholder-count="2"><button class="{{d.cls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><span class="nokta"><i></i></span><span><b>{{d.n}}</b><small>{{d.t}}</small></span><em>{{d.p}}</em></button></sc-for>
+  <sc-if value="{{teslimatVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas" style="margin-top: 18px"><b>Teslimat</b></div>
+  <sc-for list="{{teslimat}}" as="d" hint-placeholder-count="2"><button class="{{d.cls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><span class="nokta"><i></i></span><span><b>{{d.n}}</b><small>{{d.t}}</small></span><em>{{d.p}}</em></button></sc-for></sc-if>
 
   </div><div class="s-sag">
   <div class="ozet">
@@ -154,7 +154,9 @@ JS = """class Component extends DCLogic {
     """ + TL_JS + """
     function demo(f) { var d = JSON.parse(JSON.stringify(self.state.demo)); f(d); self.setState({ demo: d }); }
     var sp = SP ? SP.oku() : S.demo, ekler = sp.ekler || {};
-    var T = """ + json.dumps([dict(k=e['k'], n=e['n'], alt=e['alt'], p=e['p'], img=e['img']) for e in EKLER], ensure_ascii=False) + """;
+    var T = """ + json.dumps([dict(k=e['k'], n=e['n'], alt=e['alt'], p=e['p'], img=e['img'], h=e['h']) for e in EKLER], ensure_ascii=False) + """;
+    var SHOP = !!(window.Ayluna && window.Ayluna.shopify), VU = (window.AYLUNA_VERI || {}).urun || {};
+    if (SHOP) T = T.filter(function (t) { return VU[t.h] && !VU[t.h].yok && VU[t.h].stok !== false; }).map(function (t) { return Object.assign({}, t, { p: VU[t.h].p, alt: 'Tek dokunuşla siparişine ekle' }); });
     var teklif = T.map(function (t) { var on = !!ekler[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
       pick: function () { if (SP) SP.ek(t.k); else demo(function (d) { d.ekler[t.k] = !d.ekler[t.k]; }); } }; });
     var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim && (x.paket || 1) === 1 && x.adet === 1), eski: x.eski ? TL(x.eski, true) : '',
@@ -180,7 +182,7 @@ JS = """class Component extends DCLogic {
     var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
       bos: !sp.satirlar.length, dolu: sp.satirlar.length > 0, satirlar: satirlar, adetToplam: adetT + ekSay,
-      teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
+      teklif: teklif, teslimat: teslimat, teklifVar: teklif.length > 0, teklifNot: SHOP ? 'Birlikte iyi gider' : 'Yalnız bu siparişte', teslimatVar: !SHOP, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
       araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
       indirim: TL(indirim, true), toplam: TL(toplam, true),
       kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.geri(); },

@@ -124,11 +124,11 @@ a{color:#1A2142}a:hover{color:#2B3463}
         <span class="urun-fiyat"><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
 
   <!-- Siparişine özel: canlı sepetteki üç teklif. Dokununca eklenir; ay dolar. Mağaza fiyatı düz yazı (üstü çizili değil). -->
-  <div class="blok-bas"><b>Siparişine özel</b><span>Yalnız bu siparişte</span></div>
-  <sc-for list="{{teklif}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}"><img src="{{t.src}}" alt=""><span><b>{{t.n}}</b><small>{{t.alt}}</small><span class="tf">{{t.p}}</span></span><span class="ekle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A8.98 9 0 0 1 12 3Z"></path></svg>{{t.btn}}</span></button></sc-for>
+  <sc-if value="{{teklifVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas"><b>Siparişine özel</b><span>{{teklifNot}}</span></div>
+  <sc-for list="{{teklif}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}"><img src="{{t.src}}" alt=""><span><b>{{t.n}}</b><small>{{t.alt}}</small><span class="tf">{{t.p}}</span></span><span class="ekle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A8.98 9 0 0 1 12 3Z"></path></svg>{{t.btn}}</span></button></sc-for></sc-if>
 
-  <div class="blok-bas" style="margin-top: 18px"><b>Teslimat</b></div>
-  <sc-for list="{{teslimat}}" as="d" hint-placeholder-count="2"><button class="{{d.cls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><span class="nokta"><i></i></span><span><b>{{d.n}}</b><small>{{d.t}}</small></span><em>{{d.p}}</em></button></sc-for>
+  <sc-if value="{{teslimatVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas" style="margin-top: 18px"><b>Teslimat</b></div>
+  <sc-for list="{{teslimat}}" as="d" hint-placeholder-count="2"><button class="{{d.cls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><span class="nokta"><i></i></span><span><b>{{d.n}}</b><small>{{d.t}}</small></span><em>{{d.p}}</em></button></sc-for></sc-if>
 
   </div><div class="s-sag">
   <div class="ozet">
@@ -158,7 +158,9 @@ class Component extends DCLogic {
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
     function demo(f) { var d = JSON.parse(JSON.stringify(self.state.demo)); f(d); self.setState({ demo: d }); }
     var sp = SP ? SP.oku() : S.demo, ekler = sp.ekler || {};
-    var T = [{"k": "astronot", "n": "Astronot Nemlendirici", "alt": "Mağazada ₺799,00", "p": 749.0, "img": "ec1ada6af6ab5b345bc0a6c49e46d7be"}, {"k": "kum", "n": "Kum Saati Lamba", "alt": "Mağazada ₺799,00", "p": 699.99, "img": "ceaf4cf66048150f068cf32120aa9eb1"}, {"k": "nem", "n": "Yıldız Işığı Nemlendirici", "alt": "Mağazada ₺849,99", "p": 749.99, "img": "bf1b4c56f2b7c2d2e4b44ece808b0887"}];
+    var T = [{"k": "astronot", "n": "Astronot Nemlendirici", "alt": "Mağazada ₺799,00", "p": 749.0, "img": "ec1ada6af6ab5b345bc0a6c49e46d7be", "h": "astronot-oda-nemlendirici-aroma-difuzor"}, {"k": "kum", "n": "Kum Saati Lamba", "alt": "Mağazada ₺799,00", "p": 699.99, "img": "ceaf4cf66048150f068cf32120aa9eb1", "h": "ask-saati"}, {"k": "nem", "n": "Yıldız Işığı Nemlendirici", "alt": "Mağazada ₺849,99", "p": 749.99, "img": "bf1b4c56f2b7c2d2e4b44ece808b0887", "h": "yildiz-isigi-nemlendirici"}];
+    var SHOP = !!(window.Ayluna && window.Ayluna.shopify), VU = (window.AYLUNA_VERI || {}).urun || {};
+    if (SHOP) T = T.filter(function (t) { return VU[t.h] && !VU[t.h].yok && VU[t.h].stok !== false; }).map(function (t) { return Object.assign({}, t, { p: VU[t.h].p, alt: 'Tek dokunuşla siparişine ekle' }); });
     var teklif = T.map(function (t) { var on = !!ekler[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
       pick: function () { if (SP) SP.ek(t.k); else demo(function (d) { d.ekler[t.k] = !d.ekler[t.k]; }); } }; });
     var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim && (x.paket || 1) === 1 && x.adet === 1), eski: x.eski ? TL(x.eski, true) : '',
@@ -195,7 +197,7 @@ class Component extends DCLogic {
     var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
       bos: !sp.satirlar.length, dolu: sp.satirlar.length > 0, satirlar: satirlar, adetToplam: adetT + ekSay,
-      teklif: teklif, teslimat: teslimat, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
+      teklif: teklif, teslimat: teslimat, teklifVar: teklif.length > 0, teklifNot: SHOP ? 'Birlikte iyi gider' : 'Yalnız bu siparişte', teslimatVar: !SHOP, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
       araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
       indirim: TL(indirim, true), toplam: TL(toplam, true),
       kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.geri(); },

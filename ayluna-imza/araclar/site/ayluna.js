@@ -2,10 +2,25 @@
    1) Tuval sayfalarının (.dc.html) şablonunu çalıştırır: {{delik}}, sc-for, sc-if, onClick; her çizimde DOM'u yerinde yamar
       (öğeler korunur: kaydırma, geçiş ve animasyonlar bozulmaz; açılan <details> açık kalır).
    2) Sepet deposu (localStorage), sepet çekmecesi, kapıda ödeme formu (EasySell yerine), menü, arama, yönlendirme.
-   Shopify'da bu işlerin karşılığı: sepet = /cart.js + /cart/add.js, kapıda ödeme = EasySell, ödeme = Shopify checkout. */
+   Shopify'da bu işlerin karşılığı: sepet = /cart.js + /cart/add.js, kapıda ödeme = EasySell, ödeme = Shopify checkout.
+   3) Shopify kipi (window.AYLUNA_SHOPIFY, tema: araclar/tema/tema_uret.py): sepet Shopify sepeti, adresler mağaza adresleri,
+      fiyat ve stok canlı ürünlerden (AYLUNA_CANLI), görseller tema dosyalarından (AYLUNA_GORSEL), kapıda ödeme EasySell. */
 (function () {
   'use strict';
   var V = window.AYLUNA_VERI || { urun: {}, sira: [] };
+  var SHOP = !!window.AYLUNA_SHOPIFY, AYAR = window.AYLUNA_AYAR || {};
+  // Shopify: görseller tema dosyalarından; fiyat, stok ve varyantlar mağazanın kendisinden (panoya yazılı fiyat yalnız ilk değer)
+  var TUVAL_FIYAT = {};
+  if (SHOP) {
+    if (window.AYLUNA_GORSEL) V.blob = window.AYLUNA_GORSEL;
+    if (AYAR.wa) V.wa = AYAR.wa;
+    var CANLI = window.AYLUNA_CANLI || {};
+    Object.keys(V.urun).forEach(function (h) {
+      var u = V.urun[h], c = CANLI[h]; TUVAL_FIYAT[h] = u.p;
+      if (!c) { u.yok = true; return; }
+      u.p = c.p / 100; u.c = c.c > c.p ? c.c / 100 : null; u.stok = !!c.stok; u.vid = c.vid; u.vs = c.v || []; u.url = c.url;
+    });
+  }
   var TL = function (n) { var s = (Math.round(n * 100) / 100).toFixed(2).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + s[1]; };
   var HTMLNS = 'http://www.w3.org/1999/xhtml';
   // Tek dosya kipi (site-tek/index.html): bütün sayfalar tek dosyada, adres #sayfa ile değişir
@@ -91,10 +106,69 @@
   var ANAHTAR = 'ayluna-sepet-v1';
   var EKLER = V.ekler || [];
   var HIZLI = 79.99, KAPIDA = 80;
-  function oku() { try { var s = JSON.parse(localStorage.getItem(ANAHTAR)); if (s && s.satirlar) return s; } catch (e) {} return { satirlar: [], ekler: {}, hizli: false }; }
+  function oku() {
+    if (SHOP) return SC;
+    try { var s = JSON.parse(localStorage.getItem(ANAHTAR)); if (s && s.satirlar) return s; } catch (e) {} return { satirlar: [], ekler: {}, hizli: false };
+  }
+  /* Shopify sepeti: /cart.js ↔ bileşenlerin beklediği biçim. Siparişe özel teklifler "_ek" özelliğiyle ayrı tutulur. */
+  function scCevir(c) {
+    var s = { satirlar: [], ekler: {}, hizli: false, adetS: 0, ham: c };
+    ((c && c.items) || []).forEach(function (it) {
+      var p = it.properties || {};
+      if (p._ek) { s.ekler[p._ek] = it.key; s.adetS += it.quantity; return; }
+      var vt = it.variant_title && it.variant_title !== 'Default Title' ? it.variant_title : '';
+      s.satirlar.push({ id: it.key, key: it.key, vid: it.variant_id, h: it.handle, ad: it.product_title, varyant: p._secim || vt || '1 adet', paket: +(p._paket || 1),
+        birim: it.final_line_price / 100 / it.quantity, eski: it.original_line_price > it.final_line_price ? it.original_line_price / 100 / it.quantity : null,
+        img: it.image || (V.urun[it.handle] && V.urun[it.handle].img) || '', adet: it.quantity });
+      s.adetS += it.quantity;
+    });
+    return s;
+  }
+  var SC = scCevir(window.AYLUNA_SEPET);
+  function scIstek(yol, govde) {
+    return fetch(yol, govde ? { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(govde) } : { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.description || j.message || 'Sepet hatası'); return j; }); });
+  }
+  function scYukle() { return scIstek('/cart.js').then(function (c) { SC = scCevir(c); haber(); return SC; }); }
+  function scHata(e) { bildir(e && e.message ? e.message : 'Sepet güncellenemedi'); scYukle(); }
+  // Seçimi Shopify kalemlerine çevir: LunaDream'de model = varyant (Kız/Erkek), paket = adet
+  function kalemler(sat) {
+    var U = V.urun[sat.h] || {}, n = sat.paket || 1, vs = U.vs || [], ozellik = { _secim: sat.varyant, _paket: String(n) };
+    function vBul(anahtar) { for (var i = 0; i < vs.length; i++) if (vs[i].t.toLocaleLowerCase('tr').indexOf(anahtar) >= 0) return vs[i].id; return U.vid; }
+    if (sat.h === 'lunadream-gece-lambasi' && sat.modeller) {
+      var say = {}; sat.modeller.forEach(function (m) { var id = vBul(m === 'erkek' ? 'erkek' : 'kız'); say[id] = (say[id] || 0) + 1; });
+      return Object.keys(say).map(function (id) { return { id: +id, quantity: say[id], properties: ozellik }; });
+    }
+    if (U.secenek && U.secenek.length && sat.secIndex != null && vs[sat.secIndex]) return [{ id: vs[sat.secIndex].id, quantity: n, properties: ozellik }];
+    return [{ id: U.vid, quantity: n, properties: ozellik }];
+  }
   function yaz(s) { try { localStorage.setItem(ANAHTAR, JSON.stringify(s)); } catch (e) {} haber(); }
   function haber() { try { window.dispatchEvent(new CustomEvent('ayluna-sepet')); } catch (e) {} suslen(); if (C) planla(); }
-  var Sepet = {
+  var Sepet = SHOP ? {
+    oku: oku,
+    ekle: function (sat) { return scIstek('/cart/add.js', { items: kalemler(sat) }).then(scYukle).catch(scHata); },
+    koy: function (sat) {
+      var sil = {}; SC.satirlar.forEach(function (x) { if (x.h === sat.h) sil[x.key] = 0; });
+      var once = Object.keys(sil).length ? scIstek('/cart/update.js', { updates: sil }) : Promise.resolve();
+      return once.then(function () { return scIstek('/cart/add.js', { items: kalemler(sat) }); }).then(scYukle).catch(scHata);
+    },
+    adet: function (id, n) { return scIstek('/cart/change.js', { id: id, quantity: Math.max(1, Math.min(9, n)) }).then(function (c) { SC = scCevir(c); haber(); }).catch(scHata); },
+    sil: function (id) { return scIstek('/cart/change.js', { id: id, quantity: 0 }).then(function (c) { SC = scCevir(c); haber(); }).catch(scHata); },
+    ek: function (k) {
+      var e = EKLER.filter(function (x) { return x.k === k; })[0], U = e && V.urun[e.h]; if (!e) return;
+      if (SC.ekler[k]) return scIstek('/cart/change.js', { id: SC.ekler[k], quantity: 0 }).then(function (c) { SC = scCevir(c); haber(); }).catch(scHata);
+      if (!U || !U.vid || U.stok === false) { bildir('Bu ürün şu an eklenemiyor'); return; }
+      return scIstek('/cart/add.js', { items: [{ id: U.vid, quantity: 1, properties: { _ek: k } }] }).then(scYukle).catch(scHata);
+    },
+    hizli: function () {},
+    temizle: function () { return scIstek('/cart/clear.js', {}).then(scYukle); },
+    sayi: function () { return SC.adetS; },
+    toplam: function (yolu) {
+      var urun = SC.ham ? SC.ham.total_price / 100 : 0, ind = yolu === 'kapida' ? 0 : Math.round(urun * 0.05 * 100) / 100, kp = yolu === 'kapida' ? KAPIDA : 0;
+      return { urun: urun, ek: 0, kargo: 0, indirim: ind, kapida: kp, toplam: Math.round((urun - ind + kp) * 100) / 100 };
+    },
+    yukle: scYukle, EKLER: EKLER, HIZLI: HIZLI, KAPIDA: KAPIDA, TL: TL
+  } : {
     oku: oku,
     ekle: function (sat) {
       var s = oku(), id = sat.h + '|' + (sat.varyant || '') + '|' + (sat.paket || 1);
@@ -134,9 +208,10 @@
     // Paket ve çoklu adette üstü çizili "2 × eski fiyat" yok (TASARIM-BILGISI §7 kural 2)
     var birim = pk ? pk.p : U.p * n, eski = n === 1 ? (pk && pk.c ? pk.c : U.c || null) : null, varyant = [];
     varyant.push(n > 1 ? n + ' adet' : '1 adet');
-    if (h === 'lunadream-gece-lambasi') { var M = { kiz: 'Kız (Tavşanlı)', erkek: 'Erkek (Robot)' }; varyant.push(n === 2 ? M[S.model || 'kiz'] + ' + ' + M[S.l2 || S.model || 'kiz'] : M[S.model || 'kiz']); }
-    else if (U.secenek && U.secenek.length) varyant.push(U.secenek[S.sec || 0]);
-    return { h: h, ad: U.ad, varyant: varyant.join(' · '), paket: n, birim: birim, eski: eski, img: U.img, adet: 1 };
+    var modeller = null, secIndex = null;
+    if (h === 'lunadream-gece-lambasi') { var M = { kiz: 'Kız (Tavşanlı)', erkek: 'Erkek (Robot)' }; modeller = n === 2 ? [S.model || 'kiz', S.l2 || S.model || 'kiz'] : [S.model || 'kiz']; varyant.push(modeller.map(function (m) { return M[m]; }).join(' + ')); }
+    else if (U.secenek && U.secenek.length) { secIndex = S.sec || 0; varyant.push(U.secenek[secIndex]); }
+    return { h: h, ad: U.ad, varyant: varyant.join(' · '), paket: n, birim: birim, eski: eski, img: U.img, adet: 1, modeller: modeller, secIndex: secIndex };
   }
 
   /* ---------- 3. Arayüz katmanları ---------- */
@@ -150,6 +225,7 @@
     tost.textContent = m; tost.classList.add('on'); clearTimeout(tost.__z); tost.__z = setTimeout(function () { tost.classList.remove('on'); }, 2600);
   }
   Sepet.bildir = bildir;
+  function waAc() { if (SHOP && V.wa && V.wa !== '#') window.open(V.wa, '_blank', 'noopener'); else bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); }
 
   // Menü
   var MENU = [['Ana sayfa', './'], ['Tüm ürünler', 'tum-urunler.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
@@ -159,14 +235,14 @@
     if (!menu) {
       menu = el('<div class="ay-katman ay-menu" role="dialog" aria-modal="true" aria-label="Menü"><div class="ay-perde" data-kapat></div><nav class="ay-panel sol">' +
         '<div class="ay-p-ust"><b>Ayluna</b><button type="button" class="ay-x" data-kapat aria-label="Menüyü kapat"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>' +
-        '<ul>' + MENU.map(function (m) { return '<li><a href="' + m[1] + '">' + m[0] + '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></a></li>'; }).join('') + '</ul>' +
+        '<ul>' + MENU.map(function (m) { return '<li><a href="' + adres(m[1]) + '">' + m[0] + '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></a></li>'; }).join('') + '</ul>' +
         '<a class="ay-wa" href="' + (V.wa || '#') + '" data-wa>WhatsApp destek · ortalama 2 saatte yanıt</a></nav></div>');
       document.body.appendChild(menu);
       menu.addEventListener('click', function (e) {
         if (e.target.closest('[data-kapat]')) { menuKapat(); return; }
         var a = e.target.closest('a[href]'); if (!a) return;
         e.preventDefault();
-        if (a.hasAttribute('data-wa')) { bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); return; }
+        if (a.hasAttribute('data-wa')) { waAc(); return; }
         menuKapat(); git(a.getAttribute('href'));
       });
     }
@@ -186,10 +262,10 @@
   function masaUst() {
     document.documentElement.setAttribute('data-ay-tur', SAYFA);
     if (!masa) {
-      masa = el('<header class="ay-masa"><div class="ay-masa-ic"><a class="ay-logo" href="./" aria-label="Ayluna ana sayfa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.6"></circle><path d="M12 2a10 10 0 0 1 0 20a7 10 0 0 0 0-20Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a>' +
-        '<nav aria-label="Ana menü">' + MASA.map(function (m) { return '<a href="' + m[1] + '" data-k="' + m[2] + '">' + m[0] + '</a>'; }).join('') + '</nav>' +
-        '<div class="ay-masa-sag"><a href="arama.html" aria-label="Ara">' + IC('<circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path>') + '</a>' +
-        '<a href="hesap.html" aria-label="Hesap">' + IC('<circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>') + '</a>' +
+      masa = el('<header class="ay-masa"><div class="ay-masa-ic"><a class="ay-logo" href="' + adres('./') + '" aria-label="Ayluna ana sayfa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.6"></circle><path d="M12 2a10 10 0 0 1 0 20a7 10 0 0 0 0-20Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a>' +
+        '<nav aria-label="Ana menü">' + MASA.map(function (m) { return '<a href="' + adres(m[1]) + '" data-k="' + m[2] + '">' + m[0] + '</a>'; }).join('') + '</nav>' +
+        '<div class="ay-masa-sag"><a href="' + adres('arama.html') + '" aria-label="Ara">' + IC('<circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path>') + '</a>' +
+        '<a href="' + adres('hesap.html') + '" aria-label="Hesap">' + IC('<circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>') + '</a>' +
         '<button type="button" aria-label="Sepet">' + IC('<path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path>') + '</button></div></div></header>');
       document.body.insertBefore(masa, document.body.firstChild);
     }
@@ -218,8 +294,10 @@
         '<button type="button" class="ay-al-kp" data-kp>Kapıda ödeme</button><button type="button" class="ay-al-btn" data-al><span data-l></span></button></div></div>');
       document.body.appendChild(cubuk);
       cubuk.addEventListener('click', function (e) {
-        if (e.target.closest('[data-al]')) sepeteAt(URUN, 'kart'); else if (e.target.closest('[data-kp]')) sepeteAt(URUN, 'kapida');
+        if (e.target.closest('[data-al]')) sepeteAt(URUN, 'kart');
+        else if (e.target.closest('[data-kp]')) { if (SHOP) { formEsitle(); if (!easySell()) sepeteAt(URUN, 'kart'); } else sepeteAt(URUN, 'kapida'); }
       });
+      if (SHOP) cubuk.querySelector('[data-kp]').setAttribute('data-ay-kapida', '');
     }
     cubuk.querySelector('img').src = gorsel(U.img); cubuk.querySelector('b').textContent = U.ad;
     cubukIO = new IntersectionObserver(function (g) {
@@ -232,7 +310,7 @@
   // Sepet çekmecesi: sepet.html sayfası iframe'de (aynı sepet bileşeni)
   var cek = null;
   function cekmeceAc() {
-    if (TEK) { git('sepet.html'); return; }
+    if (TEK || SHOP) { git('sepet.html'); return; }
     var u_ = ust(); if (u_) { u_.Ayluna.cekmeceAc(); return; }
     if (!cek) {
       cek = el('<div class="ay-katman ay-cek" role="dialog" aria-modal="true" aria-label="Sepet"><div class="ay-perde" data-kapat></div><div class="ay-panel sag"><iframe title="Sepet" src="sepet.html"></iframe></div></div>');
@@ -247,7 +325,10 @@
   // Kapıda ödeme formu (canlıda EasySell; burada aynı alanlar, ₺80 ücret, siparişe özel teklifler, "Bekle!" kartla %5)
   var kf = null;
   var ILLER = 'Adana,Adıyaman,Afyonkarahisar,Ağrı,Aksaray,Amasya,Ankara,Antalya,Ardahan,Artvin,Aydın,Balıkesir,Bartın,Batman,Bayburt,Bilecik,Bingöl,Bitlis,Bolu,Burdur,Bursa,Çanakkale,Çankırı,Çorum,Denizli,Diyarbakır,Düzce,Edirne,Elazığ,Erzincan,Erzurum,Eskişehir,Gaziantep,Giresun,Gümüşhane,Hakkari,Hatay,Iğdır,Isparta,İstanbul,İzmir,Kahramanmaraş,Karabük,Karaman,Kars,Kastamonu,Kayseri,Kilis,Kırıkkale,Kırklareli,Kırşehir,Kocaeli,Konya,Kütahya,Malatya,Manisa,Mardin,Mersin,Muğla,Muş,Nevşehir,Niğde,Ordu,Osmaniye,Rize,Sakarya,Samsun,Şanlıurfa,Siirt,Sinop,Şırnak,Sivas,Tekirdağ,Tokat,Trabzon,Tunceli,Uşak,Van,Yalova,Yozgat,Zonguldak'.split(',');
+  // Shopify: EasySell formu kendi düğme seçicisiyle açılır ([data-ay-kapida], EasySell ayarı). Uygulama yoksa sepete yönlendirilir.
+  function easySell() { return !!(window.EASYSELL_CONFIG || window.EasySell || window.easysell || document.querySelector('[class*="es-form"],[id*="easysell"],[class*="easysell"]')); }
   function kapidaAc() {
+    if (SHOP) { if (!easySell()) { bildir('Kapıda ödeme formu yüklenemedi; sepetten devam edebilirsin'); git('sepet.html'); } return; }
     var u_ = ust(); if (u_) { u_.Ayluna.kapidaAc(); return; }
     cekmeceKapat();
     if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; }
@@ -308,8 +389,19 @@
 
   /* ---------- 4. Yönlendirme ---------- */
   function tekHash(u) { if (!u || u === './' || u === 'index.html') return '#'; var m = String(u).match(/^([\w-]+)\.html(\?.*)?$/); return m ? '#' + m[1] + (m[2] || '') : u; }
-  function git(u) { if (TEK) { var h = tekHash(u); if (location.hash === h || (h === '#' && !location.hash)) rota(); else location.hash = h; return; } kokP().location.href = u; }
-  function geri() { if (TEK) { if (history.length > 1) history.back(); else git('./'); return; } git(document.referrer && document.referrer.indexOf(location.host) >= 0 ? document.referrer : './'); }
+  var ADRES = { './': '/', 'index.html': '/', 'tum-urunler.html': '/collections/all', 'sepet.html': '/cart', 'odeme.html': '/checkout', 'arama.html': '/search',
+    'hesap.html': '/account', 'kargo-takip.html': AYAR.takip || '/apps/track123', 'iletisim.html': '/pages/iletisim', 'iade.html': '/pages/iade', 'kargo.html': '/pages/kargo',
+    'kvkk.html': '/pages/kvkk', 'mesafeli-satis.html': '/pages/mesafeli-satis', 'on-bilgilendirme.html': '/pages/on-bilgilendirme', 'hizmet-sartlari.html': '/pages/hizmet-sartlari', 'siparis-alindi.html': '/' };
+  function adres(u) {
+    if (!SHOP) return u;
+    var m = String(u || './').match(/^([^?#]*)([?#].*)?$/), y = m[1] || './', q = m[2] || '';
+    if (ADRES[y]) return ADRES[y] + (y === 'arama.html' || y === 'tum-urunler.html' ? q : '');
+    var h = y.match(/^([\w-]+)\.html$/);
+    if (h && V.urun[h[1]]) return (V.urun[h[1]].url || '/products/' + h[1]) + q;
+    return u;
+  }
+  function git(u) { if (SHOP) { window.location.href = adres(u); return; } if (TEK) { var h = tekHash(u); if (location.hash === h || (h === '#' && !location.hash)) rota(); else location.hash = h; return; } kokP().location.href = u; }
+  function geri() { if (SHOP) { if (history.length > 1 && document.referrer.indexOf(location.host) >= 0) history.back(); else git('./'); return; } if (TEK) { if (history.length > 1) history.back(); else git('./'); return; } git(document.referrer && document.referrer.indexOf(location.host) >= 0 ? document.referrer : './'); }
   function norm(s) { return (s || '').toLocaleLowerCase('tr').replace(/\s+/g, ' ').trim(); }
   var ADLAR = [];
   Object.keys(V.urun).forEach(function (h) { (V.urun[h].adlar || [V.urun[h].ad]).forEach(function (a) { ADLAR.push([norm(a), h]); }); });
@@ -321,13 +413,20 @@
     [/hesabına giriş|giriş yap/, 'hesap.html']];
   function metinYonu(m) { m = norm(m); for (var i = 0; i < YON.length; i++) if (YON[i][0].test(m)) return YON[i][1]; return null; }
 
-  var KOKEL = document.getElementById('kok') || document.body;
-  var SAYFA = KOKEL.getAttribute('data-sayfa') || '', URUN = KOKEL.getAttribute('data-urun') || '';
+  var KOKEL = document.getElementById('kok');  // Shopify'da betik <head>'de yüklenir; sayfa türü baslat'ta okunur
+  var SAYFA = KOKEL ? KOKEL.getAttribute('data-sayfa') || '' : '', URUN = KOKEL ? KOKEL.getAttribute('data-urun') || '' : '';
   function sepeteAt(h, yolu) {
     var V2 = V.urun[h]; if (!V2) return;
     if (V2.stok === false) { bildir('Bu ürün şu an tükendi'); return; }
     var s = satir(h); if (!s) return;
     if (h !== URUN) { s.paket = 1; s.birim = V2.p; s.eski = V2.c; s.varyant = '1 adet' + (V2.secenek && V2.secenek.length ? ' · ' + V2.secenek[0] : ''); }
+    if (SHOP) {
+      if (!V2.vid) { bildir('Bu ürün mağazada bulunamadı'); return; }
+      var is_ = h === URUN ? Sepet.koy(s) : Sepet.ekle(s);
+      if (yolu === 'kart') is_.then(function () { if (SC.satirlar.length) git('sepet.html'); });
+      else if (h !== URUN) is_.then(function () { bildir('Sepete eklendi'); });
+      return;
+    }
     if (h === URUN) Sepet.koy(s); else Sepet.ekle(s);
     if (yolu === 'kapida') kapidaAc(); else { cekmeceAc(); }
   }
@@ -343,11 +442,15 @@
     if (al === 'Yukarı çık') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     if (a.classList.contains('marka') || al === 'Ayluna ana sayfa') { e.preventDefault(); git('./'); return; }
     var du = a.getAttribute('data-url'); if (du) { e.preventDefault(); git(du); return; }
-    if (a.hasAttribute('data-wa') || /whatsapp/i.test(m) && href === '#') { e.preventDefault(); bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); return; }
+    if (a.hasAttribute('data-wa') || /whatsapp/i.test(m) && (href === '#' || (a.tagName === 'BUTTON' && !a.closest('form')))) { e.preventDefault(); waAc(); return; }
     // Ürün sayfası: satın alma butonları
     if (a.tagName === 'BUTTON' && URUN && SAYFA === 'urun') {
       if (a.disabled) return;
-      if (a.matches('.btn2,.btn-kp')) { e.preventDefault(); if (/haber ver/i.test(m)) { bildir('Gelince haber vereceğiz (önizleme)'); return; } sepeteAt(URUN, 'kapida'); return; }
+      if (a.matches('.btn2,.btn-kp')) {
+        if (/haber ver/i.test(m)) { e.preventDefault(); bildir(SHOP ? 'Stok gelince haber vermek için bize WhatsApp\'tan yaz' : 'Gelince haber vereceğiz (önizleme)'); return; }
+        if (SHOP) { formEsitle(); if (!easySell()) { e.preventDefault(); sepeteAt(URUN, 'kart'); } return; }
+        e.preventDefault(); sepeteAt(URUN, 'kapida'); return;
+      }
       if (a.matches('.btn1,.btn-on')) { e.preventDefault(); sepeteAt(URUN, 'kart'); return; }
     }
     // Koleksiyon / kartlardaki "Sepete ekle"
@@ -357,7 +460,7 @@
     e.preventDefault();
     var h2 = urunBul(m) || urunBul(a.getAttribute('aria-label'));
     var y = metinYonu(m);
-    if (y === 'wa') { bildir('WhatsApp numarası: [teyit]. Canlıda wa.me bağlantısı açılır.'); return; }
+    if (y === 'wa') { waAc(); return; }
     if (/^(gece lambası|projektör|nemlendirici|lunadream)$/i.test(norm(m))) { git('arama.html?q=' + encodeURIComponent(m.trim())); return; }
     if (h2 && !y) { git(h2 + '.html'); return; }
     if (y) { git(y); return; }
@@ -371,11 +474,26 @@
     var h = urunBul(k.textContent); if (h) git(h + '.html');
   });
   // Formlar: önizlemede gönderim yerine onay
+  function formGonder(f) {
+    var d = new FormData(), al = function (sec) { var i = f.querySelector(sec); return i ? i.value.trim() : ''; };
+    var ep = al('input[type=email]'), tel = al('input[type=tel]'), ad = al('input[type=text],input:not([type])'), msj = al('textarea');
+    d.append('utf8', '✓'); d.append('form_type', SAYFA === 'iletisim' ? 'contact' : 'customer');
+    if (SAYFA === 'iletisim') { d.append('contact[name]', ad); d.append('contact[email]', ep); d.append('contact[phone]', tel); d.append('contact[body]', msj); }
+    else { d.append('contact[email]', ep); d.append('contact[tags]', 'newsletter'); }
+    return fetch('/contact', { method: 'POST', body: d, credentials: 'same-origin' });
+  }
   document.addEventListener('submit', function (e) {
     var f = e.target; if (f.closest('.ay-katman') || f.hasAttribute('data-kendi')) return;
+    if (SHOP && f.closest('[data-ay-shopify]')) return;  // tema formları (ürün formu vb.) kendi yolunu izler
     e.preventDefault();
     var bos = Array.prototype.filter.call(f.querySelectorAll('input[type=email],input[type=text],input[type=tel],textarea'), function (i) { return !i.value.trim(); });
     if (bos.length) { bildir('Lütfen alanları doldur'); bos[0].focus(); return; }
+    if (SHOP) {
+      if (SAYFA === 'kargo-takip') { git('kargo-takip.html'); return; }
+      if (SAYFA === 'hesap') { git('hesap.html'); return; }
+      formGonder(f).then(function () { bildir(SAYFA === 'iletisim' ? 'Mesajın alındı; en geç 2 saat içinde dönüyoruz' : 'Kaydın alındı'); f.reset(); }).catch(function () { bildir('Gönderilemedi, birazdan tekrar dene'); });
+      return;
+    }
     var msj = SAYFA === 'kargo-takip' ? 'Canlıda Track123 sonucu burada görünür (önizleme)' : SAYFA === 'iletisim' ? 'Mesajın alındı; en geç 2 saat içinde dönüyoruz (önizleme)' : SAYFA === 'hesap' ? 'Giriş kodu e-postana gönderildi (önizleme)' : 'Kaydın alındı, %5 kodun e-postana gelecek (önizleme)';
     bildir(msj); f.reset();
   }, true);
@@ -385,7 +503,28 @@
   /* Her çizimden sonra: sepet rozeti */
   // Başlıktaki sepet düğmesi: "Sepet" ya da "Sepet, 0 ürün" (çekmecedeki "Sepeti kapat" değil)
   function sepetDugmesi(al) { return al === 'Sepet' || al.indexOf('Sepet,') === 0; }
+  // Shopify: Kapıda düğmeleri EasySell seçicisiyle işaretlenir; ana sayfa kartlarında canlı fiyat; gizli ürün formu seçime eşit
+  function shopSusle() {
+    var k = document.querySelectorAll('#kok .btn2, #kok .btn-kp');
+    for (var i = 0; i < k.length; i++) if (/kapıda/i.test(k[i].textContent) && !k[i].hasAttribute('data-ay-kapida')) k[i].setAttribute('data-ay-kapida', '');
+    var kart = document.querySelectorAll('#kok .uk[data-h]');
+    for (var j = 0; j < kart.length; j++) {
+      var u = V.urun[kart[j].getAttribute('data-h')]; if (!u || u.yok) continue;
+      var st = kart[j].querySelector('.f strong'), es = kart[j].querySelector('.f s'), rz = kart[j].querySelector('em');
+      if (st && st.textContent !== TL(u.p)) st.textContent = TL(u.p);
+      if (es) { var et = u.c ? TL(u.c) : ''; if (es.textContent !== et) es.textContent = et; }
+      if (rz && !rz.classList.contains('tukendi')) { var rt = u.c ? '%' + Math.round((1 - u.p / u.c) * 100) : ''; if (rz.textContent !== rt) rz.textContent = rt; rz.hidden = !rt; }
+    }
+    if (SAYFA === 'urun') formEsitle();
+  }
+  function formEsitle() {
+    var f = document.querySelector('form[data-ay-urun-formu]'), s = satir(URUN); if (!f || !s) return;
+    var k = kalemler(s)[0]; if (!k) return;
+    var ad = { id: k.id, quantity: s.paket || 1, 'properties[_secim]': s.varyant };
+    Object.keys(ad).forEach(function (n) { var i = f.querySelector('[name="' + n + '"]'); if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.appendChild(i); } if (i.value !== String(ad[n])) i.value = ad[n]; });
+  }
   function suslen() {
+    if (SHOP) shopSusle();
     var n = Sepet.sayi();
     var b = document.querySelectorAll('[aria-label^="Sepet"]');
     for (var i = 0; i < b.length; i++) { if (b[i].closest('.ay-katman') || !sepetDugmesi(b[i].getAttribute('aria-label'))) continue; if (b[i].getAttribute('data-ay-adet') !== String(n)) b[i].setAttribute('data-ay-adet', String(n)); }
@@ -414,10 +553,26 @@
     tek: TEK, geri: geri, gorsel: gorsel, baslatTek: function () { window.addEventListener('hashchange', rota); rota(); },
     baslat: function (Comp) {
       kok = document.getElementById('kok'); sablon = document.getElementById('T').content;
+      SAYFA = kok.getAttribute('data-sayfa') || ''; URUN = kok.getAttribute('data-urun') || '';
       masaUst(); C = new Comp({}); ciz(); cubukKur();
+      // Shopify: sayfadaki tasarım fiyatı mağaza fiyatından farklıysa uyar (yalnız tema düzenleyicide ve konsolda)
+      if (SHOP && SAYFA === 'urun' && V.urun[URUN] && Math.abs((TUVAL_FIYAT[URUN] || 0) - V.urun[URUN].p) > 0.009) {
+        console.warn('Ayluna: tasarımdaki fiyat', TUVAL_FIYAT[URUN], 'mağaza fiyatı', V.urun[URUN].p);
+        if (window.Shopify && window.Shopify.designMode) bildir('Uyarı: bu sayfadaki fiyat mağaza fiyatından farklı; temayı güncelle');
+      }
     },
+    fiyat: function (l) {
+      // Koleksiyon/arama listeleri: Shopify'da fiyat ve stok canlı
+      if (!SHOP) return l;
+      return l.map(function (x) { var u = V.urun[x.h]; if (!u || u.yok) return x; var c = u.c && u.c > u.p ? u.c : null; return Object.assign({}, x, { p: u.p, c: c, var: !!u.stok }); });
+    },
+    shopify: SHOP, adres: adres,
     cekmeceAc: cekmeceAc, cekmeceKapat: cekmeceKapat, cekmecede: function () { return !!ust(); }, kapidaAc: kapidaAc, kapidaKapat: kapidaKapat, menuAc: menuAc, git: git, siparisVer: siparisVer, bildir: bildir, TL: TL, satir: satir, urunBul: urunBul,
     odemeyeGec: function () { if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; } git('odeme.html'); }
   };
   document.addEventListener('DOMContentLoaded', suslen);
+  // Shopify temasında betik defer ile yüklenir; panolar kendilerini kuyruğa koyar (window.AYLUNA_KUYRUK), burada çalışır
+  var kuyruk = window.AYLUNA_KUYRUK || [];
+  window.AYLUNA_KUYRUK = { push: function (f) { f(); } };
+  kuyruk.forEach(function (f) { f(); });
 })();

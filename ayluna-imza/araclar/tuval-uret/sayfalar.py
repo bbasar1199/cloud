@@ -159,7 +159,7 @@ KOLEKSIYON = ("""
   <div class="izgara"><sc-for list="{{urunler}}" as="u" hint-placeholder-count="6"><div class="{{u.cls}}"><span><img src="{{u.src}}" alt="{{u.ad}}"><sc-if value="{{u.rozet}}" hint-placeholder-val="{{true}}"><em class="{{u.rcls}}">{{u.rozet}}</em></sc-if></span><span><b>{{u.ad}}</b><span class="f"><strong>{{u.p}}</strong><s>{{u.c}}</s></span><button class="ekle-b" type="button">{{u.btn}}</button></span></div></sc-for></div>
 """)
 KOL_EK = """
-    var U = """ + json.dumps(URUNLER, ensure_ascii=False) + """;
+    var U = """ + json.dumps(URUNLER, ensure_ascii=False) + """; if (window.Ayluna && window.Ayluna.fiyat) U = window.Ayluna.fiyat(U);
     var KAT = ['Tümü', 'Gece lambaları', 'Projektörler', 'Nemlendiriciler', 'Diğer'];
     var SIR = ['Öne çıkan', 'Fiyat artan', 'Fiyat azalan'];
     var kat = S.kat || 'Tümü', sir = S.sir || 0;
