@@ -519,7 +519,7 @@ class Component extends DCLogic {
       kPrev: function () { self.setState({ kim: (S.kim + KIM.length - 1) % KIM.length, kBas: S.t }); },
       kNext: function () { self.setState({ kim: (S.kim + 1) % KIM.length, kBas: S.t }); },
       paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
-      onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,
+      onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd',
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),

@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.2 · paket seçimsiz açılır, Kaching arkada, Kapıda düğmesi yok (19 Ekim, en güncel)
+## Tema 1.0.3 · düğmede fiyat yok, müşteri mesajları (19 Ekim, en güncel)
+- Kullanıcı: "Güvenli Ödeme ile Al'da fiyat yazmasın (%5 fark zaten 80 lira az ödemek)" ve "bahsettiğim yorum kısımlarını yapmamışız".
+- Kartla öde düğmesi bütün ürün sayfalarında yalnız "Güvenli Ödeme ile Al"; masaüstü çubuğu da (düğme metnini kopyalıyor).
+- LunaDream: "Sizden gelen mesajlar" bölümü (yorumların altında): eski sitedeki 8 sohbetten 6'sı (`canvas/musteri/mesaj-*.jpg`, tuval asset'i, `blob-yerel.json`); telefonda kayan dikey kartlar, masaüstünde tek satır şerit; dokununca büyük görünüm (Esc/dokunuş kapatır, sayfa kaymaz, odak kapat düğmesinde, 48 px).
+  - Eleştirmen: mesaj-6 ("zürafa/hayvanlar çıkmadı") kutu vaadiyle, mesaj-7 ("ürününüz gümrükte") aynı gün kargo sözüyle çelişiyor → konmadı (dosyalar duruyor).
+  - "Aileler ne diyor?"daki müşteri fotoğrafları 84 px kareden 150 px dikey karta büyüdü, dokununca büyür; gerçek müşteri hikâyesi (IMG_4145, `musteri/foto-1.jpg`) eklendi. Eski sitedeki Higgsfield üretimi 5 "mutlu kullanıcı" fotoğrafı konmadı.
+  - Öneri (kullanıcıya soruldu): Instagram sohbetlerindeki ad ve profil fotoğrafları bulanıklaştırılsın (KVKK).
+- E_H=6632 (LunaDream 1700 px pencerede ölçüldü). Site testleri (düğmede fiyat yok, mesajlar denetimi dahil) ve tema benzetimi HEPSİ TAMAM.
+
+## Tema 1.0.2 · paket seçimsiz açılır, Kaching arkada, Kapıda düğmesi yok (19 Ekim)
 - Kullanıcı 1.0.1'i yükleyip yayına aldı, sonra geri kaldırdı (satış sitesi, sipariş kaçmasın). Dedikleri:
   - "Mobile geçirince ekrana tam sığmıyor." (Benzetimde 360/375/414'te taşma yok; büyük ihtimalle uygulamaların sayfaya kendiliğinden eklediği kutu. Ekran görüntüsü istendi.)
   - "Kapıda ödeme için Kaching bundle bağlıydı, o çalışmıyor; direkt 2'li seçili geliyor, seçili olmadan gelsin." → "Kaching bundle dediğim COD form, ben bağlıyorum." → "Kapıda ödeme kısmını ben koyacağım, sen koyma."

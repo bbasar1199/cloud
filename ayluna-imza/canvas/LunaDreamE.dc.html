@@ -379,8 +379,17 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .vid-alt span{font-size:13px;color:#B9BED6}
 .vid-etiket{position:absolute;left:10px;top:10px;z-index:1;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(12,16,39,.6)}
 /* Yorum duvarı: müşteri fotoğrafları + konu çipleri + kaydırmalı yorum kartları (metinler Loox'tan birebir) */
-.mf{flex:none;width:84px;height:84px;padding:0;border:0;border-radius:16px;overflow:hidden;background:#F1E8DA;cursor:pointer}
-.mf img{width:100%;height:100%;object-fit:cover;display:block}
+/* Müşteri fotoğrafları (19 Eki): küçük kare yerine dikey kart, dokununca büyür */
+.mf{flex:none;width:150px;aspect-ratio:3/4;padding:0;border:0;border-radius:18px;overflow:hidden;background:#F1E8DA;cursor:pointer}
+/* Sizden gelen mesajlar: telefon ekranı oranında kartlar */
+.msj-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 2px}
+.msj{flex:0 0 228px;aspect-ratio:9/16;scroll-snap-align:start;padding:0;border:1px solid #E3D8C7;border-radius:20px;overflow:hidden;background:#FFFDF9;cursor:pointer}
+.msj img,.mf img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.msj:active,.mf:active{transform:scale(.98)}
+.buyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+.buyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.buyuk-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.buyuk-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
 .yk2{flex:0 0 284px;scroll-snap-align:start;margin:0;min-height:200px;padding:18px 16px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px;color:#1A2142}
 .yk2 .tirnak{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:.6;color:#F2A65A;height:20px}
 .yk2 q{font-family:"Young Serif",Georgia,serif;font-size:16px;line-height:1.3;quotes:none;flex:1}
@@ -504,7 +513,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   <section id="yorumlar" class="bolum gir">
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span></span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
-      <sc-for list="{{mfoto}}" as="f" hint-placeholder-count="5"><button class="mf" type="button" aria-label="Müşteri fotoğrafını büyüt"><img src="{{f.src}}" alt="{{f.alt}}"></button></sc-for>
+      <sc-for list="{{mfoto}}" as="f" hint-placeholder-count="5"><button class="mf" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for>
     </div>
     <div class="noscroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 16px 16px 0">
       <sc-for list="{{topics}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}">{{t.n}}</button></sc-for>
@@ -518,6 +527,19 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
     <div class="px"><a href="#" class="cip" style="display: flex; justify-content: center; margin-top: 14px; text-decoration: none">{{reviews}} yorumun hepsini oku</a>
     <p style="margin: 10px 0 0; font-size: 13px; color: #5C6078; text-align: center">Yorumlar yalnız Ayluna'dan sipariş verenlerden toplanır; hepsi yayımlanır.</p></div>
   </section>
+
+  <!-- Sizden gelen mesajlar (kullanıcı, 19 Eki: eski sitedeki "gelen mesajlar" bölümü): müşterilerin izniyle paylaşılan gerçek sohbet
+       ekran görüntüleri (canvas/musteri). Kaydırılır, dokununca büyür. Eski sitedeki "Gün boyu konfor" ve "Binlerce mutlu kullanıcı" metinleri alınmadı. -->
+  <section class="bolum gir" id="mesajlar">
+    <div class="px"><h2 class="h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 15px; color: #5C6078">Müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
+    <div class="noscroll msj-serit">
+      <sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for>
+      <span aria-hidden="true" style="flex: 0 0 6px"></span>
+    </div>
+  </section>
+
+  <!-- Büyük görünüm: müşteri fotoğrafı ya da mesaj; dokununca ya da Esc ile kapanır -->
+  <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="buyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="buyuk-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
 
   <!-- Diskler: tavana yansıt -->
   <section class="gece gir" id="diskler">
@@ -588,11 +610,14 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5953}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6632}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
+    // Büyük görünüm Esc ile kapanır
+    this.esc = function (e) { if (e.key === 'Escape' && self.state.buyuk) self.setState({ buyuk: null }); };
+    document.addEventListener('keydown', this.esc);
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
@@ -659,12 +684,15 @@ class Component extends DCLogic {
     iz.forEach(function (z) { self.tio.observe(z); });
   }
   componentDidUpdate() {
+    var acik = !!this.state.buyuk;
+    if (acik !== !!this.buyukAcik) { this.buyukAcik = acik; document.documentElement.style.overflow = acik ? 'hidden' : '';
+      if (acik) { var x = document.querySelector('.buyuk-x'); if (x) x.focus(); } }
     if (this.tio && this.izIlk && !this.izIlk.isConnected) this.izBagla();
     // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
   galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
@@ -747,8 +775,14 @@ class Component extends DCLogic {
       { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%' }
     ];
     // Müşteri fotoğrafları (Loox foto yorumları)
-    var mfoto = [['4323cd781a0d687b528b3059505be48c', 'LunaDream’e sarılan küçük kız'], ['7ad3cbbe71680f4ed3027dbd056e391f', 'Çocuk odasında yanan LunaDream'], ['f060b12bc3353fae64eedf62798c5711', 'Duvara yansıyan deniz deseni'], ['ec3c3976bbe8f18e5660f4a4c355ebf7', 'Karanlıkta yanan LunaDream']]
-      .map(function (f) { return { src: B + f[0], alt: 'Müşteri fotoğrafı: ' + f[1] }; });
+    // Gerçek müşteri içeriği. Eski sitedeki "mutlu kullanıcı" fotoğraflarının 5'i Higgsfield üretimi (hf_): müşteri diye konmaz; yalnız IMG_4145 (minikesnaftr hikâyesi) alındı.
+    function buyut(src, ad) { return function () { self.setState({ buyuk: src, buyukAd: ad }); }; }
+    // Eleştirmen (19 Eki): mesaj-6 ("zürafa çıkmadı") kutu vaadiyle, mesaj-7 ("ürününüz gümrükte") aynı gün kargo sözüyle çelişir; şeritte yok
+    var MSJ = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e',
+      '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'];
+    var mesajlar = MSJ.map(function (id, i) { var n = 'Müşteri mesajı ' + (i + 1); return { src: B + id, n: n, ac: buyut(B + id, n) }; });
+    var mfoto = [['f17eea08d28f448f84ae69364c4320a3', 'LunaDream ile oynayan küçük kız (müşterinin paylaştığı hikâye)'], ['4323cd781a0d687b528b3059505be48c', 'LunaDream’e sarılan küçük kız'], ['7ad3cbbe71680f4ed3027dbd056e391f', 'Çocuk odasında yanan LunaDream'], ['f060b12bc3353fae64eedf62798c5711', 'Duvara yansıyan deniz deseni'], ['ec3c3976bbe8f18e5660f4a4c355ebf7', 'Karanlıkta yanan LunaDream']]
+      .map(function (f) { var a = 'Müşteri fotoğrafı: ' + f[1]; return { src: B + f[0], alt: a, ac: buyut(B + f[0], a) }; });
     var REV = [
       { tags: ['Uyku'], name: 'Burak G.', q: 'Çocuğum çalıştırmadan uyumuyor, uykuya hemen dalıyor.' },
       { tags: ['Hediye'], name: 'Handan B.', q: 'Torunum filmlerini kendisi seçti ve onunla uyumaya başladı.' },
@@ -803,7 +837,7 @@ class Component extends DCLogic {
     return { masa: MASA, tel: !MASA,
       gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
-      onLabel: 'Güvenli Ödeme ile Al · ' + TL(online, true), onPrice: TL(online, true),
+      onLabel: 'Güvenli Ödeme ile Al', onPrice: TL(online, true),  // düğmede fiyat yok (kullanıcı, 19 Eki)
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
       onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
@@ -811,7 +845,8 @@ class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, topics: topics, revs: revs, vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
     };
   }

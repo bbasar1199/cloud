@@ -181,6 +181,18 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       return { ic: z.top >= f.top && z.bottom <= f.bottom + .5 && z.left >= f.left && z.right <= f.right, temsil: /temsil/i.test(document.querySelector('#kok').textContent) }; });
     not(g.ic && !g.temsil, `${h}: gösterge fotoğrafın içinde, "temsilî" yazısı yok`);
   }
+  // Güvenli Ödeme düğmelerinde fiyat yok (kullanıcı, 19 Eki)
+  { const fiyatli = [];
+    for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba']) {
+      await pg.goto(KOK + f + '.html'); await pg.waitForTimeout(300);
+      const t = await pg.evaluate(() => [...document.querySelectorAll('#kok .btn-on, #kok .btn1')].map(b => (b.querySelector('.b-ic>span') || b).textContent.trim()));
+      if (t.some(x => /₺/.test(x))) fiyatli.push(f + ': ' + t.join(' | ')); }
+    not(!fiyatli.length, 'Güvenli Ödeme düğmelerinde fiyat yok' + (fiyatli.length ? ': ' + fiyatli.join('; ') : '')); }
+  // Sizden gelen mesajlar (19 Eki): 6 gerçek sohbet, dokununca büyür, Esc kapatır
+  await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
+  { const n = await pg.locator('#mesajlar .msj').count(); await pg.locator('#mesajlar .msj').first().click(); await pg.waitForTimeout(300);
+    const acik = await pg.locator('.buyuk img').count(); await pg.keyboard.press('Escape'); await pg.waitForTimeout(300);
+    not(n === 6 && acik === 1 && await pg.locator('.buyuk').count() === 0, `mesajlar: ${n} kart, büyük görünüm açılıp Esc ile kapandı`); }
   // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı) galeriyi durdurmaz; kaymadan geçer
   { const rm = await b.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' }); const rp = await rm.newPage();
     for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ask-saati']) {
@@ -234,7 +246,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   const c0 = await mp.locator('.ay-al.on').count();
   await mp.evaluate(() => window.scrollTo(0, 2400)); await mp.waitForTimeout(800);
   const cl = await mp.locator('.ay-al.on [data-l]').textContent().catch(() => '');
-  not(c0 === 0 && /^Güvenli Ödeme ile Al · ₺/.test(cl), 'masaüstü çubuğu: üstte kapalı, aşağıda açık "' + cl + '"');
+  not(c0 === 0 && cl.trim() === 'Güvenli Ödeme ile Al', 'masaüstü çubuğu: üstte kapalı, aşağıda açık, düğmede fiyat yok (19 Eki) "' + cl + '"');
   not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
   await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
   not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');

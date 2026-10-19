@@ -393,7 +393,7 @@ def js(u):
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
     return {
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
-      onLabel: 'Güvenli Ödeme ile Al · ' + onPrice, onPrice: onPrice,
+      onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
