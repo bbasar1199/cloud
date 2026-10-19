@@ -20,14 +20,15 @@ B = '/_blob/'
 I = dict(Y.I, bas='7e1339aefa8d185cd41f6c37b16853c5', kesim='5782766948fef68b7273c061529d6324', afis='be86b4a93cb896b0ad69042a2e915e68')
 # Kutudaki 12 film diski (kullanıcı, 19 Eki: "USB'nin diskleri böyle", iki ürün görseli): 6 renkli + 6 siyah-beyaz; Ay, Satürn gibi
 # doğası beyaz olanlar tavanda da beyaz. Kullanıcının görsellerinden kırpıldı (canvas/usb/k-*.webp, yerelde büyütme, üretim yok);
-# renkli altısının kaynağı ~50 px, büyütünce kareli olmasın diye tavandaki yansıma gibi yumuşatıldı (asıl görsel gelirse değişir).
+# Kaynaklar küçük (renkli diskler ~50 px): iki görsel yerelde Real-ESRGAN x4plus ile 4x büyütüldü, sonra kırpıldı
+# (kullanıcı, 19 Eki: "kalitesini arttırmamışsın"; yumuşatmak yetmedi). Ücretsiz, bu makinede; Higgsfield yok.
 # Eski 12 disk (afişten, d01–d12) kutuyla örtüşmediği için kalktı. Adlar desenin tarifidir.
-DISK = [('Kızıl sarmal', '298ae74db19f9db800b9e9036f8da560'), ('Mavi nebula', 'b9827fcce5c63d62332bae79435b337a'),
-        ('Ay yüzeyi', '877983233d8c1e6644d73c1923e72595'), ('Yıldız yağmuru', 'af1815158d14c5b764fad7776e10284c'),
-        ('Mavi galaksi', '9665b9b2418d5356d09a0e49b65225a7'), ('Yıldız kuşağı', '093b2415a406f8c3029e9fc3ab073eaf'),
-        ('Dolunay', 'e3900cbd48390901b17932d8912b6b44'), ('Satürn', '62e0ed0370f3e64bee9916a776621abf'),
-        ('Uzay balinası', 'ac1f2ab95a1b0b8a819f04095305f179'), ('Samanyolu', '14c1fb57790b4d352192307e2266071e'),
-        ('Bulut sarmalı', '3b7f66c3091c4a32ba836ca875d7f4f3'), ('Uzak galaksi', 'f5f8b6e9da726943b0ca3bea161462e8')]
+DISK = [('Kızıl sarmal', 'b9f5d788517b91ee796e4170791b31ee'), ('Mavi nebula', '4ceeb81725946c822da32225b36f8707'),
+        ('Ay yüzeyi', 'a1c504f99589f63119d510c6f2c60919'), ('Yıldız yağmuru', 'd83c22969ff22eeda6a4ca43aa9e9792'),
+        ('Mavi galaksi', 'e0c62326edb330a8e656d1783d3a17cb'), ('Yıldız kuşağı', '913d542458ee66ea5831071ef906a926'),
+        ('Dolunay', 'dac06d8e40f97dcc07c044913dd850a1'), ('Satürn', 'f62fdb9c7a12f760a4bcb9d306fbafbe'),
+        ('Uzay balinası', 'b94b60d6baf860e25b45a407b46a674a'), ('Samanyolu', 'c814e4a17e35eae6284f97d3645659a6'),
+        ('Bulut sarmalı', '940ee9133dda38926366d750a651ee3a'), ('Uzak galaksi', '97e1e85efbecaad855efdf10a1f78716')]
 D = dict((n, B + i) for n, i in DISK)
 KES = B + I['kesim']
 
