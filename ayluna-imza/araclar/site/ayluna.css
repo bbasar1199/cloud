@@ -72,3 +72,141 @@ img{max-width:100%}
 @media (prefers-reduced-motion:reduce){.ay-panel,.ay-perde,.ay-tost{transition:none}}
 .yukari{opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
 .ay-asagi .yukari{opacity:1;visibility:visible}
+
+/* ---------- Masaüstü (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım") ----------
+   1024px ve üstü: ortak üst menü (ayluna.js masaUst), telefon başlıkları gizli. Ürün sayfası: solda yapışkan kare galeri,
+   sağda satın alma; altındaki bölümler ortada okunur sütunda. Ana sayfa ve koleksiyon geniş ızgara. Telefon düzeni değişmez. */
+.ay-masa{display:none}
+@media (min-width:1024px){
+  .ay-masa{display:block;position:sticky;top:0;z-index:900;background:#1A2142;color:#fff;font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  html[data-ay-tur=odeme] .ay-masa{display:none}
+  .ay-masa-ic{max-width:1200px;margin:0 auto;height:72px;padding:0 32px;display:flex;align-items:center;gap:32px;box-sizing:border-box}
+  .ay-logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;flex:none}
+  .ay-logo svg{width:26px;height:26px}
+  .ay-logo b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:25px;letter-spacing:-.02em}
+  .ay-masa nav{display:flex;gap:26px;margin:0 auto}
+  .ay-masa nav a{color:#C9CFE2;text-decoration:none;font-size:15px;font-weight:500;padding:24px 0 22px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s}
+  .ay-masa nav a:hover{color:#fff}
+  .ay-masa nav a[aria-current]{color:#fff;border-bottom-color:#F2A65A}
+  .ay-masa-sag{display:flex;gap:2px;flex:none}
+  .ay-masa-sag a,.ay-masa-sag button{width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
+  .ay-masa-sag a:hover,.ay-masa-sag button:hover{background:rgba(255,255,255,.09)}
+  .ay-masa .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ay-masa [data-ay-adet]::after{top:3px;right:1px;background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
+  .ay-masa a:focus-visible,.ay-masa button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* Telefon başlıkları */
+  #kok header.ust,#kok .sahne>header,#kok .u-ust{display:none!important}
+  /* Genel: içerik sayfaları ortada okunur sütun */
+  .pg{max-width:760px;overflow:visible!important}
+  .yapis{display:none!important}
+  body{overflow-x:clip}
+  /* Duyuru şeritleri ve alt bilgi kenardan kenara */
+  #kok .pg>.duyuru,#kok .pg>.serit,#kok .pg>.u-serit{width:100vw;margin-left:calc(50% - 50vw)!important}
+  #kok .pg>.duyuru~.u-serit{margin-top:0!important}
+
+  /* Ürün sayfası: üstte iki sütun (.urun-ust: solda yapışkan kare galeri, sağda satın alma), altta ortada bölümler */
+  html[data-ay-tur=urun] .pg{max-width:1200px!important;padding:0 32px 48px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=urun] .urun-ust{display:grid;grid-template-columns:minmax(0,1fr) 440px;column-gap:56px;align-items:start;margin-top:28px}
+  html[data-ay-tur=urun] .urun-ust>.sahne,html[data-ay-tur=urun] .urun-ust>.hero,html[data-ay-tur=urun] .urun-ust>.ust-sol{grid-column:1;position:sticky;top:96px}
+  html[data-ay-tur=urun] .urun-ust>#siparis,html[data-ay-tur=urun] .urun-ust>.ust-sag{grid-column:2;margin-top:0!important}
+  /* Galeri kare, kenarları yuvarlak; telefondaki sabit 390 px ölçüler akışkan */
+  html[data-ay-tur=urun] .sahne{height:auto!important;background:transparent!important;overflow:visible!important}
+  html[data-ay-tur=urun] .sahne .kare-foto{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:1/1;border-radius:24px;overflow-x:auto}
+  html[data-ay-tur=urun] .sahne .kf{flex:0 0 100%!important;height:auto!important}
+  html[data-ay-tur=urun] .sahne .kare-foto img{top:0!important;height:100%!important}
+  html[data-ay-tur=urun] .sahne .seritler{position:static!important;margin-top:16px}
+  html[data-ay-tur=urun] .sahne .ay-iz circle{fill:transparent;stroke:#1A2142}
+  html[data-ay-tur=urun] .sahne .ay-iz .on circle{stroke:#1A2142}
+  html[data-ay-tur=urun] .levha{border-radius:0!important;background:transparent!important;padding-top:0!important}
+  html[data-ay-tur=urun] .hero.kare{background:transparent!important;padding-bottom:0!important}
+  html[data-ay-tur=urun] .hero.kare .h-iz{border-radius:24px}
+  html[data-ay-tur=urun] .hero.kare .h-alt{position:static!important;margin-top:16px;color:var(--lac,#1A2142)}
+  html[data-ay-tur=urun] .hero.kare .d-iz svg,html[data-ay-tur=urun] .hero.kare .h-alt svg{stroke:#1A2142}
+  html[data-ay-tur=urun] .hero.kare .h-alt small{color:#5C6078}
+  html[data-ay-tur=urun] .ust-sol .gal{margin:0!important;border-radius:24px}
+  html[data-ay-tur=urun] .ust-sol .g-alt{margin-top:16px}
+  html[data-ay-tur=urun] .yol{overflow-x:clip}
+  html[data-ay-tur=urun] .al{padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #siparis.px,html[data-ay-tur=urun] .ust-sag>*{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
+  /* Alttaki bölümler: ortada 760 px; kendi içinde telefon ölçüsüyle kurulu etkileşimli olanlar ortada 430 px */
+  html[data-ay-tur=urun] .pg>section,html[data-ay-tur=urun] .pg>.blk{max-width:760px;margin-left:auto!important;margin-right:auto!important;margin-top:56px}
+  html[data-ay-tur=urun] .pg>section#bir-gece,html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar{max-width:430px}
+  html[data-ay-tur=urun] .pg>footer{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:72px;box-sizing:border-box}
+
+  /* Ana sayfa: geniş slayt, 5'li yorum, 4 sütun ürün, yan yana bloklar */
+  html[data-ay-tur=ana] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=ana] .slayt{margin:28px 0 0;height:560px}
+  html[data-ay-tur=ana] .sl::after{background:linear-gradient(90deg,rgba(12,16,39,.9) 0%,rgba(12,16,39,.6) 36%,rgba(12,16,39,0) 64%)}
+  html[data-ay-tur=ana] .sl-y{left:64px;right:auto;top:50%;bottom:auto;max-width:440px;transform:translateY(-50%)}
+  html[data-ay-tur=ana] .sl-y small{font-size:14px}
+  html[data-ay-tur=ana] .sl-y h2{font-size:64px}
+  html[data-ay-tur=ana] .sl-y p{margin-top:14px;font-size:17px}
+  html[data-ay-tur=ana] .sl-y a{min-height:52px;margin-top:26px;padding:0 24px}
+  html[data-ay-tur=ana] .ay-iz{left:64px;bottom:36px}
+  html[data-ay-tur=ana] .bb{padding:80px 0 0}
+  html[data-ay-tur=ana] .h2{font-size:40px}
+  html[data-ay-tur=ana] .bb .h2 br,html[data-ay-tur=ana] .bulten .h2 br{display:none}
+  html[data-ay-tur=ana] .yorum-serit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:24px 0 4px;overflow:visible}
+  html[data-ay-tur=ana] .yorum-serit>span{display:none}
+  html[data-ay-tur=ana] .yk{padding:20px}
+  html[data-ay-tur=ana] .yk p{font-size:16px}
+  html[data-ay-tur=ana] .y-not{margin:12px 0 0}
+  html[data-ay-tur=ana] .izgara{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:24px 0 0}
+  html[data-ay-tur=ana] .uk>span:last-child{padding:14px 16px 18px}
+  html[data-ay-tur=ana] .uk b{min-height:0;font-size:15px}
+  html[data-ay-tur=ana] .uk .f strong{font-size:16px}
+  html[data-ay-tur=ana] .tum{width:320px;margin:32px auto 0}
+  html[data-ay-tur=ana] .guven{grid-template-columns:repeat(4,minmax(0,1fr));margin:80px 0 0}
+  html[data-ay-tur=ana] .guven div{padding:24px 22px;border:0!important;border-right:1px solid var(--cizgi)!important}
+  html[data-ay-tur=ana] .guven div:last-child{border-right:0!important}
+  html[data-ay-tur=ana] .ay-blok{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);margin:80px 0 0}
+  html[data-ay-tur=ana] .ay-blok img{height:540px}
+  html[data-ay-tur=ana] .ay-blok>div{align-self:center;padding:56px}
+  html[data-ay-tur=ana] .ay-blok h2{font-size:48px}
+  html[data-ay-tur=ana] .ay-blok p{max-width:440px;font-size:16px}
+  html[data-ay-tur=ana] .ay-blok a{display:inline-flex;padding:0 28px}
+  html[data-ay-tur=ana] .bulten{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);column-gap:48px;align-items:center;margin:80px 0 0;padding:40px 48px}
+  html[data-ay-tur=ana] .bulten>h2,html[data-ay-tur=ana] .bulten>p{grid-column:1}
+  html[data-ay-tur=ana] .bulten form{grid-column:2;grid-row:1/3;margin:0}
+  html[data-ay-tur=ana] .bulten .h2{font-size:32px}
+  @media (hover:hover){
+    .uk img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+    .uk:hover img{transform:scale(1.04)}
+  }
+  /* Koleksiyon: 4 sütun */
+  html[data-ay-tur=koleksiyon] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=koleksiyon] .sb{padding:48px 0 0}
+  html[data-ay-tur=koleksiyon] .sb h1{font-size:48px}
+  html[data-ay-tur=koleksiyon] .arac{padding:20px 0 0;overflow:visible}
+  html[data-ay-tur=koleksiyon] .sirala{padding:16px 0 0;border-bottom:1px solid var(--cizgi,#E3D8C7)}
+  html[data-ay-tur=koleksiyon] .izgara{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;padding:24px 0 0}
+  html[data-ay-tur=koleksiyon] .uk>span:last-child{padding:14px 16px 16px}
+  html[data-ay-tur=koleksiyon] .uk b{min-height:0;font-size:15px}
+  /* Arama: koleksiyon gibi 4 sütun */
+  html[data-ay-tur=arama] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box}
+  html[data-ay-tur=arama] .sb{padding:48px 0 0}
+  html[data-ay-tur=arama] .sb h1{font-size:48px}
+  html[data-ay-tur=arama] .ara{max-width:640px;margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=arama] .oneri,html[data-ay-tur=arama] .sonuc{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=arama] .izg{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;margin:20px 0 0}
+  html[data-ay-tur=arama] .izg span{padding:14px 16px 16px;font-size:15px}
+  /* Sepet: solda ürünler ve seçenekler, sağda yapışkan özet */
+  html[data-ay-tur=sepet] .pg{max-width:1080px!important;margin-top:32px!important;margin-bottom:64px!important;border-radius:24px;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .s-ust{height:76px;padding:0 16px 0 32px}
+  html[data-ay-tur=sepet] .s-ust h2{font-size:30px}
+  html[data-ay-tur=sepet] .s-govde{display:grid;grid-template-columns:minmax(0,1fr) 380px;column-gap:48px;align-items:start;padding:12px 32px 32px}
+  html[data-ay-tur=sepet] .s-sol>*,html[data-ay-tur=sepet] .s-sag>*{margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=sepet] .s-sag{position:sticky;top:96px;margin-top:12px;padding:20px 24px 4px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .s-sag .ozet{border-top:0;padding-top:0;margin-top:0}
+  html[data-ay-tur=sepet] .s-sag .btn1,html[data-ay-tur=sepet] .s-sag .btn2,html[data-ay-tur=sepet] .s-sol>button{width:100%!important}
+  html[data-ay-tur=sepet] .bos-s{max-width:480px;margin:48px auto!important}
+  /* Alt bilgi (ana sayfa ve içerik sayfaları): kenardan kenara, solda imza, sağda bağlantılar */
+  #kok .pg>footer.alt{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:96px;box-sizing:border-box;padding:56px max(32px,calc(50vw - 568px)) 40px;border-radius:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"imza sut" "yasal sut" "kart sut" "telif telif";column-gap:64px;align-content:start}
+  #kok .pg>footer.alt .imza{grid-area:imza;margin-top:0}
+  #kok .pg>footer.alt .imza span{font-size:72px}
+  #kok .pg>footer.alt .sut{grid-area:sut}
+  #kok .pg>footer.alt .yasal{grid-area:yasal}
+  #kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
+  #kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
+  #kok .pg>footer.alt a{min-height:40px}
+}

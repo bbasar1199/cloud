@@ -87,7 +87,7 @@ CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,san
 .s-not{margin:0 16px 20px;font-size:12px;color:var(--soluk)}
 .urun-fiyat s{display:block;font-size:12px;color:var(--soluk)}
 .bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
-.bos-s svg{display:block;margin:0 auto 10px}
+.bos-s>svg{display:block;margin:0 auto 10px}
 .bos-s h3{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:26px}
 .bos-s p{margin:6px 0 0;font-size:15px;color:var(--soluk)}
 @media (prefers-reduced-motion:reduce){.pg *{animation:none!important;transition:none!important}}
@@ -111,7 +111,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <button class="btn1" type="button" onClick="{{urunlere}}" style="margin: 16px 0 0; width: 100%"><span class="b-ic"><span>Ürünlere bak</span></span>""" + OK + """</button>
     <button class="btn2" type="button" onClick="{{hesap}}" style="margin: 10px 0 0; width: 100%">Hesabına giriş yap</button></div></sc-if>
 
-  <sc-if value="{{dolu}}" hint-placeholder-val="{{true}}">
+  <sc-if value="{{dolu}}" hint-placeholder-val="{{true}}"><div class="s-govde"><div class="s-sol">
   <p class="kargo-serit">""" + KAMYON + """<span>{{kargoSerit}}</span></p>
   <sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><div class="urun"><img src="{{u.img}}" alt="{{u.ad}}">
     <div><b>{{u.ad}}</b><small>{{u.varyant}}</small>
@@ -125,6 +125,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <div class="blok-bas" style="margin-top: 18px"><b>Teslimat</b></div>
   <sc-for list="{{teslimat}}" as="d" hint-placeholder-count="2"><button class="{{d.cls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><span class="nokta"><i></i></span><span><b>{{d.n}}</b><small>{{d.t}}</small></span><em>{{d.p}}</em></button></sc-for>
 
+  </div><div class="s-sag">
   <div class="ozet">
     <p><span>Ürünler</span><b>{{araUrun}}</b></p>
     <sc-if value="{{ekVar}}" hint-placeholder-val="{{true}}"><p><span>Siparişine özel</span><b>{{araEk}}</b></p></sc-if>
@@ -140,7 +141,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg>Kart bilgin bize gelmez</span>
     <span><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>WhatsApp destek</span>
   </div>
-  </sc-if>
+  </div></div></sc-if>
 </div>
 """
 

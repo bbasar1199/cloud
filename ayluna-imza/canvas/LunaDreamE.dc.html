@@ -395,7 +395,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   <!-- Üst şerit: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
   <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cdShort}}</b></div>
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
-  <section class="sahne" aria-label="LunaDream fotoğrafları">
+  <div class="urun-ust"><section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></div></sc-for></div>
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
@@ -456,7 +456,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
          sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"></span></span><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><b>Bugün</b><span>Sipariş verildi</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg><b>{{kargo}}</b><span>Kargoda</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg><b>{{teslim}}</b><span>Kapında</span></li></ol>
-  </section>
+  </section></div>
 
   <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
   <section class="bolum gir" id="videolar">

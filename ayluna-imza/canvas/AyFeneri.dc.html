@@ -637,7 +637,7 @@ body{margin:0;background:#F2F4F8}
 <div class="pg">
   <div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>
   <!-- Galeri: kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur); başlık yalnız ilk fotoğrafta; küçük resim ve sayı yok -->
-  <section class="hero kare" aria-label="Ayluna AyFeneri fotoğrafları">
+  <div class="urun-ust"><section class="hero kare" aria-label="Ayluna AyFeneri fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="h-alt"><span class="f-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="5"><svg class="{{f.dcls}}" viewBox="0 0 14 22"><path class="hz" d="M8 6.5 L22 2 L22 11 Z"></path><path d="M4 5 L7 2 L10 5 Z"></path><rect x="4.5" y="5" width="5" height="3"></rect><rect class="fn" x="4.5" y="5" width="5" height="3"></rect><path d="M4.5 8 H9.5 L10.5 20 H3.5 Z"></path><path d="M2 20.5 H12"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
@@ -660,7 +660,7 @@ body{margin:0;background:#F2F4F8}
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
-  </section>
+  </section></div>
 
   <!-- Feneri yak (düzeltildi, kullanıcı 18 Eki: "ayın tam göründüğü, düzgün çalışan hâle getir"): sahnenin tamamı kırpılmadan görünür;
        yazı ve anahtar alt şeritte, görselin üstünde değil. Kapalıyken oda karanlık; açınca ışık fenerin tepesinden yayılır, duvarda ay belirir. -->

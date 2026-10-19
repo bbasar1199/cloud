@@ -168,6 +168,26 @@
   }
   function menuKapat() { if (menu) menu.classList.remove('on'); kilit(0); }
 
+  /* Masaüstü (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım"): 1024px ve üstünde ortak üst menü.
+     Sayfaların telefon başlıkları o genişlikte gizlenir (ayluna.css); bağlantı ve düğmeler genel yönlendirmeden geçer. */
+  var MASA = [['Tüm ürünler', 'tum-urunler.html', 'koleksiyon'], ['LunaDream', 'lunadream-gece-lambasi.html', 'lunadream-gece-lambasi'], ['Galaxy USB', 'galayx-usb-projektor.html', 'galayx-usb-projektor'],
+    ['AyFeneri', 'lamba.html', 'lamba'], ['Galaksi Night', 'ayluna-galaksi-night-projektor.html', 'ayluna-galaksi-night-projektor'], ['Kargo takip', 'kargo-takip.html', 'kargo-takip'], ['İletişim', 'iletisim.html', 'iletisim']];
+  var IC = function (d) { return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>'; };
+  var masa = null;
+  function masaUst() {
+    document.documentElement.setAttribute('data-ay-tur', SAYFA);
+    if (!masa) {
+      masa = el('<header class="ay-masa"><div class="ay-masa-ic"><a class="ay-logo" href="./" aria-label="Ayluna ana sayfa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.6"></circle><path d="M12 2a10 10 0 0 1 0 20a7 10 0 0 0 0-20Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a>' +
+        '<nav aria-label="Ana menü">' + MASA.map(function (m) { return '<a href="' + m[1] + '" data-k="' + m[2] + '">' + m[0] + '</a>'; }).join('') + '</nav>' +
+        '<div class="ay-masa-sag"><a href="arama.html" aria-label="Ara">' + IC('<circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path>') + '</a>' +
+        '<a href="hesap.html" aria-label="Hesap">' + IC('<circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>') + '</a>' +
+        '<button type="button" aria-label="Sepet">' + IC('<path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path>') + '</button></div></div></header>');
+      document.body.insertBefore(masa, document.body.firstChild);
+    }
+    var k = SAYFA === 'urun' ? URUN : SAYFA, l = masa.querySelectorAll('nav a');
+    for (var i = 0; i < l.length; i++) { if (l[i].getAttribute('data-k') === k) l[i].setAttribute('aria-current', 'page'); else l[i].removeAttribute('aria-current'); }
+  }
+
   // Sepet çekmecesi: sepet.html sayfası iframe'de (aynı sepet bileşeni)
   var cek = null;
   function cekmeceAc() {
@@ -345,6 +365,7 @@
     SAYFA = P.tur; URUN = P.urun || '';
     sablon = document.getElementById('T-' + (T[ad] ? ad : '404')).content;
     while (kok.firstChild) kok.removeChild(kok.firstChild);
+    masaUst();
     ilk = true; planli = false; C = new (P.js())({}); window.scrollTo(0, 0); ciz();
   }
 
@@ -352,7 +373,7 @@
     tek: TEK, geri: geri, gorsel: gorsel, baslatTek: function () { window.addEventListener('hashchange', rota); rota(); },
     baslat: function (Comp) {
       kok = document.getElementById('kok'); sablon = document.getElementById('T').content;
-      C = new Comp({}); ciz();
+      masaUst(); C = new Comp({}); ciz();
     },
     cekmeceAc: cekmeceAc, cekmeceKapat: cekmeceKapat, cekmecede: function () { return !!ust(); }, kapidaAc: kapidaAc, kapidaKapat: kapidaKapat, menuAc: menuAc, git: git, siparisVer: siparisVer, bildir: bildir, TL: TL, satir: satir, urunBul: urunBul,
     odemeyeGec: function () { if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; } git('odeme.html'); }

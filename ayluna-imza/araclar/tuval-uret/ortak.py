@@ -64,3 +64,21 @@ def canli_galeri(handle):
     import json, os
     p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'ogrenme', 'galeri-canli.json')
     return [x['id'] for x in json.load(open(p))[handle]]
+
+
+# Masaüstü iki sütun (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım"): galeri ile satın alma kutusu
+# tek sarmalayıcıda; galeri yalnız bu kısımda yapışık kalır, alttaki bölümlerin üstüne binmez. Telefonda etkisiz.
+def urun_ust(html, bas):
+    i = html.index(bas)
+    k = html.rindex('<section', 0, html.index('id="siparis"', i))
+    d, p = 0, k
+    while True:
+        a, c = html.find('<section', p + 1), html.find('</section>', p + 1)
+        if a != -1 and a < c:
+            d, p = d + 1, a
+        elif d:
+            d, p = d - 1, c
+        else:
+            son = c + len('</section>')
+            break
+    return html[:i] + '<div class="urun-ust">' + html[i:son] + '</div>' + html[son:]

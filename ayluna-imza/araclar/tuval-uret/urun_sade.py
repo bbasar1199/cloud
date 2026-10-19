@@ -130,12 +130,14 @@ def govde(u):
     sss = ''.join('<details class="sss"><summary>%s<span class="arti" aria-hidden="true">+</span></summary><p>%s</p></details>' % (q['s'], q['c']) for q in u['sss'])
     return ad, gal, (serit +
         '  <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn\'de geçer -->\n'
+        '  <div class="urun-ust"><div class="ust-sol">\n'  # masaüstünde sol sütun (galeri); telefonda etkisiz
         '  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div></div>\n'
         '  <div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></div>\n'
+        '  </div><div class="ust-sag">\n'  # masaüstünde sağ sütun (satın alma)
         '  <section class="bilgi" id="siparis"><h1>%s<span>.</span></h1><p class="kisa">%s</p>'
         '<p class="fiyat"><b>%s</b>%s%s</p></section>\n' % (ad, u['kisa'], tl(u['fiyat']), '<s>%s</s>' % tl(eski) if eski else '', rozet) +
         '  <ul class="oz-l">' + oz + '</ul>\n' + sec + pk + al +
-        '  <ol class="yol-k" aria-label="Siparişten teslime">' + SY.YOL + '</ol>\n'
+        '  <ol class="yol-k" aria-label="Siparişten teslime">' + SY.YOL + '</ol>\n  </div></div>\n'
         '  <section class="blk"><h2>Kutuda ne var<span>?</span></h2><p class="kutu">%s</p></section>\n' % u['kutuda'] +
         '  <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)">' + sss + '</div></section>\n'
         '  <!-- Yorumlar: Shopify\'da bu ürünün Loox kutusu (hepsi, m.28/B). Loox: %s -->\n'

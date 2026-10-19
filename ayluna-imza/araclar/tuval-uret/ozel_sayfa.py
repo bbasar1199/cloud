@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, canli_galeri
+from ortak import TAIL, TL_JS, canli_galeri, urun_ust
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -420,5 +420,5 @@ def sayfa(u):
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
         h = int(os.environ.get('S_H_' + u, {'af': 6596, 'gn': 7108}[u]))  # ölçülen pano boyu (19 Eki, kare galeri)
-        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(sayfa(u) + TAIL.format(h=h, js=js(u)))
+        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"') + TAIL.format(h=h, js=js(u)))
         print('yazıldı:', dosya, h)

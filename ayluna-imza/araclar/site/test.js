@@ -137,7 +137,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   await pg.fill('input[type=search]', 'nemlendirici'); await pg.press('input[type=search]', 'Enter'); await pg.waitForTimeout(500);
   not(pg.url().includes('arama.html?q=nemlendirici') && (await pg.locator('.izg a').count()) === 3, '404 arama → 3 nemlendirici');
   await pg.goto(KOK + 'index.html'); await pg.waitForTimeout(300);
-  await pg.locator('[aria-label="Ara"]').click(); await pg.waitForTimeout(300);
+  await pg.locator('#kok [aria-label="Ara"]').click(); await pg.waitForTimeout(300);
   not(pg.url().endsWith('arama.html'), 'başlık Ara → arama.html');
 
   // Baskı satırları (18 Eki): fiyatta "Stokta" yok, altında "Dün [X]"; dönen satır hediye → aynı gün kargo + 16.00 sayacı (İstanbul saati)
@@ -171,6 +171,24 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     const r = await pg.evaluate(() => { const s = [...document.querySelectorAll('.kare-foto .kf, .h-iz .hs, .g-iz .gs')]; const i = s[0] && s[0].querySelector('img').getBoundingClientRect(); return { n: s.length, oran: i && i.height ? Math.round(i.width / i.height * 100) / 100 : 0 }; });
     not(r.n === liste.length && Math.abs(r.oran - 1) < .02, `${h}: galeri ${r.n}/${liste.length} görsel, oran ${r.oran}`);
   }
+
+  // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
+  const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  const mp = await mctx.newPage(); mp.on('pageerror', e => loglar.push('pageerror masaüstü: ' + e.message));
+  for (const f of ['index', 'tum-urunler', 'sepet', 'iletisim', 'arama', 'iade', 'lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba']) {
+    await mp.goto(KOK + f + '.html'); await mp.waitForTimeout(700);
+    await mp.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await mp.waitForTimeout(500);
+    const r = await mp.evaluate(() => {
+      const g = e => e && getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().height > 0;
+      const tel = [...document.querySelectorAll('#kok header.ust, #kok .sahne>header, #kok .u-ust')].some(g);
+      const yt = document.querySelector('.ay-masa'), ust = yt && yt.getBoundingClientRect();
+      const gal = document.querySelector('.urun-ust>.sahne, .urun-ust>.hero, .urun-ust>.ust-sol');
+      const yap = gal ? gal.getBoundingClientRect().bottom <= gal.parentElement.getBoundingClientRect().bottom + 1 : true;
+      return { sw: document.documentElement.scrollWidth, masa: g(yt) && ust.width === innerWidth, tel, yap };
+    });
+    not(r.sw === 1440 && r.masa && !r.tel && r.yap, `masaüstü ${f}: taşma ${r.sw}, üst menü ${r.masa}, telefon başlığı gizli ${!r.tel}, galeri üst kısımda ${r.yap}`);
+  }
+  await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));
   console.log(hata ? `\n${hata} HATA` : '\nHEPSİ TAMAM');
