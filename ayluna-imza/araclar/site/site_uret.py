@@ -3,7 +3,7 @@
 # Tuval sayfaları (.dc.html) olduğu gibi kullanılır; ayluna.js onları çalıştırır (şablon + DOM yaması) ve siteyi bağlar:
 # sepet (localStorage), sepet çekmecesi, kapıda ödeme formu, menü, arama, ödeme önizlemesi, sipariş alındı.
 # Çıktı: ayluna-imza/site/ (index.html + sayfalar + g/ görseller + ayluna.js/css + veri.js). Görseller 1200px'e küçültülür.
-import os, re, sys, json, shutil
+import os, re, sys, io, json, shutil
 from PIL import Image
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 TU = os.path.join(KOK, 'araclar', 'tuval-uret'); sys.path.insert(0, TU)
@@ -19,6 +19,21 @@ BLOB = {'e02351b3be4a1c555c5d760d0bbda723': 'm-kiz', '0033dfea6282c5bc479c385213
         'ec0a99ef7b8839a12ab7e6aa4282f7da': 'ld2', '35f6b0090fd4e65b22f48d111fe61905': 'ld3', 'a08890007843d79d94bfffc397a3d0ac': 'ld4', 'd4efe7e83c74524ece75e962161f7fff': 'ld5',
         'fd0a28089115b8aa3de9bcb92a65a8e2': 'ld6', '3ddd8b8b95f040d436d5d0ea350924b8': 'ld7', '98db755893dbcebe192c69e73ae5afff': 'ld8'}
 BLOB.update(json.load(open(os.path.join(KOK, 'araclar', 'blob-yerel.json'))))
+
+
+def gorsel(p, en, q):
+    """Görseli en'e küçültüp (bayt, uzantı, mime) döndürür. Saydam görsel (arka planı temizlenmiş kesim) WebP olarak saydam
+    kalır; JPEG'e çevrilince saydamlık siyah oluyordu (kullanıcı, 19 Eki: "seçim kısmında kız erkekte arkasında siyahlık var").
+    Saydam olmayanlar JPEG."""
+    im = Image.open(p)
+    if im.mode == 'P' and 'transparency' in im.info: im = im.convert('RGBA')
+    saydam = im.mode in ('RGBA', 'LA') and im.getchannel('A').getextrema()[0] < 255
+    im = im.convert('RGBA' if saydam else 'RGB')
+    if im.width > en: im = im.resize((en, round(im.height * en / im.width)), Image.LANCZOS)
+    b = io.BytesIO()
+    if saydam:
+        im.save(b, 'WEBP', quality=q + 6, method=6); return b.getvalue(), 'webp', 'image/webp'
+    im.save(b, 'JPEG', quality=q, optimize=True, progressive=True); return b.getvalue(), 'jpg', 'image/jpeg'
 
 
 def blob_yolu(i):
@@ -124,16 +139,14 @@ def main():
         kullanilan.add(u['img'][7:])
     for e in V['ekler']:
         kullanilan.add(e['img'][7:])
-    # Görseller: 1200px'e küçült, JPEG
+    # Görseller: 1200px'e küçült; saydam olan WebP (saydam kalır), diğerleri JPEG
     yol = {}
     for i in sorted(kullanilan):
         p = blob_yolu(i)
         if not p: eksik.add(i); continue
-        hedef = 'g/%s.jpg' % i
         try:
-            im = Image.open(p); im = im.convert('RGB')
-            if im.width > 1200: im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
-            im.save(os.path.join(CIKTI, hedef), quality=82, optimize=True, progressive=True)
+            bayt, uz, _ = gorsel(p, 1200, 82); hedef = 'g/%s.%s' % (i, uz)
+            open(os.path.join(CIKTI, hedef), 'wb').write(bayt)
         except Exception as e:
             print('görsel hatası', i, p, e); continue
         yol[i] = hedef
@@ -205,10 +218,8 @@ def tek():
     for i in sorted(ids):
         p = blob_yolu(i)
         if not p: continue
-        im = Image.open(p).convert('RGB')
-        if im.width > 800: im = im.resize((800, round(im.height * 800 / im.width)), Image.LANCZOS)
-        b = io.BytesIO(); im.save(b, 'JPEG', quality=72, optimize=True, progressive=True)
-        blob[i] = 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode()
+        bayt, _, mime = gorsel(p, 800, 72)
+        blob[i] = 'data:%s;base64,' % mime + base64.b64encode(bayt).decode()
     V['blob'] = blob
     css = open(os.path.join(KAYNAK, 'ayluna.css'), encoding='utf-8').read() + '\nbody{background:var(--ay-zemin,#F6F1E9)}'
     fontlar = sorted(fontlar) + ['<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">']

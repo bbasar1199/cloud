@@ -154,6 +154,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(fark >= 2 && fark <= 3, f + ': sayaç akıyor ' + s1 + ' → ' + s2);
     await sp.clock.runFor(4500); not((await on()).includes(ilk), f + ': başa döndü');
     not((await sp.locator('.yol li').nth(1).textContent()).includes('Bugün'), f + ': yolda kargo tarihi Bugün');
+    if (f.startsWith('lunadream')) { const src = await sp.evaluate(() => [...document.querySelectorAll('.yarim-iz img')].map(i => i.currentSrc || i.src));
+      not(src.length === 2 && src.every(x => /\.webp$/.test(x)), f + ': model kartı görselleri saydam (WebP), siyah zemin yok'); }
     { await sp.locator('.al-on').scrollIntoViewIfNeeded(); await sp.clock.runFor(600); const kd = await sp.locator('.stok-kd.on').textContent();
       not(/^Son (18|23) adet$/.test(kd) && await sp.locator('#siparis .canli, #siparis p.stok').count() === 0, f + ': stok kurdelesi butonda "' + kd + '", eski stok satırı yok'); }
     await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(11000); // 16.30
