@@ -181,6 +181,8 @@
     ['AyFeneri', 'lamba.html', 'lamba'], ['Galaksi Night', 'ayluna-galaksi-night-projektor.html', 'ayluna-galaksi-night-projektor'], ['Kargo takip', 'kargo-takip.html', 'kargo-takip'], ['İletişim', 'iletisim.html', 'iletisim']];
   var IC = function (d) { return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>'; };
   var masa = null;
+  // Masaüstü sınırı geçilince (pencere boyu) yeniden çiz: özellik kartları telefonda satın alma kutusunda, masaüstünde galerinin altında
+  if (window.matchMedia) { var mq = matchMedia('(min-width: 1024px)'); if (mq.addEventListener) mq.addEventListener('change', planla); else if (mq.addListener) mq.addListener(planla); }
   function masaUst() {
     document.documentElement.setAttribute('data-ay-tur', SAYFA);
     if (!masa) {
@@ -193,6 +195,38 @@
     }
     var k = SAYFA === 'urun' ? URUN : SAYFA, l = masa.querySelectorAll('nav a');
     for (var i = 0; i < l.length; i++) { if (l[i].getAttribute('data-k') === k) l[i].setAttribute('aria-current', 'page'); else l[i].removeAttribute('aria-current'); }
+  }
+
+  // Masaüstü yapışkan satın alma çubuğu (eleştirmen önerisi, kullanıcı seçti 19 Eki): sayfanın satın alma butonu
+  // ekranın üstünden çıkınca menünün altından iner. Ürün, seçim, kartla al butonu (sayfadaki etiketin aynısı) ve fiyatsız Kapıda bağlantısı.
+  // Yalnız transform/opacity; sayaç yok; telefonda görünmez (oradaki yapışkan çubuk sayfanın kendisinde).
+  var cubuk = null, cubukIO = null;
+  function anaBtn() { return document.querySelector('#kok .urun-ust .btn-on, #kok .urun-ust .btn1'); }
+  function cubukYaz() {
+    if (!cubuk) return;
+    var b = anaBtn(), s = satir(URUN);
+    cubuk.querySelector('[data-l]').textContent = b ? (b.querySelector('.b-ic>span') || b).textContent.trim() : 'Güvenli Ödeme ile Al';
+    cubuk.querySelector('[data-v]').textContent = s ? s.varyant : '';
+  }
+  function cubukKur() {
+    if (cubukIO) { cubukIO.disconnect(); cubukIO = null; }
+    if (cubuk) cubuk.classList.remove('on');
+    var U = V.urun[URUN], b = anaBtn();
+    if (SAYFA !== 'urun' || !U || U.stok === false || !b || !window.IntersectionObserver) return;
+    if (!cubuk) {
+      cubuk = el('<div class="ay-al" role="region" aria-label="Hızlı satın alma"><div class="ay-al-ic"><img alt=""><span class="ay-al-y"><b></b><small data-v></small></span>' +
+        '<button type="button" class="ay-al-kp" data-kp>Kapıda ödeme</button><button type="button" class="ay-al-btn" data-al><span data-l></span></button></div></div>');
+      document.body.appendChild(cubuk);
+      cubuk.addEventListener('click', function (e) {
+        if (e.target.closest('[data-al]')) sepeteAt(URUN, 'kart'); else if (e.target.closest('[data-kp]')) sepeteAt(URUN, 'kapida');
+      });
+    }
+    cubuk.querySelector('img').src = gorsel(U.img); cubuk.querySelector('b').textContent = U.ad;
+    cubukIO = new IntersectionObserver(function (g) {
+      var x = g[0], ac = !x.isIntersecting && x.boundingClientRect.top < 0;
+      if (ac) cubukYaz(); cubuk.classList.toggle('on', ac);
+    });
+    cubukIO.observe(b);
   }
 
   // Sepet çekmecesi: sepet.html sayfası iframe'de (aynı sepet bileşeni)
@@ -373,14 +407,14 @@
     sablon = document.getElementById('T-' + (T[ad] ? ad : '404')).content;
     while (kok.firstChild) kok.removeChild(kok.firstChild);
     masaUst();
-    ilk = true; planli = false; C = new (P.js())({}); window.scrollTo(0, 0); ciz();
+    ilk = true; planli = false; C = new (P.js())({}); window.scrollTo(0, 0); ciz(); cubukKur();
   }
 
   window.Ayluna = {
     tek: TEK, geri: geri, gorsel: gorsel, baslatTek: function () { window.addEventListener('hashchange', rota); rota(); },
     baslat: function (Comp) {
       kok = document.getElementById('kok'); sablon = document.getElementById('T').content;
-      masaUst(); C = new Comp({}); ciz();
+      masaUst(); C = new Comp({}); ciz(); cubukKur();
     },
     cekmeceAc: cekmeceAc, cekmeceKapat: cekmeceKapat, cekmecede: function () { return !!ust(); }, kapidaAc: kapidaAc, kapidaKapat: kapidaKapat, menuAc: menuAc, git: git, siparisVer: siparisVer, bildir: bildir, TL: TL, satir: satir, urunBul: urunBul,
     odemeyeGec: function () { if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; } git('odeme.html'); }

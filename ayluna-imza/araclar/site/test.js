@@ -193,12 +193,21 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       const g = e => e && getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().height > 0;
       const tel = [...document.querySelectorAll('#kok header.ust, #kok .sahne>header, #kok .u-ust')].some(g);
       const yt = document.querySelector('.ay-masa'), ust = yt && yt.getBoundingClientRect();
-      const gal = document.querySelector('.urun-ust>.sahne, .urun-ust>.hero, .urun-ust>.ust-sol');
+      const gal = document.querySelector('.urun-ust>.urun-sol, .urun-ust>.ust-sol');
       const yap = gal ? gal.getBoundingClientRect().bottom <= gal.parentElement.getBoundingClientRect().bottom + 1 : true;
       return { sw: document.documentElement.scrollWidth, masa: g(yt) && ust.width === innerWidth, tel, yap };
     });
     not(r.sw === 1440 && r.masa && !r.tel && r.yap, `masaüstü ${f}: taşma ${r.sw}, üst menü ${r.masa}, telefon başlığı gizli ${!r.tel}, galeri üst kısımda ${r.yap}`);
   }
+  // Masaüstü yapışkan satın alma çubuğu: üstte kapalı, satın alma butonu geçince açılır; Kapıda → form, sepette tek satır
+  await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.evaluate(() => localStorage.clear()); await mp.reload(); await mp.waitForTimeout(900);
+  const c0 = await mp.locator('.ay-al.on').count();
+  await mp.evaluate(() => window.scrollTo(0, 2400)); await mp.waitForTimeout(800);
+  const cl = await mp.locator('.ay-al.on [data-l]').textContent().catch(() => '');
+  not(c0 === 0 && /^Güvenli Ödeme ile Al · ₺/.test(cl), 'masaüstü çubuğu: üstte kapalı, aşağıda açık "' + cl + '"');
+  not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
+  await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
+  not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

@@ -67,8 +67,24 @@ def canli_galeri(handle):
 
 
 # Masaüstü iki sütun (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım"): galeri ile satın alma kutusu
-# tek sarmalayıcıda; galeri yalnız bu kısımda yapışık kalır, alttaki bölümlerin üstüne binmez. Telefonda etkisiz.
-def urun_ust(html, bas):
+# tek sarmalayıcıda (.urun-ust); solda galeri, sağda satın alma. Telefonda etkisiz.
+# oz: satın alma kutusundaki özellik kartları. Masaüstünde galerinin altına geçer (eleştirmen önerisi, kullanıcı seçti 19 Eki):
+# DOM'da her an tek kopya olur; renderVals'taki masa/tel bayrağı hangisinin çizileceğini seçer (tuvalde telefon yeri).
+MASA_JS = "    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);\n    return { masa: MASA, tel: !MASA,"
+
+
+def masa_bayrak(js):
+    i = js.index('renderVals()')
+    j = js.index('\n    return {', i) + 1  # renderVals'ın kendi dönüşü (iç işlevlerin daha içerideki return'leri değil)
+    return js[:j] + MASA_JS + js[j + len('    return {'):]
+
+
+def urun_ust(html, bas, oz=None):
+    sol = ''
+    if oz:
+        assert html.count(oz) == 1, 'özellik bloğu tek olmalı'
+        html = html.replace(oz, '<sc-if value="{{tel}}" hint-placeholder-val="{{true}}">' + oz + '</sc-if>')
+        sol = '\n    <sc-if value="{{masa}}" hint-placeholder-val="{{false}}"><div class="sol-oz">' + oz + '</div></sc-if>\n  '
     i = html.index(bas)
     k = html.rindex('<section', 0, html.index('id="siparis"', i))
     d, p = 0, k
@@ -81,4 +97,7 @@ def urun_ust(html, bas):
         else:
             son = c + len('</section>')
             break
+    if oz:
+        return (html[:i] + '<div class="urun-ust"><div class="urun-sol">' + html[i:k] + sol + '</div>\n  '
+                + html[k:son] + '</div>' + html[son:])
     return html[:i] + '<div class="urun-ust">' + html[i:son] + '</div>' + html[son:]

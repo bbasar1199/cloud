@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
 
 # Bir gece kadranı: fotoğraf penceresinin merkezi (195, 216), yay yarıçapı 156; 5 an yayda (açı, derece)
 KAD_X, KAD_Y, KAD_R = 195, 216, 156
@@ -821,6 +821,12 @@ JS = """class Component extends DCLogic {
 }"""
 
 # Diğer ürün sayfaları (luna_usb.py) bu dosyadaki CSS ve parçaları içe aktarır; yazma yalnız doğrudan çalıştırınca
+# Sihirli Özellikler bloğu: masaüstünde galerinin altına geçer (ortak.urun_ust)
+def sihirli(h):
+    i = h.index('<p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>')
+    return h[i:h.index('\n    </div>', h.index('<div class="sih">', i)) + len('\n    </div>')]
+
+
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 6160)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6160)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

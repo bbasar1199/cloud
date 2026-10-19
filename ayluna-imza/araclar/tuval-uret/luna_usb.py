@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
 import luna_e as E
 import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
@@ -731,12 +731,18 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
+# Özellik kartları: masaüstünde galerinin altına geçer (ortak.urun_ust)
+def ozellik(h):
+    i = h.index('<div class="ozler">\n')
+    return h[i:h.index('\n    </div>', i) + len('\n    </div>')]
+
+
 # Renk seçenekleri: aynı düzen, farklı ikinci renk + yazı tipi (lacivert sabit)
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
     h = int(os.environ.get('U_H', 7086))
-    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"') + TAIL.format(h=h, js=JS))
+    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(JS)))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
     for no, ad in enumerate(SECENEK, 1):

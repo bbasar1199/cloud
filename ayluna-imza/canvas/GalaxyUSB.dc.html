@@ -362,12 +362,21 @@ body{margin:0;background:#F2F4F8}
   <div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>
   <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
-  <div class="urun-ust"><section class="hero kare" aria-label="Galaxy USB fotoğrafları">
+  <div class="urun-ust"><div class="urun-sol"><section class="hero kare" aria-label="Galaxy USB fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><svg class="{{f.dcls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle class="ic" cx="12" cy="12" r="2.6"></circle><path class="ark" d="M12 3a9 9 0 0 1 9 9"></path></svg></sc-for></span><span class="sira"><small>Temsilî görseller</small></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 
+  
+    <sc-if value="{{masa}}" hint-placeholder-val="{{false}}"><div class="sol-oz"><div class="ozler">
+      <div class="oz"><span class="gz" aria-hidden="true"><span class="port"></span><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>USB tak, çalıştır</b><span class="t">Laptop, powerbank ya da şarj başlığı.</span></div>
+      <div class="oz"><span class="gz"><span class="dn" aria-hidden="true"><img src="/_blob/b9f5d788517b91ee796e4170791b31ee" alt=""><img src="/_blob/dac06d8e40f97dcc07c044913dd850a1" alt=""><img src="/_blob/e0c62326edb330a8e656d1783d3a17cb" alt=""></span></span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
+      <div class="oz"><span class="gz" aria-hidden="true"><span class="karo salla"><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
+      <div class="oz"><span class="gz" aria-hidden="true"><span class="karo"><span class="hale"></span><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
+      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
+    </div></div></sc-if>
+  </div>
   <section class="al" id="siparis">
     <h1 class="bas-y">Galaxy USB Projektör</h1>
     <p class="alt-b">2'si 1 arada: galaksi projektörü ve gece lambası.</p>
@@ -376,13 +385,13 @@ body{margin:0;background:#F2F4F8}
     <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>62</b> kişi satın aldı</span></p>
 
 
-    <div class="ozler">
+    <sc-if value="{{tel}}" hint-placeholder-val="{{true}}"><div class="ozler">
       <div class="oz"><span class="gz" aria-hidden="true"><span class="port"></span><svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg></span><b>USB tak, çalıştır</b><span class="t">Laptop, powerbank ya da şarj başlığı.</span></div>
       <div class="oz"><span class="gz"><span class="dn" aria-hidden="true"><img src="/_blob/b9f5d788517b91ee796e4170791b31ee" alt=""><img src="/_blob/dac06d8e40f97dcc07c044913dd850a1" alt=""><img src="/_blob/e0c62326edb330a8e656d1783d3a17cb" alt=""></span></span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo salla"><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
       <div class="oz"><span class="gz" aria-hidden="true"><span class="karo"><span class="hale"></span><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span></span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
       <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
-    </div>
+    </div></sc-if>
 
     <div class="pk-bas">Çok al, az öde</div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
@@ -586,7 +595,8 @@ class Component extends DCLogic {
       { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' }
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
-    return {
+    var MASA = !!(window.matchMedia && matchMedia('(min-width: 1024px)').matches);
+    return { masa: MASA, tel: !MASA,
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay,
       disk: disk, dNo: S.disk + 1, dAd: DISK[S.disk][0],
       kim: kim,

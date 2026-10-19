@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Galeriler Shopify'daki gibi + masaüstü (19 Ekim, en güncel)
+## Masaüstü görünüm (19 Ekim, en güncel)
+- Kullanıcı: "Bir de bu mağazanın masaüstü görünüşünü de yapmak lazım."
+- 1024 px ve üstü yalnız CSS + ortak üst menü: `araclar/site/ayluna.css` sonundaki masaüstü bloğu, `ayluna.js masaUst()`. Telefon düzeni değişmez (test.js mobil + masaüstü denemeleri).
+- Ürün sayfası: galeri + satın alma kutusu `.urun-ust` sarmalayıcısında (`ortak.urun_ust`); galeri yalnız bu kısımda yapışık. Ana sayfa geniş slayt, 4 sütun ürün; koleksiyon ve arama 4 sütun; sepet iki sütun (sağda yapışkan özet).
+- Düzeltmeler: ürün alt bilgisi iki sütun; ürün sayfası butonları sepeti katlamaz (`Sepet.koy`); sepette paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2); boş sepette ok kayması (telefonda da vardı).
+- Eleştirmen (ayluna-elestirmen) 11 öneri verdi; en iyi 3'ü kullanıcıya soruldu, **üçü de seçildi**:
+  1. Masaüstü yapışkan satın alma çubuğu (satın alma kutusu ekrandan çıkınca menünün altından iner; kapıda bağlantısında fiyat yok, sayaç yok).
+  2. Sihirli Özellikler (ve diğer imza sayfalarındaki özellik kartları) masaüstünde galerinin altına; telefonda sıra aynı.
+  3. Alt bölümler masaüstüne açılır: koyu bölümler kenardan kenara gece bandı, Bir gece iki sütun, odalar yan yana, kaydırmalı şeritler ızgara.
+- Bekleyen eleştirmen önerileri (seçilmedi, sırada): yatay slayt görseli (Flow), koleksiyonda LunaDream için "Seç", slayt noktaları tıklanır, ödeme sayfası iki sütun, % rozeti posterden fiyata, ana sayfaya Loox puanı.
+
+## Galeriler Shopify'daki gibi + masaüstü (19 Ekim)
 - Kullanıcı: "Benim şu anda kullandığım ürün görselleri tarzında yapmayı düşünüyorum, yazısı vesaire. Fotoğraf kısmını Shopify'daki ile aynı şekle getir. Bir de mağazanın masaüstü görünüşünü yapmak lazım."
 - `araclar/canli_galeri.py`: canlı `/products.json` (`ogrenme/canli-urunler.json`) → `ogrenme/galeri-canli.json` (Shopify sırası, çıkarılanlar ve kontrol listesi kodda). `ortak.canli_galeri(handle)` tüm üreticilerde.
 - LunaDream, USB, AyFeneri, Galaksi Night galerileri kare (`.hero.kare`, LunaDream `.sahne`); oda sahneleri galeriden çıktı (sayfanın diğer bölümlerinde duruyor). Basit sayfalar aynı listeyi kullanıyor. test.js her ürünün galeri sayısını ve kareliğini dener.
