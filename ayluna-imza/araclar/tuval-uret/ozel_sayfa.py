@@ -55,6 +55,7 @@ CSS = r"""
 
 /* AyFeneri göstergesi büyüdü (18×28), huzme 4 sn'de bir salınır, tepe ışığı opaklıkla yanar */
 .f-iz{gap:16px}
+.hero.kare .f-iz svg{stroke:rgba(26,33,66,.45)}.hero.kare .f-iz .lit{stroke:var(--lac)}.hero.kare .y-iz .gz{fill:rgba(26,33,66,.3)}.hero.kare .y-iz .yr{stroke:rgba(26,33,66,.35)}.hero.kare .y-iz .ay{fill:var(--lac)}
 .f-iz svg{width:18px;height:28px}
 .f-iz .fn{fill:var(--v);opacity:0;transition:opacity .4s var(--ease)}
 .f-iz .lit .fn{opacity:1;fill:var(--v)}

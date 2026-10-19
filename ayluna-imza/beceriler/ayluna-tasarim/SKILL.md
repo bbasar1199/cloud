@@ -225,6 +225,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Köşeli yer tutucular sitede kalır, kullanıcı gerekirse doldurur; teyit için ısrar edilmez. Site tek dosya `index.html` olarak da verilir (`python3 araclar/site/site_uret.py` → `site-tek/index.html`).
 - Kullanıcı (18 Eki) "tüm iskelet, her kısım tam çalışsın" der: önce denetim (bağlantı, düğme, form, sepet, ödeme, kapıda, boş hâller, politikalar, 320px), eksik listesi, hepsini düzelt; gerçek tarayıcıda uçtan uca tıklama testi geçmeden gönderme. Seçilen paket/model/seçenek sepete aynen gider. Shopify teması da aynı listeyle test edilir (`ogrenme/site-denetimi.md`).
 
+## Galeri (19 Ekim)
+- Ürün galerisi Shopify'daki gibi: mağazanın görselleri, aynı sıra, kare, kenardan kenara. Fotoğrafın altında koyu bant yok; gösterge ve "Temsilî görseller" sayfanın zemininde. Üstte koyu logo bandı kalır; şeffaf yapılmaz, fotoğrafın üstüne başlık binmez.
+
 ## Masaüstü (19 Ekim)
 - Telefon düzeni değişmez; masaüstü 1024 px ve üstünde ayrı katman. Ortak lacivert üst menü; telefon başlıkları gizli; duyuru şeridi ve alt bilgi kenardan kenara.
 - Ürün sayfası: solda kare galeri + özellik kartları, sağda satın alma (ad, fiyat, Dün, seçiciler, kargo, iki buton). Ödeme butonu ilk ekranda görünür.
@@ -234,6 +237,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Masaüstü taşma, galeri yeri ve çubuk test.js'te denenir; teslimden önce 1440 px ekran görüntüsüne bakılır.
 
 ## Shopify
+- **Tema 1.0.0 (19 Ekim):** `python3 araclar/tema/tema_uret.py` → `tema-zip/ayluna-tema-1.0.0.zip`. Tasarım panoları birebir; sepet/ödeme Shopify, kapıda ödeme EasySell (`[data-ay-kapida]`), fiyat/stok canlı. Kurulum ve yayın öncesi denetim: `araclar/tema/KURULUM.md`. Teslimden önce Theme Check + `araclar/tema/benzetim.py` ile `test-tema.js`.
 - **Sıfırdan Ayluna teması** (kullanıcı kararı, 17 Ekim). Hiçbir hazır tema (Horizon, Dawn…) kopyalanmaz ya da temel alınmaz; her parça benzersiz yazılır.
 - İlk kurulum zip ile yapılır, sonraki değişiklikler `.txt` olarak verilir. Şu an canlıda ChatGPT ile yapılmış bir sürüm var; o da değiştirilecek.
 - Kaynak `araclar/shopify-kaynak/*.liquid` → `python3 ayluna-imza/araclar/shopify-derle.py` → `shopify/*.txt`. Kurulum: `shopify/KURULUM.txt`.

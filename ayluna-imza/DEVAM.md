@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Masaüstü görünüm (19 Ekim, en güncel)
+## Shopify teması 1.0.0 (19 Ekim, en güncel)
+- Kullanıcı: "Sen bana artık siteyi gönder bakalım bi" → "tema dosyası olarak son halini".
+- Önizleme sitesi Shopify teması değildi; `shopify/` altındaki eski bölümler ilk LunaDream tasarımından. Tema sıfırdan kuruldu: `araclar/tema/tema_uret.py` → `tema/` + `tema-zip/ayluna-tema-1.0.0.zip` (241 dosya, 13 MB; ikisi de git dışında, betikle yeniden üretilir).
+- Yapı: `layout/theme.liquid`; bölümler `ayluna-sayfa` (ana, koleksiyon, sepet, arama, 404), `ayluna-urun` (ürün adresine göre pano, yoksa sade sayfa + EasySell için gizli ürün formu), `ayluna-icerik` (iletişim ve yasal sayfalar adrese göre, diğerleri sade), `ayluna-sifre`; her pano bir snippet (`ay-*.liquid`); müşteri sayfaları sade.
+- `ayluna.js` Shopify kipi: sepet `/cart.js`, mağaza adresleri, canlı fiyat/stok/varyant (`ay-canli`), kapıda ödeme EasySell (`[data-ay-kapida]`), iletişim/bülten `/contact`, WhatsApp tema ayarı. Önizleme kipi değişmedi.
+- Doğrulama: Theme Check hatasız (yalnız Google Fonts uyarısı); `araclar/tema/benzetim.py` + `test-tema.js` (38 deneme) geçti. Gerçek mağazada denenmedi: EasySell seçicisi, Kaching paket indirimi, %5 kart indirimi → `araclar/tema/KURULUM.md` yayın öncesi listesi.
+- Galerinin altındaki koyu şerit kaldırıldı (kullanıcı: "Şerit kalksın").
+
+## Masaüstü görünüm (19 Ekim)
 - Kullanıcı: "Bir de bu mağazanın masaüstü görünüşünü de yapmak lazım."
 - 1024 px ve üstü yalnız CSS + ortak üst menü: `araclar/site/ayluna.css` sonundaki masaüstü bloğu, `ayluna.js masaUst()`. Telefon düzeni değişmez (test.js mobil + masaüstü denemeleri).
 - Ürün sayfası: galeri + satın alma kutusu `.urun-ust` sarmalayıcısında (`ortak.urun_ust`); galeri yalnız bu kısımda yapışık. Ana sayfa geniş slayt, 4 sütun ürün; koleksiyon ve arama 4 sütun; sepet iki sütun (sağda yapışkan özet).

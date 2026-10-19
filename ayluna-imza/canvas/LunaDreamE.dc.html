@@ -38,28 +38,30 @@ a{color:#1A2142}a:hover{color:#2B3463}
    kare ürün fotoğrafı kırpılmadan tam genişlik, alt kenarı geceye karışır; diskler fotoğrafın kenarlarında yavaşça süzülür;
    küçük resimler ve sayaç fotoğrafın üstünde; altına yuvarlak köşeli levha biner. "Işığı aç" anahtarı yok (17 Ekim kararı). */
 /* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): görsel logo bandının altında tam kare, üstüne gölge ya da yüzen öğe binmez; ay göstergesi altında. */
-.sahne{position:relative;height:516px;background:#0C1027;overflow:hidden;color:#FFFDF9}
-.sahne header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;text-shadow:0 1px 8px rgba(12,16,39,.5)}
-.sahne .kare-foto{position:absolute;top:0;left:0;width:390px;height:446px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+/* Kullanıcı (19 Eki, "bu altında görsellerin böyle kalmayacak değil mi" → "Şerit kalksın"): fotoğrafın altındaki koyu bant yok; logo bandı koyu kalır,
+   fotoğraf kenardan kenara kare, gösterge altında sayfanın kendi zemininde. */
+.sahne{position:relative;background:transparent;overflow:hidden}
+.sahne header{position:relative;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 4px;z-index:3;background:#0C1027;color:#FFFDF9}
+.sahne .kare-foto{position:relative;width:100%;aspect-ratio:1/1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .sahne .kare-foto::-webkit-scrollbar{display:none}
-.kf{position:relative;flex:0 0 390px;height:446px;scroll-snap-align:start}
+.kf{position:relative;flex:0 0 100%;scroll-snap-align:start}
 .sahne .gec{position:absolute;top:0;bottom:0;width:50%;z-index:1;padding:0;border:0;background:transparent;cursor:pointer}
-.sahne .kare-foto img{position:absolute;left:0;width:100%;object-fit:cover}
+.sahne .kare-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @keyframes suz{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-10px) rotate(calc(var(--r) + 10deg))}}
 .yuzen{position:absolute;z-index:2;border-radius:50%;overflow:hidden;box-shadow:0 10px 18px -8px rgba(0,0,0,.7),0 0 0 2px rgba(255,253,249,.32);animation:suz 7s ease-in-out infinite}
 .yuzen img{width:100%;height:100%;object-fit:cover;display:block}
-.seritler{position:absolute;left:16px;right:16px;bottom:38px;z-index:3;display:flex;align-items:flex-end;gap:8px}
+.seritler{position:relative;margin:12px 16px 0;display:flex;align-items:center;gap:8px}
 /* Galeri göstergesi (küçük resimlerin yerine, kullanıcı: "görünmesin, kaydırılır olsun; altlarına ay animasyonu, sayfa geçtikçe tamamlanıyor gibi"):
    her fotoğrafa bir ay; geçtikçe evreler yanar, son fotoğrafta dolunay. Hareket yalnız transform/opacity. */
 .ay-iz{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
 .ay-iz svg{width:15px;height:15px;flex:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-.ay-iz circle{fill:rgba(12,16,39,.45);stroke:rgba(255,253,249,.5);stroke-width:1.6}
+.ay-iz circle{fill:transparent;stroke:rgba(26,33,66,.35);stroke-width:1.6}
 .ay-iz path{fill:#F2A65A;opacity:0;transform-origin:12px 12px;transform:scale(.5);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
 .ay-iz .lit path{opacity:1;transform:none}
 .ay-iz .on{transform:scale(1.4)}
-.ay-iz .on circle{stroke:#FFFDF9}
+.ay-iz .on circle{stroke:#1A2142}
 .sira{flex:none;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;padding:4px 9px;border-radius:999px;background:#0C1027}
-.levha{position:relative;z-index:4;margin-top:-30px;background:#F6F1E9;border-radius:28px 28px 0 0;padding-top:14px}
+.levha{position:relative;z-index:4;background:#F6F1E9;padding-top:4px}
 /* Yazı ölçeği (Tur 11, kullanıcı: "yazı bazı yerlerde çok büyük, düzensiz"):
    başlık 1: 44 (yalnız LunaDream) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün) · kart başlığı: 18–20
    gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Bölüm etiketi tek stil: 13px kalın, #A05A1C, büyük harf yok. */
@@ -397,7 +399,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <div class="urun-ust"><div class="urun-sol"><section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
-    <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}; top: {{f.top}}px; height: {{f.h}}px"></div></sc-for></div>
+    <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; ay evreleri fotoğraf ilerledikçe dolar. -->
     <div class="seritler">
       <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><svg class="{{f.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{f.ay}}"></path></svg></sc-for></span>

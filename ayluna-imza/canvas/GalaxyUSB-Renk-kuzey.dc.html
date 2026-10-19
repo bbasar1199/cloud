@@ -77,12 +77,15 @@ body{margin:0;background:#F2F4F8}
 .hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
 /* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): logo bandının altında tam kare görsel; üstüne başlık ya da gölge binmez, gösterge altta.
    AyFeneri ve Galaksi Night da bunu kullanır (ozel_sayfa.py, U.CSS). */
-.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:44px}
-.hero.kare .u-ust{order:-1}
+/* Kullanıcı (19 Eki, "Şerit kalksın"): fotoğrafın altındaki koyu bant yok; logo bandı koyu kalır, gösterge sayfanın zemininde. */
+.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:0;background:transparent;color:var(--lac)}
+.hero.kare .u-ust{order:-1;background:var(--koyu);color:#fff}
 .hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
 .hero.kare .hs::after{display:none}
 .hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
-.hero.kare .h-alt{bottom:14px}
+.hero.kare .h-alt{position:relative;left:auto;right:auto;bottom:auto;margin:12px 16px 0}
+.hero.kare .d-iz svg{stroke:rgba(26,33,66,.35)}.hero.kare .d-iz .lit{stroke:var(--lac)}.hero.kare .d-iz .lit .ic{fill:var(--lac)}
+.hero.kare .h-alt .sira,.hero.kare .h-alt .sira small{color:var(--soluk)}
 /* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
 .h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .d-iz{display:flex;align-items:center;gap:10px}
