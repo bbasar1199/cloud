@@ -475,7 +475,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.1 · gösterge gömülü, WhatsApp ve şirket bilgisi yok (19 Ekim, en güncel)
+## Tema 1.0.2 · paket seçimsiz açılır, Kaching arkada, Kapıda düğmesi yok (19 Ekim, en güncel)
+- Kullanıcı 1.0.1'i yükleyip yayına aldı, sonra geri kaldırdı (satış sitesi, sipariş kaçmasın). Dedikleri:
+  - "Mobile geçirince ekrana tam sığmıyor." (Benzetimde 360/375/414'te taşma yok; büyük ihtimalle uygulamaların sayfaya kendiliğinden eklediği kutu. Ekran görüntüsü istendi.)
+  - "Kapıda ödeme için Kaching bundle bağlıydı, o çalışmıyor; direkt 2'li seçili geliyor, seçili olmadan gelsin." → "Kaching bundle dediğim COD form, ben bağlıyorum." → "Kapıda ödeme kısmını ben koyacağım, sen koyma."
+  - Seçim: "Bizim kartlar, arkada Kaching."
+- Canlı sitede (eski tema) salt okunur inceleme: Kaching kutusu ürün formunun yanına kendiliğinden eklenir, açılışta seçili paket yok; EasySell kapıda formu paketi `kaching-bundle kaching-bundles-block` → `$$c.selectedVariants()`'tan okur ({variantId, quantity, properties.__kaching_bundles}). EasySell düğmesini `easysell-form` kancasının yanına koyar. Kaching sayfadaki `/cart/add` isteklerini yakalayıp kendi seçimiyle değiştirir; adreste `kaching_bundles=true` varsa dokunmaz.
+- Yapılanlar:
+  - Bütün ürün sayfalarında açılışta paket seçili değil (LunaDream/USB 2'li, AyFeneri/Galaksi/sade 1'li varsayılanı kalktı); seçimsiz alım 1 adet.
+  - Shopify'da tasarımdaki Kapıda düğmeleri (ürün, masaüstü çubuğu, sepet) ve sepetteki kapıda notu gizli (`html.ay-shop [data-ay-kapida]`).
+  - Satın al düğmesinin altında yuva (`data-ay-dis`, yamada içine dokunulmaz): `easysell-form` kancası + ürün bölümüne eklenen uygulama blokları (`@app`).
+  - Ürün bölümünde görünmez `<kaching-bundle product-id>` yer tutucu; `kachingEsitle` tasarımda seçilen adedin Kaching paketini (radyo) seçer; `kalemler` kart ödemesinde satırlara `__kaching_bundles` yazar; ekleme `?kaching_bundles=true` ile (Kız + Erkek korunur).
+  - Benzetime Kaching taklidi (gözlenen API) ve testler: paket seçili değil, Kaching 2'li seçildi, iki satırda indirim özelliği, Kapıda gizli, EasySell düğmesi yeniden çizimde yuvada. Tema benzetimi ve site testleri HEPSİ TAMAM; Theme Check yalnız RemoteAsset.
+  - Kaching paketleri ile kart fiyatları karşılaştırıldı: hepsi aynı (Yıldız Işığı'nda Kaching %25 → 1 kuruş fark olabilir).
+- Mesaj ve müşteri fotoğrafı bölümleri (eski sitede custom liquid): mesajlar gerçek ve izinli; fotoğrafların 5/6'sı `hf_` (Higgsfield) üretimi, müşteri diye gösterilmez. Kullanıcıya öneri sunuldu, karar bekleniyor.
+
+## Tema 1.0.1 · gösterge gömülü, WhatsApp ve şirket bilgisi yok (19 Ekim)
 - Kullanıcı (LunaDream galerisi ve "Bir gece" ekran görüntüleriyle): "burası böyle kalıyor ve burası böyle kalıyor" → "aynı sorun tüm sayfalarda var, o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" → "temsili görseller yazısı da duruyor hâlâ" → "WhatsApp zımbırtılarını ve şirketi de kaldır, ben onları sonra kendim ekleyeceğim".
 - **Galeri göstergesi fotoğrafın içinde:** bütün ürün sayfalarında (4 imza + 13 sade) fotoğrafın en alt kenarında ortada ince çizgiler; her fotoğrafa bir, geçilenler ve o anki beyaz, sıradakiler soluk; hafif gölge. Ay/disk/fener simgeleri kalktı: gömülünce Galaksi Night'ta afişin sarı bandına biniyor, AyFeneri'de kalabalık duruyordu. Masaüstünde de aynı (alt kenardan 10 px).
 - **"Temsilî görseller" ve "Görseller temsilîdir…" notları kalktı** (galeri altı, oda/sahne şeritleri). Yalnız Hizmet şartları sayfasındaki "Görseller" maddesi kaldı (politika metni).

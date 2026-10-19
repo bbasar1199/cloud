@@ -24,12 +24,33 @@ for p in URUNLER:
     for v in vs: VARYANT[v['id']] = dict(h=p['handle'], ad=p['title'], vt=v['t'], p=v['p'], c=c, img=(p.get('images') or [{}])[0].get('src', ''))
 
 SEPET = {'satir': []}  # {key, id, adet, ozellik}
+_veri = open(os.path.join(TEMA, 'assets', 'ayluna-veri.js'), encoding='utf-8').read()
+V_URUN = json.loads(_veri[_veri.index('=') + 1:].strip().rstrip(';'))['urun']  # tasarım verisi (paketler)
 KILIT = threading.Lock()
 GORSEL = {}
 for f in os.listdir(os.path.join(TEMA, 'assets')):
     m = re.match(r'^([0-9a-f]{32})\.\w+$', f)
     if m: GORSEL[m.group(1)] = '/assets/' + f
 GONDERILEN = []  # /contact gönderimleri (test için)
+ISTEK = []  # /cart/add.js istek adresleri (kaching_bundles=true denetimi)
+
+# Kaching taklidi (canlı sayfada gözlenen davranış, 19 Eki): <kaching-bundle> yer tutucusuna 1,5 sn sonra kutu kurulur;
+# her paket bir radyo (değer = paket kimliği); $$c.selectedVariants() seçili paketin adedini ve __kaching_bundles özelliğini,
+# seçim yoksa 1 adet ve boş özellik döndürür; varyant gizli formdaki id'dir.
+KACHING_JS = '''<script>
+customElements.define('kaching-bundles-block', class extends HTMLElement {
+  connectedCallback() {
+    var ayar = JSON.parse(document.querySelector('script.kaching-bundles-deal-block-settings').textContent), ad = 'kb' + Date.now(), self = this;
+    this.innerHTML = ayar.dealBars.map(function (b) { return '<div class="kaching-bundles__bar"><input type="radio" name="' + ad + '" value="' + b.id + '"><label>' + b.title + '</label></div>'; }).join('');
+    this.$$c = { selectedVariants: function () {
+      var r = self.querySelector('input:checked'), vid = +document.querySelector('form[data-ay-urun-formu] [name=id]').value;
+      if (!r) return [{ variantId: vid, quantity: 1, properties: {} }];
+      var b = ayar.dealBars.filter(function (x) { return x.id === r.value; })[0];
+      return [{ variantId: vid, quantity: b.quantity, properties: { __kaching_bundles: JSON.stringify({ deal: 'TEST', main: true, bid: b.id }) } }]; } };
+  }
+});
+setTimeout(function () { document.querySelectorAll('kaching-bundle').forEach(function (k) { k.appendChild(document.createElement('kaching-bundles-block')); }); }, 1500);
+</script>'''
 
 
 def sepet_json():
@@ -79,6 +100,12 @@ def rota(yol):
         c = CANLI[h]
         form = ('<form method="post" action="/cart/add" data-ay-urun-formu data-ay-shopify hidden class="ay-urun-formu"><input type="hidden" name="id" value="%d">'
                 '<input type="hidden" name="quantity" value="1"></form>' % c['vid'])
+        pk = [b for b in (V_URUN.get(h) or {}).get('paket') or []]
+        if len(pk) > 1:  # paketli ürün: Kaching ayarı + gizli kutu
+            bars = [dict(id='bar-%d' % b['n'], title='%d Adet' % b['n'], quantity=b['n']) for b in pk]
+            form += ('<script class="kaching-bundles-product" data-product-id="1" data-main="true" type="application/json">{}</script>'
+                     '<script class="kaching-bundles-deal-block-settings" data-product-id="1" type="application/json">%s</script>'
+                     '<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="1"></kaching-bundle></div>' % json.dumps(dict(dealBars=bars)) + KACHING_JS)
         return snippet(T.ad(pano)) + form, h
     m = re.match(r'^/pages/([\w-]+)$', yol)
     if m:
@@ -98,6 +125,7 @@ class Isleyici(BaseHTTPRequestHandler):
         u = urlparse(self.path); yol = u.path
         if yol == '/cart.js': return self.yanit(200, json.dumps(sepet_json(), ensure_ascii=False))
         if yol == '/__gonderilen': return self.yanit(200, json.dumps(GONDERILEN, ensure_ascii=False))
+        if yol == '/__istek': return self.yanit(200, json.dumps(ISTEK, ensure_ascii=False))
         if yol.startswith('/assets/'):
             f = os.path.join(TEMA, 'assets', os.path.basename(yol))
             if os.path.exists(f):
@@ -110,6 +138,7 @@ class Isleyici(BaseHTTPRequestHandler):
     def do_POST(self):
         n = int(self.headers.get('Content-Length') or 0); ham = self.rfile.read(n)
         yol = urlparse(self.path).path
+        if yol == '/cart/add.js': ISTEK.append(self.path)
         if yol == '/contact':
             GONDERILEN.append(ham.decode('utf-8', 'replace')); return self.yanit(200, '<p>ok</p>', 'text/html')
         try: d = json.loads(ham or b'{}')

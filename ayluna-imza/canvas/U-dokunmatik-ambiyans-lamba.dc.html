@@ -297,9 +297,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3150}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3263}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: 2, sec: 0 }); }
+  constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: null, sec: 0 }); }
   componentDidMount() { var self = this;
     this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 6); self.setState({ now: Date.now() }); }, 1000); }
   git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }

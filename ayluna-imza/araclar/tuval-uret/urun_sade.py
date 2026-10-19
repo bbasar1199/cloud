@@ -121,7 +121,7 @@ def govde(u):
         al = ('  <!-- Stok satırı ELLE girilir (Shopify bölüm ayarı: sayı + aç/kapa); boşsa gizlenir -->\n'
               '  <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>\n'
               '  <div class="al"><button class="btn1" type="button"><span class="b-ic"><span>Güvenli Ödeme ile Al · {{kart}}</span><small>Kartla %5 indirim dahil</small></span>' + A.OK + '</button>'
-              '<button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button></div>\n')
+              '<button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button><div class="ay-dis" data-ay-dis></div></div>\n')
     else:
         al = ('  <div class="al" style="margin-top: 18px"><button class="btn1" type="button" disabled><span class="b-ic"><span>Tükendi</span><small>Yeniden gelince haber verelim</small></span></button>'
               '<button class="btn2" type="button">Gelince haber ver</button></div>\n')
@@ -150,7 +150,7 @@ def js(u, gal):
         e = b['eski'] if b.get('eski') and b['eski'] > b['fiyat'] else None
         paket.append({'n': b['adet'], 't': '%d Adet' % b['adet'], 'alt': b.get('alt') or '', 'p': tl(b['fiyat']), 'e': tl(e) if e else '', 'f': b['fiyat'], 'rib': b['adet'] == 2})
     sec = (u.get('secenek') or [{}])[0].get('degerler', []) if u.get('secenek') else []
-    st = "{ g: 0, gOto: true, pk: %d, sec: 0 }" % (2 if len(paket) > 1 else 1)
+    st = "{ g: 0, gOto: true, pk: %s, sec: 0 }" % ('null' if len(paket) > 1 else '1')  # açılışta paket seçili değil (19 Eki)
     ek = """
     var GAL = """ + json.dumps(gal) + """, AD = """ + json.dumps(AD.get(u['handle'], u['ad']), ensure_ascii=False) + """;
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });

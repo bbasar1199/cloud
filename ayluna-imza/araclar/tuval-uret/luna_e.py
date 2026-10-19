@@ -483,6 +483,8 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar. Butonda fiyat yok (kullanıcı, Tur 25); ₺80 ücret ve toplam,
          sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+    <!-- Shopify: Kapıda düğmesi yok, kapıda ödemeyi kullanıcı EasySell ile koyar; düğmesi bu yuvaya gelir -->
+    <div class="ay-dis" data-ay-dis></div>
     <ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"></span></span>""" + YOL + """</ol>
   </section>
 
@@ -607,7 +609,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)

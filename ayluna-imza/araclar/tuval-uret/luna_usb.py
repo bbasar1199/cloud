@@ -514,6 +514,7 @@ AL = ("""
          sayı + aç/kapa; Shopify stoğuna bağlı değil, boşsa kurdele yok. "Dün" fiyatın altında. -->
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>""" + ('</div>' if STOK else '') + """
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+    <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section>
 """)
@@ -633,7 +634,7 @@ def sayfa(tema, kesit=None):
 
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 2, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Hareket azaltılmışsa disk ve oda kartı kendiliğinden geçmez; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)

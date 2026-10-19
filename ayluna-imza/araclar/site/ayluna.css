@@ -297,3 +297,9 @@ img{max-width:100%}
   #kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
   #kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
 }
+
+/* Shopify kipi (19 Eki): kapıda ödeme düğmesini mağaza sahibi EasySell ile koyar; tasarımdaki Kapıda düğmeleri ve sepetteki kapıda notu gizli.
+   Satın al düğmesinin altındaki yuva EasySell düğmesini ve uygulama bloklarını taşır. Kaching paket kutusu görünmez çalışır. */
+html.ay-shop [data-ay-kapida]{display:none!important}
+.ay-dis:not(:empty){margin-top:12px}
+.ay-arka{position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);visibility:hidden;pointer-events:none}

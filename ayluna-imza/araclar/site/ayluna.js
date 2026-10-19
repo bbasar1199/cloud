@@ -9,6 +9,7 @@
   'use strict';
   var V = window.AYLUNA_VERI || { urun: {}, sira: [] };
   var SHOP = !!window.AYLUNA_SHOPIFY, AYAR = window.AYLUNA_AYAR || {};
+  if (SHOP) document.documentElement.classList.add('ay-shop');  // Shopify'da tasarımdaki Kapıda düğmeleri gizli (ayluna.css)
   // Shopify: görseller tema dosyalarından; fiyat, stok ve varyantlar mağazanın kendisinden (panoya yazılı fiyat yalnız ilk değer)
   var TUVAL_FIYAT = {};
   if (SHOP) {
@@ -78,6 +79,7 @@
     for (var i = el.attributes.length - 1; i >= 0; i--) { var nm = el.attributes[i].name; if (!(nm in v.a) && !koru(el, nm)) el.removeAttribute(nm); }
     for (var k in v.a) if (el.getAttribute(k) !== v.a[k]) try { el.setAttribute(k, v.a[k]); } catch (e) {}
     dinle(el, v.h);
+    if (el.hasAttribute('data-ay-dis')) return;  // uygulama yuvası (EasySell düğmesi, uygulama blokları): içi bizim değil
     cocuklar(el, v.c);
   }
   function cocuklar(el, vc) {
@@ -125,7 +127,10 @@
     return s;
   }
   var SC = scCevir(window.AYLUNA_SEPET);
+  // Sepete ekleme: kalemler zaten Kaching özelliğini taşır; kaching_bundles=true Kaching'in isteği kendi seçimiyle değiştirmesini önler
+  // (yoksa 2'li pakette Kız + Erkek iki aynı modele dönebilir)
   function scIstek(yol, govde) {
+    if (yol === '/cart/add.js') yol += '?kaching_bundles=true';
     return fetch(yol, govde ? { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(govde) } : { headers: { Accept: 'application/json' } })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.description || j.message || 'Sepet hatası'); return j; }); });
   }
@@ -134,6 +139,7 @@
   // Seçimi Shopify kalemlerine çevir: LunaDream'de model = varyant (Kız/Erkek), paket = adet
   function kalemler(sat) {
     var U = V.urun[sat.h] || {}, n = sat.paket || 1, vs = U.vs || [], ozellik = { _secim: sat.varyant, _paket: String(n) };
+    var kb = SHOP && sat.h === URUN ? kachingOzellik(n) : null; if (kb) ozellik.__kaching_bundles = kb;  // paket indirimi (Kaching)
     function vBul(anahtar) { for (var i = 0; i < vs.length; i++) if (vs[i].t.toLocaleLowerCase('tr').indexOf(anahtar) >= 0) return vs[i].id; return U.vid; }
     if (sat.h === 'lunadream-gece-lambasi' && sat.modeller) {
       var say = {}; sat.modeller.forEach(function (m) { var id = vBul(m === 'erkek' ? 'erkek' : 'kız'); say[id] = (say[id] || 0) + 1; });
@@ -499,9 +505,46 @@
   // Başlıktaki sepet düğmesi: "Sepet" ya da "Sepet, 0 ürün" (çekmecedeki "Sepeti kapat" değil)
   function sepetDugmesi(al) { return al === 'Sepet' || al.indexOf('Sepet,') === 0; }
   // Shopify: Kapıda düğmeleri EasySell seçicisiyle işaretlenir; ana sayfa kartlarında canlı fiyat; gizli ürün formu seçime eşit
+  /* Kaching arkada (kullanıcı, 19 Eki: "bizim kartlar, arkada Kaching"). Temadaki gizli <kaching-bundle> kutusu:
+     tasarımdaki paket kartı seçilince Kaching'de aynı adetli paket seçilir. Kapıda formu (EasySell) paketi ve indirimi bu kutudan okur;
+     kartla ödemede satırlara Kaching'in __kaching_bundles özelliği yazılır, indirim bununla uygulanır. Paket seçilmediyse Kaching'e dokunulmaz
+     (açılışta seçili paket yok, eski temadaki gibi; seçimsiz alım 1 adet). */
+  var KB_AYAR = null;
+  function kaching() { var k = document.querySelector('kaching-bundle kaching-bundles-block'); return k && k.$$c ? k : null; }
+  function kachingBar(n) {
+    if (!KB_AYAR) {
+      var ana = document.querySelector('script.kaching-bundles-product[data-main]'), pid = ana && ana.getAttribute('data-product-id');
+      var sc = (pid && document.querySelector('script.kaching-bundles-deal-block-settings[data-product-id="' + pid + '"]')) || document.querySelector('script.kaching-bundles-deal-block-settings');
+      try { KB_AYAR = sc ? JSON.parse(sc.textContent) : null; } catch (e) { KB_AYAR = null; }
+      if (!KB_AYAR) return null;
+    }
+    var b = (KB_AYAR.dealBars || []).filter(function (x) { return x.quantity === n; })[0]; return b ? b.id : null;
+  }
+  function kachingEsitle() {
+    if (!SHOP || SAYFA !== 'urun' || !C) return;
+    var k = kaching(), S = C.state || {}, n = S.adet || S.pk; if (!k || !n) return;
+    var id = kachingBar(n), r = id && k.querySelector('input[type="radio"][value="' + id + '"]');
+    if (r && !r.checked) r.click();
+  }
+  function kachingOzellik(n) {
+    var k = kaching(); if (!k) return null;
+    try {
+      var sv = k.$$c.selectedVariants() || [], top = 0; sv.forEach(function (v) { top += v.quantity; });
+      var p = sv[0] && sv[0].properties; return top === n && p && p.__kaching_bundles ? p.__kaching_bundles : null;
+    } catch (e) { return null; }
+  }
+  // Uygulama yuvası (tasarımda satın al düğmesinin altı): EasySell düğmesi (easysell-form kancasının yanına kendisi koyar) ve
+  // tema düzenleyicide ürün bölümüne eklenen uygulama blokları
+  function yuvaDoldur() {
+    var y = document.querySelector('#kok [data-ay-dis]'); if (!y || y.__dolu) return; y.__dolu = 1;
+    y.appendChild(document.createElement('easysell-form'));
+    var ub = document.querySelector('.ay-uygulama-bloklari'); if (ub) { while (ub.firstChild) y.appendChild(ub.firstChild); }
+  }
   function shopSusle() {
     var k = document.querySelectorAll('#kok .btn2, #kok .btn-kp');
     for (var i = 0; i < k.length; i++) if (/kapıda/i.test(k[i].textContent) && !k[i].hasAttribute('data-ay-kapida')) k[i].setAttribute('data-ay-kapida', '');
+    // Sepetteki "Kapıda ödemede ₺80…" notu Kapıda düğmesiyle birlikte gizlenir (kapıda ödeme EasySell'de)
+    var sn = document.querySelectorAll('#kok .s-not'); for (var z = 0; z < sn.length; z++) if (/kapıda ödeme ücreti/i.test(sn[z].textContent) && !sn[z].hasAttribute('data-ay-kapida')) sn[z].setAttribute('data-ay-kapida', '');
     var kart = document.querySelectorAll('#kok .uk[data-h]');
     for (var j = 0; j < kart.length; j++) {
       var u = V.urun[kart[j].getAttribute('data-h')]; if (!u || u.yok) continue;
@@ -510,7 +553,7 @@
       if (es) { var et = u.c ? TL(u.c) : ''; if (es.textContent !== et) es.textContent = et; }
       if (rz && !rz.classList.contains('tukendi')) { var rt = u.c ? '%' + Math.round((1 - u.p / u.c) * 100) : ''; if (rz.textContent !== rt) rz.textContent = rt; rz.hidden = !rt; }
     }
-    if (SAYFA === 'urun') formEsitle();
+    if (SAYFA === 'urun') { formEsitle(); kachingEsitle(); yuvaDoldur(); }
   }
   function formEsitle() {
     var f = document.querySelector('form[data-ay-urun-formu]'), s = satir(URUN); if (!f || !s) return;

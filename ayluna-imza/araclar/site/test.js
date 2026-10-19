@@ -74,8 +74,14 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   await pg.waitForTimeout(400);
   not(pg.url().includes('siparis-alindi') && (await pg.locator('.tamam').textContent()).includes('kapına gelince'), 'kapıda sipariş → teşekkür (kapıda yazısı)');
 
-  // 4) LunaDream: model + 2 lamba sepete doğru gidiyor
-  await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
+  // 4) LunaDream: açılışta paket seçili değil (19 Eki), seçimsiz alım 1 adet; 2 Adet seçilince 2 lamba sepete doğru gidiyor
+  await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(500);
+  not(await pg.locator('#siparis [aria-pressed="true"]').filter({ hasText: 'Adet' }).count() === 0, 'LunaDream: açılışta paket seçili değil');
+  await pg.locator('.btn-on').first().click(); await pg.waitForTimeout(800);
+  const sat1 = await pg.evaluate(() => AylunaSepet.oku().satirlar[0]);
+  not(sat1 && sat1.birim === 1699.99 && /1 adet/.test(sat1.varyant), 'LunaDream seçimsiz alım 1 adet: ' + (sat1 && sat1.varyant));
+  await pg.evaluate(() => { localStorage.clear(); Ayluna.cekmeceKapat(); }); await pg.reload(); await pg.waitForTimeout(500);
+  await pg.locator('#siparis button', { hasText: '2 Adet' }).first().click(); await pg.waitForTimeout(300);
   await pg.locator('.btn-on').first().click(); await pg.waitForTimeout(800);
   const sat = await pg.evaluate(() => AylunaSepet.oku().satirlar[0]);
   not(sat && sat.birim === 2749.99 && /2 adet/.test(sat.varyant), 'LunaDream 2 lamba sepette: ' + (sat && sat.varyant));

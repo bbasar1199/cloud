@@ -228,6 +228,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 ## Galeri (19 Ekim)
 - Ürün galerisi Shopify'daki gibi: mağazanın görselleri, aynı sıra, kare, kenardan kenara. Fotoğrafın altında bant, satır ya da not yok. Gösterge fotoğrafın içine gömülü: en alt kenarda ortada ince çizgiler (her fotoğrafa bir, geçilenler beyaz); simge (ay, disk) kullanılmaz, afiş yazısına biner. "Temsilî görseller" notu fotoğraf altına yazılmaz. "Animasyonları azalt" açıkken de galeri geçer (anında). Üstte koyu logo bandı kalır; şeffaf yapılmaz, fotoğrafın üstüne başlık binmez.
 - WhatsApp ve şirket bilgisi (unvan, MERSİS, adres, KEP, telefon) şimdilik sitede yok; kullanıcı kendisi ekleyecek. "Bize yaz" İletişim sayfasına gider. Yayından önce şirket bilgisi yasal zorunluluk (hatırlat, ekleme).
+- Ürün sayfasında açılışta paket seçili gelmez (seçimsiz alım 1 adet). Kapıda ödeme düğmesini kullanıcı EasySell ile koyar; tema koymaz, yalnız satın al düğmesinin altında yuva bırakır. Paket indirimi Kaching'te: tasarımdaki kartlar görünür, Kaching kutusu gizli ve kartlarla eşlenir; kartla ödemede satırlara Kaching özelliği yazılır.
+- Yapay zekâ ile üretilmiş görsel "müşteri", "mutlu kullanıcı" diye gösterilmez; sosyal kanıt yalnız gerçek müşteri içeriği (izinli mesaj ekran görüntüsü, müşteri fotoğrafı/videosu, Loox).
+- Tema mağazada yayınlanmış temada değil, yayınlanmamış temanın Önizleme'sinde denenir (satış sürerken sipariş kaçmaz).
 
 ## Masaüstü (19 Ekim)
 - Telefon düzeni değişmez; masaüstü 1024 px ve üstünde ayrı katman. Ortak lacivert üst menü; telefon başlıkları gizli; duyuru şeridi ve alt bilgi kenardan kenara.

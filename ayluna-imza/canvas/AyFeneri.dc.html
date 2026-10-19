@@ -667,6 +667,7 @@ body{margin:0;background:#F2F4F8}
     <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+    <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section></div>
 
@@ -751,7 +752,7 @@ body{margin:0;background:#F2F4F8}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6430}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 1, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Hareket azaltılmışsa fener, huzme ve disk durur; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)

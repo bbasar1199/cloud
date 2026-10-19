@@ -464,6 +464,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
     <!-- Canlıda kapıda ödeme uygulamasının formunu açar. Butonda fiyat yok (kullanıcı, Tur 25); ₺80 ücret ve toplam,
          sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+    <!-- Shopify: Kapıda düğmesi yok, kapıda ödemeyi kullanıcı EasySell ile koyar; düğmesi bu yuvaya gelir -->
+    <div class="ay-dis" data-ay-dis></div>
     <ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"></span></span><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><b>Bugün</b><span>Sipariş verildi</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg><b>{{kargo}}</b><span>Kargoda</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section></div>
 
@@ -588,7 +590,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6024}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: 2, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.izler = []; for (var z = 0; z < 187; z++) this.izler.push({ i: z, y: z * 25 }); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)

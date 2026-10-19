@@ -9,7 +9,7 @@ KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(KOK, 'araclar', 'site'))
 import site_uret as S
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.1'
+SURUM = '1.0.2'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
@@ -161,9 +161,14 @@ window.AYLUNA_SEPET = {{ cart | json }};
         + '{%- endcase -%}\n\n{% schema %}\n' + json.dumps({'name': 'Ayluna sayfası', 'class': 'ay-bolum', 'settings': [
             {'type': 'select', 'id': 'sayfa', 'label': 'Sayfa', 'options': secenek, 'default': 'ana'}]}, ensure_ascii=False, indent=2) + '\n{% endschema %}\n')
     yaz('sections/ayluna-urun.liquid', '''{%- comment -%} Ayluna · ürün sayfası. Her ürünün kendi tasarım panosu var; panosu olmayan yeni ürün sade sayfayla açılır.
-  Gizli ürün formu EasySell içindir: ayluna.js seçilen modeli/paketi buraya yazar (data-ay-urun-formu). {%- endcomment -%}
+  Gizli ürün formu kapıda ödeme (EasySell) ve Kaching içindir: ayluna.js seçilen modeli/paketi buraya yazar (data-ay-urun-formu).
+  Kaching paket kutusu görünmez durur; tasarımdaki paket kartları onu seçer (kapıda formu paketi ve indirimi oradan okur).
+  Kapıda ödeme düğmesini mağaza sahibi EasySell ile koyar; tema koymaz. EasySell düğmesi ve bu bölüme eklenen uygulama blokları
+  tasarımda satın al düğmesinin altındaki yuvaya taşınır. {%- endcomment -%}
+{%- assign ay_pano = true -%}
 {%- case product.handle -%}
 ''' + ''.join("  {%%- when '%s' -%%}{%% render '%s' %%}\n" % (h, ad(p)) for h, p in URUN_PANO) + '''  {%- else -%}
+    {%- assign ay_pano = false -%}
     ''' + GENEL_CSS.replace('\n', '\n    ') + GENEL_UST + '''    <main class="ay-g"><div class="ay-g-urun">
       <div>{%- for m in product.media limit: 6 -%}{{ m.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.title }}{%- endfor -%}</div>
       <div>
@@ -174,17 +179,22 @@ window.AYLUNA_SEPET = {{ cart | json }};
           {%- else -%}<label>Seçenek<select name="id">{%- for v in product.variants -%}<option value="{{ v.id }}"{% unless v.available %} disabled{% endunless %}>{{ v.title }}</option>{%- endfor -%}</select></label>{%- endif -%}
           <button type="submit"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Sepete ekle{% else %}Tükendi{% endif %}</button>
         {%- endform -%}
+        {%- for block in section.blocks -%}{%- case block.type -%}{%- when '@app' -%}<div {{ block.shopify_attributes }}>{% render block %}</div>{%- endcase -%}{%- endfor -%}
         <div class="rte">{{ product.description }}</div>
       </div>
     </div></main>
     ''' + GENEL_ALT + '''{%- endcase -%}
+{%- if ay_pano -%}
 {%- form 'product', product, data-ay-urun-formu: '', data-ay-shopify: '', hidden: 'hidden', class: 'ay-urun-formu' -%}
   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
   <input type="hidden" name="quantity" value="1">
 {%- endform -%}
+<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="{{ product.id }}"></kaching-bundle></div>
+<div class="ay-uygulama-bloklari" hidden>{%- for block in section.blocks -%}{%- case block.type -%}{%- when '@app' -%}<div class="ay-uygulama" {{ block.shopify_attributes }}>{% render block %}</div>{%- endcase -%}{%- endfor -%}</div>
+{%- endif -%}
 
 {% schema %}
-{ "name": "Ayluna ürün sayfası", "class": "ay-bolum", "settings": [] }
+{ "name": "Ayluna ürün sayfası", "class": "ay-bolum", "settings": [], "blocks": [{ "type": "@app" }] }
 {% endschema %}
 ''')
     vakalar = ''.join("  {%%- when %s -%%}{%% render '%s' %%}\n" % (', '.join("'%s'" % x for x in el), ad(p)) for el, p, _ in ICERIK_PANO)

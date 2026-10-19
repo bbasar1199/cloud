@@ -172,6 +172,7 @@ def al(u):
     <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %%5 indirim dahil</small></span>%s</button>
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
+    <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
   </section>
 """ % (AD[u], alt, O.tl(d['P1']), O.tl(d['C1']), pct, O.tl(d['P1']), O.tl(d['C1']), pct, ozler(u), O.ALICI, I(pk), kutu, U.OK))
@@ -342,7 +343,7 @@ def js(u):
           ('ask-saati', 'Ayluna Kum Saati Lamba', 799, 999)]
     shop = [[n, p, c, B + BA['u-%s.jpg' % h]] for h, n, p, c in PR if h != kendi]
     return """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: 1, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Hareket azaltılmışsa fener, huzme ve disk durur; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
