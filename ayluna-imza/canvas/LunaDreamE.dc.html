@@ -147,7 +147,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .ui-isik.kucuk .kad{right:auto;left:12px;top:56px}
 
 /* Disk şeridi: her 2 sn bir disk kayar (0,6 sn), kayarken 90° yuvarlanır, durunca sabit; ortadaki pencerede, komşular .85 ve soluk */
-.ui-serit{--d:46px;--adim:50px;--pad:65px;width:176px;height:78px;overflow:hidden}
+.ui-serit{position:relative;display:block;flex:none;--d:46px;--adim:50px;--pad:65px;width:176px;height:78px;overflow:hidden}
 .ui-serit.serit-k{--d:38px;--adim:42px;--pad:60px;width:158px;height:62px}
 .pencere{position:absolute;left:calc(var(--pad) - 4px);top:0;width:calc(var(--d) + 8px);height:calc(var(--d) + 8px);border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9;animation:pen 8s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
 .tren{position:absolute;left:0;top:4px;display:flex;gap:calc(var(--adim) - var(--d));padding-left:var(--pad);animation:tren 8s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
@@ -203,8 +203,12 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .pil{position:relative;display:flex;gap:2px;width:42px;height:20px;padding:2.5px;border:1.5px solid #1A2142;border-radius:6px}
 .pil::after{content:"";position:absolute;right:-5px;top:5px;width:3px;height:7px;border-radius:0 2px 2px 0;background:#1A2142}
 .pil i{flex:1;border-radius:2px;background:#1A2142;animation:dilim 6s cubic-bezier(.2,.7,.2,1) infinite both}
-.pil i:nth-child(1){animation-delay:var(--gec,0s)}.pil i:nth-child(2){animation-delay:calc(var(--gec,0s) + .7s)}.pil i:nth-child(3){animation-delay:calc(var(--gec,0s) + 1.4s)}.pil i:nth-child(4){animation-delay:calc(var(--gec,0s) + 2.1s)}
-@keyframes dilim{0%{opacity:.12}6%,55%{opacity:1}62%,100%{opacity:1}}
+.pil i:nth-child(1){animation-name:pl1}.pil i:nth-child(2){animation-name:pl2}.pil i:nth-child(3){animation-name:pl3}.pil i:nth-child(4){animation-name:pl4}
+.pil i{animation-delay:var(--gec,0s)}
+@keyframes pl1{0%{opacity:.12}10%,94%{opacity:1}100%{opacity:.12}}
+@keyframes pl2{0%,10%{opacity:.12}22%,94%{opacity:1}100%{opacity:.12}}
+@keyframes pl3{0%,22%{opacity:.12}34%,94%{opacity:1}100%{opacity:.12}}
+@keyframes pl4{0%,34%{opacity:.12}46%,94%{opacity:1}100%{opacity:.12}}
 .fis{width:22px;height:22px;margin-left:-2px;opacity:0;animation:fis 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
 .fis svg{width:22px;height:22px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 @keyframes fis{0%,56%{transform:none;opacity:1}64%,94%{transform:translateX(12px);opacity:0}100%{transform:none;opacity:1}}

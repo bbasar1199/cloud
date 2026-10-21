@@ -475,7 +475,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.8 · Sihirli özellikler canlı kartlar, teslim kartı (21 Ekim, en güncel)
+## Tema 1.0.9 · Galaxy USB canlı kartlar; LunaDream "Neler yapabiliyor?" taslakları (21 Ekim, en güncel)
+- Kullanıcı (sitesindeki özellik anlatımının ekran görüntüsüyle): "USB için de yap aynısını; bir de LunaDream için sitemde olan bu tarz bir tasarım istiyorum, yine UI kullanabiliriz."
+- **USB (uygulandı):** `luna_usb.py` özellik hücrelerinde `.uk-ek` ekranları (UK_TAK, ortak disk şeridi `S2.ui_serit('k', UK_DISK)`, UK_BOYUN, UK_LAMBA, cetvel); teslim `.teslim` kartı + `.y-ik` USB ikonu. Disk şeridi CSS'i `S2.SERIT_CSS` (USB'de `.fis` çakıştığı için yalnız şerit alınır; `.ui-serit` kendi `position:relative`'i ile kırpılır). U_H=7480. Test: 5 ekran, şerit, teslim ikonu.
+- **LunaDream özellik anlatımı (karar bekliyor):** `ozellik_varyant.py` → `canvas/LunaDreamE-Ozellik.dc.html`. Eleştirmen 1. tur: Satırlar 7, Sekmeler 6, Kaydırmalı 5; düzeltmeler işlendi (gerçek ürün kesimi modele bağlı, kumanda paneli yok, eylem başlıkları, tek cümle, ekran 140 px, iddia temizliği). Yeri: Videolar'ın altı, Odası'nın üstü. Kullanıcıya soruldu: yön, ışık seçeneği sayısı ([X]), desen dönüyor mu.
+
+## Tema 1.0.8 · Sihirli özellikler canlı kartlar, teslim kartı (21 Ekim)
 - Kullanıcı: "Emoji benefit kısmını vesaire biraz daha kurumsal yapsak ve UI'lerle doldursak; dönen diskler sırayla masal diskini gidip gelse gibi tatlı ufak sekanslar."
 - `sihirli2_varyant.py` → `canvas/LunaDreamE-Sihirli2.dc.html`: üç yön (Canlı kartlar 7, Bento 6, Özellik turu 4); eleştirmen düzeltmeleri işlendi (disk yalnız kayarken yuvarlanır; pil sekansı, lamba şarjda sönük; LunaDream ikonu; cümleler kısa). GIF'ler kullanıcıya gönderildi.
 - Kullanıcı: **Canlı kartlar** + aynı dil **teslim çizelgesine**.

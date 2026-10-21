@@ -266,3 +266,6 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Kendiliğinden ilerleyen sekme turu satın alma kutusunda yok.
 - Teslim çizelgesi aynı dilde: beyaz kart, ton ekranda hilal → yarım → dolunay, paket kutusu akar, Kapında'da lamba yanar.
 - Fotoğraf bölümlerine (vitrin, yorumlar) UI bindirilmez.
+- Galaxy USB canlı kartlar kendi dilinde (gümüş ekran, lacivert çizgi, --v2 yalnız ışık); disk şeridi LunaDream ile ortak (`S2.SERIT_CSS`).
+- Sitedeki eski anlatım alınırken: yorum afişi yok, teyitsiz sayı [X], kutuda olmayan parça (kumanda) çizilmez, pil süresi ima edilmez.
+- Özellik anlatımı Sihirli'yi tekrar etmez: Sihirli "ne", anlatım "nasıl" (gerçek ürün kesimi, eylem başlığı).

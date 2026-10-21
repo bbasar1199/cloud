@@ -225,6 +225,9 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     await pg.keyboard.press('Escape');
     not(!kalan.length, 'WhatsApp ve şirket bilgisi hiçbir sayfada yok' + (kalan.length ? ': ' + kalan.join(', ') : '')); }
 
+  // Galaxy USB canlı kartlar (21 Eki): 5 özellik hücresinde ekran, disk şeridi, teslim kartında USB ikonu
+  await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.waitForTimeout(500);
+  not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .ui-serit .sd').count() === 5 && await pg.locator('#siparis .teslim .y-ik').count() === 1, 'Galaxy USB: 5 özellik ekranı, disk şeridi, teslim kartında ikon');
   // Satın alma butonları sepeti katlamaz (kartla dene → kapat → kapıda), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);
   await pg.evaluate(() => { AylunaSepet.koy({ h: 'galayx-usb-projektor', ad: 'Galaxy USB', varyant: '2 adet', paket: 2, birim: 2279.99, eski: null }); });

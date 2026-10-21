@@ -68,6 +68,26 @@ IK = Y.IK
 OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>'
 FIS = '<svg class="fis-a" viewBox="0 0 60 30" aria-hidden="true"><g class="fis"><rect class="uc" x="2" y="10" width="10" height="10" rx="1.5"></rect><rect class="gv" x="12" y="7" width="16" height="16" rx="4"></rect><path class="kb" d="M28 15h32"></path></g></svg>'
 
+# Canlı kartlar (21 Eki; kullanıcı LunaDream'deki Sihirli canlı kartları için: "USB için de yap aynısını"). Her özellik hücresinde
+# küçük ekran ve sekans (USB dili: gümüş zemin, lacivert çizgi, ikinci ton yalnız ışıkta). Disk şeridi LunaDream ile ortak (S2.SERIT_CSS).
+import sihirli2_varyant as S2
+# USB çizgi ikonu: lensli başlık, esnek boyun, USB fişi. Işın çizgileri başlıktan yukarı (projeksiyon); hale (gece lambası)
+def uk_ik(isin=False, hale=False):
+    return ('<svg class="uk-ik" viewBox="0 0 32 32" aria-hidden="true"><g class="uk-bas">' +
+            ('<path class="uk-isin" d="M13 2.5L9 -3.5M16 2L16 -4.5M19 2.5L23 -3.5"></path>' if isin else '') +
+            ('<circle class="uk-hale" cx="16" cy="7.5" r="9.5"></circle>' if hale else '') +
+            '<rect x="9" y="3" width="14" height="9" rx="4.5"></rect><circle class="uk-lens" cx="16" cy="7.5" r="2.2"></circle>'
+            '<path d="M16 12c0 3-2 4.5-2 7.5 0 2 2 3 2 4.5"></path></g><rect x="12.5" y="24" width="7" height="4" rx="1"></rect><path d="M14 28v2.5h4V28"></path></svg>')
+
+
+UK_DISK = [(n, i) for n, i in DISK if n in ('Kızıl sarmal', 'Dolunay', 'Mavi galaksi', 'Satürn')]
+UK_TAK = ('<span class="uk uk-tak" aria-hidden="true"><span class="uk-sira"><span class="port"></span>' + FIS + uk_ik(isin=True) + '</span>'
+          '<span class="uk-et uk-uc"><i>Laptop</i><i>Powerbank</i><i>Şarj başlığı</i></span></span>')
+UK_BOYUN = ('<span class="uk uk-boyun" aria-hidden="true">' + uk_ik(isin=True) + '<span class="uk-et uk-uc"><i>Tavana</i><i>Duvara</i><i>Köşeye</i></span></span>')
+UK_LAMBA = ('<span class="uk uk-mod" aria-hidden="true"><span class="uk-yildiz"><i></i><i></i><i></i></span>' + uk_ik(isin=True, hale=True) +
+            '<span class="uk-et uk-iki"><i>Projeksiyon</i><i>Gece lambası</i></span></span>')
+
+
 
 def head(title, css, font):
     return '''<!doctype html>
@@ -331,6 +351,64 @@ CSS = r"""
 @keyframes yk2{0%,26%{opacity:0;transform:scale(.3)}33%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 @keyframes yk3{0%,57%{opacity:0;transform:scale(.3)}64%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 
+/* Canlı kartlar (21 Eki): her hücrede ekran (gümüş tonu), sekanslar 3,2-9,6 sn; ikinci ton (--v2) yalnız ışıkta */
+.uk-ek{position:relative;display:flex;align-items:center;justify-content:center;height:72px;margin-bottom:10px;border-radius:12px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff);overflow:hidden}
+.oz.genis .uk-ek{flex:none;width:150px;margin:0}
+.uk{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px}
+.uk-ik{width:40px;height:40px;overflow:visible;fill:none;stroke:var(--lac);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.uk-ik rect,.uk-ik .uk-lens{fill:var(--yuzey)}
+.uk-ik .uk-isin{stroke:var(--v2);opacity:0}
+.uk-ik .uk-hale{fill:none;stroke:var(--v2);stroke-width:1.2;opacity:0}
+.uk-et{display:grid;font-size:12px;font-weight:600;color:var(--soluk);white-space:nowrap}
+.uk-et i{grid-area:1/1;justify-self:center;font-style:normal;opacity:0}
+/* USB tak: fiş girer (mevcut 3,2 sn döngü), lens ve ışın yanar; kaynak adı 3 döngüde bir değişir */
+.uk-sira{display:flex;align-items:center;gap:2px}
+.uk-tak .fis-a{width:50px;height:34px}
+.uk-tak .uk-ik{width:36px;height:36px}
+.uk-tak .uk-lens{animation:ulens 3.2s var(--ease) infinite}
+.uk-tak .uk-isin{animation:uisin 3.2s var(--ease) infinite}
+@keyframes ulens{0%,38%{fill:var(--yuzey)}44%,80%{fill:var(--v2)}90%,100%{fill:var(--yuzey)}}
+@keyframes uisin{0%,40%{opacity:0}46%,80%{opacity:1}90%,100%{opacity:0}}
+.uk-uc i:nth-child(1){opacity:1;animation:uc1 9.6s var(--ease) infinite}.uk-uc i:nth-child(2){animation:uc2 9.6s var(--ease) infinite}.uk-uc i:nth-child(3){animation:uc3 9.6s var(--ease) infinite}
+@keyframes uc1{0%,30%{opacity:1}33%,97%{opacity:0}100%{opacity:1}}
+@keyframes uc2{0%,31%{opacity:0}34%,63%{opacity:1}66%,100%{opacity:0}}
+@keyframes uc3{0%,64%{opacity:0}67%,96%{opacity:1}99%,100%{opacity:0}}
+/* Esnek boyun: baş tabandan döner (tavan 0°, duvar 62°, köşe 32°), ışın hep yanar */
+.uk-boyun .uk-bas{transform-box:view-box;transform-origin:16px 24px;animation:boyun 9.6s var(--ease) infinite}
+.uk-boyun .uk-isin{opacity:1}
+.uk-boyun .uk-lens{fill:var(--v2)}
+@keyframes boyun{0%,28%{transform:none}34%,61%{transform:rotate(62deg)}67%,94%{transform:rotate(32deg)}100%{transform:none}}
+/* Gece lambası da: projeksiyonda ışın + yıldızlar; gece lambasında başlıkta hale, ışın yok (6 sn) */
+.uk-mod{padding-top:10px}
+.uk-yildiz{position:absolute;left:50%;top:0;width:48px;height:12px;margin-left:-24px}
+.uk-yildiz i{position:absolute;top:0;width:3px;height:3px;border-radius:50%;background:var(--v2);opacity:0;animation:uyil 6s var(--ease) infinite}
+.uk-yildiz i:nth-child(1){left:6px}.uk-yildiz i:nth-child(2){left:22px;top:-3px}.uk-yildiz i:nth-child(3){left:40px}
+@keyframes uyil{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+.uk-mod .uk-isin{animation:uisin2 6s var(--ease) infinite}
+.uk-mod .uk-hale{transform-box:fill-box;transform-origin:50% 50%;animation:uhale 6s var(--ease) infinite}
+.uk-mod .uk-lens{animation:ulens2 6s var(--ease) infinite}
+@keyframes uisin2{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+@keyframes uhale{0%,50%{opacity:0;transform:scale(.8)}58%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes ulens2{0%,4%{fill:var(--yuzey)}10%,94%{fill:var(--v2)}100%{fill:var(--yuzey)}}
+.uk-iki i:nth-child(1){opacity:1;animation:ui1 6s var(--ease) infinite}.uk-iki i:nth-child(2){animation:ui2 6s var(--ease) infinite}
+@keyframes ui1{0%,46%{opacity:1}50%,100%{opacity:0}}
+@keyframes ui2{0%,50%{opacity:0}54%,96%{opacity:1}100%{opacity:0}}
+/* Disk şeridi (LunaDream ile ortak) USB renginde */
+.uk-ek .pencere{background:var(--yuzey)}
+.uk-ek .adlar{color:var(--lac);font-family:var(--fg)}
+/* Teslim kartı (21 Eki): beyaz kart, ekranda noktalar ve paket; Kapında'da USB ikonu belirir */
+.teslim{position:relative;margin-top:22px;padding:8px 8px 12px;border-radius:16px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi)}
+.teslim::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:52px;border-radius:12px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol{margin:0;padding-top:16px}
+.teslim .yol::before,.teslim .yol-iz{top:25px}
+.teslim .yd{margin-bottom:22px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol-iz em::before{box-shadow:0 0 0 2px #EEF1F7,0 0 0 3.5px var(--lac)}
+.y-ik{position:absolute;left:calc(50% + 14px);top:-8px;width:34px;height:34px;opacity:0;animation:yik 8s var(--ease) infinite}
+.y-ik .uk-lens{fill:var(--v2)}
+.y-ik .uk-ik{width:34px;height:34px}
+@keyframes yik{0%,58%{opacity:0;transform:translateY(4px)}66%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.y-ik{opacity:1}.uk-ik .uk-isin{opacity:1}}
+""" + S2.SERIT_CSS + r"""
 /* Bu gece tavanda ne olsun? (Yön A'dan, kullanıcı istedi): yaşam fotoğrafı, yazı görselin içinde; fotoğraflar yavaşça süzülür */
 .sahne-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
 .sk{position:relative;flex:0 0 272px;height:380px;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:#000}
@@ -496,11 +574,11 @@ AL = ("""
 """ + DUN_SATIR + """
 
     <div class="ozler">
-      <div class="oz"><span class="gz" aria-hidden="true"><span class="port"></span>""" + FIS + """</span><b>USB tak, çalıştır</b><span class="t">Laptop, powerbank ya da şarj başlığı.</span></div>
-      <div class="oz"><span class="gz">""" + disk_yigin() + """</span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
-      <div class="oz"><span class="gz" aria-hidden="true"><span class="karo salla"><img src=\"""" + KES + """\" alt=""></span></span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
-      <div class="oz"><span class="gz" aria-hidden="true"><span class="karo"><span class="hale"></span><img src=\"""" + KES + """\" alt=""></span></span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
-      <div class="oz genis"><span class="gz" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
+      <div class="oz"><span class="uk-ek">""" + UK_TAK + """</span><b>USB tak, çalıştır</b><span class="t">Laptop, powerbank ya da şarj başlığı.</span></div>
+      <div class="oz"><span class="uk-ek">""" + S2.ui_serit('k', UK_DISK) + """</span><b>12 film diski</b><span class="t">Diski değiştir, tavan değişsin.</span></div>
+      <div class="oz"><span class="uk-ek">""" + UK_BOYUN + """</span><b>Esnek boyun</b><span class="t">Tavana, duvara, köşeye çevir.</span></div>
+      <div class="oz"><span class="uk-ek">""" + UK_LAMBA + """</span><b>Gece lambası da</b><span class="t">Gövdesi yumuşak ışıkla yanar.</span></div>
+      <div class="oz genis"><span class="uk-ek uk-genis" aria-hidden="true"><span class="cetvel"><i></i></span></span><span><b>Az yer kaplar</b><span class="t">Başlık 4 cm, toplam boy 23,5 cm.</span></span></div>
     </div>
 
     <div class="pk-bas">Çok al, az öde</div>
@@ -515,7 +593,7 @@ AL = ("""
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>""" + ('</div>' if STOK else '') + """
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
-    <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
+    <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><span class="y-ik" aria-hidden="true">""" + uk_ik() + """</span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
   </section>
 """)
 
@@ -743,7 +821,7 @@ def ozellik(h):
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7086))
+    h = int(os.environ.get('U_H', 7480))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
