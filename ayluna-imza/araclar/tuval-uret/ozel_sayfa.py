@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak
+from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -275,7 +275,7 @@ def gerisi(u):
     <h2 class="bas-y h2">Alanlar ne<br>diyor<span class="n">?</span></h2>
     <p class="yer">[Loox: bu ürünün tüm yorumları, fotoğraflı olanlar başta; puan dağılımı ve sayı otomatik]</p>
   </section>
-
+""" + mesaj_bolum('<h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2>') + """
   <section class="px">
     <div class="otuz"><span class="ot-h" aria-hidden="true">""" + U.OTUZ + """<b>30</b><small>gün</small></span><span><b>Beğenmezsen iade et</b><span>Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
   </section>
@@ -411,12 +411,12 @@ DOSYA = {'af': ('AyFeneri.dc.html', 'af-a'), 'gn': ('GalaksiNight.dc.html', 'gn-
 def sayfa(u):
     dosya, yon = DOSYA[u]
     t = O.YON[yon]
-    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS
+    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + MESAJ_CSS
     return U.head(AD[u], css, t['font']) + govde(u)
 
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
         h = int(os.environ.get('S_H_' + u, {'af': 6596, 'gn': 7108}[u]))  # ölçülen pano boyu (19 Eki, kare galeri)
-        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"', ozler(u)) + TAIL.format(h=h, js=masa_bayrak(js(u))))
+        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"', ozler(u)) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

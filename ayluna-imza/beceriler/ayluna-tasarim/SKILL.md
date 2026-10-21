@@ -232,7 +232,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Yapay zekâ ile üretilmiş görsel "müşteri", "mutlu kullanıcı" diye gösterilmez; sosyal kanıt yalnız gerçek müşteri içeriği (izinli mesaj ekran görüntüsü, müşteri fotoğrafı/videosu, Loox).
 - "Güvenli Ödeme ile Al" düğmesinde ve telefondaki alt çubukta fiyat yazmaz; fiyat paket kartlarında.
 - Müşteri kanıtı tek bölümde tek akış: puan → "Sizden gelen mesajlar" şeridi (kendi başlığı, büyük kart; mesajlar başka içerikle karıştırılmaz) → öne çıkan tek yorum → "Evlerinizden" fotoğraf şeridi → kısa yorum listesi → hepsini oku. Konu çipi ve sekme yok.
-- Müşteri mesajı ekran görüntüleri yalnız konu oldukları ürünün sayfasına konur; sayfanın vaadiyle (kargo süresi, kutu içeriği) çelişen mesaj seçilmez.
+- "Sizden gelen mesajlar" (gerçek, izinli sohbetler) bütün ürün sayfalarında; başka ürünün mesajıysa altında hangi ürünün siparişlerinden olduğu yazar. Sayfanın vaadiyle (kargo süresi, kutu içeriği) çelişen mesaj seçilmez.
 - Tema mağazada yayınlanmış temada değil, yayınlanmamış temanın Önizleme'sinde denenir (satış sürerken sipariş kaçmaz).
 
 ## Masaüstü (19 Ekim)

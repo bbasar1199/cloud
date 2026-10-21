@@ -197,6 +197,16 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(k.filter(c => c === 'k-msj').length === 6 && k.filter(c => c === 'k-foto').length === 5 && k[0] === 'k-msj' && await pg.locator('#yorumlar .yone').count() === 1
       && await pg.locator('#yorumlar .cip[aria-pressed]').count() === 0 && await pg.locator('#mesajlar').count() === 0 && acik === 1 && await pg.locator('.buyuk').count() === 0,
       `müşteri kanıtı tek bölüm: ${k.length} görsel (ilk ${k[0]}), büyük görünüm açılıp Esc ile kapandı`); }
+  // Sizden gelen mesajlar diğer ürünlerde de (kullanıcı, 19 Eki): 6 kart, "LunaDream siparişlerinden" notu, dokununca büyür, Esc kapatır
+  { const eksik = [];
+    for (const f of ['galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'ask-saati', 'sunset-lamba']) {
+      await pg.goto(KOK + f + '.html'); await pg.waitForTimeout(400);
+      const n = await pg.locator('#mesajlar .mkarma button').count(), not_ = /LunaDream siparişlerinden/.test(await pg.locator('#mesajlar').textContent().catch(() => ''));
+      let ok = n === 6 && not_;
+      if (ok) { await pg.locator('#mesajlar .mkarma button').first().click(); await pg.waitForTimeout(300); ok = await pg.locator('.mbuyuk img').count() === 1;
+        await pg.keyboard.press('Escape'); await pg.waitForTimeout(300); ok = ok && await pg.locator('.mbuyuk').count() === 0; }
+      if (!ok) eksik.push(f + ' (' + n + ')'); }
+    not(!eksik.length, 'mesajlar bölümü diğer ürünlerde' + (eksik.length ? ': ' + eksik.join(', ') : '')); }
   // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı) galeriyi durdurmaz; kaymadan geçer
   { const rm = await b.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' }); const rp = await rm.newPage();
     for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ask-saati']) {

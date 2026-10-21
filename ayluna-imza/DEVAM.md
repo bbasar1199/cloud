@@ -475,7 +475,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.5 · mesajlar kendi şeridinde (19 Ekim, en güncel)
+## Tema 1.0.6 · mesajlar bütün ürün sayfalarında (21 Ekim, en güncel)
+- Kullanıcı: "Şu WhatsApp konuşmaları için olan kısım eksik, bir tek LunaDream'de var."
+- `ortak.py`: `mesaj_bolum(baslik)`, `MESAJ_CSS`, `mesaj_js(js)` (renderVals'a mesaj verisi ve büyük görünüm durumu; `return {` ve `return Object.assign(R, {` ikisini de tanır). Büyük görünüm sınıfları `.mbuyuk`/`.mb-x` (ozel_sayfa'daki `.buyuk` ile çakışmasın).
+- Galaxy USB, AyFeneri, Galaksi Night: yorumların altında, panonun kendi başlık biçimiyle. 13 sade ürün: "Alanlar ne diyor?" bloğunun altında. Hepsinde "LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler." Masaüstünde tek satır kayar (400 px).
+- Yükseklikler: U_H=7358 S_H_af=6951 S_H_gn=7414 (E_H=6844), sade ürünler `canvas/urunler/yukseklik.json`.
+- Site testleri (mesajlar diğer ürünlerde denetimi dahil) ve tema benzetimi HEPSİ TAMAM.
+
+## Tema 1.0.5 · mesajlar kendi şeridinde (19 Ekim)
 - Kullanıcı (B düzenine): "E ama WP mesajları falan gidiyor." Karışık şeritte mesajlar fotoğrafların arasında kayboluyordu.
 - `#yorumlar` sırası: puan → "Sizden gelen mesajlar" (6 mesaj, 320 px kart, dokununca büyür) → öne çıkan yorum → "Evlerinizden" (5 müşteri fotoğrafı, 200 px) → 4 kısa yorum → hepsini oku → not. Masaüstünde 400/260 px.
 - E_H=6844. Site testleri ve tema benzetimi HEPSİ TAMAM.

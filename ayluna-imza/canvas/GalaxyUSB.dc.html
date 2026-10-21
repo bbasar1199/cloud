@@ -361,6 +361,19 @@ body{margin:0;background:#F2F4F8}
 
 @media (prefers-reduced-motion:reduce){.pg *,.pg *::before,.pg *::after{animation:none!important;transition:none!important}.yol-iz em{display:none}}
 
+/* Sizden gelen mesajlar (ortak.mesaj_bolum) */
+.mesaj-bol{padding-top:8px}
+.m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
+.mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
+.mkarma::-webkit-scrollbar{display:none}
+.mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.mkarma button:active{transform:scale(.98)}
+.mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mbuyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+.mbuyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+
 </style>
 </helmet>
 <div class="pg">
@@ -467,6 +480,13 @@ body{margin:0;background:#F2F4F8}
     <p class="yer">[Loox: bu ürünün tüm doğrulanmış yorumları; puan ve sayı otomatik]</p>
   </section>
 
+  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
+  <section class="bolum mesaj-bol" id="mesajlar">
+    <div class="px"><h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
+    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+  </section>
+  <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
+
   <section class="px">
     <div class="otuz"><span class="ot-h" aria-hidden="true"><i style="transform: rotate(0deg); animation-delay: 0.00s"></i><i style="transform: rotate(12deg); animation-delay: 0.10s"></i><i style="transform: rotate(24deg); animation-delay: 0.20s"></i><i style="transform: rotate(36deg); animation-delay: 0.30s"></i><i style="transform: rotate(48deg); animation-delay: 0.40s"></i><i style="transform: rotate(60deg); animation-delay: 0.50s"></i><i style="transform: rotate(72deg); animation-delay: 0.60s"></i><i style="transform: rotate(84deg); animation-delay: 0.70s"></i><i style="transform: rotate(96deg); animation-delay: 0.80s"></i><i style="transform: rotate(108deg); animation-delay: 0.90s"></i><i style="transform: rotate(120deg); animation-delay: 1.00s"></i><i style="transform: rotate(132deg); animation-delay: 1.10s"></i><i style="transform: rotate(144deg); animation-delay: 1.20s"></i><i style="transform: rotate(156deg); animation-delay: 1.30s"></i><i style="transform: rotate(168deg); animation-delay: 1.40s"></i><i style="transform: rotate(180deg); animation-delay: 1.50s"></i><i style="transform: rotate(192deg); animation-delay: 1.60s"></i><i style="transform: rotate(204deg); animation-delay: 1.70s"></i><i style="transform: rotate(216deg); animation-delay: 1.80s"></i><i style="transform: rotate(228deg); animation-delay: 1.90s"></i><i style="transform: rotate(240deg); animation-delay: 2.00s"></i><i style="transform: rotate(252deg); animation-delay: 2.10s"></i><i style="transform: rotate(264deg); animation-delay: 2.20s"></i><i style="transform: rotate(276deg); animation-delay: 2.30s"></i><i style="transform: rotate(288deg); animation-delay: 2.40s"></i><i style="transform: rotate(300deg); animation-delay: 2.50s"></i><i style="transform: rotate(312deg); animation-delay: 2.60s"></i><i style="transform: rotate(324deg); animation-delay: 2.70s"></i><i style="transform: rotate(336deg); animation-delay: 2.80s"></i><i style="transform: rotate(348deg); animation-delay: 2.90s"></i><b>30</b><small>gün</small></span><span><b>Beğenmezsen iade et</b><span>Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
   </section>
@@ -503,7 +523,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6851}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7358}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, disk: 0, dOto: true, kim: 0, kBas: 0, kOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
@@ -598,8 +618,13 @@ class Component extends DCLogic {
       { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' }
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
+    var _mk = this;
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
     var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
-    return { masa: MASA, tel: !MASA,
+    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay,
       disk: disk, dNo: S.disk + 1, dAd: DISK[S.disk][0],
       kim: kim,

@@ -8,7 +8,7 @@
 # Ürün adları mağazadaki gibi (içerik dosyasındaki ad önerileri kullanıcıya soruldu).
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, canli_galeri
+from ortak import HEAD, TAIL, TL_JS, canli_galeri, mesaj_bolum, mesaj_js, MESAJ_CSS
 import anasayfa as A
 import sayfalar as SY
 ROOT = os.path.join(HERE, '..', '..')
@@ -139,7 +139,8 @@ def govde(u):
         '  <section class="blk"><h2>Kutuda ne var<span>?</span></h2><p class="kutu">%s</p></section>\n' % u['kutuda'] +
         '  <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)">' + sss + '</div></section>\n'
         '  <!-- Yorumlar: Shopify\'da bu ürünün Loox kutusu (hepsi, m.28/B). Loox: %s -->\n'
-        '  <section class="blk"><h2>Alanlar ne diyor<span>?</span></h2><p class="yer" style="margin: 0">[Loox: bu ürünün tüm yorumları]</p></section>\n' % (u['loox'].get('not') or ''))
+        '  <section class="blk"><h2>Alanlar ne diyor<span>?</span></h2><p class="yer" style="margin: 0">[Loox: bu ürünün tüm yorumları]</p></section>\n' % (u['loox'].get('not') or '')
+        + mesaj_bolum('<h2 style="margin: 0; font-family: \'Young Serif\', Georgia, serif; font-weight: 400; font-size: 22px; letter-spacing: -.01em; color: var(--lac)">Sizden gelen mesajlar<span style="color: var(--v)">.</span></h2>'))
 
 
 def js(u, gal):
@@ -177,8 +178,8 @@ def js(u, gal):
 if __name__ == '__main__':
     for u in ICERIK:
         ad, gal, g = govde(u)
-        css = CSS.replace('.pg{--v:#F2A65A}', '.pg{--v:%s}' % u['renk']['vurgu'])
+        css = CSS.replace('.pg{--v:#F2A65A}', '.pg{--v:%s}' % u['renk']['vurgu']) + MESAJ_CSS + '.mesaj-bol{margin-top:24px}.mesaj-bol .px{padding:0 16px}\n'
         html = '<div class="pg" style="padding-bottom: 0">\n' + SY.DUYURU + SY.UST + g + SY.ALT + SY.YUKARI + '</div>\n'
         dosya = 'U-%s.dc.html' % u['handle']
-        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · ' + ad, css=css) + html + TAIL.format(h=YUK.get(dosya, 3800), js=js(u, gal)))
+        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · ' + ad, css=css) + html + TAIL.format(h=YUK.get(dosya, 3800), js=mesaj_js(js(u, gal))))
         print('yazıldı:', dosya, len(gal), 'görsel')

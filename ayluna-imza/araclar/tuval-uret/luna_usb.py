@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS
 import luna_e as E
 import luna_usb_yon as Y
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
@@ -580,7 +580,7 @@ GERISI = ("""
     <h2 class="bas-y h2">Alanlar ne<br>diyor<span class="n">?</span></h2>
     <p class="yer">[Loox: bu ürünün tüm doğrulanmış yorumları; puan ve sayı otomatik]</p>
   </section>
-
+""" + mesaj_bolum('<h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2>') + """
   <section class="px">
     <div class="otuz"><span class="ot-h" aria-hidden="true">""" + OTUZ + """<b>30</b><small>gün</small></span><span><b>Beğenmezsen iade et</b><span>Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
   </section>
@@ -630,7 +630,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS, t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + MESAJ_CSS, t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -744,7 +744,7 @@ SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
     h = int(os.environ.get('U_H', 7086))
-    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(JS)))
+    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
     for no, ad in enumerate(SECENEK, 1):

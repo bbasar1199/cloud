@@ -271,6 +271,20 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .sss[open] .arti{transform:rotate(45deg)}
 .sss p{margin:0 0 14px;font-size:14px;color:var(--soluk)}
 
+/* Sizden gelen mesajlar (ortak.mesaj_bolum) */
+.mesaj-bol{padding-top:8px}
+.m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
+.mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
+.mkarma::-webkit-scrollbar{display:none}
+.mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.mkarma button:active{transform:scale(.98)}
+.mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mbuyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+.mbuyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+.mesaj-bol{margin-top:24px}.mesaj-bol .px{padding:0 16px}
+
 @media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
 </style>
 </helmet>
@@ -292,11 +306,18 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)"><details class="sss"><summary>Kargo ücretli mi, ne zaman gelir?<span class="arti" aria-hidden="true">+</span></summary><p>Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin.</p></details><details class="sss"><summary>Beğenmezsem iade edebilir miyim?<span class="arti" aria-hidden="true">+</span></summary><p>Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir.</p></details><details class="sss"><summary>Kartla mı ödesem, kapıda mı?<span class="arti" aria-hidden="true">+</span></summary><p>Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir.</p></details><details class="sss"><summary>Garantisi var mı, sorun olursa ne yapacağım?<span class="arti" aria-hidden="true">+</span></summary><p>Garanti süresi: [garanti]. Bir sorun olursa bize yaz.</p></details><details class="sss"><summary>Prize mi takılır, şarjlı mı?<span class="arti" aria-hidden="true">+</span></summary><p>[teyit: güç kaynağı — USB kablo, adaptör ya da şarjlı pil]</p></details><details class="sss"><summary>Hazne ne kadar su alır, kaç saat çalışır?<span class="arti" aria-hidden="true">+</span></summary><p>[teyit: hazne hacmi ve bir dolumda çalışma süresi]</p></details><details class="sss"><summary>Kutudan ne çıkıyor?<span class="arti" aria-hidden="true">+</span></summary><p>[teyit]</p></details></div></section>
   <!-- Yorumlar: Shopify'da bu ürünün Loox kutusu (hepsi, m.28/B). Loox: Yorum yok. -->
   <section class="blk"><h2>Alanlar ne diyor<span>?</span></h2><p class="yer" style="margin: 0">[Loox: bu ürünün tüm yorumları]</p></section>
+
+  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
+  <section class="bolum mesaj-bol" id="mesajlar">
+    <div class="px"><h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 22px; letter-spacing: -.01em; color: var(--lac)">Sizden gelen mesajlar<span style="color: var(--v)">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
+    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+  </section>
+  <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
   <footer class="alt"><div class="sut"><div><h3>Mağaza</h3><a href="#">Ana sayfa</a><a href="#">Tüm ürünler</a><a href="#">Kargo takip</a><a href="#">İletişim</a></div><div><h3>Politikalar</h3><a href="#">İade politikası</a><a href="#">Kargo politikası</a><a href="#">Gizlilik</a><a href="#">Hizmet şartları</a><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a></div></div><div class="kart-logo" aria-label="Kabul edilen kartlar"><span>VISA</span><span>Mastercard</span><span>Troy</span></div><div class="imza" aria-label="Ayluna"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true">Ayluna</span></div><p class="telif">Fiyatlara KDV dahildir. © 2026 Ayluna</p></footer>
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2642}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3098}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: 1, sec: 0 }); }
   componentDidMount() { var self = this;
@@ -325,7 +346,12 @@ class Component extends DCLogic {
     var secenek = SEC.map(function (n, i) { var on = S.sec === i; return { n: n, on: on ? 'true' : 'false', cls: on ? 'on' : '', pick: function () { self.setState({ sec: i }); } }; });
     var sp = PK.filter(function (b) { return b.n === S.pk; })[0], tutar = sp ? sp.f : 799.0;
 
-    return Object.assign(R, {gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
+    var _mk = this;
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
+    return Object.assign(R, { mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
   }
 }
 </script>

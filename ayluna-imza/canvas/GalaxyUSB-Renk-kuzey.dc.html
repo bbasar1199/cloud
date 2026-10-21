@@ -361,6 +361,19 @@ body{margin:0;background:#F2F4F8}
 
 @media (prefers-reduced-motion:reduce){.pg *,.pg *::before,.pg *::after{animation:none!important;transition:none!important}.yol-iz em{display:none}}
 
+/* Sizden gelen mesajlar (ortak.mesaj_bolum) */
+.mesaj-bol{padding-top:8px}
+.m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
+.mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
+.mkarma::-webkit-scrollbar{display:none}
+.mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.mkarma button:active{transform:scale(.98)}
+.mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mbuyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+.mbuyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+
 </style>
 </helmet>
 <div class="pg"><div class="secenek"><b>Seçenek 1 · Kuzey ışığı</b><span>Nane yeşili (kuzey ışığı diskinden), Outfit + DM Sans: ferah, her yaşa</span><span class="renk" aria-hidden="true"><i style="background: #1A2142"></i><i style="background: #62E6B5"></i><i style="background: #14855E"></i><i style="background: #F1F5F3"></i></span></div><div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>

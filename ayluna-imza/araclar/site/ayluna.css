@@ -153,6 +153,9 @@ img{max-width:100%}
   html[data-ay-tur=urun] .pg>section .karma{overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
   html[data-ay-tur=urun] .karma button{height:400px}
   html[data-ay-tur=urun] .karma.kucuk button{height:260px}
+  /* Sizden gelen mesajlar (diğer ürünler): masaüstünde de tek satır kayar */
+  html[data-ay-tur=urun] .pg>section .mkarma{overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
+  html[data-ay-tur=urun] .mkarma button{height:400px}
   /* Diğer ürünler: 1136 px, altı sütun ızgara */
   html[data-ay-tur=urun] .pg>section:has(.kart){max-width:1136px!important}
   html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart){display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px 16px!important}

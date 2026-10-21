@@ -101,3 +101,54 @@ def urun_ust(html, bas, oz=None):
         return (html[:i] + '<div class="urun-ust"><div class="urun-sol">' + html[i:k] + sol + '</div>\n  '
                 + html[k:son] + '</div>' + html[son:])
     return html[:i] + '<div class="urun-ust">' + html[i:son] + '</div>' + html[son:]
+
+
+# Müşteri mesajları (19 Eki): LunaDream siparişlerinden gerçek, izinli sohbet ekran görüntüleri (canvas/musteri, tuval asset'i).
+# Kullanıcı: "WhatsApp konuşmaları için olan kısım eksik, bir tek LunaDream'de var" → diğer ürün sayfalarında da var. Mesajlar LunaDream
+# siparişlerinden olduğu için başlığın altında bu yazar (müşteri o ürün hakkında yazılmış sanmasın). Kutu vaadiyle ya da kargo sözüyle
+# çelişen iki mesaj (mesaj-6 "hayvanlar çıkmadı", mesaj-7 "gümrükte") yok. Kartlar dokununca büyür; Esc ya da dokunuş kapatır.
+MESAJ_ID = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996',
+            'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234']
+MESAJ_CSS = r"""
+/* Sizden gelen mesajlar (ortak.mesaj_bolum) */
+.mesaj-bol{padding-top:8px}
+.m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
+.mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
+.mkarma::-webkit-scrollbar{display:none}
+.mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.mkarma button:active{transform:scale(.98)}
+.mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mbuyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+.mbuyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+"""
+
+
+def mesaj_bolum(baslik):
+    """Başlık (panonun kendi h2 biçimiyle) + not + mesaj şeridi + büyük görünüm."""
+    return ('\n  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->\n'
+            '  <section class="bolum mesaj-bol" id="mesajlar">\n'
+            '    <div class="px">' + baslik + '<p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>\n'
+            '    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt">'
+            '<img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>\n'
+            '  </section>\n'
+            '  <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}">'
+            '<img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>\n')
+
+
+MESAJ_VERI = """var _mk = this;
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = """ + str(MESAJ_ID) + """.map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
+"""
+
+
+def mesaj_js(js):
+    """renderVals'a mesaj verisini ve büyük görünüm durumunu ekler (masa_bayrak'tan önce ya da sonra)."""
+    i = js.index('renderVals()')
+    j = js.index('\n    return ', i) + 1   # renderVals'ın kendi dönüşü: "return {" ya da "return Object.assign(R, {"
+    k = js.index('{', j) + 1
+    return (js[:j] + '    ' + MESAJ_VERI + js[j:k] + ' mesajlar: mesajlar, buyuk: this.state.buyuk || \'\', buyukAd: this.state.buyukAd || \'\', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,'
+            + js[k:])
