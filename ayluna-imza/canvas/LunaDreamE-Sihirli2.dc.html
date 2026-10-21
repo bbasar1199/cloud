@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>LunaDream · Sihirli özellikler yönleri</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F6F1E9}
+a{color:#1A2142}a:hover{color:#2B3463}
+.pg{width:390px;background:#F6F1E9;color:#1A2142;font-family:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+.pg *{box-sizing:border-box}
+.ser{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
+.px{padding-left:16px;padding-right:16px}
+.mut{color:#5C6078}
+.h2{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:16px;background:#1A2142;color:#FFFDF9;font:inherit;font-size:17px;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s cubic-bezier(.2,.7,.2,1)}
+.btn:active{transform:scale(.985)}
+.etiket{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;letter-spacing:.02em;color:#1A2142}
+.etiket>span:first-child{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#766B5B}
+.rozet{display:inline-block;padding:2px 7px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.odeme{display:flex;flex-direction:column;justify-content:center;height:62px;padding:0 12px;border-radius:14px;border:1.5px solid;font:inherit;color:#1A2142;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.2,.7,.2,1)}
+.odeme:active{transform:scale(.98)}
+.not{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#766B5B}
+.pg{background:#F6F1E9;font-size:15px}
+.sec{padding:0 16px 40px}
+.oneri{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding-top:16px;border-top:1px dashed #D6CAB6;font-size:12px;font-weight:700;color:#A05A1C}
+.oneri-alt{margin:0 0 16px;font-size:13px;color:#5C6078;text-wrap:balance}
+.ust-yazi{margin:0;font-size:13px;font-weight:700;color:#A05A1C}
+.pg button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pg :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+img{display:block}
+
+/* Ortak mini arayüz: ekran zemini ton #F1E8DA, çizgiler lacivert, ışık amber */
+.ek{position:relative;display:grid;place-items:center;overflow:hidden;border-radius:14px;background:#F1E8DA}
+.ui{position:relative;display:block}
+.lmb{width:32px;height:32px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.lmb .kb{fill:#FFFDF9}
+.lmb .isk{fill:#F2A65A;stroke:none;opacity:.9}
+.tel{width:22px;height:22px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round}
+.durum{position:relative;display:grid;font-size:12px;font-weight:600;color:#5C6078;white-space:nowrap}
+.durum i{grid-area:1/1;font-style:normal}
+
+/* Parlaklık: 3 kademe (6 sn). Duran kare: üçüncü kademe */
+.ui-isik{width:120px;height:64px}
+.ui-isik .lmb{position:absolute;left:14px;top:16px}
+.ui-isik .hl{position:absolute;left:30px;top:32px;border-radius:50%;border:1.5px solid #F2A65A}
+.ui-isik .h1{width:40px;height:40px;margin:-20px 0 0 -20px;opacity:.9}
+.ui-isik .h2{width:56px;height:56px;margin:-28px 0 0 -28px;opacity:.55;animation:l2 6s cubic-bezier(.2,.7,.2,1) infinite}
+.ui-isik .h3{width:72px;height:72px;margin:-36px 0 0 -36px;opacity:.3;animation:l3 6s cubic-bezier(.2,.7,.2,1) infinite}
+.ui-isik .isk{animation:lisk 6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes l2{0%,30%{opacity:0;transform:scale(.8)}37%,92%{opacity:.55;transform:none}100%{opacity:0;transform:scale(.8)}}
+@keyframes l3{0%,63%{opacity:0;transform:scale(.8)}70%,92%{opacity:.3;transform:none}100%{opacity:0;transform:scale(.8)}}
+@keyframes lisk{0%,30%{opacity:.35}37%,63%{opacity:.65}70%,92%{opacity:1}100%{opacity:.35}}
+.kad{position:absolute;right:0;top:26px;display:flex;gap:8px;padding:4px 6px;border-radius:999px;background:#FFFDF9}
+.kad i{width:6px;height:6px;border-radius:50%;background:#D6CAB6}
+.kad b{position:absolute;left:4px;top:2px;width:10px;height:10px;border-radius:50%;background:#F2A65A;transform:translateX(28px);animation:kad 6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes kad{0%,30%{transform:none}37%,63%{transform:translateX(14px)}70%,92%{transform:translateX(28px)}100%{transform:none}}
+
+/* Diskler: pencerede sırayla (8 sn, 4 disk × 2 sn). Duran kare: ilk disk ve adı */
+.ui-disk{width:120px;height:72px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.yuva{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;background:#FFFDF9;box-shadow:0 0 0 1.5px #1A2142}
+.yuva .d{position:absolute;inset:3px;width:42px;height:42px;border-radius:50%;object-fit:cover;opacity:0}
+.yuva .d1{opacity:1}
+.ui-disk .d{animation:dsk 8s cubic-bezier(.2,.7,.2,1) infinite both}
+.ui-disk .d2{animation-delay:2s}.ui-disk .d3{animation-delay:4s}.ui-disk .d4{animation-delay:6s}
+@keyframes dsk{0%{transform:translateX(48px) rotate(-90deg);opacity:0}3%{opacity:1}8%{transform:none}24%{transform:rotate(80deg);opacity:1}29%{transform:translateX(-48px) rotate(170deg);opacity:0}100%{transform:translateX(-48px) rotate(170deg);opacity:0}}
+.adlar{position:relative;display:grid;font-size:12px;font-weight:600;color:#1A2142;white-space:nowrap}
+.adlar i{grid-area:1/1;justify-self:center;font-style:normal;opacity:0}
+.adlar .a1{opacity:1}
+.ui-disk .adlar i,.ui-serit .adlar i{animation:adk 8s cubic-bezier(.2,.7,.2,1) infinite both}
+.adlar .a2{animation-delay:2s!important}.adlar .a3{animation-delay:4s!important}.adlar .a4{animation-delay:6s!important}
+@keyframes adk{0%,3%{opacity:0;transform:translateY(4px)}8%,23%{opacity:1;transform:none}27%,100%{opacity:0;transform:translateY(-4px)}}
+
+/* Bluetooth: bağlan (0-35%) → çal (38-94%). Duran kare: çalıyor, ilerleme yarıda */
+.ui-bt{width:132px;display:flex;flex-direction:column;gap:6px}
+.bt-sira{display:flex;align-items:center;gap:4px;height:34px}
+.ui-bt .lmb{width:28px;height:28px}
+.akis{position:relative;width:30px;height:6px}
+.akis i{position:absolute;left:0;top:1px;width:4px;height:4px;border-radius:50%;background:#1A2142;opacity:0;animation:akis 6s cubic-bezier(.2,.7,.2,1) infinite}
+.akis i:nth-child(2){animation-delay:.25s}.akis i:nth-child(3){animation-delay:.5s}
+@keyframes akis{0%{transform:none;opacity:0}4%{opacity:1}22%{transform:translateX(26px);opacity:0}23%{transform:none;opacity:0}27%{opacity:1}34%{transform:translateX(26px);opacity:0}100%{transform:translateX(26px);opacity:0}}
+.eq{display:flex;align-items:flex-end;gap:2px;height:18px;margin-left:2px;animation:btg 6s cubic-bezier(.2,.7,.2,1) infinite}
+.eq i{width:3px;height:18px;border-radius:2px;background:#F2A65A;transform-origin:50% 100%;transform:scaleY(.5);animation:ses 1.2s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}.eq i:nth-child(4){animation-delay:-.9s}
+@keyframes ses{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes btg{0%,35%{opacity:0}40%,92%{opacity:1}100%{opacity:0}}
+.bt-alt{display:flex;flex-direction:column;gap:4px}
+.ui-bt .durum i:first-child{opacity:0;animation:d1 6s cubic-bezier(.2,.7,.2,1) infinite}
+.ui-bt .durum i:last-child{animation:d2 6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes d1{0%,33%{opacity:1}38%,100%{opacity:0}}
+@keyframes d2{0%,35%{opacity:0}40%,94%{opacity:1}100%{opacity:0}}
+.cal{position:relative;height:3px;border-radius:2px;background:#E3D8C7;overflow:hidden}
+.cal b{position:absolute;inset:0;border-radius:2px;background:#1A2142;transform-origin:0 50%;transform:scaleX(.5);animation:cal 6s linear infinite}
+@keyframes cal{0%,38%{transform:scaleX(0)}94%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+
+/* Şarj: halka dilim dilim dolar, kablo çıkar (6 sn). Duran kare: dolu halka, kablosuz */
+.ui-sarj{width:132px;height:64px}
+.halka{position:absolute;left:32px;top:32px;width:0;height:0}
+.halka i{position:absolute;left:-1.5px;top:-4px;width:3px;height:8px;border-radius:2px;background:#F2A65A;animation:dilim 6s cubic-bezier(.2,.7,.2,1) infinite both}
+@keyframes dilim{0%{opacity:.18}5%,62%{opacity:1}72%,100%{opacity:.18}}
+.ui-sarj .lmb{position:absolute;left:18px;top:17px;width:28px;height:28px}
+.fis{position:absolute;left:60px;top:22px;width:22px;height:22px;opacity:0;animation:fis 6s cubic-bezier(.2,.7,.2,1) infinite}
+.fis svg{width:22px;height:22px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transform:scaleX(-1)}
+@keyframes fis{0%,58%{transform:none;opacity:1}66%,92%{transform:translateX(12px);opacity:0}100%{transform:none;opacity:1}}
+.ui-sarj .durum{position:absolute;left:66px;top:42px}
+.ui-sarj .durum i:first-child{opacity:0;animation:s1 6s cubic-bezier(.2,.7,.2,1) infinite}
+.ui-sarj .durum i:last-child{animation:s2 6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes s1{0%,58%{opacity:1}64%,100%{opacity:0}}
+@keyframes s2{0%,60%{opacity:0}66%,94%{opacity:1}100%{opacity:0}}
+
+/* A · Canlı kartlar */
+.a-izgara{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.a-kart{display:flex;flex-direction:column;gap:10px;padding:10px 10px 14px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142;text-decoration:none}
+.a-kart .ek{height:92px}
+.a-kart b{display:block;padding:0 4px;font-size:15px;line-height:1.25}
+.a-kart span.t{display:block;margin-top:2px;padding:0 4px;font-size:13px;line-height:1.4;color:#5C6078;text-wrap:balance}
+
+/* B · Özellik turu: tek ekran, 4 satır; etkin satırın çizgisi 5 sn'de dolar */
+.b-kutu{margin-top:12px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;overflow:hidden}
+.b-ekran{position:relative;height:150px;margin:10px 10px 0;border-radius:14px;background:#F1E8DA}
+.b-sahne{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(6px);transition:opacity .35s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1)}
+.b-sahne.on{opacity:1;transform:none}
+.b-sahne .ui{transform:scale(1.45)}
+.b-liste{list-style:none;margin:0;padding:4px 0 6px}
+.b-sat{position:relative;display:block;width:100%;min-height:52px;padding:10px 16px;border:0;background:none;text-align:left;color:#1A2142}
+.b-sat+.b-sat{border-top:1px solid #EFE6D8}
+.b-sat b{display:block;font-size:15px;line-height:1.25;color:#5C6078;transition:color .25s cubic-bezier(.2,.7,.2,1)}
+.b-sat .t{display:block;font-size:13px;line-height:1.4;color:#5C6078;opacity:0;transform:translateY(-2px);max-height:0;overflow:hidden;transition:opacity .25s cubic-bezier(.2,.7,.2,1),transform .25s cubic-bezier(.2,.7,.2,1)}
+.b-sat.on b{color:#1A2142}
+.b-sat.on .t{opacity:1;transform:none;max-height:40px;margin-top:2px}
+.b-sat .cz{position:absolute;left:16px;right:16px;bottom:0;height:2px;background:#F2A65A;transform-origin:0 50%;transform:scaleX(0)}
+.b-sat.on .cz{animation:bcz 5s linear forwards}
+@keyframes bcz{to{transform:scaleX(1)}}
+
+/* C · Bento: geniş disk kartı + üç küçük kare */
+.c-genis{display:grid;grid-template-columns:minmax(0,1fr) 176px;align-items:center;gap:12px;margin-top:12px;padding:10px 10px 10px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142;text-decoration:none}
+.c-genis b{display:block;font-size:16px;line-height:1.25}
+.c-genis span.t{display:block;margin-top:4px;font-size:13px;line-height:1.4;color:#5C6078}
+.c-genis u{color:#A05A1C;text-underline-offset:3px}
+.c-genis .ek{height:112px}
+.c-uc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}
+.c-kare{display:flex;flex-direction:column;gap:8px;padding:8px 8px 12px;border-radius:18px;background:#FFFDF9;border:1px solid #E3D8C7}
+.c-kare .ek{display:flex;align-items:center;justify-content:center;height:76px}
+.c-kare .ui{flex:none}
+.c-kare .ui{transform:scale(.7)}
+.c-kare .durum,.c-kare .bt-alt{display:none}
+.c-kare b{display:block;padding:0 2px;font-size:13px;line-height:1.25}
+/* Geniş disk şeridi: 6 disk × 46 px; her 2 sn bir disk kayar; ortadaki pencerede döner */
+.ui-serit{width:176px;height:96px}
+.pencere{position:absolute;left:61px;top:4px;width:54px;height:54px;border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9}
+.tren{position:absolute;left:0;top:8px;display:flex;gap:4px;padding-left:65px;animation:tren 8s cubic-bezier(.2,.7,.2,1) infinite}
+.sd{flex:none;width:46px;height:46px;transform:scale(.72);opacity:.55;animation:sdo 8s cubic-bezier(.2,.7,.2,1) infinite}
+.sd img{width:46px;height:46px;border-radius:50%;object-fit:cover;animation:don 6s linear infinite}
+@keyframes don{to{transform:rotate(360deg)}}
+@keyframes tren{0%,20%{transform:none}25%,45%{transform:translateX(-50px)}50%,70%{transform:translateX(-100px)}75%,95%{transform:translateX(-150px)}100%{transform:translateX(-200px)}}
+.sd:nth-child(1){animation-name:sd1}.sd:nth-child(2){animation-name:sd2}.sd:nth-child(3){animation-name:sd3}.sd:nth-child(4){animation-name:sd4}.sd:nth-child(5){animation-name:sd5}
+@keyframes sd1{0%,20%{transform:none;opacity:1}25%,100%{transform:scale(.72);opacity:.55}}
+@keyframes sd2{0%,20%{transform:scale(.72);opacity:.55}25%,45%{transform:none;opacity:1}50%,100%{transform:scale(.72);opacity:.55}}
+@keyframes sd3{0%,45%{transform:scale(.72);opacity:.55}50%,70%{transform:none;opacity:1}75%,100%{transform:scale(.72);opacity:.55}}
+@keyframes sd4{0%,70%{transform:scale(.72);opacity:.55}75%,95%{transform:none;opacity:1}100%{transform:scale(.72);opacity:.55}}
+@keyframes sd5{0%,95%{transform:scale(.72);opacity:.55}100%{transform:none;opacity:1}}
+.ui-serit .adlar{position:absolute;left:0;right:0;bottom:4px}
+.ui-serit .adlar i{animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){.sd:nth-child(1){transform:none;opacity:1}}
+
+@media (prefers-reduced-motion:reduce){.pg *{transition:none!important;animation:none!important}}
+</style>
+</helmet>
+<div class="pg">
+  <div style="padding: 18px 16px 10px">
+    <h1 class="h2" style="font-size: 22px">Sihirli özellikler · üç kurumsal yön</h1>
+    <p style="margin: 6px 0 0; font-size: 13px; color: #5C6078">Satın alma kutusunda, fiyatın altında. Her özellik kendi küçük sekansıyla anlatılır: disk sırayla gelir ve döner, parlaklık üç kademe, Bluetooth bağlanıp çalar, şarj halkası dolar. Kartlar beyaz, amber yalnız hareket eden parçada.</p>
+  </div>
+
+  <section class="sec">
+    <p class="oneri">A · Canlı kartlar</p>
+    <p class="oneri-alt">Bugünkü 2×2 düzen kalır; ikon kutusunun yerine her kartın üstünde küçük bir ekran ve sekansı.</p>
+    <p class="ust-yazi">Sihirli özellikler</p>
+    <div class="a-izgara"><a href="#diskler" class="a-kart"><span class="ek"><span class="ui ui-disk" aria-hidden="true"><span class="yuva"><img class="d d1" src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img class="d d2" src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img class="d d3" src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""><img class="d d4" src="/_blob/bbd010d8d946edc8fef9c0404cba4ea2" alt=""></span><span class="adlar"><i class="a1">Okyanus</i><i class="a2">Uzay</i><i class="a3">Deniz kızı</i><i class="a4">Şato</i></span></span></span><span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. Diski tak, masal tavana yansısın.</span></span></a><div class="a-kart"><span class="ek"><span class="ui ui-isik" aria-hidden="true"><span class="hl h3"></span><span class="hl h2"></span><span class="hl h1"></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="kad"><i></i><i></i><i></i><b></b></span></span></span><span><b>3 parlaklık</b><span class="t">Kısık, orta ya da parlak; geceye göre ayarla.</span></span></div><div class="a-kart"><span class="ek"><span class="ui ui-bt" aria-hidden="true"><span class="bt-sira"><svg class="tel" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg><span class="akis"><i></i><i></i><i></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="eq"><i></i><i></i><i></i><i></i></span></span><span class="bt-alt"><span class="durum"><i>Bağlanıyor</i><i>Ninni çalıyor</i></span><span class="cal"><b></b></span></span></span></span><span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan; ses lambadan gelsin.</span></span></div><div class="a-kart"><span class="ek"><span class="ui ui-sarj" aria-hidden="true"><span class="halka"><i style="transform: rotate(0deg) translateY(-25px); animation-delay: 0.00s"></i><i style="transform: rotate(30deg) translateY(-25px); animation-delay: 0.18s"></i><i style="transform: rotate(60deg) translateY(-25px); animation-delay: 0.36s"></i><i style="transform: rotate(90deg) translateY(-25px); animation-delay: 0.54s"></i><i style="transform: rotate(120deg) translateY(-25px); animation-delay: 0.72s"></i><i style="transform: rotate(150deg) translateY(-25px); animation-delay: 0.90s"></i><i style="transform: rotate(180deg) translateY(-25px); animation-delay: 1.08s"></i><i style="transform: rotate(210deg) translateY(-25px); animation-delay: 1.26s"></i><i style="transform: rotate(240deg) translateY(-25px); animation-delay: 1.44s"></i><i style="transform: rotate(270deg) translateY(-25px); animation-delay: 1.62s"></i><i style="transform: rotate(300deg) translateY(-25px); animation-delay: 1.80s"></i><i style="transform: rotate(330deg) translateY(-25px); animation-delay: 1.98s"></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="fis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h7M10 8.5h5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-5zM17 10.5h3M17 13.5h3"></path></svg></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span></span><span><b>Şarjlı, kablosuz</b><span class="t">Şarj et, kablosu olmadan her odaya taşı.</span></span></div></div>
+  </section>
+
+  <section class="sec">
+    <p class="oneri">B · Özellik turu</p>
+    <p class="oneri-alt">Tek büyük ekran, altında dört satır. Etkin satırın çizgisi 5 sn'de dolar, sıradakine geçer; dokununca o özellik açılır. En "ürün tanıtım sayfası" duran yön.</p>
+    <p class="ust-yazi">Sihirli özellikler</p>
+    <div class="b-kutu">
+      <div class="b-ekran"><div class="{{b0}}" aria-hidden="{{bg0}}"><span class="ui ui-disk" aria-hidden="true"><span class="yuva"><img class="d d1" src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img class="d d2" src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img class="d d3" src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""><img class="d d4" src="/_blob/bbd010d8d946edc8fef9c0404cba4ea2" alt=""></span><span class="adlar"><i class="a1">Okyanus</i><i class="a2">Uzay</i><i class="a3">Deniz kızı</i><i class="a4">Şato</i></span></span></div><div class="{{b1}}" aria-hidden="{{bg1}}"><span class="ui ui-isik" aria-hidden="true"><span class="hl h3"></span><span class="hl h2"></span><span class="hl h1"></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="kad"><i></i><i></i><i></i><b></b></span></span></div><div class="{{b2}}" aria-hidden="{{bg2}}"><span class="ui ui-bt" aria-hidden="true"><span class="bt-sira"><svg class="tel" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg><span class="akis"><i></i><i></i><i></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="eq"><i></i><i></i><i></i><i></i></span></span><span class="bt-alt"><span class="durum"><i>Bağlanıyor</i><i>Ninni çalıyor</i></span><span class="cal"><b></b></span></span></span></div><div class="{{b3}}" aria-hidden="{{bg3}}"><span class="ui ui-sarj" aria-hidden="true"><span class="halka"><i style="transform: rotate(0deg) translateY(-25px); animation-delay: 0.00s"></i><i style="transform: rotate(30deg) translateY(-25px); animation-delay: 0.18s"></i><i style="transform: rotate(60deg) translateY(-25px); animation-delay: 0.36s"></i><i style="transform: rotate(90deg) translateY(-25px); animation-delay: 0.54s"></i><i style="transform: rotate(120deg) translateY(-25px); animation-delay: 0.72s"></i><i style="transform: rotate(150deg) translateY(-25px); animation-delay: 0.90s"></i><i style="transform: rotate(180deg) translateY(-25px); animation-delay: 1.08s"></i><i style="transform: rotate(210deg) translateY(-25px); animation-delay: 1.26s"></i><i style="transform: rotate(240deg) translateY(-25px); animation-delay: 1.44s"></i><i style="transform: rotate(270deg) translateY(-25px); animation-delay: 1.62s"></i><i style="transform: rotate(300deg) translateY(-25px); animation-delay: 1.80s"></i><i style="transform: rotate(330deg) translateY(-25px); animation-delay: 1.98s"></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="fis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h7M10 8.5h5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-5zM17 10.5h3M17 13.5h3"></path></svg></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span></div></div>
+      <ul class="b-liste"><li><button class="{{bs0}}" type="button" onClick="{{bsec0}}" aria-pressed="{{bp0}}"><b>6 + 6 masal diski</b><span class="t">Altısı hediye. Diski tak, masal tavana yansısın.</span><span class="cz" aria-hidden="true"></span></button></li><li><button class="{{bs1}}" type="button" onClick="{{bsec1}}" aria-pressed="{{bp1}}"><b>3 parlaklık</b><span class="t">Kısık, orta ya da parlak; geceye göre ayarla.</span><span class="cz" aria-hidden="true"></span></button></li><li><button class="{{bs2}}" type="button" onClick="{{bsec2}}" aria-pressed="{{bp2}}"><b>Bluetooth ninni</b><span class="t">Telefondan bağlan; ses lambadan gelsin.</span><span class="cz" aria-hidden="true"></span></button></li><li><button class="{{bs3}}" type="button" onClick="{{bsec3}}" aria-pressed="{{bp3}}"><b>Şarjlı, kablosuz</b><span class="t">Şarj et, kablosu olmadan her odaya taşı.</span><span class="cz" aria-hidden="true"></span></button></li></ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="oneri">C · Bento</p>
+    <p class="oneri-alt">Diskler ürünü ayıran özellik: üstte geniş kart, disk şeridi kayar, ortadaki pencerede döner ve adı değişir. Altta üç küçük kare. En az yer kaplayan yön.</p>
+    <p class="ust-yazi">Sihirli özellikler</p>
+    <a class="c-genis" href="#diskler"><span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. Diski tak, masal tavana yansısın. <u>Diskleri gör</u></span></span><span class="ek"><span class="ui ui-serit" aria-hidden="true"><span class="pencere"></span><span class="tren"><span class="sd"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""></span><span class="sd"><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""></span><span class="sd"><img src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""></span><span class="sd"><img src="/_blob/bbd010d8d946edc8fef9c0404cba4ea2" alt=""></span><span class="sd"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""></span><span class="sd"><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""></span></span><span class="adlar"><i class="a1">Okyanus</i><i class="a2">Uzay</i><i class="a3">Deniz kızı</i><i class="a4">Şato</i></span></span></span></a>
+    <div class="c-uc"><div class="c-kare"><span class="ek"><span class="ui ui-isik" aria-hidden="true"><span class="hl h3"></span><span class="hl h2"></span><span class="hl h1"></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="kad"><i></i><i></i><i></i><b></b></span></span></span><b>3 parlaklık</b></div><div class="c-kare"><span class="ek"><span class="ui ui-bt" aria-hidden="true"><span class="bt-sira"><svg class="tel" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg><span class="akis"><i></i><i></i><i></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="eq"><i></i><i></i><i></i><i></i></span></span><span class="bt-alt"><span class="durum"><i>Bağlanıyor</i><i>Ninni çalıyor</i></span><span class="cal"><b></b></span></span></span></span><b>Bluetooth ninni</b></div><div class="c-kare"><span class="ek"><span class="ui ui-sarj" aria-hidden="true"><span class="halka"><i style="transform: rotate(0deg) translateY(-25px); animation-delay: 0.00s"></i><i style="transform: rotate(30deg) translateY(-25px); animation-delay: 0.18s"></i><i style="transform: rotate(60deg) translateY(-25px); animation-delay: 0.36s"></i><i style="transform: rotate(90deg) translateY(-25px); animation-delay: 0.54s"></i><i style="transform: rotate(120deg) translateY(-25px); animation-delay: 0.72s"></i><i style="transform: rotate(150deg) translateY(-25px); animation-delay: 0.90s"></i><i style="transform: rotate(180deg) translateY(-25px); animation-delay: 1.08s"></i><i style="transform: rotate(210deg) translateY(-25px); animation-delay: 1.26s"></i><i style="transform: rotate(240deg) translateY(-25px); animation-delay: 1.44s"></i><i style="transform: rotate(270deg) translateY(-25px); animation-delay: 1.62s"></i><i style="transform: rotate(300deg) translateY(-25px); animation-delay: 1.80s"></i><i style="transform: rotate(330deg) translateY(-25px); animation-delay: 1.98s"></i></span><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><path class="kb" d="M7 13c0-5 4-9 9-9s9 4 9 9c-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0-1.5 1-3 1-4.5 0z"></path><rect class="isk" x="10.5" y="14.5" width="11" height="7" rx="1.5"></rect><path d="M10 14v8M22 14v8"></path><path d="M8.5 22.5h15l-1.5 4h-12z"></path></svg><span class="fis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h7M10 8.5h5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-5zM17 10.5h3M17 13.5h3"></path></svg></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span></span><b>Şarjlı, kablosuz</b></div></div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { b: 0 }; }
+  componentDidMount() {
+    // B: etkin satır 5 sn'de bir sıradakine geçer; dokununca 12 sn bekler. Azaltılmış harekette kendiliğinden geçmez.
+    var self = this;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    this.iv = setInterval(function () { if (Date.now() - (self.dok || 0) < 12000) return; self.setState({ b: (self.state.b + 1) % 4 }); }, 5000);
+  }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    var self = this, S = this.state, o = {};
+    for (var i = 0; i < 4; i++) (function (i) { var on = i === S.b;
+      o['b' + i] = 'b-sahne' + (on ? ' on' : ''); o['bg' + i] = on ? 'false' : 'true';
+      o['bs' + i] = 'b-sat' + (on ? ' on' : ''); o['bp' + i] = on ? 'true' : 'false';
+      o['bsec' + i] = function () { self.dok = Date.now(); self.setState({ b: i }); }; })(i);
+    return o;
+  }
+}
+</script>
+</body>
+</html>
