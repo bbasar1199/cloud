@@ -247,6 +247,11 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       return { orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: on && on.textContent, gizli: document.querySelectorAll('.vt-m[aria-hidden=true]').length }; });
     not(r.orta < 4 && /Tavanda uzay/.test(r.yazi) && r.gizli === 3, `telefon vitrin: 3. ay → Tavanda uzay ortada (${Math.round(r.orta)} px), yazı değişti, öbür yazılar gizli`); }
   { const sw = await pg.evaluate(() => document.documentElement.scrollWidth); not(sw === 390, 'telefon LunaDream: yatay taşma yok (' + sw + ')'); }
+  // Sihirli özellikler · Canlı kartlar ve teslim kartı (21 Eki): 4 kart, her birinde mini ekran; teslim kartında Kapında lambası; Erkek seçilince robot ikonu
+  not(await pg.locator('#siparis .sih .a-kart').count() === 4 && await pg.locator('#siparis .sih .sh-ek').count() === 4 && await pg.locator('.teslim .yol-lamba').count() === 1 && await pg.locator('.sih .oz').count() === 0, 'telefon: Sihirli canlı kartlar (4 ekran), teslim kartında lamba');
+  { const kiz = await pg.locator('.sih .lmb.rb').count(); await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
+    const rb = await pg.locator('.sih .lmb.rb').count(), lk = await pg.locator('.sih .lmb:not(.rb)').count(); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
+    not(kiz === 0 && rb === 3 && lk === 0, `Sihirli ikonu modele bağlı: Kız'da robot ${kiz}, Erkek'te robot ${rb}, atlıkarınca ${lk}`); }
 
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });

@@ -258,3 +258,11 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Mutlu çocuk karesi tek başına konmaz: çocuk + ürün + tavandaki ışığı aynı karede. Yüz yakın plan değil; oda Türk evine benzer; tavan deseni gerçek diskten, gerçek parlaklıkta. Görsel yalnız Google Flow ile, ürün gerçek fotoğraftan; "müşteri" etiketi konmaz.
 - Aynı işi gören ikinci bölüm açılmaz; var olan bölüm büyütülüp taşınır.
 - Premium his: tek odak (ortadaki kart büyük, yandakiler geride), yazı fotoğrafın dışında, ilerleme dolan ayla; sayaç ("1 / 4"), fotoğrafa binen çip, Instagram arayüzü taklidi, dönen/uçan kart yok. Masaüstünde şerit sütun kenarında kesik bitmez.
+
+## Sihirli özellikler ve mini arayüzler (21 Eki)
+- Sihirli özellikler = Canlı kartlar: 2×2 beyaz kart, her kartta ton ekran (#F1E8DA) + 6-8 sn sekans; kartlar 0,6 sn arayla başlar. Kod: `sihirli2_varyant.MINI_CSS`, `kart_a`, `IKON`.
+- Sekans teyitsiz iddia çizmez: disk yalnız kayarken yuvarlanır, durunca sabit; şarjda lamba sönük, "Kablosuz"da yanar.
+- Lamba ikonu modele bağlı (Kız atlıkarınca, Erkek robot).
+- Kendiliğinden ilerleyen sekme turu satın alma kutusunda yok.
+- Teslim çizelgesi aynı dilde: beyaz kart, ton ekranda hilal → yarım → dolunay, paket kutusu akar, Kapında'da lamba yanar.
+- Fotoğraf bölümlerine (vitrin, yorumlar) UI bindirilmez.

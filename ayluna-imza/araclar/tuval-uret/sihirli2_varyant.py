@@ -26,12 +26,20 @@ LAMBA = ('<svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16
          '<path class="kb" d="M6 13C6 8.4 10.5 5.4 16 5.4S26 8.4 26 13a2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0z"></path>'
          '<rect class="isk" x="10" y="14.6" width="12" height="6.2" rx="1.2"></rect><path d="M9.5 14.5v6.5M22.5 14.5v6.5"></path>'
          '<path d="M8 21h16c0 2.9-3.6 4.6-8 4.6S8 23.9 8 21z"></path><path d="M11.4 25.3c-.4 1.5-1.6 2.2-2.8 1.9M20.6 25.3c.4 1.5 1.6 2.2 2.8 1.9"></path></svg>')
+# LunaDream Erkek (Uzay Kaşifi) çizgi ikonu: anten, kubbe baş, koyu yüz paneli ve amber gözler (ışık), gövde, palet
+ROBOT = ('<svg class="lmb rb" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.4V4"></path><circle cx="16" cy="3" r="1.2"></circle>'
+         '<path class="kb" d="M7.5 16a8.5 8.5 0 0 1 17 0z"></path><rect x="10" y="9.6" width="12" height="5.2" rx="2.6" fill="#1A2142"></rect>'
+         '<circle class="isk" cx="13.6" cy="12.2" r="1.1"></circle><circle class="isk" cx="18.4" cy="12.2" r="1.1"></circle>'
+         '<path d="M8.5 16h15v4h-15z"></path><rect x="6" y="20" width="20" height="6.4" rx="3.2"></rect><circle cx="10.4" cy="23.2" r="1.4"></circle><circle cx="16" cy="23.2" r="1.4"></circle><circle cx="21.6" cy="23.2" r="1.4"></circle></svg>')
+# Sayfada modele bağlı: Kız seçiliyken atlıkarınca, Erkek seçiliyken robot (renderVals: sihKiz / sihErkek)
+IKON = ('<sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}">' + LAMBA + '</sc-if>'
+        '<sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}">' + ROBOT + '</sc-if>')
 TEL = '<svg class="tel" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg>'
 FIS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12h-7M14 8.5H9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h5zM7 10.5H4M7 13.5H4"></path></svg>'
 
 
 def ui_isik(kucuk=False):
-    return ('<span class="ui ui-isik%s" aria-hidden="true"><span class="hl hl3"></span><span class="hl hl2"></span><span class="hl hl1"></span>' % (' kucuk' if kucuk else '') + LAMBA +
+    return ('<span class="ui ui-isik%s" aria-hidden="true"><span class="hl hl3"></span><span class="hl hl2"></span><span class="hl hl1"></span>' % (' kucuk' if kucuk else '') + IKON +
             '<span class="kad"><i></i><i></i><i></i><b></b></span></span>')
 
 
@@ -44,14 +52,14 @@ def ui_serit(boy):  # boy: 'b' büyük (46 px disk) | 'k' küçük (38 px disk)
 
 def ui_bt(kucuk=False):
     if kucuk:
-        return '<span class="ui ui-bt kucuk" aria-hidden="true">' + LAMBA + '<span class="eq"><i></i><i></i><i></i><i></i></span></span>'
-    return ('<span class="ui ui-bt" aria-hidden="true"><span class="bt-sira">' + TEL + '<span class="akis"><i></i><i></i><i></i></span>' + LAMBA +
+        return '<span class="ui ui-bt kucuk" aria-hidden="true">' + IKON + '<span class="eq"><i></i><i></i><i></i><i></i></span></span>'
+    return ('<span class="ui ui-bt" aria-hidden="true"><span class="bt-sira">' + TEL + '<span class="akis"><i></i><i></i><i></i></span>' + IKON +
             '<span class="eq"><i></i><i></i><i></i><i></i></span></span><span class="bt-alt"><span class="durum"><i>Bağlanıyor</i><i>Ninni çalıyor</i></span>'
             '<span class="cal"><b></b></span></span></span>')
 
 
 def ui_sarj(kucuk=False):
-    return ('<span class="ui ui-sarj%s" aria-hidden="true"><span class="sarj-sira">' % (' kucuk' if kucuk else '') + LAMBA +
+    return ('<span class="ui ui-sarj%s" aria-hidden="true"><span class="sarj-sira">' % (' kucuk' if kucuk else '') + IKON +
             '<span class="pil"><i></i><i></i><i></i><i></i></span><span class="fis">' + FIS + '</span></span>' +
             ('' if kucuk else '<span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span>') + '</span>')
 
@@ -64,17 +72,7 @@ OZ = [
     ('sarj', 'Şarjlı, kablosuz', 'Her odaya taşı.', 'Her odaya taşı', ui_sarj),
 ]
 
-CSS = r""".pg{background:#F6F1E9;font-size:15px}
-.sec{padding:0 16px 40px}
-.oneri{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding-top:16px;border-top:1px dashed #D6CAB6;font-size:12px;font-weight:700;color:#A05A1C}
-.oneri-alt{margin:0 0 16px;font-size:13px;color:#5C6078;text-wrap:balance}
-.ust-yazi{margin:0;font-size:13px;font-weight:700;color:#A05A1C}
-.pg button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.pg :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
-img{display:block}
-u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
-
-/* Ortak mini arayüz (.sh-ek: sayfadaki .ek ile çakışmasın). Zemin ton #F1E8DA, çizgi lacivert 1,5 px, ışık amber */
+MINI_CSS = r"""/* Ortak mini arayüz (Sihirli özellikler, luna_e.py da kullanır). (.sh-ek: sayfadaki .ek ile çakışmasın). Zemin ton #F1E8DA, çizgi lacivert 1,5 px, ışık amber */
 .sh-ek{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px;background:#F1E8DA}
 .ui{position:relative;display:block;flex:none}
 .lmb{width:30px;height:30px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -107,12 +105,12 @@ u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
 .ui-isik.kucuk .kad{right:auto;left:12px;top:56px}
 
 /* Disk şeridi: her 2 sn bir disk kayar (0,6 sn), kayarken 90° yuvarlanır, durunca sabit; ortadaki pencerede, komşular .85 ve soluk */
-.ui-serit{--d:46px;--adim:50px;--pad:65px;width:176px;height:78px}
+.ui-serit{--d:46px;--adim:50px;--pad:65px;width:176px;height:78px;overflow:hidden}
 .ui-serit.serit-k{--d:38px;--adim:42px;--pad:60px;width:158px;height:62px}
 .pencere{position:absolute;left:calc(var(--pad) - 4px);top:0;width:calc(var(--d) + 8px);height:calc(var(--d) + 8px);border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9;animation:pen 8s EASE infinite;animation-delay:var(--gec,0s)}
 .tren{position:absolute;left:0;top:4px;display:flex;gap:calc(var(--adim) - var(--d));padding-left:var(--pad);animation:tren 8s EASE infinite;animation-delay:var(--gec,0s)}
 .sd{flex:none;width:var(--d);height:var(--d);transform:scale(.85);opacity:.5}
-.sd img{width:var(--d);height:var(--d);border-radius:50%;object-fit:cover;animation:yuvar 8s EASE infinite;animation-delay:var(--gec,0s)}
+.sd img{display:block;width:var(--d);height:var(--d);border-radius:50%;object-fit:cover;animation:yuvar 8s EASE infinite;animation-delay:var(--gec,0s)}
 .sd:nth-child(1){transform:none;opacity:1}
 .sd:nth-child(1){animation:sd1 8s EASE infinite}.sd:nth-child(2){animation:sd2 8s EASE infinite}.sd:nth-child(3){animation:sd3 8s EASE infinite}.sd:nth-child(4){animation:sd4 8s EASE infinite}.sd:nth-child(5){animation:sd5 8s EASE infinite}
 .sd{animation-delay:var(--gec,0s)!important}
@@ -183,6 +181,19 @@ u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
 .a-kart .sh-ek{height:72px}
 .a-kart b{display:block;padding:0 6px;font-size:15px;line-height:1.25}
 .a-kart span.t{display:block;margin-top:2px;padding:0 6px;font-size:14px;line-height:1.4;color:#5C6078}
+.a-kart u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
+
+""".replace('EASE', E)
+
+PANO_CSS = r""".pg{background:#F6F1E9;font-size:15px}
+.sec{padding:0 16px 40px}
+.oneri{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding-top:16px;border-top:1px dashed #D6CAB6;font-size:12px;font-weight:700;color:#A05A1C}
+.oneri-alt{margin:0 0 16px;font-size:13px;color:#5C6078;text-wrap:balance}
+.ust-yazi{margin:0;font-size:13px;font-weight:700;color:#A05A1C}
+.pg button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pg :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+img{display:block}
+u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
 
 /* C · Bento: geniş disk kartı + üç küçük kare (gösterge lambanın altında, başlığın altında tek satır) */
 .c-genis{display:grid;grid-template-columns:minmax(0,1fr) 176px;align-items:center;gap:12px;margin-top:12px;padding:10px 10px 10px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142;text-decoration:none}
@@ -213,6 +224,8 @@ u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
 .b-sat.on.dur .cz{animation:none;transform:none}
 @keyframes bcz{to{transform:scaleX(1)}}
 """.replace('EASE', E)
+CSS = PANO_CSS + MINI_CSS
+
 
 
 def kart_a(k):
@@ -268,7 +281,7 @@ JS = """class Component extends DCLogic {
   }
   componentWillUnmount() { clearInterval(this.iv); }
   renderVals() {
-    var self = this, S = this.state, o = {};
+    var self = this, S = this.state, o = { sihKiz: true, sihErkek: false };
     for (var i = 0; i < 4; i++) (function (i) { var on = i === S.b;
       o['b' + i] = 'b-sahne' + (on ? ' on' : ''); o['bg' + i] = on ? 'false' : 'true';
       o['bs' + i] = 'b-sat' + (on ? ' on' : '') + (on && S.dur ? ' dur' : ''); o['bp' + i] = on ? 'true' : 'false';
@@ -277,5 +290,6 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · Sihirli özellikler yönleri', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('S2_H', 1500)), js=JS))
-print('yazıldı:', os.path.abspath(OUT))
+if __name__ == '__main__':
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · Sihirli özellikler yönleri', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('S2_H', 1705)), js=JS))
+    print('yazıldı:', os.path.abspath(OUT))

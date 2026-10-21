@@ -6,6 +6,7 @@
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
+import sihirli2_varyant as S2
 
 
 
@@ -28,8 +29,11 @@ def muhur():
 
 
 # Teslim çizgisi: hilal (bugün) → yarım ay (kargoda) → dolunay (kapında). Kaydırınca sırayla dolar.
-YOL = ''.join('<li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="%s"></path></svg><b>%s</b><span>%s</span></li>' % (ay(f), b, t)
-              for f, b, t in [(.22, 'Bugün', 'Sipariş verildi'), (.5, '{{kargo}}', 'Kargoda'), (1, '{{teslim}}', 'Kapında')])
+YOL = ''.join('<li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="%s"></path></svg>%s<b>%s</b><span>%s</span></li>' % (ay(f), ek, b, t)
+              for f, b, t, ek in [(.22, 'Bugün', 'Sipariş verildi', ''), (.5, '{{kargo}}', 'Kargoda', ''),
+                                  (1, '{{teslim}}', 'Kapında', '<span class="yol-lamba" aria-hidden="true">' + S2.IKON + '</span>')])
+# Paket kutusu (teslim çizelgesinde ekranda akar)
+KUTU = '<svg class="kutu" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 5.2L8 2.5l5.5 2.7v5.6L8 13.5l-5.5-2.7z"></path><path d="M2.5 5.2L8 7.9l5.5-2.7M8 7.9v5.6"></path></svg>'
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE.dc.html')
 
 CSS = r""".pg{background:#F6F1E9}
@@ -112,32 +116,13 @@ CSS = r""".pg{background:#F6F1E9}
 .cip:active{transform:scale(.985)}
 .kesim{position:absolute;left:50%;bottom:4px;height:44px;width:auto;max-width:46px;transform:translateX(-50%)}
 .msub{font-size:12px;color:#5C6078;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Sihirli Özellikler (Tur 7b, kullanıcı V1'i seçti): 2×2 beyaz kart, lacivert ikon kutusu + amber ikon.
-   Her kartta üst satır: solda ikon, sağda ürüne özgü küçük canlı gösterge; altında başlık ve tek cümle.
-   Döngüler yavaş, yalnız transform/opacity. Canlıda kart ekrana girince 150 ms arayla başlar (IntersectionObserver). */
-.sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.oz{position:relative;isolation:isolate;overflow:hidden;padding:14px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:#FFFDF9;border:1px solid #E3D8C7;color:#1A2142;text-decoration:none}
-.oz-ust{display:flex;align-items:center;justify-content:space-between;gap:8px;height:48px;margin-bottom:2px}
-.oz .ik{position:relative;width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center;background:#1A2142;color:#F2A65A}
-.oz .ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.oz .ik.yan::before{content:"";position:absolute;inset:-14px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.45),rgba(242,166,90,0) 66%);animation:nefes 4.5s ease-in-out infinite}
-.oz b{font-size:15px;font-weight:700;line-height:1.25}
-.oz .t{font-size:14px;line-height:1.4;color:#5C6078;text-wrap:balance}
-.oz .t u{color:#A05A1C;text-underline-offset:3px;white-space:nowrap}
-@keyframes nefes{0%,100%{transform:scale(.8);opacity:.45}50%{transform:scale(1.12);opacity:1}}
-@keyframes yel{from{transform:rotate(0)}to{transform:rotate(var(--r))}}
-.yelpaze{position:relative;width:72px;height:40px}
-.yelpaze img{position:absolute;top:2px;width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #FFFDF9;box-shadow:0 0 0 1px #E3D8C7;transform-origin:50% 130%;animation:yel 5s ease-in-out infinite alternate}
-.yelpaze img:nth-child(1){right:38px;--r:-12deg}.yelpaze img:nth-child(2){right:19px;--r:0deg;animation-delay:-1.6s}.yelpaze img:nth-child(3){right:0;--r:12deg;animation-delay:-3.2s}
-@keyframes ses{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
-.dalga{display:flex;align-items:flex-end;gap:4px;height:26px}
-.dalga i{display:block;width:4px;height:26px;border-radius:2px;background:#F2A65A;transform-origin:50% 100%;animation:ses 2.4s ease-in-out infinite}
-.dalga i:nth-child(2){animation-delay:-.4s}.dalga i:nth-child(3){animation-delay:-.8s}.dalga i:nth-child(4){animation-delay:-1.2s}.dalga i:nth-child(5){animation-delay:-1.6s}
-/* Pil: dolar, dolu bekler, opacity ile söner; başa sıçrama görünmez */
-@keyframes sarj{0%{transform:scaleX(.15);opacity:0}8%{opacity:1}70%{transform:scaleX(1)}90%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
-.pil{position:relative;width:46px;height:22px;border:1.6px solid #1A2142;border-radius:6px;padding:2px}
-.pil::after{content:"";position:absolute;right:-5px;top:6px;width:3px;height:7px;border-radius:0 2px 2px 0;background:#1A2142}
-.pil i{display:block;width:100%;height:100%;border-radius:3px;background:#F2A65A;transform-origin:0 50%;animation:sarj 3.8s ease-in-out infinite}
+/* Sihirli Özellikler · Canlı kartlar (21 Eki; kullanıcı: "emoji benefit kısmını daha kurumsal yapsak, UI'lerle doldursak;
+   dönen diskler sırayla masal diskini gidip gelse gibi tatlı ufak sekanslar"; eleştirmen 7/10, kullanıcı seçti).
+   2×2 beyaz kart kalır; her kartın üstünde ton ekran (#F1E8DA) ve sekans: disk şeridi (kayarken yuvarlanır, durunca sabit),
+   3 parlaklık, Bluetooth bağlan → çal, pil dolar ve fiş çıkar (lamba şarjda sönük). Kartlar 0,6 sn arayla başlar.
+   Mini arayüz CSS'i sihirli2_varyant.MINI_CSS (pano ile aynı). Lamba ikonu modele bağlı (Kız atlıkarınca / Erkek robot). */
+.sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+""" + S2.MINI_CSS + r"""
 /* Paket (canlı sitedeki biçim) */
 /* Seçiciler (Tur 25, kullanıcı seçimi "Satır kartlar"): model, paket ve 2. lamba tek dil. Aynı kart (yüzey, 1,5px çizgi,
    20px köşe), aynı küçük görsel (açık ton zeminde stüdyo kesimi), aynı seçili durum: 2px lacivert çerçeve + amber dolunay noktası.
@@ -230,7 +215,24 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .yol.on .yol-akis i,.yol.on .yol-paket,.yol.on li:nth-child(3) .evre path,.yol.on li:nth-child(4) .evre path,.yol.on li:nth-child(4) .evre::after{animation-play-state:running}
 @media (prefers-reduced-motion:reduce){.yol-akis i,.yol .evre path,.yol li:nth-child(4) .evre::after{animation:none!important}.yol-paket{display:none}}
 .yol b{font-size:14px;font-weight:700}
-.yol span{font-size:13px;color:#5C6078}
+.yol>li>span{font-size:13px;color:#5C6078}
+/* Teslim çizelgesi · Canlı kartlar dili (21 Eki, kullanıcı Sihirli'nin dilini buraya da istedi): beyaz kart, ton ekran (#F1E8DA)
+   içinde hilal → yarım → dolunay; paket kutusu akar, Kapında'da kutu söner ve LunaDream lambası yanar. Tarihler ekranın altında. */
+.teslim{position:relative;margin-top:22px;padding:8px 8px 12px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7}
+.teslim::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:64px;border-radius:14px;background:#F1E8DA}
+.teslim .yol{margin:0;padding-top:18px}
+.teslim .yol::before{top:32px}
+.teslim .yol-akis{top:31.25px}
+.teslim .yol .evre{margin-bottom:24px;background:#F1E8DA}
+.teslim .yol .evre circle{fill:#F1E8DA}
+.teslim .yol-paket::before{display:none}
+.yol-paket .kutu{position:absolute;left:-8px;top:-8px;width:16px;height:16px;fill:#FFFDF9;stroke:#1A2142;stroke-width:1.3;stroke-linejoin:round}
+.yol-lamba{position:absolute;left:calc(50% + 17px);top:0;width:28px;height:28px;opacity:0;transform:translateY(4px)}
+.yol-lamba .lmb{width:28px;height:28px}
+.yol-lamba{animation:yk-lamba 8s cubic-bezier(.2,.7,.2,1) infinite both;animation-play-state:paused}
+.yol.on .yol-lamba{animation-play-state:running}
+@keyframes yk-lamba{0%,58%{opacity:0;transform:translateY(4px)}66%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@media (prefers-reduced-motion:reduce){.yol-lamba{animation:none!important;opacity:1;transform:none}}
 /* Fiyat düşüşü: 0–0,7 sn ₺1.999,00 büyük; 0,7 sn çizilir; 1,1 sn sağa kayıp küçülür ve söner, yerine soluk eski fiyat gelir;
    aynı anda indirimli fiyat 10px yukarıdan düşer; 1,6 sn rozet belirir. Yalnız transform/opacity, bir kez. */
 .fiyat-satir{position:relative;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:8px 0 0;min-height:28px;font-variant-numeric:tabular-nums}
@@ -426,13 +428,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span></p>
 """ + DUN_SATIR + """
 
-    <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). V1 Sade beyaz -->
+    <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). Canlı kartlar (21 Eki): her kartta küçük ekran ve sekans -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
-    <div class="sih">
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik yan"><svg viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5z"></path></svg></span></span><b>Mışıl mışıl uykular</b><span class="t">3 parlaklık ayarı.</span></div>
-      <a class="oz" href="#diskler"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span><span class="yelpaze"><img src="/_blob/a24f13e032569f76d64b9b0fbe8d74f7" alt=""><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><img src="/_blob/04ed9ce4ae8a36619975caa7d2de9ad8" alt=""></span></span><b>6 + 6 masal diski</b><span class="t">Altısı hediye. <u>Diskleri gör</u></span></a>
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"></path><circle cx="6.5" cy="17" r="2.5"></circle><circle cx="16.5" cy="15" r="2.5"></circle></svg></span><span class="dalga"><i></i><i></i><i></i><i></i><i></i></span></span><b>Bluetooth ninni</b><span class="t">Telefondan bağlan, çalsın.</span></div>
-      <div class="oz"><span class="oz-ust" aria-hidden="true"><span class="ik"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"></rect><path d="M22 11v2M6 10v4M10 10v4"></path></svg></span><span class="pil"><i></i></span></span><b>Kablosuz kullanım</b><span class="t">Şarjlı, her odaya taşı.</span></div>
+    <div class="sih">""" + ''.join(S2.kart_a(k) for k in S2.OZ) + """
     </div>
 
     <!-- Seçiciler (Tur 25, kullanıcı "Satır kartlar"ı seçti): model yan yana iki yarım kart, paket alt alta satır kart,
@@ -466,7 +464,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <!-- Shopify: Kapıda düğmesi yok, kapıda ödemeyi kullanıcı EasySell ile koyar; düğmesi bu yuvaya gelir -->
     <div class="ay-dis" data-ay-dis></div>
-    <ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"></span></span>""" + YOL + """</ol>
+    <div class="teslim"><ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket">""" + KUTU + """</span></span>""" + YOL + """</ol></div>
   </section>
 
   <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
@@ -733,7 +731,7 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq
@@ -749,5 +747,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6405)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6485)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

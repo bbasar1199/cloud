@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Premium fotoğraf seti hazırlığı (21 Ekim, en güncel)
+## Tema 1.0.8 · Sihirli özellikler canlı kartlar, teslim kartı (21 Ekim, en güncel)
+- Kullanıcı: "Emoji benefit kısmını vesaire biraz daha kurumsal yapsak ve UI'lerle doldursak; dönen diskler sırayla masal diskini gidip gelse gibi tatlı ufak sekanslar."
+- `sihirli2_varyant.py` → `canvas/LunaDreamE-Sihirli2.dc.html`: üç yön (Canlı kartlar 7, Bento 6, Özellik turu 4); eleştirmen düzeltmeleri işlendi (disk yalnız kayarken yuvarlanır; pil sekansı, lamba şarjda sönük; LunaDream ikonu; cümleler kısa). GIF'ler kullanıcıya gönderildi.
+- Kullanıcı: **Canlı kartlar** + aynı dil **teslim çizelgesine**.
+- `luna_e.py`: eski V1 kartları ve CSS'i gitti; `.sih` içinde `S2.kart_a` kartları, CSS `S2.MINI_CSS` (pano ile ortak; `sihirli2_varyant` yalnız doğrudan çalışınca dosya yazar). İkon `S2.IKON` (renderVals `sihKiz`/`sihErkek`). Teslim: `<div class="teslim">` içinde mevcut `.yol` (ay evreleri ve 8 sn döngü korunur), ton ekran, paket kutusu (`KUTU`), Kapında'da `.yol-lamba`.
+- Masaüstünde disk şeridi kendi genişliğinde kırpılır (`.ui-serit{overflow:hidden}`).
+- E_H=6485, S2_H=1705. Site testleri (Sihirli 4 ekran, teslim lambası, ikon modele bağlı dahil), tema benzetimi HEPSİ TAMAM; Theme Check yalnız RemoteAsset.
+
+## Premium fotoğraf seti hazırlığı (21 Ekim)
 - Kullanıcı: "Biraz daha kurumsal bir görüntü oluşturmanı istiyorum; ürünün premium fotoğrafları olmalı." Sonra: "ChatGPT'den yaptır."
 - Bu oturumda Flow da OpenAI anahtarı da yok (api.openai.com 401). Hazırlananlar:
   - `ogrenme/premium-fotograf-seti.md`: fotoğraf dili, 11 karelik çekim listesi, sayfadaki yerleri (galeri, model kartları, vitrin, Diskler).
