@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.7 · Bir gece kalktı, yerine Gece vitrini (21 Ekim, en güncel)
+## Premium fotoğraf seti hazırlığı (21 Ekim, en güncel)
+- Kullanıcı: "Biraz daha kurumsal bir görüntü oluşturmanı istiyorum; ürünün premium fotoğrafları olmalı." Sonra: "ChatGPT'den yaptır."
+- Bu oturumda Flow da OpenAI anahtarı da yok (api.openai.com 401). Hazırlananlar:
+  - `ogrenme/premium-fotograf-seti.md`: fotoğraf dili, 11 karelik çekim listesi, sayfadaki yerleri (galeri, model kartları, vitrin, Diskler).
+  - `ogrenme/chatgpt-istemleri-lunadream.txt`: kare başına yapıştırılacak istemler.
+  - Referans paketi `lunadream-referans.zip` (canvas/ dosyalarından, 01-13).
+- Kareler gelince: galeri yazılı afişler yerine 1-7 + oda kareleri; model kartları 1 ve 3; vitrin 8-11; Diskler 7. Gelmeyen kare için bugünkü görsel kalır.
+
+## Tema 1.0.7 · Bir gece kalktı, yerine Gece vitrini (21 Ekim)
 - Kullanıcı: "Bir gece, beş an bir şey hissettirmiyor"; onun yerine çocukların odalarında mutlu hâlini gösteren görseller önerdi, benzer markaları araştırmamı istedi.
 - Araştırma (`ogrenme/rakip-sayfalar.md`, `ogrenme/rakip-derleme.jpg`): saat saat ritüel bölümü hiçbir markada yok; mutlu çocuk karesi tek başına değil, çocuk + ürün + ışığı aynı karede (Tonies, Moonlite, Cloud b); gerçek müşteri içeriği ayrı şeritte.
 - Eleştirmen: Bir gece kalksın; "Odası böyle görünecek" 4 karta çıksın ve onun yerine taşınsın (8/10). Kullanıcı: "Odası böyle görünecek'i yapmıştık zaten" → yeni bölüm değil, aynı bölüm büyüdü; sayfada tek Odası var. Kullanıcı: "Profesyonel bir görüntü istiyorum."

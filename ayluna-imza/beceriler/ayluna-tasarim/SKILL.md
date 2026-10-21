@@ -218,6 +218,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Ürün asla sıfırdan üretilmez. Gerçek fotoğraf referans alınır, sahne ve ışık değişir.
 - Araç: Google Flow (Nano Banana Pro). İş akışı DEVAM.md'de.
 - **Higgsfield'da üretim, düzenleme ya da büyütme yapılmaz, kredi harcanmaz** (kullanıcı, 18 Eki: "görselleri Flow'dan üreteceksin, Higgsfield'dan üretme"). Flow'a erişim yoksa başka araca geçilmez: istem + referans hazırlanır, kullanıcıya sorulur.
+- **ChatGPT de kullanılır** (kullanıcı, 21 Eki: "ChatGPT'den yaptır"). Oturumda `OPENAI_API_KEY` yoksa kopyala-yapıştır istem + numaralı referans paketi hazırlanır; anahtar istenmez.
+- **Kurumsal fotoğraf dili:** iki fon (sıcak krem stüdyo, derin lacivert gece), yumuşak ışık, 85 mm, yazısız; mor-neon, rozet, yazılı afiş yok. Çekim listesi `ogrenme/premium-fotograf-seti.md`.
 - Görselde yazı üretilmez; metin HTML'de eklenir.
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 

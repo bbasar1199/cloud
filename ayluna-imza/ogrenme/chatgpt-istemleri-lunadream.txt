@@ -1,0 +1,69 @@
+LunaDream · premium fotoğraf seti · ChatGPT istemleri (21 Eki)
+=================================================================
+Nasıl kullanılır:
+- Her kare için ChatGPT'de YENİ bir sohbet aç.
+- "Ekler" satırındaki dosyaları referans paketinden (lunadream-referans.zip) yükle.
+- İstemi olduğu gibi yapıştır.
+- Çıkan görseli "Dosya" adıyla kaydet ve bana gönder.
+
+Her kareyi büyüt ve bak:
+- Lamba referanstakinden farklıysa yeniden ürettir. Bakılacaklar: tavşan sayısı, kubbe kıvrımı, altın şeritler, robotun yüzü ve tekerlekleri.
+- Elde ya da parmakta bozukluk, görselde yazı varsa da yeniden ürettir.
+- Düzeltme için aynı sohbete şunu yaz: "Keep the lamp exactly like the reference photo; change only the background."
+
+Ortak dil: iki fon var (sıcak krem stüdyo ya da derin lacivert gece), ışık yumuşak; mor ya da neon renk, yazı, logo, rozet yok.
+
+
+1) Dosya: p-kiz-gunduz.png   ·   Ekler: 01-m-kiz.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Premium studio product photograph of the exact night lamp in the attached photo. Keep the product identical: same pink scalloped dome, gold trim, carousel bunnies, base and feet, same proportions and colors. Place it centered on a seamless warm cream paper backdrop (color close to #F1E8DA), three-quarter view, camera slightly above eye level, 85mm lens look. Soft window light from the left, soft natural shadow to the right, gentle background falloff, sharp product. Minimal, calm, high-end catalog quality like an Apple or Hatch product page. Lamp switched off. No text, no logo, no props. Square image.
+
+
+2) Dosya: p-kiz-gece.png   ·   Ekler: 01-m-kiz.jpg, 05-disk-ay-yildiz.jpg, 03-c-kiz-gece.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Premium product photograph of the exact night lamp in the first attached photo (keep shape, colors, bunnies and gold trim identical), switched on and glowing warm amber, standing on a light oak surface in front of a deep navy seamless backdrop (close to #141A36). The moon-and-stars pattern from the second attached disc is softly projected onto the upper backdrop at realistic, modest brightness (use the third photo only as a reference for the light mood). The lamp is the only light source. 85mm look, sharp product, calm and elegant. No purple, no neon, no text, no logo. Square image.
+
+
+3) Dosya: p-erkek-gunduz.png   ·   Ekler: 02-m-erkek.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Premium studio product photograph of the exact robot-shaped night lamp in the attached photo. Keep the product identical: white dome head, black face screen with yellow eyes, antenna, black tracks with yellow wheels, yellow side plate, same proportions and colors. Centered on a seamless warm cream paper backdrop (close to #F1E8DA), three-quarter view, slightly above eye level, 85mm lens look, soft window light from the left, soft shadow to the right, sharp product. Lamp switched off. High-end catalog quality. No text added, no logo, no props. Square image.
+
+
+4) Dosya: p-erkek-gece.png   ·   Ekler: 02-m-erkek.jpg, 06-disk-uzay.jpg, 04-c-erkek-gece.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Premium product photograph of the exact robot night lamp in the first attached photo (keep every detail identical), switched on with its dome glowing warm, standing on a light oak surface in front of a deep navy seamless backdrop (close to #141A36). The space pattern from the second attached disc (planets and stars) is softly projected onto the upper backdrop at realistic, modest brightness (third photo only for light mood). The lamp is the only light source. 85mm look, sharp, calm, elegant. No purple, no neon, no text added. Square image.
+
+
+5) Dosya: p-kiz-detay.png   ·   Ekler: 01-m-kiz.jpg, 07-c-elde.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Macro product photograph of the lamp in the attached photos: close-up of the glowing dome and the carousel bunnies inside, shallow depth of field, warm amber light, dark navy background. Keep the product details identical to the reference. Premium, calm. No text. Square image.
+
+
+6) Dosya: p-elde.png   ·   Ekler: 07-c-elde.jpg, 01-m-kiz.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Photograph of two adult hands holding the exact glowing pink bunny night lamp from the attached photos at chest height, in front of soft cream linen fabric; no face visible. The lamp's size relative to the hands must match the first reference photo. The lamp is switched on, warm light. Natural, flawless hands and fingers. Premium, calm, soft light. No text. Square image.
+
+
+7) Dosya: p-diskler.png   ·   Ekler: 01-m-kiz.jpg, 08-disk-masal.jpg, 09-disk-okyanus.jpg, 10-disk-sato.jpg, 11-disk-deniz-kizi.jpg, 12-disk-hayvanlar.jpg, 05-disk-ay-yildiz.jpg   ·   Oran: kare
+---------------------------------------------------------------------
+Top-down flat lay on a warm cream surface: the round story discs from the attached images fanned out in a neat arc (keep each disc's artwork exactly as in the reference), and next to them the switched-off pink bunny night lamp from the first photo (identical to the reference). Soft daylight, minimal, catalog layout, plenty of empty space. No text added, no logo. Square image.
+
+
+8) Dosya: lo-kiz-masal.png   ·   Ekler: 01-m-kiz.jpg, 05-disk-ay-yildiz.jpg, 03-c-kiz-gece.jpg   ·   Oran: dikey (2:3)
+---------------------------------------------------------------------
+Editorial lifestyle photograph, night, a child's bedroom in a modern Turkish home (sheer tulle curtain, light oak nightstand, cotton bedding, simple painted wall; not a styled Scandinavian showroom). The exact pink bunny night lamp from the first photo (identical to the reference) glows warm on the nightstand. On the ceiling and upper wall, the moon-and-stars pattern from the attached disc, soft and at realistic brightness, only on the ceiling area (not covering the whole room). A girl about 4-5 years old lies in bed on her back, seen from the side, smiling up at the ceiling; her face is not a close-up. Warm amber and navy tones, calm, premium. No text. Portrait image.
+
+
+9) Dosya: lo-ninni.png   ·   Ekler: 01-m-kiz.jpg, 03-c-kiz-gece.jpg   ·   Oran: dikey (2:3)
+---------------------------------------------------------------------
+Editorial lifestyle photograph, evening, a dim child's bedroom in a modern Turkish home. A mother sits on the edge of the bed holding a phone (screen not visible), face in profile. A small child wrapped in a blanket is seen from behind, turned toward her. The exact pink bunny night lamp from the first photo (identical) glows warm on the nightstand; faint stars on the ceiling. Sheer tulle curtain, cotton bedding. Warm, intimate, calm, premium. No text. Portrait image.
+
+
+10) Dosya: lo-erkek-uzay.png   ·   Ekler: 02-m-erkek.jpg, 06-disk-uzay.jpg, 04-c-erkek-gece.jpg   ·   Oran: dikey (2:3)
+---------------------------------------------------------------------
+Editorial lifestyle photograph, night, a boy's bedroom in a modern Turkish home. The exact robot night lamp from the first photo (identical to the reference) glows on the nightstand. The space pattern from the attached disc (planets, stars) is softly projected on the ceiling at realistic brightness, only on the ceiling. A boy about 5 years old in pajamas sits on the bed with his back to the camera, pointing at a planet on the ceiling. Navy and warm yellow tones, cinematic but calm, premium. No text. Portrait image.
+
+
+11) Dosya: lo-disk-sec.png   ·   Ekler: 01-m-kiz.jpg, 13-c-an-disk.jpg, 08-disk-masal.jpg, 09-disk-okyanus.jpg, 10-disk-sato.jpg   ·   Oran: dikey (2:3)
+---------------------------------------------------------------------
+Close-up lifestyle photograph, evening, on a bed with cotton bedding: a child's small hands holding one of the round story discs from the attached images (artwork identical), other discs spread nearby. In the soft-focus background, the glowing pink bunny night lamp from the first photo (identical). No face, only hands. Warm amber light, shallow depth of field, premium, calm. No text. Portrait image.
