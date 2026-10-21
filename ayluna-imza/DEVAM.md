@@ -475,7 +475,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.6 · mesajlar bütün ürün sayfalarında (21 Ekim, en güncel)
+## Tema 1.0.7 · Bir gece kalktı, yerine Gece vitrini (21 Ekim, en güncel)
+- Kullanıcı: "Bir gece, beş an bir şey hissettirmiyor"; onun yerine çocukların odalarında mutlu hâlini gösteren görseller önerdi, benzer markaları araştırmamı istedi.
+- Araştırma (`ogrenme/rakip-sayfalar.md`, `ogrenme/rakip-derleme.jpg`): saat saat ritüel bölümü hiçbir markada yok; mutlu çocuk karesi tek başına değil, çocuk + ürün + ışığı aynı karede (Tonies, Moonlite, Cloud b); gerçek müşteri içeriği ayrı şeritte.
+- Eleştirmen: Bir gece kalksın; "Odası böyle görünecek" 4 karta çıksın ve onun yerine taşınsın (8/10). Kullanıcı: "Odası böyle görünecek'i yapmıştık zaten" → yeni bölüm değil, aynı bölüm büyüdü; sayfada tek Odası var. Kullanıcı: "Profesyonel bir görüntü istiyorum."
+- Dört arayüz denendi (`canvas/LunaDreamE-Oda2.dc.html`, `luna_e_oda2.py`): Gece vitrini 8, Kemerli pencere 6,5, Hikâye 6 (USB'nin tekrarı), Deste 4. Uygulanan: **Gece vitrini**.
+- `luna_e.py`: Bir gece kadranının bütün CSS/HTML/JS'i (KAD_*, IZ_*, geceKaydir, geceTuval, moments) ve iki posterli eski #odalar silindi. Yeni `#odalar.vitrin` Videolar ile "Aileler ne diyor?" arasında: lacivert panel (28 px), kart 280×372, ortadaki kart kaydırmayla büyür ve aydınlanır (`animation-timeline: view(inline)`, yoksa sınıf geçişi), yazı altta 280 ms'de değişir, 4 ay gezgini (48 px). Çip fotoğrafa binmez, sayaç yok. Her kartta eylem: Kız modelini seç / Modelini seç / Erkek modelini seç / Diskleri gör.
+- Masaüstü (`ayluna.css`): kenardan kenara bant ve şerit, ortadaki kart 360×480, yazı ve aylar altta ortada.
+- Görseller yer tutucu: çocuklu 4 kare Flow'da üretilecek (`ogrenme/flow-istemleri-lunadream-oda.md`; tavan deseni gerçek diskten, yüz yakın plan değil, Türk evi, "müşteri" etiketi yok).
+- Sayfa yaklaşık 2.500 px kısaldı (E_H=6405). Site testleri (vitrin denetimleri dahil), tema benzetimi HEPSİ TAMAM; Theme Check yalnız RemoteAsset uyarısı.
+
+## Tema 1.0.6 · mesajlar bütün ürün sayfalarında (21 Ekim)
 - Kullanıcı: "Şu WhatsApp konuşmaları için olan kısım eksik, bir tek LunaDream'de var."
 - `ortak.py`: `mesaj_bolum(baslik)`, `MESAJ_CSS`, `mesaj_js(js)` (renderVals'a mesaj verisi ve büyük görünüm durumu; `return {` ve `return Object.assign(R, {` ikisini de tanır). Büyük görünüm sınıfları `.mbuyuk`/`.mb-x` (ozel_sayfa'daki `.buyuk` ile çakışmasın).
 - Galaxy USB, AyFeneri, Galaksi Night: yorumların altında, panonun kendi başlık biçimiyle. 13 sade ürün: "Alanlar ne diyor?" bloğunun altında. Hepsinde "LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler." Masaüstünde tek satır kayar (400 px).

@@ -237,7 +237,16 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   await pg.evaluate(() => Ayluna.kapidaKapat());
 
   await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
-  not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0 && await pg.locator('.g-liste').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü listesi yok');
+  not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü kopyası yok');
+  // Odası böyle görünecek · Gece vitrini (21 Eki): Bir gece ve iki posterli eski Odası yok; 4 oda, aya dokununca oda ortaya kayar ve yazı değişir
+  not(await pg.locator('#bir-gece').count() === 0 && await pg.locator('.poster').count() === 0 && await pg.locator('#odalar.vitrin .vt-kart').count() === 4 && await pg.locator('#odalar').count() === 1, 'telefon: Bir gece yok, tek Odası bölümü (Gece vitrini, 4 oda)');
+  { const sira = await pg.evaluate(() => ['videolar', 'odalar', 'yorumlar', 'diskler'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+    not(sira, 'telefon: Odası Videolar ile Aileler ne diyor arasında'); }
+  await pg.locator('#odalar').scrollIntoViewIfNeeded(); await pg.locator('.vt-ay').nth(2).click(); await pg.waitForTimeout(900);
+  { const r = await pg.evaluate(() => { const el = document.querySelector('.vt-serit'), c = el.children[2], on = document.querySelector('.vt-m.on');
+      return { orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: on && on.textContent, gizli: document.querySelectorAll('.vt-m[aria-hidden=true]').length }; });
+    not(r.orta < 4 && /Tavanda uzay/.test(r.yazi) && r.gizli === 3, `telefon vitrin: 3. ay → Tavanda uzay ortada (${Math.round(r.orta)} px), yazı değişti, öbür yazılar gizli`); }
+  { const sw = await pg.evaluate(() => document.documentElement.scrollWidth); not(sw === 390, 'telefon LunaDream: yatay taşma yok (' + sw + ')'); }
 
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
@@ -264,12 +273,13 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
   await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
   not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
-  // Bir gece masaüstünde: liste anı seçer, sayfa kaydırması seçimi değiştirmez; özellik kartları sol sütunda tek kopya
+  // Masaüstü: özellik kartları sol sütunda tek kopya; Gece vitrini kenardan kenara bant ve şerit, yazı altta; 4. ay → 4. oda ortada
   await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.waitForTimeout(800);
   not(await mp.locator('.sol-oz .sih').count() === 1 && await mp.locator('.sih').count() === 1, 'masaüstü: Sihirli Özellikler galerinin altında, tek kopya');
-  await mp.locator('#bir-gece .g-li').nth(3).click(); await mp.waitForTimeout(400);
-  await mp.evaluate(() => window.scrollBy(0, 400)); await mp.waitForTimeout(500);
-  not(await mp.locator('#bir-gece .g-li.on').textContent().then(t => t.includes('21:00')) && await mp.locator('.gece-cerceve.an3').count() === 1, 'masaüstü Bir gece: listeden 21:00 seçildi, kaydırınca değişmedi');
+  await mp.locator('#odalar').scrollIntoViewIfNeeded(); await mp.locator('.vt-ay').nth(3).click(); await mp.waitForTimeout(900);
+  { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
+      return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
+    not(r.gen === 1440 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin: bant ${r.gen}, şerit kenardan kenara ve yazı altta ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

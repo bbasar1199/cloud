@@ -45,7 +45,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - sosyal kanıt
 - Alışılmış satış kalıpları (sayaç, stok, "dün satılan") gerçek veriye bağlanır.
 - **Fayda:** durağan emoji ya da ikon listesi yok. Yerine animasyonlu "Sihirli Özellikler" geliyor.
-- **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → LunaDream + puan (aynı satır) → fiyat + Stokta → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Bir gece → Yorum duvarı → Diskler → Odası böyle görünecek → İade → SSS (ilk soru: kutudan ne çıkıyor).
+- **Sayfa sırası (LunaDream):** sahne galeri (logo fotoğrafın üstünde) → LunaDream + puan (aynı satır) → fiyat + Stokta → kampanya sayacı → Sihirli Özellikler → Model (Kız tavşanlı ninnili / Erkek robot ninnili) → Paket → stok ve "dün X aile" satırları → iki buton → teslim çizelgesi → Videolar → Odası böyle görünecek (Gece vitrini, 4 oda) → Yorum duvarı → Diskler → İade → SSS (ilk soru: kutudan ne çıkıyor).
 - **Yazı ölçeği v3 (kesin):** ürün adı 28 · bölüm başlığı 22 · büyük rakam 32 · paket adı 17 / fiyatı 18 · fiyat 20 · gövde 15 · açıklama 14 · not 13 · etiket 12 · buton 16/14. Ara boyut yok. Kullanıcı büyük ve düzensiz yazıyı iki kez düzeltti.
 - **Az yazı, iç içe değil:** başlığı olan bölümde üst etiket yok; tek cümle açıklama; kart içinde kart yok; gölge yok.
 - **Model ve 2'li paket:** model kartı yalnız Kız / Erkek. 2 Adet (varsayılan) seçilince paketin altında küçük seçim: "1. lamba [Kız/Erkek] · 2. lamba [Kız/Erkek]". Tur 25'ten beri: model kartı = 1. lamba; 2. lamba, 2 Adet kartının içinde çiple seçilir (hap segment yok).
@@ -87,7 +87,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **Yeni ürün sayfasından önce canlı sayfa telefonda incelenir;** satan kalıplar (yaşam fotoğrafları, kare galeri, "Çok al az öde", büyük butonlar) korunur, çelişkili sayı ve sağlık iddiası alınmaz.
 - **Bütünlük (18 Eki, kullanıcı: "her şey çok yabancı duruyor, bir bütün ve uyum yakala"):**
   - Yeni deneme, seçilen yönün (B+) dilinden çıkmaz: Young Serif + Onest; krem, lacivert ve amber; Sihirli V1; canlı sitedeki paket ve iki buton.
-  - Yenilik, bölüm içinde tek bir parça olarak denenir; örnek: Bir gece kadranı. Yazı tipini ve renkleri değiştiren turlar (D; Tur 20'deki E) "yabancı" bulundu.
+  - Yenilik, bölüm içinde tek bir parça olarak denenir; örnek: Bir gece kadranı (21 Eki'de kalktı: his vermedi). Yazı tipini ve renkleri değiştiren turlar (D; Tur 20'deki E) "yabancı" bulundu.
   - Sipariş fişi istenmiyor.
   - **Ay evresi dili** (18 Eki, kullanıcı: "yarım ay, tam ay olma efektini kullanmaya devam et"): hilal → yarım ay → dolunay, markanın motifi. Teslim çizgisinde (Bugün / Kargoda / Kapında, kaydırınca sırayla dolar) ve 30 gün mühründe (halkada 8 evre) kullanılır.
   - **Renk disiplini** (kullanıcı: "renkler birbirine giriyor, büyük marka hissi yok"):
@@ -106,11 +106,11 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - **Kesimler saydam kalır:** arka planı temizlenmiş görsel hiçbir çıktıda JPEG'e çevrilmez (saydamlık siyah olur); sitede WebP, Shopify'da PNG/WebP. Teslimden önce gerçek çıktıda seçim kartlarına bakılır.
   - **Fiyat düşüşü** (kullanıcı isteği): açılışta bir kez ₺1.999,00 → çizilir → indirimli fiyat yukarıdan düşer → rozet. Sayan rakam kuralının tek istisnasıdır.
   - **Seçiciler = satır kartlar** (Tur 25, kullanıcı seçimi): model yan yana iki yarım kart; paket alt alta satır kart (görsel, ad, "%15 indirim" / "₺649,99 kazanç", fiyat, eski fiyat / "tanesi", dolunay noktası, lacivert "En avantajlı" kurdelesi); 2 Adet açılınca kartın içinde "2. lamba" çipleri; altta tek hediye şeridi "Her kutuda +6 hediye masal diski". Kemerli gece penceresi ve hap segment kullanılmaz.
-  - **Ay evresi hareketi:** Bir gece'de ay her anda biraz daha dolar. Kargo takibi "Sipariş verildi"den başlar, sırayla dolar; 8 sn'lik sakin döngü, ekrana girene kadar durur. Tek seferlik animasyon kullanılmaz: tuvalde bakan olmadan biter, "çalışmıyor" sanılır.
+  - **Ay evresi hareketi:** Odası vitrininde aylar kart kart dolar (hilal → dolunay). Kargo takibi "Sipariş verildi"den başlar, sırayla dolar; 8 sn'lik sakin döngü, ekrana girene kadar durur. Tek seferlik animasyon kullanılmaz: tuvalde bakan olmadan biter, "çalışmıyor" sanılır.
   - **Buton altında not yazılmaz.** Kapıda butonunda fiyat da yazmaz (Tur 25). ₺80 kapıda ödeme ücreti formun özetinde ve SSS'de yazar (mevzuat: sipariş onayından önce).
   - Fiyatın altında "Ücretsiz kargo · 30 gün iade · Güvenli ödeme" gibi güven satırı yok (kullanıcı: "çok kötü duruyor").
   - Hediye diski "her kutuda +6" diye yazılır; çıplak "12 disk" yazılmaz.
-  - **Yapışkan öğe** (Bir gece paneli, satın al çubuğu): hiçbir atasında `overflow:hidden` olmaz; taşma `overflow:clip` ile kesilir. Kaydırmalı bölüm telefon boyunda kaydırılarak denetlenir (tuval boyu hatayı göstermez). Panel ekranda ortalanmış kart olarak yapışır.
+  - **Yapışkan öğe** (satın al çubuğu): hiçbir atasında `overflow:hidden` olmaz; taşma `overflow:clip` ile kesilir. Kaydırmalı bölüm telefon boyunda kaydırılarak denetlenir (tuval boyu hatayı göstermez). Panel ekranda ortalanmış kart olarak yapışır.
   - **Kaydırmaya bağlı hareket tuvalde de çalışmalı:** tuvalde pano kaymaz, tuval kayar. Sayfa kaydırmasının yanında tuvalin görünür alanı da izlenir (görünmez işaretler + IntersectionObserver, rootMargin'siz). Pano `expand: "fill"`. Sınama: `araclar/kaydirma-testi.js`.
   - **Puan ürün adının yanında** (Tur 25): solda ad, sağda yıldızlar + ortalama, altında "N yorum"; dokununca yorumlara iner. "Stokta" fiyat satırının sağ ucunda.
   - **Odası böyle görünecek** (Tur 26, "Kutudan ne çıkıyor"un yerine): iki oda posteri yan yana kayar; fotoğraf üstte, yazı altında lacivert bantta; yazı ürünün üstüne binmez; "… modelini seç" modeli seçer; altında temsilî notu. Kutu içeriği SSS'de.
@@ -157,7 +157,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
    - ince ay sonu şeridi, birlikte al
    - **İki buton: "Güvenli Ödeme İle Al" (%5) üstte, "Kapıda Ödeme ile Sipariş Ver" altta.** Kapıda ödeme ücreti ₺80 baştan yazılır.
    - güven üçlüsü, müşteri fotoğrafları
-3. Bir gece, beş an.
+3. Odası böyle görünecek · Gece vitrini (21 Eki; Bir gece, beş an kalktı).
 4. Çipli yorumlar.
 5. 12 disk.
 6. Avucuna sığar ve kutu içeriği.
@@ -250,3 +250,9 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Kaynak `araclar/shopify-kaynak/*.liquid` → `python3 ayluna-imza/araclar/shopify-derle.py` → `shopify/*.txt`. Kurulum: `shopify/KURULUM.txt`.
 - Bölümler Main.dc'ye göre yazılır.
 - Bilinen hatalar `TASARIM-BILGISI.md` §8'de.
+
+## Duygu bölümleri ve premium his (21 Eki)
+- Saat saat ritüel bölümü yapılmaz; rutin en fazla tek kart ya da tek cümle.
+- Mutlu çocuk karesi tek başına konmaz: çocuk + ürün + tavandaki ışığı aynı karede. Yüz yakın plan değil; oda Türk evine benzer; tavan deseni gerçek diskten, gerçek parlaklıkta. Görsel yalnız Google Flow ile, ürün gerçek fotoğraftan; "müşteri" etiketi konmaz.
+- Aynı işi gören ikinci bölüm açılmaz; var olan bölüm büyütülüp taşınır.
+- Premium his: tek odak (ortadaki kart büyük, yandakiler geride), yazı fotoğrafın dışında, ilerleme dolan ayla; sayaç ("1 / 4"), fotoğrafa binen çip, Instagram arayüzü taklidi, dönen/uçan kart yok. Masaüstünde şerit sütun kenarında kesik bitmez.

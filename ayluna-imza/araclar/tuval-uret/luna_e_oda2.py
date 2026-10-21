@@ -217,5 +217,5 @@ JS = """class Component extends DCLogic {
   }
 }"""
 
-open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E oda arayüzleri', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('O_H', 2900)), js=JS))
+open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E oda arayüzleri', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('O_H', 2584)), js=JS))
 print('yazıldı:', os.path.abspath(OUT))

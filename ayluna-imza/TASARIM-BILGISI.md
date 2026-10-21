@@ -153,7 +153,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
    - ay sonu şeridi, birlikte al
    - iki buton: online ve kapıda (uygulama formu)
    - güven üçlüsü, müşteri fotoğrafları
-3. Bir gece, beş an.
+3. Odası böyle görünecek · Gece vitrini (21 Eki; Bir gece, beş an kalktı).
 4. Çipli yorumlar.
 5. Diskler.
 6. Avucuna sığar ve kutu içeriği.
@@ -347,6 +347,9 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 19 Eki | "Şu yorum kısımlarının hepsi karmaşık görünüyor, onlar için bir düzen oturtalım." Üç yön gösterildi (A sekmeli 5/10, B tek akış 8/10, C duvar 4/10); kullanıcı **B**'yi seçti. | **Müşteri kanıtı tek bölüm, tek akış:** puan → öne çıkan tek yorum (çerçevesiz kart) → fotoğraf ve mesajlar aynı yükseklikte tek şerit (fotoğrafla başlar, dokununca büyür) → kısa yorum listesi → hepsini oku → kısa not. Konu çipleri, ayrı mesaj bölümü ve üst üste birden çok şerit yok; fotoğraf ve mesaj sekmeye saklanmaz. |
 | 19 Eki | (B düzenine) "E ama WP mesajları falan gidiyor." | **Müşteri mesajları karışık şeritte kaybolmaz:** bölümün başında kendi başlıklı şeridi ("Sizden gelen mesajlar", büyük kart), sonra öne çıkan yorum, sonra ayrı küçük fotoğraf şeridi ("Evlerinizden"), sonra kısa yorumlar. |
 | 21 Eki | "Şu WhatsApp konuşmaları için olan kısım eksik, bir tek LunaDream'de var." | **"Sizden gelen mesajlar" bütün ürün sayfalarında** (USB, AyFeneri, Galaksi Night, sade ürünler; `ortak.mesaj_bolum`). Mesajlar LunaDream siparişlerinden olduğu için diğer sayfalarda başlığın altında "LunaDream siparişlerinden" yazar. (19 Eki'deki "mesajlar yalnız kendi ürününün sayfasında" kuralının yerine geçer.) Ürüne özel mesaj gelirse o ürünün sayfasında onlar kullanılır. |
+| 21 Eki | "Bir gece, beş an bir şey hissettirmiyor; bunun bir anlamı yok gibi." Yerine çocukların odalarında mutlu hâlini gösteren görselleri önerdi, benzer markaları araştırmamı istedi. | **Saat saat ritüel bölümü yapılmaz** (araştırılan 8 markanın hiçbirinde yok; rutin tek kart ya da tek cümle). **Mutlu çocuk karesi tek başına konmaz:** çocuk, ürün ve ürünün ışığı (tavandaki yansıma) aynı karede; bu kareler kaydırmalı kartlarda ya da galeride durur. Marka görseli "müşteri" diye etiketlenmez; gerçek müşteri içeriği ayrı şeritte kalır. |
+| 21 Eki | "Odası böyle görünecek'i yapmıştık zaten." | **Aynı işi gören ikinci bölüm açılmaz;** var olan bölüm büyütülüp taşınır. Bir gece kalktı; Odası 4 karta çıkıp onun yerine geçti, aşağıdaki eski hâli silindi. |
+| 21 Eki | "Profesyonel bir görüntü istiyorum." (Odası'nın arayüzü için; seçim bana bırakıldı) | **Premium = sade dramaturji:** tek odak (ortaya gelen kart büyür, yandakiler geride), yazı fotoğrafın dışında ve altında yumuşak geçişle, ilerleme marka motifiyle (dolan ay), sayaç ("1 / 4") ve fotoğrafa binen çip yok. Instagram arayüzü taklidi, dönen/uçan kart, deste gibi efektler premium değil. Masaüstünde şerit sütun kenarında kesilmez; ya ekran kenarına uzanır ya hiç taşmaz. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

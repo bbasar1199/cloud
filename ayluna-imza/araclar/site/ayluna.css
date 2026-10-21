@@ -132,12 +132,12 @@ img{max-width:100%}
   html[data-ay-tur=urun] #siparis.px,html[data-ay-tur=urun] .ust-sag>*{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
   /* Alttaki bölümler: ortada 760 px; kendi içinde telefon ölçüsüyle kurulu etkileşimli olanlar ortada 430 px */
   html[data-ay-tur=urun] .pg>section,html[data-ay-tur=urun] .pg>.blk{max-width:760px;margin-left:auto!important;margin-right:auto!important;margin-top:56px}
-  html[data-ay-tur=urun] .pg>section#bir-gece,html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar{max-width:430px}
+  html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar{max-width:430px}
   html[data-ay-tur=urun] .pg>footer{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:72px;box-sizing:border-box}
   html[data-ay-tur=urun]{scroll-padding-top:156px}
   /* Alt bölümler masaüstüne açılır (19 Eki, kullanıcı eleştirmenin önerisini seçti):
      koyu bölümler kenardan kenara gece bandı (içerik 1136 px), şeritler ızgara, odalar yan yana */
-  html[data-ay-tur=urun] .pg>section.koyu,html[data-ay-tur=urun] .pg>section.gece,html[data-ay-tur=urun] .pg>section#bir-gece{max-width:none!important;width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:0!important;border-radius:0!important;padding:72px max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
+  html[data-ay-tur=urun] .pg>section.koyu,html[data-ay-tur=urun] .pg>section.gece,html[data-ay-tur=urun] .pg>section.vitrin{max-width:none!important;width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:0!important;border-radius:0!important;padding:72px max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
   html[data-ay-tur=urun] .pg>section.koyu .px,html[data-ay-tur=urun] .pg>section.gece .px{padding-left:0!important;padding-right:0!important}
   html[data-ay-tur=urun] .pg>section .h2,html[data-ay-tur=urun] .pg>section h2.bas-y{font-size:36px!important}
   html[data-ay-tur=urun] .pg>section .h2 br,html[data-ay-tur=urun] .pg>section h2.bas-y br{display:none}
@@ -160,20 +160,15 @@ img{max-width:100%}
   html[data-ay-tur=urun] .pg>section:has(.kart){max-width:1136px!important}
   html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart){display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px 16px!important}
   html[data-ay-tur=urun] .kart{min-width:0}
-  /* LunaDream · Bir gece: kadran solda, beş an sağda */
-  html[data-ay-tur=urun] .pg>section#bir-gece{display:grid;grid-template-columns:430px minmax(0,1fr);column-gap:72px;align-items:center;background:#1A2142}
-  html[data-ay-tur=urun] #bir-gece .gece-adimlar,html[data-ay-tur=urun] #bir-gece .gece-iz{display:none}
-  html[data-ay-tur=urun] #bir-gece .gece-cerceve{position:relative;top:auto}
-  html[data-ay-tur=urun] #bir-gece .g-bas p{display:none}
-  html[data-ay-tur=urun] .g-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;color:#EDE5D8}
-  html[data-ay-tur=urun] .g-li{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:baseline;gap:16px;width:100%;min-height:64px;padding:14px 20px;border:0;border-radius:16px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
-  html[data-ay-tur=urun] .g-li .saat{font-family:"Young Serif",Georgia,serif;font-size:24px;color:#B9BED6;font-variant-numeric:tabular-nums}
-  html[data-ay-tur=urun] .g-li b{display:block;font-size:17px;color:#FFFDF9}
-  html[data-ay-tur=urun] .g-li-y>span{display:block;margin-top:2px;font-size:14px;line-height:1.45;color:#B9BED6}
-  html[data-ay-tur=urun] .g-li.on{background:rgba(255,253,249,.07);box-shadow:inset 0 0 0 1px rgba(242,166,90,.45)}
-  html[data-ay-tur=urun] .g-li.on .saat{color:#F2A65A}
-  html[data-ay-tur=urun] .g-li:hover{transform:translateX(4px)}
-  html[data-ay-tur=urun] .g-li:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* LunaDream · Odası böyle görünecek (Gece vitrini, 21 Eki): şerit kenardan kenara; ortadaki kart 360×480, yanlardakiler ekran kenarına kadar
+     görünür (kesik sütun kenarı yok); yazı ve aylar altta ortada */
+  html[data-ay-tur=urun] .vitrin>.h2{padding:0!important;text-align:center}
+  html[data-ay-tur=urun] .pg>section.vitrin .vt-serit{overflow-x:auto!important;scroll-snap-type:x mandatory!important;margin:36px calc(-1 * max(32px,calc(50vw - 568px))) 0;padding:0 calc(50vw - 180px)!important}
+  html[data-ay-tur=urun] .vitrin .vt-kart{flex-basis:360px;height:480px;border-radius:24px}
+  html[data-ay-tur=urun] .vitrin .vt-metin{padding-top:28px}
+  html[data-ay-tur=urun] .vitrin .vt-bas{font-size:30px}
+  html[data-ay-tur=urun] .vitrin .vt-yazi{max-width:420px;font-size:16px}
+  html[data-ay-tur=urun] .vitrin .vt-aylar{margin-top:14px}
   /* LunaDream · Diskler: tavan solda büyük, başlık ve diskler sağda */
   html[data-ay-tur=urun] .pg>section.gece#diskler{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"tavan bas" "tavan disk";column-gap:64px;row-gap:24px;align-items:end}
   html[data-ay-tur=urun] .gece#diskler>.px:first-child{grid-area:bas}
@@ -181,11 +176,6 @@ img{max-width:100%}
   html[data-ay-tur=urun] .gece#diskler>.noscroll{grid-area:disk;align-self:start;flex-wrap:wrap;gap:10px!important;padding-top:0!important}
   html[data-ay-tur=urun] .gece#diskler .tavan{height:460px;border-radius:24px}
   /* LunaDream · Odası böyle görünecek: iki oda yan yana */
-  html[data-ay-tur=urun] .pg>section#odalar:has(.b-serit){max-width:1136px!important}
-  html[data-ay-tur=urun] #odalar .b-serit{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px!important}
-  html[data-ay-tur=urun] #odalar .b-serit .poster{flex:none}
-  html[data-ay-tur=urun] #odalar .b-serit .p-foto{height:420px}
-  html[data-ay-tur=urun] #odalar .b-say{display:none}
   /* Galaxy USB · Bu gece tavanda: üç sahne yan yana */
   html[data-ay-tur=urun] .sahne-serit{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important}
   html[data-ay-tur=urun] .sahne-serit .sk{height:520px}

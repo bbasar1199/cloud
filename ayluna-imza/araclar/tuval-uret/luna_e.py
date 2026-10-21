@@ -1,14 +1,12 @@
-# LunaDream ürün sayfası · E (Tur 21): B+ Gece Postası'nın dili + Bir gece kadranı. Çalıştır: python3 luna_e.py
+# LunaDream ürün sayfası · E (Tur 21): B+ Gece Postası'nın dili. Çalıştır: python3 luna_e.py
 # Kullanıcı (E'ye): "Sipariş fişini kaldır, emoji benefiti düzelt, yazım hataları berbat, yazı fontu kötü; her şey çok yabancı
 # duruyor, bir bütün ve uyum yakala." E bu yüzden seçilen B+'nın üstüne yeniden kuruldu: Young Serif + Onest, krem/lacivert/amber,
-# Sihirli V1 (2×2 beyaz kart), satır kart seçiciler (Tur 25) ve iki buton. B+'dan tek fark: "Bir gece, beş an" gece kadranı (koyu panel).
+# Sihirli V1 (2×2 beyaz kart), satır kart seçiciler (Tur 25) ve iki buton. 21 Eki: "Bir gece, beş an" kalktı (kullanıcı: "bir şey hissettirmiyor"); yerine "Odası böyle görünecek" Gece vitrini.
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
 
-# Bir gece kadranı: fotoğraf penceresinin merkezi (195, 216), yay yarıçapı 156; 5 an yayda (açı, derece)
-KAD_X, KAD_Y, KAD_R = 195, 216, 156
 
 
 def ay(f, r=9, c=12):
@@ -32,12 +30,6 @@ def muhur():
 # Teslim çizgisi: hilal (bugün) → yarım ay (kargoda) → dolunay (kapında). Kaydırınca sırayla dolar.
 YOL = ''.join('<li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="%s"></path></svg><b>%s</b><span>%s</span></li>' % (ay(f), b, t)
               for f, b, t in [(.22, 'Bugün', 'Sipariş verildi'), (.5, '{{kargo}}', 'Kargoda'), (1, '{{teslim}}', 'Kapında')])
-KAD_A = [168, 128, 90, 52, 12]
-EVRE = [.14, .34, .55, .8, 1]  # kullanıcı: "kaydırdıkça ayın içi dolsun": her anda ay biraz daha dolar
-KAD_P = [[round(KAD_X + KAD_R * math.cos(math.radians(a)), 1), round(KAD_Y - KAD_R * math.sin(math.radians(a)), 1)] for a in KAD_A]
-KAD_L = [[round(KAD_X + 121 * math.cos(math.radians(a)), 1), round(KAD_Y - 121 * math.sin(math.radians(a)), 1)] for a in KAD_A]  # saat yazıları yayın içinde
-IZ_ARA, IZ_PAY = 25, 2000  # Bir gece tuval izi: 25px aralık, panelin 2000px üstü ve altı
-IZ_SAY = (2 * IZ_PAY + 660) // IZ_ARA + 1
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE.dc.html')
 
 CSS = r""".pg{background:#F6F1E9}
@@ -76,12 +68,8 @@ CSS = r""".pg{background:#F6F1E9}
    başlık 1: 44 (yalnız LunaDream) · bölüm başlığı: 26 · büyük rakam: 40 (puan, saat, 30 gün) · kart başlığı: 18–20
    gövde: 16 · açıklama: 15 · not: 13 · etiket: 12. Bölüm etiketi tek stil: 13px kalın, #A05A1C, büyük harf yok. */
 .pg{font-size:15px}
-/* Tur 25 (kullanıcı: "Bir gece 5 anın altı neden o kadar çok boş"): ortak başlıktaki overflow:hidden sayfayı kaydırma kabı yapıyor,
-   Bir gece paneli yapışmıyor, telefonda altında ~1.900px boş adım kalıyordu. clip kaydırma kabı oluşturmaz; yapışkan çalışır.
-   clip'i tanımayan eski tarayıcıda kaydırma adımları kapanır (yay ve oklarla gezilir). Canlı temada da sarmalayıcılarda
-   overflow:hidden olmamalı. */
+/* overflow:clip kaydırma kabı oluşturmaz; yapışkan öğeler çalışır. Canlı temada sarmalayıcılarda overflow:hidden olmamalı. */
 .pg{overflow:clip;margin:0 auto}
-@supports not (overflow:clip){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
 .h2{font-size:22px;line-height:1.15}
 .etiket{font-size:13px}
 .etiket>span:first-child{text-transform:none;letter-spacing:0;font-size:13px;font-weight:700;color:#A05A1C}
@@ -265,85 +253,41 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
 .gece{background:#1A2142;color:#EDE5D8;padding:32px 0 34px;margin-top:36px;border-radius:28px}
-/* Bir gece, beş an · gece kadranı (kullanıcı: "o section için UI tasarım istiyorum"). B+'nın koyu paneli içinde:
-   ortada yuvarlak fotoğraf penceresi, çevresindeki yayda beş saat; ay seçili saate yay boyunca gider.
-   Akşam lamba ışığı güçlü, gece yıldızlar çoğalır, sabah amber şafak gelir. Yaydaki saate, oklara dokununca ya da
-   telefonda kaydırınca ilerler (panel yapışık). Durum tek sınıfta (.an0–.an4). Yalnız transform/opacity. */
-.gece-bolum{--gh:520px;position:relative;margin-top:36px}
-/* Telefonda panel, üst kenar ile satın al çubuğu arasında ortalanmış kart olarak yapışır (eşit krem pay; kadranın içi boşalmaz) */
-@media (max-height:1599px){.gece-bolum{--gh:clamp(520px,calc(100vh - 76px),660px)}}
-.gece-cerceve{position:sticky;top:0;height:var(--gh);display:flex;flex-direction:column;overflow:hidden;isolation:isolate;border-radius:28px;background:#1A2142;color:#EDE5D8}
-@media (max-height:1599px){.gece-cerceve{top:max(0px,calc((100vh - 76px - var(--gh)) / 2))}}
-.g-bas{position:relative;z-index:1;padding:28px 16px 0}
-.g-alan{position:relative;flex:1}
-.g-ic{position:absolute;left:0;top:50%;width:390px;height:468px;margin-top:-234px}
-.gk{position:absolute;inset:0;pointer-events:none;transition:opacity .64s cubic-bezier(.2,.7,.2,1)}
-.gk-yildiz{opacity:.25}
-.gk-yildiz circle{fill:#FFFDF9}
-.gk-sabah{background:linear-gradient(0deg,rgba(242,166,90,.16),rgba(242,166,90,0) 34%);opacity:0}
-
-.gk-isik{background:radial-gradient(132px 132px at 195px 216px,rgba(242,166,90,.34),rgba(242,166,90,0))}
-.an0 .gk-isik{opacity:.95}.an1 .gk-isik{opacity:.75}.an2 .gk-isik{opacity:.6}.an3 .gk-isik{opacity:.4}.an4 .gk-isik{opacity:0}
-.an1 .gk-yildiz{opacity:.55}.an2 .gk-yildiz{opacity:.85}.an3 .gk-yildiz{opacity:1}.an4 .gk-yildiz{opacity:0}
-.an4 .gk-sabah{opacity:1}
-.kadran{position:absolute;left:0;top:0;width:390px;height:468px;fill:none;pointer-events:none}
-.kadran .yay{stroke:#FFFDF9;stroke-opacity:.3;stroke-width:1.5;stroke-dasharray:1.5 7;stroke-linecap:round}
-.kadran .halka{stroke:#FFFDF9;stroke-opacity:.2;stroke-width:1.5}
-.g-noktalar{position:absolute;inset:0;pointer-events:none}.g-noktalar button{pointer-events:auto}
-.g-nokta{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer}
-.g-evre{width:16px;height:16px;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .32s cubic-bezier(.2,.7,.2,1)}
-.g-evre circle{fill:#1A2142;stroke:rgba(255,253,249,.7);stroke-width:1.6}
-.g-evre path{fill:#F2A65A}
-.g-nokta[aria-pressed="true"] .g-evre{opacity:0;transform:scale(.4)}
-.g-saat{position:absolute;min-width:48px;min-height:48px;padding:0;border:0;background:transparent;display:grid;place-items:center;transform:translate(-50%,-50%);font:inherit;font-size:13px;font-weight:600;color:#B9BED6;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer}
-.g-saat.on{color:#FFFDF9}
-.g-ay-kol{position:absolute;left:195px;top:216px;width:0;height:0;transition:transform .64s cubic-bezier(.2,.7,.2,1)}
-.g-ay{position:absolute;left:156px;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;display:grid;place-items:center;pointer-events:none;transition:transform .64s cubic-bezier(.2,.7,.2,1),opacity .64s cubic-bezier(.2,.7,.2,1)}
-.g-ay::before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,rgba(242,166,90,.34),rgba(242,166,90,0) 68%)}
-.g-ay svg{position:relative;width:34px;height:34px}
-.g-ay circle{fill:#1A2142;stroke:rgba(255,253,249,.8);stroke-width:1.3}
-.g-ay path{fill:#F2A65A;opacity:0;transition:opacity .5s cubic-bezier(.2,.7,.2,1)}
-.an0 .g-ay .ev0,.an1 .g-ay .ev1,.an2 .g-ay .ev2,.an3 .g-ay .ev3,.an4 .g-ay .ev4{opacity:1}
-.g-foto{position:absolute;left:107px;top:128px;width:176px;height:176px;border-radius:50%;overflow:hidden;background:#0C1027}
-.g-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .48s cubic-bezier(.2,.7,.2,1),transform .64s cubic-bezier(.2,.7,.2,1)}
-.g-yazi{position:absolute;left:72px;right:72px;top:332px;height:120px;text-align:center}
-.g-an{position:absolute;inset:0;opacity:0;transform:translateY(10px);transition:opacity .32s cubic-bezier(.2,.7,.2,1),transform .32s cubic-bezier(.2,.7,.2,1)}
-.g-an .saat{display:block;font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.1;color:#F2A65A;font-variant-numeric:tabular-nums}
-.g-an b{display:block;margin-top:6px;font-size:16px;color:#FFFDF9}
-.g-an span.t{display:block;margin-top:2px;font-size:14px;line-height:1.4;color:#B9BED6;text-wrap:balance}
-.an0 .g-foto img:nth-child(1),.an1 .g-foto img:nth-child(2),.an2 .g-foto img:nth-child(3),.an3 .g-foto img:nth-child(4),.an4 .g-foto img:nth-child(5){opacity:1;transform:none}
-.an0 .g-an:nth-child(1),.an1 .g-an:nth-child(2),.an2 .g-an:nth-child(3),.an3 .g-an:nth-child(4),.an4 .g-an:nth-child(5){opacity:1;transform:none;transition-delay:.12s}
-.g-alt{position:absolute;left:16px;right:16px;top:352px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-.g-ok{width:48px;height:48px;padding:0;border:1.5px solid rgba(255,253,249,.5);border-radius:50%;background:transparent;color:#FFFDF9;display:grid;place-items:center;cursor:pointer;pointer-events:auto;transition:transform .16s cubic-bezier(.2,.7,.2,1)}
-.g-ok:active{transform:scale(.94)}
-.g-ok svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.gece-cerceve :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
-/* Kaydırma adımları: telefonda her an ~48vh kaydırma, panel yapışık kalır. Uzun görüntü alanında (tuval, 1600px+) adım yok. */
-.gece-adimlar{margin-top:calc(-1 * var(--gh))}
-/* Tuvalde kaydırma izi: panelin IZ_PAY px üstünden altına görünmez noktalar (geceTuval) */
-.gece-iz{position:absolute;left:0;top:-""" + str(IZ_PAY) + r"""px;width:1px;height:1px;pointer-events:none}
-.gece-iz i{position:absolute;left:0;width:1px;height:1px}
-.gece-adim{height:48vh}
-.gece-adim:first-child{height:calc(var(--gh) + 30vh)}
-@media (min-height:1600px){.gece-adimlar{margin-top:0}.gece-adim,.gece-adim:first-child{height:0}}
-@media (prefers-reduced-motion:reduce){.gk,.g-ay-kol,.g-ay,.g-ay path,.g-foto img,.g-an,.g-evre{transition:none}}
-/* Odası böyle görünecek (Tur 26, kullanıcı "B · Kaydırmalı"yı seçti): iki oda posteri yan yana kayar, ikincisi kenardan görünür.
-   Üstte fotoğraf (lamba ve tavan açık kalır), altında lacivert yazı bandı; yazı ürünün üstüne binmez. */
-.b-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 0}
-.poster{position:relative;display:flex;flex-direction:column;flex:0 0 300px;overflow:hidden;scroll-snap-align:start;border-radius:24px;background:#1A2142;color:#FFFDF9}
-.p-foto{position:relative;flex:none;height:340px;overflow:hidden;background:#0C1027}
-.p-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.p-cip{position:absolute;left:14px;top:14px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 7px;border-radius:999px;background:rgba(255,253,249,.94);color:#1A2142;font-size:12px;font-weight:700}
-.p-cip .evre{width:14px;height:14px}.p-cip .evre circle{fill:none;stroke:#1A2142;stroke-width:1.6}.p-cip .evre path{fill:#F2A65A}
-.p-alt{display:flex;flex-direction:column;gap:6px;padding:18px}
-.p-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
-.p-bas span{color:#F2A65A}
-.p-yazi{margin:0;font-size:14px;line-height:1.45;color:#B9BED6}
-.p-sec{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:48px;margin-top:4px;padding:0 14px;border:1.5px solid rgba(255,253,249,.55);border-radius:999px;background:transparent;color:#FFFDF9;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
-.p-sec:active{transform:scale(.97)}
+/* Odası böyle görünecek · Gece vitrini (21 Eki): "Bir gece, beş an" ve iki posterli eski Odası'nın yerine (kullanıcı: "profesyonel bir
+   görüntü istiyorum"; eleştirmen dört yönden bunu seçti, 8/10). Diskler paneliyle aynı lacivert ve köşe. Kart 280×372 (3:4), yanlarda 55 px pay.
+   Ortaya gelen kart büyür ve aydınlanır (destekleyen tarayıcıda kaydırmayla sürekli, yoksa sınıf geçişi); yazı altta 280 ms'de değişir;
+   aylar dolarak ilerler. Çip fotoğrafa (tavana) binmez, sayaç yok. Yalnız transform/opacity. */
+.vitrin{margin-top:36px;padding:30px 0 20px;border-radius:28px;background:#1A2142;color:#FFFDF9}
+.vitrin>.h2{padding:0 20px;color:#FFFDF9}
+.vt-serit{position:relative;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:22px 55px 0}
+.vt-kart{position:relative;flex:0 0 280px;height:372px;border-radius:20px;overflow:hidden;background:#0C1027;scroll-snap-align:center;scroll-snap-stop:always;cursor:pointer;transform:scale(.92);opacity:.6;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s cubic-bezier(.2,.7,.2,1)}
+.vt-kart.on{transform:none;opacity:1;cursor:default}
+.vt-kart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vt-kart::after{content:"";position:absolute;inset:0;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(255,253,249,.12);pointer-events:none}
+@supports (animation-timeline: view()){
+  .vt-kart,.vt-kart.on{transition:none;animation:vt-odak linear both;animation-timeline:view(inline)}
+  @keyframes vt-odak{0%{transform:scale(.92);opacity:.6}50%{transform:none;opacity:1}100%{transform:scale(.92);opacity:.6}}
+}
+.vt-metin{display:grid;padding:18px 24px 0;text-align:center}
+.vt-m{grid-area:1/1;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .28s cubic-bezier(.2,.7,.2,1),transform .28s cubic-bezier(.2,.7,.2,1)}
+.vt-m.on{opacity:1;transform:none;pointer-events:auto}
+.vt-etk{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#B9BED6}
+.vt-etk .evre{width:14px;height:14px}
+.vt-etk .evre circle{fill:none;stroke:#B9BED6;stroke-width:1.6}.vt-etk .evre path{fill:#F2A65A}
+.vt-bas{margin:6px 0 0;font-family:"Young Serif",Georgia,serif;font-size:22px;line-height:1.12;letter-spacing:-.01em}
+.vt-bas span{color:#F2A65A}
+.vt-yazi{margin:6px 0 0;max-width:300px;font-size:15px;line-height:1.45;color:#B9BED6;text-wrap:balance}
+.vt-sec{display:inline-flex;align-items:center;gap:6px;min-height:48px;margin-top:2px;padding:0 4px;border:0;background:none;color:#F2A65A;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.vt-aylar{position:relative;display:flex;justify-content:center;gap:28px;margin-top:6px}
+.vt-aylar::before{content:"";position:absolute;left:50%;top:50%;width:204px;height:1px;margin-left:-102px;background:rgba(255,253,249,.18)}
+.vt-ay{position:relative;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:#1A2142;cursor:pointer}
+.vt-ay .evre{width:22px;height:22px;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.vt-ay .evre circle{fill:none;stroke:rgba(255,253,249,.5);stroke-width:1.6}
+.vt-ay .evre path{fill:rgba(255,253,249,.28)}
+.vt-ay.on .evre{transform:scale(1.18)}
+.vt-ay.on .evre circle{stroke:#F2A65A}.vt-ay.on .evre path{fill:#F2A65A}
+.vitrin :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
 .ok-ik{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.b-say{display:flex;justify-content:center;gap:6px;margin-top:12px}
-.b-say i{width:6px;height:6px;border-radius:50%;background:#D6CAB6}.b-say i.on{background:#1A2142}
 .temsil{margin:10px 16px 0;font-size:12px;color:#5C6078}
 .cip{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #1A2142;background:transparent;color:#1A2142;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cip.on{background:#1A2142;color:#FFFDF9}
@@ -420,7 +364,6 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .buyuk-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
 .buyuk-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
 .noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}"""
-CSS += ''.join('.an%d .g-ay-kol{transform:rotate(-%ddeg)}.an%d .g-ay{transform:rotate(%ddeg)}' % (i, a, i, a) for i, a in enumerate(KAD_A))
 
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir. Canlıda bölüm ayarı (sayı; boşsa satır gizlenir) ya da Shopify Flow'un
 # her gece yazdığı metafield. Uydurma sayı yazılmaz; önizlemede yer tutucu.
@@ -535,26 +478,16 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
   </section>
 
-  <!-- Bir gece, beş an · gece kadranı. Panel yapışık; kaydırma adımları (canlıda IntersectionObserver), yaydaki saat ya da oklar anı seçer. -->
-  <section class="gece-bolum" id="bir-gece" aria-labelledby="gece-bas">
-    <div class="{{geceCls}}">
-      <svg class="gk gk-yildiz" viewBox="0 0 390 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="173" cy="15" r="1.1"></circle><circle cx="341" cy="9" r="0.9"></circle><circle cx="282" cy="12" r="1.1"></circle><circle cx="306" cy="30" r="1.4"></circle><circle cx="117" cy="8" r="0.9"></circle><circle cx="230" cy="32" r="0.9"></circle><circle cx="131" cy="40" r="1.4"></circle><circle cx="250" cy="9" r="1.4"></circle><circle cx="71" cy="20" r="1.4"></circle><circle cx="370" cy="60" r="0.9"></circle><circle cx="20" cy="80" r="1.1"></circle><circle cx="33" cy="120" r="0.9"></circle><circle cx="362" cy="130" r="0.9"></circle><circle cx="156" cy="52" r="0.9"></circle><circle cx="14" cy="300" r="1.4"></circle><circle cx="370" cy="320" r="0.9"></circle><circle cx="30" cy="420" r="1.1"></circle><circle cx="360" cy="440" r="1.4"></circle><circle cx="52" cy="250" r="0.8"></circle><circle cx="342" cy="220" r="0.8"></circle></svg>
-      <span class="gk gk-sabah" aria-hidden="true"></span>
-      <div class="g-bas"><h2 class="h2" id="gece-bas" style="color: #FFFDF9">Bir gece, beş an<span class="n">.</span></h2><p style="margin: 6px 0 0; font-size: 14px; color: #B9BED6">Kaydır ya da yaydaki saate dokun.</p></div>
-      <div class="g-alan"><div class="g-ic">
-        <span class="gk gk-isik" aria-hidden="true"></span>
-        <svg class="kadran" viewBox="0 0 390 468" aria-hidden="true"><path class="yay" d="M39 216A156 156 0 0 1 351 216"></path><circle class="halka" cx="195" cy="216" r="96"></circle></svg>
-        <div class="g-foto"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><img src="{{a.src}}" alt="{{a.alt}}" aria-hidden="{{a.gizli}}" style="object-position: {{a.pos}}"></sc-for></div>
-        <div class="g-noktalar" role="group" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><button class="{{a.saatCls}}" type="button" tabindex="-1" aria-hidden="true" style="left: {{a.lx}}px; top: {{a.ly}}px" onClick="{{a.pick}}">{{a.t}}</button><button class="g-nokta" type="button" style="left: {{a.x}}px; top: {{a.y}}px" onClick="{{a.pick}}" aria-pressed="{{a.on}}" aria-label="{{a.t}}, {{a.title}}"><svg class="g-evre" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{a.evre}}"></path></svg></button></sc-for></div>
-        <span class="g-ay-kol" aria-hidden="true"><span class="g-ay"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle>""" + ''.join('<path class="ev%d" d="%s"></path>' % (i, ay(f)) for i, f in enumerate(EVRE)) + """</svg></span></span>
-        <div class="g-yazi" aria-live="polite"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="g-an" aria-hidden="{{a.gizli}}"><span class="saat">{{a.t}}</span><b>{{a.title}}</b><span class="t">{{a.text}}</span></div></sc-for></div>
-        <div class="g-alt"><button class="g-ok" type="button" onClick="{{gOnce}}" aria-label="Önceki an"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok" type="button" onClick="{{gSonra}}" aria-label="Sonraki an"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"></path></svg></button></div>
-      </div></div>
+  <!-- Odası böyle görünecek · Gece vitrini (21 Eki; "Bir gece, beş an" ve iki posterli eski Odası'nın yerine). Kaydır, karta ya da aya dokun.
+       Görseller yer tutucu: çocuk, lamba ve tavandaki ışık aynı karede olan Flow kareleri gelecek (ogrenme/flow-istemleri-lunadream-oda.md).
+       Marka görseli; "müşteri" etiketi konmaz. Yazı HTML; fotoğrafa gömülmez. -->
+  <section class="vitrin gir" id="odalar" aria-labelledby="oda-bas">
+    <h2 class="h2" id="oda-bas">Odası böyle<br>görünecek<span class="n">.</span></h2>
+    <div class="vt-serit noscroll" onScroll="{{odaKay}}">
+      <sc-for list="{{odalar}}" as="o" hint-placeholder-count="4"><div class="{{o.cls}}" aria-hidden="{{o.gizli}}" onClick="{{o.git}}"><img src="{{o.src}}" alt="{{o.alt}}" loading="lazy" style="object-position: {{o.pos}}"></div></sc-for>
     </div>
-    <!-- Masaüstü (19 Eki, kullanıcı eleştirmenin önerisini seçti): kadran solda, beş an sağda tıklanır liste; kaydırma adımı yok -->
-    <sc-if value="{{masa}}" hint-placeholder-val="{{false}}"><ol class="g-liste" aria-label="Gecenin anları"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><li><button class="{{a.lcls}}" type="button" onClick="{{a.pick}}" aria-pressed="{{a.on}}"><span class="saat">{{a.t}}</span><span class="g-li-y"><b>{{a.title}}</b><span>{{a.text}}</span></span></button></li></sc-for></ol></sc-if>
-    <div class="gece-iz" aria-hidden="true"><sc-for list="{{izler}}" as="z" hint-placeholder-count="1"><i data-iz="{{z.i}}" style="top: {{z.y}}px"></i></sc-for></div>
-    <div class="gece-adimlar" aria-hidden="true"><sc-for list="{{moments}}" as="a" hint-placeholder-count="5"><div class="gece-adim" data-adim="{{a.i}}"></div></sc-for></div>
+    <div class="vt-metin" aria-live="polite"><sc-for list="{{odalar}}" as="o" hint-placeholder-count="4"><div class="{{o.mcls}}" aria-hidden="{{o.gizli}}"><span class="vt-etk"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{o.ev}}"></path></svg>{{o.cip}}</span><p class="vt-bas">{{o.bas}}<span>.</span></p><p class="vt-yazi">{{o.yazi}}</p><button class="vt-sec" type="button" tabindex="{{o.tab}}" onClick="{{o.eylem}}">{{o.sec}}<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></sc-for></div>
+    <div class="vt-aylar" role="group" aria-label="Odalar"><sc-for list="{{odalar}}" as="o" hint-placeholder-count="4"><button class="{{o.ayCls}}" type="button" onClick="{{o.git}}" aria-label="{{o.lbl}}" aria-pressed="{{o.basili}}"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{o.ev}}"></path></svg></button></sc-for></div>
   </section>
 
   <!-- Puan ve sayı Loox'tan; yorumlar Loox'taki gerçek yorumlardan birebir. "Satın aldı" yalnız Loox'un doğruladığı yorumda. Fotoğraflar Loox foto yorumlarından ve müşteri hikâyesinden. -->
@@ -573,19 +506,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for>
     </div>
     <!-- Kullanıcı: her kutuda bütün diskler çıkar (6 + 6 hediye), iki modelde de -->
-  </section>
-
-  <!-- Odası böyle görünecek (Tur 26, kullanıcı B'yi seçti; "Kutudan ne çıkıyor"un yerine, kutu içeriği SSS'ye geçti).
-       Görseller tuvaldeki gece oda fotoğrafları (gerçek ürün referansıyla), temsilî. Yazı HTML; fotoğrafa gömülmez.
-       "… modelini seç" modeli seçer ve model kartlarına kaydırır. -->
-  <section class="bolum gir" id="odalar">
-    <div class="px"><h2 class="h2">Odası böyle<br>görünecek<span class="n">.</span></h2></div>
-    <div class="b-serit noscroll" onScroll="{{odaKay}}">
-      <div class="poster"><div class="p-foto"><img src="/_blob/fd0bca1b99cf3837b69fb025cc4e2cd9" alt="Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar" style="object-position: 50% 40%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Kız modeli · Tavşanlı</span></div><div class="p-alt"><p class="p-bas">Tavanda masal<span>.</span></p><p class="p-yazi">Işığı kapatınca seçtiğin masal diski tavana yansır.</p><button class="p-sec" type="button" onClick="{{secKiz}}">Kız modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
-      <div class="poster"><div class="p-foto"><img src="/_blob/31751eb35473aca04420825deb3c3ce0" alt="Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar" style="object-position: 62% 50%"><span class="p-cip"><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.78) + """'></path></svg>Erkek modeli · Uzay Kaşifi</span></div><div class="p-alt"><p class="p-bas">Tavanda uzay<span>.</span></p><p class="p-yazi">Uzay diskini tak, tavan uzaya dönsün.</p><button class="p-sec" type="button" onClick="{{secErkek}}">Erkek modelini seç<svg class="ok-ik" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div></div>
-      <span aria-hidden="true" style="flex: 0 0 6px"></span>
-    </div>
-    <div class="b-say" aria-hidden="true"><i class="{{nokta0}}"></i><i class="{{nokta1}}"></i></div>
   </section>
 
   <!-- 30 gün iade -->
@@ -632,7 +552,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.izler = []; for (var z = 0; z < """ + str(IZ_SAY) + """; z++) this.izler.push({ i: z, y: z * """ + str(IZ_ARA) + """ }); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, gece: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Büyük görünüm Esc ile kapanır
@@ -645,12 +565,6 @@ JS = """class Component extends DCLogic {
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
       if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
       self.setState(o); }, 1000);
-    // Bir gece (kullanıcı: "kaydırdıkça değişmiyor"): iki durum.
-    // Telefon ve tam pencere (Oynat): sayfa kayar, panel yapışık; ekranın ortasını geçen son adım anı seçer.
-    // Tuval: pano kendi kaymaz, tuval kayar. Ekranda görünen işaretler ekranın üst ve alt kenarını verir;
-    // ekranın ortası panelin üstünden altına inerken an 0 → 4 ilerler.
-    if (window.innerHeight < 1600 && window.CSS && CSS.supports('overflow', 'clip')) this.geceKaydir();
-    else if (typeof IntersectionObserver !== 'undefined') this.geceTuval();
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');
     if (al && typeof IntersectionObserver !== 'undefined') {
@@ -664,55 +578,15 @@ JS = """class Component extends DCLogic {
       this.yolio.observe(yol);
     } else this.setState({ yolAc: true });
   }
-  anSec(an) { if (an !== this.geceSon) { this.geceSon = an; if (an !== this.state.gece) this.setState({ gece: an }); } }
-  geceKaydir() {
-    var self = this;
-    this.kaydir = function () {
-      if (self.raf) return;
-      self.raf = requestAnimationFrame(function () {
-        self.raf = 0;
-        if (window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches) return;  // sitenin masaüstünde kaydırma adımı yok; liste ve oklar seçer (tuvalin geniş Oynat penceresi telefon düzeninde kalır)
-        var adim = document.querySelectorAll('[data-adim]'), orta = window.innerHeight / 2, an = 0;
-        for (var k = 0; k < adim.length; k++) if (adim[k].getBoundingClientRect().top <= orta) an = k;
-        if (adim.length) self.anSec(an);
-      });
-    };
-    window.addEventListener('scroll', this.kaydir, { passive: true });
-    this.kaydir();
-  }
-  geceTuval() {
-    var self = this, gor = {}, ARA = """ + str(IZ_ARA) + """, PAY = """ + str(IZ_PAY) + """;
-    this.tio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { var i = Number(e.target.getAttribute('data-iz')); if (e.isIntersecting) gor[i] = 1; else delete gor[i]; });
-      var k = Object.keys(gor).map(Number), n = self.izSay;
-      if (!k.length) return;
-      var ust = Math.min.apply(null, k), alt = Math.max.apply(null, k), ustY = ust * ARA, altY = alt * ARA;
-      if (ust > 0 && alt < n - 1) self.ekranH = altY - ustY;           // iki kenar da işaretlerin içinde
-      else if (ust > 0 && self.ekranH) altY = ustY + self.ekranH;      // alt kenar dışarıda
-      else if (alt < n - 1 && self.ekranH) ustY = altY - self.ekranH;  // üst kenar dışarıda
-      else return;                                                     // konum bilinmez (çok uzak yakınlaştırma)
-      var panel = document.querySelector('.gece-cerceve'), H = panel ? panel.offsetHeight : 520;
-      var t = ((ustY + altY) / 2 - PAY + 150) / (H + 300);
-      self.anSec(Math.max(0, Math.min(4, Math.floor(t * 5))));
-    });
-    this.izBagla();
-  }
-  izBagla() {
-    var self = this, iz = document.querySelectorAll('[data-iz]');
-    if (!this.tio || !iz.length) return;
-    this.tio.disconnect(); this.izSay = iz.length; this.izIlk = iz[0];
-    iz.forEach(function (z) { self.tio.observe(z); });
-  }
   componentDidUpdate() {
     var acik = !!this.state.buyuk;
     if (acik !== !!this.buyukAcik) { this.buyukAcik = acik; document.documentElement.style.overflow = acik ? 'hidden' : '';
       if (acik) { var x = document.querySelector('.buyuk-x'); if (x) x.focus(); } }
-    if (this.tio && this.izIlk && !this.izIlk.isConnected) this.izBagla();
     // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
   galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.kaydir) window.removeEventListener('scroll', this.kaydir); if (this.tio) this.tio.disconnect(); if (this.yolio) this.yolio.disconnect(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -748,20 +622,6 @@ JS = """class Component extends DCLogic {
     var KG = KARGO(S.now || Date.now()), kd = KG.gun;
     var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
     var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
-    // Bir gece: tuvaldeki gerçek ürün görselleri; Erkek'te 20:45 ve 21:00 değişir
-    var M = [
-      { t: '20:00', title: 'Odayı hazırla', text: 'Perdeyi çek, lambayı komodine koy.', id: kiz ? 'fd0bca1b99cf3837b69fb025cc4e2cd9' : '31751eb35473aca04420825deb3c3ce0', alt: 'Gece çocuk odasında komodinde yanan LunaDream', pos: '62% 60%' },
-      { t: '20:30', title: 'Masalı seç', text: 'Bu gecenin diskini çocuğun seçsin.', id: '5b284c77c252b08a2974bde8e43de126', alt: 'Kubbesi açık LunaDream ve diskler', pos: '50% 40%' },
-      kiz ? { t: '20:45', title: 'Birlikte dinleyin', text: 'En sevdiği ninniyi telefondan aç.', id: '64229e39b184f68336dc1c9b99e8e850', alt: 'Tavşanlı LunaDream', pos: '50% 45%' }
-          : { t: '20:45', title: 'Uzay yolculuğu', text: 'Işığı kapat, tavanda uzay başlasın.', id: 'b2c8d9b92ad3541b532e3aa108a74735', alt: 'Uzay Kaşifi LunaDream', pos: '50% 45%' },
-      { t: '21:00', title: 'Gözler kapanır', text: 'Masal tavanda, sen yanında.', id: kiz ? '3d214a1ba100aaf3d85bb18a27325237' : '49da18af3a87a3c97bb59cb9dbe8817f', alt: 'Gece yatak başında yanan LunaDream', pos: '50% 55%' },
-      { t: '07:30', title: 'Sabah şarja tak', text: 'Gündüz şarj olsun, akşama hazır.', id: kiz ? '2288b7fbcc230bd9d47e25ef6550ce78' : 'cbd70711defa628872683fa471fcac61', alt: 'Gündüz komodinde LunaDream', pos: '50% 72%' }
-    ];
-    var EV = """ + str([ay(f) for f in EVRE]) + """;
-    var gece = S.gece || 0, KP = """ + str(KAD_P) + """, KL = """ + str(KAD_L) + """;
-    var moments = M.map(function (a, i) { var on = i === gece; return { i: i, t: a.t, title: a.title, text: a.text, src: B + a.id, alt: on ? a.alt : '', pos: a.pos,
-      x: KP[i][0], y: KP[i][1], lx: KL[i][0], ly: KL[i][1], evre: EV[i], saatCls: 'g-saat' + (on ? ' on' : ''), lcls: 'g-li' + (on ? ' on' : ''), on: on ? 'true' : 'false', gizli: on ? 'false' : 'true',
-      pick: function () { self.setState({ gece: i }); } }; });
     // Bugünkü fiyat sayacı (kullanıcı kararı): her gece 23:59'da (İstanbul) sıfırlanır. Gerçek olması için:
     // toptancı zammı gün içinde gelse bile o günün fiyatı 23:59'a kadar korunur, yeni fiyat ertesi gün başlar.
     function IKI(n) { return n < 10 ? '0' + n : String(n); }
@@ -835,7 +695,24 @@ JS = """class Component extends DCLogic {
     // Odalar: "… modelini seç" modeli seçer, model kartlarına kayar; şerit kaydıkça nokta değişir
     function odaSec(m) { return function () { self.setState({ model: m }); var h = document.getElementById('modeller');
       if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); }; }
-    function odaKay(e) { var el = e && (e.currentTarget || e.target); if (!el) return; var i = el.scrollLeft > 150 ? 1 : 0; if (i !== (self.state.oda || 0)) self.setState({ oda: i }); }
+    function odaKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.children.length) return; var m = el.scrollLeft + el.clientWidth / 2, en = 0, ef = 1e9;
+      for (var k = 0; k < el.children.length; k++) { var c = el.children[k], f = Math.abs(c.offsetLeft + c.offsetWidth / 2 - m); if (f < ef) { ef = f; en = k; } }
+      if (en !== (S.oda || 0)) self.setState({ oda: en }); }
+    // Odası böyle görünecek · Gece vitrini: karta ya da aya dokununca o oda ortaya kayar. Görseller yer tutucu; Flow kareleri gelince kimlikler değişir.
+    var AZH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function odaGit(i) { return function () { var el = document.querySelector('.vt-serit'), c = el && el.children[i]; if (i !== (S.oda || 0)) self.setState({ oda: i });
+      if (c && el.scrollTo) el.scrollTo({ left: c.offsetLeft - (el.clientWidth - c.offsetWidth) / 2, behavior: AZH ? 'auto' : 'smooth' }); }; }
+    function diskGit() { var h = document.getElementById('diskler'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: AZH ? 'auto' : 'smooth', block: 'start' }); }
+    var ODA = [
+      { id: 'fd0bca1b99cf3837b69fb025cc4e2cd9', pos: '50% 40%', alt: 'Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar', cip: 'Kız modeli · Tavşanlı', bas: 'Tavanda masal', yazi: 'Işığı kapatınca seçtiği masal diski tavana yansır.', sec: 'Kız modelini seç', e: 'kiz' },
+      { id: '8b1f621be2cb3b6133b7b78bc14e1963', pos: '50% 30%', alt: 'Kucakta yanan LunaDream Kız', cip: 'İki modelde de ninni', bas: 'Birlikte dinleyin', yazi: 'En sevdiği ninniyi telefondan aç; ses lambadan gelsin.', sec: 'Modelini seç', e: '' },
+      { id: '31751eb35473aca04420825deb3c3ce0', pos: '62% 50%', alt: 'Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar', cip: 'Erkek modeli · Uzay Kaşifi', bas: 'Tavanda uzay', yazi: 'Uzay diskini tak, tavana uzay yansısın.', sec: 'Erkek modelini seç', e: 'erkek' },
+      { id: '5b284c77c252b08a2974bde8e43de126', pos: '50% 40%', alt: 'Kubbesi açık LunaDream ve masal diskleri', cip: '6 + 6 hediye disk', bas: 'Masalı o seçsin', yazi: 'Bu gecenin diskini kutudaki masallardan çocuğun seçsin.', sec: 'Diskleri gör', e: 'disk' }
+    ];
+    var OEV = """ + str([ay(f) for f in (.25, .5, .75, 1)]) + """, oi = S.oda || 0;
+    var odalar = ODA.map(function (o, i) { var on = i === oi; return { src: B + o.id, pos: o.pos, alt: o.alt, cip: o.cip, bas: o.bas, yazi: o.yazi, sec: o.sec, ev: OEV[i],
+      cls: 'vt-kart' + (on ? ' on' : ''), mcls: 'vt-m' + (on ? ' on' : ''), ayCls: 'vt-ay' + (on ? ' on' : ''), gizli: on ? 'false' : 'true', tab: on ? '0' : '-1', basili: on ? 'true' : 'false',
+      lbl: (i + 1) + '. oda: ' + o.bas, git: odaGit(i), eylem: o.e === 'disk' ? diskGit : odaSec(o.e || S.model || 'kiz') }; });
     var faq = [
       { q: 'Kutudan ne çıkıyor?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' },
       { q: 'Ninni hangi modelde var?', a: 'İki modelde de var. İkisi de telefona Bluetooth ile bağlanır; çalan ninni lambadan gelir.' },
@@ -856,10 +733,10 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', izler: this.izler, moments: moments, geceCls: 'gece-cerceve an' + gece, gOnce: function () { self.setState({ gece: (gece + 4) % 5 }); }, gSonra: function () { self.setState({ gece: (gece + 1) % 5 }); }, vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
-      secKiz: odaSec('kiz'), secErkek: odaSec('erkek'), odaKay: odaKay, nokta0: (S.oda || 0) === 0 ? 'on' : '', nokta1: (S.oda || 0) === 1 ? 'on' : '', shop: shop, shopCount: PR.length, faq: faq
+      odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq
     };
   }
 }"""
@@ -872,5 +749,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6160)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6405)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
