@@ -1,24 +1,27 @@
-# LunaDream · "Neler yapabiliyor?" 2. tur, 3 yeni yön (21 Eki). Çalıştır: python3 ozellik2_varyant.py
+# LunaDream · "Neler yapabiliyor?" 2. tur (21 Eki). Çalıştır: python3 ozellik2_varyant.py
 # Kullanıcı (1. tur Satırlar / Sekmeler / Kaydırmalı için): "Hayır, o da çok boğar; daha iyi bir şeyler mi düşünsek, çok sıkıcı duruyor böyle."
-# Liste düzeni tamamen çıkar: ürün merkezde, yazı en az, tek bir hareketli an. "Işığı aç/kapat" anahtarı yok (17 Eki).
-# Sihirli kartlar "ne" der (6 + 6 disk, 3 parlaklık...); bu bölüm "nasıl" der, eylem cümleleriyle.
-# Sekans teyitsiz iddia çizmez: disk tavanda dönmez, şarjdayken lamba sönük, kumanda yok, pil süresi yok.
-#   A · Yörünge sahnesi: koyu sahne, ortada gerçek ürün; dört düğüm bir yörüngede, amber ay noktası düğümden düğüme gider;
-#       seçilen özelliğin etkisi ürünün üstünde (tavanda masal, parlaklık halkaları, ses dalgaları, pil). Ekrandayken ilerler, dokununca durur.
-#   B · Etiketli ürün: büyük stüdyo fotoğrafı, çevresinde dört yüzen etiket (parça konumu iddia etmemek için ürüne çizgi yok);
-#       etkin etiketin minik simgesi oynar, altında tek cümle.
-#   C · Masal kitabı: kapak + dört sayfa; "Sayfayı çevir" ile sayfa çevrilir (yalnız transform). Resimler 1. turun büyük arayüzleri.
+# Liste düzeni tamamen çıkar: ürün büyük, yazı en az. "Işığı aç/kapat" anahtarı yok (17 Eki).
+# İlk taslak (A Yörünge 7/5, B Etiketli ürün 6/6, C Masal kitabı 5/3; git geçmişinde d090a34). Eleştirmenin üç seçimi:
+#   1 · Aydınlık sahne: B'nin büyük stüdyo fotoğrafı + A'nın etkileri lambanın çevresinde (halkalar, ses dalgaları, rozetler).
+#   2 · Gece kadranı: A sadeleşti; düğüm daireleri yok, yayda dört yazı, amber ay noktası yazıdan yazıya; pencere 200 px.
+#   3 · Etiketli ürün (güvenli yedek): fotoğraf, dört eylem etiketi, altta tek cümle.
+# Eleştirmen düzeltmeleri (hepsine):
+#   - Etiketler eylem ("Diski tak", "Işığı kıs", "Ninni çal", "Kablosuz kullan"): Sihirli'nin "ne" kartlarını tekrar etmez.
+#   - "[X] ışık seçeneği" sayfada yok; "Üç kademe: kısık, orta, parlak." (3 kademe teyitli).
+#   - Disk lambanın tepesine inmez (takıldığı yer çizilmez); disk rozette belirir. Gece fotoğrafı yok (Videolar gösteriyor).
+#   - Her durum 6 sn; sekanslar bir kez oynar ve son karede kalır. Ekrana girince tek tur (24 sn), Masal'da durur; dokununca durur.
+#     Azaltılmış harekette ilerlemez. Yeni sonsuz döngü yok.
+#   - Etkin etiket: lacivert dolgu katmanı (opacity); renk ve gölge canlandırılmaz. Pasif yazılar opak gri, yarı saydam değil.
+#   - "Kabloyu çıkar, odaya taşı" yerine "kablo takılı değilken de yanar" (pil süresi ima edilmez).
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL
 import sihirli2_varyant as S2
-import ozellik_varyant as O
 OUT = os.path.join(HERE, '..', '..', 'canvas', 'LunaDreamE-Ozellik2.dc.html')
 
 E = 'cubic-bezier(.2,.7,.2,1)'
 FOTO = {'kiz': 'e02351b3be4a1c555c5d760d0bbda723', 'erkek': '0033dfea6282c5bc479c385213661c00'}
-DISK = {'kiz': '4a3a69e8c1d8dddad8c33f8f463b8a0e', 'erkek': 'b088d2c82561b76f6db997fbc3944059'}  # Ay ve yıldız / Uzay diski
-TAVAN = {'kiz': '3d214a1ba100aaf3d85bb18a27325237', 'erkek': '49da18af3a87a3c97bb59cb9dbe8817f'}  # gerçek gece fotoğrafları (c-ninni-*): tavandaki yansıma kırpılır
+DISK = {'kiz': ('4a3a69e8c1d8dddad8c33f8f463b8a0e', 'Ay ve yıldız'), 'erkek': ('b088d2c82561b76f6db997fbc3944059', 'Uzay')}
 
 
 def model(f):  # sayfada modele bağlı (renderVals: sihKiz / sihErkek)
@@ -26,92 +29,70 @@ def model(f):  # sayfada modele bağlı (renderVals: sihKiz / sihErkek)
             '<sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}">' + f('erkek') + '</sc-if>')
 
 
-OZ = [  # (anahtar, düğüm / etiket, başlık, cümle)
-    ('masal', 'Masal', 'Tavana masal', 'Diski tak, tavana yansısın', 'Diski tak, ışığı kapat; seçtiği masal tavanda.'),
-    ('isik', 'Işık', '3 kademe ışık', 'Uyurken en kısığa al', 'Kısık, orta, parlak. [X] ışık seçeneği.'),
-    ('ninni', 'Ninni', 'Ninni çalar', 'Telefondan ninni çal', 'Bluetooth ile bağla; ninni lambadan çalsın.'),
-    ('sarj', 'Şarj', 'Şarjlı, taşınır', 'Kabloyu çıkar, odaya taşı', 'Kablosu takılı değilken de çalışır.'),
+OZ = [  # (anahtar, eylem etiketi, kadran adı, başlık (2), cümle)
+    ('masal', 'Diski tak', 'Masal', 'Diski tak, tavana yansısın', 'Diski tak; masal tavana yansısın.'),
+    ('isik', 'Işığı kıs', 'Işık', 'Uyurken en kısığa al', 'Üç kademe: kısık, orta, parlak.'),
+    ('ninni', 'Ninni çal', 'Ninni', 'Telefondan ninni çal', 'Telefondan bağla; ninni lambadan çalsın.'),
+    ('sarj', 'Kablosuz kullan', 'Şarj', 'Şarj et, kablosuz kullan', 'Kablo takılı değilken de yanar.'),
 ]
 
-IK = {  # 24 px çizgi simgeler
-    'masal': '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="1.8"></circle><path d="M12 5.4a6.6 6.6 0 0 1 6 3.9"></path></svg>',
-    'isik': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18v-3.5M12 18v-7M18 18V7.5"></path></svg>',
-    'ninni': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6.6l10-2.1v11"></path><circle cx="6.6" cy="17.5" r="2.4"></circle><circle cx="16.6" cy="15.5" r="2.4"></circle></svg>',
-    'sarj': '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7.5" width="16" height="9" rx="2.2"></rect><path d="M21.5 10.5v3M11.8 9.4l-2 2.8h3l-2 2.8"></path></svg>',
+# Rozetler (lambanın altında; etkin duruma göre biri görünür)
+ROZET = ('<span class="rz rz-disk">' + model(lambda m: '<img src="/_blob/%s" alt=""><b>%s diski</b>' % DISK[m]) + '</span>'
+         '<span class="rz rz-kad">' + ''.join('<i><span>%s</span><span class="e">%s</span></i>' % (w, w) for w in ('Kısık', 'Orta', 'Parlak')) + '</span>'
+         '<span class="rz rz-cal"><span class="eq"><i></i><i></i><i></i><i></i></span><b>Ninni çalıyor</b></span>'
+         '<span class="rz rz-pil"><span class="rz-bat"><i></i><i></i><i></i><i></i></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span>')
+HALKA = '<div class="hk" aria-hidden="true"><i></i><i></i><i></i></div>'
+DALGA = '<div class="dl" aria-hidden="true"><span class="sol"><i></i><i></i><i></i></span><span class="sag"><i></i><i></i><i></i></span></div>'
+
+# Etiketteki minik simge (etkinken bir kez oynar)
+EK_IK = {
+    'masal': model(lambda m: '<img class="ek-dsk" src="/_blob/%s" alt="">' % DISK[m][0]),
+    'isik': '<span class="ek-kd"><i></i><i></i><i></i></span>',
+    'ninni': '<span class="eq ek-eq"><i></i><i></i><i></i><i></i></span>',
+    'sarj': '<span class="ek-bat"><i></i><i></i><i></i></span>',
 }
-OKSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>'
-DONSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"></path></svg>'
 
 
-def yt(t, koyu=False):  # [X] yer tutucusu görünür işaretlenir
-    return t.replace('[X]', '<span class="yt%s">[X]</span>' % (' koyu' if koyu else ''))
+def foto():
+    return model(lambda m: '<img class="ft-img" src="/_blob/%s" alt="LunaDream %s modeli, stüdyo çekimi">' % (FOTO[m], 'Kız' if m == 'kiz' else 'Erkek'))
 
 
-# ---------- A · Yörünge sahnesi ----------
-# Sahne 358 × 512; yörünge merkezi (179, 250), yarıçap 136; düğümler köşegenlerde (saat yönünde: Masal, Işık, Ninni, Şarj)
-MX, MY, R = 179, 250, 136
-POS = [(MX - 96, MY - 96), (MX + 96, MY - 96), (MX + 96, MY + 96), (MX - 96, MY + 96)]
+def etiketler(k, alt):  # k: durum öneki; alt: alttaki etiketlerin üst konumu (px)
+    pos = ['left: 12px; top: 14px', 'right: 12px; top: 14px', 'left: 12px; top: %dpx' % alt, 'right: 12px; top: %dpx' % alt]
+    return ''.join('<button class="{{%sc%d}}" type="button" style="%s" onClick="{{%sg%d}}" aria-pressed="{{%sp%d}}"><span class="ek-ik">%s</span><span class="ek-ad">%s</span></button>'
+                   % (k, i, pos[i], k, i, k, i, EK_IK[o[0]], o[1]) for i, o in enumerate(OZ))
 
 
-def a_sahne():
-    tavan = model(lambda m: '<img class="oy-desen %s" src="/_blob/%s" alt="">' % (m, TAVAN[m]))
-    disk = model(lambda m: '<img class="oy-disk" src="/_blob/%s" alt="">' % DISK[m])
-    urun = model(lambda m: '<span class="oy-pen"><img class="oy-img %s" src="/_blob/%s" alt=""></span>' % (m, FOTO[m]))
-    dug = ''.join('<button class="{{oyd%d}}" type="button" style="left: %dpx; top: %dpx" onClick="{{oyg%d}}" aria-pressed="{{oyp%d}}">'
-                  '<span class="oy-ik">%s</span><span class="oy-ad">%s</span></button>' % (i, x - 28, y - 28, i, i, IK[k[0]], k[1])
-                  for i, (k, (x, y)) in enumerate(zip(OZ, POS)))
-    metin = ''.join('<div class="{{oym%d}}" aria-hidden="{{oyh%d}}"><h3 class="oy-bas">%s</h3><p class="oy-p">%s</p></div>' % (i, i, k[3], yt(k[4], True))
-                    for i, k in enumerate(OZ))
-    return ('<div class="{{oyCls}}">'
-            '<div class="oy-tavan" aria-hidden="true">' + tavan + '</div>'
-            '<div class="oy-yor" aria-hidden="true"><span class="oy-kol" style="--a: {{oyAci}}deg"><i></i></span></div>'
-            '<div class="oy-hl" aria-hidden="true"><i></i><i></i><i></i></div>'
-            '<div class="oy-dal" aria-hidden="true"><span class="sol"><i></i><i></i><i></i></span><span class="sag"><i></i><i></i><i></i></span></div>'
-            '<div class="oy-urun" aria-hidden="true">' + disk + urun + '</div>'
-            '<div class="oy-alt" aria-hidden="true">'
-            '<span class="oy-kad"><i>Kısık</i><i>Orta</i><i>Parlak</i></span>'
-            '<span class="oy-cal"><span class="eq"><i></i><i></i><i></i><i></i></span>Ninni çalıyor</span>'
-            '<span class="oy-pil"><span class="oy-bat"><i></i><i></i><i></i><i></i></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span>'
-            '</div>' + dug +
-            '<div class="oy-metin" aria-live="polite">' + metin + '</div></div>')
+def cumle(k):
+    return '<div class="ft-metin" aria-live="polite">' + ''.join('<p class="{{%sm%d}}" aria-hidden="{{%sh%d}}">%s</p>' % (k, i, k, i, o[4]) for i, o in enumerate(OZ)) + '</div>'
 
 
-# ---------- B · Etiketli ürün ----------
-EK_IK = {  # etiketteki minik simge (etkinken oynar)
-    'masal': model(lambda m: '<img class="oe-dsk" src="/_blob/%s" alt="">' % DISK[m]),
-    'isik': '<span class="oe-kd"><i></i><i></i><i></i></span>',
-    'ninni': '<span class="eq oe-eq"><i></i><i></i><i></i><i></i></span>',
-    'sarj': '<span class="oe-bat"><i></i><i></i><i></i></span>',
-}
-EK_POS = ['left: 12px; top: 14px', 'right: 12px; top: 64px', 'left: 12px; top: 376px', 'right: 12px; top: 392px']
+# 1 · Aydınlık sahne: çerçeve 358 × 440; lamba merkezi (179, 224)
+def aydinlik():
+    return ('<div class="{{aCls}}" data-tur="a"><div class="ft">' + foto() + '</div>' + HALKA + DALGA +
+            '<div class="rz-yer" aria-hidden="true">' + ROZET + '</div>' + etiketler('a', 380) + '</div>' + cumle('a'))
 
 
-def b_sahne():
-    foto = model(lambda m: '<img class="oe-img" src="/_blob/%s" alt="LunaDream %s modeli, stüdyo çekimi">' % (FOTO[m], 'Kız' if m == 'kiz' else 'Erkek'))
-    cip = ''.join('<button class="{{oec%d}}" type="button" style="%s" onClick="{{oeg%d}}" aria-pressed="{{oep%d}}"><span class="oe-ik">%s</span>%s</button>'
-                  % (i, EK_POS[i], i, i, EK_IK[k[0]], k[2]) for i, k in enumerate(OZ))
-    metin = ''.join('<p class="{{oem%d}}" aria-hidden="{{oeh%d}}">%s</p>' % (i, i, yt(k[4])) for i, k in enumerate(OZ))
-    return '<div class="oe"><div class="oe-foto">' + foto + '</div>' + cip + '</div><div class="oe-metin" aria-live="polite">' + metin + '</div>'
+# 2 · Gece kadranı: panel 358 × 432; pencere merkezi (179, 220), çap 200; yay yarıçapı 136, yazılar 162
+YAZI = [(39, 139), (124, 68), (234, 68), (319, 139)]  # θ = -60, -20, 20, 60 derece
 
 
-# ---------- C · Masal kitabı ----------
-RESIM = {'masal': O.ui_tavan, 'isik': O.ui_isik, 'ninni': O.ui_tel, 'sarj': O.ui_pil}
+def kadran():
+    dug = ''.join('<button class="{{bd%d}}" type="button" style="left: %dpx; top: %dpx" onClick="{{bg%d}}" aria-pressed="{{bp%d}}">%s</button>'
+                  % (i, x - 32, y - 24, i, i, o[2]) for i, (o, (x, y)) in enumerate(zip(OZ, YAZI)))
+    metin = ''.join('<div class="{{bm%d}}" aria-hidden="{{bh%d}}"><h3 class="gk-bas">%s</h3><p class="gk-p">%s</p></div>' % (i, i, o[3], o[4]) for i, o in enumerate(OZ))
+    pen = model(lambda m: '<img class="%s" src="/_blob/%s" alt="">' % (m, FOTO[m]))
+    return ('<div class="{{bCls}}" data-tur="b">'
+            '<div class="gk-yay" aria-hidden="true"><i></i></div>'
+            '<div class="gk-kol" aria-hidden="true" style="--a: {{bAci}}deg"><i></i></div>' + HALKA + DALGA +
+            '<div class="gk-pen" aria-hidden="true">' + pen + '</div>'
+            '<div class="rz-yer" aria-hidden="true">' + ROZET + '</div>' + dug +
+            '<div class="gk-metin" aria-live="polite">' + metin + '</div></div>')
 
 
-def c_kitap():
-    sayfa = []
-    kapak = model(lambda m: '<span class="ok-pen"><img class="%s" src="/_blob/%s" alt=""></span>' % (m, FOTO[m]))
-    sayfa.append('<article class="{{okc0}}" style="z-index: 5" aria-hidden="{{okh0}}"><div class="ok-kapak">' + kapak +
-                 '<h2 class="ok-kbas">Neler<br>yapabiliyor<span>?</span></h2><p class="ok-kalt">Dört sayfada LunaDream</p></div>'
-                 '<div class="ok-alt"><span></span><button class="ok-cevir koyu" type="button" onClick="{{okg0}}" tabindex="{{okt0}}">Sayfayı çevir' + OKSVG + '</button></div></article>')
-    for j, k in enumerate(OZ, 1):
-        son = j == len(OZ)
-        nok = ''.join('<i%s></i>' % (' class="on"' if n == j - 1 else '') for n in range(len(OZ)))
-        sayfa.append('<article class="{{okc%d}}" style="z-index: %d" aria-hidden="{{okh%d}}"><div class="ok-resim">%s</div>'
-                     '<h3 class="ok-bas">%s</h3><p class="ok-p">%s</p>'
-                     '<div class="ok-alt"><span class="ok-nok" aria-hidden="true">%s</span><button class="ok-cevir" type="button" onClick="{{okg%d}}" tabindex="{{okt%d}}">%s</button></div></article>'
-                     % (j, 5 - j, j, RESIM[k[0]](), k[3], yt(k[4]), nok, j, j, ('Başa dön' + DONSVG) if son else ('Sayfayı çevir' + OKSVG)))
-    return '<div class="ok">' + ''.join(sayfa) + '</div>'
+# 3 · Etiketli ürün: çerçeve 358 × 420
+def etiketli():
+    return '<div class="{{cCls}}" data-tur="c"><div class="ft">' + foto() + '</div>' + etiketler('c', 358) + '</div>' + cumle('c')
 
 
 CSS = r""".pg{background:#F6F1E9;font-size:15px}
@@ -121,211 +102,188 @@ CSS = r""".pg{background:#F6F1E9;font-size:15px}
 .pg button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .pg :focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
 .h2 span.n{color:#F2A65A}
-.yt{background:#F1E8DA;color:#7A4513;border-radius:4px;padding:0 3px}
-.yt.koyu{background:rgba(242,166,90,.18);color:#F6C893}
 
-/* A · Yörünge sahnesi */
-.oy{position:relative;height:512px;margin-top:16px;border-radius:28px;background:#1A2142;overflow:hidden;color:#FFFDF9}
-.oy-tavan{position:absolute;left:0;right:0;top:0;height:178px;overflow:hidden;opacity:0;transition:opacity .7s EASE;-webkit-mask-image:linear-gradient(#000 30%,transparent);mask-image:linear-gradient(#000 30%,transparent)}
-.oy-desen{position:absolute;left:0;top:0;width:358px;height:auto;opacity:.9;transform:scale(1.04);transform-origin:50% 0;transition:transform 1.4s EASE}
-.oy-desen.erkek{top:-120px}
-.oy.s0 .oy-tavan{opacity:1}
-.oy.s0 .oy-desen{transform:none}
-.oy-yor{position:absolute;left:43px;top:114px;width:272px;height:272px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(246,241,233,.16)}
-.oy-kol{position:absolute;inset:0;transform:rotate(var(--a));transition:transform 1s EASE}
-.oy-kol i{position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#F2A65A}
-/* ürün (gerçek kesim), merkezde */
-.oy-urun{position:absolute;left:95px;top:166px;width:168px;height:168px}
-.oy-pen{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#EEE4DA;transition:opacity .5s EASE}
-.oy-img{position:absolute;left:-26px;top:-56px;width:220px;height:220px;max-width:none}
-.oy-img.erkek{left:-25px;top:-58px}
-/* Masal: disk lambanın üstüne iner, desen tavanda yumuşakça belirir (dönmez) */
-.oy-disk{position:absolute;left:50%;top:-14px;z-index:1;width:26px;height:26px;margin-left:-13px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.5px #FFFDF9;opacity:0}
-.oy.s0 .oy-disk{animation:oydisk 4.5s EASE both}
-@keyframes oydisk{0%{opacity:0;transform:translateY(-34px)}14%{opacity:1}34%{opacity:1;transform:none}48%,100%{opacity:0;transform:translateY(12px) scale(.5)}}
-/* Işık: üç halka, kısık → orta → parlak; ürün de kademeyle aydınlanır (6 sn) */
-.oy-hl i{position:absolute;left:50%;top:250px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #F2A65A;opacity:0;transition:opacity .4s EASE}
-.oy-hl i:nth-child(1){width:190px;height:190px;margin:-95px 0 0 -95px;left:179px}
-.oy-hl i:nth-child(2){width:216px;height:216px;margin:-108px 0 0 -108px;left:179px}
-.oy-hl i:nth-child(3){width:242px;height:242px;margin:-121px 0 0 -121px;left:179px}
-.oy.s1 .oy-hl i:nth-child(1){opacity:.9}
-.oy.s1 .oy-hl i:nth-child(2){opacity:.5;animation:oyl2 6s EASE infinite}
-.oy.s1 .oy-hl i:nth-child(3){opacity:.25;animation:oyl3 6s EASE infinite}
-.oy.s1 .oy-pen{animation:oyik 6s EASE infinite}
-@keyframes oyl2{0%,30%{opacity:0;transform:scale(.9)}37%,92%{opacity:.5;transform:none}100%{opacity:0;transform:scale(.9)}}
-@keyframes oyl3{0%,63%{opacity:0;transform:scale(.9)}70%,92%{opacity:.25;transform:none}100%{opacity:0;transform:scale(.9)}}
-@keyframes oyik{0%,30%{opacity:.6}37%,63%{opacity:.8}70%,92%{opacity:1}100%{opacity:.6}}
-/* Ninni: ürünün iki yanından ses dalgaları */
-.oy-dal span{position:absolute;top:226px;width:48px;height:48px;opacity:0;transition:opacity .4s EASE}
-.oy-dal .sol{left:44px}.oy-dal .sag{left:266px}
-.oy-dal i{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;box-shadow:inset 1.5px 0 0 0 #F2A65A;opacity:0}
-.oy-dal .sol i{box-shadow:inset 1.5px 0 0 0 #F2A65A}.oy-dal .sag i{box-shadow:inset -1.5px 0 0 0 #F2A65A}
-.oy.s2 .oy-dal span{opacity:1}
-.oy.s2 .oy-dal .sol i{animation:oydl 2.4s EASE infinite}.oy.s2 .oy-dal .sag i{animation:oydr 2.4s EASE infinite}
-.oy-dal i:nth-child(2){animation-delay:.8s!important}.oy-dal i:nth-child(3){animation-delay:1.6s!important}
-@keyframes oydl{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(-22px) scale(1.25)}}
-@keyframes oydr{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(22px) scale(1.25)}}
-/* Şarj: pil dolar, lamba şarjdayken sönük; fiş çıkınca "Kablosuz" ve yanar */
-.oy.s3 .oy-pen{animation:oysj 6s EASE infinite}
-@keyframes oysj{0%,58%{opacity:.4}66%,92%{opacity:1}100%{opacity:.4}}
-/* pencerenin altına binen küçük gösterge rozeti (en çok 134 px; alt düğümlere değmez) */
-.oy-alt{position:absolute;left:109px;top:318px;width:140px;height:30px;display:grid;justify-items:center;align-items:center;font-size:12px;font-weight:600;color:#B9BED6}
-.oy-alt>span{grid-area:1/1;display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border-radius:999px;background:#1A2142;box-shadow:inset 0 0 0 1px rgba(246,241,233,.22);opacity:0;transform:translateY(4px);transition:opacity .35s EASE,transform .35s EASE;white-space:nowrap}
-.oy.s1 .oy-kad,.oy.s2 .oy-cal,.oy.s3 .oy-pil{opacity:1;transform:none}
-.oy-kad{gap:8px!important}
-.oy-kad i{font-style:normal;opacity:.5}
-.oy-kad i:nth-child(3){opacity:1;color:#FFFDF9}
-.oy.s1 .oy-kad i:nth-child(1){animation:oyk1 6s EASE infinite}.oy.s1 .oy-kad i:nth-child(2){animation:oyk2 6s EASE infinite}.oy.s1 .oy-kad i:nth-child(3){animation:oyk3 6s EASE infinite}
-@keyframes oyk1{0%,30%{opacity:1}37%,100%{opacity:.5}}
-@keyframes oyk2{0%,30%{opacity:.5}37%,63%{opacity:1}70%,100%{opacity:.5}}
-@keyframes oyk3{0%,63%{opacity:.5}70%,92%{opacity:1}100%{opacity:.5}}
-.oy-cal .eq{height:14px;margin:0;animation:none}
-.oy-cal .eq i{height:14px}
-.oy-bat{position:relative;display:flex;gap:2px;width:36px;height:18px;padding:2.5px;border:1.5px solid #FFFDF9;border-radius:5px}
-.oy-bat::after{content:"";position:absolute;right:-5px;top:4px;width:3px;height:6px;border-radius:0 2px 2px 0;background:#FFFDF9}
-.oy-bat i{flex:1;border-radius:1.5px;background:#FFFDF9}
-.oy.s3 .oy-bat i:nth-child(1){animation:pl1 6s EASE infinite both}.oy.s3 .oy-bat i:nth-child(2){animation:pl2 6s EASE infinite both}
-.oy.s3 .oy-bat i:nth-child(3){animation:pl3 6s EASE infinite both}.oy.s3 .oy-bat i:nth-child(4){animation:pl4 6s EASE infinite both}
-.oy-pil .durum{color:#B9BED6}
-.oy.s3 .oy-pil .durum i:first-child{opacity:0;animation:s1 6s EASE infinite}.oy.s3 .oy-pil .durum i:last-child{animation:s2 6s EASE infinite}
-/* düğümler: 56 px; etkin düğümün halkası amber, ay noktası onun altına girer */
-.oy-d{position:absolute;width:56px;height:56px;padding:0;border:0;border-radius:50%;background:#1A2142;color:#FFFDF9;box-shadow:inset 0 0 0 1.5px rgba(246,241,233,.3);transition:box-shadow .4s EASE}
-.oy-d.on{box-shadow:inset 0 0 0 1.5px #F2A65A}
-.oy-ik{display:grid;place-items:center;width:100%;height:100%}
-.oy-ik svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.75;transition:opacity .4s EASE}
-.oy-d.on .oy-ik svg{opacity:1}
-.oy-ad{position:absolute;left:50%;width:80px;margin-left:-40px;text-align:center;font-size:13px;font-weight:600;color:#B9BED6;transition:color .4s EASE}
-.oy-d.ust .oy-ad{bottom:calc(100% + 6px)}.oy-d.alt .oy-ad{top:calc(100% + 6px)}
-.oy-d.on .oy-ad{color:#FFFDF9}
-.oy-metin{position:absolute;left:20px;right:20px;top:414px;display:grid}
-.oy-m{grid-area:1/1;opacity:0;transform:translateY(6px);transition:opacity .35s EASE,transform .35s EASE}
-.oy-m.on{opacity:1;transform:none}
-.oy-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.2;letter-spacing:-.01em;color:#FFFDF9}
-.oy-p{margin:6px 0 0;font-size:15px;line-height:1.45;color:#B9BED6}
+/* Fotoğraf çerçevesi (1 ve 3): kare fotoğraf üstte, altı zemin rengine erir */
+.sa,.et{position:relative;margin-top:16px}
+.sa{height:440px}.et{height:420px}
+.ft{position:absolute;inset:0;border-radius:22px;overflow:hidden;background:#EEE4DA}
+.ft-img{position:absolute;left:0;top:0;width:100%;height:358px;object-fit:cover;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+.ft-metin{display:grid;align-items:center;min-height:48px;margin-top:12px}
+.ft-m{grid-area:1/1;margin:0;font-size:16px;line-height:1.4;color:#1A2142;white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .3s EASE,transform .3s EASE}
+.ft-m.on{opacity:1;transform:none}
 
-/* B · Etiketli ürün: 358 × 452 çerçeve; fotoğraf üstte kare, altı aynı zemin rengine yumuşakça erir */
-.oe{position:relative;height:452px;margin-top:16px}
-.oe-foto{position:absolute;inset:0;border-radius:24px;overflow:hidden;background:#EEE4DA}
-.oe-img{position:absolute;left:0;top:0;width:100%;height:358px;object-fit:cover;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
-.oe-cip{position:absolute;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 7px;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font-size:14px;font-weight:600;white-space:nowrap;
-  animation:oegir .5s EASE both;transition:box-shadow .3s EASE}
-.oe-cip:nth-of-type(2){animation-delay:.12s}.oe-cip:nth-of-type(3){animation-delay:.24s}.oe-cip:nth-of-type(4){animation-delay:.36s}
-@keyframes oegir{from{opacity:0;transform:translateY(8px)}}
-.oe-cip.on{box-shadow:0 0 0 1px #1A2142;border-color:#1A2142}
-.oe-ik{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#F1E8DA;overflow:hidden}
-.oe-dsk{display:block;width:26px;height:26px;border-radius:50%;object-fit:cover}
-.oe-cip.on .oe-dsk{animation:oedsk 2.4s EASE infinite}
-@keyframes oedsk{0%,100%{transform:none}30%{transform:translateY(-3px)}55%{transform:none}}
-.oe-kd{display:flex;gap:3px}
-.oe-kd i{width:6px;height:6px;border-radius:50%;background:#1A2142;opacity:.25}
-.oe-kd i:nth-child(1){opacity:1}
-.oe-cip.on .oe-kd i{background:#F2A65A}
-.oe-cip.on .oe-kd i:nth-child(1){animation:oyk1 6s EASE infinite;opacity:1}
-.oe-cip.on .oe-kd i:nth-child(2){animation:oekd2 6s EASE infinite}.oe-cip.on .oe-kd i:nth-child(3){animation:oekd3 6s EASE infinite}
-@keyframes oekd2{0%,30%{opacity:.25}37%,92%{opacity:1}100%{opacity:.25}}
-@keyframes oekd3{0%,63%{opacity:.25}70%,92%{opacity:1}100%{opacity:.25}}
-.oe-eq{height:14px;margin:0;animation:none}
-.oe-eq i{height:14px;background:#1A2142;animation-play-state:paused}
-.oe-cip.on .oe-eq i{background:#F2A65A;animation-play-state:running}
-.oe-bat{position:relative;display:flex;gap:1.5px;width:20px;height:12px;padding:1.5px;border:1.5px solid #1A2142;border-radius:3.5px}
-.oe-bat::after{content:"";position:absolute;right:-4px;top:2.5px;width:2px;height:4px;border-radius:0 1px 1px 0;background:#1A2142}
-.oe-bat i{flex:1;border-radius:1px;background:#1A2142}
-.oe-cip.on .oe-bat i:nth-child(1){animation:pl1 6s EASE infinite both}.oe-cip.on .oe-bat i:nth-child(2){animation:pl2 6s EASE infinite both}.oe-cip.on .oe-bat i:nth-child(3){animation:pl3 6s EASE infinite both}
-.oe-metin{display:grid;margin-top:14px;min-height:48px}
-.oe-m{grid-area:1/1;margin:0;font-size:16px;line-height:1.45;color:#1A2142;text-wrap:balance;opacity:0;transform:translateY(6px);transition:opacity .3s EASE,transform .3s EASE}
-.oe-m.on{opacity:1;transform:none}
+/* Eylem etiketleri: 48 px; etkin olan lacivert dolgu katmanıyla (opacity), yazı rengi anında değişir */
+.ek{position:absolute;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 7px;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font-size:14px;font-weight:600;white-space:nowrap;isolation:isolate;animation:ekgir .5s EASE both}
+.ek::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;background:#1A2142;opacity:0;transition:opacity .3s EASE}
+.ek.on::before{opacity:1}
+.ek.on{color:#FFFDF9}
+.ek:nth-of-type(2){animation-delay:.12s}.ek:nth-of-type(3){animation-delay:.24s}.ek:nth-of-type(4){animation-delay:.36s}
+@keyframes ekgir{from{opacity:0;transform:translateY(8px)}}
+.ek-ik{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#F1E8DA;overflow:hidden}
+.ek-dsk{display:block;width:26px;height:26px;border-radius:50%;object-fit:cover}
+.ek.on .ek-dsk{animation:dkg .8s EASE both}
+.ek-kd{display:flex;gap:3px}
+.ek-kd i{width:6px;height:6px;border-radius:50%;background:#1A2142;opacity:.3}
+.ek-kd i:first-child{opacity:1}
+.ek.on .ek-kd i{background:#A05A1C}
+.ek.on .ek-kd i:nth-child(2){animation:kd2 6s EASE both}.ek.on .ek-kd i:nth-child(3){animation:kd3 6s EASE both}
+@keyframes kd2{0%,30%{opacity:.3}37%,100%{opacity:1}}
+@keyframes kd3{0%,63%{opacity:.3}70%,100%{opacity:1}}
+.ek-eq{height:14px;margin:0;animation:none}
+.ek-eq i{height:14px;background:#1A2142;animation:none;transform:scaleY(.5)}
+.ek-eq i:nth-child(2){transform:scaleY(.8)}.ek-eq i:nth-child(3){transform:scaleY(.4)}.ek-eq i:nth-child(4){transform:scaleY(.65)}
+.ek.on .ek-eq i{background:#A05A1C;animation:ses 2s EASE 3}
+.ek-bat{position:relative;display:flex;gap:1.5px;width:20px;height:12px;padding:1.5px;border:1.5px solid #1A2142;border-radius:3.5px}
+.ek-bat::after{content:"";position:absolute;right:-4px;top:2.5px;width:2px;height:4px;border-radius:0 1px 1px 0;background:#1A2142}
+.ek-bat i{flex:1;border-radius:1px;background:#1A2142}
+.ek.on .ek-bat i:nth-child(1){animation:rp1 6s EASE both}.ek.on .ek-bat i:nth-child(2){animation:rp2 6s EASE both}.ek.on .ek-bat i:nth-child(3){animation:rp3 6s EASE both}
 
-/* C · Masal kitabı: 326 × 452, sağ sayfa; sol kenardan çevrilir (rotateY, perspektif) */
-.ok{position:relative;width:326px;height:420px;margin:16px auto 0;perspective:1600px}
-.ok::before,.ok::after{content:"";position:absolute;inset:0;border-radius:6px 18px 18px 6px;background:#FBF7F0;border:1px solid #E3D8C7}
-.ok::before{transform:translate(8px,6px)}.ok::after{transform:translate(4px,3px)}
-.ok-sayfa{position:absolute;inset:0;display:flex;flex-direction:column;padding:14px 14px 8px 22px;border-radius:6px 18px 18px 6px;background:#FFFDF9;border:1px solid #E3D8C7;
-  transform-origin:0 50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s EASE}
-.ok-sayfa::before{content:"";position:absolute;left:0;top:0;bottom:0;width:18px;border-radius:6px 0 0 6px;background:linear-gradient(90deg,rgba(26,33,66,.09),rgba(26,33,66,0))}
-.ok-sayfa::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#1A2142;opacity:0;pointer-events:none;transition:opacity .9s EASE}
-.ok-sayfa.gecti{transform:rotateY(-180deg)}
-.ok-sayfa.gecti::after{opacity:.2}
-.ok-sayfa.kapak{background:#1A2142;border-color:#1A2142}
-.ok-sayfa.kapak::before{background:linear-gradient(90deg,rgba(0,0,0,.25),rgba(0,0,0,0))}
-.ok-kapak{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4px 8px}
-.ok-pen{position:absolute;right:6px;top:10px;width:176px;height:176px;border-radius:50%;overflow:hidden;background:#EEE4DA}
-.ok-pen img{position:absolute;left:-24px;top:-60px;width:230px;height:230px;max-width:none}
-.ok-kbas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:34px;line-height:1.05;letter-spacing:-.02em;color:#FFFDF9}
-.ok-kbas span{color:#F2A65A}
-.ok-kalt{margin:10px 0 0;font-size:15px;color:#B9BED6}
-.ok-resim{position:relative;display:flex;align-items:center;justify-content:center;height:206px;flex:none;border-radius:12px;background:#F1E8DA;overflow:hidden}
-.ok-resim .bu{transform:scale(.96)}
-.ok-bas{margin:18px 0 0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;letter-spacing:-.01em;color:#1A2142;text-wrap:balance}
-.ok-p{margin:8px 0 0;font-size:15px;line-height:1.5;color:#5C6078;text-wrap:pretty}
-.ok-alt{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.ok-nok{display:flex;gap:6px}
-.ok-nok i{width:6px;height:6px;border-radius:50%;background:#E3D8C7}
-.ok-nok i.on{background:#F2A65A}
-.ok-cevir{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 4px;border:0;background:none;color:#1A2142;font-size:14px;font-weight:700}
-.ok-cevir.koyu{color:#FFFDF9}
-.ok-cevir svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* Etki katmanları (1 ve 2): halkalar, ses dalgaları; merkez --mx/--my */
+.sa{--mx:179px;--my:224px}
+.gk{--mx:179px;--my:220px}
+.hk i{position:absolute;left:var(--mx);top:var(--my);border-radius:50%;box-shadow:inset 0 0 0 1.5px #F2A65A;opacity:0;transition:opacity .4s EASE}
+.sa .hk i:nth-child(1){width:200px;height:200px;margin:-100px 0 0 -100px}
+.sa .hk i:nth-child(2){width:236px;height:236px;margin:-118px 0 0 -118px}
+.sa .hk i:nth-child(3){width:272px;height:272px;margin:-136px 0 0 -136px}
+.gk .hk i:nth-child(1){width:214px;height:214px;margin:-107px 0 0 -107px}
+.gk .hk i:nth-child(2){width:230px;height:230px;margin:-115px 0 0 -115px}
+.gk .hk i:nth-child(3){width:246px;height:246px;margin:-123px 0 0 -123px}
+.s1 .hk i:nth-child(1){opacity:.9}
+.s1 .hk i:nth-child(2){opacity:.55;animation:hk2 6s EASE both}
+.s1 .hk i:nth-child(3){opacity:.3;animation:hk3 6s EASE both}
+@keyframes hk2{0%,30%{opacity:0;transform:scale(.92)}37%,100%{opacity:.55;transform:none}}
+@keyframes hk3{0%,63%{opacity:0;transform:scale(.92)}70%,100%{opacity:.3;transform:none}}
+.dl span{position:absolute;top:calc(var(--my) - 24px);width:48px;height:48px}
+.sa .dl .sol{left:calc(var(--mx) - 124px)}.sa .dl .sag{left:calc(var(--mx) + 76px)}
+.gk .dl .sol{left:calc(var(--mx) - 158px)}.gk .dl .sag{left:calc(var(--mx) + 110px)}
+.dl i{position:absolute;inset:0;border-radius:50%;opacity:0}
+.dl .sol i{box-shadow:inset 1.5px 0 0 0 #F2A65A}.dl .sag i{box-shadow:inset -1.5px 0 0 0 #F2A65A}
+.s2 .dl .sol i{animation:dll 2s EASE 3}.s2 .dl .sag i{animation:dlr 2s EASE 3}
+.s2 .dl i:nth-child(2){animation-delay:.67s}.s2 .dl i:nth-child(3){animation-delay:1.33s}
+@keyframes dll{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(-20px) scale(1.25)}}
+@keyframes dlr{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(20px) scale(1.25)}}
+
+/* Rozetler: lambanın altında tek rozet; 13 px; pasif yazı opak gri */
+.rz-yer{position:absolute;left:0;right:0;display:grid;justify-items:center;height:32px}
+.sa .rz-yer{top:340px}.gk .rz-yer{top:304px}
+.rz{grid-area:1/1;display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;font-size:13px;font-weight:600;color:#1A2142;white-space:nowrap;
+  opacity:0;transform:translateY(4px);transition:opacity .35s EASE,transform .35s EASE}
+.gk .rz{background:#1A2142;box-shadow:inset 0 0 0 1px rgba(246,241,233,.24);color:#FFFDF9}
+.s0 .rz-disk,.s1 .rz-kad,.s2 .rz-cal,.s3 .rz-pil{opacity:1;transform:none}
+.rz b{font-weight:600}
+.rz-disk img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.s0 .rz-disk img{animation:dkg .9s EASE both}
+@keyframes dkg{0%{opacity:0;transform:translateX(24px) rotate(90deg)}100%{opacity:1;transform:none}}
+.rz-kad{gap:10px}
+.rz-kad i{position:relative;font-style:normal;color:#6B6F86}
+.gk .rz-kad i{color:#8E93AE}
+.rz-kad .e{position:absolute;left:0;top:0;color:#1A2142;opacity:0}
+.gk .rz-kad .e{color:#FFFDF9}
+.rz-kad i:nth-child(3) .e{opacity:1}
+.s1 .rz-kad i:nth-child(1) .e{animation:kw1 6s EASE both}.s1 .rz-kad i:nth-child(2) .e{animation:kw2 6s EASE both}.s1 .rz-kad i:nth-child(3) .e{animation:kw3 6s EASE both}
+@keyframes kw1{0%,30%{opacity:1}37%,100%{opacity:0}}
+@keyframes kw2{0%,30%{opacity:0}37%,63%{opacity:1}70%,100%{opacity:0}}
+@keyframes kw3{0%,63%{opacity:0}70%,100%{opacity:1}}
+.rz-cal .eq{height:14px;margin:0;animation:none}
+.rz-cal .eq i{height:14px;animation:none;transform:scaleY(.6)}
+.s2 .rz-cal .eq i{animation:ses 2s EASE 3}
+.rz-bat{position:relative;display:flex;gap:2px;width:34px;height:17px;padding:2px;border:1.5px solid currentColor;border-radius:5px}
+.rz-bat::after{content:"";position:absolute;right:-5px;top:4px;width:3px;height:6px;border-radius:0 2px 2px 0;background:currentColor}
+.rz-bat i{flex:1;border-radius:1.5px;background:currentColor}
+.s3 .rz-bat i:nth-child(1){animation:rp1 6s EASE both}.s3 .rz-bat i:nth-child(2){animation:rp2 6s EASE both}.s3 .rz-bat i:nth-child(3){animation:rp3 6s EASE both}.s3 .rz-bat i:nth-child(4){animation:rp4 6s EASE both}
+@keyframes rp1{0%{opacity:.15}10%,100%{opacity:1}}
+@keyframes rp2{0%,10%{opacity:.15}22%,100%{opacity:1}}
+@keyframes rp3{0%,22%{opacity:.15}34%,100%{opacity:1}}
+@keyframes rp4{0%,34%{opacity:.15}46%,100%{opacity:1}}
+.rz-pil .durum{color:inherit;font-size:13px}
+.rz-pil .durum i:first-child{opacity:0}
+.s3 .rz-pil .durum i:first-child{animation:sd1 6s EASE both}.s3 .rz-pil .durum i:last-child{animation:sd2 6s EASE both}
+@keyframes sd1{0%,58%{opacity:1}64%,100%{opacity:0}}
+@keyframes sd2{0%,60%{opacity:0}66%,100%{opacity:1}}
+
+/* 2 · Gece kadranı */
+.gk{position:relative;height:432px;margin-top:16px;border-radius:28px;background:#1A2142;overflow:hidden;color:#FFFDF9}
+.gk-yay{position:absolute;left:43px;top:84px;width:272px;height:136px;overflow:hidden}
+.gk-yay i{position:absolute;left:0;top:0;width:272px;height:272px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(246,241,233,.2)}
+.gk-kol{position:absolute;left:43px;top:84px;width:272px;height:272px;transform:rotate(var(--a));transition:transform 1s EASE}
+.gk-kol i{position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#F2A65A}
+.gk-pen{position:absolute;left:79px;top:120px;width:200px;height:200px;border-radius:50%;overflow:hidden;background:#EEE4DA;transition:opacity .5s EASE}
+.gk-pen img{position:absolute;left:-30px;top:-68px;width:260px;height:260px;max-width:none}
+.gk-pen img.erkek{left:-29px;top:-66px}
+.gk.s1 .gk-pen{animation:gkb 6s EASE both}
+.gk.s3 .gk-pen{animation:gks 6s EASE both}
+@keyframes gkb{0%,30%{opacity:.6}37%,63%{opacity:.8}70%,100%{opacity:1}}
+@keyframes gks{0%,58%{opacity:.4}66%,100%{opacity:1}}
+.gk-d{position:absolute;width:64px;height:48px;padding:0;border:0;background:none;color:#8E93AE;font-size:14px;font-weight:600}
+.gk-d.on{color:#FFFDF9}
+.gk-metin{position:absolute;left:20px;right:20px;top:356px;display:grid}
+.gk-m{grid-area:1/1;opacity:0;transform:translateY(6px);transition:opacity .35s EASE,transform .35s EASE}
+.gk-m.on{opacity:1;transform:none}
+.gk-bas{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.2;letter-spacing:-.01em;color:#FFFDF9}
+.gk-p{margin:6px 0 0;font-size:15px;line-height:1.45;color:#B9BED6}
 """.replace('EASE', E)
 
 BAS = '<h2 class="h2">Neler<br>yapabiliyor<span class="n">?</span></h2>'
 
 HTML = """<div class="pg">
   <div style="padding: 18px 16px 10px">
-    <h1 class="h2" style="font-size: 22px">LunaDream · Neler yapabiliyor? 2. tur</h1>
-    <p style="margin: 6px 0 0; font-size: 13px; color: #5C6078">Liste yok: ürün ortada, yazı en az, tek hareketli an. Sihirli kartlar "ne" der, bu bölüm "nasıl" der. Yeri: Videolar'ın altı, Odası'nın üstü. Işığı aç/kapat anahtarı yok.</p>
+    <h1 class="h2" style="font-size: 22px">LunaDream · Neler yapabiliyor? 2. tur, eleştirmenin sırası</h1>
+    <p style="margin: 6px 0 0; font-size: 13px; color: #5C6078">Ürün büyük, yazı en az. Etiketler eylem söyler (Sihirli "ne" der). Her durum 6 sn; ekrana girince tek tur, Masal'da durur, dokununca durur. Yeri: Videolar'ın altı, Odası'nın üstü.</p>
   </div>
 
   <section class="sec">
-    <p class="oneri">A · Yörünge sahnesi</p>
-    <p class="oneri-alt">Koyu sahnede gerçek ürün; amber ay noktası yörüngede düğümden düğüme gider, etkisi ürünün üstünde görünür. Ekrandayken ilerler, dokununca durur.</p>
-    """ + BAS + a_sahne() + """
+    <p class="oneri">1 · Aydınlık sahne</p>
+    <p class="oneri-alt">Büyük stüdyo fotoğrafı; etkin özelliğin etkisi lambanın çevresinde: üç amber halka, iki yanda ses dalgaları, altta disk, kademe ve pil rozeti.</p>
+    """ + BAS + aydinlik() + """
   </section>
 
   <section class="sec">
-    <p class="oneri">B · Etiketli ürün</p>
-    <p class="oneri-alt">Büyük stüdyo fotoğrafı, çevresinde dört etiket; etkin etiketin minik simgesi oynar, altta tek cümle. Paragraf yok.</p>
-    """ + BAS + b_sahne() + """
+    <p class="oneri">2 · Gece kadranı</p>
+    <p class="oneri-alt">Beğenilen gece kadranının dili: lacivert sahne, yuvarlak pencerede ürün, yayda dört yazı; amber ay noktası yazıdan yazıya gider.</p>
+    """ + BAS + kadran() + """
   </section>
 
   <section class="sec">
-    <p class="oneri">C · Masal kitabı</p>
-    <p class="oneri-alt">Kapak ve dört sayfa; "Sayfayı çevir" ile sayfa soldan çevrilir. Marka "masal" dediği için metafor ona uyar.</p>
-    """ + c_kitap() + """
+    <p class="oneri">3 · Etiketli ürün</p>
+    <p class="oneri-alt">Güvenli yedek: fotoğraf, dört eylem etiketi, altta tek cümle. Etkin etiketin simgesi bir kez oynar.</p>
+    """ + BAS + etiketli() + """
   </section>
 </div>
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { a: 0, aAdim: 0, aDur: false, b: 0, bDur: false, c: 0, cDur: false }; }
+  constructor(p) { super(p); this.state = { a: 0, aDur: false, b: 0, bDur: false, c: 0, cDur: false }; this.tm = {}; }
   componentDidMount() {
-    // Ekrandayken kendiliğinden ilerler (A 4,5 sn, B 4 sn, C 5 sn); dokununca o yön durur. Azaltılmış harekette ilerlemez.
+    // Ekrana girince tek tur: her durum 6 sn, dört adımda Masal'a döner ve durur. Dokununca o yön durur. Azaltılmış harekette ilerlemez.
     var self = this;
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    this.iv = [setInterval(function () { self.ilerle('a'); }, 4500), setInterval(function () { self.ilerle('b'); }, 4000), setInterval(function () { self.ilerle('c'); }, 5000)];
+    ['a', 'b', 'c'].forEach(function (k) {
+      var el = document.querySelector('[data-tur="' + k + '"]'); if (!el) return;
+      var basla = function () { var n = 0;
+        var adim = function () { if (self.state[k + 'Dur']) return; var o = {}; o[k] = (self.state[k] + 1) % 4; self.setState(o); if (++n < 4) self.tm[k] = setTimeout(adim, 6000); };
+        self.tm[k] = setTimeout(adim, 6000); };
+      if (typeof IntersectionObserver === 'undefined') return basla();
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); basla(); } }, { threshold: .5 });
+      io.observe(el);
+    });
   }
-  componentWillUnmount() { (this.iv || []).forEach(clearInterval); }
-  ilerle(k) {
-    var S = this.state; if (S[k + 'Dur']) return;
-    if (k === 'a') this.setState({ a: (S.a + 1) % 4, aAdim: S.aAdim + 1 });
-    if (k === 'b') this.setState({ b: (S.b + 1) % 4 });
-    if (k === 'c') this.setState({ c: (S.c + 1) % 5 });
-  }
+  componentWillUnmount() { for (var k in this.tm) clearTimeout(this.tm[k]); }
   renderVals() {
     var self = this, S = this.state, o = { sihKiz: true, sihErkek: false };
-    o.oyCls = 'oy s' + S.a; o.oyAci = -45 + 90 * S.aAdim;
-    for (var i = 0; i < 4; i++) (function (i) { var on = i === S.a, eb = i === S.b;
-      o['oyd' + i] = 'oy-d' + (i < 2 ? ' ust' : ' alt') + (on ? ' on' : ''); o['oyp' + i] = on ? 'true' : 'false';
-      o['oyg' + i] = function () { var d = (i - self.state.a + 4) % 4; self.setState({ a: i, aAdim: self.state.aAdim + d, aDur: true }); };
-      o['oym' + i] = 'oy-m' + (on ? ' on' : ''); o['oyh' + i] = on ? 'false' : 'true';
-      o['oec' + i] = 'oe-cip' + (eb ? ' on' : ''); o['oep' + i] = eb ? 'true' : 'false';
-      o['oeg' + i] = function () { self.setState({ b: i, bDur: true }); };
-      o['oem' + i] = 'oe-m' + (eb ? ' on' : ''); o['oeh' + i] = eb ? 'false' : 'true'; })(i);
-    for (var j = 0; j < 5; j++) (function (j) { var ac = j === S.c;
-      o['okc' + j] = 'ok-sayfa' + (j === 0 ? ' kapak' : '') + (j < S.c ? ' gecti' : ''); o['okh' + j] = ac ? 'false' : 'true'; o['okt' + j] = ac ? '0' : '-1';
-      o['okg' + j] = function () { self.setState({ c: (j + 1) % 5, cDur: true }); }; })(j);
+    o.aCls = 'sa s' + S.a; o.bCls = 'gk s' + S.b; o.cCls = 'et s' + S.c; o.bAci = -60 + 40 * S.b;
+    for (var i = 0; i < 4; i++) (function (i) {
+      ['a', 'c'].forEach(function (k) { var on = i === S[k];
+        o[k + 'c' + i] = 'ek' + (on ? ' on' : ''); o[k + 'p' + i] = on ? 'true' : 'false';
+        o[k + 'g' + i] = function () { var s = {}; s[k] = i; s[k + 'Dur'] = true; self.setState(s); };
+        o[k + 'm' + i] = 'ft-m' + (on ? ' on' : ''); o[k + 'h' + i] = on ? 'false' : 'true'; });
+      var on = i === S.b;
+      o['bd' + i] = 'gk-d' + (on ? ' on' : ''); o['bp' + i] = on ? 'true' : 'false';
+      o['bg' + i] = function () { self.setState({ b: i, bDur: true }); };
+      o['bm' + i] = 'gk-m' + (on ? ' on' : ''); o['bh' + i] = on ? 'false' : 'true'; })(i);
     return o;
   }
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · Neler yapabiliyor 2', css=S2.MINI_CSS + O.MINI_CSS + CSS) + HTML + TAIL.format(h=int(os.environ.get('OZ2_H', 1900)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · Neler yapabiliyor 2', css=S2.MINI_CSS + CSS) + HTML + TAIL.format(h=int(os.environ.get('OZ2_H', 2249)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

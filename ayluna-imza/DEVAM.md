@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.9 · Galaxy USB canlı kartlar; LunaDream "Neler yapabiliyor?" taslakları (21 Ekim, en güncel)
+## LunaDream "Neler yapabiliyor?" 2. tur (21 Ekim, en güncel)
+- Kullanıcı 1. tur için (Satırlar / Sekmeler / Kaydırmalı): "Hayır, o da çok boğar; daha iyi bir şeyler mi düşünsek, çok sıkıcı duruyor böyle." "21 animasyon" sorusuna tercih belirtmedi ([X] kalır, sayfaya çıkmaz).
+- İlk taslak (`ozellik2_varyant.py`, git d090a34): A Yörünge sahnesi 7/5, B Etiketli ürün 6/6, C Masal kitabı 5/3. Eleştirmen: A'nın düğümleri akıllı ev uygulaması gibi, Tur 20 yörüngesine benziyor; B, Sihirli'nin aynısı ve hareketsiz; C kapakla içeriği saklıyor, Tur 5 kitabının aynısı.
+- Eleştirmenin seçtiği üç yön işlendi (`ozellik2_varyant.py` → `canvas/LunaDreamE-Ozellik2.dc.html`, tuval Sürüm 120, Güncel sayfa x=3290):
+  1. **Aydınlık sahne:** stüdyo fotoğrafı (358 × 440), etkiler lambanın çevresinde (üç amber halka, ses dalgaları), altta disk / kademe / pil rozeti; dört eylem etiketi.
+  2. **Gece kadranı:** lacivert sahne, 200 px yuvarlak pencere, yayda dört yazı, amber ay noktası yazıdan yazıya. Seçilirse vitrinle arasında en az 36 px krem boşluk.
+  3. **Etiketli ürün:** fotoğraf, dört eylem etiketi, altta tek cümle (güvenli yedek).
+- Ortak: "[X] ışık seçeneği" yok ("Üç kademe: kısık, orta, parlak."); disk lambanın tepesine inmez, rozette belirir; gece fotoğrafı yok (Videolar gösteriyor); her durum 6 sn, ekrana girince tek tur, Masal'da durur, dokununca durur; renk/gölge canlandırılmaz.
+- Kesim temizliği denendi (açık kenar + zemin): kesimin alt kısmı bozuk; koyu sahnede kesim yerine yuvarlak pencerede stüdyo fotoğrafı.
+- GIF'ler kullanıcıya gönderildi; seçim bekleniyor. Seçilince `luna_e.py`'de Videolar ile Odası arasına, tema 1.0.10.
+
+## Tema 1.0.9 · Galaxy USB canlı kartlar; LunaDream "Neler yapabiliyor?" taslakları (21 Ekim)
 - Kullanıcı (sitesindeki özellik anlatımının ekran görüntüsüyle): "USB için de yap aynısını; bir de LunaDream için sitemde olan bu tarz bir tasarım istiyorum, yine UI kullanabiliriz."
 - **USB (uygulandı):** `luna_usb.py` özellik hücrelerinde `.uk-ek` ekranları (UK_TAK, ortak disk şeridi `S2.ui_serit('k', UK_DISK)`, UK_BOYUN, UK_LAMBA, cetvel); teslim `.teslim` kartı + `.y-ik` USB ikonu. Disk şeridi CSS'i `S2.SERIT_CSS` (USB'de `.fis` çakıştığı için yalnız şerit alınır; `.ui-serit` kendi `position:relative`'i ile kırpılır). U_H=7480. Test: 5 ekran, şerit, teslim ikonu.
 - **LunaDream özellik anlatımı (karar bekliyor):** `ozellik_varyant.py` → `canvas/LunaDreamE-Ozellik.dc.html`. Eleştirmen 1. tur: Satırlar 7, Sekmeler 6, Kaydırmalı 5; düzeltmeler işlendi (gerçek ürün kesimi modele bağlı, kumanda paneli yok, eylem başlıkları, tek cümle, ekran 140 px, iddia temizliği). Yeri: Videolar'ın altı, Odası'nın üstü. Kullanıcıya soruldu: yön, ışık seçeneği sayısı ([X]), desen dönüyor mu.

@@ -269,3 +269,4 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Galaxy USB canlı kartlar kendi dilinde (gümüş ekran, lacivert çizgi, --v2 yalnız ışık); disk şeridi LunaDream ile ortak (`S2.SERIT_CSS`).
 - Sitedeki eski anlatım alınırken: yorum afişi yok, teyitsiz sayı [X], kutuda olmayan parça (kumanda) çizilmez, pil süresi ima edilmez.
 - Özellik anlatımı Sihirli'yi tekrar etmez: Sihirli "ne", anlatım "nasıl" (gerçek ürün kesimi, eylem başlığı).
+- Özellik anlatımı liste olmaz ("çok boğar, sıkıcı", 21 Eki): ürün büyük, yazı en az, tek sahne; etki ürünün çevresinde (halka, ses dalgası, rozet). Kendiliğinden ilerleme ekrana girince tek tur (durum başına 6 sn), sonra durur; sekans bir kez oynar ve son karede kalır. Yörünge düğümleri ve masal kitabı geri gelmez.
