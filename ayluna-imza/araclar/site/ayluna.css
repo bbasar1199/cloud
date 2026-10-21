@@ -132,7 +132,7 @@ img{max-width:100%}
   html[data-ay-tur=urun] #siparis.px,html[data-ay-tur=urun] .ust-sag>*{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
   /* Alttaki bölümler: ortada 760 px; kendi içinde telefon ölçüsüyle kurulu etkileşimli olanlar ortada 430 px */
   html[data-ay-tur=urun] .pg>section,html[data-ay-tur=urun] .pg>.blk{max-width:760px;margin-left:auto!important;margin-right:auto!important;margin-top:56px}
-  html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar{max-width:430px}
+  html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar,html[data-ay-tur=urun] .pg>section#neler{max-width:430px}
   html[data-ay-tur=urun] .pg>footer{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:72px;box-sizing:border-box}
   html[data-ay-tur=urun]{scroll-padding-top:156px}
   /* Alt bölümler masaüstüne açılır (19 Eki, kullanıcı eleştirmenin önerisini seçti):

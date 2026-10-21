@@ -475,7 +475,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## LunaDream "Neler yapabiliyor?" 2. tur (21 Ekim, en güncel)
+## Tema 1.0.10 · LunaDream "Neler yapabiliyor?" = Aydınlık sahne (21 Ekim, en güncel)
 - Kullanıcı 1. tur için (Satırlar / Sekmeler / Kaydırmalı): "Hayır, o da çok boğar; daha iyi bir şeyler mi düşünsek, çok sıkıcı duruyor böyle." "21 animasyon" sorusuna tercih belirtmedi ([X] kalır, sayfaya çıkmaz).
 - İlk taslak (`ozellik2_varyant.py`, git d090a34): A Yörünge sahnesi 7/5, B Etiketli ürün 6/6, C Masal kitabı 5/3. Eleştirmen: A'nın düğümleri akıllı ev uygulaması gibi, Tur 20 yörüngesine benziyor; B, Sihirli'nin aynısı ve hareketsiz; C kapakla içeriği saklıyor, Tur 5 kitabının aynısı.
 - Eleştirmenin seçtiği üç yön işlendi (`ozellik2_varyant.py` → `canvas/LunaDreamE-Ozellik2.dc.html`, tuval Sürüm 120, Güncel sayfa x=3290):
@@ -484,7 +484,11 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   3. **Etiketli ürün:** fotoğraf, dört eylem etiketi, altta tek cümle (güvenli yedek).
 - Ortak: "[X] ışık seçeneği" yok ("Üç kademe: kısık, orta, parlak."); disk lambanın tepesine inmez, rozette belirir; gece fotoğrafı yok (Videolar gösteriyor); her durum 6 sn, ekrana girince tek tur, Masal'da durur, dokununca durur; renk/gölge canlandırılmaz.
 - Kesim temizliği denendi (açık kenar + zemin): kesimin alt kısmı bozuk; koyu sahnede kesim yerine yuvarlak pencerede stüdyo fotoğrafı.
-- GIF'ler kullanıcıya gönderildi; seçim bekleniyor. Seçilince `luna_e.py`'de Videolar ile Odası arasına, tema 1.0.10.
+- GIF'ler gönderildi. Kullanıcı: **1 · Aydınlık sahne**.
+- Uygulandı: `luna_e.py`'de Videolar ile Odası arasında `<section id="neler">`. Kod pano ile ortak: `ozellik2_varyant.NZ_CSS`, `sahne('nz')`, `js_degerler('nz')` (renderVals dönüşüne `...nzV`), `js_tur('nz')` (componentDidMount; `clearTimeout(this.turnz)`). Durum `nz`, `nzDur`. Sınıflar `nz-` önekli (sayfada `.ek` ve `.hk` başka işte).
+- Sahne kapsayıcı genişliğine bağlı (`container-type:inline-size`, cqw; 358 tabanı, oran 358/440): 375 px telefonda ve masaüstündeki 430 px sütunda (`ayluna.css` `#neler{max-width:430px}`, sahne 398 px) aynı oranla kurulur.
+- Fotoğraf yer tutucu: m-kiz / m-erkek (galeride de var). Premium set gelince p-kiz-gunduz / p-erkek-gunduz.
+- E_H=7087, OZ2_H=2269. Site testleri (sıra, 4 etiket, rozet, dokununca durur, Erkek fotoğrafı, masaüstü oran ve halka ortası) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.10.zip`. Tuval Sürüm 122, site Sürüm 24.
 
 ## Tema 1.0.9 · Galaxy USB canlı kartlar; LunaDream "Neler yapabiliyor?" taslakları (21 Ekim)
 - Kullanıcı (sitesindeki özellik anlatımının ekran görüntüsüyle): "USB için de yap aynısını; bir de LunaDream için sitemde olan bu tarz bir tasarım istiyorum, yine UI kullanabiliriz."

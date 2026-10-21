@@ -255,6 +255,17 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const kiz = await pg.locator('.sih .lmb.rb').count(); await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
     const rb = await pg.locator('.sih .lmb.rb').count(), lk = await pg.locator('.sih .lmb:not(.rb)').count(); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
     not(kiz === 0 && rb === 3 && lk === 0, `Sihirli ikonu modele bağlı: Kız'da robot ${kiz}, Erkek'te robot ${rb}, atlıkarınca ${lk}`); }
+  // Neler yapabiliyor? · Aydınlık sahne (21 Eki): Videolar ile Odası arasında; 4 eylem etiketi ve rozetler; dokununca etiket, cümle ve rozet değişir, tur durur; Erkek'te robot fotoğrafı
+  { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+    not(sira && await pg.locator('#neler .nz-ek').count() === 4 && await pg.locator('#neler .nz-rz').count() === 4, 'telefon: Neler yapabiliyor? Videolar ile Odası arasında, 4 eylem etiketi, rozetler'); }
+  await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.locator('#neler .nz-ek').nth(2).click(); await pg.waitForTimeout(600);
+  { const r = await pg.evaluate(() => ({ bas: document.querySelectorAll('#neler .nz-ek[aria-pressed=true]').length, on: [...document.querySelectorAll('#neler .nz-ek')].findIndex(e => e.classList.contains('on')),
+      yazi: document.querySelector('#neler .nz-m.on').textContent, rz: +getComputedStyle(document.querySelector('#neler .nz-cal')).opacity, sahne: document.querySelector('#neler .nz').className }));
+    await pg.waitForTimeout(6500); const sonra = await pg.evaluate(() => document.querySelector('#neler .nz').className);
+    not(r.bas === 1 && r.on === 2 && /ninni/.test(r.yazi) && r.rz > .9 && /nzs2/.test(r.sahne) && sonra === r.sahne, `Neler: 3. etiket → etkin, cümle ve rozet değişti, tur durdu (${r.sahne} → ${sonra}, rozet ${r.rz})`); }
+  { await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
+    const alt = await pg.evaluate(() => [...document.querySelectorAll('#neler .nz-img')].map(i => i.alt).join()); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
+    not(/Erkek/.test(alt) && !/Kız/.test(alt), 'Neler: Erkek seçilince robot fotoğrafı (' + alt + ')'); }
 
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
@@ -288,6 +299,11 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
       return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
     not(r.gen === 1440 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin: bant ${r.gen}, şerit kenardan kenara ve yazı altta ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
+  // Masaüstü: Neler yapabiliyor? 430 px sütunda; sahne orantılı büyür (cqw), halkalar lambanın ortasında
+  await mp.locator('#neler').scrollIntoViewIfNeeded();
+  { const r = await mp.evaluate(() => { const s = document.querySelector('#neler .nz').getBoundingClientRect(), h = document.querySelector('#neler .nz-hk i').getBoundingClientRect();
+      return { w: Math.round(s.width), oran: s.height / s.width, orta: Math.abs((h.left + h.right) / 2 - (s.left + s.right) / 2) }; });
+    not(r.w <= 430 && r.w > 358 && Math.abs(r.oran - 440 / 358) < .01 && r.orta < 1.5, `masaüstü Neler: sahne ${r.w} px, oran ${r.oran.toFixed(3)}, halka ortada (${r.orta.toFixed(1)} px)`); }
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

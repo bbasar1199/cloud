@@ -7,6 +7,7 @@ import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
 import sihirli2_varyant as S2
+import ozellik2_varyant as OZ2
 
 
 
@@ -122,7 +123,7 @@ CSS = r""".pg{background:#F6F1E9}
    3 parlaklık, Bluetooth bağlan → çal, pil dolar ve fiş çıkar (lamba şarjda sönük). Kartlar 0,6 sn arayla başlar.
    Mini arayüz CSS'i sihirli2_varyant.MINI_CSS (pano ile aynı). Lamba ikonu modele bağlı (Kız atlıkarınca / Erkek robot). */
 .sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-""" + S2.MINI_CSS + r"""
+""" + S2.MINI_CSS + OZ2.NZ_CSS + r"""
 /* Paket (canlı sitedeki biçim) */
 /* Seçiciler (Tur 25, kullanıcı seçimi "Satır kartlar"): model, paket ve 2. lamba tek dil. Aynı kart (yüzey, 1,5px çizgi,
    20px köşe), aynı küçük görsel (açık ton zeminde stüdyo kesimi), aynı seçili durum: 2px lacivert çerçeve + amber dolunay noktası.
@@ -476,6 +477,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
   </section>
 
+  <!-- Neler yapabiliyor? · Aydınlık sahne (21 Eki; kullanıcı 1. tur listeleri için "çok boğar, sıkıcı" dedi, 2. turda bunu seçti).
+       Stüdyo fotoğrafı modele bağlı; etkin özelliğin etkisi lambanın çevresinde (halkalar, ses dalgaları, disk/kademe/pil rozeti).
+       Etiketler eylem söyler (Sihirli "ne" der). Ekrana girince tek tur (her durum 6 sn), Masal'da durur; dokununca durur.
+       Kod ve CSS ozellik2_varyant.py'de (pano ile ortak). Premium set gelince fotoğraf p-kiz-gunduz / p-erkek-gunduz olur. -->
+  <section class="px bolum gir" id="neler" aria-labelledby="neler-bas">
+    <h2 class="h2" id="neler-bas">Neler<br>yapabiliyor<span class="n">?</span></h2>
+    """ + OZ2.sahne('nz') + """
+  </section>
+
   <!-- Odası böyle görünecek · Gece vitrini (21 Eki; "Bir gece, beş an" ve iki posterli eski Odası'nın yerine). Kaydır, karta ya da aya dokun.
        Görseller yer tutucu: çocuk, lamba ve tavandaki ışık aynı karede olan Flow kareleri gelecek (ogrenme/flow-istemleri-lunadream-oda.md).
        Marka görseli; "müşteri" etiketi konmaz. Yazı HTML; fotoğrafa gömülmez. -->
@@ -550,7 +560,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, nz: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Büyük görünüm Esc ile kapanır
@@ -558,7 +568,8 @@ JS = """class Component extends DCLogic {
     document.addEventListener('keydown', this.esc);
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
+    // Neler yapabiliyor?: ekrana girince tek tur (her durum 6 sn), Masal'da durur; dokununca durur; azaltılmış harekette ilerlemez
+""" + OZ2.js_tur('nz') + """    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
       if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
@@ -584,7 +595,7 @@ JS = """class Component extends DCLogic {
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
   galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
+  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.turnz); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -720,7 +731,7 @@ JS = """class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
-    return {
+    """ + OZ2.js_degerler('nz') + """    return { ...nzV,
       gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al', onPrice: TL(online, true),  // düğmede fiyat yok (kullanıcı, 19 Eki)
@@ -747,5 +758,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6485)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7087)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
