@@ -259,18 +259,18 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const k = await b.newContext({ viewport: { width: 360, height: 800 } }), p = await k.newPage(); await p.goto(KOK + 'lunadream-gece-lambasi.html'); await p.waitForTimeout(500);
     const r = await p.evaluate(() => { const s = document.querySelector('#siparis .sih .ui-serit'), e = s.closest('.sh-ek'); return { s: Math.round(s.getBoundingClientRect().width), e: Math.round(e.getBoundingClientRect().width), u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
     not(r.s <= r.e && r.u === 1, `360 px: disk şeridi kart ekranına sığar (${r.s} ≤ ${r.e}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
-  // Ürün soruları (22 Eki): teslim kartının hemen altında, aynı kart; 6 soru + "7 soru daha"; açılınca dolunay; alttaki SSS'de aynı soru yok
+  // Ürün soruları (22 Eki): teslim kartının hemen altında, aynı kart; yalnız 4 soru ("o kadar çok soru olmasın"); açılınca dolunay;
+  // diğer ürün soruları alttaki SSS'de; aynı soru iki yerde yok; pil süresi sorusu yok
   { const r = await pg.evaluate(() => { const t = document.querySelector('#siparis .teslim'), u = t.nextElementSibling;
-      const s0 = u && u.querySelector('.urs-s summary'); return { yer: !!u && u.classList.contains('urs'), n: document.querySelectorAll('.urs-s').length, daha: (document.querySelector('.urs-daha') || {}).textContent,
+      const s0 = u && u.querySelector('.urs-s summary'); return { yer: !!u && u.classList.contains('urs'), n: document.querySelectorAll('.urs-s').length, daha: !!document.querySelector('.urs-daha'),
         satir: s0 ? Math.round(s0.getBoundingClientRect().height) : 0 }; });
     await pg.locator('.urs-s summary').nth(1).click(); await pg.waitForTimeout(450);
     const ay = await pg.evaluate(() => { const d = document.querySelectorAll('.urs-s')[1]; return { acik: d.open, dolu: +getComputedStyle(d.querySelector('.dolu')).opacity, yazi: d.querySelector('p').textContent }; });
-    await pg.locator('.urs-daha').click(); await pg.waitForTimeout(300);
-    const r2 = await pg.evaluate(() => { const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());
-      return { n: q.length, daha: !!document.querySelector('.urs-daha'), ikiYerde: sss.filter(x => q.includes(x)), sensor: q.includes('Hareket sensörü var mı?'), pil: q.some(x => /ne kadar gider/.test(x)) }; });
     await pg.locator('.urs-s summary').nth(1).click();
-    not(r.yer && r.n === 6 && r.daha === '7 soru daha' && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.n === 13 && !r2.daha && r2.ikiYerde.length === 0 && r2.sensor && !r2.pil,
-      `ürün soruları: teslim kartının altında, 6 + "7 soru daha" (${r.daha}), satır ${r.satir} px, açılınca dolunay, 13 soru, SSS'de tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
+    const r2 = await pg.evaluate(() => { const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());
+      return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
+    not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && r2.sensor && !r2.pil,
+      `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
   // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));

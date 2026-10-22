@@ -475,7 +475,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.14 · Ürün soruları teslim kartının altında; site görsel düzeltmesi (22 Ekim, en güncel)
+## Tema 1.0.15 · Teslim kartının altında yalnız 4 soru (22 Ekim, en güncel)
+- Kullanıcı: "O kadar çok soru olmasın kargo takibin altında."
+- `.urs` artık 4 soru: Bu ürün ne işe yarıyor? / Projeksiyon nasıl çalışıyor? / Bluetooth var mı, ne işe yarıyor? (hoparlör cevabı buna katıldı) / Kutu içeriğinde neler var? "7 soru daha" düğmesi ve `ursHepsi` kalktı.
+- Diğer 8 ürün sorusu (şarj, gece rutini, ışık, güvenlik, tuşlar, hareket sensörü, Bluetooth bağlanma ve sorun) alttaki "Merak edilenler" SSS'nin başında; ardından yaş, kargo, ödeme, iade (12 soru). E_H=7647. Site testleri (teslim altında 4 soru, satır 54 px, dolunay, SSS tekrarı yok) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.15.zip`. Tuval Sürüm 134, site Sürüm 32.
+
+## Tema 1.0.14 · Ürün soruları teslim kartının altında; site görsel düzeltmesi (22 Ekim)
 - Kullanıcı: "Görsel görünmüyor ya dostum." Neden: site önizlemesine (Sürüm 29) yalnız sayfa ve görseller gitti, `veri.js` gitmedi; `/_blob/` → `g/` eşlemesinde yeni lamba parçaları yoktu. `veri.js` yayınlandı (Sürüm 30). **Site yayınında yeni görsel varsa `veri.js` de gönderilir.** Tema ve yerel site doğruydu.
 - Kullanıcı (mağazadaki açılır sorular ve SSS ekran görüntüleriyle): "Bunları da ekle, kargo takibin altına; o kısma mükemmel otursun."
   - `luna_e.py`: teslim kartının hemen altında `.urs` (aynı kart: krem, 1 px çizgi, 20 köşe). `<details>` satırları ≥ 54 px; kapalıyken hilal, açılınca dolunay (`URS_AY`, teslim çizgisinin `ay()` çizimi; opacity), ok döner. İlk 6 soru, "7 soru daha" (`ursHepsi`).

@@ -419,7 +419,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .teslim .yol .evre{margin-bottom:24px;background:#F1E8DA}
 .teslim .yol .evre circle{fill:#F1E8DA}
 .teslim .yol-paket::before{display:none}
-/* Ürün soruları: teslim kartıyla aynı kart (krem, 1 px çizgi, 20 köşe); satır ≥ 52 px; hilal → dolunay, ok döner (yalnız opacity/transform) */
+/* Ürün soruları: teslim kartıyla aynı kart (krem, 1 px çizgi, 20 köşe); satır ≥ 54 px; hilal → dolunay, ok döner (yalnız opacity/transform) */
 .urs{margin-top:10px;padding:2px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7}
 .urs-s+.urs-s{border-top:1px solid #EFE6D8}
 .urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:54px;padding:6px 0;font-size:15px;font-weight:600;line-height:1.3;color:#1A2142;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -435,8 +435,6 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .urs-ok{flex:none;width:18px;height:18px;fill:none;stroke:#5C6078;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
 .urs-s[open] .urs-ok{transform:rotate(180deg)}
 .urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:#5C6078}
-.urs-daha{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin:0;padding:0;border:0;border-top:1px solid #EFE6D8;background:none;font:inherit;font-size:14px;font-weight:700;color:#A05A1C;cursor:pointer}
-.urs-daha:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:8px}
 .yol-paket .kutu{position:absolute;left:-8px;top:-8px;width:16px;height:16px;fill:#FFFDF9;stroke:#1A2142;stroke-width:1.3;stroke-linejoin:round}
 .yol-lamba{position:absolute;left:calc(50% + 17px);top:0;width:28px;height:28px;opacity:0;transform:translateY(4px)}
 .yol-lamba .lmb{width:28px;height:28px}
@@ -649,12 +647,11 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
     <div class="ay-dis" data-ay-dis></div>
     <div class="teslim"><ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket"><svg class="kutu" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 5.2L8 2.5l5.5 2.7v5.6L8 13.5l-5.5-2.7z"></path><path d="M2.5 5.2L8 7.9l5.5-2.7M8 7.9v5.6"></path></svg></span></span><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><b>Bugün</b><span>Sipariş verildi</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg><b>{{kargo}}</b><span>Kargoda</span></li><li><svg class="evre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg><span class="yol-lamba" aria-hidden="true"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><svg class="lmb" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="3.6" r="1.5"></circle><path class="kb" d="M6 13C6 8.4 10.5 5.4 16 5.4S26 8.4 26 13a2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0z"></path><rect class="isk" x="10" y="14.6" width="12" height="6.2" rx="1.2"></rect><path d="M9.5 14.5v6.5M22.5 14.5v6.5"></path><path d="M8 21h16c0 2.9-3.6 4.6-8 4.6S8 23.9 8 21z"></path><path d="M11.4 25.3c-.4 1.5-1.6 2.2-2.8 1.9M20.6 25.3c.4 1.5 1.6 2.2 2.8 1.9"></path></svg></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><svg class="lmb rb" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.4V4"></path><circle cx="16" cy="3" r="1.2"></circle><path class="kb" d="M7.5 16a8.5 8.5 0 0 1 17 0z"></path><rect x="10" y="9.6" width="12" height="5.2" rx="2.6" fill="#1A2142"></rect><circle class="isk" cx="13.6" cy="12.2" r="1.1"></circle><circle class="isk" cx="18.4" cy="12.2" r="1.1"></circle><path d="M8.5 16h15v4h-15z"></path><rect x="6" y="20" width="20" height="6.4" rx="3.2"></rect><circle cx="10.4" cy="23.2" r="1.4"></circle><circle cx="16" cy="23.2" r="1.4"></circle><circle cx="21.6" cy="23.2" r="1.4"></circle></svg></sc-if></span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
     <!-- Ürün soruları (22 Eki, kullanıcı: mağazadaki açılır soruları "kargo takibin altına ekle, o kısma mükemmel otursun").
-         Teslim kartıyla aynı kart; soru kapalıyken hilal, açılınca dolunay (teslim çizgisinin ay dili). İlk 6 soru, "7 soru daha" ile hepsi.
+         Teslim kartıyla aynı kart; soru kapalıyken hilal, açılınca dolunay (teslim çizgisinin ay dili). Yalnız 4 temel soru (kullanıcı: "o kadar çok soru olmasın"); diğerleri alttaki SSS'de.
          Cevaplar canlı sayfadaki LunaDream cevaplarından, yalnız teyitli olanlar: hareket sensörü yok (mağaza "hareket sensörlü değildir"
          diyor; altındaki sensör cevabı AyFeneri'nden kopya), pil süresi yazılmaz (canlıda da boş), sağlık iddiası yok. -->
     <div class="urs" role="group" aria-label="Ürün hakkında sorular">
-      <sc-for list="{{urs}}" as="u" hint-placeholder-count="6"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{{u.q}}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{{u.a}}</p></details></sc-for>
-      <sc-if value="{{ursDahaVar}}" hint-placeholder-val="{{true}}"><button class="urs-daha" type="button" onClick="{{ursDaha}}">{{ursDahaYazi}}</button></sc-if>
+      <sc-for list="{{urs}}" as="u" hint-placeholder-count="4"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{{u.q}}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{{u.a}}</p></details></sc-for>
     </div>
   </section></div>
 
@@ -763,7 +760,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7321}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7647}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
@@ -951,24 +948,23 @@ class Component extends DCLogic {
     var odalar = ODA.map(function (o, i) { var on = i === oi; return { src: B + o.id, pos: o.pos, alt: o.alt, cip: o.cip, bas: o.bas, yazi: o.yazi, sec: o.sec, ev: OEV[i],
       cls: 'vt-kart' + (on ? ' on' : ''), mcls: 'vt-m' + (on ? ' on' : ''), ayCls: 'vt-ay' + (on ? ' on' : ''), gizli: on ? 'false' : 'true', tab: on ? '0' : '-1', basili: on ? 'true' : 'false',
       lbl: (i + 1) + '. oda: ' + o.bas, git: odaGit(i), eylem: o.e === 'disk' ? diskGit : odaSec(o.e || S.model || 'kiz') }; });
-    // Ürün soruları (teslim kartının altı): canlı sayfadaki LunaDream cevaplarından teyitli olanlar; ilk 6 görünür
+    // Ürün soruları (teslim kartının altı; 22 Eki kullanıcı "o kadar çok soru olmasın"): yalnız 4 temel soru; gerisi alttaki SSS'de
     var URS = [
       { q: 'Bu ürün ne işe yarıyor?', a: 'Gece lambası ve masal projektörü bir arada. Seçtiğin masal diskini tavana yansıtır, telefondaki ninniyi Bluetooth ile çalar. Işığı üç kademede kısılır, şarjla kablosuz çalışır.' },
       { q: 'Projeksiyon nasıl çalışıyor?', a: (kiz ? 'Kubbeyi' : 'Robotun başını') + ' aç, masal diskini üstten tak ve kapat. Odanın ışığını kapatınca diskteki masal tavana ve duvara yansır.' },
+      { q: 'Bluetooth var mı, ne işe yarıyor?', a: 'İki modelde de var. Telefona ya da tablete bağlanır; açtığın ninni, müzik ya da sesli masal lambanın hoparlöründen çalar.' },
+      { q: 'Kutu içeriğinde neler var?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' }
+    ];
+    // Merak edilenler (alttaki SSS): ürün kullanımı soruları (canlı sayfadan, teyitli olanlar), sonra satın alma soruları
+    var faq = [
+      { q: 'Ürün şarjlı mı, prizde mi çalışır?', a: 'Şarjlı; şarjı varken kablosuz çalışır. Kutudaki USB kabloyla şarj edilir, şarj olurken de kullanılabilir.' },
       { q: 'Gece rutinine nasıl entegre ederim?', a: 'Yatmadan önce ana ışığı kapatın, diski birlikte seçip takın, telefondan kısa bir ninni açın ve ışığı kısığa alın. Her gece aynı sırayla yapınca yatma vakti belli olur.' },
-      { q: 'Bluetooth var mı, ne işe yarıyor?', a: 'İki modelde de var. Telefona ya da tablete bağlanır; açtığın ninni, müzik ya da sesli masal lambadan çalar.' },
-      { q: 'Hoparlör olarak kullanabilir miyim?', a: 'Evet. Bluetooth ile bağlıyken telefonda açtığın her ses lambanın hoparlöründen gelir.' },
-      { q: 'Kutu içeriğinde neler var?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' },
-      { q: 'Bluetooth hoparlöre nasıl bağlanırım?', a: 'Lambayı aç ve Bluetooth’unu aç. Telefonda Bluetooth’u açıp listeden lambayı seç. Bağlanınca telefondaki ninniler ve müzik uygulamaları lambadan çalar.' },
-      { q: 'Bluetooth bağlanmıyor, ne yapmalıyım?', a: 'Telefonda Bluetooth’u kapatıp aç, lambayı kapatıp aç. Eski eşleşmeyi “unut” deyip yeniden bağlan ve yakından dene. Olmazsa İletişim sayfasından yaz, yardımcı olalım.' },
+      { q: 'Işığı göz yorar mı, çocuğu rahatsız eder mi?', a: 'Işığı sıcak tonlu ve yumuşak. Gece için orta ya da kısık kademeyi seç; ışığı göze değil, duvara ya da tavana yansıt.' },
+      { q: 'Çocuk odasında kullanmak güvenli mi?', a: 'Düz ve sağlam bir yere koy. Masal diskleri küçük parça sayılır; küçük çocuklar diskleri büyüklerle birlikte kullansın. Şarj ederken kabloyu ortada bırakma.' },
       { q: 'Tuşlar ile neleri kontrol edebilirim?', a: 'Lambanın tuşlarıyla açıp kapatır, ışığı parlak, orta ve kısık arasında değiştirir, Bluetooth’u açarsın. Sesi telefondan da ayarlayabilirsin.' },
       { q: 'Hareket sensörü var mı?', a: 'Yok. Lamba tuşlarla açılıp kapanır; gece kendiliğinden yanıp sönmez.' },
-      { q: 'Ürün şarjlı mı, prizde mi çalışır?', a: 'Şarjlı; şarjı varken kablosuz çalışır. Kutudaki USB kabloyla şarj edilir, şarj olurken de kullanılabilir.' },
-      { q: 'Işığı göz yorar mı, çocuğu rahatsız eder mi?', a: 'Işığı sıcak tonlu ve yumuşak. Gece için orta ya da kısık kademeyi seç; ışığı göze değil, duvara ya da tavana yansıt.' },
-      { q: 'Çocuk odasında kullanmak güvenli mi?', a: 'Düz ve sağlam bir yere koy. Masal diskleri küçük parça sayılır; küçük çocuklar diskleri büyüklerle birlikte kullansın. Şarj ederken kabloyu ortada bırakma.' }
-    ];
-    var ursN = S.ursHepsi ? URS.length : 6;
-    var faq = [
+      { q: 'Bluetooth hoparlöre nasıl bağlanırım?', a: 'Lambayı aç ve Bluetooth’unu aç. Telefonda Bluetooth’u açıp listeden lambayı seç. Bağlanınca telefondaki ninniler ve müzik uygulamaları lambadan çalar.' },
+      { q: 'Bluetooth bağlanmıyor, ne yapmalıyım?', a: 'Telefonda Bluetooth’u kapatıp aç, lambayı kapatıp aç. Eski eşleşmeyi “unut” deyip yeniden bağlan ve yakından dene. Olmazsa İletişim sayfasından yaz, yardımcı olalım.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
@@ -995,7 +991,7 @@ class Component extends DCLogic {
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq,
-      urs: URS.slice(0, ursN), ursDahaVar: ursN < URS.length, ursDahaYazi: (URS.length - ursN) + ' soru daha', ursDaha: function () { self.setState({ ursHepsi: true }); }
+      urs: URS
     };
   }
 }
