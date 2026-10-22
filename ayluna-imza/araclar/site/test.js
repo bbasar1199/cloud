@@ -266,6 +266,11 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not(sira && r.kart === 4 && r.ust && r.eski === 0, `telefon: Neler yapabiliyor? afiş Videolar ile Odası arasında, 4 kart, lamba kartların önünde, Aydınlık sahne yok (${JSON.stringify(r)})`); }
   await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.waitForTimeout(700);
   { const c = await pg.evaluate(() => document.querySelector('#neler .na').className); not(/gir/.test(c) && !/bek/.test(c), 'Neler: ekrana girince kartlar oynar (' + c + ')'); }
+  // 22 Eki ("Çalışmıyor ki bu kısım"): kartlar dokunulur; Diski tak → sıradaki disk takılır, Işığı kıs → kademe değişir ve lamba kısılır
+  { await pg.locator('#neler .k-disk').click(); await pg.waitForTimeout(400);
+    await pg.locator('#neler .k-isik').click({ position: { x: 30, y: 20 } }); await pg.waitForTimeout(800);
+    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .na'); return { disk: a.querySelector('.nw-dt b').textContent, cls: a.className, dk: a.querySelector('.k-disk').className, koyu: +getComputedStyle(a.querySelector('.na-kes.koyu')).opacity }; });
+    not(r.disk === 'Okyanus' && /\bo[ab]\b/.test(r.dk) && /\bi1\b/.test(r.cls) && r.koyu > .4 && r.koyu < .6, `Neler: dokununca disk değişir (${r.disk}) ve takılır, ışık Orta'ya iner, lamba kısılır (${r.cls}, ${r.koyu})`); }
   { await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
     const r = await pg.evaluate(() => ({ c: document.querySelector('#neler .na').className, img: document.querySelectorAll('#neler .na-img.erkek').length, kiz: document.querySelectorAll('#neler .na-img.kiz').length }));
     await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);

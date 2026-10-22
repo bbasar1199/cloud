@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.11 · "Neler yapabiliyor?" = Afiş, ürün önde (22 Ekim, en güncel)
+## Tema 1.0.12 · "Neler yapabiliyor?" kartları dokunulur (22 Ekim, en güncel)
+- Kullanıcı durgun afişin ekran görüntüsüyle: "Çalışmıyor ki bu kısım." Kartlar yalnız bir kez oynayıp duruyordu, dokununca hiçbir şey olmuyordu.
+- `ozellik3_varyant.py` yeniden yazıldı: kartlar `<button>`; sekanslar CSS gecikmesi yerine JS zamanlayıcıyla (`kOyna`: 2,1 / 4,5 / 6,9-7,7 / 9,3 sn, 11,7 sn'de biter). Her oynatışta kart sınıfı `oa`/`ob` arasında değişir (`ciftle()` keyframe'leri `2` ekiyle çoğaltır), böylece animasyon baştan başlar.
+  - Diski tak → sıradaki disk (Ay ve yıldız, Okyanus, Uzay, Deniz kızı, Şato) takılır, adı kartta yazar.
+  - Işığı kıs → Parlak / Orta / Kısık (`i0/i1/i2`); lambanın koyu kopyası ve hale opacity ile kısılır.
+  - Telefondan çal, Şarj et → sekans yeniden oynar.
+  - Tur: IntersectionObserver; afiş ekrana her girişte tur baştan oynar. Dokunulduysa (`kElle`) tur bir daha başlamaz. `azH` (azaltılmış hareket) açıksa tur yok, dokunuş çalışır.
+  - Altında ipucu: "Kartlara dokunup dene."
+- Tuval panosu yalnız afiş (Hikâye yedeği çıktı), OZ3_H=814; E_H=7097. Testler: dokunuş (disk → Okyanus, `oa/ob`, `i1`, koyu .5), Erkek, masaüstü; site + tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset.
+- Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.12.zip`. Tuval Sürüm 128, site Sürüm 28.
+
+## Tema 1.0.11 · "Neler yapabiliyor?" = Afiş, ürün önde (22 Ekim)
 - Kullanıcı 3. turda "1 · Afiş, ürün önde"yi seçti. Disk sorusuna: "Kubbe açılıp üstten" (teyitli ürün bilgisi).
 - `luna_e.py`: Aydınlık sahne (OZ2) çıktı; `#neler` = `OZ3.afis('nf')`, CSS `OZ3.AFIS_CSS`, JS `OZ3.js_afis_tur('nf')` + `OZ3.js_afis_deger('nf', "S.model === 'erkek'")` (dönüşte `...nfV`). Durum `nfOn` (false: bekler, true: kartlar oynar).
 - "Diski tak" kartı: tonda kutuda çizgi lamba (Kız atlıkarınca / Erkek robot); kubbe 10 px kalkar, Ay ve yıldız diski üstten iner, kubbe kapanır (2,4 sn, bir kez). Erkek'te robotun başı kubbe sayıldı (aynı mekanizma varsayıldı; teyit gerekirse sorulacak).

@@ -274,3 +274,4 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Aydınlık sahne (açık stüdyo fotoğrafı + çip + ince halka) reddedildi (22 Eki: "hiç ama hiç beğenmedim"). Özellik anlatımında kullanıcının sitesindeki afiş dili: koyu ürün fotoğrafı + üstünde gerçek arayüz kartı.
 - LunaDream "Neler yapabiliyor?" = Afiş, ürün önde (22 Eki, kullanıcı seçti): koyu ürün fotoğrafı, lamba kesimi arayüz kartlarının önünde; kartlar sırayla gelir, sekanslar tek tek oynar ve durur; Işık kartı lambayı da kısar. Kod `ozellik3_varyant.py`.
 - Teyitli ürün bilgisi (22 Eki): masal diski kubbe açılıp üstten takılır.
+- Arayüz kartı gibi görünen her şey dokununca çalışır (22 Eki: "Çalışmıyor ki bu kısım"). Kart buton olur, dokunuş gerçek eylemi yapar (disk değişir, ışık kademesi değişir, sekans yeniden oynar); kendiliğinden tur ekrana her girişte baştan oynar, dokunulunca durur. Tek satır ipucu: "Kartlara dokunup dene."

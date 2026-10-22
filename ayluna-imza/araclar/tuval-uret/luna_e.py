@@ -479,7 +479,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Neler yapabiliyor? · Afiş, ürün önde (22 Eki; kullanıcı sitesindeki afişi örnek gösterdi; Aydınlık sahneyi "hiç ama hiç beğenmedim" dedi, 3. turda bunu seçti).
        Koyu ürün fotoğrafı (x2), lamba kesimi arayüz kartlarının önünde. Kartlar ekrana girince sırayla gelir; sekanslar tek tek oynar ve durur:
-       Diski tak (kubbe açılır, disk üstten iner; teyitli) → Telefondan çal → Işığı kıs (lamba da kısılır) → Şarj et. Kod ve CSS ozellik3_varyant.py'de. -->
+       Diski tak (kubbe açılır, disk üstten iner; teyitli) → Telefondan çal → Işığı kıs (lamba da kısılır) → Şarj et.
+       Kartlar düğme (22 Eki, kullanıcı: "Çalışmıyor ki bu kısım"): dokununca disk değişip takılır, ninni baştan çalar, ışık Parlak/Orta/Kısık,
+       şarj dolar. Ekrandan çıkıp girince (dokunulmadıysa) tur bir kez daha oynar. Kod ve CSS ozellik3_varyant.py'de. -->
   <section class="px bolum gir" id="neler" aria-labelledby="neler-bas">
     <h2 class="h2" id="neler-bas">Neler<br>yapabiliyor<span class="n">?</span></h2>
     """ + OZ3.afis('nf') + """
@@ -593,8 +595,8 @@ JS = """class Component extends DCLogic {
     // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
-  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
+""" + OZ3.js_afis_yontem('nf') + """  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentWillUnmount() { clearInterval(this.iv); """ + OZ3.js_afis_kapat('nf') + """ if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -757,5 +759,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7067)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7097)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
