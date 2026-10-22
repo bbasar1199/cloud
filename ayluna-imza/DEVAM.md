@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.10 · LunaDream "Neler yapabiliyor?" = Aydınlık sahne (21 Ekim, en güncel)
+## Disk kartı sığar; "Neler yapabiliyor?" 3. tur: koyu afiş + arayüz kartları (22 Ekim, en güncel)
+- Kullanıcı (Sihirli disk kartının ekran görüntüsüyle): "Disk kartı tam sığmıyor; Aydınlık sahne kısmını hiç ama hiç beğenmedim, yeni bir tarz deneyelim."
+- **Disk kartı:** şerit (`S2.ui_serit`, `SERIT_CSS`) = ortadaki disk + iki tam komşu (k 128 px, b 152 px); solda bir komşu (son disk), sağda döngü için iki disk; pencere halkası kesilmez. "Diskleri gör" bölünmez. USB ortak şeridi de aynı (5 → 7 disk öğesi). Test: 360 px'te şerit ≤ kart ekranı. Tuval Sürüm 123, site Sürüm 25 (yayında).
+- **Neler 3. tur** (`ozellik3_varyant.py` → `canvas/LunaDreamE-Ozellik3.dc.html`): sitedeki afiş dili (images/18.png: koyu ürün fotoğrafı, arayüz kartı ürüne biner).
+  - İlk taslak: A Afiş 7/7, B Hikâye 8/4, C Bento 5/5 (git f2c6b0c).
+  - Eleştirmenin seçimi işlendi: **A "ürün önde"**: c-an-kiz / c-erkek-disk yerel Real-ESRGAN x2 (`/tmp/sr-env`, `scratchpad/sr.py`), lamba kesimi rembg isnet-general-use (`scratchpad/kes.py`); fotoğraf → koyu hale → kartlar → kesim → kesimin koyu kopyası. Kartlar ürünün arkasına girer, ürüne bakan kenarda iç boşluk. Başlıklar eylem (Diski tak, Telefondan çal, Işığı kıs, Şarj et); gölge yok; kartlar 0/0,5/1/1,5 sn'de gelir, sekanslar 2,1/4,5/6,9/9,3 sn'de tek tek (2,4 sn) oynar ve durur. **Işık kartı lambayı kısar** (koyu kopya + hale, yalnız opacity).
+  - Yeni asset'ler (tuval): c-an-kiz-x2 9fc836c3…, c-an-kiz-kesim.webp 64acd867…, c-erkek-disk-x2 d78da0ee…, c-erkek-disk-kesim.webp 55988cac… (`blob-yerel.json`).
+  - Yedek: B Hikâye (Ken Burns yok, başlıklar binmez, Masal'a dönüp durur).
+  - Eleştirmenin 3. fikri (Masal kartında kubbe açılıp disk iner) diskin nasıl takıldığı teyit edilmeden çizilmez; kullanıcıya soruldu.
+  - Seçim bekleniyor. Sayfadaki Aydınlık sahne seçilen yönle değişecek (tema 1.0.11).
+
+## Tema 1.0.10 · LunaDream "Neler yapabiliyor?" = Aydınlık sahne (21 Ekim; 22 Ekim'de kullanıcı beğenmedi)
 - Kullanıcı 1. tur için (Satırlar / Sekmeler / Kaydırmalı): "Hayır, o da çok boğar; daha iyi bir şeyler mi düşünsek, çok sıkıcı duruyor böyle." "21 animasyon" sorusuna tercih belirtmedi ([X] kalır, sayfaya çıkmaz).
 - İlk taslak (`ozellik2_varyant.py`, git d090a34): A Yörünge sahnesi 7/5, B Etiketli ürün 6/6, C Masal kitabı 5/3. Eleştirmen: A'nın düğümleri akıllı ev uygulaması gibi, Tur 20 yörüngesine benziyor; B, Sihirli'nin aynısı ve hareketsiz; C kapakla içeriği saklıyor, Tur 5 kitabının aynısı.
 - Eleştirmenin seçtiği üç yön işlendi (`ozellik2_varyant.py` → `canvas/LunaDreamE-Ozellik2.dc.html`, tuval Sürüm 120, Güncel sayfa x=3290):
