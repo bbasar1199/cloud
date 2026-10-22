@@ -259,22 +259,31 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const k = await b.newContext({ viewport: { width: 360, height: 800 } }), p = await k.newPage(); await p.goto(KOK + 'lunadream-gece-lambasi.html'); await p.waitForTimeout(500);
     const r = await p.evaluate(() => { const s = document.querySelector('#siparis .sih .ui-serit'), e = s.closest('.sh-ek'); return { s: Math.round(s.getBoundingClientRect().width), e: Math.round(e.getBoundingClientRect().width), u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
     not(r.s <= r.e && r.u === 1, `360 px: disk şeridi kart ekranına sığar (${r.s} ≤ ${r.e}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
-  // Neler yapabiliyor? · Afiş, ürün önde (22 Eki): Videolar ile Odası arasında; 4 kart, lamba kesimi kartların önünde; ekrana girince kartlar oynar; Erkek'te robot
+  // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
+  // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
-    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .na'), k = a.querySelector('.na-kes:not(.koyu)'), c = a.querySelector('.nw');
-      return { kart: a.querySelectorAll('.nw').length, ust: +getComputedStyle(k).zIndex > +getComputedStyle(c).zIndex, eski: document.querySelectorAll('#neler .nz, #neler .nz-ek').length }; });
-    not(sira && r.kart === 4 && r.ust && r.eski === 0, `telefon: Neler yapabiliyor? afiş Videolar ile Odası arasında, 4 kart, lamba kartların önünde, Aydınlık sahne yok (${JSON.stringify(r)})`); }
+    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .dg');
+      return { kelime: a.querySelectorAll('.dg-soz span').length, dugme: a.querySelectorAll('.dg-bar button').length, parca: a.querySelectorAll('.ur-k.kiz .ur-ust, .ur-k.kiz .ur-alt').length,
+        onde: +getComputedStyle(a.querySelector('.dg-urun')).zIndex > +getComputedStyle(a.querySelector('.dg-soz')).zIndex,
+        eski: document.querySelectorAll('#neler .nw, #neler .na, #neler .nz').length }; });
+    not(sira && r.kelime === 4 && r.dugme === 4 && r.parca === 4 && r.onde && r.eski === 0, `telefon: Neler yapabiliyor? Dergi kapağı Videolar ile Odası arasında, 4 kelime, 4 düğme, kubbe/gövde ayrı, lamba kelimenin önünde, beyaz kart yok (${JSON.stringify(r)})`); }
   await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.waitForTimeout(700);
-  { const c = await pg.evaluate(() => document.querySelector('#neler .na').className); not(/gir/.test(c) && !/bek/.test(c), 'Neler: ekrana girince kartlar oynar (' + c + ')'); }
-  // 22 Eki ("Çalışmıyor ki bu kısım"): kartlar dokunulur; Diski tak → sıradaki disk takılır, Işığı kıs → kademe değişir ve lamba kısılır
-  { await pg.locator('#neler .k-disk').click(); await pg.waitForTimeout(400);
-    await pg.locator('#neler .k-isik').click({ position: { x: 30, y: 20 } }); await pg.waitForTimeout(800);
-    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .na'); return { disk: a.querySelector('.nw-dt b').textContent, cls: a.className, dk: a.querySelector('.k-disk').className, koyu: +getComputedStyle(a.querySelector('.na-kes.koyu')).opacity }; });
-    not(r.disk === 'Okyanus' && /\bo[ab]\b/.test(r.dk) && /\bi1\b/.test(r.cls) && r.koyu > .4 && r.koyu < .6, `Neler: dokununca disk değişir (${r.disk}) ve takılır, ışık Orta'ya iner, lamba kısılır (${r.cls}, ${r.koyu})`); }
+  { const c = await pg.evaluate(() => document.querySelector('#neler .dg').className); not(/gir/.test(c) && !/bek/.test(c) && /\bb0\b/.test(c) && /x-tak/.test(c) && /\bo[ab]\b/.test(c), 'Neler: ekrana girince tur başlar, "Tak." kubbe açılır (' + c + ')'); }
+  // Dokunuş: Kıs → üç kademe, lamba kısılır; Şarj → ışık alttan dolar; lambaya dokununca aynı özellik yeniden oynar
+  { await pg.locator('#neler .dg-bar button').nth(2).click(); await pg.waitForTimeout(2100);
+    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .dg'); return { cls: a.className, on: a.querySelector('.dg-bar button.on').textContent, koyu: +getComputedStyle(a.querySelector('.ur-k.kiz .ur-alt.koyu')).opacity }; });
+    not(/\bb2\b/.test(r.cls) && /\bi2\b/.test(r.cls) && r.on === 'Kıs' && r.koyu > .9, `Neler: Kıs'a dokununca kademe Kısık'a iner, lamba kısılır (${r.cls}, ${r.koyu})`); }
+  { await pg.locator('#neler .dg-bar button').nth(3).click(); await pg.waitForTimeout(500);
+    const r1 = await pg.evaluate(() => { const a = document.querySelector('#neler .dg'); return { cls: a.className, an: getComputedStyle(a.querySelector('.ur-k.kiz .ur-dol')).animationName, koyu: +getComputedStyle(a.querySelector('.ur-k.kiz .ur-alt.koyu')).opacity }; });
+    await pg.locator('#neler .dg-urun').click(); await pg.waitForTimeout(200);
+    const c2 = await pg.evaluate(() => document.querySelector('#neler .dg').className);
+    const ab = s => (s.match(/\bo[ab]\b/) || [''])[0];
+    not(/\bb3\b/.test(r1.cls) && /x-sarj/.test(r1.cls) && /sarjdol/.test(r1.an) && /\bb3\b/.test(c2) && ab(c2) && ab(c2) !== ab(r1.cls), `Neler: Şarj'da ışık alttan dolar (${r1.an}), lambaya dokununca yeniden oynar (${ab(r1.cls)} → ${ab(c2)})`); }
   { await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
-    const r = await pg.evaluate(() => ({ c: document.querySelector('#neler .na').className, img: document.querySelectorAll('#neler .na-img.erkek').length, kiz: document.querySelectorAll('#neler .na-img.kiz').length }));
+    const r = await pg.evaluate(() => ({ c: document.querySelector('#neler .dg').className, e: document.querySelectorAll('#neler .ur-k.erkek').length, k: document.querySelectorAll('#neler .ur-k.kiz').length,
+      yazi: document.querySelector('#neler .dg-alt span').textContent }));
     await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
-    not(/erkek/.test(r.c) && r.img === 1 && r.kiz === 0, 'Neler: Erkek seçilince robot fotoğrafı ve kart yerleri (' + r.c + ')'); }
+    not(/erkek/.test(r.c) && r.e === 1 && r.k === 0 && /Robotun başını aç/.test(r.yazi), 'Neler: Erkek seçilince robot kesimi, "Robotun başını aç" (' + r.c + ')'); }
 
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
@@ -308,12 +317,12 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
       return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
     not(r.gen === 1440 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin: bant ${r.gen}, şerit kenardan kenara ve yazı altta ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
-  // Masaüstü: Neler yapabiliyor? afişi 430 px sütunda ortada, orantılı büyür (zoom); kesim fotoğrafla aynı yerde
+  // Masaüstü: Neler yapabiliyor? Dergi kapağı 430 px sütunda ortada, orantılı büyür (zoom); kubbe ve gövde aynı kutuda
   await mp.locator('#neler').scrollIntoViewIfNeeded();
-  { const r = await mp.evaluate(() => { const s = document.getElementById('neler').getBoundingClientRect(), a = document.querySelector('#neler .na').getBoundingClientRect(),
-      f = document.querySelector('#neler .na-img.kiz').getBoundingClientRect(), k = document.querySelector('#neler .na-kes.kiz').getBoundingClientRect();
-      return { w: Math.round(a.width), orta: Math.abs((a.left + a.right) / 2 - (s.left + s.right) / 2), ayni: Math.abs(f.left - k.left) + Math.abs(f.top - k.top) + Math.abs(f.width - k.width) }; });
-    not(r.w > 358 && r.w <= 430 && r.orta < 2 && r.ayni < 1, `masaüstü Neler: afiş ${r.w} px, ortada (${r.orta.toFixed(1)}), kesim fotoğrafla aynı yerde (${r.ayni.toFixed(1)})`); }
+  { const r = await mp.evaluate(() => { const s = document.getElementById('neler').getBoundingClientRect(), a = document.querySelector('#neler .dg').getBoundingClientRect(),
+      f = document.querySelector('#neler .ur-k.kiz .ur-alt').getBoundingClientRect(), k = document.querySelector('#neler .ur-k.kiz .ur-ust').getBoundingClientRect();
+      return { w: Math.round(a.width), orta: Math.abs((a.left + a.right) / 2 - (s.left + s.right) / 2), ayni: Math.abs(f.left - k.left) + Math.abs(f.width - k.width) }; });
+    not(r.w > 358 && r.w <= 430 && r.orta < 2 && r.ayni < 1, `masaüstü Neler: Dergi kapağı ${r.w} px, ortada (${r.orta.toFixed(1)}), kubbe gövdeyle hizalı (${r.ayni.toFixed(1)})`); }
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

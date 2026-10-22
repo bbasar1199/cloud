@@ -9,7 +9,8 @@
 #   süre çizilmez); hikâye göstergesi gibi dolan çizgi yok, etkin sekme kısa amber çizgi; sabah zemini #FFFDF9 + 1 px kenar;
 #   tur "Tak."ta biter; Kıs kelimeleri renk geçişi yerine amber kopya + opacity.
 # Ürün parçaları: c-an-kiz-kesim / c-erkek-disk-kesim kubbe (baş) ve gövde olarak ikiye bölündü (canvas/c-gorsel/parca, scratchpad bol.py).
-# Kubbe açılıp disk üstten girer (teyitli, 22 Eki). Erkek'te baş kalkar (varsayım). Ses, pil süresi, kumanda çizilmez.
+# Kubbe açılıp disk üstten girer (teyitli, 22 Eki). Erkek'te robotun başı açılır, disk üstten girer (kullanıcı teyidi, 22 Eki).
+# Ses, pil süresi, kumanda çizilmez. Kullanıcı 22 Eki 4. turda Dergi kapağı'nı seçti; luna_e.py CSS, dergi(), JS_DK, js_tur/js_kapat, js_dk_deger alır.
 import os, sys, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL
@@ -19,7 +20,7 @@ E = 'cubic-bezier(.2,.7,.2,1)'
 B = '/_blob/'
 # kubbe (üst), gövde (alt), tam; en/boy oranı
 PAR = {'kiz': ('d605d392308a84a33323ff40eded6937', '4617058d97e3ceabb65294479d7d6f37', '680dbd1da6e069189d440927c113c3f3'),
-       'erkek': ('0b63136e2e09e31cc155a983ea675132', '78fc28432ba75443c7538f984bf51573', '8e52eb8347fbca90cc90cca9a217a58c')}
+       'erkek': ('825ac9de9877ef81df18964af573ee51', 'de7706aca81b851f9959e30f6a4ec568', '8e52eb8347fbca90cc90cca9a217a58c')}
 DISK_AY = '4a3a69e8c1d8dddad8c33f8f463b8a0e'
 NOTA = '<svg viewBox="0 0 24 24"><path d="M9 17.5V5.5l10-2v12"></path><circle cx="6.5" cy="17.5" r="2.6"></circle><circle cx="16.5" cy="15.5" r="2.6"></circle></svg>'
 
@@ -71,8 +72,7 @@ URUN_CSS = r"""/* Ürün (parçalı kesim) */
 .ur-k img{position:absolute;left:0;top:0;width:100%;height:100%}
 .ur-k .koyu{filter:brightness(.42);opacity:0;transition:opacity .7s EASE}
 .ur-disk{left:28%!important;top:19%!important;width:44%!important;height:auto!important;aspect-ratio:1;border-radius:50%;opacity:0;box-shadow:0 0 0 2px #C9A46A}
-.ur-k.erkek .ur-disk{left:33%!important;top:40%!important;width:28%!important}
-.ur-k.erkek .ur-ust{transform-origin:50% 100%}
+.ur-k.erkek .ur-disk{left:33%!important;top:31%!important;width:34%!important}
 .ur-hale{position:absolute;left:50%;top:40%;width:150%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(242,166,90,.42),rgba(242,166,90,0));opacity:0;transition:opacity .9s EASE;pointer-events:none}
 .ur-gol{position:absolute;left:8%;right:8%;bottom:-10px;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(10,13,32,.38),rgba(10,13,32,0))}
 /* Şarj: koyu kopya penceresi yukarı kayar, içi aşağı (yerinde durur); ışık alttan yukarı dolar */
@@ -87,9 +87,9 @@ URUN_CSS = r"""/* Ürün (parçalı kesim) */
 ACTIONS = ['tak', 'cal', 'kis', 'sarj']
 
 
-# ---------------- A · Dergi kapağı ----------------
+# ---------------- A · Dergi kapağı (sınıf öneki dg-; USB'deki Diskler dk- kullanır) ----------------
 SV = lambda i, w: '<span class="sv s%d">%s<em aria-hidden="true">%s</em></span>' % (i, w, w)
-DK = [('Tak.', 'Kubbeyi aç, masal diskini üstten tak.', 'Tak'),
+DK = [('Tak.', model(lambda m: 'Kubbeyi aç' if m == 'kiz' else 'Robotun başını aç') + ', masal diskini üstten tak.', 'Tak'),
       ('Çal.', 'Telefondaki ninni, Bluetooth ile lambadan çalar.', 'Çal'),
       ('Kıs.', SV(0, 'Parlak') + ', ' + SV(1, 'orta') + ', ' + SV(2, 'kısık') + '. Uykuya göre ayarla.', 'Kıs'),
       ('Şarj.', 'Şarjlı, kablosuz kullanılır.', 'Şarj')]
@@ -97,75 +97,81 @@ DK = [('Tak.', 'Kubbeyi aç, masal diskini üstten tak.', 'Tak'),
 
 def dergi():
     return ('<div class="{{dkCls}}" data-tur="dk">' + ''.join('<span class="{{dkz%d}}"></span>' % i for i in range(4)) +
-            '<p class="dk-soz" aria-hidden="true">' + ''.join('<span class="{{dkw%d}}">%s</span>' % (i, b[0]) for i, b in enumerate(DK)) + '</p>'
-            '<p class="dk-alt" aria-live="polite">' + ''.join('<span class="{{dkc%d}}">%s</span>' % (i, b[1]) for i, b in enumerate(DK)) + '</p>'
-            '<button class="dk-urun" type="button" onClick="{{dkUrunG}}" aria-label="Bu özelliği yeniden göster">' + urun() + '</button>'
-            '<div class="dk-bar">' + ''.join('<button class="{{dkb%d}}" type="button" onClick="{{dkg%d}}"><b></b>%s</button>' % (i, i, b[2]) for i, b in enumerate(DK)) +
+            '<p class="dg-soz" aria-hidden="true">' + ''.join('<span class="{{dkw%d}}">%s</span>' % (i, b[0]) for i, b in enumerate(DK)) + '</p>'
+            '<p class="dg-alt" aria-live="polite">' + ''.join('<span class="{{dkc%d}}">%s</span>' % (i, b[1]) for i, b in enumerate(DK)) + '</p>'
+            '<button class="dg-urun" type="button" onClick="{{dkUrunG}}" aria-label="Bu özelliği yeniden göster">' + urun() + '</button>'
+            '<div class="dg-bar">' + ''.join('<button class="{{dkb%d}}" type="button" onClick="{{dkg%d}}"><b></b>%s</button>' % (i, i, b[2]) for i, b in enumerate(DK)) +
             '</div></div>')
 
 
 DK_CSS = r"""/* A · Dergi kapağı: 358 × 520 */
-.dk{position:relative;width:358px;height:520px;margin:16px auto 0;border-radius:24px;overflow:hidden;isolation:isolate}
-.dk::after{content:"";position:absolute;inset:0;z-index:4;border-radius:inherit;box-shadow:inset 0 0 0 1px #E3D8C7;pointer-events:none}
+.dg{position:relative;width:358px;height:520px;margin:16px auto 0;border-radius:24px;overflow:hidden;isolation:isolate}
+.dg::after{content:"";position:absolute;inset:0;z-index:4;border-radius:inherit;box-shadow:inset 0 0 0 1px #E3D8C7;pointer-events:none}
 /* Zemin perdesi: yeni renk alttan yükselir (geri dönüşte üstteki perdeler iner); ara gri ton olmaz */
-.dk-z{position:absolute;inset:0;transform:translateY(101%);transition:transform .9s EASE}
-.dk-z.on{transform:none}
-.dk-z.z0{background:#F1E8DA}.dk-z.z1{background:#1A2142}.dk-z.z2{background:#0C1027}.dk-z.z3{background:#FFFDF9}
-.dk-soz{position:absolute;left:14px;right:0;top:6px;height:140px;margin:0;overflow:hidden;font-family:"Young Serif",Georgia,serif;font-size:128px;line-height:140px;letter-spacing:-.045em;z-index:1}
-.dk-soz span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(105%);transition:transform .8s EASE}
-.dk-soz span.ust{transform:translateY(-105%)}
-.dk-soz span.on{transform:none}
-.dk-soz span:nth-child(1),.dk-soz span:nth-child(4){color:#1A2142}
-.dk-soz span:nth-child(2),.dk-soz span:nth-child(3){color:#FFFDF9}
-.dk-alt{position:absolute;left:18px;bottom:76px;width:142px;height:110px;margin:0;font-size:16px;line-height:1.4;z-index:1}
-.dk-alt>span{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(8px);transition:opacity .5s EASE,transform .5s EASE}
-.dk-alt>span.on{opacity:1;transform:none;transition-delay:.25s}
-.dk-alt>span:nth-child(1),.dk-alt>span:nth-child(4){color:#3B4160}
-.dk-alt>span:nth-child(2),.dk-alt>span:nth-child(3){color:rgba(255,253,249,.8)}
-.dk-alt .sv{position:relative;display:inline-block}
-.dk-alt .sv em{position:absolute;left:0;top:0;font-style:normal;color:#F2A65A;opacity:0;transition:opacity .3s EASE}
-.i0 .dk-alt .s0 em,.i1 .dk-alt .s1 em,.i2 .dk-alt .s2 em{opacity:1}
-.dk-urun{position:absolute;right:0;bottom:58px;width:200px;height:362px;padding:0;border:0;background:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent}
-.dk-urun:focus-visible{outline:2px solid #F2A65A;outline-offset:2px;border-radius:12px}
-.dk .ur{right:4px;bottom:0;--uh:360px}
-.dk.b1 .ur-hale,.dk.b2 .ur-hale{opacity:1}
-.dk-bar{position:absolute;left:0;right:0;bottom:0;display:flex;height:56px;padding:0 6px;z-index:3}
-.dk-bar button{position:relative;flex:1;height:56px;padding:6px 0 0;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:#5C6078;cursor:pointer;transition:color 0s .45s}
-.dk-bar button b{position:absolute;left:50%;top:10px;width:24px;height:2px;margin-left:-12px;border-radius:1px;background:#F2A65A;transform:scaleX(0);transition:transform .4s EASE}
-.dk-bar button.on{color:#1A2142}
-.dk-bar button.on b{transform:none}
-.b1 .dk-bar button,.b2 .dk-bar button{color:rgba(255,253,249,.66)}
-.b1 .dk-bar button.on,.b2 .dk-bar button.on{color:#FFFDF9}
-.dk-bar button:focus-visible{outline:2px solid #F2A65A;outline-offset:-4px;border-radius:10px}
-.dk.bek .dk-soz span,.dk.bek .dk-alt,.dk.bek .ur{opacity:0}
-.dk.gir .dk-urun{animation:dkgir .9s EASE backwards}
+.dg-z{position:absolute;inset:0;transform:translateY(101%);transition:transform .9s EASE}
+.dg-z.on{transform:none}
+.dg-z.z0{background:#F1E8DA}.dg-z.z1{background:#1A2142}.dg-z.z2{background:#0C1027}.dg-z.z3{background:#FFFDF9}
+.dg-soz{position:absolute;left:14px;right:0;top:6px;height:140px;margin:0;overflow:hidden;font-family:"Young Serif",Georgia,serif;font-size:128px;line-height:140px;letter-spacing:-.045em;z-index:1}
+.dg-soz span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(105%);transition:transform .8s EASE}
+.dg-soz span.ust{transform:translateY(-105%)}
+.dg-soz span.on{transform:none}
+.dg-soz span:nth-child(1),.dg-soz span:nth-child(4){color:#1A2142}
+.dg-soz span:nth-child(2),.dg-soz span:nth-child(3){color:#FFFDF9}
+.dg-alt{position:absolute;left:18px;bottom:76px;width:142px;height:110px;margin:0;font-size:16px;line-height:1.4;z-index:1}
+.dg-alt>span{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(8px);transition:opacity .5s EASE,transform .5s EASE}
+.dg-alt>span.on{opacity:1;transform:none;transition-delay:.25s}
+.dg-alt>span:nth-child(1),.dg-alt>span:nth-child(4){color:#3B4160}
+.dg-alt>span:nth-child(2),.dg-alt>span:nth-child(3){color:rgba(255,253,249,.8)}
+.dg-alt .sv{position:relative;display:inline-block}
+.dg-alt .sv em{position:absolute;left:0;top:0;font-style:normal;color:#F2A65A;opacity:0;transition:opacity .3s EASE}
+.i0 .dg-alt .s0 em,.i1 .dg-alt .s1 em,.i2 .dg-alt .s2 em{opacity:1}
+.dg-urun{position:absolute;right:0;bottom:58px;width:200px;height:362px;padding:0;border:0;background:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent}
+.dg-urun:focus-visible{outline:2px solid #F2A65A;outline-offset:2px;border-radius:12px}
+.dg .ur{right:4px;bottom:0;--uh:360px}
+/* Erkek (robot) geniş: daha alçak, yazı sütunu daralır */
+.dg.erkek .ur{--uh:290px}
+.dg.erkek .dg-urun{width:224px;height:292px}
+.dg.erkek .dg-alt{width:116px}
+.dg.b1 .ur-hale,.dg.b2 .ur-hale{opacity:1}
+.dg-bar{position:absolute;left:0;right:0;bottom:0;display:flex;height:56px;padding:0 6px;z-index:3}
+.dg-bar button{position:relative;flex:1;height:56px;padding:6px 0 0;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:#5C6078;cursor:pointer;transition:color 0s .45s}
+.dg-bar button b{position:absolute;left:50%;top:10px;width:24px;height:2px;margin-left:-12px;border-radius:1px;background:#F2A65A;transform:scaleX(0);transition:transform .4s EASE}
+.dg-bar button.on{color:#1A2142}
+.dg-bar button.on b{transform:none}
+.b1 .dg-bar button,.b2 .dg-bar button{color:rgba(255,253,249,.66)}
+.b1 .dg-bar button.on,.b2 .dg-bar button.on{color:#FFFDF9}
+.dg-bar button:focus-visible{outline:2px solid #F2A65A;outline-offset:-4px;border-radius:10px}
+.dg.bek .dg-soz span,.dg.bek .dg-alt,.dg.bek .ur{opacity:0}
+.dg.gir .dg-urun{animation:dkgir .9s EASE backwards}
 @keyframes dkgir{from{opacity:0;transform:translateY(24px)}}
-@media (max-width:389px){.dk{zoom:.958}}
-@media (max-width:374px){.dk{zoom:.916}}
-@media (max-width:359px){.dk{zoom:.86}}
+@media (max-width:389px){.dg{zoom:.958}}
+@media (max-width:374px){.dg{zoom:.916}}
+@media (max-width:359px){.dg{zoom:.86}}
+@media (min-width:1024px){.dg{zoom:1.1}}
 """
 
 
-def js_dk_deger():
+def js_dk_deger(erkek='false'):
+    """renderVals içinde (self ve S tanımlı): dkV nesnesi; erkek: Erkek modeli seçili mi (JS ifadesi)."""
     return ("var dB = S.dkB || 0, dP = S.dkP || 0;\n"
-            "    var dkV = { dkCls: 'dk b' + dB + ' x-' + %s[dB] + ' i' + (S.dkI || 0) + (dP ? (dP %% 2 ? ' oa' : ' ob') : '') + (S.dkOn === false ? ' bek' : S.dkOn ? ' gir' : ''),\n"
+            "    var dkV = { dkCls: 'dg b' + dB + ' x-' + %s[dB] + ' i' + (S.dkI || 0) + ((%s) ? ' erkek' : '') + (dP ? (dP %% 2 ? ' oa' : ' ob') : '') + (S.dkOn === false ? ' bek' : S.dkOn ? ' gir' : ''),\n"
             "      dkUrunG: function () { self.dkDokun(dB); } };\n"
-            "    [0, 1, 2, 3].forEach(function (i) { dkV['dkz' + i] = 'dk-z z' + i + (i <= dB ? ' on' : ''); dkV['dkw' + i] = i === dB ? 'on' : i < dB ? 'ust' : ''; dkV['dkc' + i] = i === dB ? 'on' : '';\n"
-            "      dkV['dkb' + i] = i === dB ? 'on' : ''; dkV['dkg' + i] = function () { self.dkDokun(i); }; });\n" % str(ACTIONS))
+            "    [0, 1, 2, 3].forEach(function (i) { dkV['dkz' + i] = 'dg-z z' + i + (i <= dB ? ' on' : ''); dkV['dkw' + i] = i === dB ? 'on' : i < dB ? 'ust' : ''; dkV['dkc' + i] = i === dB ? 'on' : '';\n"
+            "      dkV['dkb' + i] = i === dB ? 'on' : ''; dkV['dkg' + i] = function () { self.dkDokun(i); }; });\n" % (str(ACTIONS), erkek))
 
 
 JS_DK = """  dkGit(i) { var self = this; this.setState({ dkB: i, dkP: (this.state.dkP || 0) + 1, dkI: 0, dkOn: true });
-    if (i === 2) { this.at('dk', 900, function () { self.setState({ dkI: 1 }); }); this.at('dk', 1800, function () { self.setState({ dkI: 2 }); }); } }
-  dkOyna() { var self = this; this.dur('dk'); this.dkKos = true; this.dkGit(0);
-    [1, 2, 3].forEach(function (i) { self.at('dk', i * 3400, function () { self.dkGit(i); }); });
-    this.at('dk', 13600, function () { self.dkGit(0); }); this.at('dk', 16200, function () { self.dkKos = false; }); }
-  dkDokun(i) { this.dur('dk'); this.dkKos = false; this.dkElle = true; this.dkGit(i); }
+    if (i === 2) { this.dkAt(900, function () { self.setState({ dkI: 1 }); }); this.dkAt(1800, function () { self.setState({ dkI: 2 }); }); } }
+  dkOyna() { var self = this; this.dkDur(); this.dkKos = true; this.dkGit(0);
+    [1, 2, 3].forEach(function (i) { self.dkAt(i * 3400, function () { self.dkGit(i); }); });
+    this.dkAt(13600, function () { self.dkGit(0); }); this.dkAt(16200, function () { self.dkKos = false; }); }
+  dkDokun(i) { this.dkDur(); this.dkKos = false; this.dkElle = true; this.dkGit(i); }
 """
 
 
 # ---------------- Ortak: zamanlayıcı ve ekrana girince tur ----------------
-JS_ORTAK = """  at(k, ms, f) { (this[k + 'T'] = this[k + 'T'] || []).push(setTimeout(f, ms)); }
-  dur(k) { (this[k + 'T'] || []).forEach(clearTimeout); this[k + 'T'] = []; }
+JS_ORTAK = """  dkAt(ms, f) { (this.dkT = this.dkT || []).push(setTimeout(f, ms)); }
+  dkDur() { (this.dkT || []).forEach(clearTimeout); this.dkT = []; }
 """
 
 
@@ -179,7 +185,7 @@ def js_tur(k):
 
 
 def js_kapat(k):
-    return "this.dur('%(k)s'); if (this.%(k)sIo) this.%(k)sIo.disconnect(); " % {'k': k}
+    return "this.%(k)sDur(); if (this.%(k)sIo) this.%(k)sIo.disconnect(); " % {'k': k}
 
 
 CSS = (URUN_CSS + DK_CSS).replace('EASE', E)
@@ -214,7 +220,7 @@ JS = """class Component extends DCLogic {
   componentWillUnmount() { """ + js_kapat('dk') + """}
 """ + JS_ORTAK + JS_DK + """  renderVals() {
     var self = this, S = this.state, o = { sihKiz: true, sihErkek: false };
-    """ + js_dk_deger() + """    return Object.assign(o, dkV);
+    """ + js_dk_deger('o.sihErkek') + """    return Object.assign(o, dkV);
   }
 }"""
 

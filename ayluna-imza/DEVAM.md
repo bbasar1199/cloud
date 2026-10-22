@@ -475,7 +475,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## "Neler yapabiliyor?" 4. tur: Dergi kapağı (22 Ekim, en güncel; karar bekliyor)
+## Tema 1.0.13 · "Neler yapabiliyor?" = Dergi kapağı (22 Ekim, en güncel)
+- Kullanıcı 4. turda (sayfa içi GIF) "Dergi kapağı"nı seçti. Erkek sorusuna: "Başı açılır, üstten" (teyitli ürün bilgisi).
+- `luna_e.py`: OZ3 (afiş) çıktı; `import ozellik4_varyant as OZ4`, CSS `OZ4.CSS`, `#neler` = `OZ4.dergi()`, JS `OZ4.js_tur('dk')` + `OZ4.JS_ORTAK + OZ4.JS_DK` + `OZ4.js_kapat('dk')` + `OZ4.js_dk_deger("S.model === 'erkek'")` (dönüşte `...dkV`). Sınıf öneki `dg-` (USB Diskler `dk-` kullanır).
+- Erkek: robot kesimi baş/gövde (`parca/erkek-ust|alt.webp`, baş dışındaki sütunlar gövdede kalır; tuval asset 825ac9de…, de7706ac…). Robot daha alçak (290 px), yazı sütunu 116 px; "Robotun başını aç, masal diskini üstten tak."
+- Masaüstünde 1,1 zoom (394 px, 430 px sütunda ortada). E_H=7107, OZ4_H=883.
+- Testler (site): sıra, 4 kelime / 4 düğme, kubbe-gövde ayrı, lamba kelimenin önünde, beyaz kart yok; ekrana girince tur; Kıs → i2 ve lamba kısılır; Şarj → sarjdol, lambaya dokununca yeniden; Erkek; masaüstü. Site + tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.13.zip`. Tuval Sürüm 132, site Sürüm 29 (yayındaki sayfa önce okundu, e19f3cd derlemesiyle aynıydı).
+
+## "Neler yapabiliyor?" 4. tur: Dergi kapağı (22 Ekim)
 - Kullanıcı (dokunulur afişten sonra): "Yine çok beğenmedim, sıkıcı geliyor gözüme."
 - Teşhis: afiş, hemen üstteki Sihirli özellikler'in dört beyaz mini arayüz kartını (disk, ışık, Bluetooth, şarj) aynı dille tekrar ediyordu. Kural: aynı özellik iki bölümde aynı dille anlatılmaz (TASARIM-BILGISI, SKILL).
 - Ürün kesimi ikiye bölündü (`canvas/c-gorsel/parca/`: kiz-ust/alt/tam, erkek-ust/alt/tam; tuval asset'leri `blob-yerel.json`'da). Kubbe gerçekten kalkar.
@@ -483,7 +490,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Üç taslak yapıldı (git c70efe8): A Dergi kapağı 8, B Atlıkarınca 4, C Albüm 3. Eleştirmen B ve C'yi eledi (21 Eki "yörünge düğümleri geri getirilmez", "deste premium değil"; C'de ürün oynamıyor). Dürüst seçenek olarak "bölüm kalksın" 6.
   - **A · Dergi kapağı:** dev tek kelime Tak. / Çal. / Kıs. / Şarj. (Young Serif 128 px), lamba kelimenin önünde; her kelimede zemin perdesi alttan yükselir (ton → lacivert → gece → #FFFDF9). Tak: kubbe kalkar, disk üstten girer. Çal: üç nota. Kıs: Parlak/Orta/Kısık (koyu kopya opacity, kelimeler amber kopyayla). Şarj: lamba söner, ışık alttan yukarı dolar (pencere yukarı, içi aşağı kayar; kablo/port/süre çizilmez). Tur bir kez, "Tak."ta biter; alt sözcüklere ya da lambaya dokununca o oynar.
   - Eleştirmen düzeltmeleri işlendi: "Taşı / istediğin yere" (taşıma, pil vaadi) → "Şarj. Şarjlı, kablosuz kullanılır."; hikâye göstergesi gibi dolan çizgi yok; pasif etiket #5C6078; sabah zemini kenarlı.
-  - Kullanıcıya sayfa içinde (Videolar ile Odası arasında) GIF gösterildi. Soru: A mı, bölüm kalksın mı; Erkek'te disk nasıl takılıyor.
+  - Kullanıcıya sayfa içinde (Videolar ile Odası arasında) GIF gösterildi; Dergi kapağı seçildi (yukarıda).
 
 ## Tema 1.0.12 · "Neler yapabiliyor?" kartları dokunulur (22 Ekim)
 - Kullanıcı durgun afişin ekran görüntüsüyle: "Çalışmıyor ki bu kısım." Kartlar yalnız bir kez oynayıp duruyordu, dokununca hiçbir şey olmuyordu.

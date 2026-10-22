@@ -7,7 +7,7 @@ import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
 import sihirli2_varyant as S2
-import ozellik3_varyant as OZ3
+import ozellik4_varyant as OZ4
 
 
 
@@ -123,7 +123,7 @@ CSS = r""".pg{background:#F6F1E9}
    3 parlaklık, Bluetooth bağlan → çal, pil dolar ve fiş çıkar (lamba şarjda sönük). Kartlar 0,6 sn arayla başlar.
    Mini arayüz CSS'i sihirli2_varyant.MINI_CSS (pano ile aynı). Lamba ikonu modele bağlı (Kız atlıkarınca / Erkek robot). */
 .sih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-""" + S2.MINI_CSS + OZ3.AFIS_CSS + r"""
+""" + S2.MINI_CSS + OZ4.CSS + r"""
 /* Paket (canlı sitedeki biçim) */
 /* Seçiciler (Tur 25, kullanıcı seçimi "Satır kartlar"): model, paket ve 2. lamba tek dil. Aynı kart (yüzey, 1,5px çizgi,
    20px köşe), aynı küçük görsel (açık ton zeminde stüdyo kesimi), aynı seçili durum: 2px lacivert çerçeve + amber dolunay noktası.
@@ -477,14 +477,13 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
   </section>
 
-  <!-- Neler yapabiliyor? · Afiş, ürün önde (22 Eki; kullanıcı sitesindeki afişi örnek gösterdi; Aydınlık sahneyi "hiç ama hiç beğenmedim" dedi, 3. turda bunu seçti).
-       Koyu ürün fotoğrafı (x2), lamba kesimi arayüz kartlarının önünde. Kartlar ekrana girince sırayla gelir; sekanslar tek tek oynar ve durur:
-       Diski tak (kubbe açılır, disk üstten iner; teyitli) → Telefondan çal → Işığı kıs (lamba da kısılır) → Şarj et.
-       Kartlar düğme (22 Eki, kullanıcı: "Çalışmıyor ki bu kısım"): dokununca disk değişip takılır, ninni baştan çalar, ışık Parlak/Orta/Kısık,
-       şarj dolar. Ekrandan çıkıp girince (dokunulmadıysa) tur bir kez daha oynar. Kod ve CSS ozellik3_varyant.py'de. -->
+  <!-- Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur; kullanıcı seçti). Afiş (3. tur) Sihirli'nin dört beyaz kartını aynı dille tekrar
+       ediyordu ("yine sıkıcı"). Dev tek kelime (Tak. Çal. Kıs. Şarj.), parçalı lamba kesimi önünde ve kendisi oynar: kubbe (Erkek'te robotun başı)
+       açılır, disk üstten girer; notalar; Parlak/Orta/Kısık; şarjda ışık alttan dolar. Her kelimede zemin perdesi alttan yükselir.
+       Ekrana girince bir tur oynar ve "Tak."ta durur; alttaki sözcüklere ya da lambaya dokununca o gösterilir. Kod ve CSS ozellik4_varyant.py'de. -->
   <section class="px bolum gir" id="neler" aria-labelledby="neler-bas">
     <h2 class="h2" id="neler-bas">Neler<br>yapabiliyor<span class="n">?</span></h2>
-    """ + OZ3.afis('nf') + """
+    """ + OZ4.dergi() + """
   </section>
 
   <!-- Odası böyle görünecek · Gece vitrini (21 Eki; "Bir gece, beş an" ve iki posterli eski Odası'nın yerine). Kaydır, karta ya da aya dokun.
@@ -569,8 +568,8 @@ JS = """class Component extends DCLogic {
     document.addEventListener('keydown', this.esc);
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Neler yapabiliyor?: ekrana girince kartlar sırayla gelir, sekanslar tek tek oynar ve durur; azaltılmış harekette son kare
-""" + OZ3.js_afis_tur('nf') + """    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
+    // Neler yapabiliyor?: ekrana girince dört kelime bir kez oynar, "Tak."ta durur; azaltılmış harekette tur yok
+""" + OZ4.js_tur('dk') + """    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
       if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
@@ -595,8 +594,8 @@ JS = """class Component extends DCLogic {
     // Galeri kabı başka fotoğrafta kaldıysa (DOM yeniden kurulduysa) durumdaki fotoğrafa geri al
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
-""" + OZ3.js_afis_yontem('nf') + """  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); """ + OZ3.js_afis_kapat('nf') + """ if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
+""" + OZ4.JS_ORTAK + OZ4.JS_DK + """  galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentWillUnmount() { clearInterval(this.iv); """ + OZ4.js_kapat('dk') + """ if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
@@ -732,7 +731,7 @@ JS = """class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
-    """ + OZ3.js_afis_deger('nf', "S.model === 'erkek'") + """    return { ...nfV,
+    """ + OZ4.js_dk_deger("S.model === 'erkek'") + """    return { ...dkV,
       gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al', onPrice: TL(online, true),  // düğmede fiyat yok (kullanıcı, 19 Eki)
@@ -759,5 +758,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7097)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7107)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
