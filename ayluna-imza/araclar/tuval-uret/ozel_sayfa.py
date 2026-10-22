@@ -14,6 +14,7 @@ import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
 import ozel_yon as O
+import urun_soru as US
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
 BL = json.load(open(os.path.join(CANVAS, 'ozel', 'bloblar.json')))
@@ -174,8 +175,10 @@ def al(u):
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
+    <!-- Ürün soruları (22 Eki, LunaDream'deki gibi): teslim çizgisinin altında 4 soru; kalanı SSS'de (urun_soru.py) -->
+    %s
   </section>
-""" % (AD[u], alt, O.tl(d['P1']), O.tl(d['C1']), pct, O.tl(d['P1']), O.tl(d['C1']), pct, ozler(u), O.ALICI, I(pk), kutu, U.OK))
+""" % (AD[u], alt, O.tl(d['P1']), O.tl(d['C1']), pct, O.tl(d['P1']), O.tl(d['C1']), pct, ozler(u), O.ALICI, I(pk), kutu, U.OK, US.urs_html(US.sorular(ICERIK[HANDLE[u]])[0])))
 
 
 def odalar(u, bas, alt):
@@ -324,10 +327,12 @@ def govde(u):
     return re.sub(r'@@([\w-]+)@@', lambda m: I(m.group(1)), h)
 
 
+HANDLE = {'af': 'lamba', 'gn': 'ayluna-galaksi-night-projektor'}
+
+
 def faq(u):
-    c = ICERIK['lamba' if u == 'af' else 'ayluna-galaksi-night-projektor']
-    ilk = [{'q': 'Kutudan ne çıkıyor?', 'a': c['kutuda']}]
-    return ilk + [{'q': x['s'], 'a': x['c']} for x in c['sss']]
+    # Ürün soruları önce (teslim altındakiler hariç), sonra satın alma soruları (urun_soru.py)
+    return [{'q': q, 'a': a} for q, a in US.sorular(ICERIK[HANDLE[u]])[1]]
 
 
 def js(u):
@@ -411,12 +416,12 @@ DOSYA = {'af': ('AyFeneri.dc.html', 'af-a'), 'gn': ('GalaksiNight.dc.html', 'gn-
 def sayfa(u):
     dosya, yon = DOSYA[u]
     t = O.YON[yon]
-    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + MESAJ_CSS
+    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + US.URS_CSS + MESAJ_CSS
     return U.head(AD[u], css, t['font']) + govde(u)
 
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
-        h = int(os.environ.get('S_H_' + u, {'af': 6596, 'gn': 7108}[u]))  # ölçülen pano boyu (19 Eki, kare galeri)
+        h = int(os.environ.get('S_H_' + u, {'af': 7188, 'gn': 7529}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
         open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"', ozler(u)) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

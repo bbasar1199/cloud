@@ -260,6 +260,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 /* Teslim, kutu, SSS, yorum */
 .yol-k{margin:22px 16px 0}
+.ust-sag .urs{margin:14px 16px 0}
+.ust-sag .urs-ay .evre path{fill:var(--amber)}  /* teslim çizgisinin ayıyla aynı renk */
 .blk{margin:24px 16px 0}
 .blk h2{margin:0 0 10px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.01em;color:var(--lac)}
 .blk h2 span{color:var(--v)}
@@ -270,6 +272,23 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .sss .arti{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--lac);color:var(--lac);font-size:17px;transition:transform .25s var(--ease)}
 .sss[open] .arti{transform:rotate(45deg)}
 .sss p{margin:0 0 14px;font-size:14px;color:var(--soluk)}
+
+.urs{margin-top:12px;padding:2px 16px;border-radius:20px;background:var(--yuzey,#FFFDF9);border:1px solid var(--cizgi,#E3D8C7);text-align:left}
+.urs-s+.urs-s{border-top:1px solid #EFE6D8;border-top-color:color-mix(in srgb,var(--cizgi,#E3D8C7) 60%,transparent)}
+.urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:54px;padding:6px 0;font-size:15px;font-weight:600;line-height:1.3;color:var(--lac,#1A2142);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.urs-s summary::-webkit-details-marker{display:none}
+.urs-s summary:focus-visible{outline:2px solid var(--v,#F2A65A);outline-offset:2px;border-radius:8px}
+.urs-ay{position:relative;flex:none;width:22px;height:22px}
+.urs-ay .evre{position:absolute;inset:0;width:22px;height:22px;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
+.urs-ay .evre circle{fill:var(--yuzey,#FFFDF9);stroke:var(--lac,#1A2142);stroke-width:1.4}
+.urs-ay .evre path{fill:var(--v,#F2A65A)}
+.urs-ay .dolu,.urs-s[open] .urs-ay .hilal{opacity:0}
+.urs-s[open] .urs-ay .dolu{opacity:1}
+.urs-q{flex:1;min-width:0}
+.urs-ok{flex:none;width:18px;height:18px;fill:none;stroke:var(--soluk,#5C6078);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.urs-s[open] .urs-ok{transform:rotate(180deg)}
+.urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:var(--soluk,#5C6078)}
+@media (prefers-reduced-motion:reduce){.urs-ay .evre,.urs-ok{transition:none}}
 
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
@@ -306,9 +325,9 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
   <div class="al"><button class="btn1" type="button"><span class="b-ic"><span>Güvenli Ödeme ile Al</span><small>Kartla %5 indirim dahil</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button><button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button><div class="ay-dis" data-ay-dis></div></div>
   <ol class="yol-k" aria-label="Siparişten teslime"><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><b>Sipariş</b>Hazırlanıyor</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.00 9 0 0 1 12 3Z"></path></svg><b>Kargoda</b>Yolda</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg><b>Kapında</b>Teslim</li></ol>
+  <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Bu ürün ne işe yarıyor?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Çocuğun çizgileri takip ederek resim çizdiği projeksiyonlu çizim masası. Sarı ya da pembe renkte.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Nasıl çalışıyor?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Diski zürafanın başına takıp ışığı açarsın; resim masaya yansır, çocuk çizgileri kalemle takip eder. Çizim silinir, yeniden başlanır.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Pil gerekiyor mu?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Pille çalışır. Pil tipi, adedi ve kutuda olup olmadığı [teyit].</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Kutu içeriğinde neler var?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Çizim masası, 3 projeksiyon diski, 12 renkli kalem, silgi ve temizleme bezi. Pil kutuda mı [teyit].</p></details></div>
   </div></div>
-  <section class="blk"><h2>Kutuda ne var<span>?</span></h2><p class="kutu">Çizim masası, 3 projeksiyon diski, 12 renkli kalem, silgi, temizleme bezi. Pil [teyit: kutuda mı?]</p></section>
-  <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)"><details class="sss"><summary>Kargo ücretli mi, ne zaman gelir?<span class="arti" aria-hidden="true">+</span></summary><p>Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin.</p></details><details class="sss"><summary>Beğenmezsem iade edebilir miyim?<span class="arti" aria-hidden="true">+</span></summary><p>Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir.</p></details><details class="sss"><summary>Kartla mı ödesem, kapıda mı?<span class="arti" aria-hidden="true">+</span></summary><p>Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir.</p></details><details class="sss"><summary>Garantisi var mı, sorun olursa ne yapacağım?<span class="arti" aria-hidden="true">+</span></summary><p>Garanti süresi: [garanti]. Bir sorun olursa bize yaz.</p></details><details class="sss"><summary>Nasıl çalışır?<span class="arti" aria-hidden="true">+</span></summary><p>Diski zürafanın başına takıp ışığı açarsın; resim masaya yansır, çocuk çizgileri kalemle takip eder.</p></details><details class="sss"><summary>Kaç yaş için uygun?<span class="arti" aria-hidden="true">+</span></summary><p>[teyit: 3 yaş ve üzeri mi, 3–8 yaş mı?]</p></details><details class="sss"><summary>Pil gerekiyor mu?<span class="arti" aria-hidden="true">+</span></summary><p>Pille çalışır. Pil tipi, adedi ve kutuda olup olmadığı [teyit].</p></details></div></section>
+  <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)"><details class="sss"><summary>Kaç farklı resim var?<span class="arti" aria-hidden="true">+</span></summary><p>3 projeksiyon diski var; disk değiştirince farklı resimler yansır. Toplam desen sayısı [teyit: 24].</p></details><details class="sss"><summary>Kaç yaş için uygun?<span class="arti" aria-hidden="true">+</span></summary><p>[teyit: 3 yaş ve üzeri mi, 3–8 yaş mı?]</p></details><details class="sss"><summary>Kargo ücretli mi, ne zaman gelir?<span class="arti" aria-hidden="true">+</span></summary><p>Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin.</p></details><details class="sss"><summary>Beğenmezsem iade edebilir miyim?<span class="arti" aria-hidden="true">+</span></summary><p>Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir.</p></details><details class="sss"><summary>Kartla mı ödesem, kapıda mı?<span class="arti" aria-hidden="true">+</span></summary><p>Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir.</p></details><details class="sss"><summary>Garantisi var mı, sorun olursa ne yapacağım?<span class="arti" aria-hidden="true">+</span></summary><p>Garanti süresi: [garanti]. Bir sorun olursa bize yaz.</p></details></div></section>
   <!-- Yorumlar: Shopify'da bu ürünün Loox kutusu (hepsi, m.28/B). Loox: 12 yorumun hepsi 20.05.2026'da (ürün 19.05 akşamı eklendi); hiçbiri doğrulanmış değil. -->
   <section class="blk"><h2>Alanlar ne diyor<span>?</span></h2><p class="yer" style="margin: 0">[Loox: bu ürünün tüm yorumları]</p></section>
 
@@ -322,7 +341,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3709}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3720}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: null, sec: 0 }); }
   componentDidMount() { var self = this;

@@ -274,6 +274,21 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
     not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && r2.sensor && !r2.pil,
       `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
+  // Diğer ürünlerde de aynı soru kartı (22 Eki, kullanıcı: "diğer ürünler için de benzer SSS kısımlarını oluştur"): teslim çizgisinin
+  // hemen altında 4 soru, satır ≥ 48 px, açılınca dolunay; aynı soru alttaki SSS'de yok; sade sayfalarda ayrı "Kutuda ne var" bölümü yok
+  { const kotu = [], k2 = await b.newContext({ viewport: { width: 390, height: 844 } }), p2 = await k2.newPage();  // LunaDream sayfası (pg) yerinde kalsın
+    for (const f of ['galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba', 'ayluna-retro-mini-pikap', 'egitici-akilli-cizim-tahtasi',
+      'dokunmatik-ambiyans-lamba', 'ayluna-cocuk-gece-feneri', 'galaksiambiyanisigi', 'lunadream-gece-lambasi-v2', 'aroma-terapi-nemlendirici',
+      'yildiz-isigi-nemlendirici', 'ask-saati', 'astronot-oda-nemlendirici-aroma-difuzor']) {
+      await p2.goto(KOK + f + '.html'); await p2.waitForTimeout(300);
+      const r = await p2.evaluate(() => { const u = document.querySelector('.urs'), o = u && u.previousElementSibling, s0 = u && u.querySelector('.urs-s summary');
+        const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());
+        return { yer: !!o && (o.matches('.teslim') || o.matches('ol.yol') || o.matches('ol.yol-k')), n: q.length, satir: s0 ? Math.round(s0.getBoundingClientRect().height) : 0,
+          tekrar: sss.filter(x => q.includes(x)), sss: sss.length, kutu: [...document.querySelectorAll('h2')].some(h => /Kutuda ne var/.test(h.textContent)) }; });
+      await p2.locator('.urs-s summary').first().click(); await p2.waitForTimeout(450);
+      const dolu = await p2.evaluate(() => +getComputedStyle(document.querySelector('.urs-s .dolu')).opacity);
+      if (!(r.yer && r.n === 4 && r.satir >= 48 && dolu > .9 && !r.tekrar.length && r.sss >= 5 && !r.kutu)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { dolu }))); }
+    not(!kotu.length, 'diğer 14 ürün: teslim altında 4 soru, açılınca dolunay, SSS\'de tekrar yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k2.close(); }
   // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));

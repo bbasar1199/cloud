@@ -15,6 +15,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS
 import luna_e as E
 import luna_usb_yon as Y
+import urun_soru as US
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
 I = dict(Y.I, bas='7e1339aefa8d185cd41f6c37b16853c5', kesim='5782766948fef68b7273c061529d6324', afis='be86b4a93cb896b0ad69042a2e915e68')
@@ -594,6 +595,8 @@ AL = ("""
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
     <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><span class="y-ik" aria-hidden="true">""" + uk_ik() + """</span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
+    <!-- Ürün soruları (22 Eki, LunaDream'deki gibi): teslim kartının altında 4 soru; kalanı SSS'de (urun_soru.py) -->
+    """ + US.urs_html(US.SORU['galayx-usb-projektor']['urs']) + """
   </section>
 """)
 
@@ -708,7 +711,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + MESAJ_CSS, t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + MESAJ_CSS, t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -775,8 +778,7 @@ JS = """class Component extends DCLogic {
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
     var faq = [
-      { q: 'Kutudan ne çıkıyor?', a: '1 Galaxy USB projektör ve 12 film diski. USB adaptör kutuda yok; laptop, powerbank ya da USB-A girişli bir şarj başlığı yeter.' },
-      { q: 'Gece lambası olarak da kullanılır mı?', a: 'Evet, 2’si 1 arada: gövdesi yumuşak ışıkla yanar. [Işık modları teyit edilecek.]' },
+      // Kutu içeriği ve gece lambası teslim kartının altındaki sorularda (aynı soru iki yerde yok)
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
       { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.]' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır. Takip bağlantısı sana gönderilir.' },
@@ -821,7 +823,7 @@ def ozellik(h):
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7480))
+    h = int(os.environ.get('U_H', 7595))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))

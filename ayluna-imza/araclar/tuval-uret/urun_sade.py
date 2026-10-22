@@ -11,6 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, canli_galeri, mesaj_bolum, mesaj_js, MESAJ_CSS
 import anasayfa as A
 import sayfalar as SY
+import urun_soru as US
 ROOT = os.path.join(HERE, '..', '..')
 CANVAS = os.path.join(ROOT, 'canvas')
 B = '/_blob/'
@@ -79,6 +80,8 @@ CSS = SY.CSS + r"""
 .btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 /* Teslim, kutu, SSS, yorum */
 .yol-k{margin:22px 16px 0}
+.ust-sag .urs{margin:14px 16px 0}
+.ust-sag .urs-ay .evre path{fill:var(--amber)}  /* teslim çizgisinin ayıyla aynı renk */
 .blk{margin:24px 16px 0}
 .blk h2{margin:0 0 10px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.01em;color:var(--lac)}
 .blk h2 span{color:var(--v)}
@@ -89,7 +92,7 @@ CSS = SY.CSS + r"""
 .sss .arti{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--lac);color:var(--lac);font-size:17px;transition:transform .25s var(--ease)}
 .sss[open] .arti{transform:rotate(45deg)}
 .sss p{margin:0 0 14px;font-size:14px;color:var(--soluk)}
-"""
+""" + US.URS_CSS
 
 
 def ay_ik(f):
@@ -125,7 +128,9 @@ def govde(u):
     else:
         al = ('  <div class="al" style="margin-top: 18px"><button class="btn1" type="button" disabled><span class="b-ic"><span>Tükendi</span><small>Yeniden gelince haber verelim</small></span></button>'
               '<button class="btn2" type="button">Gelince haber ver</button></div>\n')
-    sss = ''.join('<details class="sss"><summary>%s<span class="arti" aria-hidden="true">+</span></summary><p>%s</p></details>' % (q['s'], q['c']) for q in u['sss'])
+    # Ürün soruları (22 Eki, LunaDream'deki gibi): 4'ü teslim çizgisinin altında, kalanı SSS'de satın alma sorularından önce (urun_soru.py)
+    urs, sorular = US.sorular(u)
+    sss = ''.join('<details class="sss"><summary>%s<span class="arti" aria-hidden="true">+</span></summary><p>%s</p></details>' % (q, a) for q, a in sorular)
     return ad, gal, (serit +
         '  <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn\'de geçer -->\n'
         '  <div class="urun-ust"><div class="ust-sol">\n'  # masaüstünde sol sütun (galeri); telefonda etkisiz
@@ -135,8 +140,8 @@ def govde(u):
         '  <section class="bilgi" id="siparis"><h1>%s<span>.</span></h1><p class="kisa">%s</p>'
         '<p class="fiyat"><b>%s</b>%s%s</p></section>\n' % (ad, u['kisa'], tl(u['fiyat']), '<s>%s</s>' % tl(eski) if eski else '', rozet) +
         '  <ul class="oz-l">' + oz + '</ul>\n' + sec + pk + al +
-        '  <ol class="yol-k" aria-label="Siparişten teslime">' + SY.YOL + '</ol>\n  </div></div>\n'
-        '  <section class="blk"><h2>Kutuda ne var<span>?</span></h2><p class="kutu">%s</p></section>\n' % u['kutuda'] +
+        # Kutu içeriği teslim altındaki 4. soruda; ayrı "Kutuda ne var" bölümü kalktı (aynı işi iki bölüm yapmasın)
+        '  <ol class="yol-k" aria-label="Siparişten teslime">' + SY.YOL + '</ol>\n  ' + US.urs_html(urs) + '\n  </div></div>\n' +
         '  <section class="blk"><h2>Merak edilenler<span>.</span></h2><div style="border-top: 1px solid var(--cizgi)">' + sss + '</div></section>\n'
         '  <!-- Yorumlar: Shopify\'da bu ürünün Loox kutusu (hepsi, m.28/B). Loox: %s -->\n'
         '  <section class="blk"><h2>Alanlar ne diyor<span>?</span></h2><p class="yer" style="margin: 0">[Loox: bu ürünün tüm yorumları]</p></section>\n' % (u['loox'].get('not') or '')

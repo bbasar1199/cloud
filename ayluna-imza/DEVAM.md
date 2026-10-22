@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Galeri = satış afişleri (22 Ekim, en güncel)
+## Ürün soruları bütün ürün sayfalarında (22 Ekim, en güncel)
+- Kullanıcı: "Diğer ürünler için de benzer SSS kısımlarını oluştur."
+- `araclar/tuval-uret/urun_soru.py`: kartın CSS'i (`URS_CSS`, LunaDream'in `.urs`'i; renkler sayfa değişkenlerinden), `urs_html()`, ürün başına `SORU` (urs: teslim altı 4 soru; ek/sss: alttaki SSS'ye giden ürün soruları) ve `sorular(icerik)` (aynı soru iki yerde olursa hata verir).
+- Bağlananlar: `urun_sade.py` (11 sade ürün + sade AyFeneri/Galaksi Night; "Kutuda ne var" bölümü kalktı, kutu 4. soruda), `ozel_sayfa.py` (AyFeneri, Galaksi Night; teslim çizgisinin altında), `luna_usb.py` (teslim kartının altında; SSS'den "Kutudan ne çıkıyor" ve "Gece lambası" çıktı).
+- Mağazadaki açılır sorular kaynak alınmadı (çoğu başka üründen kopya). Cevaplar `ogrenme/urun-icerik.json` ve kullanıcı teyitlerinden; bilinmeyen [teyit].
+- Pano boyları ölçüldü: GalaxyUSB 7595, AyFeneri 7188, GalaksiNight 7529; sade sayfalar `canvas/urunler/yukseklik.json`.
+- Site testi: diğer 14 ürün sayfasında kart teslimin hemen altında, 4 soru, satır ≥ 48 px, açılınca dolunay, SSS'de tekrar yok, "Kutuda ne var" yok.
+- Site testleri (165) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.18.zip`. Tuval Sürüm 140, site Sürüm 35.
+
+## Galeri = satış afişleri (22 Ekim)
 - Kullanıcı: "Ürün görsellerini beğenmedim, düzeltmeni istiyorum." → "Eskilerinin ki satış odaklı görseller olsun, USB'ninki gibi." Salt fotoğraf galerisi kalktı; galeri USB galerisi gibi afiş.
 - `araclar/gorsel/afis_uret.py`: premium fotoğraflardan 6 afiş (1080 kare JPG) → `canvas/p-gorsel/afis-1..6.jpg`. Yazı HTML (Young Serif + Onest, `onizleme/f`), Playwright ile basılır. Çalıştırma: PIL'li Python + `NODE_PATH=/opt/node-tools/node_modules`.
   1. Masal anlatan / gece lambası (koyu, Kız gece; 6 masal diski, Bluetooth ninni, 3 kademe ışık)

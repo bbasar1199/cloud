@@ -251,6 +251,90 @@ body{margin:0;background:#F2F4F8}
 @keyframes yk2{0%,26%{opacity:0;transform:scale(.3)}33%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 @keyframes yk3{0%,57%{opacity:0;transform:scale(.3)}64%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
 
+/* Canlı kartlar (21 Eki): her hücrede ekran (gümüş tonu), sekanslar 3,2-9,6 sn; ikinci ton (--v2) yalnız ışıkta */
+.uk-ek{position:relative;display:flex;align-items:center;justify-content:center;height:72px;margin-bottom:10px;border-radius:12px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff);overflow:hidden}
+.oz.genis .uk-ek{flex:none;width:150px;margin:0}
+.uk{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px}
+.uk-ik{width:40px;height:40px;overflow:visible;fill:none;stroke:var(--lac);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.uk-ik rect,.uk-ik .uk-lens{fill:var(--yuzey)}
+.uk-ik .uk-isin{stroke:var(--v2);opacity:0}
+.uk-ik .uk-hale{fill:none;stroke:var(--v2);stroke-width:1.2;opacity:0}
+.uk-et{display:grid;font-size:12px;font-weight:600;color:var(--soluk);white-space:nowrap}
+.uk-et i{grid-area:1/1;justify-self:center;font-style:normal;opacity:0}
+/* USB tak: fiş girer (mevcut 3,2 sn döngü), lens ve ışın yanar; kaynak adı 3 döngüde bir değişir */
+.uk-sira{display:flex;align-items:center;gap:2px}
+.uk-tak .fis-a{width:50px;height:34px}
+.uk-tak .uk-ik{width:36px;height:36px}
+.uk-tak .uk-lens{animation:ulens 3.2s var(--ease) infinite}
+.uk-tak .uk-isin{animation:uisin 3.2s var(--ease) infinite}
+@keyframes ulens{0%,38%{fill:var(--yuzey)}44%,80%{fill:var(--v2)}90%,100%{fill:var(--yuzey)}}
+@keyframes uisin{0%,40%{opacity:0}46%,80%{opacity:1}90%,100%{opacity:0}}
+.uk-uc i:nth-child(1){opacity:1;animation:uc1 9.6s var(--ease) infinite}.uk-uc i:nth-child(2){animation:uc2 9.6s var(--ease) infinite}.uk-uc i:nth-child(3){animation:uc3 9.6s var(--ease) infinite}
+@keyframes uc1{0%,30%{opacity:1}33%,97%{opacity:0}100%{opacity:1}}
+@keyframes uc2{0%,31%{opacity:0}34%,63%{opacity:1}66%,100%{opacity:0}}
+@keyframes uc3{0%,64%{opacity:0}67%,96%{opacity:1}99%,100%{opacity:0}}
+/* Esnek boyun: baş tabandan döner (tavan 0°, duvar 62°, köşe 32°), ışın hep yanar */
+.uk-boyun .uk-bas{transform-box:view-box;transform-origin:16px 24px;animation:boyun 9.6s var(--ease) infinite}
+.uk-boyun .uk-isin{opacity:1}
+.uk-boyun .uk-lens{fill:var(--v2)}
+@keyframes boyun{0%,28%{transform:none}34%,61%{transform:rotate(62deg)}67%,94%{transform:rotate(32deg)}100%{transform:none}}
+/* Gece lambası da: projeksiyonda ışın + yıldızlar; gece lambasında başlıkta hale, ışın yok (6 sn) */
+.uk-mod{padding-top:10px}
+.uk-yildiz{position:absolute;left:50%;top:0;width:48px;height:12px;margin-left:-24px}
+.uk-yildiz i{position:absolute;top:0;width:3px;height:3px;border-radius:50%;background:var(--v2);opacity:0;animation:uyil 6s var(--ease) infinite}
+.uk-yildiz i:nth-child(1){left:6px}.uk-yildiz i:nth-child(2){left:22px;top:-3px}.uk-yildiz i:nth-child(3){left:40px}
+@keyframes uyil{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+.uk-mod .uk-isin{animation:uisin2 6s var(--ease) infinite}
+.uk-mod .uk-hale{transform-box:fill-box;transform-origin:50% 50%;animation:uhale 6s var(--ease) infinite}
+.uk-mod .uk-lens{animation:ulens2 6s var(--ease) infinite}
+@keyframes uisin2{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+@keyframes uhale{0%,50%{opacity:0;transform:scale(.8)}58%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes ulens2{0%,4%{fill:var(--yuzey)}10%,94%{fill:var(--v2)}100%{fill:var(--yuzey)}}
+.uk-iki i:nth-child(1){opacity:1;animation:ui1 6s var(--ease) infinite}.uk-iki i:nth-child(2){animation:ui2 6s var(--ease) infinite}
+@keyframes ui1{0%,46%{opacity:1}50%,100%{opacity:0}}
+@keyframes ui2{0%,50%{opacity:0}54%,96%{opacity:1}100%{opacity:0}}
+/* Disk şeridi (LunaDream ile ortak) USB renginde */
+.uk-ek .pencere{background:var(--yuzey)}
+.uk-ek .adlar{color:var(--lac);font-family:var(--fg)}
+/* Teslim kartı (21 Eki): beyaz kart, ekranda noktalar ve paket; Kapında'da USB ikonu belirir */
+.teslim{position:relative;margin-top:22px;padding:8px 8px 12px;border-radius:16px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi)}
+.teslim::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:52px;border-radius:12px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol{margin:0;padding-top:16px}
+.teslim .yol::before,.teslim .yol-iz{top:25px}
+.teslim .yd{margin-bottom:22px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol-iz em::before{box-shadow:0 0 0 2px #EEF1F7,0 0 0 3.5px var(--lac)}
+.y-ik{position:absolute;left:calc(50% + 14px);top:-8px;width:34px;height:34px;opacity:0;animation:yik 8s var(--ease) infinite}
+.y-ik .uk-lens{fill:var(--v2)}
+.y-ik .uk-ik{width:34px;height:34px}
+@keyframes yik{0%,58%{opacity:0;transform:translateY(4px)}66%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.y-ik{opacity:1}.uk-ik .uk-isin{opacity:1}}
+/* Disk şeridi: her 2 sn bir disk kayar (0,6 sn), kayarken 90° yuvarlanır, durunca sabit; ortadaki pencerede, komşular .85 ve soluk.
+   Genişlik = ortadaki disk + iki tam komşu (22 Eki, kullanıcı: "disk kartı tam sığmıyor"; 375 px telefonda kart ekranı 149 px).
+   --pad: ortadaki diskin sol kenarı; tren bir komşu solda başlar (padding-left = pad - adim). */
+.ui-serit{position:relative;display:block;flex:none;--d:46px;--adim:50px;--pad:53px;width:152px;height:76px;overflow:hidden}
+.ui-serit.serit-k{--d:38px;--adim:42px;--pad:45px;width:128px;height:64px}
+.pencere{position:absolute;left:calc(var(--pad) - 4px);top:2px;width:calc(var(--d) + 8px);height:calc(var(--d) + 8px);border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9;animation:pen 8s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.tren{position:absolute;left:0;top:6px;display:flex;gap:calc(var(--adim) - var(--d));padding-left:calc(var(--pad) - var(--adim));animation:tren 8s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.sd{flex:none;width:var(--d);height:var(--d);transform:scale(.85);opacity:.5}
+.sd img{display:block;width:var(--d);height:var(--d);border-radius:50%;object-fit:cover;animation:yuvar 8s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.sd:nth-child(2){transform:none;opacity:1}
+.sd:nth-child(2){animation:sd1 8s cubic-bezier(.2,.7,.2,1) infinite}.sd:nth-child(3){animation:sd2 8s cubic-bezier(.2,.7,.2,1) infinite}.sd:nth-child(4){animation:sd3 8s cubic-bezier(.2,.7,.2,1) infinite}.sd:nth-child(5){animation:sd4 8s cubic-bezier(.2,.7,.2,1) infinite}.sd:nth-child(6){animation:sd5 8s cubic-bezier(.2,.7,.2,1) infinite}
+.sd{animation-delay:var(--gec,0s)!important}
+@keyframes tren{0%,18%{transform:none}25.5%,43%{transform:translateX(calc(var(--adim) * -1))}50.5%,68%{transform:translateX(calc(var(--adim) * -2))}75.5%,93%{transform:translateX(calc(var(--adim) * -3))}100%{transform:translateX(calc(var(--adim) * -4))}}
+@keyframes yuvar{0%,18%{transform:none}25.5%,43%{transform:rotate(-90deg)}50.5%,68%{transform:rotate(-180deg)}75.5%,93%{transform:rotate(-270deg)}100%{transform:rotate(-360deg)}}
+@keyframes pen{0%,18%{opacity:1}21.75%{opacity:.4}25.5%,43%{opacity:1}46.75%{opacity:.4}50.5%,68%{opacity:1}71.75%{opacity:.4}75.5%,93%{opacity:1}96.75%{opacity:.4}100%{opacity:1}}
+@keyframes sd1{0%,18%{transform:none;opacity:1}25.5%,100%{transform:scale(.85);opacity:.5}}
+@keyframes sd2{0%,18%{transform:scale(.85);opacity:.5}25.5%,43%{transform:none;opacity:1}50.5%,100%{transform:scale(.85);opacity:.5}}
+@keyframes sd3{0%,43%{transform:scale(.85);opacity:.5}50.5%,68%{transform:none;opacity:1}75.5%,100%{transform:scale(.85);opacity:.5}}
+@keyframes sd4{0%,68%{transform:scale(.85);opacity:.5}75.5%,93%{transform:none;opacity:1}100%{transform:scale(.85);opacity:.5}}
+@keyframes sd5{0%,93%{transform:scale(.85);opacity:.5}100%{transform:none;opacity:1}}
+.adlar{position:absolute;left:0;right:0;bottom:0;display:grid;font-size:12px;font-weight:600;color:#1A2142;white-space:nowrap}
+.adlar i{grid-area:1/1;justify-self:center;font-style:normal;opacity:0;animation:adk 8s cubic-bezier(.2,.7,.2,1) infinite both}
+.adlar .a1{opacity:1;animation-delay:var(--gec,0s)}
+.adlar .a2{animation-delay:calc(var(--gec,0s) + 2s)}.adlar .a3{animation-delay:calc(var(--gec,0s) + 4s)}.adlar .a4{animation-delay:calc(var(--gec,0s) + 6s)}
+@keyframes adk{0%{opacity:0;transform:translateY(4px)}3%,18%{opacity:1;transform:none}22%,100%{opacity:0;transform:translateY(-4px)}}
+
+
 /* Bu gece tavanda ne olsun? (Yön A'dan, kullanıcı istedi): yaşam fotoğrafı, yazı görselin içinde; fotoğraflar yavaşça süzülür */
 .sahne-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
 .sk{position:relative;flex:0 0 272px;height:380px;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:#000}
@@ -637,6 +721,23 @@ body{margin:0;background:#F2F4F8}
 @keyframes netgec{0%,12%{opacity:0}55%,90%{opacity:1}100%{opacity:0}}
 .net span>span{font-size:14px}
 
+.urs{margin-top:12px;padding:2px 16px;border-radius:20px;background:var(--yuzey,#FFFDF9);border:1px solid var(--cizgi,#E3D8C7);text-align:left}
+.urs-s+.urs-s{border-top:1px solid #EFE6D8;border-top-color:color-mix(in srgb,var(--cizgi,#E3D8C7) 60%,transparent)}
+.urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:54px;padding:6px 0;font-size:15px;font-weight:600;line-height:1.3;color:var(--lac,#1A2142);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.urs-s summary::-webkit-details-marker{display:none}
+.urs-s summary:focus-visible{outline:2px solid var(--v,#F2A65A);outline-offset:2px;border-radius:8px}
+.urs-ay{position:relative;flex:none;width:22px;height:22px}
+.urs-ay .evre{position:absolute;inset:0;width:22px;height:22px;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
+.urs-ay .evre circle{fill:var(--yuzey,#FFFDF9);stroke:var(--lac,#1A2142);stroke-width:1.4}
+.urs-ay .evre path{fill:var(--v,#F2A65A)}
+.urs-ay .dolu,.urs-s[open] .urs-ay .hilal{opacity:0}
+.urs-s[open] .urs-ay .dolu{opacity:1}
+.urs-q{flex:1;min-width:0}
+.urs-ok{flex:none;width:18px;height:18px;fill:none;stroke:var(--soluk,#5C6078);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.urs-s[open] .urs-ok{transform:rotate(180deg)}
+.urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:var(--soluk,#5C6078)}
+@media (prefers-reduced-motion:reduce){.urs-ay .evre,.urs-ok{transition:none}}
+
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
 .m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
@@ -682,6 +783,8 @@ body{margin:0;background:#F2F4F8}
     <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
+    <!-- Ürün soruları (22 Eki, LunaDream'deki gibi): teslim çizgisinin altında 4 soru; kalanı SSS'de (urun_soru.py) -->
+    <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Bu ürün ne işe yarıyor?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Tavana ya da duvara gökyüzü ve uzay sahneleri yansıtan masa üstü projektör. Diski değiştirince sahne değişir; yansıyan görüntü yavaşça döner.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Tavana mı duvara mı yansıtır?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>İkisine de. Başlık eğilir; görüntüyü tavana ya da duvara çevirirsin. Oda ne kadar karanlıksa görüntü o kadar net olur.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Şarjlı mı?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Hayır. USB-C kabloyla prize ya da bir USB çıkışına takılıyken çalışır; pil bitmesi derdi yok. USB adaptör kutuda mı [teyit].</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Diskler nasıl değişir?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Disk başlıktaki yuvaya elle takılıp çıkarılır, alet gerekmez.</p></details></div>
   </section></div>
 
   <section class="koyu bolum" style="padding-bottom: 36px" id="odalar"><div class="px"><h2 class="bas-y h2">Hangi odada<br>nasıl görünür<span class="n">?</span></h2><p class="alt-b">Salonda duvara, yatak odasında tavana: diski seç, ışığı kapat.</p></div><div class="oda-serit noscroll"><div class="oda-k"><img src="/_blob/8ca9e9e52398f6922370ce154e601204" alt="Salonda: Film gecesi yerine duvarda galaksi." style="object-position: 70% 50%"><b>Salonda</b><span>Film gecesi yerine duvarda galaksi.</span></div><div class="oda-k"><img src="/_blob/57f532f706a33b66f8157521970f6ad1" alt="Yatak odasında: Bulutsu tavanda ağır ağır döner." style="object-position: 50% 40%"><b>Yatak odasında</b><span>Bulutsu tavanda ağır ağır döner.</span></div><div class="oda-k"><img src="/_blob/8b872d6d345e3856671faf73641c0d97" alt="Çocuk odasında: Masaldan sonra tavanda dolunay." style="object-position: 50% 40%"><b>Çocuk odasında</b><span>Masaldan sonra tavanda dolunay.</span></div><div class="oda-k"><img src="/_blob/5284c6d153cf493912cc181c5d59b399" alt="Genç odasında: Kuzey ışığı tavanda, kurallar senin." style="object-position: 50% 40%"><b>Genç odasında</b><span>Kuzey ışığı tavanda, kurallar senin.</span></div><span aria-hidden="true" style="flex: 0 0 6px"></span></div></section>
@@ -771,7 +874,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7414}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7529}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
@@ -835,7 +938,7 @@ class Component extends DCLogic {
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
       yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
-      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}, {"q": "Şarjlı mı?", "a": "Hayır. USB-C kabloyla prize ya da USB çıkışına takılı çalışır. USB adaptör kutuda mı [teyit]."}, {"q": "Diskler nasıl değişir?", "a": "Disk başlıktaki yuvaya elle takılıp çıkarılır, alet gerekmez."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}], shop: shop, shopCount: PR.length
+      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], shop: shop, shopCount: PR.length
     };
   }
 }
