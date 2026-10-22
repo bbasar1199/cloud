@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.13 · "Neler yapabiliyor?" = Dergi kapağı (22 Ekim, en güncel)
+## Tema 1.0.14 · Ürün soruları teslim kartının altında; site görsel düzeltmesi (22 Ekim, en güncel)
+- Kullanıcı: "Görsel görünmüyor ya dostum." Neden: site önizlemesine (Sürüm 29) yalnız sayfa ve görseller gitti, `veri.js` gitmedi; `/_blob/` → `g/` eşlemesinde yeni lamba parçaları yoktu. `veri.js` yayınlandı (Sürüm 30). **Site yayınında yeni görsel varsa `veri.js` de gönderilir.** Tema ve yerel site doğruydu.
+- Kullanıcı (mağazadaki açılır sorular ve SSS ekran görüntüleriyle): "Bunları da ekle, kargo takibin altına; o kısma mükemmel otursun."
+  - `luna_e.py`: teslim kartının hemen altında `.urs` (aynı kart: krem, 1 px çizgi, 20 köşe). `<details>` satırları ≥ 54 px; kapalıyken hilal, açılınca dolunay (`URS_AY`, teslim çizgisinin `ay()` çizimi; opacity), ok döner. İlk 6 soru, "7 soru daha" (`ursHepsi`).
+  - 13 soru; cevaplar canlı LunaDream sayfasından (`scratchpad` dışında saklanmadı) ayıklandı: "Bu model hareket sensörlü değildir" → "Hareket sensörü var mı? Yok."; sensörün nasıl çalıştığı (AyFeneri kopyası) alınmadı; "Şarjı ne kadar gider?" canlıda da boş ve pil süresi yazılmaz → yok; "göz yormaz", "güvenlidir" gibi iddialar yerine kullanım önerisi; kutu içeriği teyitli liste (kılavuz yazılmadı). Projeksiyon cevabı modele bağlı (Kubbeyi / Robotun başını).
+  - Alttaki "Merak edilenler" SSS'den kutu, ninni ve ışık soruları çıktı (yukarıda var); SSS satın alma sorularına kaldı (yaş, kargo, ödeme, iade).
+  - Canlıdaki "1 Yıl Garanti · 90 Gün Para İade Garantisi" bandı alınmadı: iade 30 gün, garanti teyitsiz.
+- E_H=7321. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.14.zip`. Tuval Sürüm 133.
+
+## Tema 1.0.13 · "Neler yapabiliyor?" = Dergi kapağı (22 Ekim)
 - Kullanıcı 4. turda (sayfa içi GIF) "Dergi kapağı"nı seçti. Erkek sorusuna: "Başı açılır, üstten" (teyitli ürün bilgisi).
 - `luna_e.py`: OZ3 (afiş) çıktı; `import ozellik4_varyant as OZ4`, CSS `OZ4.CSS`, `#neler` = `OZ4.dergi()`, JS `OZ4.js_tur('dk')` + `OZ4.JS_ORTAK + OZ4.JS_DK` + `OZ4.js_kapat('dk')` + `OZ4.js_dk_deger("S.model === 'erkek'")` (dönüşte `...dkV`). Sınıf öneki `dg-` (USB Diskler `dk-` kullanır).
 - Erkek: robot kesimi baş/gövde (`parca/erkek-ust|alt.webp`, baş dışındaki sütunlar gövdede kalır; tuval asset 825ac9de…, de7706ac…). Robot daha alçak (290 px), yazı sütunu 116 px; "Robotun başını aç, masal diskini üstten tak."
