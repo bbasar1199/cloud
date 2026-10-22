@@ -482,7 +482,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - 13 soru; cevaplar canlı LunaDream sayfasından (`scratchpad` dışında saklanmadı) ayıklandı: "Bu model hareket sensörlü değildir" → "Hareket sensörü var mı? Yok."; sensörün nasıl çalıştığı (AyFeneri kopyası) alınmadı; "Şarjı ne kadar gider?" canlıda da boş ve pil süresi yazılmaz → yok; "göz yormaz", "güvenlidir" gibi iddialar yerine kullanım önerisi; kutu içeriği teyitli liste (kılavuz yazılmadı). Projeksiyon cevabı modele bağlı (Kubbeyi / Robotun başını).
   - Alttaki "Merak edilenler" SSS'den kutu, ninni ve ışık soruları çıktı (yukarıda var); SSS satın alma sorularına kaldı (yaş, kargo, ödeme, iade).
   - Canlıdaki "1 Yıl Garanti · 90 Gün Para İade Garantisi" bandı alınmadı: iade 30 gün, garanti teyitsiz.
-- E_H=7321. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.14.zip`. Tuval Sürüm 133.
+- E_H=7321. Site testleri (yeni: soru kartı yeri, 6 + "7 soru daha", satır 54 px, dolunay, 13 soru, SSS tekrarı yok, pil sorusu yok) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.14.zip`. Tuval Sürüm 133, site Sürüm 31.
 
 ## Tema 1.0.13 · "Neler yapabiliyor?" = Dergi kapağı (22 Ekim)
 - Kullanıcı 4. turda (sayfa içi GIF) "Dergi kapağı"nı seçti. Erkek sorusuna: "Başı açılır, üstten" (teyitli ürün bilgisi).
