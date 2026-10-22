@@ -270,4 +270,5 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Sitedeki eski anlatım alınırken: yorum afişi yok, teyitsiz sayı [X], kutuda olmayan parça (kumanda) çizilmez, pil süresi ima edilmez.
 - Özellik anlatımı Sihirli'yi tekrar etmez: Sihirli "ne", anlatım "nasıl" (gerçek ürün kesimi, eylem başlığı).
 - Özellik anlatımı liste olmaz ("çok boğar, sıkıcı", 21 Eki): ürün büyük, yazı en az, tek sahne; etki ürünün çevresinde (halka, ses dalgası, rozet). Kendiliğinden ilerleme ekrana girince tek tur (durum başına 6 sn), sonra durur; sekans bir kez oynar ve son karede kalır. Yörünge düğümleri ve masal kitabı geri gelmez.
-- LunaDream "Neler yapabiliyor?" = Aydınlık sahne (21 Eki, kullanıcı seçti): stüdyo fotoğrafı, etki lambanın çevresinde (halka, ses dalgası, rozet), köşelerde dört eylem etiketi, altta tek cümle. Kod `ozellik2_varyant.py` (NZ_CSS, sahne, js_degerler, js_tur); sahne genişliğe orantılı (cqw).
+- Kart içi mini sekans kartın ekranına sığar; 360 ve 375 px'te de kesilen parça olmaz (22 Eki). Disk şeridi ortadaki disk + iki tam komşu.
+- Aydınlık sahne (açık stüdyo fotoğrafı + çip + ince halka) reddedildi (22 Eki: "hiç ama hiç beğenmedim"). Özellik anlatımında kullanıcının sitesindeki afiş dili: koyu ürün fotoğrafı + üstünde gerçek arayüz kartı.

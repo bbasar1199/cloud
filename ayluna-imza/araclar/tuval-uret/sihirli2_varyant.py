@@ -45,7 +45,7 @@ def ui_isik(kucuk=False):
 
 def ui_serit(boy, diskler=None):  # boy: 'b' büyük (46 px disk) | 'k' küçük (38 px disk); diskler: [(ad, blob id)] × 4
     dl = diskler or DISK
-    ds = dl + dl[:1]
+    ds = dl[-1:] + dl + dl[:2]  # solda bir komşu, sağda döngü için iki disk; ortadaki disk her an iki tam komşuyla
     return ('<span class="ui ui-serit serit-%s" aria-hidden="true"><span class="pencere"></span><span class="tren">' % boy +
             ''.join('<span class="sd"><img src="/_blob/%s" alt=""></span>' % i for _, i in ds) + '</span>'
             '<span class="adlar">' + ''.join('<i class="a%d">%s</i>' % (k + 1, n) for k, (n, _) in enumerate(dl)) + '</span></span>')
@@ -74,15 +74,17 @@ OZ = [
 ]
 
 # Disk şeridi (USB sayfası da kullanır; adlar ve disk listesi ui_serit parametresi)
-SERIT_CSS = r"""/* Disk şeridi: her 2 sn bir disk kayar (0,6 sn), kayarken 90° yuvarlanır, durunca sabit; ortadaki pencerede, komşular .85 ve soluk */
-.ui-serit{position:relative;display:block;flex:none;--d:46px;--adim:50px;--pad:65px;width:176px;height:78px;overflow:hidden}
-.ui-serit.serit-k{--d:38px;--adim:42px;--pad:60px;width:158px;height:62px}
-.pencere{position:absolute;left:calc(var(--pad) - 4px);top:0;width:calc(var(--d) + 8px);height:calc(var(--d) + 8px);border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9;animation:pen 8s EASE infinite;animation-delay:var(--gec,0s)}
-.tren{position:absolute;left:0;top:4px;display:flex;gap:calc(var(--adim) - var(--d));padding-left:var(--pad);animation:tren 8s EASE infinite;animation-delay:var(--gec,0s)}
+SERIT_CSS = r"""/* Disk şeridi: her 2 sn bir disk kayar (0,6 sn), kayarken 90° yuvarlanır, durunca sabit; ortadaki pencerede, komşular .85 ve soluk.
+   Genişlik = ortadaki disk + iki tam komşu (22 Eki, kullanıcı: "disk kartı tam sığmıyor"; 375 px telefonda kart ekranı 149 px).
+   --pad: ortadaki diskin sol kenarı; tren bir komşu solda başlar (padding-left = pad - adim). */
+.ui-serit{position:relative;display:block;flex:none;--d:46px;--adim:50px;--pad:53px;width:152px;height:76px;overflow:hidden}
+.ui-serit.serit-k{--d:38px;--adim:42px;--pad:45px;width:128px;height:64px}
+.pencere{position:absolute;left:calc(var(--pad) - 4px);top:2px;width:calc(var(--d) + 8px);height:calc(var(--d) + 8px);border-radius:50%;box-shadow:0 0 0 1.5px #1A2142;background:#FFFDF9;animation:pen 8s EASE infinite;animation-delay:var(--gec,0s)}
+.tren{position:absolute;left:0;top:6px;display:flex;gap:calc(var(--adim) - var(--d));padding-left:calc(var(--pad) - var(--adim));animation:tren 8s EASE infinite;animation-delay:var(--gec,0s)}
 .sd{flex:none;width:var(--d);height:var(--d);transform:scale(.85);opacity:.5}
 .sd img{display:block;width:var(--d);height:var(--d);border-radius:50%;object-fit:cover;animation:yuvar 8s EASE infinite;animation-delay:var(--gec,0s)}
-.sd:nth-child(1){transform:none;opacity:1}
-.sd:nth-child(1){animation:sd1 8s EASE infinite}.sd:nth-child(2){animation:sd2 8s EASE infinite}.sd:nth-child(3){animation:sd3 8s EASE infinite}.sd:nth-child(4){animation:sd4 8s EASE infinite}.sd:nth-child(5){animation:sd5 8s EASE infinite}
+.sd:nth-child(2){transform:none;opacity:1}
+.sd:nth-child(2){animation:sd1 8s EASE infinite}.sd:nth-child(3){animation:sd2 8s EASE infinite}.sd:nth-child(4){animation:sd3 8s EASE infinite}.sd:nth-child(5){animation:sd4 8s EASE infinite}.sd:nth-child(6){animation:sd5 8s EASE infinite}
 .sd{animation-delay:var(--gec,0s)!important}
 @keyframes tren{0%,18%{transform:none}25.5%,43%{transform:translateX(calc(var(--adim) * -1))}50.5%,68%{transform:translateX(calc(var(--adim) * -2))}75.5%,93%{transform:translateX(calc(var(--adim) * -3))}100%{transform:translateX(calc(var(--adim) * -4))}}
 @keyframes yuvar{0%,18%{transform:none}25.5%,43%{transform:rotate(-90deg)}50.5%,68%{transform:rotate(-180deg)}75.5%,93%{transform:rotate(-270deg)}100%{transform:rotate(-360deg)}}
@@ -189,7 +191,7 @@ MINI_CSS = r"""/* Ortak mini arayüz (Sihirli özellikler, luna_e.py da kullanı
 .a-kart .sh-ek{height:72px}
 .a-kart b{display:block;padding:0 6px;font-size:15px;line-height:1.25}
 .a-kart span.t{display:block;margin-top:2px;padding:0 6px;font-size:14px;line-height:1.4;color:#5C6078}
-.a-kart u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px}
+.a-kart u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
 
 """.replace('EASE', E)
 

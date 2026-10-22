@@ -227,7 +227,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
 
   // Galaxy USB canlı kartlar (21 Eki): 5 özellik hücresinde ekran, disk şeridi, teslim kartında USB ikonu
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.waitForTimeout(500);
-  not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .ui-serit .sd').count() === 5 && await pg.locator('#siparis .teslim .y-ik').count() === 1, 'Galaxy USB: 5 özellik ekranı, disk şeridi, teslim kartında ikon');
+  not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .ui-serit .sd').count() === 7 && await pg.locator('#siparis .teslim .y-ik').count() === 1, 'Galaxy USB: 5 özellik ekranı, disk şeridi, teslim kartında ikon');
   // Satın alma butonları sepeti katlamaz (kartla dene → kapat → kapıda), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);
   await pg.evaluate(() => { AylunaSepet.koy({ h: 'galayx-usb-projektor', ad: 'Galaxy USB', varyant: '2 adet', paket: 2, birim: 2279.99, eski: null }); });
@@ -255,6 +255,10 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const kiz = await pg.locator('.sih .lmb.rb').count(); await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
     const rb = await pg.locator('.sih .lmb.rb').count(), lk = await pg.locator('.sih .lmb:not(.rb)').count(); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
     not(kiz === 0 && rb === 3 && lk === 0, `Sihirli ikonu modele bağlı: Kız'da robot ${kiz}, Erkek'te robot ${rb}, atlıkarınca ${lk}`); }
+  // 22 Eki ("disk kartı tam sığmıyor"): 360 px telefonda disk şeridi kart ekranına sığar, "Diskleri gör" bölünmez
+  { const k = await b.newContext({ viewport: { width: 360, height: 800 } }), p = await k.newPage(); await p.goto(KOK + 'lunadream-gece-lambasi.html'); await p.waitForTimeout(500);
+    const r = await p.evaluate(() => { const s = document.querySelector('#siparis .sih .ui-serit'), e = s.closest('.sh-ek'); return { s: Math.round(s.getBoundingClientRect().width), e: Math.round(e.getBoundingClientRect().width), u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
+    not(r.s <= r.e && r.u === 1, `360 px: disk şeridi kart ekranına sığar (${r.s} ≤ ${r.e}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
   // Neler yapabiliyor? · Aydınlık sahne (21 Eki): Videolar ile Odası arasında; 4 eylem etiketi ve rozetler; dokununca etiket, cümle ve rozet değişir, tur durur; Erkek'te robot fotoğrafı
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
     not(sira && await pg.locator('#neler .nz-ek').count() === 4 && await pg.locator('#neler .nz-rz').count() === 4, 'telefon: Neler yapabiliyor? Videolar ile Odası arasında, 4 eylem etiketi, rozetler'); }
