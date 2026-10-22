@@ -475,7 +475,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.15 · Teslim kartının altında yalnız 4 soru (22 Ekim, en güncel)
+## Premium fotoğraf seti · GPT ile üretim betiği (22 Ekim, en güncel)
+- Kullanıcı ("görsellerde değişmesi iyi olur dediğin kısım neresi?") → 4 yer gösterildi: galeri (6 karenin 5'i yazılı afiş), model kartları, Odası böyle görünecek (4 yer tutucu), Diskler ("[gerçek tavan fotoğrafı]", kullanıcı çekecek).
+- Kullanıcı: "Girip yap direkt GPT'den." Bu oturumda `OPENAI_API_KEY` yok (api.openai.com 401), Chrome uzantısı da bağlı değil; ChatGPT'ye girilemedi. Kullanıcıya anahtarı ortam ayarına eklemesi söylendi (sohbete değil).
+- `araclar/gorsel/gpt_uret.py`: istemleri `ogrenme/chatgpt-istemleri-lunadream.txt`'den okur, ekleri depodaki dosyalardan (REF eşlemesi) yükler, `images/edits` (gpt-image-1, high) ile 11 kareyi `canvas/p-gorsel/`'e yazar. `--dene` yalnız planı gösterir (11 kare, ekler tamam). Anahtar yalnız ortamdan, komut satırına yazılmaz.
+- Anahtar gelince: üret → her kareyi büyütüp gerçek ürünle karşılaştır (tavşan, kubbe, robot yüzü, el, yazı) → uyanlar galeri 1-7, model kartları 1 ve 3, Odası 8-11, Diskler 7; gelmeyen yerde bugünkü görsel kalır.
+
+## Tema 1.0.15 · Teslim kartının altında yalnız 4 soru (22 Ekim)
 - Kullanıcı: "O kadar çok soru olmasın kargo takibin altında."
 - `.urs` artık 4 soru: Bu ürün ne işe yarıyor? / Projeksiyon nasıl çalışıyor? / Bluetooth var mı, ne işe yarıyor? (hoparlör cevabı buna katıldı) / Kutu içeriğinde neler var? "7 soru daha" düğmesi ve `ursHepsi` kalktı.
 - Diğer 8 ürün sorusu (şarj, gece rutini, ışık, güvenlik, tuşlar, hareket sensörü, Bluetooth bağlanma ve sorun) alttaki "Merak edilenler" SSS'nin başında; ardından yaş, kargo, ödeme, iade (12 soru). E_H=7647. Site testleri (teslim altında 4 soru, satır 54 px, dolunay, SSS tekrarı yok) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.15.zip`. Tuval Sürüm 134, site Sürüm 32.
