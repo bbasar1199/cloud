@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Premium fotoğraf seti · GPT ile üretim betiği (22 Ekim, en güncel)
+## Galeri = premium set (22 Ekim, en güncel)
+- Kullanıcı ChatGPT'de üretip 5 kare gönderdi (dosya olarak gelen: 21-25). Sohbet arasında gönderdiği 5 kare daha (Kız gündüz, disk seçen eller, erkek odası, ninni, kız odası) görüldü ama dosya olarak gelmedi; yeniden istendi.
+- `canvas/p-gorsel/`: p-kiz-gece (23), p-elde (22), p-diskler (21), p-erkek-gunduz (25), p-erkek-gece (24). Tuval asset'leri a31842e2…, 3d65f756…, 4fef037f…, 2d42fce7…, 0c17d626… (`blob-yerel.json`).
+- `luna_e.py`: `P_GAL` (5 kare, alt yazılı) galeriyi besler; `canli_galeri` ve yazılı afişler (AD_LD) LunaDream galerisinden çıktı. Müşteri paylaşımı "Evlerinizden" şeridinde.
+- Kontrol: Kız kareleri gerçek ürünle birebir. Erkek karelerinde yan plakadaki "UZAY KAŞİFİ PROJEKTÖR" baskısı yok; kullanıcıya soruldu.
+- Bekleyen: p-kiz-gunduz (gelince ilk kare ve Kız model kartı), Erkek model kartı (p-erkek-gunduz, Kız kartıyla birlikte değişecek), 4 oda karesi → Odası böyle görünecek.
+- Site testi: LunaDream galerisi 5 kare (`PREMIUM` istisnası), diğer ürünler mağaza sırası. Site ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.16.zip`. Tuval Sürüm 135, site Sürüm 33.
+
+## Premium fotoğraf seti · GPT ile üretim betiği (22 Ekim)
 - Kullanıcı ("görsellerde değişmesi iyi olur dediğin kısım neresi?") → 4 yer gösterildi: galeri (6 karenin 5'i yazılı afiş), model kartları, Odası böyle görünecek (4 yer tutucu), Diskler ("[gerçek tavan fotoğrafı]", kullanıcı çekecek).
 - Kullanıcı: "Girip yap direkt GPT'den." Bu oturumda `OPENAI_API_KEY` yok (api.openai.com 401), Chrome uzantısı da bağlı değil; ChatGPT'ye girilemedi. Kullanıcıya anahtarı ortam ayarına eklemesi söylendi (sohbete değil).
 - `araclar/gorsel/gpt_uret.py`: istemleri `ogrenme/chatgpt-istemleri-lunadream.txt`'den okur, ekleri depodaki dosyalardan (REF eşlemesi) yükler, `images/edits` (gpt-image-1, high) ile 11 kareyi `canvas/p-gorsel/`'e yazar. `--dene` yalnız planı gösterir (11 kare, ekler tamam). Anahtar yalnız ortamdan, komut satırına yazılmaz.

@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak
 import sihirli2_varyant as S2
 import ozellik4_varyant as OZ4
 
@@ -396,6 +396,15 @@ STOK = '18'
 AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % ay(.15)
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
+# Galeri · premium fotoğraf seti (22 Eki; kullanıcı ChatGPT'de üretti, istemler ogrenme/chatgpt-istemleri-lunadream.txt).
+# Yazılı mağaza afişleri (AD_LD) galeriden çıktı; müşteri paylaşımı "Evlerinizden" şeridinde (mfoto). Kız kareleri gerçek ürünle
+# birebir (kubbe, 4 tavşan, 3 düğme, ayaklar); Erkek karelerinde yan plakadaki "UZAY KAŞİFİ" baskısı yok (kullanıcıya soruldu).
+# Bekleyen: p-kiz-gunduz (ilk kare olacak) ve 4 çocuklu oda karesi (dosya olarak gelmedi).
+P_GAL = [{'id': 'a31842e2fc0323c85237366363264731', 'n': 'LunaDream Kız modeli, gece, ışığı yanıyor'},
+         {'id': '3d65f756235e636225a8736b3c763e77', 'n': 'Elde tutulan yanan LunaDream'},
+         {'id': '4fef037f0bf887f358089e71d4754573', 'n': 'LunaDream ve kutudaki masal diskleri'},
+         {'id': '2d42fce7d4e71ba119bf63a75b772679', 'n': 'LunaDream Erkek modeli, Uzay Kaşifi robot'},
+         {'id': '0c17d626caf671c59f27329a56b0a1e7', 'n': 'Uzay Kaşifi duvara uzay diskini yansıtıyor'}]
 AD_LD = {'211acb76d908e8ed6d4f5fcddc987893': 'Masalsı gece ışığı', '652e1893a0ae33a24ee0e3d53edab757': 'Müşteri paylaşımı: çocuk odasında LunaDream', 'a08890007843d79d94bfffc397a3d0ac': 'Gece modu', 'd4efe7e83c74524ece75e962161f7fff': 'Deniz altı', '3ddd8b8b95f040d436d5d0ea350924b8': 'Hediyeye hazır', '98db755893dbcebe192c69e73ae5afff': 'Uzay macerası'}
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
@@ -627,7 +636,7 @@ JS = """class Component extends DCLogic {
     """ + TL_JS + """
     // Galeri Shopify'daki gibi (kullanıcı, 19 Eki): canlı mağazanın görselleri, aynı sıra, kare (ogrenme/galeri-canli.json).
     // Çıkarılanlar: 'Temalar' afişi (kutuda olmayan diskler), 'Elif K.' kartı ve yorum kolajı (uydurma yorum).
-    var G = """ + str([{'id': i, 'n': AD_LD.get(i, 'LunaDream görseli')} for i in canli_galeri('lunadream-gece-lambasi')]) + """;
+    var G = """ + str(P_GAL) + """;
     // Ay göstergesi: i. fotoğrafın evresi (i+1)/N; geçilenler ve o anki yanar, son fotoğrafta dolunay
     function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: '50% 50%', top: 56, h: 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
