@@ -231,94 +231,111 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .a-kart span.t{display:block;margin-top:2px;padding:0 6px;font-size:14px;line-height:1.4;color:#5C6078}
 .a-kart u{color:#A05A1C;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
 
-/* Neler yapabiliyor? · Aydınlık sahne (21 Eki). Sahne kapsayıcı genişliğine bağlı: 1cqw = genişliğin %1'i (358 px tabanı) */
-.nz{position:relative;margin-top:16px;container-type:inline-size;aspect-ratio:358/440}
-.nz.sade{aspect-ratio:358/420}
-.nz-ft{position:absolute;inset:0;border-radius:22px;overflow:hidden;background:#EEE4DA}
-.nz-img{position:absolute;left:0;top:0;width:100%;height:100cqw;object-fit:cover;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
-.nz-metin{display:grid;align-items:center;min-height:48px;margin-top:12px}
-.nz-m{grid-area:1/1;margin:0;font-size:16px;line-height:1.4;color:#1A2142;white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .3s cubic-bezier(.2,.7,.2,1),transform .3s cubic-bezier(.2,.7,.2,1)}
-.nz-m.on{opacity:1;transform:none}
-/* Eylem etiketleri: 48 px; etkin olan lacivert dolgu katmanıyla (opacity), yazı rengi anında değişir */
-.nz-ek{position:absolute;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 7px;border-radius:999px;border:1px solid #E3D8C7;background:#FFFDF9;color:#1A2142;font:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;isolation:isolate;-webkit-tap-highlight-color:transparent;animation:nzgir .5s cubic-bezier(.2,.7,.2,1) both}
-.nz-ek::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;background:#1A2142;opacity:0;transition:opacity .3s cubic-bezier(.2,.7,.2,1)}
-.nz-ek.on::before{opacity:1}
-.nz-ek.on{color:#FFFDF9}
-.nz-ek:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
-.nz-ek:nth-of-type(2){animation-delay:.12s}.nz-ek:nth-of-type(3){animation-delay:.24s}.nz-ek:nth-of-type(4){animation-delay:.36s}
-@keyframes nzgir{from{opacity:0;transform:translateY(8px)}}
-.nz-ik{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#F1E8DA;overflow:hidden}
-.nz-dsk{display:block;width:26px;height:26px;border-radius:50%;object-fit:cover}
-.nz-ek.on .nz-dsk{animation:nzdk .8s cubic-bezier(.2,.7,.2,1) both}
-.nz-kd{display:flex;gap:3px}
-.nz-kd i{width:6px;height:6px;border-radius:50%;background:#1A2142;opacity:.3}
-.nz-kd i:first-child{opacity:1}
-.nz-ek.on .nz-kd i{background:#A05A1C}
-.nz-ek.on .nz-kd i:nth-child(2){animation:nzk2 6s cubic-bezier(.2,.7,.2,1) both}.nz-ek.on .nz-kd i:nth-child(3){animation:nzk3 6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzk2{0%,30%{opacity:.3}37%,100%{opacity:1}}
-@keyframes nzk3{0%,63%{opacity:.3}70%,100%{opacity:1}}
-.nz-eq{height:14px;margin:0;animation:none}
-.nz-eq i{height:14px;background:#1A2142;animation:none;transform:scaleY(.5)}
-.nz-eq i:nth-child(2){transform:scaleY(.8)}.nz-eq i:nth-child(3){transform:scaleY(.4)}.nz-eq i:nth-child(4){transform:scaleY(.65)}
-.nz-ek.on .nz-eq i{background:#A05A1C;animation:ses 2s cubic-bezier(.2,.7,.2,1) 3}
-.nz-bat{position:relative;display:flex;gap:1.5px;width:20px;height:12px;padding:1.5px;border:1.5px solid #1A2142;border-radius:3.5px}
-.nz-bat::after{content:"";position:absolute;right:-4px;top:2.5px;width:2px;height:4px;border-radius:0 1px 1px 0;background:#1A2142}
-.nz-bat i{flex:1;border-radius:1px;background:#1A2142}
-.nz-ek.on .nz-bat i:nth-child(1){animation:nzp1 6s cubic-bezier(.2,.7,.2,1) both}.nz-ek.on .nz-bat i:nth-child(2){animation:nzp2 6s cubic-bezier(.2,.7,.2,1) both}.nz-ek.on .nz-bat i:nth-child(3){animation:nzp3 6s cubic-bezier(.2,.7,.2,1) both}
-/* Etkiler lambanın çevresinde: lamba merkezi (50cqw, 62.57cqw) */
-.nz-hk i{position:absolute;border-radius:50%;box-shadow:inset 0 0 0 1.5px #F2A65A;opacity:0;transition:opacity .4s cubic-bezier(.2,.7,.2,1)}
-.nz .nz-hk i{left:50cqw;top:62.57cqw}
-.nz .nz-hk i:nth-child(1){width:55.87cqw;height:55.87cqw;margin:-27.93cqw 0 0 -27.93cqw}
-.nz .nz-hk i:nth-child(2){width:65.92cqw;height:65.92cqw;margin:-32.96cqw 0 0 -32.96cqw}
-.nz .nz-hk i:nth-child(3){width:75.98cqw;height:75.98cqw;margin:-37.99cqw 0 0 -37.99cqw}
-.nzs1 .nz-hk i:nth-child(1){opacity:.9}
-.nzs1 .nz-hk i:nth-child(2){opacity:.55;animation:nzh2 6s cubic-bezier(.2,.7,.2,1) both}
-.nzs1 .nz-hk i:nth-child(3){opacity:.3;animation:nzh3 6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzh2{0%,30%{opacity:0;transform:scale(.92)}37%,100%{opacity:.55;transform:none}}
-@keyframes nzh3{0%,63%{opacity:0;transform:scale(.92)}70%,100%{opacity:.3;transform:none}}
-.nz-dl span{position:absolute;width:48px;height:48px}
-.nz .nz-dl span{top:calc(62.57cqw - 24px)}
-.nz .nz-dl .sol{left:calc(31.3cqw - 56px)}.nz .nz-dl .sag{left:calc(68.7cqw + 8px)}
-.nz-dl i{position:absolute;inset:0;border-radius:50%;opacity:0}
-.nz-dl .sol i{box-shadow:inset 1.5px 0 0 0 #F2A65A}.nz-dl .sag i{box-shadow:inset -1.5px 0 0 0 #F2A65A}
-.nzs2 .nz-dl .sol i{animation:nzdl 2s cubic-bezier(.2,.7,.2,1) 3}.nzs2 .nz-dl .sag i{animation:nzdr 2s cubic-bezier(.2,.7,.2,1) 3}
-.nzs2 .nz-dl i:nth-child(2){animation-delay:.67s}.nzs2 .nz-dl i:nth-child(3){animation-delay:1.33s}
-@keyframes nzdl{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(-20px) scale(1.25)}}
-@keyframes nzdr{0%{opacity:0;transform:none}25%{opacity:1}100%{opacity:0;transform:translateX(20px) scale(1.25)}}
-/* Rozetler: lambanın altında tek rozet; 13 px; pasif yazı opak gri */
-.nz-rzy{position:absolute;left:0;right:0;display:grid;justify-items:center;height:32px}
-.nz .nz-rzy{top:94.97cqw}
-.nz-rz{grid-area:1/1;display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;font-size:13px;font-weight:600;color:#1A2142;white-space:nowrap;
-  opacity:0;transform:translateY(4px);transition:opacity .35s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1)}
-.nzs0 .nz-disk,.nzs1 .nz-kad,.nzs2 .nz-cal,.nzs3 .nz-pil{opacity:1;transform:none}
-.nz-rz b{font-weight:600}
-.nz-disk img{width:22px;height:22px;border-radius:50%;object-fit:cover}
-.nzs0 .nz-disk img{animation:nzdk .9s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzdk{0%{opacity:0;transform:translateX(24px) rotate(90deg)}100%{opacity:1;transform:none}}
-.nz-kad{gap:10px}
-.nz-kad i{position:relative;font-style:normal;color:#6B6F86}
-.nz-kad .e{position:absolute;left:0;top:0;color:#1A2142;opacity:0}
-.nz-kad i:nth-child(3) .e{opacity:1}
-.nzs1 .nz-kad i:nth-child(1) .e{animation:nzw1 6s cubic-bezier(.2,.7,.2,1) both}.nzs1 .nz-kad i:nth-child(2) .e{animation:nzw2 6s cubic-bezier(.2,.7,.2,1) both}.nzs1 .nz-kad i:nth-child(3) .e{animation:nzw3 6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzw1{0%,30%{opacity:1}37%,100%{opacity:0}}
-@keyframes nzw2{0%,30%{opacity:0}37%,63%{opacity:1}70%,100%{opacity:0}}
-@keyframes nzw3{0%,63%{opacity:0}70%,100%{opacity:1}}
-.nz-cal .eq{height:14px;margin:0;animation:none}
-.nz-cal .eq i{height:14px;animation:none;transform:scaleY(.6)}
-.nzs2 .nz-cal .eq i{animation:ses 2s cubic-bezier(.2,.7,.2,1) 3}
-.nz-rbat{position:relative;display:flex;gap:2px;width:34px;height:17px;padding:2px;border:1.5px solid currentColor;border-radius:5px}
-.nz-rbat::after{content:"";position:absolute;right:-5px;top:4px;width:3px;height:6px;border-radius:0 2px 2px 0;background:currentColor}
-.nz-rbat i{flex:1;border-radius:1.5px;background:currentColor}
-.nzs3 .nz-rbat i:nth-child(1){animation:nzp1 6s cubic-bezier(.2,.7,.2,1) both}.nzs3 .nz-rbat i:nth-child(2){animation:nzp2 6s cubic-bezier(.2,.7,.2,1) both}.nzs3 .nz-rbat i:nth-child(3){animation:nzp3 6s cubic-bezier(.2,.7,.2,1) both}.nzs3 .nz-rbat i:nth-child(4){animation:nzp4 6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzp1{0%{opacity:.15}10%,100%{opacity:1}}
-@keyframes nzp2{0%,10%{opacity:.15}22%,100%{opacity:1}}
-@keyframes nzp3{0%,22%{opacity:.15}34%,100%{opacity:1}}
-@keyframes nzp4{0%,34%{opacity:.15}46%,100%{opacity:1}}
-.nz-pil .durum{color:inherit;font-size:13px}
-.nz-pil .durum i:first-child{opacity:0}
-.nzs3 .nz-pil .durum i:first-child{animation:nzs1 6s cubic-bezier(.2,.7,.2,1) both}.nzs3 .nz-pil .durum i:last-child{animation:nzs2 6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes nzs1{0%,58%{opacity:1}64%,100%{opacity:0}}
-@keyframes nzs2{0%,60%{opacity:0}66%,100%{opacity:1}}
+/* Arayüz kartı: beyaz, 18 köşe, 1 px çizgi (gölge yok). --g giriş, --s sekans başlangıcı, --d sekans süresi */
+.nw{position:absolute;display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px;border-radius:18px;background:#FFFDF9;color:#1A2142;box-shadow:inset 0 0 0 1px rgba(26,33,66,.1);--g:0s;--s:.6s;--d:6s}
+.bek .nw{opacity:0}
+.gir .nw{animation:nwgir .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--g)}
+@keyframes nwgir{from{opacity:0;transform:translateY(14px)}}
+.nw-b{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#1A2142;white-space:nowrap}
+.nw-b svg{width:16px;height:16px;flex:none;fill:none;stroke:#1A2142;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.nw-dr{position:relative;display:grid}
+.nw-dr i{grid-area:1/1;font-style:normal;opacity:0}
+.nw-dr i:last-child{opacity:1}
+.nw-dr.sag{margin-left:auto;font-size:12px;font-weight:600;color:#5C6078}
+/* Diski tak: kubbe kalkar (0,4 sn), disk üstten iner (0,5 sn), kubbe kapanır (0,4 sn); 2,4 sn, bir kez. Son kare: kubbe kapalı */
+.nw-d{display:flex;align-items:center;gap:10px}
+.tk{position:relative;flex:none;width:48px;height:48px;border-radius:12px;background:#F1E8DA;overflow:hidden}
+.tk svg{position:absolute;left:8px;top:10px;width:32px;height:32px;fill:none;stroke:#1A2142;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tk .kb{fill:#FFFDF9}
+.tk .isk{fill:#F2A65A;stroke:none}
+.tk-d{position:absolute;left:17px;top:16px;width:14px;height:14px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px #1A2142;opacity:0}
+.gir .tk-k{animation:tkk var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+.gir .tk-d{animation:tkd var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes tkk{0%{transform:none}17%,58%{transform:translateY(-10px)}75%,100%{transform:none}}
+@keyframes tkd{0%,17%{opacity:0;transform:translateY(-26px)}21%{opacity:1;transform:translateY(-24px)}40%,60%{opacity:1;transform:none}75%,100%{opacity:0;transform:translateY(2px)}}
+.nw-dt{display:flex;flex-direction:column;gap:1px;min-width:0;line-height:1.25}
+.nw-dt b{font-size:15px;white-space:nowrap}
+.nw-dt small{font-size:12px;color:#5C6078}
+/* Işığı kıs: kaydırıcı Parlak → Orta → Kısık; durum sağda; son kare Kısık */
+.nw-sl{position:relative;height:6px;margin:8px 0 4px;border-radius:3px;background:#F1E8DA}
+.nw-sl>b{position:absolute;inset:0;border-radius:3px;background:#F2A65A;transform-origin:0 50%;transform:scaleX(.08)}
+.nw-sl em{position:absolute;top:1px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#C9BCA6}
+.nw-sl em:nth-of-type(1){left:10px}.nw-sl em:nth-of-type(2){left:50%}.nw-sl em:nth-of-type(3){left:calc(100% - 10px)}
+.nw-sl .tut{position:absolute;left:0;top:-7px;z-index:1;width:calc(100% - 20px);height:20px}
+.nw-sl .tut::after{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#FFFDF9;box-shadow:0 0 0 1.5px #1A2142}
+.gir .nw-sl>b{animation:nws var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+.gir .nw-sl .tut{animation:nwt var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nws{0%,30%{transform:scaleX(1)}37%,63%{transform:scaleX(.5)}70%,100%{transform:scaleX(.08)}}
+@keyframes nwt{0%,30%{transform:translateX(100%)}37%,63%{transform:translateX(50%)}70%,100%{transform:none}}
+.gir .nw-isik .nw-dr i:nth-child(1){animation:nwk1 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+.gir .nw-isik .nw-dr i:nth-child(2){animation:nwk2 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+.gir .nw-isik .nw-dr i:nth-child(3){animation:nwk3 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nwk1{0%,30%{opacity:1}37%,100%{opacity:0}}
+@keyframes nwk2{0%,30%{opacity:0}37%,63%{opacity:1}70%,100%{opacity:0}}
+@keyframes nwk3{0%,63%{opacity:0}70%,100%{opacity:1}}
+/* Telefondan çal: bağlanır, çalar (ses çubukları üç kez), ilerleme dolar */
+.nw-pl{display:flex;align-items:center;gap:10px}
+.nw-pl .kap{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:10px;background:#1A2142}
+.nw-pl .kap svg{width:19px;height:19px;fill:#F2A65A}
+.nw-pl .ad{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.25}
+.nw-pl .ad b{font-size:15px}.nw-pl .ad small{font-size:12px;color:#5C6078}
+.nw-pl .eq{height:16px;margin:0;animation:none}
+.nw-pl .eq i{height:16px;animation:none;transform:scaleY(.55)}
+.nw-pl .eq i:nth-child(2){transform:scaleY(.9)}.nw-pl .eq i:nth-child(3){transform:scaleY(.4)}.nw-pl .eq i:nth-child(4){transform:scaleY(.7)}
+.gir .nw-pl .eq i{animation:ses calc(var(--d) / 3) cubic-bezier(.2,.7,.2,1) 3;animation-delay:var(--s)}
+.nw-pr{position:relative;height:4px;border-radius:2px;background:#F1E8DA;overflow:hidden}
+.nw-pr b{position:absolute;inset:0;background:#1A2142;transform-origin:0 50%;transform:scaleX(.62)}
+.gir .nw-pr b{animation:nwp var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nwp{0%,25%{transform:scaleX(0)}100%{transform:scaleX(.62)}}
+.gir .nw-ninni .nw-dr i:first-child{animation:nwr1 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}.gir .nw-ninni .nw-dr i:last-child{animation:nwr2 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nwr1{0%,20%{opacity:1}25%,100%{opacity:0}}
+@keyframes nwr2{0%,22%{opacity:0}27%,100%{opacity:1}}
+/* Şarj et: pil dolar, fiş çıkar, "Kablosuz" (lamba çizilmez; pil süresi yok) */
+.nw-sj{display:flex;align-items:center;gap:6px;height:28px}
+.nw-sj .fis{width:24px;height:24px;opacity:0}
+.nw-sj .fis svg{width:24px;height:24px;fill:none;stroke:#1A2142;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nw-sj .bat{position:relative;display:flex;gap:3px;width:58px;height:26px;padding:3px;border:1.5px solid #1A2142;border-radius:7px}
+.nw-sj .bat::after{content:"";position:absolute;right:-6px;top:7px;width:4px;height:9px;border-radius:0 2px 2px 0;background:#1A2142}
+.nw-sj .bat i{flex:1;border-radius:2.5px;background:#1A2142}
+.gir .nw-sj .bat i:nth-child(1){animation:pl1x var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}.gir .nw-sj .bat i:nth-child(2){animation:pl2x var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+.gir .nw-sj .bat i:nth-child(3){animation:pl3x var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}.gir .nw-sj .bat i:nth-child(4){animation:pl4x var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes pl1x{0%{opacity:.12}10%,100%{opacity:1}}
+@keyframes pl2x{0%,10%{opacity:.12}22%,100%{opacity:1}}
+@keyframes pl3x{0%,22%{opacity:.12}34%,100%{opacity:1}}
+@keyframes pl4x{0%,34%{opacity:.12}46%,100%{opacity:1}}
+.gir .nw-sj .fis{animation:nwf var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nwf{0%,56%{opacity:1;transform:none}64%,100%{opacity:0;transform:translateX(-10px)}}
+.nw-dr.alt{font-size:13px;font-weight:600}
+.gir .nw-sarj .nw-dr i:first-child{animation:nws1 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}.gir .nw-sarj .nw-dr i:last-child{animation:nws2 var(--d) cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--s)}
+@keyframes nws1{0%,58%{opacity:1}64%,100%{opacity:0}}
+@keyframes nws2{0%,60%{opacity:0}66%,100%{opacity:1}}
+
+/* A · Afiş (ürün önde) */
+.na{position:relative;height:480px;margin-top:16px;border-radius:24px;overflow:hidden;background:#141A36;--op:50% 78%;isolation:isolate}
+.bek .na-hale,.bek .na-kes.koyu{opacity:0}
+.na-img,.na-kes{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op);pointer-events:none}
+.na-img{z-index:0}
+.na-hale{position:absolute;left:50%;top:62%;z-index:1;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(closest-side,rgba(12,16,39,.35),rgba(12,16,39,0))}
+.na .nw{z-index:2;pointer-events:none}
+.na-kes{z-index:3}
+.na-kes.koyu{z-index:4;filter:brightness(.76)}
+.gir .na-hale,.gir .na-kes.koyu{animation:nak 2.4s cubic-bezier(.2,.7,.2,1) both;animation-delay:6.9s}
+@keyframes nak{0%,30%{opacity:0}37%,63%{opacity:.5}70%,100%{opacity:1}}
+/* Kartlar: üstte ikisi tam görünür; alttakiler ürünün arkasına girer, ürüne bakan kenarda iç boşluk */
+.k-disk{left:12px;top:16px;width:164px}
+.k-ninni{right:12px;top:70px;width:160px}
+.k-isik{left:12px;top:236px;width:150px;padding-right:44px!important}
+.k-sarj{right:12px;bottom:16px;width:140px;padding-left:54px!important}
+.na.erkek .k-isik{top:226px}
+.na.erkek .k-sarj{width:128px;padding-left:58px!important;bottom:12px}
+.na.erkek .k-sarj .fis{display:none}
+
+/* 358 px tabanlı afiş: 375 / 360 px telefonda küçülür, masaüstü sütununda büyür (zoom: konumlar ve ürün birlikte) */
+.na{width:358px;margin-left:auto;margin-right:auto}
+@media (max-width:389px){.na{zoom:.958}}
+@media (max-width:374px){.na{zoom:.916}}
+@media (max-width:359px){.na{zoom:.86}}
+@media (min-width:1024px){.na{zoom:1.1}}
 
 /* Paket (canlı sitedeki biçim) */
 /* Seçiciler (Tur 25, kullanıcı seçimi "Satır kartlar"): model, paket ve 2. lamba tek dil. Aynı kart (yüzey, 1,5px çizgi,
@@ -645,13 +662,12 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
     </div>
   </section>
 
-  <!-- Neler yapabiliyor? · Aydınlık sahne (21 Eki; kullanıcı 1. tur listeleri için "çok boğar, sıkıcı" dedi, 2. turda bunu seçti).
-       Stüdyo fotoğrafı modele bağlı; etkin özelliğin etkisi lambanın çevresinde (halkalar, ses dalgaları, disk/kademe/pil rozeti).
-       Etiketler eylem söyler (Sihirli "ne" der). Ekrana girince tek tur (her durum 6 sn), Masal'da durur; dokununca durur.
-       Kod ve CSS ozellik2_varyant.py'de (pano ile ortak). Premium set gelince fotoğraf p-kiz-gunduz / p-erkek-gunduz olur. -->
+  <!-- Neler yapabiliyor? · Afiş, ürün önde (22 Eki; kullanıcı sitesindeki afişi örnek gösterdi; Aydınlık sahneyi "hiç ama hiç beğenmedim" dedi, 3. turda bunu seçti).
+       Koyu ürün fotoğrafı (x2), lamba kesimi arayüz kartlarının önünde. Kartlar ekrana girince sırayla gelir; sekanslar tek tek oynar ve durur:
+       Diski tak (kubbe açılır, disk üstten iner; teyitli) → Telefondan çal → Işığı kıs (lamba da kısılır) → Şarj et. Kod ve CSS ozellik3_varyant.py'de. -->
   <section class="px bolum gir" id="neler" aria-labelledby="neler-bas">
     <h2 class="h2" id="neler-bas">Neler<br>yapabiliyor<span class="n">?</span></h2>
-    <div class="{{nzCls}}" data-tur="nz"><div class="nz-ft"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img class="nz-img" src="/_blob/e02351b3be4a1c555c5d760d0bbda723" alt="LunaDream Kız modeli, stüdyo çekimi" loading="lazy"></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img class="nz-img" src="/_blob/0033dfea6282c5bc479c385213661c00" alt="LunaDream Erkek modeli, stüdyo çekimi" loading="lazy"></sc-if></div><div class="nz-hk" aria-hidden="true"><i></i><i></i><i></i></div><div class="nz-dl" aria-hidden="true"><span class="sol"><i></i><i></i><i></i></span><span class="sag"><i></i><i></i><i></i></span></div><div class="nz-rzy" aria-hidden="true"><span class="nz-rz nz-disk"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img src="/_blob/4a3a69e8c1d8dddad8c33f8f463b8a0e" alt=""><b>Ay ve yıldız diski</b></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""><b>Uzay diski</b></sc-if></span><span class="nz-rz nz-kad"><i><span>Kısık</span><span class="e">Kısık</span></i><i><span>Orta</span><span class="e">Orta</span></i><i><span>Parlak</span><span class="e">Parlak</span></i></span><span class="nz-rz nz-cal"><span class="eq"><i></i><i></i><i></i><i></i></span><b>Ninni çalıyor</b></span><span class="nz-rz nz-pil"><span class="nz-rbat"><i></i><i></i><i></i><i></i></span><span class="durum"><i>Şarj oluyor</i><i>Kablosuz</i></span></span></div><button class="{{nzc0}}" type="button" style="left: 12px; top: 14px" onClick="{{nzg0}}" aria-pressed="{{nzp0}}"><span class="nz-ik"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img class="nz-dsk" src="/_blob/4a3a69e8c1d8dddad8c33f8f463b8a0e" alt=""></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img class="nz-dsk" src="/_blob/b088d2c82561b76f6db997fbc3944059" alt=""></sc-if></span><span class="nz-ad">Diski tak</span></button><button class="{{nzc1}}" type="button" style="right: 12px; top: 14px" onClick="{{nzg1}}" aria-pressed="{{nzp1}}"><span class="nz-ik"><span class="nz-kd"><i></i><i></i><i></i></span></span><span class="nz-ad">Işığı kıs</span></button><button class="{{nzc2}}" type="button" style="left: 12px; bottom: 12px" onClick="{{nzg2}}" aria-pressed="{{nzp2}}"><span class="nz-ik"><span class="eq nz-eq"><i></i><i></i><i></i><i></i></span></span><span class="nz-ad">Ninni çal</span></button><button class="{{nzc3}}" type="button" style="right: 12px; bottom: 12px" onClick="{{nzg3}}" aria-pressed="{{nzp3}}"><span class="nz-ik"><span class="nz-bat"><i></i><i></i><i></i></span></span><span class="nz-ad">Kablosuz kullan</span></button></div><div class="nz-metin" aria-live="polite"><p class="{{nzm0}}" aria-hidden="{{nzh0}}">Diski tak; masal tavana yansısın.</p><p class="{{nzm1}}" aria-hidden="{{nzh1}}">Üç kademe: kısık, orta, parlak.</p><p class="{{nzm2}}" aria-hidden="{{nzh2}}">Telefondan bağla; ninni lambadan çalsın.</p><p class="{{nzm3}}" aria-hidden="{{nzh3}}">Kablo takılı değilken de yanar.</p></div>
+    <div class="{{nfCls}}" data-tur="nf" role="img" aria-label="LunaDream: diski tak, telefondan ninni çal, ışığı kıs, şarj et"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img class="na-img kiz" src="/_blob/9fc836c3d9ab1f8fb163f2f255034bbc" alt=""></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img class="na-img erkek" src="/_blob/d78da0ee8e43fa98686a43e648e14295" alt=""></sc-if><span class="na-hale" aria-hidden="true"></span><div aria-hidden="true"><div class="nw nw-disk k-disk" style="--g: 0s; --s: 2.1s; --d: 2.4s"><div class="nw-b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="2"></circle></svg><span>Diski tak</span></div><div class="nw-d"><span class="tk"><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><svg class="tk-g" viewBox="0 0 32 32" aria-hidden="true"><rect class="isk" x="10" y="14.6" width="12" height="6.2" rx="1.2"></rect><path d="M9.5 14.5v6.5M22.5 14.5v6.5"></path><path d="M8 21h16c0 2.9-3.6 4.6-8 4.6S8 23.9 8 21z"></path><path d="M11.4 25.3c-.4 1.5-1.6 2.2-2.8 1.9M20.6 25.3c.4 1.5 1.6 2.2 2.8 1.9"></path></svg><img class="tk-d" src="/_blob/4a3a69e8c1d8dddad8c33f8f463b8a0e" alt=""><svg class="tk-k" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="3.6" r="1.5"></circle><path class="kb" d="M6 13C6 8.4 10.5 5.4 16 5.4S26 8.4 26 13a2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0 2 2 0 0 1-4 0z"></path></svg></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><svg class="tk-g" viewBox="0 0 32 32" aria-hidden="true"><path d="M8.5 16h15v4h-15z"></path><rect x="6" y="20" width="20" height="6.4" rx="3.2"></rect><circle cx="10.4" cy="23.2" r="1.4"></circle><circle cx="16" cy="23.2" r="1.4"></circle><circle cx="21.6" cy="23.2" r="1.4"></circle></svg><img class="tk-d" src="/_blob/4a3a69e8c1d8dddad8c33f8f463b8a0e" alt=""><svg class="tk-k" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.4V4"></path><circle cx="16" cy="3" r="1.2"></circle><path class="kb" d="M7.5 16a8.5 8.5 0 0 1 17 0z"></path><rect x="10" y="9.6" width="12" height="5.2" rx="2.6" fill="#1A2142"></rect><circle class="isk" cx="13.6" cy="12.2" r="1.1"></circle><circle class="isk" cx="18.4" cy="12.2" r="1.1"></circle></svg></sc-if></span><span class="nw-dt"><b>Ay ve yıldız</b><small>6 + 6 disk</small></span></div></div><div class="nw nw-ninni k-ninni" style="--g: .5s; --s: 4.5s; --d: 2.4s"><div class="nw-b"><svg viewBox="0 0 24 24"><path d="M7 7l10 10-5 5V2l5 5L7 17"></path></svg><span>Telefondan çal</span></div><div class="nw-pl"><span class="kap"><svg viewBox="0 0 24 24"><path d="M15.5 4.5a8 8 0 1 0 4 14.4A7 7 0 0 1 15.5 4.5z"></path></svg></span><span class="ad"><b>Ninni</b><small class="nw-dr"><i>Bağlanıyor</i><i>Çalıyor</i></small></span><span class="eq"><i></i><i></i><i></i><i></i></span></div><div class="nw-pr"><b></b></div></div><div class="nw nw-isik k-isik" style="--g: 1s; --s: 6.9s; --d: 2.4s"><div class="nw-b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg><span>Işığı kıs</span><span class="nw-dr sag"><i>Parlak</i><i>Orta</i><i>Kısık</i></span></div><div class="nw-sl"><i></i><b></b><span class="tut"></span><em></em><em></em><em></em></div></div><div class="nw nw-sarj k-sarj" style="--g: 1.5s; --s: 9.3s; --d: 2.4s"><div class="nw-b"><svg viewBox="0 0 24 24"><path d="M13 3L6 13h5l-1 8 7-10h-5z"></path></svg><span>Şarj et</span></div><div class="nw-sj"><span class="fis"><svg viewBox="0 0 24 24"><path d="M3 12h6M9 8.5h5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H9zM16 10.5h4M16 13.5h4"></path></svg></span><span class="bat"><i></i><i></i><i></i><i></i></span></div><div class="nw-dr alt"><i>Şarj oluyor</i><i>Kablosuz</i></div></div></div><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img class="na-kes kiz" src="/_blob/64acd86736049ff811d5db5e441aed6b" alt=""></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img class="na-kes erkek" src="/_blob/55988cac00dcbf39b9ec247b6ccd9e3e" alt=""></sc-if><sc-if value="{{sihKiz}}" hint-placeholder-val="{{true}}"><img class="na-kes koyu kiz" src="/_blob/64acd86736049ff811d5db5e441aed6b" alt=""></sc-if><sc-if value="{{sihErkek}}" hint-placeholder-val="{{false}}"><img class="na-kes koyu erkek" src="/_blob/55988cac00dcbf39b9ec247b6ccd9e3e" alt=""></sc-if></div>
   </section>
 
   <!-- Odası böyle görünecek · Gece vitrini (21 Eki; "Bir gece, beş an" ve iki posterli eski Odası'nın yerine). Kaydır, karta ya da aya dokun.
@@ -741,9 +757,9 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7087}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7067}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, nz: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Büyük görünüm Esc ile kapanır
@@ -751,14 +767,11 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this.esc);
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Neler yapabiliyor?: ekrana girince tek tur (her durum 6 sn), Masal'da durur; dokununca durur; azaltılmış harekette ilerlemez
-    (function (k) { var el = document.querySelector('[data-tur="' + k + '"]'); if (!el || azH) return;
-      var basla = function () { var n = 0;
-        var adim = function () { if (self.state[k + 'Dur']) return; var o = {}; o[k] = ((self.state[k] || 0) + 1) % 4; self.setState(o); if (++n < 4) self['tur' + k] = setTimeout(adim, 6000); };
-        self['tur' + k] = setTimeout(adim, 6000); };
-      if (typeof IntersectionObserver === 'undefined') return basla();
-      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); basla(); } }, { threshold: .5 });
-      io.observe(el); })('nz');
+    // Neler yapabiliyor?: ekrana girince kartlar sırayla gelir, sekanslar tek tek oynar ve durur; azaltılmış harekette son kare
+    (function (k) { var el = document.querySelector('[data-tur="' + k + '"]'); if (!el || azH || typeof IntersectionObserver === 'undefined') return;
+      var s = {}; s[k + 'On'] = false; self.setState(s);
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); var o = {}; o[k + 'On'] = true; self.setState(o); } }, { threshold: .4 });
+      io.observe(el); })('nf');
     // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
@@ -785,7 +798,7 @@ class Component extends DCLogic {
     var el = document.querySelector('.kare-foto'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; }
   }
   galGit(i) { var el = document.querySelector('.kare-foto'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
-  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.turnz); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
+  componentWillUnmount() { clearInterval(this.iv); if (this.esc) document.removeEventListener('keydown', this.esc); if (this.yolio) this.yolio.disconnect(); }
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
@@ -932,13 +945,9 @@ class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Işık çocuğu rahatsız eder mi?', a: 'Sıcak tonlu, yumuşak bir ışığı var. 3 parlaklık ayarından birini seçebilirsin.' }
     ];
-    var nzV = { nzCls: 'nz nzs' + (S.nz || 0) };
-    for (var i = 0; i < 4; i++) (function (i) { var on = i === (S.nz || 0);
-      nzV['nzc' + i] = 'nz-ek' + (on ? ' on' : ''); nzV['nzp' + i] = on ? 'true' : 'false';
-      nzV['nzg' + i] = function () { self.setState({ nz: i, nzDur: true }); };
-      nzV['nzm' + i] = 'nz-m' + (on ? ' on' : ''); nzV['nzh' + i] = on ? 'false' : 'true'; })(i);
+    var nfV = { nfCls: 'na' + ((S.model === 'erkek') ? ' erkek' : '') + (S.nfOn === false ? ' bek' : S.nfOn ? ' gir' : '') };
     var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
-    return { masa: MASA, tel: !MASA, ...nzV,
+    return { masa: MASA, tel: !MASA, ...nfV,
       gal: gal, gNo: S.g + 1, gCount: G.length, gKay: gKay, gPrev: function () { self.setState({ g: (S.g + G.length - 1) % G.length }); }, gNext: function () { self.setState({ g: (S.g + 1) % G.length }); }, models: models, modelName: kiz ? 'Kız · tavşanlı' : 'Erkek · Uzay Kaşifi', modelSrc: kiz ? KES_K : KES_E,
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al', onPrice: TL(online, true),  // düğmede fiyat yok (kullanıcı, 19 Eki)

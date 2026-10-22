@@ -259,17 +259,17 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const k = await b.newContext({ viewport: { width: 360, height: 800 } }), p = await k.newPage(); await p.goto(KOK + 'lunadream-gece-lambasi.html'); await p.waitForTimeout(500);
     const r = await p.evaluate(() => { const s = document.querySelector('#siparis .sih .ui-serit'), e = s.closest('.sh-ek'); return { s: Math.round(s.getBoundingClientRect().width), e: Math.round(e.getBoundingClientRect().width), u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
     not(r.s <= r.e && r.u === 1, `360 px: disk şeridi kart ekranına sığar (${r.s} ≤ ${r.e}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
-  // Neler yapabiliyor? · Aydınlık sahne (21 Eki): Videolar ile Odası arasında; 4 eylem etiketi ve rozetler; dokununca etiket, cümle ve rozet değişir, tur durur; Erkek'te robot fotoğrafı
+  // Neler yapabiliyor? · Afiş, ürün önde (22 Eki): Videolar ile Odası arasında; 4 kart, lamba kesimi kartların önünde; ekrana girince kartlar oynar; Erkek'te robot
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
-    not(sira && await pg.locator('#neler .nz-ek').count() === 4 && await pg.locator('#neler .nz-rz').count() === 4, 'telefon: Neler yapabiliyor? Videolar ile Odası arasında, 4 eylem etiketi, rozetler'); }
-  await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.locator('#neler .nz-ek').nth(2).click(); await pg.waitForTimeout(600);
-  { const r = await pg.evaluate(() => ({ bas: document.querySelectorAll('#neler .nz-ek[aria-pressed=true]').length, on: [...document.querySelectorAll('#neler .nz-ek')].findIndex(e => e.classList.contains('on')),
-      yazi: document.querySelector('#neler .nz-m.on').textContent, rz: +getComputedStyle(document.querySelector('#neler .nz-cal')).opacity, sahne: document.querySelector('#neler .nz').className }));
-    await pg.waitForTimeout(6500); const sonra = await pg.evaluate(() => document.querySelector('#neler .nz').className);
-    not(r.bas === 1 && r.on === 2 && /ninni/.test(r.yazi) && r.rz > .9 && /nzs2/.test(r.sahne) && sonra === r.sahne, `Neler: 3. etiket → etkin, cümle ve rozet değişti, tur durdu (${r.sahne} → ${sonra}, rozet ${r.rz})`); }
+    const r = await pg.evaluate(() => { const a = document.querySelector('#neler .na'), k = a.querySelector('.na-kes:not(.koyu)'), c = a.querySelector('.nw');
+      return { kart: a.querySelectorAll('.nw').length, ust: +getComputedStyle(k).zIndex > +getComputedStyle(c).zIndex, eski: document.querySelectorAll('#neler .nz, #neler .nz-ek').length }; });
+    not(sira && r.kart === 4 && r.ust && r.eski === 0, `telefon: Neler yapabiliyor? afiş Videolar ile Odası arasında, 4 kart, lamba kartların önünde, Aydınlık sahne yok (${JSON.stringify(r)})`); }
+  await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.waitForTimeout(700);
+  { const c = await pg.evaluate(() => document.querySelector('#neler .na').className); not(/gir/.test(c) && !/bek/.test(c), 'Neler: ekrana girince kartlar oynar (' + c + ')'); }
   { await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
-    const alt = await pg.evaluate(() => [...document.querySelectorAll('#neler .nz-img')].map(i => i.alt).join()); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
-    not(/Erkek/.test(alt) && !/Kız/.test(alt), 'Neler: Erkek seçilince robot fotoğrafı (' + alt + ')'); }
+    const r = await pg.evaluate(() => ({ c: document.querySelector('#neler .na').className, img: document.querySelectorAll('#neler .na-img.erkek').length, kiz: document.querySelectorAll('#neler .na-img.kiz').length }));
+    await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
+    not(/erkek/.test(r.c) && r.img === 1 && r.kiz === 0, 'Neler: Erkek seçilince robot fotoğrafı ve kart yerleri (' + r.c + ')'); }
 
   // Masaüstü (19 Eki): ortak üst menü, yatay taşma yok, ürün sayfasında galeri yalnız üst kısımda yapışık
   const mctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
@@ -303,11 +303,12 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
       return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
     not(r.gen === 1440 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin: bant ${r.gen}, şerit kenardan kenara ve yazı altta ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
-  // Masaüstü: Neler yapabiliyor? 430 px sütunda; sahne orantılı büyür (cqw), halkalar lambanın ortasında
+  // Masaüstü: Neler yapabiliyor? afişi 430 px sütunda ortada, orantılı büyür (zoom); kesim fotoğrafla aynı yerde
   await mp.locator('#neler').scrollIntoViewIfNeeded();
-  { const r = await mp.evaluate(() => { const s = document.querySelector('#neler .nz').getBoundingClientRect(), h = document.querySelector('#neler .nz-hk i').getBoundingClientRect();
-      return { w: Math.round(s.width), oran: s.height / s.width, orta: Math.abs((h.left + h.right) / 2 - (s.left + s.right) / 2) }; });
-    not(r.w <= 430 && r.w > 358 && Math.abs(r.oran - 440 / 358) < .01 && r.orta < 1.5, `masaüstü Neler: sahne ${r.w} px, oran ${r.oran.toFixed(3)}, halka ortada (${r.orta.toFixed(1)} px)`); }
+  { const r = await mp.evaluate(() => { const s = document.getElementById('neler').getBoundingClientRect(), a = document.querySelector('#neler .na').getBoundingClientRect(),
+      f = document.querySelector('#neler .na-img.kiz').getBoundingClientRect(), k = document.querySelector('#neler .na-kes.kiz').getBoundingClientRect();
+      return { w: Math.round(a.width), orta: Math.abs((a.left + a.right) / 2 - (s.left + s.right) / 2), ayni: Math.abs(f.left - k.left) + Math.abs(f.top - k.top) + Math.abs(f.width - k.width) }; });
+    not(r.w > 358 && r.w <= 430 && r.orta < 2 && r.ayni < 1, `masaüstü Neler: afiş ${r.w} px, ortada (${r.orta.toFixed(1)}), kesim fotoğrafla aynı yerde (${r.ayni.toFixed(1)})`); }
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));

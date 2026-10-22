@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Disk kartı sığar; "Neler yapabiliyor?" 3. tur: koyu afiş + arayüz kartları (22 Ekim, en güncel)
+## Tema 1.0.11 · "Neler yapabiliyor?" = Afiş, ürün önde (22 Ekim, en güncel)
+- Kullanıcı 3. turda "1 · Afiş, ürün önde"yi seçti. Disk sorusuna: "Kubbe açılıp üstten" (teyitli ürün bilgisi).
+- `luna_e.py`: Aydınlık sahne (OZ2) çıktı; `#neler` = `OZ3.afis('nf')`, CSS `OZ3.AFIS_CSS`, JS `OZ3.js_afis_tur('nf')` + `OZ3.js_afis_deger('nf', "S.model === 'erkek'")` (dönüşte `...nfV`). Durum `nfOn` (false: bekler, true: kartlar oynar).
+- "Diski tak" kartı: tonda kutuda çizgi lamba (Kız atlıkarınca / Erkek robot); kubbe 10 px kalkar, Ay ve yıldız diski üstten iner, kubbe kapanır (2,4 sn, bir kez). Erkek'te robotun başı kubbe sayıldı (aynı mekanizma varsayıldı; teyit gerekirse sorulacak).
+- Afiş 358 px tabanlı; 375/360 px telefonda zoom .958/.916, masaüstünde 1,1 (394 px, 430 px sütunda ortada).
+- E_H=7067, OZ3_H=1618. Site testleri (sıra, 4 kart, lamba kartların önünde, ekrana girince oynar, Erkek fotoğrafı, masaüstü genişlik/orta/kesim hizası, 360 px disk şeridi) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.11.zip`. Tuval Sürüm 125, site Sürüm 27.
+- Site önizlemesinde 19 görsel hiç yayınlanmamıştı (AyFeneri, Galaksi Night, Mesajlar ve LunaDream'de kullanılan); hepsi yüklendi. Diğer ürün sayfalarının yayındaki HTML'i yerel derlemeden eski olabilir; ilk fırsatta karşılaştırılıp yayınlanmalı.
+
+## Disk kartı sığar; "Neler yapabiliyor?" 3. tur: koyu afiş + arayüz kartları (22 Ekim)
 - Kullanıcı (Sihirli disk kartının ekran görüntüsüyle): "Disk kartı tam sığmıyor; Aydınlık sahne kısmını hiç ama hiç beğenmedim, yeni bir tarz deneyelim."
 - **Disk kartı:** şerit (`S2.ui_serit`, `SERIT_CSS`) = ortadaki disk + iki tam komşu (k 128 px, b 152 px); solda bir komşu (son disk), sağda döngü için iki disk; pencere halkası kesilmez. "Diskleri gör" bölünmez. USB ortak şeridi de aynı (5 → 7 disk öğesi). Test: 360 px'te şerit ≤ kart ekranı. Tuval Sürüm 123, site Sürüm 25 (yayında).
 - **Neler 3. tur** (`ozellik3_varyant.py` → `canvas/LunaDreamE-Ozellik3.dc.html`): sitedeki afiş dili (images/18.png: koyu ürün fotoğrafı, arayüz kartı ürüne biner).

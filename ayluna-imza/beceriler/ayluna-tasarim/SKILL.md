@@ -272,3 +272,5 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Özellik anlatımı liste olmaz ("çok boğar, sıkıcı", 21 Eki): ürün büyük, yazı en az, tek sahne; etki ürünün çevresinde (halka, ses dalgası, rozet). Kendiliğinden ilerleme ekrana girince tek tur (durum başına 6 sn), sonra durur; sekans bir kez oynar ve son karede kalır. Yörünge düğümleri ve masal kitabı geri gelmez.
 - Kart içi mini sekans kartın ekranına sığar; 360 ve 375 px'te de kesilen parça olmaz (22 Eki). Disk şeridi ortadaki disk + iki tam komşu.
 - Aydınlık sahne (açık stüdyo fotoğrafı + çip + ince halka) reddedildi (22 Eki: "hiç ama hiç beğenmedim"). Özellik anlatımında kullanıcının sitesindeki afiş dili: koyu ürün fotoğrafı + üstünde gerçek arayüz kartı.
+- LunaDream "Neler yapabiliyor?" = Afiş, ürün önde (22 Eki, kullanıcı seçti): koyu ürün fotoğrafı, lamba kesimi arayüz kartlarının önünde; kartlar sırayla gelir, sekanslar tek tek oynar ve durur; Işık kartı lambayı da kısar. Kod `ozellik3_varyant.py`.
+- Teyitli ürün bilgisi (22 Eki): masal diski kubbe açılıp üstten takılır.
