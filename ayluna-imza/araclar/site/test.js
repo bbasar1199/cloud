@@ -172,8 +172,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
 
   // Galeriler Shopify'daki gibi (19 Eki): görsel sayısı ogrenme/galeri-canli.json ile aynı, kare
   const GC = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'ogrenme', 'galeri-canli.json'), 'utf8'));
-  // LunaDream galerisi 22 Eki'den beri premium setten (luna_e.py P_GAL, 5 kare); diğerleri mağazadaki sırada
-  const PREMIUM = { 'lunadream-gece-lambasi': 5 };
+  // LunaDream galerisi 22 Eki'den beri satış afişlerinden (luna_e.py P_GAL, 6 kare); diğerleri mağazadaki sırada
+  const PREMIUM = { 'lunadream-gece-lambasi': 6 };
   for (const [h, canli] of Object.entries(GC)) {
     const liste = PREMIUM[h] ? Array(PREMIUM[h]) : canli;
     await pg.goto(KOK + h + '.html'); await pg.waitForTimeout(400);

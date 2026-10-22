@@ -181,12 +181,12 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - Kum Saati ₺799 / ₺999
   - Galaksi Night ₺2.199 / ₺2.999
   - Yıldız Işığı Nemlendirici ₺849,99 / ₺1.099
-- Modeller: Kız = tavşanlı, Bluetooth ninni hoparlörlü. Erkek = Uzay Kaşifi robot, hoparlörsüz. Bluetooth vaadi modele bağlanır.
+- Modeller: Kız = tavşanlı, Erkek = Uzay Kaşifi robot. İkisi de Bluetooth ile ninni çalar (17 Eki teyidi).
 - Galaxy USB (18 Eki): beyaz; kutuda projektör + 12 film diski, **USB adaptör yok**; 2'si 1 arada (projektör + gece lambası); başlık 4 cm, toplam boy 23,5 cm; 1 Adet ₺1.599 / ₺1.999, 2 Adet ₺2.399,99 (Kaching). Loox 2,0 · 7 yorum; canlıdaki "4,7 · 2467" ve "90 gün" yanlış.
 - Kutu: lamba + 6 disk + 6 hediye disk + USB kablo. Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan çekilir (4,7 · 62, teyit bekliyor). "Elif K.", 2.467, 10.000+ ve 12.000+ uydurmadır.
 - Bilinmeyen değer köşeli yer tutucu kalır: [X] cm, [X] saat, [yaş], [Firma unvanı], [numara].
-- LunaDream (17 Eki teyidi): iki model de Bluetooth ninni; 3 parlaklık ayarı; her yaş için; her kutuda 6 + 6 hediye disk; boyut ve pil süresi yazılmaz; Ekim kampanyası 1–31 Ekim; tüm kartlar geçer; stok satırı elle (şimdilik 18); iade kodu Ayluna'dan, iade kargosu ücretsiz; Loox müşteri fotoğrafları kullanılabilir.
+- LunaDream (17 Eki teyidi): iki model de Bluetooth ninni; 3 parlaklık ayarı; her yaş için; her kutuda 6 masal diski + 6 hediye disk (vitrinde yalnız "6 masal diski" yazılır, "6 + 6" yazılmaz; 22 Eki); boyut ve pil süresi yazılmaz; Ekim kampanyası 1–31 Ekim; tüm kartlar geçer; stok satırı elle (şimdilik 18); iade kodu Ayluna'dan, iade kargosu ücretsiz; Loox müşteri fotoğrafları kullanılabilir.
 
 ## İş verisi → tasarım kuralı
 - Kapıda ödemede iade %28,6, ön ödemede %0,8. İadelerin %92'si "alıcı bulunamadı".
@@ -219,7 +219,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Araç: Google Flow (Nano Banana Pro). İş akışı DEVAM.md'de.
 - **Higgsfield'da üretim, düzenleme ya da büyütme yapılmaz, kredi harcanmaz** (kullanıcı, 18 Eki: "görselleri Flow'dan üreteceksin, Higgsfield'dan üretme"). Flow'a erişim yoksa başka araca geçilmez: istem + referans hazırlanır, kullanıcıya sorulur.
 - **ChatGPT de kullanılır** (kullanıcı, 21 Eki: "ChatGPT'den yaptır"). Oturumda `OPENAI_API_KEY` yoksa kopyala-yapıştır istem + numaralı referans paketi hazırlanır; anahtar istenmez.
-- **Kurumsal fotoğraf dili:** iki fon (sıcak krem stüdyo, derin lacivert gece), yumuşak ışık, 85 mm, yazısız; mor-neon, rozet, yazılı afiş yok. Çekim listesi `ogrenme/premium-fotograf-seti.md`.
+- **Kurumsal fotoğraf dili:** iki fon (sıcak krem stüdyo, derin lacivert gece), yumuşak ışık, 85 mm; fotoğrafın kendisi yazısız, mor-neon ve rozet yok. Çekim listesi `ogrenme/premium-fotograf-seti.md`.
+- **Ürün galerisi = satış afişleri** (kullanıcı, 22 Eki: "satış odaklı görseller olsun, USB'ninki gibi"): her kare tek mesaj, iki satır serif başlık (ikinci satır vurgu), bir satır alt yazı, 3 çizgi ikon + etiket ya da kutu listesi, sol üstte marka işareti. Zemin premium fotoğraf, ürün yazının altında kalmaz. Yazı HTML katmanında basılır (`araclar/gorsel/afis_uret.py`), görsel aracına yazdırılmaz; yalnız teyitli bilgi, rozet/yıldız/yorum yok.
 - Görselde yazı üretilmez; metin HTML'de eklenir.
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 

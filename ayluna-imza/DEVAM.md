@@ -475,7 +475,22 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Galeri = premium set (22 Ekim, en güncel)
+## Galeri = satış afişleri (22 Ekim, en güncel)
+- Kullanıcı: "Ürün görsellerini beğenmedim, düzeltmeni istiyorum." → "Eskilerinin ki satış odaklı görseller olsun, USB'ninki gibi." Salt fotoğraf galerisi kalktı; galeri USB galerisi gibi afiş.
+- `araclar/gorsel/afis_uret.py`: premium fotoğraflardan 6 afiş (1080 kare JPG) → `canvas/p-gorsel/afis-1..6.jpg`. Yazı HTML (Young Serif + Onest, `onizleme/f`), Playwright ile basılır. Çalıştırma: PIL'li Python + `NODE_PATH=/opt/node-tools/node_modules`.
+  1. Masal anlatan / gece lambası (koyu, Kız gece; 6 masal diski, Bluetooth ninni, 3 kademe ışık)
+  2. Her gece / yeni bir masal (krem, diskler; "Kutuda 6 masal diski, masalı o seçsin.")
+  3. Telefondan ninni, / lambadan çalsın (sıcak, elde; Bluetooth, ninni ve masal, şarjlı)
+  4. Uzay Kaşifi / erkek modeli (krem, Erkek gündüz)
+  5. Işık kapanınca / masal başlar (koyu, Erkek gece; yazı sağ altta)
+  6. Kutudan / ne çıkıyor? (krem, Kız tam + 6 disk + kutu listesi)
+- Tuval asset'leri: 431c14e7…, 19fdd440…, 6aaf7301…, 7805eb49…, 726517a5…, 39ff6e02… (`blob-yerel.json`). `luna_e.py` `P_GAL` bunlara döndü; site testi `PREMIUM` 6.
+- Değiştirmek için: `AFIS` listesinde başlık/alt yazı/özellik değiştir → betiği çalıştır → asset'leri yeniden yükle, `P_GAL` ve `blob-yerel.json` id'lerini güncelle.
+- Kullanıcı: "6+6 masal yerine 6 masal yaz sadece." Afiş 1, 2, 4, 5 yeniden basıldı (etiket "6 masal / diski", afiş 2 alt yazısı "Kutuda 6 masal diski, masalı o seçsin."); Sihirli disk kartı "6 masal diski · Her gece başka masal." (`sihirli2_varyant.OZ`); Odası çipi "6 masal diski"; ana sayfa slaydı "kutuda 6 masal diski". Kutu listeleri (SSS cevabı, afiş 6) "6 hediye disk" satırını koruyor; kullanıcıya soruldu.
+- Site testleri, tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.17.zip`. Tuval Sürüm 139, site Sürüm 34.
+- Bekleyen: Erkek "UZAY KAŞİFİ" baskısı kararı; gelmeyen 5 kare (Kız gündüz gelince 1. afişin yanına ya da model kartına).
+
+## Galeri = premium set (22 Ekim)
 - Kullanıcı ChatGPT'de üretip 5 kare gönderdi (dosya olarak gelen: 21-25). Sohbet arasında gönderdiği 5 kare daha (Kız gündüz, disk seçen eller, erkek odası, ninni, kız odası) görüldü ama dosya olarak gelmedi; yeniden istendi.
 - `canvas/p-gorsel/`: p-kiz-gece (23), p-elde (22), p-diskler (21), p-erkek-gunduz (25), p-erkek-gece (24). Tuval asset'leri a31842e2…, 3d65f756…, 4fef037f…, 2d42fce7…, 0c17d626… (`blob-yerel.json`).
 - `luna_e.py`: `P_GAL` (5 kare, alt yazılı) galeriyi besler; `canli_galeri` ve yazılı afişler (AD_LD) LunaDream galerisinden çıktı. Müşteri paylaşımı "Evlerinizden" şeridinde.

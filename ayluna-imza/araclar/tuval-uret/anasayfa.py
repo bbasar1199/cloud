@@ -40,7 +40,7 @@ ANA_SAY = 8  # ana sayfada ilk 8 ürün, gerisi "Tüm ürünler"
 
 # Slayt: yazısız görsel + HTML yazı (görsele gömülü yazı yok). LunaDream ve USB görselleri tuvalde zaten var.
 SLAYT = [
-    ('fd0bca1b99cf3837b69fb025cc4e2cd9', '50% 55%', 'LunaDream Gece Lambası', 'Masal gibi<br>geceler.', 'Ninni çalar; kutuda 6 + 6 hediye disk.', 'LunaDream\'i incele', 'Gece çocuk odası, komodinde yanan LunaDream'),
+    ('fd0bca1b99cf3837b69fb025cc4e2cd9', '50% 55%', 'LunaDream Gece Lambası', 'Masal gibi<br>geceler.', 'Ninni çalar; kutuda 6 masal diski.', 'LunaDream\'i incele', 'Gece çocuk odası, komodinde yanan LunaDream'),
     ('7d5f80214a0664a51946b0ece044e8cb', '50% 30%', 'Galaxy USB Projektör', 'Tavanı<br>sahneye çevir.', 'Bir USB girişi, 12 film diski.', 'Galaxy USB\'yi incele', 'Komodinde beyaz Galaxy USB projektör'),
     (BL['ayfeneri-kare.jpg'], '50% 30%', 'Ayluna AyFeneri', 'Duvara<br>ay yansıt.', 'Kumandalı, Bluetooth hoparlörlü deniz feneri.', 'AyFeneri\'ni incele', 'Duvara ay yansıtan AyFeneri deniz feneri lamba'),
 ]

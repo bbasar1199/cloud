@@ -67,7 +67,7 @@ def ui_sarj(kucuk=False):
 
 # (anahtar, başlık, kısa cümle, tek satır (B ve C), mini arayüz)
 OZ = [
-    ('disk', '6 + 6 masal diski', 'Altısı hediye.', 'Altısı hediye', lambda: ui_serit('k')),
+    ('disk', '6 masal diski', 'Her gece başka masal.', 'Her gece başka masal', lambda: ui_serit('k')),
     ('isik', '3 parlaklık', 'Kısık, orta, parlak.', 'Kısık · orta · parlak', ui_isik),
     ('bt', 'Bluetooth ninni', 'Telefondan bağlan, çalsın.', 'Telefondan çalar', ui_bt),
     ('sarj', 'Şarjlı, kablosuz', 'Her odaya taşı.', 'Her odaya taşı', ui_sarj),

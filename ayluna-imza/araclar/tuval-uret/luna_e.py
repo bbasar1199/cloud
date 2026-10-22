@@ -397,14 +397,15 @@ AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r=
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 # Galeri · premium fotoğraf seti (22 Eki; kullanıcı ChatGPT'de üretti, istemler ogrenme/chatgpt-istemleri-lunadream.txt).
-# Yazılı mağaza afişleri (AD_LD) galeriden çıktı; müşteri paylaşımı "Evlerinizden" şeridinde (mfoto). Kız kareleri gerçek ürünle
-# birebir (kubbe, 4 tavşan, 3 düğme, ayaklar); Erkek karelerinde yan plakadaki "UZAY KAŞİFİ" baskısı yok (kullanıcıya soruldu).
-# Bekleyen: p-kiz-gunduz (ilk kare olacak) ve 4 çocuklu oda karesi (dosya olarak gelmedi).
-P_GAL = [{'id': 'a31842e2fc0323c85237366363264731', 'n': 'LunaDream Kız modeli, gece, ışığı yanıyor'},
-         {'id': '3d65f756235e636225a8736b3c763e77', 'n': 'Elde tutulan yanan LunaDream'},
-         {'id': '4fef037f0bf887f358089e71d4754573', 'n': 'LunaDream ve kutudaki masal diskleri'},
-         {'id': '2d42fce7d4e71ba119bf63a75b772679', 'n': 'LunaDream Erkek modeli, Uzay Kaşifi robot'},
-         {'id': '0c17d626caf671c59f27329a56b0a1e7', 'n': 'Uzay Kaşifi duvara uzay diskini yansıtıyor'}]
+# Galeri = satış afişleri (22 Eki, kullanıcı: "eskilerinin ki satış odaklı görseller olsun, USB'ninki gibi"). Afişler
+# araclar/gorsel/afis_uret.py ile premium fotoğraflardan kurulur; yazı HTML katmanı (Young Serif + Onest), yalnız teyitli bilgi.
+# Erkek karelerinde yan plakadaki "UZAY KAŞİFİ" baskısı yok (kullanıcıya soruldu). Bekleyen: p-kiz-gunduz ve 4 çocuklu oda karesi.
+P_GAL = [{'id': '431c14e77a655e68c7e62f470b2d5602', 'n': 'LunaDream: masal anlatan gece lambası'},
+         {'id': '19fdd4407da396df1e450240258f05c1', 'n': 'Her gece yeni bir masal: kutuda 6 masal diski'},
+         {'id': '6aaf73019d53bfde1d0c89948a2a0a66', 'n': 'Telefondan ninni, lambadan çalsın: Bluetooth'},
+         {'id': '7805eb49eea923cb1f811ab785151efd', 'n': 'Uzay Kaşifi erkek modeli'},
+         {'id': '726517a500e21249449b7115d11e77ce', 'n': 'Işık kapanınca masal başlar: disk tavana ve duvara yansır'},
+         {'id': '39ff6e0228add11e8bb7b22abe7b9e6d', 'n': 'Kutudan ne çıkıyor: lamba, 6 masal diski, 6 hediye disk, USB şarj kablosu'}]
 AD_LD = {'211acb76d908e8ed6d4f5fcddc987893': 'Masalsı gece ışığı', '652e1893a0ae33a24ee0e3d53edab757': 'Müşteri paylaşımı: çocuk odasında LunaDream', 'a08890007843d79d94bfffc397a3d0ac': 'Gece modu', 'd4efe7e83c74524ece75e962161f7fff': 'Deniz altı', '3ddd8b8b95f040d436d5d0ea350924b8': 'Hediyeye hazır', '98db755893dbcebe192c69e73ae5afff': 'Uzay macerası'}
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
@@ -548,7 +549,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 14px 16px 0">
       <sc-for list="{{discs}}" as="d" hint-placeholder-count="11"><button class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.n}} diskini göster"><img src="{{d.src}}" alt=""></button></sc-for>
     </div>
-    <!-- Kullanıcı: her kutuda bütün diskler çıkar (6 + 6 hediye), iki modelde de -->
+    <!-- Kullanıcı: her kutuda bütün diskler çıkar, iki modelde de. Sayfada yalnız "6 masal diski" yazılır (22 Eki: "6 + 6 değil, 6 masal") -->
   </section>
 
   <!-- 30 gün iade -->
@@ -751,7 +752,7 @@ JS = """class Component extends DCLogic {
       { id: 'fd0bca1b99cf3837b69fb025cc4e2cd9', pos: '50% 40%', alt: 'Gece çocuk odası: komodinde yanan LunaDream Kız, tavanda ay ve yıldızlar', cip: 'Kız modeli · Tavşanlı', bas: 'Tavanda masal', yazi: 'Işığı kapatınca seçtiği masal diski tavana yansır.', sec: 'Kız modelini seç', e: 'kiz' },
       { id: '8b1f621be2cb3b6133b7b78bc14e1963', pos: '50% 30%', alt: 'Kucakta yanan LunaDream Kız', cip: 'İki modelde de ninni', bas: 'Birlikte dinleyin', yazi: 'En sevdiği ninniyi telefondan aç; ses lambadan gelsin.', sec: 'Modelini seç', e: '' },
       { id: '31751eb35473aca04420825deb3c3ce0', pos: '62% 50%', alt: 'Gece çocuk odası: komodinde yanan LunaDream Erkek (Uzay Kaşifi), duvarda yıldızlar', cip: 'Erkek modeli · Uzay Kaşifi', bas: 'Tavanda uzay', yazi: 'Uzay diskini tak, tavana uzay yansısın.', sec: 'Erkek modelini seç', e: 'erkek' },
-      { id: '5b284c77c252b08a2974bde8e43de126', pos: '50% 40%', alt: 'Kubbesi açık LunaDream ve masal diskleri', cip: '6 + 6 hediye disk', bas: 'Masalı o seçsin', yazi: 'Bu gecenin diskini kutudaki masallardan çocuğun seçsin.', sec: 'Diskleri gör', e: 'disk' }
+      { id: '5b284c77c252b08a2974bde8e43de126', pos: '50% 40%', alt: 'Kubbesi açık LunaDream ve masal diskleri', cip: '6 masal diski', bas: 'Masalı o seçsin', yazi: 'Bu gecenin diskini kutudaki masallardan çocuğun seçsin.', sec: 'Diskleri gör', e: 'disk' }
     ];
     var OEV = """ + str([ay(f) for f in (.25, .5, .75, 1)]) + """, oi = S.oda || 0;
     var odalar = ODA.map(function (o, i) { var on = i === oi; return { src: B + o.id, pos: o.pos, alt: o.alt, cip: o.cip, bas: o.bas, yazi: o.yazi, sec: o.sec, ev: OEV[i],

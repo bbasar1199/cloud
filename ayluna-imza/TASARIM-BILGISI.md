@@ -94,7 +94,7 @@ Her oturumda `DEVAM.md`'den sonra bunu oku. Ayrıntı ve kaynaklar `ogrenme/` kl
 - **Stok satırı elle:** kullanıcı Shopify stoğunu kullanmıyor; "Stokta son X adet" satırını kendisi yazar ve açıp kapatır (şimdilik 18). "Dün X aile aldı" satırı veri olmadığı için yok.
 - **İade:** 30 gün; iade kodunu Ayluna gönderir, iade kargosu ücretsiz.
 - **Müşteri fotoğrafları** (Loox foto yorumları) sayfada kullanılabilir (kullanıcı izni, 17 Eki).
-- Kutuda 6 disk + 6 hediye disk; **her kutuda hepsi çıkar** (2'li pakette her kutuda +6 hediye). Brif şikâyeti: "12 disk yazıyor, 6 geliyor". Bu yüzden her yerde "6 + 6 hediye" yazılır, çıplak "12 disk" yazılmaz.
+- Kutuda 6 disk + 6 hediye disk; **her kutuda hepsi çıkar** (2'li pakette her kutuda +6 hediye). Brif şikâyeti: "12 disk yazıyor, 6 geliyor". Bu yüzden çıplak "12 disk" yazılmaz. **22 Eki'den beri vitrin dili "6 masal diski"** (kullanıcı: "6 + 6 masal yerine 6 masal yaz sadece"); "6 + 6" kalıbı hiçbir yerde yok. Kutu içeriği listesinde (SSS cevabı, Kutudan ne çıkıyor afişi) "6 hediye disk" satırı duruyor, kullanıcıya soruldu.
 - Unicorn diski kutuda yok; gösterilmez.
 - Yorumlar: Burak G., Handan B., Abdülkerim T., Sevcan Z., Mehmet C. Puan Loox'tan gelir.
 - Uydurma sayılar kullanılmaz: "Elif K.", 2.467, 10.000+, 12.000+.
@@ -136,7 +136,7 @@ Teyit gelene kadar köşeli yer tutucu kalır: [X] cm.
 
 **Main'in bilinen kusurları** (taşırken düzelt):
 1. Özellik şeridindeki "Bluetooth ninni" Erkek seçilince de görünüyor. Modele bağlanmalı.
-2. "12 masal diski" yerine "6 + 6 hediye disk".
+2. "12 masal diski" yerine "6 masal diski" (22 Eki; önce "6 + 6 hediye disk" idi).
 3. Alt CTA'lar (Bir gece kartı, kapanış) hep "Kapıda öde" diyor ve indirimsiz fiyat gösteriyor. Ödeme seçimine bağlanmalı.
 4. "Stokta" sabit metin; envantere bağlanmalı. 4,7 puana 5 dolu yıldız konmuş; kısmi yıldız gerekli.
 5. "Annelerin videoları" bölümü fotoğrafı video gibi gösteriyor. Gerçek video yoksa bölüm gizlenir.
@@ -364,6 +364,8 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 22 Eki | (Mağazadaki açılır sorular ve SSS ekran görüntüleriyle) "Bunları da ekle, kargo takibin altına; eklenen özellikle uyumlu olsun, o kısma mükemmel otursun." | **Ürün soruları satın alma alanında, teslim kartının hemen altında; teslim kartıyla aynı kart** (krem, 1 px çizgi, 20 köşe), kapalıyken hilal, açılınca dolunay. İlk 6 soru, "7 soru daha". Cevaplar mağazadaki LunaDream cevaplarından **yalnız teyitli olanlar**: başka üründen kopya cevap (hareket sensörü nasıl çalışır, plak çalar) alınmaz, pil süresi yazılmaz, sağlık iddiası yok. Aynı soru alttaki SSS'de tekrar etmez (SSS satın alma sorularına kalır). |
 | 22 Eki | "O kadar çok soru olmasın kargo takibin altında." | **Teslim kartının altında en fazla 4 soru** (ne işe yarıyor, projeksiyon, Bluetooth, kutu içeriği); "N soru daha" düğmesi yok. Diğer ürün soruları alttaki SSS'de, satın alma sorularından önce. Hoparlör sorusu Bluetooth cevabına katıldı. |
 | 22 Eki | (ChatGPT'de ürettiği premium kareleri gönderdi) | **Galeri premium setten:** yazılı mağaza afişleri galeriden çıktı; ilk kare yanan Kız (gece), sonra elde, diskler, Erkek gündüz, Erkek gece. Her kare gerçek ürünle karşılaştırılır (kubbe, 4 tavşan, 3 düğme, ayaklar; robotun yüzü, anten, 4 düğme, tekerlek). Erkek karelerinde yan plakadaki "UZAY KAŞİFİ" baskısı yok; kullanıcıya soruldu. Sohbet arasında gönderilen görseller dosya olarak gelmeyebilir; gelmeyenler yeniden istenir. |
+| 22 Eki | "Ürün görsellerini beğenmedim, düzeltmeni istiyorum." Soru: ne olsun? → "Eskilerinin ki satış odaklı görseller olsun, USB'ninki gibi." | **Galeri satış afişidir, salt fotoğraf değil** (21 Eki "galeride yazılı afiş yok" kararı kalktı). Galaxy USB galerisi gibi her kare tek mesaj: iki satır serif başlık (ikinci satır vurgu rengi), bir satır alt yazı, 3 yuvarlak çizgi ikon + iki satırlık etiket ya da kutu listesi; marka işareti sol üstte. Zemin premium fotoğrafın kendisi; ürün yazının altında kalmaz (foto kenara maskeyle erir). Fon sırası koyu → krem → sıcak → krem → koyu → krem. **Yazı yapay zekâya yazdırılmaz:** HTML katmanı (Young Serif + Onest) Playwright ile 1080 kare basılır (`araclar/gorsel/afis_uret.py`); yalnız teyitli bilgi (6 + 6 disk, Bluetooth ninni iki modelde, 3 kademe ışık, şarjlı, kutu içeriği). Rozet, yıldız, yorum, uydurma sayı yok. |
+| 22 Eki | (Satış afişlerini görünce) "6+6 masal yerine 6 masal yaz sadece." | **Disk sayısı vitrinde yalnız "6 masal diski"**: "6 + 6", "altısı hediye", "yanında 6 hediye disk" yazılmaz. Değişen yerler: afiş 1, 2, 4, 5 etiketleri ve alt yazısı; Sihirli disk kartı ("6 masal diski · Her gece başka masal."); Odası çipi; ana sayfa slaydı. Kutu içeriği listeleri (SSS, afiş 6) olduğu gibi; soruldu. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
