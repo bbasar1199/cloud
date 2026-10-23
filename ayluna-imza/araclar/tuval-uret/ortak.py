@@ -91,39 +91,55 @@ def tk_html(dun):
     import re
     sat = [('', 'Dün <b>%s kişi</b> satın aldı' % dun), ('kargo', '<b>Ücretsiz kargo</b> ile kapına'),
            ('iade', '<b>30 gün</b> iade hakkı'), ('kart', 'Kartla öde, <b>%5 indirim</b>')]
-    def bir(ik, t):
+    def bir(i, ik, t):
         on = '<i class="dsr-nokta"></i>' if not ik else '<svg viewBox="0 0 24 24">' + TK_IKON[ik] + '</svg>'
-        return '<span class="dsr-s">' + on + '<span>' + t + '</span></span>'
+        return '<span class="{{tkC%d}}">' % i + on + '<span>' + t + '</span></span>'
     sr = ' '.join(re.sub('<[^>]+>', '', t) + '.' for _, t in sat)
     return ('    <p class="dun dsr"><span class="dsr-sr">' + sr + '</span><span class="dsr-pen" aria-hidden="true">'
-            '<span class="{{tkCls}}" style="transform: translateY({{tkY}}px)">' + ''.join(bir(*x) for x in sat) + bir(*sat[0]) + '</span></span></p>\n')
+            '<span class="{{tkCls}}" style="transform: translateY({{tkY}}px)">' + ''.join(bir(i, *x) for i, x in enumerate(sat)) + bir(4, *sat[0]) + '</span></span></p>\n')
 
 
-def tk_css(metin, vurgu, nokta):
-    return (""".dsr{display:block;margin:8px 0 0;font-size:13px;font-weight:700;line-height:24px;color:%(m)s}
+# Renk (23 Eki, kullanıcı: "önceki gibi yeşil olan ile olsun, yine gelirken animasyon ile gelsin, renkler çok sıkıcı durmasın"):
+# eski Dün satırının yeşili; şerit sayfaya girerken aşağıdan yükselir (sayfanın .dun.dsr kuralı), her satır girerken simge ya da nokta
+# küçükten büyür, vurgu yukarıdan düşer, nokta iki kez halka verir (sonsuz döngü yok; eleştirmen). Kenar maskesi kayarken harf
+# çengellerinin pencere kenarında iz bırakmasını önler. gecik: ilk satırın sayfa girişiyle aynı anda oynaması için gecikme.
+def tk_css(metin, vurgu, nokta, gecik='0s'):
+    g = float(gecik.rstrip('s'))
+    return (""".dsr{display:block;margin:8px 0 0;font-size:13px;font-weight:600;line-height:24px;color:%(m)s}
 .dsr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%%);white-space:nowrap}
-.dsr-pen{position:relative;display:block;height:24px;overflow:hidden}
+.dsr-pen{position:relative;display:block;height:24px;overflow:hidden;-webkit-mask-image:linear-gradient(#0000,#000 2px,#000 22px,#0000);mask-image:linear-gradient(#0000,#000 2px,#000 22px,#0000)}
 .dsr-iz{display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .dsr-iz.anlik{transition:none}
 .dsr-s{display:flex;align-items:center;gap:8px;height:24px;white-space:nowrap;overflow:hidden}
 .dsr-s>span{overflow:hidden;text-overflow:ellipsis}
-.dsr-s b{font-weight:700;color:%(v)s;font-variant-numeric:tabular-nums}
+.dsr-s b{display:inline-block;font-weight:700;color:%(v)s;font-variant-numeric:tabular-nums}
 .dsr-s svg{width:16px;height:16px;flex:none;fill:none;stroke:%(v)s;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .dsr-nokta{position:relative;flex:none;width:8px;height:8px;margin:0 4px;border-radius:50%%;background:%(n)s}
-.dsr-nokta::after{content:"";position:absolute;inset:0;border-radius:50%%;background:%(n)s;animation:dsr-nabiz 1.5s cubic-bezier(.2,.7,.2,1) infinite}
-@keyframes dsr-nabiz{0%%{opacity:.55;transform:scale(1)}100%%{opacity:0;transform:scale(2.6)}}
-@media (prefers-reduced-motion:reduce){.dsr-iz{transition:none}.dsr-nokta::after{animation:none}}
-""" % {'m': metin, 'v': vurgu, 'n': nokta})
+.dsr-nokta::after{content:"";position:absolute;inset:0;border-radius:50%%;background:%(n)s;opacity:0}
+.dsr-s.on svg,.dsr-s.on .dsr-nokta{animation:dsr-pop .45s cubic-bezier(.2,.7,.2,1) .1s both}
+.dsr-s.on b{animation:dsr-dus .5s cubic-bezier(.2,.7,.2,1) .15s both}
+.dsr-s.on .dsr-nokta::after{animation:dsr-nabiz 1.4s cubic-bezier(.2,.7,.2,1) .4s 2}
+.dsr-s.on:first-child svg,.dsr-s.on:first-child .dsr-nokta{animation-delay:%(g0).2fs}
+.dsr-s.on:first-child b{animation-delay:%(g1).2fs}
+.dsr-s.on:first-child .dsr-nokta::after{animation-delay:%(g2).2fs}
+@keyframes dsr-pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes dsr-dus{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
+@keyframes dsr-nabiz{0%%{opacity:.6;transform:scale(1)}100%%{opacity:0;transform:scale(2.8)}}
+@media (prefers-reduced-motion:reduce){.dsr-iz{transition:none}.dsr-s svg,.dsr-s b,.dsr-nokta,.dsr-nokta::after{animation:none!important}}
+""" % {'m': metin, 'v': vurgu, 'n': nokta, 'g0': g + .1, 'g1': g + .2, 'g2': g + .5})
 
 
 # Zamanlayıcıya (her saniye) eklenir: tik = saniye sayacı adı, S = durum, o = yeni durum. 4 satır + kopya; her satır 3 sn.
-def tk_adim(tik):
-    return ("      if (!azH) { var tkd = %(t)s - (S.tkT || 0);\n"
+def tk_adim(tik, ilk=0):
+    # ilk: şerit sayfaya geç girdiği için (fiyat animasyonundan sonra) ilk satırın ek bekleme süresi, sn
+    return ("      if (!azH) { var tkd = %(t)s - (S.tkT === undefined ? %(i)d : S.tkT);\n"
             "        if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = %(t)s - 1; o.tkAn = true; }\n"
-            "        else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = %(t)s; o.tkAn = false; } }\n") % {'t': tik}
+            "        else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = %(t)s; o.tkAn = false; } }\n") % {'t': tik, 'i': ilk}
 
 
-TK_DEGER = "tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''),"
+# Görünen satıra "on" (giriş hareketi); kopyadan başa görünmez dönüşte (tkAn) ilk satır yeniden oynamaz
+TK_DEGER = ("tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''), "
+            + ', '.join("tkC%d: 'dsr-s' + ((S.tk || 0) === %d && !(%d === 0 && S.tkAn) ? ' on' : '')" % (i, i, i) for i in range(5)) + ',')
 
 
 # Ürün galerisi okları (23 Eki, masaüstü: fareyle kaydırılamıyordu). Telefonda gizli (parmakla kayar); masaüstünde fotoğrafın iki yanında,

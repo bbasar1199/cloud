@@ -475,7 +475,11 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Dün satırı canlıdaki gibi dönen şerit (23 Ekim, en güncel)
+## Dün şeridi yeşil + giriş hareketi (23 Ekim, en güncel)
+- Kullanıcı: "Renk olarak içime sinmedi." 5 yön çizildi (`scratchpad/dsr-yon/`), eleştirmen amber 8 / yeşil 7 / krem 6; kullanıcı: "Önceki gibi yeşil olan ile olsun, yine gelirken animasyon ile gelsin, renkler çok sıkıcı durmasın."
+- `ortak.tk_css(metin, vurgu, nokta, gecik)`: lacivert 600 yazı, vurgu/ikon #2E6B4F, nokta #2E9E62; görünen satıra `on` (TK_DEGER `tkC0..4`): ikon/nokta `dsr-pop`, vurgu `dsr-dus`, nokta `dsr-nabiz` ×2 (sonsuz yok); ilk satır sayfa girişiyle gecikmeli (LunaDream 1,9 sn, USB 1,2 sn); kenar maskesi. `tk_adim(tik, ilk)`: ilk satır girişten sonra ~3 sn (LunaDream ilk=3, USB ilk=2).
+
+## Dün satırı canlıdaki gibi dönen şerit (23 Ekim)
 - Kullanıcı: "Dün 62 kişi satın aldı kısmı şu an sitemdeki gibi dönen ücretsiz kargo vesaire olan kısım gibi olsun, girip bi kontrol et." Canlı LunaDream tarandı (izleyiciler engelli): fiyat bölgesinde `.live-checkout` (24 px pencere, 4 satır alt alta, `translateY` 0,5 sn `cubic-bezier(.22,.61,.36,1)`, ~3 sn bekleme, ilk satırda nabız noktası, vurgu #F27A1A kalın, 12-13 px). Satırlar: "31 kişi şu anda inceliyor" (sayı canlı oynuyor), "3 günde 399 adet satıldı", "Son 10 günün en düşük fiyatı", "Kargo bedava".
 - Yapılan: `ortak.py` `tk_html(dun)`, `tk_css(metin, vurgu, nokta)`, `tk_adim(tik)`, `TK_DEGER` (sınıflar `dsr-`; `.tk` USB kurulum kartıyla çakışıyordu). LunaDream ve USB'de `DUN_SATIR = tk_html(DUN)`. Satırlar: Dün 62 kişi → Ücretsiz kargo ile kapına → 30 gün iade hakkı → Kartla öde, %5 indirim (+ ilk satırın kopyası). Uydurma ve teyitsiz satırlar alınmadı. Temada sayı sabit (62).
 - Site testleri 169 HEPSİ TAMAM (yeni: şerit döner, ilk satır Dün 62, uydurma satır yok). Tema benzetimi tamam, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.25.zip`; tuval Sürüm 151, site Sürüm 42.

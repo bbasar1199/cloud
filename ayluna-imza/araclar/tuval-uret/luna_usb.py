@@ -704,7 +704,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('var(--lac)', 'var(--v2)', 'var(--v2)'), t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('var(--lac)', '#2E6B4F', '#2E9E62', '1.2s'), t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -721,7 +721,7 @@ JS = """class Component extends DCLogic {
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % """ + str(len(KIM)) + """; o.kBas = t; }
       if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
-""" + tk_adim('t') + """      self.setState(o);
+""" + tk_adim('t', 2) + """      self.setState(o);
     }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');

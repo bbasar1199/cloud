@@ -602,7 +602,7 @@ JS = """class Component extends DCLogic {
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
       if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
-""" + tk_adim('self.tik') + """      self.setState(o); }, 1000);
+""" + tk_adim('self.tik', 3) + """      self.setState(o); }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');
     if (al && typeof IntersectionObserver !== 'undefined') {
@@ -804,5 +804,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS + tk_css('#1A2142', '#A05A1C', '#F2A65A')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

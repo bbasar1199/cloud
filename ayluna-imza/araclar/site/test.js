@@ -157,13 +157,13 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     not((await on()).includes(ilk), f + ': dönen satır önce "' + ilk + '"');
     // "Dün 62" şeridi (23 Eki, kullanıcı: "şu an sitemdeki gibi dönen ücretsiz kargo vesaire olan kısım gibi olsun"): tek satır, 3 sn'de bir yukarı kayar
     const dsr = () => sp.locator('.dsr-iz').evaluate(e => e.style.transform);
-    const d0 = await dsr(), dsat = await sp.locator('.dsr-s').allTextContents();
+    const d0 = await dsr(), dsat = await sp.locator('.dsr-iz > span').allTextContents(), ilkOn = await sp.locator('.dsr-iz > span').first().evaluate(e => e.classList.contains('on'));
     await sp.clock.runFor(3500); const k = await on(), s1 = await sp.locator('.dn-sy').textContent();
-    const d1 = await dsr();
-    not(/translateY\(0px\)/.test(d0) && /translateY\(-24px\)/.test(d1) && dsat.length === 5 && /^Dün 62 kişi satın aldı$/.test(dsat[0].trim()) && dsat[4] === dsat[0] && !dsat.some(x => /inceliyor|adet satıldı|en düşük/.test(x)),
-      f + ': Dün şeridi döner (' + d0 + ' → ' + d1 + '), ilk satır "Dün 62", uydurma satır yok');
     not(k.includes('16.00’ya kadar') && /^03:12:\d\d$/.test(s1), f + ': sonra aynı gün kargo + sayaç ' + s1);
     await sp.clock.runFor(2000); const s2 = await sp.locator('.dn-sy').textContent(), fark = +s1.slice(-2) - +s2.slice(-2);
+    const d1 = await dsr();
+    not(/translateY\(0px\)/.test(d0) && /translateY\(-24px\)/.test(d1) && dsat.length === 5 && /^Dün 62 kişi satın aldı$/.test(dsat[0].trim()) && dsat[4] === dsat[0] && !dsat.some(x => /inceliyor|adet satıldı|en düşük/.test(x)) && ilkOn,
+      f + ': Dün şeridi döner (' + d0 + ' → ' + d1 + '), ilk satır "Dün 62", girişte hareketli (on), uydurma satır yok');
     not(fark >= 2 && fark <= 3, f + ': sayaç akıyor ' + s1 + ' → ' + s2);
     await sp.clock.runFor(4500); not((await on()).includes(ilk), f + ': başa döndü');
     not((await sp.locator('.yol li').nth(1).textContent()).includes('Bugün'), f + ': yolda kargo tarihi Bugün');
