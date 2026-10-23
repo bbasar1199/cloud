@@ -482,6 +482,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Ürün soruları (`urun_soru.py`, bütün ürünler) 54 → 48, 14 px; LunaDream SSS 60 → 52 (`BOYUT_CSS`'teki soru satırı kuralı çekirdeğe taşındı).
   - Sepet satın al 62 → 52, Kapıda 56 → 48; diğer sayfalar (`sayfalar.py`, `sayfalar2.py`): form düğmesi 56 → 52, arama kutusu 56 → 52, ödeme seçeneği 56 → 52, sayfa başlığı 34 → 30; kapıda formu düğmesi (`ayluna.css` `.ay-btn`) 56 → 52.
 - Pano boyları ölçüldü ve üreticilere yazıldı: LunaDreamE 7334, GalaxyUSB 7268, AyFeneri 6855, GalaksiNight 7171, Sepet 1281, sade ürünler `canvas/urunler/yukseklik.json`. `sayfalar.py`/`sayfalar2.py` boy kayması yine geri alındı, sonra ölçüldü.
+- Site testleri 169 HEPSİ TAMAM; tema benzetimi tamam, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.28.zip` (LunaDream satın alma kutusu boyutu da içinde); tuval Sürüm 156, site Sürüm 45.
 
 ## Satın alma kutusu olağan boyutta (23 Ekim)
 - Kullanıcı: "Emoji benefit kısmı, model seçimi kısmı vesaire çok büyük, daha default bir boyuta getir, orantısızlıkları düzelt." `luna_e.py` `BOYUT_CSS` (CSS'in sonuna eklenir, yalnız LunaDream): Sihirli 164 → 135 px, model 74 → 58, paket 82 → 62, düğmeler 62/56 → 52/48, teslim 137 → 125, 4 soru satırı 54 → 48. Kutu 1524 → 1323 px; E_H 7647 → 7430.
