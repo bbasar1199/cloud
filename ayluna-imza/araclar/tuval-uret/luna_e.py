@@ -803,6 +803,19 @@ def sihirli(h):
     return h[i:h.index('\n    </div>', h.index('<div class="sih">', i)) + len('\n    </div>')]
 
 
+# Zemin beyaz, renkler sade (23 Eki, kullanıcı: "arka planı beyaza çevir, renk olarak daha sade bir renge getir"; kapsam: yalnız LunaDream).
+# Açık paletin bej tonları nötre çevrilir: krem zemin ve krem kart beyaz, bej panel açık gri, bej çizgi gri, kehribar küçük başlıklar lacivert.
+# Koyu bölümler (gece, vitrin, alt bilgi), amber düğme ve yıldızlar olduğu gibi kalır. --zemin: site ve temada sayfanın dış zemini.
+SADE = [('#F6F1E9', '#FFFFFF'), ('#FFFDF9', '#FFFFFF'), ('#F1E8DA', '#F3F4F7'), ('#EFE6D8', '#ECEEF2'), ('#E3D8C7', '#E4E6EB'),
+        ('#D6CAB6', '#C9CED8'), ('#766B5B', '#6B7080'), ('#A05A1C', '#1A2142')]
+
+
+def sade(h):
+    for a, b in SADE:
+        h = h.replace(a, b).replace(a.lower(), b)
+    return h
+
+
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

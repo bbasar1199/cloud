@@ -475,7 +475,11 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Dün şeridi yeşil + giriş hareketi (23 Ekim, en güncel)
+## LunaDream zemini beyaz, renkler sade (23 Ekim, en güncel)
+- Kullanıcı: "Fazla mı animasyon var?" → ölçüldü (ilk 3 telefon ekranında Sihirli kartları, teslim kartı sürekli; iki dönen satır, iki sayaç, galeri). Öneri verildi (Sihirli ve teslim ekrana girince bir tur oynayıp dursun; Dün şeridinde satır içi hareket yalnız ilk satırda); kullanıcı henüz seçmedi.
+- Kullanıcı: "Arka planı beyaza çevir, renk olarak daha sade bir renge getir." Kapsam: yalnız LunaDream. `luna_e.py` `SADE` + `sade()` yazarken açık paleti çevirir: #F6F1E9/#FFFDF9 → #FFFFFF, #F1E8DA → #F3F4F7, #EFE6D8 → #ECEEF2, #E3D8C7 → #E4E6EB, #D6CAB6 → #C9CED8, #766B5B → #6B7080, #A05A1C → #1A2142. `.pg{--zemin:#FFFFFF}` ile site/tema dış zemini beyaz. Koyu bölümler, amber düğme, yeşil Dün şeridi aynı.
+
+## Dün şeridi yeşil + giriş hareketi (23 Ekim)
 - Kullanıcı: "Renk olarak içime sinmedi." 5 yön çizildi (`scratchpad/dsr-yon/`), eleştirmen amber 8 / yeşil 7 / krem 6; kullanıcı: "Önceki gibi yeşil olan ile olsun, yine gelirken animasyon ile gelsin, renkler çok sıkıcı durmasın."
 - `ortak.tk_css(metin, vurgu, nokta, gecik)`: lacivert 600 yazı, vurgu/ikon #2E6B4F, nokta #2E9E62; görünen satıra `on` (TK_DEGER `tkC0..4`): ikon/nokta `dsr-pop`, vurgu `dsr-dus`, nokta `dsr-nabiz` ×2 (sonsuz yok); ilk satır sayfa girişiyle gecikmeli (LunaDream 1,9 sn, USB 1,2 sn); kenar maskesi. `tk_adim(tik, ilk)`: ilk satır girişten sonra ~3 sn (LunaDream ilk=3, USB ilk=2).
 - Site testleri 169 HEPSİ TAMAM; tema benzetimi tamam, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.26.zip`; tuval Sürüm 153, site Sürüm 43.
