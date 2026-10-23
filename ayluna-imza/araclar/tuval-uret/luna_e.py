@@ -170,14 +170,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 /* Dönen satır (kullanıcı, 18 Eki): hediye diski ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde, kutu en uzunu
    kadar; dönerken yükseklik değişmez. Giren alttan, çıkan yukarı (yalnız transform/opacity). Hareket azaltılmışsa ikisi alt alta. */
 /* Renk (kullanıcı, 18 Eki: "lacivert rengimize çevirsek daha bütün görünür"): lacivert zemin, ay beyazı yazı, ışık yalnız hilalde. */
-.donen{position:relative;display:grid;margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#1A2142;font-size:14px;font-weight:700;color:#FFFDF9;overflow:hidden}
-.dn-s{grid-area:1/1;display:flex;align-items:center;gap:8px;min-height:24px;opacity:0;transform:translateY(80%);transition:opacity .36s cubic-bezier(.2,.7,.2,1),transform .36s cubic-bezier(.2,.7,.2,1)}
-.dn-s.on{opacity:1;transform:none}.dn-s.ust{transform:translateY(-80%)}
-.dn-s svg{width:16px;height:16px;flex:none}.dn-s circle{fill:none;stroke:rgba(255,253,249,.7);stroke-width:1.6}.dn-s path{fill:#F2A65A}
-.dn-m{flex:1;min-width:0;font-size:13px;line-height:1.3}
-.dn-sy{flex:none;padding:3px 8px;border-radius:999px;background:rgba(255,253,249,.14);color:#FFFDF9;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.dn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-@media (prefers-reduced-motion:reduce){.donen{row-gap:8px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
+.yol-not{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 8px;margin:10px 4px 2px;font-size:13px;line-height:1.35;color:#5C6078;text-align:center}
+.yol-not .dn-sy{flex:none;padding:3px 9px;border-radius:999px;background:#1A2142;color:#FFFDF9;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .btn-on{display:flex;align-items:center;justify-content:center;width:100%;min-height:62px;margin-top:20px;border:0;border-radius:20px;background:#F2A65A;color:#1A2142;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #C97F38;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
 .btn-on:active{transform:translateY(4px)}
 /* Stok kurdelesi (kullanıcı, 18 Eki: "C'yi yap"; eleştirmen 8/10): paket kartındaki "En avantajlı" kurdelesinin dili, butonun üst
@@ -389,7 +383,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 
 # Dün satış (kullanıcı, 18 Eki): gerçek sayı elle girilir. Canlıda bölüm ayarı (sayı; boşsa satır gizlenir) ya da Shopify Flow'un
 # her gece yazdığı metafield. Uydurma sayı yazılmaz; önizlemede yer tutucu.
-DUN = '62'  # kullanıcı, 18 Eki
+DUN = ''  # 18 Eki'de '62' elle girilmişti; 23 Eki: bayat sayı gizlendi (eleştirmen, kullanıcı: "kötü ve gereksiz kısımları düzelt"). Güncel sayı girilince satır döner.
 # Stok (kullanıcı, 18 Eki: "stoklar elle girilecek"): kurdelede "Son N adet". Boşsa kurdele yok.
 STOK = '18'
 # Azalan ay: hediye satırındaki hilalin aynası (ışık solda), "azalıyor" der; oranlı çubuk yerine.
@@ -397,15 +391,13 @@ AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r=
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
 # Galeri · premium fotoğraf seti (22 Eki; kullanıcı ChatGPT'de üretti, istemler ogrenme/chatgpt-istemleri-lunadream.txt).
-# Galeri = satış afişleri (22 Eki, kullanıcı: "eskilerinin ki satış odaklı görseller olsun, USB'ninki gibi"). Afişler
-# araclar/gorsel/afis_uret.py ile premium fotoğraflardan kurulur; yazı HTML katmanı (Young Serif + Onest), yalnız teyitli bilgi.
-# Erkek karelerinde yan plakadaki "UZAY KAŞİFİ" baskısı yok (kullanıcıya soruldu). Bekleyen: p-kiz-gunduz ve 4 çocuklu oda karesi.
-P_GAL = [{'id': '431c14e77a655e68c7e62f470b2d5602', 'n': 'LunaDream: masal anlatan gece lambası'},
-         {'id': '19fdd4407da396df1e450240258f05c1', 'n': 'Her gece yeni bir masal: kutuda 6 masal diski'},
-         {'id': '6aaf73019d53bfde1d0c89948a2a0a66', 'n': 'Telefondan ninni, lambadan çalsın: Bluetooth'},
-         {'id': '7805eb49eea923cb1f811ab785151efd', 'n': 'Uzay Kaşifi erkek modeli'},
-         {'id': '726517a500e21249449b7115d11e77ce', 'n': 'Işık kapanınca masal başlar: disk tavana ve duvara yansır'},
-         {'id': '39ff6e0228add11e8bb7b22abe7b9e6d', 'n': 'Kutudan ne çıkıyor: lamba, 6 masal diski, 6 hediye disk, USB şarj kablosu'}]
+# Galeri = satış afişleri, 2. tur (23 Eki; kullanıcı: "satış odaklı değil, yorum görseli yapılmamış, çok sönük"). araclar/gorsel/afis_uret.py:
+# açılış (Kız, gece, tavanda yansıma) · yorum (Loox'taki gerçek alıcılar) · diskler · Erkek (Uzay Kaşifi, etiketli) · kutudan ne çıkıyor + güven şeridi.
+P_GAL = [{'id': '756460fee1769304a455ca478fcee1af', 'n': 'LunaDream Kız gece odasında yanıyor, tavanda ay ve yıldızlar: tavanı masala çeviren lamba'},
+         {'id': '447d1a0fd314f411baa1860180e51105', 'n': 'Alıcı yorumları: Abdülkerim T., Mehmet C. ve Handan B.'},
+         {'id': '992615e38254c615df3e40a553e54032', 'n': 'Her gece başka bir masal: LunaDream ve 6 masal diski'},
+         {'id': '3c0683cd0453bc9c12a7d20eae71116b', 'n': 'LunaDream Erkek modeli Uzay Kaşifi gece odasında, duvarda yıldızlar'},
+         {'id': '1bf394a66814e821fa3313725f076f0c', 'n': 'Kutudan ne çıkıyor: lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu; ücretsiz kargo, 30 gün iade, kartla %5 indirim'}]
 AD_LD = {'211acb76d908e8ed6d4f5fcddc987893': 'Masalsı gece ışığı', '652e1893a0ae33a24ee0e3d53edab757': 'Müşteri paylaşımı: çocuk odasında LunaDream', 'a08890007843d79d94bfffc397a3d0ac': 'Gece modu', 'd4efe7e83c74524ece75e962161f7fff': 'Deniz altı', '3ddd8b8b95f040d436d5d0ea350924b8': 'Hediyeye hazır', '98db755893dbcebe192c69e73ae5afff': 'Uzay macerası'}
 STAR = '<span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span>'
 def isaret(boy, cizgi='rgba(255,253,249,.55)'):
@@ -482,10 +474,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
         </div>
       </sc-for>
     </div>
-    <!-- Dönen satır (kullanıcı, 18 Eki: "ilk hali öyle başlasın, sonra bugün 16'ya kadar verilen siparişler aynı gün kargoda, orada bir sayaç dönsün").
-         Hediye 4 sn, kargo 6 sn. Simge yoldaki gibi: hilal hediye, yarım ay kargoda. Ekran okuyucu ikisini düz metin okur, sayacı saniye saniye okumaz.
-         16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
-    <p class="donen"><span class="dn-sr">Her kutuda 6 masal diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda 6 masal diski</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.5) + """'></path></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
     <!-- Stok kurdelesi (kullanıcı, 18 Eki: stok denemelerinden C seçildi): Güvenli Ödeme butonunun üst kenarında. Sayı elle
          (tema ayarı: sayı + aç/kapa; Shopify stoğuna bağlı değil), boşsa kurdele yok ve buton eski yerine döner. -->
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn-on" type="button">{{onLabel}}</button>""" + ('</div>' if STOK else '') + """
@@ -494,22 +482,15 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <!-- Shopify: Kapıda düğmesi yok, kapıda ödemeyi kullanıcı EasySell ile koyar; düğmesi bu yuvaya gelir -->
     <div class="ay-dis" data-ay-dis></div>
-    <div class="teslim"><ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket">""" + KUTU + """</span></span>""" + YOL + """</ol></div>
+    <div class="teslim"><ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket">""" + KUTU + """</span></span>""" + YOL + """</ol>
+      <!-- Aynı gün kargo sayacı teslim kartında (23 Eki, sadeleştirme: dönen satır kalktı, "bugün kargoda" tek yerde) -->
+      <p class="yol-not"><span>{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy" aria-label="{{kgAria}}">{{kgSayac}}</b></sc-if></p></div>
     <!-- Ürün soruları (22 Eki, kullanıcı: mağazadaki açılır soruları "kargo takibin altına ekle, o kısma mükemmel otursun").
          Teslim kartıyla aynı kart; soru kapalıyken hilal, açılınca dolunay (teslim çizgisinin ay dili). Yalnız 4 temel soru (kullanıcı: "o kadar çok soru olmasın"); diğerleri alttaki SSS'de.
          Cevaplar canlı sayfadaki LunaDream cevaplarından, yalnız teyitli olanlar: hareket sensörü yok (mağaza "hareket sensörlü değildir"
          diyor; altındaki sensör cevabı AyFeneri'nden kopya), pil süresi yazılmaz (canlıda da boş), sağlık iddiası yok. -->
     <div class="urs" role="group" aria-label="Ürün hakkında sorular">
       <sc-for list="{{urs}}" as="u" hint-placeholder-count="4"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true">""" + URS_AY + """</span><span class="urs-q">{{u.q}}</span>""" + URS_OK + """</summary><p>{{u.a}}</p></details></sc-for>
-    </div>
-  </section>
-
-  <!-- Videolar: canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
-  <section class="bolum gir" id="videolar">
-    <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
-    <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
-      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
-      <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
   </section>
 
@@ -589,14 +570,14 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #2A3260"><img class="kesim" src="{{modelSrc}}" alt="" style="height: 38px; bottom: 4px"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{adetName}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{cubukAlt}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">Satın al</button>
   </div>
 </div>
 """
 
 JS = """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     // Büyük görünüm Esc ile kapanır
@@ -605,10 +586,9 @@ JS = """class Component extends DCLogic {
     // Azaltılmış hareket (ör. Windows'ta animasyon efektleri kapalı): galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
     var azH = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Neler yapabiliyor?: ekrana girince dört kelime bir kez oynar, "Tak."ta durur; azaltılmış harekette tur yok
-""" + OZ4.js_tur('dk') + """    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) + dönen satır (hediye 4 sn, kargo 6 sn)
+""" + OZ4.js_tur('dk') + """    // Tek saat: sayaçlar + galeri 5 sn'de bir sonraki fotoğrafa kayar (elle kaydırılınca durur) 
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
-      if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
       self.setState(o); }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');
@@ -681,13 +661,6 @@ JS = """class Component extends DCLogic {
     function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var cdAy = AYY(Math.round(kalan / 864000) / 100);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
-    // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
-    var vids = [
-      { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%' },
-      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%' },
-      { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%' },
-      { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%' }
-    ];
     // Müşteri fotoğrafları (Loox foto yorumları)
     // Gerçek müşteri içeriği. Eski sitedeki "mutlu kullanıcı" fotoğraflarının 5'i Higgsfield üretimi (hf_): müşteri diye konmaz; yalnız IMG_4145 (minikesnaftr hikâyesi) alındı.
     function buyut(src, ad) { return function () { self.setState({ buyuk: src, buyukAd: ad }); }; }
@@ -720,20 +693,21 @@ JS = """class Component extends DCLogic {
     ];
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });
+    // Görseller yazısız ürün kesimleri (23 Eki): mağaza afişlerindeki "153.748 yıldız detayı", "1 Yıl Garanti" gibi teyitsiz yazılar kartta yok (canvas/capraz)
     var PR = [
-      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: 'c91c0730a3e7924eb99ad263ae4ea6df' },
-      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '3df93f38bf4441cdf4dc64b625a1e22d' },
+      { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: '18992c2375dc098b76ce965f442b1fac' },
+      { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '8dec4fb3201c17c5af97a727f760fc22' },
       { n: 'Astronot Oda Nemlendirici', p: 799, c: 0, id: 'd8080b6820c271f87bc04c6e4740f45e' },
-      { n: 'Ayluna Çocuk Gece Feneri', p: 1599, c: 0, id: '54fbc676197e7a655579e1a97b2ba4ba' },
-      { n: 'Galaxy USB Projektör', p: 1599, c: 1999, id: '88c17ac1f221cab147f23e1a46b7f55e' },
-      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: '9e6102bb76acbfeb101fca8e2fc1024e' },
-      { n: 'Aroma Terapi Nemlendirici', p: 1499, c: 1999, id: '775fa58da36effbe4e62be8ad9e11f4f' },
-      { n: 'Eğitici Akıllı Çizim Tahtası', p: 1199, c: 1999, id: 'c01f20bf04acc790f0e31281b0be778e' },
-      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: 'd326933d74a22adce90d7f6ac3eabf43' },
-      { n: 'Sunset Lamba', p: 699, c: 999, id: '46cfbd570f385373a0a0721698f87162' },
-      { n: 'Dokunmatik Ambiyans Lamba', p: 1299.99, c: 0, id: 'f77b44c85460f5ea4bd1588836d4faaf' },
-      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: '0307a2c24e8297579b82099467f001d9' },
-      { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: 'dc53ea0cd16957a3ba6babb4922f3a00' }
+      { n: 'Ayluna Çocuk Gece Feneri', p: 1599, c: 0, id: '6f398702127fe04cec0b55cbea8d417a' },
+      { n: 'Galaxy USB Projektör', p: 1599, c: 1999, id: '41f7a27eea89e7b4288be3202350a7c1' },
+      { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: '25a27f563fc8df1f0ba6a183605872c0' },
+      { n: 'Aroma Terapi Nemlendirici', p: 1499, c: 1999, id: '0eed23be3ba0b89b788601cc2ce21eda' },
+      { n: 'Eğitici Akıllı Çizim Tahtası', p: 1199, c: 1999, id: '861b0ab4da17f667a9b093797c4c3e81' },
+      { n: 'Ayluna AyFeneri', p: 1649.99, c: 2499, id: 'd77d9351df992b5c2d25a76be3cfe019' },
+      { n: 'Sunset Lamba', p: 699, c: 999, id: 'ede1c77509a69c04052181b5db4a8f54' },
+      { n: 'Dokunmatik Ambiyans Lamba', p: 1299.99, c: 0, id: '99a7d6be05cb9fa65839c7398154f621' },
+      { n: 'Ayluna Kum Saati Lamba', p: 799, c: 999, id: 'c1be20769938c100b273d139871a766c' },
+      { n: 'Ayluna Retro Mini Pikap', p: 1499, c: 1999.99, id: '68a527f889ae6e33cd6c38eb1d44b12c' }
     ];
     // Not: üstü çizili fiyatlar her ürün için son 10 gün kuralına tabi; canlıda compare_at_price'tan gelir.
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
@@ -766,15 +740,11 @@ JS = """class Component extends DCLogic {
       { q: 'Kutu içeriğinde neler var?', a: 'Her kutuda: seçtiğin modelde 1 lamba, 6 masal diski, 6 hediye disk ve USB şarj kablosu. İki modelde de aynı; 2 Adet’te iki kutu gelir.' }
     ];
     // Merak edilenler (alttaki SSS): ürün kullanımı soruları (canlı sayfadan, teyitli olanlar), sonra satın alma soruları
+    // Merak edilenler (23 Eki, sadeleştirme 12 → 7): şarj, tuşlar ve sensör Sihirli/Dergi'de anlatılıyor; iki Bluetooth sorusu birleşti
     var faq = [
-      { q: 'Ürün şarjlı mı, prizde mi çalışır?', a: 'Şarjlı; şarjı varken kablosuz çalışır. Kutudaki USB kabloyla şarj edilir, şarj olurken de kullanılabilir.' },
-      { q: 'Gece rutinine nasıl entegre ederim?', a: 'Yatmadan önce ana ışığı kapatın, diski birlikte seçip takın, telefondan kısa bir ninni açın ve ışığı kısığa alın. Her gece aynı sırayla yapınca yatma vakti belli olur.' },
       { q: 'Işığı göz yorar mı, çocuğu rahatsız eder mi?', a: 'Işığı sıcak tonlu ve yumuşak. Gece için orta ya da kısık kademeyi seç; ışığı göze değil, duvara ya da tavana yansıt.' },
       { q: 'Çocuk odasında kullanmak güvenli mi?', a: 'Düz ve sağlam bir yere koy. Masal diskleri küçük parça sayılır; küçük çocuklar diskleri büyüklerle birlikte kullansın. Şarj ederken kabloyu ortada bırakma.' },
-      { q: 'Tuşlar ile neleri kontrol edebilirim?', a: 'Lambanın tuşlarıyla açıp kapatır, ışığı parlak, orta ve kısık arasında değiştirir, Bluetooth’u açarsın. Sesi telefondan da ayarlayabilirsin.' },
-      { q: 'Hareket sensörü var mı?', a: 'Yok. Lamba tuşlarla açılıp kapanır; gece kendiliğinden yanıp sönmez.' },
-      { q: 'Bluetooth hoparlöre nasıl bağlanırım?', a: 'Lambayı aç ve Bluetooth’unu aç. Telefonda Bluetooth’u açıp listeden lambayı seç. Bağlanınca telefondaki ninniler ve müzik uygulamaları lambadan çalar.' },
-      { q: 'Bluetooth bağlanmıyor, ne yapmalıyım?', a: 'Telefonda Bluetooth’u kapatıp aç, lambayı kapatıp aç. Eski eşleşmeyi “unut” deyip yeniden bağlan ve yakından dene. Olmazsa İletişim sayfasından yaz, yardımcı olalım.' },
+      { q: 'Bluetooth hoparlöre nasıl bağlanırım?', a: 'Lambayı ve Bluetooth’unu aç, telefonda listeden lambayı seç; ninni ve müzik lambadan çalar. Bağlanmazsa telefonda Bluetooth’u kapatıp aç, eski eşleşmeyi “unut” deyip yakından yeniden dene.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır.' },
       { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
@@ -787,13 +757,12 @@ JS = """class Component extends DCLogic {
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
       onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
-      kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac,
-      dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
+      kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, kgAria: KG.aria,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
-      buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
+      buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq,
       urs: URS
     };
@@ -808,5 +777,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6916)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

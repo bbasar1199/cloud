@@ -147,7 +147,19 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(pg.url().endsWith('arama.html'), 'başlık Ara → arama.html');
 
   // Baskı satırları (18 Eki): fiyatta "Stokta" yok, altında "Dün [X]"; dönen satır hediye → aynı gün kargo + 16.00 sayacı (İstanbul saati)
-  for (const [f, ilk] of [['lunadream-gece-lambasi.html', 'hediye'], ['galayx-usb-projektor.html', 'film diski']]) {
+  // LunaDream (23 Eki, sadeleştirme): dönen satır yok; aynı gün kargo sayacı teslim kartında (.yol-not); bayat "Dün 62" gizli; yapışkan çubukta sayaç yerine seçim
+  { const sp = await ctx.newPage(); sp.on('pageerror', e => loglar.push('pageerror lunadream: ' + e.message));
+    await sp.clock.install({ time: new Date('2026-10-19T09:47:15Z') }); // Pazartesi 12:47:15 İstanbul
+    await sp.goto(KOK + 'lunadream-gece-lambasi.html'); await sp.clock.runFor(1500);
+    const not1 = await sp.locator('.teslim .yol-not').textContent(), s1 = await sp.locator('.yol-not .dn-sy').textContent();
+    await sp.clock.runFor(2000); const s2 = await sp.locator('.yol-not .dn-sy').textContent(), fark = +s1.slice(-2) - +s2.slice(-2);
+    const cubuk = await sp.locator('.yapis').textContent();
+    not(await sp.locator('.donen').count() === 0 && await sp.locator('.dun').count() === 0 && not1.includes('16.00’ya kadar') && /^03:12:\d\d$/.test(s1) && fark >= 1 && fark <= 3 && /1 Adet · Kız/.test(cubuk) && !/kaldı/.test(cubuk),
+      `lunadream: dönen satır ve Dün yok; kargo sayacı teslim kartında (${s1} → ${s2}); çubukta "1 Adet · Kız", sayaç yok`);
+    await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(2000); // 16.30
+    not((await sp.locator('.teslim .yol-not').textContent()).includes('yarın kargoda') && await sp.locator('.yol-not .dn-sy').count() === 0, 'lunadream: 16.00 sonrası teslim kartında "yarın kargoda", sayaç yok');
+    await sp.close(); }
+  for (const [f, ilk] of [['galayx-usb-projektor.html', 'film diski']]) {
     const sp = await ctx.newPage(); sp.on('pageerror', e => loglar.push('pageerror ' + f + ': ' + e.message));
     await sp.clock.install({ time: new Date('2026-10-19T09:47:15Z') }); // Pazartesi 12:47:15 İstanbul
     await sp.goto(KOK + f); await sp.clock.runFor(1500);
@@ -172,8 +184,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
 
   // Galeriler Shopify'daki gibi (19 Eki): görsel sayısı ogrenme/galeri-canli.json ile aynı, kare
   const GC = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'ogrenme', 'galeri-canli.json'), 'utf8'));
-  // LunaDream galerisi 22 Eki'den beri satış afişlerinden (luna_e.py P_GAL, 6 kare); diğerleri mağazadaki sırada
-  const PREMIUM = { 'lunadream-gece-lambasi': 6 };
+  // LunaDream galerisi 22 Eki'den beri satış afişlerinden (luna_e.py P_GAL, 5 kare, 23 Eki 2. tur); diğerleri mağazadaki sırada
+  const PREMIUM = { 'lunadream-gece-lambasi': 5 };
   for (const [h, canli] of Object.entries(GC)) {
     const liste = PREMIUM[h] ? Array(PREMIUM[h]) : canli;
     await pg.goto(KOK + h + '.html'); await pg.waitForTimeout(400);
@@ -246,8 +258,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü kopyası yok');
   // Odası böyle görünecek · Gece vitrini (21 Eki): Bir gece ve iki posterli eski Odası yok; 4 oda, aya dokununca oda ortaya kayar ve yazı değişir
   not(await pg.locator('#bir-gece').count() === 0 && await pg.locator('.poster').count() === 0 && await pg.locator('#odalar.vitrin .vt-kart').count() === 4 && await pg.locator('#odalar').count() === 1, 'telefon: Bir gece yok, tek Odası bölümü (Gece vitrini, 4 oda)');
-  { const sira = await pg.evaluate(() => ['videolar', 'odalar', 'yorumlar', 'diskler'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
-    not(sira, 'telefon: Odası Videolar ile Aileler ne diyor arasında'); }
+  { const sira = await pg.evaluate(() => ['siparis', 'odalar', 'yorumlar', 'diskler'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+    not(sira, 'telefon: Odası satın alma ile Aileler ne diyor arasında; Videolar bölümü yok (23 Eki)'); }
   await pg.locator('#odalar').scrollIntoViewIfNeeded(); await pg.locator('.vt-ay').nth(2).click(); await pg.waitForTimeout(900);
   { const r = await pg.evaluate(() => { const el = document.querySelector('.vt-serit'), c = el.children[2], on = document.querySelector('.vt-m.on');
       return { orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: on && on.textContent, gizli: document.querySelectorAll('.vt-m[aria-hidden=true]').length }; });
@@ -271,9 +283,9 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     const ay = await pg.evaluate(() => { const d = document.querySelectorAll('.urs-s')[1]; return { acik: d.open, dolu: +getComputedStyle(d.querySelector('.dolu')).opacity, yazi: d.querySelector('p').textContent }; });
     await pg.locator('.urs-s summary').nth(1).click();
     const r2 = await pg.evaluate(() => { const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());
-      return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
-    not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && r2.sensor && !r2.pil,
-      `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
+      return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), yedi: sss.length === 7, pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
+    not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && !r2.sensor && r2.yedi && !r2.pil,
+      `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}, 7 olmalı; sensör sorusu yok), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
   // Diğer ürünlerde de aynı soru kartı (22 Eki, kullanıcı: "diğer ürünler için de benzer SSS kısımlarını oluştur"): teslim çizgisinin
   // hemen altında 4 soru, satır ≥ 48 px, açılınca dolunay; aynı soru alttaki SSS'de yok; sade sayfalarda ayrı "Kutuda ne var" bölümü yok
   { const kotu = [], k2 = await b.newContext({ viewport: { width: 390, height: 844 } }), p2 = await k2.newPage();  // LunaDream sayfası (pg) yerinde kalsın
@@ -289,14 +301,14 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       const dolu = await p2.evaluate(() => +getComputedStyle(document.querySelector('.urs-s .dolu')).opacity);
       if (!(r.yer && r.n === 4 && r.satir >= 48 && dolu > .9 && !r.tekrar.length && r.sss >= 5 && !r.kutu)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { dolu }))); }
     not(!kotu.length, 'diğer 14 ürün: teslim altında 4 soru, açılınca dolunay, SSS\'de tekrar yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k2.close(); }
-  // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
+  // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): satın alma ile Odası arasında (23 Eki: Videolar kalktı); beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
-  { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+  { const sira = await pg.evaluate(() => ['siparis', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
     const r = await pg.evaluate(() => { const a = document.querySelector('#neler .dg');
       return { kelime: a.querySelectorAll('.dg-soz span').length, dugme: a.querySelectorAll('.dg-bar button').length, parca: a.querySelectorAll('.ur-k.kiz .ur-ust, .ur-k.kiz .ur-alt').length,
         onde: +getComputedStyle(a.querySelector('.dg-urun')).zIndex > +getComputedStyle(a.querySelector('.dg-soz')).zIndex,
         eski: document.querySelectorAll('#neler .nw, #neler .na, #neler .nz').length }; });
-    not(sira && r.kelime === 4 && r.dugme === 4 && r.parca === 4 && r.onde && r.eski === 0, `telefon: Neler yapabiliyor? Dergi kapağı Videolar ile Odası arasında, 4 kelime, 4 düğme, kubbe/gövde ayrı, lamba kelimenin önünde, beyaz kart yok (${JSON.stringify(r)})`); }
+    not(sira && r.kelime === 4 && r.dugme === 4 && r.parca === 4 && r.onde && r.eski === 0, `telefon: Neler yapabiliyor? Dergi kapağı satın alma ile Odası arasında, 4 kelime, 4 düğme, kubbe/gövde ayrı, lamba kelimenin önünde, beyaz kart yok (${JSON.stringify(r)})`); }
   await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.waitForTimeout(700);
   { const c = await pg.evaluate(() => document.querySelector('#neler .dg').className); not(/gir/.test(c) && !/bek/.test(c) && /\bb0\b/.test(c) && /x-tak/.test(c) && /\bo[ab]\b/.test(c), 'Neler: ekrana girince tur başlar, "Tak." kubbe açılır (' + c + ')'); }
   // Dokunuş: Kıs → üç kademe, lamba kısılır; Şarj → ışık alttan dolar; lambaya dokununca aynı özellik yeniden oynar

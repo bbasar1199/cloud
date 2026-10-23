@@ -475,7 +475,17 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Ürün soruları bütün ürün sayfalarında (22 Ekim, en güncel)
+## Galeri 2. tur + LunaDream sadeleşti (23 Ekim, en güncel)
+- Kullanıcı: "Site görsellerini beğenmedim; satış odaklı değil, yorum görseli yapılmamış, çok sönük." 3 yön çizildi (`araclar/gorsel/afis_yon.py`, `canvas/p-gorsel/yon/`); eleştirmen A'yı (gece vitrini) öne aldı (A 7, B 5, C 5) ve karmayı seçti.
+- Yeni galeri 5 kare (`araclar/gorsel/afis_uret.py` → `canvas/p-gorsel/afis-1..5.jpg`): 1 açılış "Tavanı masala çeviren lamba" (Kız, gece, tavanda yansıma, lamba büyük; 3 halka) · 2 yorum "Reklamındaki gibi mi?" (Abdülkerim T., Mehmet C., Handan B.; Loox birebir, düz kart, 36 px) · 3 "Her gece başka bir masal" (disk yayı) · 4 "Uzay Kaşifi erkek modeli" (c-erkek-gece, etiketli robot) · 5 "Kutudan ne çıkıyor?" + güven şeridi (Ücretsiz kargo · 30 gün iade · Kartla %5 indirim; "kapıda ödeme" yazılmaz). Açılış ve Erkek kırpması Real-ESRGAN ile büyütüldü (`canvas/c-gorsel/hd`).
+- Asset'ler: 756460fe…, 447d1a0f…, 992615e3…, 3c0683cd…, 1bf394a6… (`P_GAL`, `blob-yerel.json`). Site testi `PREMIUM` 5.
+- Kullanıcı: "Site çok mu karmaşık, boğucu mu?" → eleştirmen 6/10, sebep tekrar. "Düzelt, kötü ve gereksiz kısımları bir mantığa oturt." Yapılanlar (`luna_e.py`): Videolar bölümü kalktı; dönen satır kalktı, kargo sayacı teslim kartında (`.yol-not`); yapışkan çubukta "1 Adet · Kız" (sayaç yok); `DUN = ''` (bayat "Dün 62" gizli; temada sayı + aç/kapa); SSS 7 soru; Sihirli şarj kartı "USB kabloyla şarj olur"; çapraz satış görselleri yazısız kesim (`canvas/capraz/`, 12 yeni asset). Diskler başlığı "Bu gece hangi masal?", dönen satırdaki "+6 hediye" de kalktı. Sayfa 7679 → 6916 px (E_H 6916).
+- Site testleri (158) ve tema benzetimi HEPSİ TAMAM; Theme Check yalnız 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.19.zip`. Tuval Sürüm 142, site Sürüm 36.
+- Erkek galerisi artık c-erkek-gece (yan plakada "UZAY KAŞİFİ PROJEKTÖR" baskısı var); baskısız p-erkek kareleri galeride yok.
+- Galaxy USB ve diğer sayfaların çapraz satış kartlarında hâlâ yazılı afişler var (bu tur yalnız LunaDream).
+- Bekleyen: kutu listesindeki "6 hediye disk" satırı kalsın mı (SSS ve afiş 5); 5 görsel dosya olarak gelmedi.
+
+## Ürün soruları bütün ürün sayfalarında (22 Ekim)
 - Kullanıcı: "Diğer ürünler için de benzer SSS kısımlarını oluştur."
 - `araclar/tuval-uret/urun_soru.py`: kartın CSS'i (`URS_CSS`, LunaDream'in `.urs`'i; renkler sayfa değişkenlerinden), `urs_html()`, ürün başına `SORU` (urs: teslim altı 4 soru; ek/sss: alttaki SSS'ye giden ürün soruları) ve `sorular(icerik)` (aynı soru iki yerde olursa hata verir).
 - Bağlananlar: `urun_sade.py` (11 sade ürün + sade AyFeneri/Galaksi Night; "Kutuda ne var" bölümü kalktı, kutu 4. soruda), `ozel_sayfa.py` (AyFeneri, Galaksi Night; teslim çizgisinin altında), `luna_usb.py` (teslim kartının altında; SSS'den "Kutudan ne çıkıyor" ve "Gece lambası" çıktı).

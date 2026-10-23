@@ -83,7 +83,11 @@ AFIS = {
            '<div class="c-bas c-ust"><h2>Bu gece<em>hangi masal?</em></h2><p>Kutuda 6 masal diski. Seçmek ona kalsın.</p></div>',
 }
 
-CSS = U.CSS.split('.metin{')[0] + """
+CSS = U.FONT_CSS + """
+body{margin:0;background:#888}
+.afis{position:relative;width:1080px;height:1080px;overflow:hidden;font-family:Onest,sans-serif;margin:0 0 20px}
+.logo{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:14px;font-family:"Young Serif",serif;font-size:42px;letter-spacing:-.01em}
+.logo .ay{width:40px;height:40px}
 @font-face{font-family:Bricolage;font-weight:800;src:url(FBG-latin-800-normal.woff2)}@font-face{font-family:Bricolage;font-weight:800;src:url(FBG-latin-ext-800-normal.woff2);unicode-range:U+0100-024F}
 .afis{background:#0B1020;color:#FFFDF9}
 .tam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.18) saturate(1.25) contrast(1.05)}

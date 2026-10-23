@@ -70,7 +70,7 @@ OZ = [
     ('disk', '6 masal diski', 'Her gece başka masal.', 'Her gece başka masal', lambda: ui_serit('k')),
     ('isik', '3 parlaklık', 'Kısık, orta, parlak.', 'Kısık · orta · parlak', ui_isik),
     ('bt', 'Bluetooth ninni', 'Telefondan bağlan, çalsın.', 'Telefondan çalar', ui_bt),
-    ('sarj', 'Şarjlı, kablosuz', 'Her odaya taşı.', 'Her odaya taşı', ui_sarj),
+    ('sarj', 'Şarjlı, kablosuz', 'USB kabloyla şarj olur.', 'USB kabloyla şarj olur', ui_sarj),  # 23 Eki: "her odaya taşı" pil süresi ima ediyordu
 ]
 
 # Disk şeridi (USB sayfası da kullanır; adlar ve disk listesi ui_serit parametresi)
