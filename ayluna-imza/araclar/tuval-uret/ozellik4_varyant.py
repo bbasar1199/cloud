@@ -111,7 +111,7 @@ DK_CSS = r"""/* A · Dergi kapağı: 358 × 520 */
 .dg-z{position:absolute;inset:0;transform:translateY(101%);transition:transform .9s EASE}
 .dg-z.on{transform:none}
 .dg-z.z0{background:#F1E8DA}.dg-z.z1{background:#1A2142}.dg-z.z2{background:#0C1027}.dg-z.z3{background:#FFFDF9}
-.dg-soz{position:absolute;left:14px;right:0;top:6px;height:140px;margin:0;overflow:hidden;font-family:"Young Serif",Georgia,serif;font-size:128px;line-height:140px;letter-spacing:-.045em;z-index:1}
+.dg-soz{position:absolute;left:14px;right:0;top:10px;height:114px;margin:0;overflow:hidden;font-family:"Young Serif",Georgia,serif;font-size:104px;line-height:114px;letter-spacing:-.045em;z-index:1}
 .dg-soz span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(105%);transition:transform .8s EASE}
 .dg-soz span.ust{transform:translateY(-105%)}
 .dg-soz span.on{transform:none}

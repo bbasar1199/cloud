@@ -249,9 +249,9 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 /* Fiyat düşüşü: 0–0,7 sn ₺1.999,00 büyük; 0,7 sn çizilir; 1,1 sn sağa kayıp küçülür ve söner, yerine soluk eski fiyat gelir;
    aynı anda indirimli fiyat 10px yukarıdan düşer; 1,6 sn rozet belirir. Yalnız transform/opacity, bir kez. */
 .fiyat-satir{position:relative;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:8px 0 0;min-height:28px;font-variant-numeric:tabular-nums}
-.fy-yeni{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.fy-yeni{font-size:20px;font-weight:600;letter-spacing:-.01em}
 .fy-eski{font-size:14px;color:#5C6078}
-.fy-ilk{position:absolute;left:0;top:0;font-size:20px;font-weight:700;letter-spacing:-.01em;color:#1A2142;opacity:0;pointer-events:none;transform-origin:0 70%}
+.fy-ilk{position:absolute;left:0;top:0;font-size:20px;font-weight:600;letter-spacing:-.01em;color:#1A2142;opacity:0;pointer-events:none;transform-origin:0 70%}
 .fy-ilk::after{content:"";position:absolute;left:-2px;right:-2px;top:55%;height:2px;border-radius:1px;background:#1A2142;transform:scaleX(0);transform-origin:0 50%}
 @keyframes fy-ilk{0%{opacity:1;transform:none}55%{opacity:1;transform:none}100%{opacity:0;transform:translateX(118px) scale(.7)}}
 @keyframes fy-cizgi{0%,30%{transform:scaleX(0)}55%,100%{transform:scaleX(1)}}
@@ -353,13 +353,13 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .ynot{margin:12px 0 0;font-size:13px;color:#5C6078;text-align:center;line-height:1.45}
 .yhep{display:flex;justify-content:center;width:100%;margin-top:16px;text-decoration:none}
 .yr{margin:0;padding:16px 0;border-bottom:1px solid #E3D8C7;display:flex;flex-direction:column;gap:10px}
-.yr q{font-family:"Young Serif",Georgia,serif;font-size:17px;line-height:1.32;quotes:none;color:#1A2142}
+.yr q{font-family:"Young Serif",Georgia,serif;font-size:15px;line-height:1.38;quotes:none;color:#1A2142}
 .yr figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .yr .dog,.yone .dog{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#2E6B4F}
 .yl{margin-top:4px}
 .yone{margin:20px 16px 0;padding:18px;border-radius:20px;background:#FFFDF9}
 .yone .tirnak{display:block;height:20px;font-family:"Young Serif",Georgia,serif;font-size:36px;line-height:.7;color:#1A2142;opacity:.35}
-.yone q{display:block;margin-top:4px;font-family:"Young Serif",Georgia,serif;font-size:21px;line-height:1.28;quotes:none;color:#1A2142}
+.yone q{display:block;margin-top:4px;font-family:"Young Serif",Georgia,serif;font-size:18px;line-height:1.32;quotes:none;color:#1A2142}
 .yone figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;font-size:13px}
 .yara{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 0;font-size:15px;font-weight:700;color:#1A2142}
 .yara span{font-size:13px;font-weight:500;color:#5C6078}
@@ -582,7 +582,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
   <div class="yapis">
     <span style="position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #2A3260"><img class="kesim" src="{{modelSrc}}" alt="" style="height: 38px; bottom: 4px"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 16px">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{adetName}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 15px; font-weight: 600">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{adetName}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
     <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">Satın al</button>
   </div>
 </div>
@@ -855,5 +855,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7334)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7307)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

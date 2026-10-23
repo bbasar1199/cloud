@@ -50,8 +50,8 @@ TEMA = {
                   ek='.hero-y .bas-y em{font-style:italic;font-weight:500;letter-spacing:-.01em}'),
 }
 # Kullanıcı (18 Eki): "Oradaki (Yön A) tasarım dili daha güzeldi; oradaki yazı fontu… sadece o section'u ve yazı fontunu al." → Ay gümüşü renkleri + Yön A yazı tipi
-TEMA['gumus-a'] = dict(TEMA['gumus'], ad='Ay gümüşü · Yön A yazısı', alt='Gümüş ve lacivert, Bricolage Grotesque + Figtree (Yön A)', fb='"Bricolage Grotesque"', fg='"Figtree"', bk=800, bls='-.035em',
-                       font='family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700',
+TEMA['gumus-a'] = dict(TEMA['gumus'], ad='Ay gümüşü · Yön A yazısı', alt='Gümüş ve lacivert, Bricolage Grotesque + Figtree (Yön A)', fb='"Bricolage Grotesque"', fg='"Figtree"', bk=600, bls='-.025em',
+                       font='family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700',
                        ek='.hero-y .bas-y em{font-weight:500;letter-spacing:-.02em}')
 ANA_TEMA = os.environ.get('U_TEMA', 'gumus-a')
 
@@ -244,8 +244,8 @@ CSS = r"""
 .cetvel{position:relative;flex:none;width:120px;height:30px;border:1.6px solid var(--lac);border-radius:6px;background:repeating-linear-gradient(90deg,var(--lac) 0 1.4px,transparent 1.4px 9px) 5px 0/108px 8px no-repeat}
 .cetvel i{position:absolute;left:5px;right:5px;bottom:5px;height:6px;border-radius:3px;background:var(--v2);transform-origin:0 50%;animation:cetvel 4s var(--ease) infinite}
 @keyframes cetvel{0%{transform:scaleX(.08);opacity:0}15%{opacity:1}60%,85%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
-.gv-ik{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--lac);overflow:hidden}
-.gv-ik svg{width:24px;height:24px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.gv-ik{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lac);overflow:hidden}
+.gv-ik svg{width:20px;height:20px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 .kamyon svg{animation:kamyon 2.6s ease-in-out infinite}
 @keyframes kamyon{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
 .kamyon .yl{stroke-dasharray:3 4;animation:yolak .9s linear infinite}
@@ -686,7 +686,7 @@ GERISI = ("""
   <!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
   <div class="yapis">
     <span class="karo"><img src=\"""" + KES + """\" alt=""></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; color: #fff; font-variant-numeric: tabular-nums"><b style="font-size: 17px">Galaxy USB</b><span style="font-size: 13px; color: var(--acik)">{{adetName}}</span></span>
+    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; color: #fff; font-variant-numeric: tabular-nums"><b style="font-size: 15px; font-weight: 600">Galaxy USB</b><span style="font-size: 13px; color: var(--acik)">{{adetName}}</span></span>
     <button class="btn1 btn-b" type="button" onClick="{{alaGit}}" style="flex: 0 0 140px; width: 140px; min-height: 52px; margin: 0">Satın al</button>
   </div>
 """)

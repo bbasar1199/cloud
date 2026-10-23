@@ -47,7 +47,7 @@ URUN = {
 YON = {
     'af-a': dict(urun='af', dosya='AyFeneri-YonA.dc.html', ad='Liman feneri', alt='Sis grisi + fener amberi; Big Shoulders Display (liman tabelası) + Figtree',
                  v='#F3B562', v2='#875912', zemin='#F1F3F4', cizgi='#DDE2E5', koyu='#101A33', koyu2='#1B2747',
-                 fb='"Big Shoulders Display"', fg='"Figtree"', bk=800, bls='-.005em',
+                 fb='"Big Shoulders Display"', fg='"Figtree"', bk=700, bls='0em',
                  font='family=Big+Shoulders+Display:wght@700;800&family=Figtree:wght@400;500;600;700',
                  ek='.pg .h2{font-size:30px;line-height:.96}.pg .fiyat b{font-size:26px}.pg .al h1{font-size:30px}.hero-y .bas-y{font-size:64px;line-height:.86}.al h1{font-size:40px;line-height:.95}.fiyat b{font-size:36px}'),
     'af-b': dict(urun='af', dosya='AyFeneri-YonB.dc.html', ad='Kıyı masalı', alt='Ay ışığı grisi + amber; Instrument Serif (masal kitabı) + Figtree',
@@ -57,7 +57,7 @@ YON = {
                  ek='.pg .h2{font-size:40px;line-height:.98}.hero-y .bas-y{font-size:54px;line-height:.94}.al h1{font-size:38px}.fiyat b{font-family:var(--fg);font-weight:700;font-size:28px}'),
     'gn-a': dict(urun='gn', dosya='GalaksiNight-YonA.dc.html', ad='Planetaryum', alt='Bulutsu moru; Sora + Manrope',
                  v='#B4A9FF', v2='#5546C9', zemin='#F3F3F8', cizgi='#E0E0EC', koyu='#0E1026', koyu2='#1B1E3F',
-                 fb='"Sora"', fg='"Manrope"', bk=700, bls='-.04em',
+                 fb='"Sora"', fg='"Manrope"', bk=600, bls='-.03em',
                  font='family=Sora:wght@600;700&family=Manrope:wght@400;500;600;700',
                  ek='.hero-y .bas-y{font-size:44px}.pg .al h1{font-size:24px;line-height:1.1}'),
     'gn-b': dict(urun='gn', dosya='GalaksiNight-YonB.dc.html', ad='Gözlemevi', alt='Yıldız mavisi; Archivo geniş (gözlem aleti yazısı)',
@@ -101,8 +101,8 @@ CSS = r"""
 .y-iz .on .yo{transform-origin:10px 10px;animation:don 3s linear infinite}
 
 /* Özellik kutusu küçük hareketleri */
-.mini{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:var(--lac);overflow:hidden}
-.mini svg{width:28px;height:28px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mini{position:relative;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lac);overflow:hidden}
+.mini svg{width:22px;height:22px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 .mini .ayi{fill:var(--v);stroke:none;animation:ayi 3s ease-in-out infinite alternate}
 @keyframes ayi{from{opacity:.55;transform:scale(.9)}to{opacity:1;transform:scale(1.05)}}
 .mini .ayi{transform-origin:14px 14px}

@@ -475,7 +475,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Ürün adı, fiyat ve iri başlıklar küçüldü (23 Ekim, en güncel)
+## Büyük site inceliği: kalınlık ve ikon karoları (23 Ekim, en güncel)
+- Kullanıcı: "Hâlâ biraz büyük geliyor gözüme; mükemmel otursun, tüm kısımlar, tüm section'lar, tüm yazılar büyük olmasın; büyük sitelerin tasarımlarından örnek alabilirsin."
+- Ölçüm (`scratchpad/ref-olc.js`, izleyiciler engelli, sepet/form yok): Hatch Restore 3 (ad 32/500, fiyat 22/500, h2 28), Loftie Lamp (36/400, 17, h2 25-34), Glossier (28/500, 14), Allbirds (24/400), Oura (40/400). Yazı boyumuz onlardan büyük değil; fark kalınlıkta (bizde 700-800) ve dolu lacivert 44-48 px ikon karolarında.
+- Yapılan: USB başlık yazı tipi (Bricolage) 800 → 600 (600 yüklendi), AyFeneri (Big Shoulders) 800 → 700, Galaksi Night (Sora) 700 → 600; fiyatlar 700 → 600 (LunaDream, sade); özellik ikon karosu `.mini` 48 → 36 (ikon 22), güven karosu `.gv-ik` 44 → 36 (ikon 20); alt çubukta ürün adı 17 → 15/600; LunaDream öne çıkan yorum 21 → 18, yorum listesi 17 → 15; dergi kapağı sözcüğü 128 → 104 px.
+- Galeri kapağındaki "Tavanı masala çeviren lamba" yazısı görselin içinde (ürün görseli); CSS ile küçülmez.
+
+## Ürün adı, fiyat ve iri başlıklar küçüldü (23 Ekim)
 - Kullanıcı: "Ürün ismi ve fiyat etiketi kısmı da biraz büyük." + "Kısaca büyük olan, görüntüyü gereksiz yere bozan tüm kısımları kontrol et ve ona göre düzenle." Telefonda 22 px üstü bütün yazılar tarandı (`scratchpad/iri-yazi.js`), tam sayfa görüntülerine bakıldı.
 - Ürün adı: LunaDream/USB/Galaksi Night/sade 28 → 24, AyFeneri (Big Shoulders) 34 → 30; Galaksi Night adı tek satıra indi. Fiyat: USB/Galaksi 30 → 22, AyFeneri 26, sade 24 → 20 (LunaDream 20 kaldı); eski fiyat 16 → 14; rozet 26 → 22 px boy, 12 px.
 - Başlıklar: USB/Galaksi bölüm 28 → 24, AyFeneri 36 → 30; koyu afiş başlıkları ("Masaldan sonra galaksi", "Kutusu hazır", "Avucuna sığar", "Oda karanlık", kapanış) 32-36 → 28-30; 30 gün rakamı 38 → 30; oda kartı 30 → 24; disk adı 28 → 22; AyFeneri "Bir fener, dört iş" maddeleri 26 → 22; LunaDream puan ve 30 gün 32 → 28.
