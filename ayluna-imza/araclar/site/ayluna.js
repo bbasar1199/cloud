@@ -279,7 +279,7 @@
   // Masaüstü yapışkan satın alma çubuğu (eleştirmen önerisi, kullanıcı seçti 19 Eki): sayfanın satın alma butonu
   // ekranın üstünden çıkınca menünün altından iner. Ürün, seçim, kartla al butonu (sayfadaki etiketin aynısı) ve fiyatsız Kapıda bağlantısı.
   // Yalnız transform/opacity; sayaç yok; telefonda görünmez (oradaki yapışkan çubuk sayfanın kendisinde).
-  var cubuk = null, cubukIO = null;
+  var cubuk = null, cubukIO = null, cubukKay = false;
   function anaBtn() { return document.querySelector('#kok .urun-ust .btn-on, #kok .urun-ust .btn1'); }
   function cubukYaz() {
     if (!cubuk) return;
@@ -308,6 +308,16 @@
       if (ac) cubukYaz(); cubuk.classList.toggle('on', ac);
     });
     cubukIO.observe(b);
+    // Buton ilk ekranın altındaysa (23 Eki: özellik kartları satın alma kutusuna geçti) hızlı kaydırmada ya da bağlantıyla atlamada
+    // buton ekrana hiç girmeden geçer, gözlemci tetiklenmez; kaydırmada butonun yerine de bakılır (kare başına bir kez)
+    if (!cubukKay) { cubukKay = true; var bekle = false;
+      window.addEventListener('scroll', function () { if (bekle) return; bekle = true; (window.requestAnimationFrame || setTimeout)(function () { bekle = false; cubukBak(); }); }, { passive: true }); }
+    cubukBak();
+  }
+  function cubukBak() {
+    var b = anaBtn(); if (!cubuk || !cubukIO || !b) return;
+    var ac = b.getBoundingClientRect().bottom < 0;
+    if (ac !== cubuk.classList.contains('on')) { if (ac) cubukYaz(); cubuk.classList.toggle('on', ac); }
   }
 
   // Sepet çekmecesi: sepet.html sayfası iframe'de (aynı sepet bileşeni)

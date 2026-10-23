@@ -423,5 +423,5 @@ def sayfa(u):
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
         h = int(os.environ.get('S_H_' + u, {'af': 7188, 'gn': 7529}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
-        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"', ozler(u)) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
+        open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

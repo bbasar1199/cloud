@@ -824,7 +824,7 @@ SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
     h = int(os.environ.get('U_H', 7595))
-    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"', ozellik(sayfa(ANA_TEMA))) + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
+    open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))
     for no, ad in enumerate(SECENEK, 1):

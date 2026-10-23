@@ -88,6 +88,8 @@ def masa_bayrak(js):
     return js[:j] + MASA_JS + js[j + len('    return {'):]
 
 
+# 23 Eki: imza sayfaları oz vermez (kullanıcı: "emoji benefit neden ürün görsellerinin altında" → "Sağa, fiyatın altına");
+# özellik kartları masaüstünde de satın alma kutusunda, galeri solda yapışkan. oz yolu ileride gerekirse diye duruyor.
 def urun_ust(html, bas, oz=None):
     sol = ''
     if oz:

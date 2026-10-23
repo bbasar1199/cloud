@@ -366,7 +366,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
   // Masaüstü: özellik kartları sol sütunda tek kopya; Gece vitrini kenardan kenara bant ve şerit, yazı altta; 4. ay → 4. oda ortada
   await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.waitForTimeout(800);
-  not(await mp.locator('.sol-oz .sih').count() === 1 && await mp.locator('.sih').count() === 1, 'masaüstü: Sihirli Özellikler galerinin altında, tek kopya');
+  { const r = await mp.evaluate(() => { const s = document.querySelector('#siparis .sih'), g = document.querySelector('.urun-ust>.sahne'); return { tek: document.querySelectorAll('.sih').length, sol: document.querySelectorAll('.sol-oz').length, sag: !!s && !!g && s.getBoundingClientRect().left > g.getBoundingClientRect().right }; });
+    not(r.tek === 1 && r.sol === 0 && r.sag, 'masaüstü: Sihirli Özellikler sağda, satın alma kutusunda fiyatın altında; galeri altı kopya yok (23 Eki)'); }
   await mp.locator('#odalar').scrollIntoViewIfNeeded(); await mp.locator('.vt-ay').nth(3).click(); await mp.waitForTimeout(900);
   { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
       return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });

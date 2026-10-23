@@ -794,5 +794,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7324)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7324)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
