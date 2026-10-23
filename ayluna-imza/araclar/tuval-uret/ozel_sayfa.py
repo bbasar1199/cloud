@@ -47,8 +47,8 @@ ODA = {
 
 CSS = r"""
 /* Ad ve fiyat boyu (eleştirmen: A'da 40/36px büyüktü; kullanıcı daha önce "fiyat çok büyük" demişti) */
-.al h1{font-size:34px}
-.fiyat b{font-size:30px}
+.al h1{font-size:30px}
+.fiyat b{font-size:22px}
 .loox{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:13px;color:var(--soluk)}
 .loox i{font-style:normal;letter-spacing:2px;color:var(--v2)}
 .pk-g .x2{font-size:12px}
@@ -86,7 +86,7 @@ CSS = r"""
 .ay-hale{position:absolute;left:74.6%;top:22.5%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,rgba(230,236,255,.28) 0,rgba(230,236,255,0) 68%);opacity:0;transition:opacity 1s var(--ease) 1.2s}
 .yak.on .ay-hale{opacity:1;animation:hale 4s ease-in-out 2.2s infinite alternate}
 .yak-alt{position:relative;left:auto;right:auto;bottom:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 18px 20px}
-.yak-alt .bas-y{font-size:32px;line-height:.95;color:#fff;margin:0}
+.yak-alt .bas-y{font-size:28px;line-height:.98;color:#fff;margin:0}
 .yak-alt .bas-y span{display:block;transition:color .6s var(--ease)}
 .yak.on .yak-alt .bas-y span:last-child{color:var(--v)}
 .yak-alt small{display:block;margin-top:6px;font-size:13px;color:#C9D0E2}
@@ -98,7 +98,7 @@ CSS = r"""
 .oda-k:nth-child(2) img{animation-delay:-4s}.oda-k:nth-child(3) img{animation-delay:-8s}.oda-k:nth-child(4) img{animation-delay:-12s}
 .oda-k::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,.5) 0,rgba(10,15,31,0) 26%,rgba(10,15,31,0) 54%,rgba(10,15,31,.9) 100%)}
 .oda-k small{position:absolute;left:16px;top:14px;z-index:1;padding:3px 10px;border-radius:999px;background:rgba(10,15,31,.6);font-size:12px;font-weight:700;color:var(--v)}
-.oda-k b{position:absolute;left:16px;right:16px;bottom:40px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:var(--bls);line-height:.95}
+.oda-k b{position:absolute;left:16px;right:16px;bottom:40px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:24px;letter-spacing:var(--bls);line-height:1}
 .oda-k span{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;font-size:14px;color:#D5DBEA}
 
 /* ===== Büyük görsel kart (hediye / avucuna sığar): yazı görselin içinde ===== */
@@ -108,7 +108,7 @@ CSS = r"""
 .buyuk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,0) 40%,rgba(10,15,31,.88) 100%)}
 .buyuk.acik::after{background:linear-gradient(180deg,rgba(26,33,66,0) 45%,rgba(26,33,66,.86) 100%)}
 .buyuk-y{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
-.buyuk-y .bas-y{font-size:36px;line-height:.95;color:#fff}
+.buyuk-y .bas-y{font-size:30px;line-height:.98;color:#fff}
 .buyuk-y p{margin:8px 0 0;font-size:15px;color:#E3E7F2}
 
 /* Netlik halkası: bulanık ve net iki görselin opaklık geçişi (filtre animasyonu yok) */
@@ -291,7 +291,7 @@ def gerisi(u):
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -299,7 +299,7 @@ def gerisi(u):
 
   <footer class="alt-bilgi">
     <div class="px">
-      <h2 class="bas-y" style="font-size: 34px; color: #fff">""" + kapanis + """<span class="n" style="color: var(--v)">.</span></h2>
+      <h2 class="bas-y" style="font-size: 28px; color: #fff">""" + kapanis + """<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span>""" + U.OK + """</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff">""" + E.isaret(48) + """<span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
@@ -422,6 +422,6 @@ def sayfa(u):
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
-        h = int(os.environ.get('S_H_' + u, {'af': 6855, 'gn': 7171}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
+        h = int(os.environ.get('S_H_' + u, {'af': 6722, 'gn': 7047}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
         open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Bütün sitede olağan boyut (23 Ekim, en güncel)
+## Ürün adı, fiyat ve iri başlıklar küçüldü (23 Ekim, en güncel)
+- Kullanıcı: "Ürün ismi ve fiyat etiketi kısmı da biraz büyük." + "Kısaca büyük olan, görüntüyü gereksiz yere bozan tüm kısımları kontrol et ve ona göre düzenle." Telefonda 22 px üstü bütün yazılar tarandı (`scratchpad/iri-yazi.js`), tam sayfa görüntülerine bakıldı.
+- Ürün adı: LunaDream/USB/Galaksi Night/sade 28 → 24, AyFeneri (Big Shoulders) 34 → 30; Galaksi Night adı tek satıra indi. Fiyat: USB/Galaksi 30 → 22, AyFeneri 26, sade 24 → 20 (LunaDream 20 kaldı); eski fiyat 16 → 14; rozet 26 → 22 px boy, 12 px.
+- Başlıklar: USB/Galaksi bölüm 28 → 24, AyFeneri 36 → 30; koyu afiş başlıkları ("Masaldan sonra galaksi", "Kutusu hazır", "Avucuna sığar", "Oda karanlık", kapanış) 32-36 → 28-30; 30 gün rakamı 38 → 30; oda kartı 30 → 24; disk adı 28 → 22; AyFeneri "Bir fener, dört iş" maddeleri 26 → 22; LunaDream puan ve 30 gün 32 → 28.
+- Ana sayfa: slayt 38 → 32, bölüm 28 → 24, "Ay ışığını evine getir" 30 → 26, bülten 24 → 22. Sayfa başlıkları 30 → 28; boş sepet 26 → 22.
+- Masaüstü (`ayluna.css`): ürün bölüm başlığı 36 → 30, ana sayfa slayt 64 → 52, bölüm 40 → 32, ay bloğu 48 → 38, koleksiyon/arama başlığı 48 → 40, alt bilgi başlığı 40 → 34.
+- Bilinçli bırakılanlar: LunaDream dergi kapağındaki dev sözcük (Tak./Çal., 128 px) ve alt bilgideki dev Ayluna yazısı (56 px); kullanıcı isterse küçülür.
+- Pano boyları: GalaxyUSB 7166, AyFeneri 6722, GalaksiNight 7047, Ayluna-Anasayfa 4180, sade ürünler `yukseklik.json`.
+
+## Bütün sitede olağan boyut (23 Ekim)
 - Kullanıcı: "Model seçme kısımları gibi sitenin her yerini kontrol et, düzgün görünsün, boyut olarak büyük olmasın." 31 sayfa telefonda (390) ölçüldü; büyükler LunaDream ölçüsüne çekildi:
   - Galaxy USB, AyFeneri, Galaksi Night (`luna_usb.py` çekirdek): paket kartı 88 → 62 (görsel 60 → 48, ad 17 → 15, fiyat 18 → 16), kurdeleli satın al 68 → 58, satın al 62 → 52, Kapıda 56 → 48, SSS 60 → 52, özellik kartı görseli 48 → 40 (iç boşluk 16 → 12), ürün adı ve bölüm başlığı 32 → 28. AyFeneri (Big Shoulders, yoğun) bölüm başlığı 42 → 36; Galaksi Night ürün adı 34 → 28 (`ozel_yon.py` `ek`).
   - 13 sade ürün (`urun_sade.py`): paket kartı 72 → 60, satın al 62 → 52, Kapıda 56 → 48, SSS 56 → 52, özellik listesi sıkı (14/13 px, ikon 20).

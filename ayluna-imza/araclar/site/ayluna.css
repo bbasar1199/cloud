@@ -147,7 +147,7 @@ img{max-width:100%}
      koyu bölümler kenardan kenara gece bandı (içerik 1136 px), şeritler ızgara, odalar yan yana */
   html[data-ay-tur=urun] .pg>section.koyu,html[data-ay-tur=urun] .pg>section.gece,html[data-ay-tur=urun] .pg>section.vitrin{max-width:none!important;width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:0!important;border-radius:0!important;padding:72px max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
   html[data-ay-tur=urun] .pg>section.koyu .px,html[data-ay-tur=urun] .pg>section.gece .px{padding-left:0!important;padding-right:0!important}
-  html[data-ay-tur=urun] .pg>section .h2,html[data-ay-tur=urun] .pg>section h2.bas-y{font-size:36px!important}
+  html[data-ay-tur=urun] .pg>section .h2,html[data-ay-tur=urun] .pg>section h2.bas-y{font-size:30px!important}
   html[data-ay-tur=urun] .pg>section .h2 br,html[data-ay-tur=urun] .pg>section h2.bas-y br{display:none}
   /* Uzun SSS (9+ soru; 23 Eki LunaDream 12 soruya döndü): masaüstünde 1136 px, iki sütun, bölüm ekrana sığar */
   html[data-ay-tur=urun] .pg>section:has(>div>details.sss:nth-child(9)){max-width:1136px!important;padding-left:0!important;padding-right:0!important}
@@ -291,12 +291,12 @@ img{max-width:100%}
   html[data-ay-tur=ana] .sl::after{background:linear-gradient(90deg,rgba(12,16,39,.9) 0%,rgba(12,16,39,.6) 36%,rgba(12,16,39,0) 64%)}
   html[data-ay-tur=ana] .sl-y{left:64px;right:auto;top:50%;bottom:auto;max-width:440px;transform:translateY(-50%)}
   html[data-ay-tur=ana] .sl-y small{font-size:14px}
-  html[data-ay-tur=ana] .sl-y h2{font-size:64px}
+  html[data-ay-tur=ana] .sl-y h2{font-size:52px}
   html[data-ay-tur=ana] .sl-y p{margin-top:14px;font-size:17px}
   html[data-ay-tur=ana] .sl-y a{min-height:52px;margin-top:26px;padding:0 24px}
   html[data-ay-tur=ana] .ay-iz{left:64px;bottom:36px}
   html[data-ay-tur=ana] .bb{padding:80px 0 0}
-  html[data-ay-tur=ana] .h2{font-size:40px}
+  html[data-ay-tur=ana] .h2{font-size:32px}
   html[data-ay-tur=ana] .bb .h2 br,html[data-ay-tur=ana] .bulten .h2 br{display:none}
   html[data-ay-tur=ana] .yorum-serit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:24px 0 4px;overflow:visible}
   html[data-ay-tur=ana] .yorum-serit>span{display:none}
@@ -314,13 +314,13 @@ img{max-width:100%}
   html[data-ay-tur=ana] .ay-blok{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);margin:80px 0 0}
   html[data-ay-tur=ana] .ay-blok img{height:540px}
   html[data-ay-tur=ana] .ay-blok>div{align-self:center;padding:56px}
-  html[data-ay-tur=ana] .ay-blok h2{font-size:48px}
+  html[data-ay-tur=ana] .ay-blok h2{font-size:38px}
   html[data-ay-tur=ana] .ay-blok p{max-width:440px;font-size:16px}
   html[data-ay-tur=ana] .ay-blok a{display:inline-flex;padding:0 28px}
   html[data-ay-tur=ana] .bulten{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);column-gap:48px;align-items:center;margin:80px 0 0;padding:40px 48px}
   html[data-ay-tur=ana] .bulten>h2,html[data-ay-tur=ana] .bulten>p{grid-column:1}
   html[data-ay-tur=ana] .bulten form{grid-column:2;grid-row:1/3;margin:0}
-  html[data-ay-tur=ana] .bulten .h2{font-size:32px}
+  html[data-ay-tur=ana] .bulten .h2{font-size:28px}
   @media (hover:hover){
     .uk img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
     .uk:hover img{transform:scale(1.04)}
@@ -328,7 +328,7 @@ img{max-width:100%}
   /* Koleksiyon: 4 sütun */
   html[data-ay-tur=koleksiyon] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
   html[data-ay-tur=koleksiyon] .sb{padding:48px 0 0}
-  html[data-ay-tur=koleksiyon] .sb h1{font-size:48px}
+  html[data-ay-tur=koleksiyon] .sb h1{font-size:40px}
   html[data-ay-tur=koleksiyon] .arac{padding:20px 0 0;overflow:visible}
   html[data-ay-tur=koleksiyon] .sirala{padding:16px 0 0;border-bottom:1px solid var(--cizgi,#E3D8C7)}
   html[data-ay-tur=koleksiyon] .izgara{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;padding:24px 0 0}
@@ -337,7 +337,7 @@ img{max-width:100%}
   /* Arama: koleksiyon gibi 4 sütun */
   html[data-ay-tur=arama] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box}
   html[data-ay-tur=arama] .sb{padding:48px 0 0}
-  html[data-ay-tur=arama] .sb h1{font-size:48px}
+  html[data-ay-tur=arama] .sb h1{font-size:40px}
   html[data-ay-tur=arama] .ara{max-width:640px;margin-left:0!important;margin-right:0!important}
   html[data-ay-tur=arama] .oneri,html[data-ay-tur=arama] .sonuc{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
   html[data-ay-tur=arama] .izg{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;margin:20px 0 0}
@@ -345,7 +345,7 @@ img{max-width:100%}
   /* Sepet: solda ürünler ve seçenekler, sağda yapışkan özet */
   html[data-ay-tur=sepet] .pg{max-width:1080px!important;margin-top:32px!important;margin-bottom:64px!important;border-radius:24px;box-shadow:inset 0 0 0 1px #E3D8C7}
   html[data-ay-tur=sepet] .s-ust{height:76px;padding:0 16px 0 32px}
-  html[data-ay-tur=sepet] .s-ust h2{font-size:30px}
+  html[data-ay-tur=sepet] .s-ust h2{font-size:28px}
   html[data-ay-tur=sepet] .s-govde{display:grid;grid-template-columns:minmax(0,1fr) 380px;column-gap:48px;align-items:start;padding:12px 32px 32px}
   html[data-ay-tur=sepet] .s-sol>*,html[data-ay-tur=sepet] .s-sag>*{margin-left:0!important;margin-right:0!important}
   html[data-ay-tur=sepet] .s-sag{position:sticky;top:96px;margin-top:12px;padding:20px 24px 4px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7}
@@ -366,7 +366,7 @@ img{max-width:100%}
   #kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
   #kok .pg>footer.alt-bilgi>.px{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas link" "btn link" "imza imza" "telif telif";column-gap:64px;row-gap:0;align-items:start;padding:0 max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
   /* 5 öğe (23 Eki, masaüstü denetimi: kural 6 öğe varsayıyordu, imza sağa, telif sol yarıya düşüyordu): başlık, buton, bağlantılar, imza, telif */
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:40px!important}
+  #kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:34px!important}
   #kok .pg>footer.alt-bilgi>.px>:nth-child(1) br{display:none}
   #kok .pg>footer.alt-bilgi>.px>:nth-child(2){grid-area:btn;justify-self:start;width:440px!important;max-width:100%;margin-top:24px!important}
   #kok .pg>footer.alt-bilgi>.px>:nth-child(3){grid-area:link;margin-top:0!important}

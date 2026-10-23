@@ -56,7 +56,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .pg button{font:inherit;color:inherit;cursor:pointer}
 .pg a{text-decoration:none}
 .pg button:focus-visible,.pg a:focus-visible,.pg input:focus-visible{outline:2px solid var(--lac);outline-offset:3px}
-.h2{font-size:28px}
+.h2{font-size:24px}
 .h2 .n{color:var(--amber)}
 @keyframes sol{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.09)}}
@@ -82,7 +82,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .sl::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,16,39,0) 38%,rgba(12,16,39,.9) 88%)}
 .sl-y{position:absolute;left:20px;right:20px;bottom:64px;z-index:1}
 .sl-y small{display:block;font-size:13px;font-weight:600;color:#E8DCC8}
-.sl-y h2{margin:6px 0 0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:38px;line-height:1.02;letter-spacing:-.02em}
+.sl-y h2{margin:6px 0 0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1.04;letter-spacing:-.02em}
 .sl-y p{margin:8px 0 0;font-size:15px;color:#D9D4CC}
 .sl.on .sl-y>*{animation:sol .7s var(--ease) both}.sl.on .sl-y p{animation-delay:.08s}.sl.on .sl-y a{animation-delay:.16s}
 .sl-y a{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:14px;padding:0 18px;border-radius:999px;background:#FFFDF9;color:var(--lac);font-size:15px;font-weight:700}
@@ -129,7 +129,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .ay-blok{margin:40px 12px 0;border-radius:24px;overflow:hidden;background:var(--lac);color:#FFFDF9}
 .ay-blok img{display:block;width:100%;height:420px;object-fit:cover;object-position:50% 20%}
 .ay-blok>div{padding:22px 20px 24px}
-.ay-blok h2{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.02em}
+.ay-blok h2{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:26px;line-height:1.05;letter-spacing:-.02em}
 .ay-blok h2 span{color:var(--amber)}
 .ay-blok p{margin:10px 0 0;font-size:15px;color:#C9CEE2}
 .cipler{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
@@ -137,7 +137,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .ay-blok a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;margin-top:18px;border-radius:16px;background:#FFFDF9;color:var(--lac);font-size:15px;font-weight:700}
 /* Bülten */
 .bulten{margin:40px 16px 0;padding:22px 18px;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi)}
-.bulten h2{font-size:24px}
+.bulten h2{font-size:22px}
 .bulten p{margin:6px 0 0;font-size:14px;color:var(--soluk)}
 .bulten form{display:flex;gap:8px;margin-top:14px}
 .bulten input{flex:1;min-width:0;height:50px;padding:0 14px;border:0;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--cizgi);font:inherit;font-size:15px;color:var(--lac)}
@@ -250,5 +250,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4210)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4180)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

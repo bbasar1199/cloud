@@ -25,7 +25,7 @@ body{margin:0;background:#F2F4F8}
 .koyu button:focus-visible,.hero button:focus-visible,.hk button:focus-visible{outline-color:var(--v)}
 .px{padding-left:16px;padding-right:16px}
 .bas-y{font-family:var(--fb);font-weight:var(--bk);letter-spacing:var(--bls);line-height:1;margin:0;text-wrap:balance;font-optical-sizing:auto}
-.h2{font-size:28px}
+.h2{font-size:24px}
 .bas-y .n{color:var(--v2)}
 .koyu{background:var(--koyu);color:#EEF2FA}
 .koyu .bas-y .n{color:var(--v)}
@@ -103,12 +103,12 @@ body{margin:0;background:#F2F4F8}
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
-.al h1{font-size:28px}
-.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin:14px 0 0;font-variant-numeric:tabular-nums}
-.fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.03em;line-height:1;animation:sol .7s var(--ease) .15s both}
-.fiyat s{position:relative;font-size:16px;color:var(--soluk);text-decoration:none}
+.al h1{font-size:24px}
+.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;font-variant-numeric:tabular-nums}
+.fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;line-height:1;animation:sol .7s var(--ease) .15s both}
+.fiyat s{position:relative;font-size:14px;color:var(--soluk);text-decoration:none}
 .fiyat s::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:var(--soluk);transform-origin:0 50%;animation:dol .6s var(--ease) .55s both}
-.rozet{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:13px;font-weight:700;animation:pop .5s var(--ease) .85s both}
+.rozet{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;animation:pop .5s var(--ease) .85s both}
 @keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
 
 /* Birleşik çizgili kutu (Yön A): özellikler ve güven aynı kalıpta; kart yığını yok */
@@ -335,7 +335,7 @@ body{margin:0;background:#F2F4F8}
 .sk:nth-child(2) img{animation-delay:-4s}.sk:nth-child(3) img{animation-delay:-8s}.sk:nth-child(4) img{animation-delay:-12s}
 @keyframes suz{from{transform:scale(1) translateX(-2%)}to{transform:scale(1.06) translateX(2%)}}
 .sk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,54,0) 55%,rgba(20,26,54,.88) 100%)}
-.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:28px;letter-spacing:-.03em;color:#fff}
+.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;color:#fff}
 .sk span{position:absolute;left:16px;bottom:14px;z-index:1;font-size:13px;color:#D5DBEA}
 
 /* 12 disk: seçilen disk tavana düşer; kendiliğinden sırayla gezer, dokununca durur. Yazı görselin içinde. */
@@ -372,7 +372,7 @@ body{margin:0;background:#F2F4F8}
 .hk-git.geri{left:0;width:35%}.hk-git.ileri{right:0;width:65%}
 .hk-y{position:absolute;left:16px;right:16px;bottom:18px;z-index:3;pointer-events:none;opacity:0;visibility:hidden}
 .hk-y.on{opacity:1;visibility:visible}
-.hk-y .bas-y{max-width:300px;font-size:34px;line-height:1}
+.hk-y .bas-y{max-width:300px;font-size:28px;line-height:1.02}
 .hk-y p{margin:8px 0 0;font-size:15px;color:#D5DBEA}
 .hk-y.on .bas-y,.hk-y.on p,.hk-y.on .hk-disk{animation:sol .7s var(--ease) both}
 .hk-y.on p{animation-delay:.1s}.hk-y.on .hk-disk{animation-delay:.2s}
@@ -404,7 +404,7 @@ body{margin:0;background:#F2F4F8}
 .ot-h{position:relative;width:112px;height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .ot-h i{position:absolute;left:55px;top:2px;width:2px;height:9px;border-radius:1px;background:var(--v);transform-origin:1px 54px;opacity:.18;animation:gun 6s linear infinite}
 @keyframes gun{0%{opacity:.18}4%,66%{opacity:1}82%,100%{opacity:.18}}
-.ot-h b{font-family:var(--fb);font-weight:var(--bk);font-size:38px;letter-spacing:-.04em}
+.ot-h b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.04em}
 .ot-h small{margin-top:2px;font-size:12px;font-weight:700;color:var(--v)}
 .otuz>span:last-child b{display:block;font-size:17px;line-height:1.25}
 .otuz>span:last-child span{display:block;margin-top:4px;font-size:14px;color:var(--acik)}
@@ -513,10 +513,10 @@ body{margin:0;background:#F2F4F8}
 .hzm-f .fn{fill:var(--v);stroke:var(--v)}
 .hzm-h{position:absolute;left:44px;top:50%;width:420px;height:150px;margin-top:-75px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(243,181,98,.6),rgba(243,181,98,.05) 80%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);transition:transform .9s var(--ease);z-index:1}
 .hzm.k0 .hzm-h{transform:rotate(-33deg)}.hzm.k1 .hzm-h{transform:rotate(-11deg)}.hzm.k2 .hzm-h{transform:rotate(11deg)}.hzm.k3 .hzm-h{transform:rotate(33deg)}
-.hzm li{position:relative;z-index:2;padding:16px 0;border-bottom:1px solid rgba(238,242,250,.1);opacity:.42;transition:opacity .5s var(--ease)}
+.hzm li{position:relative;z-index:2;padding:13px 0;border-bottom:1px solid rgba(238,242,250,.1);opacity:.42;transition:opacity .5s var(--ease)}
 .hzm li:last-child{border-bottom:0}
 .hzm li.on{opacity:1}
-.hzm li b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:26px;letter-spacing:var(--bls);line-height:1}
+.hzm li b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1}
 .hzm li span{display:block;margin-top:4px;font-size:14px;color:#C9D0E2}
 .hzm li button{position:absolute;inset:0;width:100%;border:0;background:transparent}
 
@@ -641,11 +641,11 @@ body{margin:0;background:#F2F4F8}
 .gece small{display:block;font-size:13px;font-weight:700;color:var(--v)}
 .gece b{display:block;margin-top:2px;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1.1}
 .gece span>span{display:block;margin-top:6px;font-size:14px;color:#C9CEE6}
-.hero-y .bas-y{font-size:44px}.pg .al h1{font-size:28px;line-height:1.08}
+.hero-y .bas-y{font-size:44px}.pg .al h1{font-size:24px;line-height:1.1}
 
 /* Ad ve fiyat boyu (eleştirmen: A'da 40/36px büyüktü; kullanıcı daha önce "fiyat çok büyük" demişti) */
-.al h1{font-size:34px}
-.fiyat b{font-size:30px}
+.al h1{font-size:30px}
+.fiyat b{font-size:22px}
 .loox{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:13px;color:var(--soluk)}
 .loox i{font-style:normal;letter-spacing:2px;color:var(--v2)}
 .pk-g .x2{font-size:12px}
@@ -683,7 +683,7 @@ body{margin:0;background:#F2F4F8}
 .ay-hale{position:absolute;left:74.6%;top:22.5%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,rgba(230,236,255,.28) 0,rgba(230,236,255,0) 68%);opacity:0;transition:opacity 1s var(--ease) 1.2s}
 .yak.on .ay-hale{opacity:1;animation:hale 4s ease-in-out 2.2s infinite alternate}
 .yak-alt{position:relative;left:auto;right:auto;bottom:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 18px 20px}
-.yak-alt .bas-y{font-size:32px;line-height:.95;color:#fff;margin:0}
+.yak-alt .bas-y{font-size:28px;line-height:.98;color:#fff;margin:0}
 .yak-alt .bas-y span{display:block;transition:color .6s var(--ease)}
 .yak.on .yak-alt .bas-y span:last-child{color:var(--v)}
 .yak-alt small{display:block;margin-top:6px;font-size:13px;color:#C9D0E2}
@@ -695,7 +695,7 @@ body{margin:0;background:#F2F4F8}
 .oda-k:nth-child(2) img{animation-delay:-4s}.oda-k:nth-child(3) img{animation-delay:-8s}.oda-k:nth-child(4) img{animation-delay:-12s}
 .oda-k::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,.5) 0,rgba(10,15,31,0) 26%,rgba(10,15,31,0) 54%,rgba(10,15,31,.9) 100%)}
 .oda-k small{position:absolute;left:16px;top:14px;z-index:1;padding:3px 10px;border-radius:999px;background:rgba(10,15,31,.6);font-size:12px;font-weight:700;color:var(--v)}
-.oda-k b{position:absolute;left:16px;right:16px;bottom:40px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:var(--bls);line-height:.95}
+.oda-k b{position:absolute;left:16px;right:16px;bottom:40px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:24px;letter-spacing:var(--bls);line-height:1}
 .oda-k span{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;font-size:14px;color:#D5DBEA}
 
 /* ===== Büyük görsel kart (hediye / avucuna sığar): yazı görselin içinde ===== */
@@ -705,7 +705,7 @@ body{margin:0;background:#F2F4F8}
 .buyuk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,0) 40%,rgba(10,15,31,.88) 100%)}
 .buyuk.acik::after{background:linear-gradient(180deg,rgba(26,33,66,0) 45%,rgba(26,33,66,.86) 100%)}
 .buyuk-y{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
-.buyuk-y .bas-y{font-size:36px;line-height:.95;color:#fff}
+.buyuk-y .bas-y{font-size:30px;line-height:.98;color:#fff}
 .buyuk-y p{margin:8px 0 0;font-size:15px;color:#E3E7F2}
 
 /* Netlik halkası: bulanık ve net iki görselin opaklık geçişi (filtre animasyonu yok) */
@@ -843,7 +843,7 @@ body{margin:0;background:#F2F4F8}
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -851,7 +851,7 @@ body{margin:0;background:#F2F4F8}
 
   <footer class="alt-bilgi">
     <div class="px">
-      <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanın <br>gökyüzü olsun<span class="n" style="color: var(--v)">.</span></h2>
+      <h2 class="bas-y" style="font-size: 28px; color: #fff">Bu gece tavanın <br>gökyüzü olsun<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
@@ -867,7 +867,7 @@ body{margin:0;background:#F2F4F8}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7171}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7047}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {

@@ -108,7 +108,7 @@ CSS = r""".pg{background:#F6F1E9}
 .ikon{width:48px;height:48px;display:grid;place-items:center;background:transparent;border:0;color:inherit;cursor:pointer}
 .yildiz{position:relative;display:inline-block;letter-spacing:1px;color:#D6CAB6;line-height:1}
 .yildiz i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#F2A65A;font-style:normal}
-.dev{font-family:"Young Serif",Georgia,serif;font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
+.dev{font-family:"Young Serif",Georgia,serif;font-size:24px;line-height:1.05;letter-spacing:-.02em;margin:4px 0 0;color:#1A2142;white-space:nowrap}
 .dev span,.h2 span.n{color:#F2A65A}
 .cip:active{transform:scale(.985)}
 .kesim{position:absolute;left:50%;bottom:4px;height:44px;width:auto;max-width:46px;transform:translateX(-50%)}
@@ -322,7 +322,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .muhur g circle{fill:#F6F1E9;stroke:#1A2142;stroke-width:2.6}
 .muhur g path{fill:#F2A65A}
 .muhur-say{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#1A2142}
+.otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1;letter-spacing:-.03em;color:#1A2142}
 .muhur-say span{margin-top:2px;font-size:12px;font-weight:700;color:#1A2142}
 .sss{border-bottom:1.5px solid #E3D8C7}
 .sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:700;font-size:15px;cursor:pointer}
@@ -412,7 +412,7 @@ YORUM_HTML = ("""  <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "
        puan → mesajlar şeridi → öne çıkan tek yorum → fotoğraf şeridi → kısa yorum listesi → hepsini oku (mesajlar karışık şeritte kaybolduğu için ayrıldı).
        Konu çipleri ve ayrı "Sizden gelen mesajlar" bölümü kalktı. -->
   <section id="yorumlar" class="bolum gir yorum-b">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 28px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <!-- Kullanıcı (19 Eki): "WP mesajları falan gidiyor" → mesajlar karışık şeritte kayboluyordu; bölümün başında kendi başlıklı şeridi,
          fotoğraflar ayrı ve küçük şeritte -->
     <p class="px yara">Sizden gelen mesajlar<span class="dokun">Dokun, büyüsün</span>""" + serit_ok('mesajlar') + """</p>

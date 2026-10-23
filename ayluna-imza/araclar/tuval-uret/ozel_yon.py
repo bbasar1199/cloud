@@ -49,7 +49,7 @@ YON = {
                  v='#F3B562', v2='#875912', zemin='#F1F3F4', cizgi='#DDE2E5', koyu='#101A33', koyu2='#1B2747',
                  fb='"Big Shoulders Display"', fg='"Figtree"', bk=800, bls='-.005em',
                  font='family=Big+Shoulders+Display:wght@700;800&family=Figtree:wght@400;500;600;700',
-                 ek='.pg .h2{font-size:36px;line-height:.94}.hero-y .bas-y{font-size:64px;line-height:.86}.al h1{font-size:40px;line-height:.95}.fiyat b{font-size:36px}'),
+                 ek='.pg .h2{font-size:30px;line-height:.96}.pg .fiyat b{font-size:26px}.pg .al h1{font-size:30px}.hero-y .bas-y{font-size:64px;line-height:.86}.al h1{font-size:40px;line-height:.95}.fiyat b{font-size:36px}'),
     'af-b': dict(urun='af', dosya='AyFeneri-YonB.dc.html', ad='Kıyı masalı', alt='Ay ışığı grisi + amber; Instrument Serif (masal kitabı) + Figtree',
                  v='#EAB25C', v2='#82570F', zemin='#EEF0F4', cizgi='#DADFE8', koyu='#0F1630', koyu2='#1A2342',
                  fb='"Instrument Serif"', fg='"Figtree"', bk=400, bls='-.015em',
@@ -59,7 +59,7 @@ YON = {
                  v='#B4A9FF', v2='#5546C9', zemin='#F3F3F8', cizgi='#E0E0EC', koyu='#0E1026', koyu2='#1B1E3F',
                  fb='"Sora"', fg='"Manrope"', bk=700, bls='-.04em',
                  font='family=Sora:wght@600;700&family=Manrope:wght@400;500;600;700',
-                 ek='.hero-y .bas-y{font-size:44px}.pg .al h1{font-size:28px;line-height:1.08}'),
+                 ek='.hero-y .bas-y{font-size:44px}.pg .al h1{font-size:24px;line-height:1.1}'),
     'gn-b': dict(urun='gn', dosya='GalaksiNight-YonB.dc.html', ad='Gözlemevi', alt='Yıldız mavisi; Archivo geniş (gözlem aleti yazısı)',
                  v='#9CC3FF', v2='#2D58B3', zemin='#F2F4F7', cizgi='#DEE3EA', koyu='#0C1428', koyu2='#17223F',
                  fb='"Archivo"', fg='"Archivo"', bk=800, bls='-.02em',
@@ -150,10 +150,10 @@ CSS = r"""
 .hzm-f .fn{fill:var(--v);stroke:var(--v)}
 .hzm-h{position:absolute;left:44px;top:50%;width:420px;height:150px;margin-top:-75px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(243,181,98,.6),rgba(243,181,98,.05) 80%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);transition:transform .9s var(--ease);z-index:1}
 .hzm.k0 .hzm-h{transform:rotate(-33deg)}.hzm.k1 .hzm-h{transform:rotate(-11deg)}.hzm.k2 .hzm-h{transform:rotate(11deg)}.hzm.k3 .hzm-h{transform:rotate(33deg)}
-.hzm li{position:relative;z-index:2;padding:16px 0;border-bottom:1px solid rgba(238,242,250,.1);opacity:.42;transition:opacity .5s var(--ease)}
+.hzm li{position:relative;z-index:2;padding:13px 0;border-bottom:1px solid rgba(238,242,250,.1);opacity:.42;transition:opacity .5s var(--ease)}
 .hzm li:last-child{border-bottom:0}
 .hzm li.on{opacity:1}
-.hzm li b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:26px;letter-spacing:var(--bls);line-height:1}
+.hzm li b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1}
 .hzm li span{display:block;margin-top:4px;font-size:14px;color:#C9D0E2}
 .hzm li button{position:absolute;inset:0;width:100%;border:0;background:transparent}
 

@@ -126,7 +126,7 @@ CSS = r"""
 .koyu button:focus-visible,.hero button:focus-visible,.hk button:focus-visible{outline-color:var(--v)}
 .px{padding-left:16px;padding-right:16px}
 .bas-y{font-family:var(--fb);font-weight:var(--bk);letter-spacing:var(--bls);line-height:1;margin:0;text-wrap:balance;font-optical-sizing:auto}
-.h2{font-size:28px}
+.h2{font-size:24px}
 .bas-y .n{color:var(--v2)}
 .koyu{background:var(--koyu);color:#EEF2FA}
 .koyu .bas-y .n{color:var(--v)}
@@ -204,12 +204,12 @@ CSS = r"""
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
-.al h1{font-size:28px}
-.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin:14px 0 0;font-variant-numeric:tabular-nums}
-.fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.03em;line-height:1;animation:sol .7s var(--ease) .15s both}
-.fiyat s{position:relative;font-size:16px;color:var(--soluk);text-decoration:none}
+.al h1{font-size:24px}
+.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;font-variant-numeric:tabular-nums}
+.fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;line-height:1;animation:sol .7s var(--ease) .15s both}
+.fiyat s{position:relative;font-size:14px;color:var(--soluk);text-decoration:none}
 .fiyat s::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:var(--soluk);transform-origin:0 50%;animation:dol .6s var(--ease) .55s both}
-.rozet{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:13px;font-weight:700;animation:pop .5s var(--ease) .85s both}
+.rozet{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;animation:pop .5s var(--ease) .85s both}
 @keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
 
 /* Birleşik çizgili kutu (Yön A): özellikler ve güven aynı kalıpta; kart yığını yok */
@@ -410,7 +410,7 @@ CSS = r"""
 .sk:nth-child(2) img{animation-delay:-4s}.sk:nth-child(3) img{animation-delay:-8s}.sk:nth-child(4) img{animation-delay:-12s}
 @keyframes suz{from{transform:scale(1) translateX(-2%)}to{transform:scale(1.06) translateX(2%)}}
 .sk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,54,0) 55%,rgba(20,26,54,.88) 100%)}
-.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:28px;letter-spacing:-.03em;color:#fff}
+.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;color:#fff}
 .sk span{position:absolute;left:16px;bottom:14px;z-index:1;font-size:13px;color:#D5DBEA}
 
 /* 12 disk: seçilen disk tavana düşer; kendiliğinden sırayla gezer, dokununca durur. Yazı görselin içinde. */
@@ -447,7 +447,7 @@ CSS = r"""
 .hk-git.geri{left:0;width:35%}.hk-git.ileri{right:0;width:65%}
 .hk-y{position:absolute;left:16px;right:16px;bottom:18px;z-index:3;pointer-events:none;opacity:0;visibility:hidden}
 .hk-y.on{opacity:1;visibility:visible}
-.hk-y .bas-y{max-width:300px;font-size:34px;line-height:1}
+.hk-y .bas-y{max-width:300px;font-size:28px;line-height:1.02}
 .hk-y p{margin:8px 0 0;font-size:15px;color:#D5DBEA}
 .hk-y.on .bas-y,.hk-y.on p,.hk-y.on .hk-disk{animation:sol .7s var(--ease) both}
 .hk-y.on p{animation-delay:.1s}.hk-y.on .hk-disk{animation-delay:.2s}
@@ -479,7 +479,7 @@ CSS = r"""
 .ot-h{position:relative;width:112px;height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .ot-h i{position:absolute;left:55px;top:2px;width:2px;height:9px;border-radius:1px;background:var(--v);transform-origin:1px 54px;opacity:.18;animation:gun 6s linear infinite}
 @keyframes gun{0%{opacity:.18}4%,66%{opacity:1}82%,100%{opacity:.18}}
-.ot-h b{font-family:var(--fb);font-weight:var(--bk);font-size:38px;letter-spacing:-.04em}
+.ot-h b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.04em}
 .ot-h small{margin-top:2px;font-size:12px;font-weight:700;color:var(--v)}
 .otuz>span:last-child b{display:block;font-size:17px;line-height:1.25}
 .otuz>span:last-child span{display:block;margin-top:4px;font-size:14px;color:var(--acik)}
@@ -667,7 +667,7 @@ GERISI = ("""
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -675,7 +675,7 @@ GERISI = ("""
 
   <footer class="alt-bilgi">
     <div class="px">
-      <h2 class="bas-y" style="font-size: 34px; color: #fff">Bu gece tavanda <br>galaksi olsun<span class="n" style="color: var(--v)">.</span></h2>
+      <h2 class="bas-y" style="font-size: 28px; color: #fff">Bu gece tavanda <br>galaksi olsun<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span><small style="color: var(--koyu)">Kartla %5 indirim dahil</small></span>""" + OK + """</button>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
       <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff">""" + E.isaret(48) + """<span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
@@ -817,7 +817,7 @@ def ozellik(h):
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7268))
+    h = int(os.environ.get('U_H', 7166))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))

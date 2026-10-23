@@ -34,13 +34,13 @@ CSS = SY.CSS + r"""
 .g-alt .lit{background:#FFFDF9}
 /* Ad, fiyat */
 .bilgi{padding:18px 16px 0}
-.bilgi h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1.08;letter-spacing:-.02em;color:var(--lac)}
+.bilgi h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.08;letter-spacing:-.02em;color:var(--lac)}
 .bilgi h1 span{color:var(--v)}
 .bilgi .kisa{margin:8px 0 0;font-size:15px;color:var(--soluk)}
-.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:14px 0 0;font-variant-numeric:tabular-nums;color:var(--lac)}
-.fiyat b{font-size:24px;font-weight:700;letter-spacing:-.01em}
-.fiyat s{font-size:15px;color:var(--soluk)}
-.fiyat em{padding:3px 9px;border-radius:999px;background:var(--lac);color:#fff;font-style:normal;font-size:12px;font-weight:700}
+.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;font-variant-numeric:tabular-nums;color:var(--lac)}
+.fiyat b{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.fiyat s{font-size:14px;color:var(--soluk)}
+.fiyat em{padding:2px 8px;border-radius:999px;background:var(--lac);color:#fff;font-style:normal;font-size:12px;font-weight:700}
 .fiyat em.yok{background:#E9E2D6;color:var(--lac)}
 /* Özellikler */
 .oz-l{list-style:none;margin:16px 16px 0;padding:2px 14px;border-radius:16px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi)}

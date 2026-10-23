@@ -22,7 +22,7 @@ OK = A.OK
 
 CSS = A.CSS + r"""
 .sb{padding:28px 16px 0}
-.sb h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.02em;color:var(--lac)}
+.sb h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.02em;color:var(--lac)}
 .sb h1 span{color:var(--amber)}
 .sb p{margin:8px 0 0;font-size:15px;color:var(--soluk)}
 .kart-k{margin:16px 16px 0;padding:18px;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);color:var(--lac)}

@@ -88,7 +88,7 @@ CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,san
 .urun-fiyat s{display:block;font-size:12px;color:var(--soluk)}
 .bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
 .bos-s>svg{display:block;margin:0 auto 10px}
-.bos-s h3{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:26px}
+.bos-s h3{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px}
 .bos-s p{margin:6px 0 0;font-size:15px;color:var(--soluk)}
 @media (prefers-reduced-motion:reduce){.pg *{animation:none!important;transition:none!important}}
 """
