@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS
 import sihirli2_varyant as S2
 import ozellik4_varyant as OZ4
 
@@ -558,7 +558,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Diğer ürünler -->
   <section class="bolum gir">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="h2">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: #5C6078">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 14px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4">
         <a class="kart" href="#"><span style="position: relative; aspect-ratio: 1 / 1; background: #F1E8DA; overflow: hidden"><img src="{{u.src}}" alt="{{u.n}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><span style="position: absolute; left: 8px; top: 8px; font-size: 12px; font-weight: 700; background: #FFFDF9; color: #A05A1C; padding: 2px 8px; border-radius: 999px">{{u.pct}}</span></sc-if></span><span style="padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 14px; font-weight: 600; line-height: 1.25; min-height: 35px">{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="font-size: 14px">{{u.price}}</b><s style="font-size: 12px; color: #5C6078">{{u.old}}</s></span></span></a>
@@ -711,7 +711,7 @@ JS = """class Component extends DCLogic {
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });
     // Görseller yazısız ürün kesimleri (23 Eki): mağaza afişlerindeki "153.748 yıldız detayı", "1 Yıl Garanti" gibi teyitsiz yazılar kartta yok (canvas/capraz)
-    var PR = [
+""" + KAY_JS + """    var PR = [
       { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: '18992c2375dc098b76ce965f442b1fac' },
       { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '8dec4fb3201c17c5af97a727f760fc22' },
       { n: 'Astronot Oda Nemlendirici', p: 799, c: 0, id: 'd8080b6820c271f87bc04c6e4740f45e' },
@@ -780,7 +780,7 @@ JS = """class Component extends DCLogic {
       yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
-      odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq,
+      odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1), faq: faq,
       urs: URS
     };
   }
@@ -794,5 +794,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7324)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7324)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

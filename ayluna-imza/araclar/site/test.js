@@ -301,6 +301,18 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       const dolu = await p2.evaluate(() => +getComputedStyle(document.querySelector('.urs-s .dolu')).opacity);
       if (!(r.yer && r.n === 4 && r.satir >= 48 && dolu > .9 && !r.tekrar.length && r.sss >= 5 && !r.kutu)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { dolu }))); }
     not(!kotu.length, 'diğer 14 ürün: teslim altında 4 soru, açılınca dolunay, SSS\'de tekrar yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k2.close(); }
+  // "Odanın geri kalanı için" (23 Eki, kullanıcı: "burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor"): masaüstünde tek satır kayar,
+  // oklar kaydırır; telefonda oklar gizli
+  { const kotu = [], k3 = await b.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' }), p3 = await k3.newPage();
+    for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor']) {
+      await p3.goto(KOK + f + '.html'); await p3.waitForTimeout(400);
+      const s = p3.locator('.noscroll:has(> .kart)').first(); await s.scrollIntoViewIfNeeded();
+      const r = await s.evaluate(e => ({ satir: new Set([...e.querySelectorAll('.kart')].map(x => Math.round(x.getBoundingClientRect().top))).size, ok: getComputedStyle(e.closest('section').querySelector('.serit-ok')).display }));
+      await p3.locator('.serit-ok button').nth(1).click(); await p3.waitForTimeout(300);
+      const sol = await s.evaluate(e => e.scrollLeft);
+      if (!(r.satir === 1 && r.ok === 'flex' && sol > 0)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { sol }))); }
+    const tel = await pg.evaluate(() => getComputedStyle(document.querySelector('.serit-ok')).display);
+    not(!kotu.length && tel === 'none', 'masaüstü: diğer ürünler tek satır kayar, oklar kaydırır; telefonda ok yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k3.close(); }
   // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));

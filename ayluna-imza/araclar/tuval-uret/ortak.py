@@ -58,6 +58,15 @@ KARGO_JS = """function KARGO(ms) {
     }"""
 
 
+# "Odanın geri kalanı için" şeridi (23 Eki, kullanıcı: "burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor"): masaüstünde de
+# tek satır kayar (ayluna.css); oklar yalnız masaüstünde görünür, telefonda şerit parmakla kaydırılır. Şablonda durur ki her saniyelik çizimde silinmesin.
+SERIT_OK_CSS = '.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok{display:none}\n'
+SERIT_OK = ('<span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
+            '<button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span>')
+KAY_JS = """function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), b = t && t.closest && t.closest('section'), s = b && b.querySelector('.noscroll');
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+"""
+
 # Ürün galerisi Shopify'daki gibi (kullanıcı, 19 Eki: "fotoğraf kısmını Shopify'daki ile aynı şekle getir"): canlı sıra, kare görsel.
 # Liste araclar/canli_galeri.py ile üretilir (uydurma yorum, sağlık iddiası, kutuda olmayan şey çıkarılır).
 def canli_galeri(handle):

@@ -156,10 +156,17 @@ img{max-width:100%}
   /* Sizden gelen mesajlar (diğer ürünler): masaüstünde de tek satır kayar */
   html[data-ay-tur=urun] .pg>section .mkarma{overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
   html[data-ay-tur=urun] .mkarma button{height:400px}
-  /* Diğer ürünler: 1136 px, altı sütun ızgara */
+  /* Diğer ürünler (23 Eki, kullanıcı: "burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor"): 1136 px, tek satır kayan şerit + oklar (ızgara değil) */
   html[data-ay-tur=urun] .pg>section:has(.kart){max-width:1136px!important}
-  html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart){display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px 16px!important}
-  html[data-ay-tur=urun] .kart{min-width:0}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart){display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:16px!important;padding:4px 0 8px!important;scrollbar-width:none}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart)::-webkit-scrollbar{display:none}
+  html[data-ay-tur=urun] .kart{flex:0 0 204px!important;min-width:0}
+  html[data-ay-tur=urun] .serit-ok{display:flex;gap:8px}
+  html[data-ay-tur=urun] .serit-ok button{display:grid;place-items:center;width:48px;height:48px;padding:0;border:1.5px solid #1A2142;border-radius:50%;background:transparent;color:#1A2142;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+  html[data-ay-tur=urun] .serit-ok button:hover{transform:translateY(-1px)}
+  html[data-ay-tur=urun] .serit-ok button:active{transform:scale(.96)}
+  html[data-ay-tur=urun] .serit-ok button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  html[data-ay-tur=urun] .serit-ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   /* LunaDream · Odası böyle görünecek (Gece vitrini, 21 Eki): şerit kenardan kenara; ortadaki kart 360×480, yanlardakiler ekran kenarına kadar
      görünür (kesik sütun kenarı yok); yazı ve aylar altta ortada */
   html[data-ay-tur=urun] .vitrin>.h2{padding:0!important;text-align:center}

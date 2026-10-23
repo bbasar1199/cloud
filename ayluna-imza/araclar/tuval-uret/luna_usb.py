@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS
 import luna_e as E
 import luna_usb_yon as Y
 import urun_soru as US
@@ -674,7 +674,7 @@ GERISI = ("""
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -711,7 +711,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + MESAJ_CSS, t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS, t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -786,7 +786,7 @@ JS = """class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün fotoğrafıyla bize yaz. [Değişim süreci teyit edilecek.]' }
     ];
-    var PR = [
+""" + KAY_JS + """    var PR = [
       { n: 'LunaDream Gece Lambası', p: 1699.99, c: 1999, id: 'e02351b3be4a1c555c5d760d0bbda723' },
       { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '3df93f38bf4441cdf4dc64b625a1e22d' },
       { n: 'Galaksi Ambiyans Işığı', p: 1499, c: 2898, id: '9e6102bb76acbfeb101fca8e2fc1024e' },
@@ -808,7 +808,7 @@ JS = """class Component extends DCLogic {
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd',
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
-      alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length
+      alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1)
     };
   }
 }"""

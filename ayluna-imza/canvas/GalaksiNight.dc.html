@@ -737,6 +737,7 @@ body{margin:0;background:#F2F4F8}
 .urs-s[open] .urs-ok{transform:rotate(180deg)}
 .urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:var(--soluk,#5C6078)}
 @media (prefers-reduced-motion:reduce){.urs-ay .evre,.urs-ok{transition:none}}
+.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok{display:none}
 
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
@@ -850,7 +851,7 @@ body{margin:0;background:#F2F4F8}
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -922,6 +923,8 @@ class Component extends DCLogic {
     var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
+function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), b = t && t.closest && t.closest('section'), s = b && b.querySelector('.noscroll');
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
     var PR = [["LunaDream Gece Lambası", 1699.99, 1999, "/_blob/f4f724c3d02ba1e40788a962f9e3fe77"], ["Galaxy USB Projektör", 1599, 1999, "/_blob/88c17ac1f221cab147f23e1a46b7f55e"], ["Ayluna AyFeneri", 1649.99, 2499, "/_blob/d326933d74a22adce90d7f6ac3eabf43"], ["Galaksi Ambiyans Işığı", 1499, 2898, "/_blob/9e6102bb76acbfeb101fca8e2fc1024e"], ["Yıldız Işığı Nemlendirici", 849.99, 1099, "/_blob/c91c0730a3e7924eb99ad263ae4ea6df"], ["Ayluna Kum Saati Lamba", 799, 999, "/_blob/0307a2c24e8297579b82099467f001d9"]];
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
     var _mk = this;
@@ -938,7 +941,7 @@ class Component extends DCLogic {
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
       yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
-      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], shop: shop, shopCount: PR.length
+      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, gökyüzü diskleri [teyit: 12 mi, Ay diskiyle 13 mü?], USB-C güç kablosu, kullanım kılavuzu. USB adaptör [teyit]."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Kartla mı ödesem, kapıda mı?", "a": "Kartla ödersen %5 indirim alırsın. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
     };
   }
 }

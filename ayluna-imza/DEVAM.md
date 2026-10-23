@@ -475,7 +475,14 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Galeri 2. tur + LunaDream sadeleşti (23 Ekim, en güncel)
+## Masaüstü şerit + telefon PDF'i (23 Ekim, en güncel)
+- Kullanıcı: "Index olarak versene bana tasarımı" → `site-tek/index.html` (13,7 MB, bütün site; sayfalar # ile: `#lunadream-gece-lambasi`).
+- "WhatsApp'tan attım, telefonda görünmüyor" → HTML dosyası telefonda JavaScript çalıştırmaz. `site-tek/LunaDream-telefon.pdf` (390 px, 2x, 9 sayfa, 1,2 MB; yapışkan çubuk gizli) üretildi: `scratchpad/pdf-cek.js` ile tam sayfa görüntü + PIL ile sayfalara bölme.
+- (Masaüstü ızgara ekran görüntüsüyle) "Burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor" → `ayluna.css` masaüstü bloğu: `.noscroll:has(>.kart)` tek satır kayar (kart 204 px). Oklar şablonda (`ortak.SERIT_OK`, `KAY_JS`, `SERIT_OK_CSS`; her saniyelik çizimde silinmesin diye çalışma anında eklenmez), yalnız masaüstünde görünür. Bağlı: `luna_e.py`, `luna_usb.py`, `ozel_sayfa.py`. Site testi: 4 sayfada tek satır, ok kaydırır, telefonda ok yok.
+- Site testleri, tema benzetimi HEPSİ TAMAM; Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.21.zip`; tuval Sürüm 146, site Sürüm 38.
+- Kullanıcı sordu: "Emoji benefit neden ürün görsellerinin altında?" Masaüstünde Sihirli kartları 19 Eki kararıyla galerinin altında (sol sütun), telefonda fiyatın altında. Kullanıcının kararı bekleniyor.
+
+## Galeri 2. tur + LunaDream sadeleşti (23 Ekim)
 - Kullanıcı: "Site görsellerini beğenmedim; satış odaklı değil, yorum görseli yapılmamış, çok sönük." 3 yön çizildi (`araclar/gorsel/afis_yon.py`, `canvas/p-gorsel/yon/`); eleştirmen A'yı (gece vitrini) öne aldı (A 7, B 5, C 5) ve karmayı seçti.
 - Yeni galeri 5 kare (`araclar/gorsel/afis_uret.py` → `canvas/p-gorsel/afis-1..5.jpg`): 1 açılış "Tavanı masala çeviren lamba" (Kız, gece, tavanda yansıma, lamba büyük; 3 halka) · 2 yorum "Reklamındaki gibi mi?" (Abdülkerim T., Mehmet C., Handan B.; Loox birebir, düz kart, 36 px) · 3 "Her gece başka bir masal" (disk yayı) · 4 "Uzay Kaşifi erkek modeli" (c-erkek-gece, etiketli robot) · 5 "Kutudan ne çıkıyor?" + güven şeridi (Ücretsiz kargo · 30 gün iade · Kartla %5 indirim; "kapıda ödeme" yazılmaz). Açılış ve Erkek kırpması Real-ESRGAN ile büyütüldü (`canvas/c-gorsel/hd`).
 - Asset'ler: 756460fe…, 447d1a0f…, 992615e3…, 3c0683cd…, 1bf394a6… (`P_GAL`, `blob-yerel.json`). Site testi `PREMIUM` 5.

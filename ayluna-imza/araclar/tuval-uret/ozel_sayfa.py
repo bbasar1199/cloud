@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS
+from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -291,7 +291,7 @@ def gerisi(u):
   </section>
 
   <section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 26px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span>""" + SERIT_OK + """</span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -394,7 +394,7 @@ def js(u):
     var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
-    var PR = """ + json.dumps(shop, ensure_ascii=False) + """;
+""" + KAY_JS + """    var PR = """ + json.dumps(shop, ensure_ascii=False) + """;
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
     return {
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
@@ -404,7 +404,7 @@ def js(u):
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
       yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
-      alaGit: alaGit, faq: """ + json.dumps(faq(u), ensure_ascii=False) + """, shop: shop, shopCount: PR.length
+      alaGit: alaGit, faq: """ + json.dumps(faq(u), ensure_ascii=False) + """, kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
     };
   }
 }"""
@@ -416,7 +416,7 @@ DOSYA = {'af': ('AyFeneri.dc.html', 'af-a'), 'gn': ('GalaksiNight.dc.html', 'gn-
 def sayfa(u):
     dosya, yon = DOSYA[u]
     t = O.YON[yon]
-    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + US.URS_CSS + MESAJ_CSS
+    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS
     return U.head(AD[u], css, t['font']) + govde(u)
 
 
