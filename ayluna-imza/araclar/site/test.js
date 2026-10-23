@@ -308,11 +308,37 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       await p3.goto(KOK + f + '.html'); await p3.waitForTimeout(400);
       const s = p3.locator('.noscroll:has(> .kart)').first(); await s.scrollIntoViewIfNeeded();
       const r = await s.evaluate(e => ({ satir: new Set([...e.querySelectorAll('.kart')].map(x => Math.round(x.getBoundingClientRect().top))).size, ok: getComputedStyle(e.closest('section').querySelector('.serit-ok')).display }));
-      await p3.locator('.serit-ok button').nth(1).click(); await p3.waitForTimeout(300);
+      await p3.locator('section:has(.noscroll > .kart) .serit-ok button').nth(1).click(); await p3.waitForTimeout(300);
       const sol = await s.evaluate(e => e.scrollLeft);
       if (!(r.satir === 1 && r.ok === 'flex' && sol > 0)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { sol }))); }
     const tel = await pg.evaluate(() => getComputedStyle(document.querySelector('.serit-ok')).display);
-    not(!kotu.length && tel === 'none', 'masaüstü: diğer ürünler tek satır kayar, oklar kaydırır; telefonda ok yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k3.close(); }
+    not(!kotu.length && tel === 'none', 'masaüstü: diğer ürünler tek satır kayar, oklar kaydırır; telefonda ok yok' + (kotu.length ? ': ' + kotu.join('; ') : ''));
+    // 23 Eki (kullanıcı: "tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın"): 1280×800'de her bölüm üst menü + çubuk (140 px) düşülünce
+    // ekrana sığar (≤ 660 px; yorumlar iki blok, her biri ≤ 660); 1024'te yana taşma yok; galeri okları sondan başa döner; mesaj şeridi okla kayar
+    await p3.setViewportSize({ width: 1280, height: 800 });
+    const sig = [];
+    for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba']) {
+      await p3.goto(KOK + f + '.html'); await p3.waitForTimeout(500);
+      const r = await p3.evaluate(() => { const uzun = [];
+        document.querySelectorAll('.pg>section').forEach(e => { if (!e.offsetHeight) return;
+          // yorumlar iki blok: başlık → mesaj şeridi, öne çıkan yorum → yorum listesi
+          const bl = e.classList.contains('yorum-b') ? [[e.children[0], [e.children[2]]], [e.children[4], [e.children[3], e.children[6]]]] : [[e, [e]]];
+          bl.forEach(([a, z]) => { const hh = Math.round(Math.max(...z.map(x => x.getBoundingClientRect().bottom)) - a.getBoundingClientRect().top);
+            if (hh > 660) uzun.push((e.id || e.className.split(' ')[0]) + ' ' + hh); }); });
+        const g = document.querySelector('.g-ok.g-geri'); return { uzun, g: !!g && getComputedStyle(g).display !== 'none' }; });
+      await p3.locator('.g-ok.g-geri').click(); await p3.waitForTimeout(700);
+      const son = await p3.evaluate(() => { const e = document.querySelector('.kare-foto, .h-iz, .g-iz'); return Math.round(e.scrollLeft / e.clientWidth) === Math.round(e.scrollWidth / e.clientWidth) - 1; });
+      const ms = p3.locator('.mkarma, .yorum-b .karma').first(); await ms.scrollIntoViewIfNeeded();
+      await p3.locator('.mesaj-bol .serit-ok button, .yorum-b .yara .serit-ok button').nth(1).click(); await p3.waitForTimeout(500);
+      const mk = await ms.evaluate(e => e.scrollLeft);
+      if (r.uzun.length || !r.g || !son || !(mk > 0)) sig.push(f + ' ' + JSON.stringify(Object.assign(r, { son, mk }))); }
+    await p3.setViewportSize({ width: 1024, height: 768 });
+    for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba', 'index', 'tum-urunler']) {
+      await p3.goto(KOK + f + '.html'); await p3.waitForTimeout(400);
+      const sw = await p3.evaluate(() => document.documentElement.scrollWidth); if (sw > 1024) sig.push(f + ' 1024 taşma ' + sw); }
+    const telOk = await pg.evaluate(() => [...document.querySelectorAll('.g-ok, .serit-ok')].every(e => getComputedStyle(e).display === 'none'));
+    not(!sig.length && telOk, 'masaüstü: her bölüm 1280×800 ekrana sığar, 1024\'te taşma yok, galeri okları sondan başa döner, mesaj şeridi okla kayar; telefonda ok yok' + (sig.length ? ': ' + sig.join('; ') : ''));
+    await k3.close(); }
   // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
   { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
@@ -364,20 +390,20 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
   await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
   not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
-  // Masaüstü: özellik kartları sol sütunda tek kopya; Gece vitrini kenardan kenara bant ve şerit, yazı altta; 4. ay → 4. oda ortada
+  // Masaüstü: özellik kartları sol sütunda tek kopya; Gece vitrini kenardan kenara bant, yazı solda şerit sağda (23 Eki, ekrana sığsın); 4. ay → 4. oda ortada
   await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.waitForTimeout(800);
   { const r = await mp.evaluate(() => { const s = document.querySelector('#siparis .sih'), g = document.querySelector('.urun-ust>.sahne'); return { tek: document.querySelectorAll('.sih').length, sol: document.querySelectorAll('.sol-oz').length, sag: !!s && !!g && s.getBoundingClientRect().left > g.getBoundingClientRect().right }; });
     not(r.tek === 1 && r.sol === 0 && r.sag, 'masaüstü: Sihirli Özellikler sağda, satın alma kutusunda fiyatın altında; galeri altı kopya yok (23 Eki)'); }
   await mp.locator('#odalar').scrollIntoViewIfNeeded(); await mp.locator('.vt-ay').nth(3).click(); await mp.waitForTimeout(900);
   { const r = await mp.evaluate(() => { const v = document.getElementById('odalar').getBoundingClientRect(), el = document.querySelector('.vt-serit'), c = el.children[3], m = document.querySelector('.vt-m.on').getBoundingClientRect(), sr = el.getBoundingClientRect();
-      return { gen: Math.round(v.width), solda: m.top >= sr.bottom && Math.abs(sr.width - innerWidth) < 2, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
-    not(r.gen === 1440 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin: bant ${r.gen}, şerit kenardan kenara ve yazı altta ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
-  // Masaüstü: Neler yapabiliyor? Dergi kapağı 430 px sütunda ortada, orantılı büyür (zoom); kubbe ve gövde aynı kutuda
+      return { gen: Math.round(v.width), boy: Math.round(v.height), solda: m.right <= sr.left, orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: document.querySelector('.vt-m.on').textContent }; });
+    not(r.gen === 1440 && r.boy <= 660 && r.solda && r.orta < 4 && /Masalı o seçsin/.test(r.yazi), `masaüstü vitrin (23 Eki): bant ${r.gen}, boy ${r.boy}, yazı solda şerit sağda ${r.solda}, 4. oda ortada (${Math.round(r.orta)} px), yazı değişti`); }
+  // Masaüstü: Neler yapabiliyor? Dergi kapağı 1136 px yayılım (23 Eki; 430 px dar sütun kalktı); kubbe ve gövde aynı kutuda
   await mp.locator('#neler').scrollIntoViewIfNeeded();
   { const r = await mp.evaluate(() => { const s = document.getElementById('neler').getBoundingClientRect(), a = document.querySelector('#neler .dg').getBoundingClientRect(),
       f = document.querySelector('#neler .ur-k.kiz .ur-alt').getBoundingClientRect(), k = document.querySelector('#neler .ur-k.kiz .ur-ust').getBoundingClientRect();
       return { w: Math.round(a.width), orta: Math.abs((a.left + a.right) / 2 - (s.left + s.right) / 2), ayni: Math.abs(f.left - k.left) + Math.abs(f.width - k.width) }; });
-    not(r.w > 358 && r.w <= 430 && r.orta < 2 && r.ayni < 1, `masaüstü Neler: Dergi kapağı ${r.w} px, ortada (${r.orta.toFixed(1)}), kubbe gövdeyle hizalı (${r.ayni.toFixed(1)})`); }
+    not(r.w === 1136 && r.orta < 2 && r.ayni < 1, `masaüstü Neler (23 Eki): Dergi kapağı 1136 px yayılım (${r.w}), ortada (${r.orta.toFixed(1)}), kubbe gövdeyle hizalı (${r.ayni.toFixed(1)})`); }
   await mctx.close();
 
   console.log('\n' +(loglar.length ? loglar.join('\n') : 'konsol hatası yok'));
