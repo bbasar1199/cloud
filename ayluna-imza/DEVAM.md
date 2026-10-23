@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Masaüstü şerit + telefon PDF'i (23 Ekim, en güncel)
+## Masaüstünde her bölüm ekrana sığar (23 Ekim, en güncel)
+- Kullanıcı: "Tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın." Ölçü: 1280×800'de üst menü + satın alma çubuğu (140 px) düşülünce 660 px; 1024×768'de 628 px. Ölçüm betiği: bölüm yükseklikleri ve yana taşma 1024/1280/1440/1920 (`scratchpad/ld-denet.js` mantığı, `test.js`'te kalıcı).
+- LunaDream (`ayluna.css` masaüstü bloğu): Neler yapabiliyor 430 px sütun → 1136 px dergi yayılımı (söz + yazı + sekmeler solda, lamba sağda, 500 px); Odası böyle görünecek 928 → 592 px (yazı + aylar solda, kart şeridi sağda; ortalama JS'i aynı); Aileler ne diyor 1505 → 1075 px (mesaj şeridi tam genişlik; altta solda fotoğraf şeridi + öne çıkan yorum, sağda yorum listesi). Sayfa 7610 → 6778 px. Telefon değişmedi (7324).
+- Oklar (`ortak.py`): `serit_ok(ad)` her kayan şeridin başlık satırına; `KAY` okun satırından sonraki `.noscroll`'u bulur. `GAL_OK` + `GALOK` ürün galerisinde sağ üst köşede iki ok (afişlerde yazı solda), sondan başa döner, galerinin üzerine gelince belirir; dört üreticide (luna_e, luna_usb, ozel_sayfa, urun_sade). Mesaj bölümü (`mesaj_bolum`) başlığında oklar (`mGeri/mIleri`, `MESAJ_VERI` içinde). Telefonda hepsi gizli.
+- Galaxy USB: "Bu gece tavanda" kart 520 → 440 px (bölüm 638); "Herkesin odasına" yazı dikeyde ortada, kart 560 px, çipler kart kenarına yapışmıyor (genel `.noscroll` iç boşluk sıfırlaması `.hk-sec`'i de sıfırlıyordu). Mesaj bölümleri bütün ürün sayfalarında 1136 px.
+- AyFeneri / Galaksi Night: oda kartları 4 sütun ızgara (1024'te 158 px yana taşıyordu). Galaksi Night diskler: dönen gök (`.kb-s`) iki satıra yayıldı, 763 → 500 px.
+- Hata: oda/sahne kartlarının fotoğrafı kartın %108'i, sitedeki genel `img{max-width:100%}` kırpınca sağda 16 px siyah şerit (telefonda da). `.sk img,.oda-k img{max-width:none}`.
+- 1024-1199 px üst menü aralıkları daraldı (1024'te 30 px taşıyordu).
+- Site testleri 160 HEPSİ TAMAM (yeni: her bölüm 1280×800'e sığar, 1024'te taşma yok, galeri okları sondan başa, mesaj şeridi okla kayar, telefonda ok yok; vitrin ve Neler testleri yeni düzene göre). Tema benzetimi HEPSİ TAMAM, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.23.zip`; tuval Sürüm 149, site Sürüm 40.
+- Bekleyen: "6 hediye disk" satırı (kutu listesi, afiş 5) kalsın mı; 5 görsel dosya olarak gelmedi; design-review ajanının diğer sayfalar raporu (gelince işlenecek).
+
+## Masaüstü şerit + telefon PDF'i (23 Ekim)
 - Kullanıcı: "Index olarak versene bana tasarımı" → `site-tek/index.html` (13,7 MB, bütün site; sayfalar # ile: `#lunadream-gece-lambasi`).
 - "WhatsApp'tan attım, telefonda görünmüyor" → HTML dosyası telefonda JavaScript çalıştırmaz. `site-tek/LunaDream-telefon.pdf` (390 px, 2x, 9 sayfa, 1,2 MB; yapışkan çubuk gizli) üretildi: `scratchpad/pdf-cek.js` ile tam sayfa görüntü + PIL ile sayfalara bölme.
 - (Masaüstü ızgara ekran görüntüsüyle) "Burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor" → `ayluna.css` masaüstü bloğu: `.noscroll:has(>.kart)` tek satır kayar (kart 204 px). Oklar şablonda (`ortak.SERIT_OK`, `KAY_JS`, `SERIT_OK_CSS`; her saniyelik çizimde silinmesin diye çalışma anında eklenmez), yalnız masaüstünde görünür. Bağlı: `luna_e.py`, `luna_usb.py`, `ozel_sayfa.py`. Site testi: 4 sayfada tek satır, ok kaydırır, telefonda ok yok.
