@@ -494,6 +494,16 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     </div>
   </section>
 
+  <!-- Videolar: gerçek ürün videoları; kalır (kullanıcı, 23 Eki: "gerçek ürün videoları olan kısım gitmiş oldu ama"; sadeleştirmede yanlışlıkla kaldırılmıştı).
+       Canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
+  <section class="bolum gir" id="videolar">
+    <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
+    <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
+      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
+      <span aria-hidden="true" style="flex: 0 0 6px"></span>
+    </div>
+  </section>
+
   <!-- Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur; kullanıcı seçti). Afiş (3. tur) Sihirli'nin dört beyaz kartını aynı dille tekrar
        ediyordu ("yine sıkıcı"). Dev tek kelime (Tak. Çal. Kıs. Şarj.), parçalı lamba kesimi önünde ve kendisi oynar: kubbe (Erkek'te robotun başı)
        açılır, disk üstten girer; notalar; Parlak/Orta/Kısık; şarjda ışık alttan dolar. Her kelimede zemin perdesi alttan yükselir.
@@ -661,6 +671,13 @@ JS = """class Component extends DCLogic {
     function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var cdAy = AYY(Math.round(kalan / 864000) / 100);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
+    // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
+    var vids = [
+      { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%' },
+      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%' },
+      { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%' },
+      { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%' }
+    ];
     // Müşteri fotoğrafları (Loox foto yorumları)
     // Gerçek müşteri içeriği. Eski sitedeki "mutlu kullanıcı" fotoğraflarının 5'i Higgsfield üretimi (hf_): müşteri diye konmaz; yalnız IMG_4145 (minikesnaftr hikâyesi) alındı.
     function buyut(src, ad) { return function () { self.setState({ buyuk: src, buyukAd: ad }); }; }
@@ -760,7 +777,7 @@ JS = """class Component extends DCLogic {
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, kgAria: KG.aria,
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, faq: faq,
@@ -777,5 +794,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 6916)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS) + urun_ust(HTML, '<section class="sahne"', sihirli(HTML)) + TAIL.format(h=int(os.environ.get('E_H', 7324)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))

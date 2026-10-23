@@ -258,8 +258,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü kopyası yok');
   // Odası böyle görünecek · Gece vitrini (21 Eki): Bir gece ve iki posterli eski Odası yok; 4 oda, aya dokununca oda ortaya kayar ve yazı değişir
   not(await pg.locator('#bir-gece').count() === 0 && await pg.locator('.poster').count() === 0 && await pg.locator('#odalar.vitrin .vt-kart').count() === 4 && await pg.locator('#odalar').count() === 1, 'telefon: Bir gece yok, tek Odası bölümü (Gece vitrini, 4 oda)');
-  { const sira = await pg.evaluate(() => ['siparis', 'odalar', 'yorumlar', 'diskler'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
-    not(sira, 'telefon: Odası satın alma ile Aileler ne diyor arasında; Videolar bölümü yok (23 Eki)'); }
+  { const sira = await pg.evaluate(() => ['videolar', 'odalar', 'yorumlar', 'diskler'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+    not(sira, 'telefon: Odası Videolar ile Aileler ne diyor arasında (gerçek ürün videoları kalır, 23 Eki)'); }
   await pg.locator('#odalar').scrollIntoViewIfNeeded(); await pg.locator('.vt-ay').nth(2).click(); await pg.waitForTimeout(900);
   { const r = await pg.evaluate(() => { const el = document.querySelector('.vt-serit'), c = el.children[2], on = document.querySelector('.vt-m.on');
       return { orta: Math.abs(c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - el.clientWidth / 2), yazi: on && on.textContent, gizli: document.querySelectorAll('.vt-m[aria-hidden=true]').length }; });
@@ -301,14 +301,14 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
       const dolu = await p2.evaluate(() => +getComputedStyle(document.querySelector('.urs-s .dolu')).opacity);
       if (!(r.yer && r.n === 4 && r.satir >= 48 && dolu > .9 && !r.tekrar.length && r.sss >= 5 && !r.kutu)) kotu.push(f + ' ' + JSON.stringify(Object.assign(r, { dolu }))); }
     not(!kotu.length, 'diğer 14 ürün: teslim altında 4 soru, açılınca dolunay, SSS\'de tekrar yok' + (kotu.length ? ': ' + kotu.join('; ') : '')); await k2.close(); }
-  // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): satın alma ile Odası arasında (23 Eki: Videolar kalktı); beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
+  // Neler yapabiliyor? · Dergi kapağı (22 Eki, 4. tur): Videolar ile Odası arasında; beyaz arayüz kartı yok (Sihirli'yi tekrar etmez);
   // dev kelime, parçalı lamba kesimi kelimenin önünde; ekrana girince tur oynar
-  { const sira = await pg.evaluate(() => ['siparis', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
+  { const sira = await pg.evaluate(() => ['videolar', 'neler', 'odalar'].map(id => document.getElementById(id)).every((e, i, a) => e && (!i || a[i - 1].compareDocumentPosition(e) & 4)));
     const r = await pg.evaluate(() => { const a = document.querySelector('#neler .dg');
       return { kelime: a.querySelectorAll('.dg-soz span').length, dugme: a.querySelectorAll('.dg-bar button').length, parca: a.querySelectorAll('.ur-k.kiz .ur-ust, .ur-k.kiz .ur-alt').length,
         onde: +getComputedStyle(a.querySelector('.dg-urun')).zIndex > +getComputedStyle(a.querySelector('.dg-soz')).zIndex,
         eski: document.querySelectorAll('#neler .nw, #neler .na, #neler .nz').length }; });
-    not(sira && r.kelime === 4 && r.dugme === 4 && r.parca === 4 && r.onde && r.eski === 0, `telefon: Neler yapabiliyor? Dergi kapağı satın alma ile Odası arasında, 4 kelime, 4 düğme, kubbe/gövde ayrı, lamba kelimenin önünde, beyaz kart yok (${JSON.stringify(r)})`); }
+    not(sira && r.kelime === 4 && r.dugme === 4 && r.parca === 4 && r.onde && r.eski === 0, `telefon: Neler yapabiliyor? Dergi kapağı Videolar ile Odası arasında, 4 kelime, 4 düğme, kubbe/gövde ayrı, lamba kelimenin önünde, beyaz kart yok (${JSON.stringify(r)})`); }
   await pg.locator('#neler').scrollIntoViewIfNeeded(); await pg.waitForTimeout(700);
   { const c = await pg.evaluate(() => document.querySelector('#neler .dg').className); not(/gir/.test(c) && !/bek/.test(c) && /\bb0\b/.test(c) && /x-tak/.test(c) && /\bo[ab]\b/.test(c), 'Neler: ekrana girince tur başlar, "Tak." kubbe açılır (' + c + ')'); }
   // Dokunuş: Kıs → üç kademe, lamba kısılır; Şarj → ışık alttan dolar; lambaya dokununca aynı özellik yeniden oynar
