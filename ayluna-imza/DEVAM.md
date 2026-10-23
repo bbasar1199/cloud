@@ -487,6 +487,8 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Sepet satırı masaüstünde tek sıra, 1024'te panel kenara yapışmaz.
   - Ufaklar: Galaksi Night ara boşluğu (`.ara`) masaüstünde yok; kargo takip / iade / iletişim başlıklarında satır sonu yok; "Dokun, büyüsün" masaüstünde gizli; 768-820 px yüksek ekranda koyu bant dolgusu 56 px.
   - Yapılmayan (düşük öncelik): ödeme önizlemesi tek sütun (gerçekte Shopify ödeme sayfası), kapıda formu masaüstünde alttan panel (Shopify'da EasySell), şerit ok uçlarda pasifleşmiyor.
+- Site testleri 167 HEPSİ TAMAM (LunaDream dönen satır testi geri, SSS 12). Tema benzetimi HEPSİ TAMAM, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.24.zip`; tuval Sürüm 150, site Sürüm 41.
+- Bekleyen: "6 hediye disk" satırı (kutu listesi, afiş 5) kalsın mı; 5 görsel dosya olarak gelmedi.
 
 ## Masaüstünde her bölüm ekrana sığar (23 Ekim)
 - Kullanıcı: "Tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın." Ölçü: 1280×800'de üst menü + satın alma çubuğu (140 px) düşülünce 660 px; 1024×768'de 628 px. Ölçüm betiği: bölüm yükseklikleri ve yana taşma 1024/1280/1440/1920 (`scratchpad/ld-denet.js` mantığı, `test.js`'te kalıcı).
