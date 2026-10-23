@@ -43,24 +43,24 @@ CSS = SY.CSS + r"""
 .fiyat em{padding:3px 9px;border-radius:999px;background:var(--lac);color:#fff;font-style:normal;font-size:12px;font-weight:700}
 .fiyat em.yok{background:#E9E2D6;color:var(--lac)}
 /* Özellikler */
-.oz-l{list-style:none;margin:18px 16px 0;padding:4px 16px;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi)}
-.oz-l li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid var(--cizgi);color:var(--lac)}
+.oz-l{list-style:none;margin:16px 16px 0;padding:2px 14px;border-radius:16px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi)}
+.oz-l li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--cizgi);color:var(--lac)}
 .oz-l li:first-child{border-top:0}
-.oz-l svg{width:24px;height:24px}.oz-l circle{fill:none;stroke:var(--lac);stroke-width:1.4}.oz-l path{fill:var(--v)}
-.oz-l b{display:block;font-size:15px}.oz-l span{display:block;margin-top:2px;font-size:14px;color:var(--soluk)}
+.oz-l svg{width:20px;height:20px;margin-top:1px}.oz-l circle{fill:none;stroke:var(--lac);stroke-width:1.4}.oz-l path{fill:var(--v)}
+.oz-l b{display:block;font-size:14px}.oz-l span{display:block;margin-top:1px;font-size:13px;line-height:1.4;color:var(--soluk)}
 /* Seçenek ve paket */
 .ust-y{margin:22px 16px 10px;font-size:14px;font-weight:700;color:var(--lac)}
 .sec{display:flex;gap:8px;padding:0 16px}
 .sec button{min-height:48px;padding:0 18px;border:0;border-radius:999px;background:var(--kart);box-shadow:inset 0 0 0 1.5px var(--cizgi);font-size:15px;font-weight:600;color:var(--lac)}
 .sec button.on{box-shadow:inset 0 0 0 2px var(--lac)}
 .pk{display:flex;flex-direction:column;gap:12px;padding:0 16px}
-.pk button{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:center;min-height:72px;padding:12px 14px;border:0;border-radius:16px;background:var(--kart);box-shadow:inset 0 0 0 1.5px var(--cizgi);text-align:left;color:var(--lac)}
+.pk button{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:center;min-height:60px;padding:8px 12px;border:0;border-radius:14px;background:var(--kart);box-shadow:inset 0 0 0 1.5px var(--cizgi);text-align:left;color:var(--lac)}
 .pk button.on{box-shadow:inset 0 0 0 2px var(--lac)}
-.pk b{display:block;font-size:16px}.pk small{display:block;margin-top:2px;font-size:13px;color:var(--soluk)}
-.pk .pf{text-align:right;font-variant-numeric:tabular-nums}.pk .pf strong{display:block;font-size:16px}.pk .pf s{font-size:13px;color:var(--soluk)}
+.pk b{display:block;font-size:15px}.pk small{display:block;margin-top:2px;font-size:12.5px;color:var(--soluk)}
+.pk .pf{text-align:right;font-variant-numeric:tabular-nums}.pk .pf strong{display:block;font-size:16px}.pk .pf s{font-size:12.5px;color:var(--soluk)}
 .pk .kurdele{position:absolute;right:14px;top:-10px;padding:2px 10px;border-radius:999px;background:var(--lac);color:#fff;font-size:12px;font-weight:700}
-.nokta{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8AE9C}
-.nokta i{display:block;width:12px;height:12px;margin:5px;border-radius:50%;background:var(--lac);opacity:0;transform:scale(.3);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.nokta{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8AE9C}
+.nokta i{display:block;width:10px;height:10px;margin:5px;border-radius:50%;background:var(--lac);opacity:0;transform:scale(.3);transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}.on .nokta i{opacity:1;transform:none}
 /* Stok, butonlar */
 .stok{display:flex;align-items:center;gap:10px;margin:20px 16px 0;font-size:14px;font-weight:600;color:var(--lac)}
@@ -68,7 +68,7 @@ CSS = SY.CSS + r"""
 .ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--v);animation:ping 1.8s var(--ease) 3}
 @keyframes ping{from{transform:scale(1);opacity:.7}to{transform:scale(2.8);opacity:0}}
 .al{padding:0 16px}
-.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:62px;margin-top:12px;padding:8px 16px;border:0;border-radius:16px;background:var(--lac)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:52px;margin-top:12px;padding:6px 16px;border:0;border-radius:16px;background:var(--lac)}
 .pg .btn1{color:#fff}
 .btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
 .btn1 .b-ic>span{font-size:16px;font-weight:700}
@@ -77,7 +77,7 @@ CSS = SY.CSS + r"""
 .btn1[disabled]{background:#E9E2D6;cursor:not-allowed}
 .pg .btn1[disabled]{color:var(--lac)}
 .btn1[disabled] .b-ic small{color:var(--soluk)}
-.btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
+.btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 /* Teslim, kutu, SSS, yorum */
 .yol-k{margin:22px 16px 0}
 .ust-sag .urs{margin:14px 16px 0}
@@ -87,7 +87,7 @@ CSS = SY.CSS + r"""
 .blk h2 span{color:var(--v)}
 .kutu{padding:16px;border-radius:18px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:15px;color:var(--lac);line-height:1.5}
 .sss{border-bottom:1px solid var(--cizgi)}
-.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;font-weight:700;font-size:15px;color:var(--lac);cursor:pointer}
+.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:700;font-size:15px;color:var(--lac);cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
 .sss .arti{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--lac);color:var(--lac);font-size:17px;transition:transform .25s var(--ease)}
 .sss[open] .arti{transform:rotate(45deg)}

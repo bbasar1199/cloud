@@ -475,7 +475,15 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Satın alma kutusu olağan boyutta (23 Ekim, en güncel)
+## Bütün sitede olağan boyut (23 Ekim, en güncel)
+- Kullanıcı: "Model seçme kısımları gibi sitenin her yerini kontrol et, düzgün görünsün, boyut olarak büyük olmasın." 31 sayfa telefonda (390) ölçüldü; büyükler LunaDream ölçüsüne çekildi:
+  - Galaxy USB, AyFeneri, Galaksi Night (`luna_usb.py` çekirdek): paket kartı 88 → 62 (görsel 60 → 48, ad 17 → 15, fiyat 18 → 16), kurdeleli satın al 68 → 58, satın al 62 → 52, Kapıda 56 → 48, SSS 60 → 52, özellik kartı görseli 48 → 40 (iç boşluk 16 → 12), ürün adı ve bölüm başlığı 32 → 28. AyFeneri (Big Shoulders, yoğun) bölüm başlığı 42 → 36; Galaksi Night ürün adı 34 → 28 (`ozel_yon.py` `ek`).
+  - 13 sade ürün (`urun_sade.py`): paket kartı 72 → 60, satın al 62 → 52, Kapıda 56 → 48, SSS 56 → 52, özellik listesi sıkı (14/13 px, ikon 20).
+  - Ürün soruları (`urun_soru.py`, bütün ürünler) 54 → 48, 14 px; LunaDream SSS 60 → 52 (`BOYUT_CSS`'teki soru satırı kuralı çekirdeğe taşındı).
+  - Sepet satın al 62 → 52, Kapıda 56 → 48; diğer sayfalar (`sayfalar.py`, `sayfalar2.py`): form düğmesi 56 → 52, arama kutusu 56 → 52, ödeme seçeneği 56 → 52, sayfa başlığı 34 → 30; kapıda formu düğmesi (`ayluna.css` `.ay-btn`) 56 → 52.
+- Pano boyları ölçüldü ve üreticilere yazıldı: LunaDreamE 7334, GalaxyUSB 7268, AyFeneri 6855, GalaksiNight 7171, Sepet 1281, sade ürünler `canvas/urunler/yukseklik.json`. `sayfalar.py`/`sayfalar2.py` boy kayması yine geri alındı, sonra ölçüldü.
+
+## Satın alma kutusu olağan boyutta (23 Ekim)
 - Kullanıcı: "Emoji benefit kısmı, model seçimi kısmı vesaire çok büyük, daha default bir boyuta getir, orantısızlıkları düzelt." `luna_e.py` `BOYUT_CSS` (CSS'in sonuna eklenir, yalnız LunaDream): Sihirli 164 → 135 px, model 74 → 58, paket 82 → 62, düğmeler 62/56 → 52/48, teslim 137 → 125, 4 soru satırı 54 → 48. Kutu 1524 → 1323 px; E_H 7647 → 7430.
 
 ## LunaDream zemini beyaz, renkler sade (23 Ekim)

@@ -226,7 +226,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 /* Ürün soruları: teslim kartıyla aynı kart (krem, 1 px çizgi, 20 köşe); satır ≥ 54 px; hilal → dolunay, ok döner (yalnız opacity/transform) */
 .urs{margin-top:10px;padding:2px 16px;border-radius:20px;background:#FFFDF9;border:1px solid #E3D8C7}
 .urs-s+.urs-s{border-top:1px solid #EFE6D8}
-.urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:54px;padding:6px 0;font-size:15px;font-weight:600;line-height:1.3;color:#1A2142;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 0;font-size:14px;font-weight:600;line-height:1.3;color:#1A2142;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .urs-s summary::-webkit-details-marker{display:none}
 .urs-s summary:focus-visible{outline:2px solid #F2A65A;outline-offset:2px;border-radius:8px}
 .urs-ay{position:relative;flex:none;width:22px;height:22px}
@@ -325,7 +325,7 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .otuz b.say{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:-.03em;color:#1A2142}
 .muhur-say span{margin-top:2px;font-size:12px;font-weight:700;color:#1A2142}
 .sss{border-bottom:1.5px solid #E3D8C7}
-.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
+.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:700;font-size:15px;cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
 .sss .arti{width:32px;height:32px;border-radius:50%;border:1.5px solid #1A2142;color:#1A2142;font-weight:400;font-size:18px;display:grid;place-items:center;flex:none;transition:transform .2s}
 .sss[open] .arti{transform:rotate(45deg)}
@@ -838,7 +838,6 @@ BOYUT_CSS = """
 .teslim .yol-akis{top:25.25px}
 .teslim .yol .evre{margin-bottom:18px}
 .urs{border-radius:16px}
-.urs-s summary{min-height:48px;font-size:14px}
 """
 
 
@@ -856,5 +855,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7430)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7334)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

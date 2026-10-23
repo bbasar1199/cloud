@@ -126,7 +126,7 @@ CSS = r"""
 .koyu button:focus-visible,.hero button:focus-visible,.hk button:focus-visible{outline-color:var(--v)}
 .px{padding-left:16px;padding-right:16px}
 .bas-y{font-family:var(--fb);font-weight:var(--bk);letter-spacing:var(--bls);line-height:1;margin:0;text-wrap:balance;font-optical-sizing:auto}
-.h2{font-size:32px}
+.h2{font-size:28px}
 .bas-y .n{color:var(--v2)}
 .koyu{background:var(--koyu);color:#EEF2FA}
 .koyu .bas-y .n{color:var(--v)}
@@ -204,7 +204,7 @@ CSS = r"""
 
 /* Satın alma */
 .al{padding:24px 16px 40px}
-.al h1{font-size:32px}
+.al h1{font-size:28px}
 .fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin:14px 0 0;font-variant-numeric:tabular-nums}
 .fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.03em;line-height:1;animation:sol .7s var(--ease) .15s both}
 .fiyat s{position:relative;font-size:16px;color:var(--soluk);text-decoration:none}
@@ -214,14 +214,14 @@ CSS = r"""
 
 /* Birleşik çizgili kutu (Yön A): özellikler ve güven aynı kalıpta; kart yığını yok */
 .ozler{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:22px;border-radius:16px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
-.oz{display:flex;flex-direction:column;gap:3px;padding:16px 14px}
+.oz{display:flex;flex-direction:column;gap:2px;padding:12px}
 .oz:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}
 .oz:nth-child(3),.oz:nth-child(4){border-bottom:1px solid var(--cizgi)}
 .ozler.dort .oz:nth-child(3),.ozler.dort .oz:nth-child(4){border-bottom:0}
 .oz:nth-child(odd):not(.genis){border-right:1px solid var(--cizgi)}
-.oz .gz{display:flex;align-items:center;height:48px;margin-bottom:8px}
-.oz b{font-size:15px;line-height:1.25}
-.oz .t{display:block;font-size:13px;color:var(--soluk);line-height:1.35}
+.oz .gz{display:flex;align-items:center;height:40px;margin-bottom:6px}
+.oz b{font-size:14px;line-height:1.25}
+.oz .t{display:block;font-size:12.5px;color:var(--soluk);line-height:1.35}
 .oz.genis{grid-column:1/-1;flex-direction:row;align-items:center;gap:16px}
 .oz.genis .gz{margin:0}
 .fis-a{width:60px;height:30px;overflow:hidden}
@@ -264,24 +264,24 @@ CSS = r"""
 /* Paket: satır kart; beyaz ürün lacivert karoda */
 .pk-bas{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:14px;font-weight:700}
 .pk-bas::after{content:"";flex:1;height:1px;background:var(--cizgi)}
-.pk{display:flex;flex-direction:column;gap:14px}
-.pk-k{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:88px;padding:12px 14px 12px 12px;border:0;border-radius:16px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
+.pk{display:flex;flex-direction:column;gap:12px}
+.pk-k{position:relative;display:flex;align-items:center;gap:10px;width:100%;min-height:62px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
 .pk-k:active{transform:scale(.985)}
 .pk-k.on{box-shadow:inset 0 0 0 2px var(--lac)}
-.pk-g{position:relative;flex:none;width:60px;height:60px;border-radius:12px;background:var(--lac);overflow:hidden}
-.pk-g img{position:absolute;bottom:-2px;left:50%;height:58px;width:auto;margin-left:-12px}
-.pk-g.iki img:first-child{margin-left:-21px;transform:rotate(-8deg)}.pk-g.iki img:nth-child(2){margin-left:-3px;transform:rotate(8deg)}
+.pk-g{position:relative;flex:none;width:48px;height:48px;border-radius:10px;background:var(--lac);overflow:hidden}
+.pk-g img{position:absolute;bottom:-2px;left:50%;height:46px;width:auto;margin-left:-10px}
+.pk-g.iki img:first-child{margin-left:-17px;transform:rotate(-8deg)}.pk-g.iki img:nth-child(2){margin-left:-2px;transform:rotate(8deg)}
 .pk-o{flex:1;min-width:0;line-height:1.25}
-.pk-o b{display:block;font-size:17px}
-.pk-o span{display:block;margin-top:3px;font-size:13px;color:var(--soluk)}
+.pk-o b{display:block;font-size:15px}
+.pk-o span{display:block;margin-top:2px;font-size:12.5px;color:var(--soluk)}
 .pk-s{display:flex;flex-direction:column;align-items:flex-end;text-align:right;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
-.pk-s b{font-size:18px}
-.pk-s s,.pk-s span{margin-top:3px;font-size:13px;color:var(--soluk)}
+.pk-s b{font-size:16px}
+.pk-s s,.pk-s span{margin-top:2px;font-size:12.5px;color:var(--soluk)}
 .nokta{flex:none;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8C0D2}
 .nokta i{display:block;width:12px;height:12px;margin:5px;border-radius:50%;background:var(--lac);opacity:0;transform:scale(.3);transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}
 .on .nokta i{opacity:1;transform:none}
-.kurdele{position:absolute;right:14px;top:-11px;padding:2px 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
+.kurdele{position:absolute;right:14px;top:-10px;padding:1px 9px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
 /* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok. 23 Eki: canlı sitedeki gibi dönen şerit (ortak.tk_html);
    fiyat ve rozet oturunca bir kez aşağıdan gelir */
 .dun.dsr{animation:dun-gel .5s var(--ease) 1.2s both}
@@ -309,12 +309,12 @@ CSS = r"""
 /* Stok kurdelesi: buton lacivert olduğu için kurdele ay gümüşü, yazı lacivert (paket kurdelesinin tersi). Dokunmayı engellemez,
    buton ekrana girince bir kez 8px aşağıdan gelir. */
 .al-on{position:relative;margin-top:24px}
-.al-on .btn1{margin-top:0;min-height:68px;padding-top:16px}  /* iki satırlı buton: yazı kurdelenin altında kalmasın */
+.al-on .btn1{margin-top:0;min-height:58px;padding-top:13px}  /* iki satırlı buton: yazı kurdelenin altında kalmasın */
 .stok-kd{position:absolute;left:18px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:var(--v);color:var(--lac);box-shadow:0 0 0 2px var(--zemin);font-size:12px;font-weight:700;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .stok-kd.on{opacity:1;transform:none}
 .stok-kd svg{width:14px;height:14px;flex:none}.stok-kd circle{fill:none;stroke:rgba(26,33,66,.55);stroke-width:1.6}.stok-kd path{fill:var(--lac)}
 @media (prefers-reduced-motion:reduce){.stok-kd{opacity:1;transform:none;transition:none}}
-.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:62px;margin-top:12px;padding:8px 16px;border:0;border-radius:16px;background:var(--lac);box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:52px;margin-top:12px;padding:6px 16px;border:0;border-radius:16px;background:var(--lac);box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px)}
 .btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
@@ -322,7 +322,7 @@ CSS = r"""
 .btn1 .b-ic small{margin-top:2px;font-size:12px;font-weight:600;color:var(--v)}
 .btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) infinite}
 @keyframes durt{0%,58%,100%{transform:none}68%{transform:translateX(5px)}78%{transform:none}86%{transform:translateX(3px)}94%{transform:none}}
-.btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
+.btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 .pg .btn-b{border:0;border-radius:14px;background:var(--v);color:var(--koyu);font-weight:700;box-shadow:0 3px 0 var(--v2)}
 .pg .btn-b svg{stroke:var(--koyu)}
 
@@ -485,7 +485,7 @@ CSS = r"""
 .otuz>span:last-child span{display:block;margin-top:4px;font-size:14px;color:var(--acik)}
 
 .sss{border-bottom:1px solid var(--cizgi)}
-.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;font-weight:700;font-size:15px;cursor:pointer}
+.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:700;font-size:15px;cursor:pointer}
 .sss summary::-webkit-details-marker{display:none}
 .sss .arti{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--lac);color:var(--v);font-size:18px;font-weight:400;transition:transform .25s var(--ease)}
 .sss[open] .arti{transform:rotate(45deg)}
@@ -817,7 +817,7 @@ def ozellik(h):
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7595))
+    h = int(os.environ.get('U_H', 7268))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))

@@ -46,7 +46,7 @@ EK_CSS = r"""
 .o-blok{margin:18px 16px 0}
 .o-blok h2{margin:0 0 10px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;color:var(--lac)}
 .o-iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.o-sec{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:56px;margin-top:8px;padding:10px 12px;border:0;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--cizgi);text-align:left;font-size:14px;color:var(--lac)}
+.o-sec{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:52px;margin-top:8px;padding:8px 12px;border:0;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--cizgi);text-align:left;font-size:14px;color:var(--lac)}
 .o-sec.on{box-shadow:inset 0 0 0 2px var(--lac)}
 .o-sec i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8C0D2}
 .o-sec.on i{box-shadow:inset 0 0 0 6px var(--lac)}

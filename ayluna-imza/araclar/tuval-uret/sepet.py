@@ -72,7 +72,7 @@ CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,san
 .ozet .top{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px dashed var(--cizgi);color:var(--lac)}
 .ozet .top span{font-size:15px;font-weight:600}
 .ozet .top b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-.02em}
-.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:62px;margin:16px 16px 0;padding:8px 16px;border:0;border-radius:16px;background:var(--lac);transition:transform .12s var(--ease)}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:52px;margin:16px 16px 0;padding:6px 16px;border:0;border-radius:16px;background:var(--lac);transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px)}
 .btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
@@ -80,7 +80,7 @@ CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,san
 .btn1 .b-ic small{margin-top:2px;font-size:12px;font-weight:600;color:#C9D2EC}
 .btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) 1s 3}
 @keyframes durt{0%,58%,100%{transform:none}68%{transform:translateX(5px)}78%{transform:none}86%{transform:translateX(3px)}94%{transform:none}}
-.btn2{display:flex;align-items:center;justify-content:center;width:calc(100% - 32px);min-height:56px;margin:12px 16px 0;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
+.btn2{display:flex;align-items:center;justify-content:center;width:calc(100% - 32px);min-height:48px;margin:12px 16px 0;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
 .guven{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 16px 24px;text-align:center}
 .guven span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--soluk);line-height:1.3}
 .guven svg{width:22px;height:22px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -195,5 +195,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Sepet', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('S_H', 1300)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Sepet', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('S_H', 1281)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))
