@@ -136,7 +136,7 @@ ILETISIM = ("""
       <label>E-posta<input type="email" autocomplete="email" placeholder="ornek@eposta.com"></label>
       <label>Telefon<input type="tel" autocomplete="tel" placeholder="05xx xxx xx xx"></label>
       <label>Mesajın<textarea placeholder="Sipariş numaran ve sorun"></textarea></label>
-      <label class="onay"><input type="checkbox">Kişisel verilerimin işlenmesine ilişkin <u>Aydınlatma Metni</u>'ni okudum.</label>
+      <label class="onay"><input type="checkbox"><span>Kişisel verilerimin işlenmesine ilişkin <u>Aydınlatma Metni</u>'ni okudum.</span></label>
       <button class="btn-l" type="submit" style="margin-top: 2px">Gönder</button>
     </form></div>
 """)

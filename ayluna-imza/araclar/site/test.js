@@ -147,19 +147,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(pg.url().endsWith('arama.html'), 'başlık Ara → arama.html');
 
   // Baskı satırları (18 Eki): fiyatta "Stokta" yok, altında "Dün [X]"; dönen satır hediye → aynı gün kargo + 16.00 sayacı (İstanbul saati)
-  // LunaDream (23 Eki, sadeleştirme): dönen satır yok; aynı gün kargo sayacı teslim kartında (.yol-not); bayat "Dün 62" gizli; yapışkan çubukta sayaç yerine seçim
-  { const sp = await ctx.newPage(); sp.on('pageerror', e => loglar.push('pageerror lunadream: ' + e.message));
-    await sp.clock.install({ time: new Date('2026-10-19T09:47:15Z') }); // Pazartesi 12:47:15 İstanbul
-    await sp.goto(KOK + 'lunadream-gece-lambasi.html'); await sp.clock.runFor(1500);
-    const not1 = await sp.locator('.teslim .yol-not').textContent(), s1 = await sp.locator('.yol-not .dn-sy').textContent();
-    await sp.clock.runFor(2000); const s2 = await sp.locator('.yol-not .dn-sy').textContent(), fark = +s1.slice(-2) - +s2.slice(-2);
-    const cubuk = await sp.locator('.yapis').textContent();
-    not(await sp.locator('.donen').count() === 0 && await sp.locator('.dun').count() === 0 && not1.includes('16.00’ya kadar') && /^03:12:\d\d$/.test(s1) && fark >= 1 && fark <= 3 && /1 Adet · Kız/.test(cubuk) && !/kaldı/.test(cubuk),
-      `lunadream: dönen satır ve Dün yok; kargo sayacı teslim kartında (${s1} → ${s2}); çubukta "1 Adet · Kız", sayaç yok`);
-    await sp.clock.setSystemTime(new Date('2026-10-19T13:30:00Z')); await sp.clock.runFor(2000); // 16.30
-    not((await sp.locator('.teslim .yol-not').textContent()).includes('yarın kargoda') && await sp.locator('.yol-not .dn-sy').count() === 0, 'lunadream: 16.00 sonrası teslim kartında "yarın kargoda", sayaç yok');
-    await sp.close(); }
-  for (const [f, ilk] of [['galayx-usb-projektor.html', 'film diski']]) {
+  // 23 Eki: sadeleştirme geri alındı (kullanıcı: "yaptığımız sadeleştirmeleri geri getir"): LunaDream'de yine dönen satır, Dün 62 ve çubukta sayaç
+  for (const [f, ilk] of [['lunadream-gece-lambasi.html', '6 masal diski'], ['galayx-usb-projektor.html', 'film diski']]) {
     const sp = await ctx.newPage(); sp.on('pageerror', e => loglar.push('pageerror ' + f + ': ' + e.message));
     await sp.clock.install({ time: new Date('2026-10-19T09:47:15Z') }); // Pazartesi 12:47:15 İstanbul
     await sp.goto(KOK + f); await sp.clock.runFor(1500);
@@ -283,9 +272,9 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     const ay = await pg.evaluate(() => { const d = document.querySelectorAll('.urs-s')[1]; return { acik: d.open, dolu: +getComputedStyle(d.querySelector('.dolu')).opacity, yazi: d.querySelector('p').textContent }; });
     await pg.locator('.urs-s summary').nth(1).click();
     const r2 = await pg.evaluate(() => { const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());
-      return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), yedi: sss.length === 7, pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
-    not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && !r2.sensor && r2.yedi && !r2.pil,
-      `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}, 7 olmalı; sensör sorusu yok), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
+      return { ikiYerde: sss.filter(x => q.includes(x)), sensor: sss.includes('Hareket sensörü var mı?'), yedi: sss.length === 12, pil: q.concat(sss).some(x => /ne kadar gider/.test(x)), sss: sss.length }; });
+    not(r.yer && r.n === 4 && !r.daha && r.satir >= 48 && ay.acik && ay.dolu > .9 && /Kubbeyi aç/.test(ay.yazi) && r2.ikiYerde.length === 0 && r2.sensor && r2.yedi && !r2.pil,
+      `ürün soruları: teslim kartının altında 4 soru, satır ${r.satir} px, açılınca dolunay; diğerleri SSS'de (${r2.sss}, 12 olmalı; sadeleştirme geri alındı, sensör sorusu var), tekrar yok (${r2.ikiYerde}), pil süresi sorusu yok`); }
   // Diğer ürünlerde de aynı soru kartı (22 Eki, kullanıcı: "diğer ürünler için de benzer SSS kısımlarını oluştur"): teslim çizgisinin
   // hemen altında 4 soru, satır ≥ 48 px, açılınca dolunay; aynı soru alttaki SSS'de yok; sade sayfalarda ayrı "Kutuda ne var" bölümü yok
   { const kotu = [], k2 = await b.newContext({ viewport: { width: 390, height: 844 } }), p2 = await k2.newPage();  // LunaDream sayfası (pg) yerinde kalsın

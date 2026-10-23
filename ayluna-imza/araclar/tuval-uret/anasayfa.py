@@ -10,7 +10,7 @@
 # Dil: marka çekirdeği (sepetle aynı) lacivert #1A2142 + krem #F6F1E9, Ayluna işareti; Young Serif + Onest.
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS
+from ortak import HEAD, TAIL, TL_JS, gal_ok, GALOK_JS
 import luna_e as E
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 OUT = os.path.join(CANVAS, 'Ayluna-Anasayfa.dc.html')  # arşivdeki eski Anasayfa.dc.html korunur
@@ -88,6 +88,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .sl-y a{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:14px;padding:0 18px;border-radius:999px;background:#FFFDF9;color:var(--lac);font-size:15px;font-weight:700}
 .sl-y a svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ay-iz{position:absolute;left:20px;bottom:24px;z-index:2;display:flex;gap:8px;pointer-events:none}
+.slayt .g-ok{display:none}
 .ay-iz svg{width:15px;height:15px;transition:transform .45s var(--ease)}
 .ay-iz circle{fill:rgba(12,16,39,.45);stroke:rgba(255,253,249,.5);stroke-width:1.6}
 .ay-iz path{fill:var(--amber);opacity:0;transform-origin:12px 12px;transform:scale(.5);transition:opacity .5s var(--ease),transform .5s var(--ease)}
@@ -188,6 +189,7 @@ HTML = ('<div class="pg" style="padding-bottom: 0">\n'
         '  <section class="slayt" aria-label="Öne çıkan ürünler">\n'
         '    <div class="s-iz" onScroll="{{sKay}}"><sc-for list="{{slayt}}" as="s" hint-placeholder-count="3"><div class="{{s.cls}}"><img src="{{s.src}}" alt="{{s.alt}}" style="object-position: {{s.pos}}"><div class="sl-y"><small>{{s.ust}}</small><h2>{{s.bas}}</h2><p>{{s.alt2}}</p><a href="#">{{s.cta}}' + OK + '</a></div></div></sc-for></div>\n'
         '    <span class="ay-iz" aria-hidden="true"><sc-for list="{{slayt}}" as="s" hint-placeholder-count="3"><svg class="{{s.acls}}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{s.ay}}"></path></svg></sc-for></span>\n'
+        '    ' + gal_ok('slayt') + '\n'  # masaüstü okları (23 Eki): telefonda gizli, parmakla kayar
         '  </section>\n'
         '  <!-- Loox yorumları: Shopify\'da Loox karusel bölümü (gerçek yorumlar, hepsi). Burada canlı karuselden beşi, kelimesi kelimesine. -->\n'
         '  <div class="bb"><h2 class="h2">Alanlar ne <br>diyor<span class="n">?</span></h2></div>\n'
@@ -222,9 +224,13 @@ JS = """class Component extends DCLogic {
   componentDidMount() {
     var self = this;
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.state.sOto = false;
-    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.sOto && self.tik % 5 === 0) self.git((self.state.s + 1) % """ + str(len(SLAYT)) + """); self.setState({ now: Date.now() }); }, 1000);
+    // Slayt fare üstündeyken ya da klavye odağı içindeyken kendiliğinden geçmez (WCAG 2.2.2; 23 Eki masaüstü denetimi)
+    this.durBak = function (e) { var t = e && e.target; self.dur = !!(t && t.closest && t.closest('.slayt')); };
+    this.durBit = function (e) { if (!e.relatedTarget) self.dur = false; };
+    document.addEventListener('mouseover', this.durBak); document.addEventListener('focusin', this.durBak); document.addEventListener('mouseout', this.durBit);
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.sOto && !self.dur && self.tik % 5 === 0) self.git((self.state.s + 1) % """ + str(len(SLAYT)) + """); self.setState({ now: Date.now() }); }, 1000);
   }
-  componentWillUnmount() { clearInterval(this.iv); }
+  componentWillUnmount() { clearInterval(this.iv); document.removeEventListener('mouseover', this.durBak); document.removeEventListener('focusin', this.durBak); document.removeEventListener('mouseout', this.durBit); }
   git(i) { var el = document.querySelector('.s-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' }); } else this.setState({ s: i }); }
   componentDidUpdate() { var el = document.querySelector('.s-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.s * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.s * el.clientWidth; } }
   renderVals() {
@@ -232,17 +238,17 @@ JS = """class Component extends DCLogic {
     function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var SL = """ + json.dumps([list(x) for x in SLAYT], ensure_ascii=False) + """;
     var slayt = SL.map(function (x, i) { var on = i === S.s; return { src: B + x[0], pos: x[1], ust: x[2], bas: x[3].replace('<br>', ' '), alt2: x[4], cta: x[5], alt: x[6], cls: on ? 'sl on' : 'sl', ay: AYE((i + 1) / SL.length), acls: i < S.s ? 'lit' : (on ? 'lit on' : '') }; });
-    function sKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+""" + GALOK_JS + """    function sKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.s) o.s = i; if (self.state.sOto && Date.now() - (self.otoKay || 0) > 900) o.sOto = false; if (o.s !== undefined || o.sOto === false) self.setState(o); }
     function IKI(n) { return n < 10 ? '0' + n : String(n); }
     var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
-    return { slayt: slayt, sKay: sKay, cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))),
+    return { slayt: slayt, sKay: sKay, galGeri: GALOK(-1), galIleri: GALOK(1), cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))),
       cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
   }
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4290)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4210)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

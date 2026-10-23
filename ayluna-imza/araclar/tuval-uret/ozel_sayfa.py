@@ -322,7 +322,7 @@ def govde(u):
                 HUZME + HEDIYE)
     else:
         orta = (odalar('gn', 'Hangi odada<br>nasıl görünür<span class="n">?</span>', 'Salonda duvara, yatak odasında tavana: diski seç, ışığı kapat.') +
-                DONEN_GOK + AVUC + '<div style="height: 44px"></div>' + KURULUM_GN)
+                DONEN_GOK + AVUC + '<div class="ara" style="height: 44px"></div>' + KURULUM_GN)
     h = '<div class="pg">\n  ' + U.SERIT + hero(u) + al(u) + orta + gerisi(u) + '</div>\n'
     return re.sub(r'@@([\w-]+)@@', lambda m: I(m.group(1)), h)
 

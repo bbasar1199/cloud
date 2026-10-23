@@ -79,9 +79,13 @@ KAY_JS = """function KAY(y) { return function (e) { var t = e && (e.currentTarge
 
 # Ürün galerisi okları (23 Eki, masaüstü: fareyle kaydırılamıyordu). Telefonda gizli (parmakla kayar); masaüstünde fotoğrafın iki yanında,
 # üzerine gelince belirir. Sondan başa döner. Elle kaydırmayla aynı: galerinin kendi onScroll'u sırayı ve otomatik geçişi günceller.
-GAL_OK = ('<button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
-          '<button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>')
-GALOK_JS = """function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz');
+def gal_ok(ad='fotoğraf'):
+    return ('<button class="g-ok g-geri" type="button" aria-label="Önceki ' + ad + '" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
+            '<button class="g-ok g-ileri" type="button" aria-label="Sonraki ' + ad + '" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>')
+
+
+GAL_OK = gal_ok()
+GALOK_JS = """function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
       if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
       s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
 """
@@ -149,8 +153,9 @@ MESAJ_CSS = r"""
 .mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
 .mkarma button:active{transform:scale(.98)}
 .mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-.mbuyuk{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
-.mbuyuk img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain}
+.mbuyuk{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+/* Büyük görünüm üst menünün (900) ve satın alma çubuğunun üstünde; görsel ekran boyunu aşmaz (23 Eki, masaüstü denetimi) */
+.mbuyuk img{width:auto;max-width:100%;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);border-radius:16px;object-fit:contain}
 .mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
 .mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
 """
@@ -160,7 +165,7 @@ def mesaj_bolum(baslik):
     """Başlık (panonun kendi h2 biçimiyle) + not + mesaj şeridi + büyük görünüm."""
     return ('\n  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->\n'
             '  <section class="bolum mesaj-bol" id="mesajlar">\n'
-            '    <div class="px">' + baslik + '<p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p>' + serit_ok('mesajlar', '{{mGeri}}', '{{mIleri}}') + '</div>\n'
+            '    <div class="px">' + baslik + '<p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler.<span class="dokun"> Dokun, büyüsün.</span></p>' + serit_ok('mesajlar', '{{mGeri}}', '{{mIleri}}') + '</div>\n'
             '    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt">'
             '<img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>\n'
             '  </section>\n'

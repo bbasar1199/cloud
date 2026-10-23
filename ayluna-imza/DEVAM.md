@@ -475,7 +475,20 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Masaüstünde her bölüm ekrana sığar (23 Ekim, en güncel)
+## Sadeleştirme geri alındı + masaüstü denetim düzeltmeleri (23 Ekim, en güncel)
+- Kullanıcı: "Bi de yaptığımız sadeleştirmeleri geri getir." (e27d8ee'deki sadeleştirme) Geri gelenler (`luna_e.py`, `sihirli2_varyant.py`): fiyatın altında dönen satır ("Her kutuda 6 masal diski" ↔ aynı gün kargo + 16.00 sayacı; teslim kartındaki `.yol-not` kalktı), `DUN = '62'`, telefondaki yapışkan çubukta sayaç (`adetName` + `cdTiny`), SSS 12 soru, Sihirli şarj "Her odaya taşı". Kalanlar: Videolar (zaten geri gelmişti), çapraz satışta yazısız ürün kesimleri (teyitsiz poster yazısı yüzünden). Sayfa telefonda 7324 → 7647 (E_H). Masaüstünde 9+ soruluk SSS iki sütun (458 px). Kural: sadeleştirme kullanıcının istediği öğeyi silmez (TASARIM-BILGISI, SKILL).
+- design-review ajanının masaüstü raporu işlendi:
+  - Mesaj/fotoğraf büyütme penceresi (`.mbuyuk`, `.buyuk`) z-index 60 → 1000 (kapat düğmesi üst menünün altındaydı), görsel ekran boyunu aşmaz.
+  - İmza sayfalarının alt bilgisi 5 öğeye göre (imza sağa, telif sol yarıya düşüyordu).
+  - Oda kartlarında başlık + alt yazı akışta (1024-1110'da biniyordu).
+  - Ana sayfa slaytına oklar (`gal_ok('slayt')`), fare üstündeyken ve odakta otomatik geçiş durur (WCAG 2.2.2); pano yüksekliği 4210'da sabit (`A_H`).
+  - Galeri okları görselin sol/sağ kenarının ortasında, yarısı dışarıda (26 galeri karesine bakıldı; sağ üst AyFeneri/Sunset başlıklarına biniyordu).
+  - "Yukarı" düğmesi masaüstünde ekranın sağ alt köşesinde; `footer.alt` boş satırı kalktı; çapraz satış başlığı şeritle hizalı; mesaj başlığı 760 sütunda, şerit sağda ekran kenarına uzanır.
+  - Sepet satırı masaüstünde tek sıra, 1024'te panel kenara yapışmaz.
+  - Ufaklar: Galaksi Night ara boşluğu (`.ara`) masaüstünde yok; kargo takip / iade / iletişim başlıklarında satır sonu yok; "Dokun, büyüsün" masaüstünde gizli; 768-820 px yüksek ekranda koyu bant dolgusu 56 px.
+  - Yapılmayan (düşük öncelik): ödeme önizlemesi tek sütun (gerçekte Shopify ödeme sayfası), kapıda formu masaüstünde alttan panel (Shopify'da EasySell), şerit ok uçlarda pasifleşmiyor.
+
+## Masaüstünde her bölüm ekrana sığar (23 Ekim)
 - Kullanıcı: "Tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın." Ölçü: 1280×800'de üst menü + satın alma çubuğu (140 px) düşülünce 660 px; 1024×768'de 628 px. Ölçüm betiği: bölüm yükseklikleri ve yana taşma 1024/1280/1440/1920 (`scratchpad/ld-denet.js` mantığı, `test.js`'te kalıcı).
 - LunaDream (`ayluna.css` masaüstü bloğu): Neler yapabiliyor 430 px sütun → 1136 px dergi yayılımı (söz + yazı + sekmeler solda, lamba sağda, 500 px); Odası böyle görünecek 928 → 592 px (yazı + aylar solda, kart şeridi sağda; ortalama JS'i aynı); Aileler ne diyor 1505 → 1075 px (mesaj şeridi tam genişlik; altta solda fotoğraf şeridi + öne çıkan yorum, sağda yorum listesi). Sayfa 7610 → 6778 px. Telefon değişmedi (7324).
 - Oklar (`ortak.py`): `serit_ok(ad)` her kayan şeridin başlık satırına; `KAY` okun satırından sonraki `.noscroll`'u bulur. `GAL_OK` + `GALOK` ürün galerisinde sağ üst köşede iki ok (afişlerde yazı solda), sondan başa döner, galerinin üzerine gelince belirir; dört üreticide (luna_e, luna_usb, ozel_sayfa, urun_sade). Mesaj bölümü (`mesaj_bolum`) başlığında oklar (`mGeri/mIleri`, `MESAJ_VERI` içinde). Telefonda hepsi gizli.
