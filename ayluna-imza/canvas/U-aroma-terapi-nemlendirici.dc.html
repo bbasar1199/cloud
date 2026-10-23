@@ -292,6 +292,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
+.mesaj-bol .serit-ok,.g-ok{display:none}
 .m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
 .mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
 .mkarma::-webkit-scrollbar{display:none}
@@ -313,7 +314,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <p class="u-serit" style="background: #F08A352E">Gerçek ateş yok: alev görüntüsünü LED ışık ve buhar oluşturur.</p>
   <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn'de geçer -->
   <div class="urun-ust"><div class="ust-sol">
-  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div><div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.acls}}"></i></sc-for></div></div>
+  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button><div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.acls}}"></i></sc-for></div></div>
   </div><div class="ust-sag">
   <section class="bilgi" id="siparis"><h1>Aroma Terapi Nemlendirici<span>.</span></h1><p class="kisa">LED ışık ve buharla şömine alevi görüntüsü veren, kumandalı ve zamanlayıcılı aroma nemlendirici.</p><p class="fiyat"><b>₺1.499,00</b><s>₺1.999,00</s><em class="yok">Tükendi</em></p></section>
   <ul class="oz-l"><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A4.50 9 0 0 0 12 3Z"></path></svg><span><b>Alev efekti</b><span>Gerçek ateş yok; LED ışık ve buhar alev görüntüsü verir.</span></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A1.80 9 0 0 0 12 3Z"></path></svg><span><b>Nem ve aroma</b><span>Haznedeki suyu buhar olarak verir; suya uçucu yağ eklenebilir. Uygun yağ ve miktar [teyit].</span></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A0.90 9 0 0 1 12 3Z"></path></svg><span><b>Uzaktan kumanda</b><span>Işık, buhar ve zamanlayıcı yerinden kalkmadan ayarlanır.</span></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A3.60 9 0 0 1 12 3Z"></path></svg><span><b>Zamanlayıcı</b><span>Belirlediğin süre sonunda kendiliğinden kapanır. Süre seçenekleri [teyit].</span></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A6.30 9 0 0 1 12 3Z"></path></svg><span><b>Buhar ayarı</b><span>Buhar seviyesi değiştirilebilir. Kademe sayısı [teyit: 2].</span></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg><span><b>6 renk LED</b><span>Alev rengi turuncu dışında mavi, mor, pembe, yeşil, sarı ve kırmızıya döner.</span></span></li></ul>
@@ -329,7 +330,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 
   <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
   <section class="bolum mesaj-bol" id="mesajlar">
-    <div class="px"><h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 22px; letter-spacing: -.01em; color: var(--lac)">Sizden gelen mesajlar<span style="color: var(--v)">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
+    <div class="px"><h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 22px; letter-spacing: -.01em; color: var(--lac)">Sizden gelen mesajlar<span style="color: var(--v)">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p><span class="serit-ok"><button type="button" aria-label="Önceki mesajlar" onClick="{{mGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki mesajlar" onClick="{{mIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></div>
     <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
   </section>
   <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
@@ -367,11 +368,18 @@ class Component extends DCLogic {
     var sp = PK.filter(function (b) { return b.n === S.pk; })[0], tutar = sp ? sp.f : 1499.0;
 
     var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
     function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
     if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
     var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
       return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
-    return Object.assign(R, { mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
+    return Object.assign(R, { mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
   }
 }
 </script>

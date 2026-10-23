@@ -60,11 +60,30 @@ KARGO_JS = """function KARGO(ms) {
 
 # "Odanın geri kalanı için" şeridi (23 Eki, kullanıcı: "burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor"): masaüstünde de
 # tek satır kayar (ayluna.css); oklar yalnız masaüstünde görünür, telefonda şerit parmakla kaydırılır. Şablonda durur ki her saniyelik çizimde silinmesin.
-SERIT_OK_CSS = '.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok{display:none}\n'
-SERIT_OK = ('<span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
-            '<button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span>')
-KAY_JS = """function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), b = t && t.closest && t.closest('section'), s = b && b.querySelector('.noscroll');
+SERIT_OK_CSS = '.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok,.g-ok{display:none}\n'
+
+
+def serit_ok(ad, geri='{{kayGeri}}', ileri='{{kayIleri}}'):
+    """Masaüstü kaydırma okları; oklar hangi satırdaysa onun hemen altındaki şeridi kaydırır (KAY)."""
+    return ('<span class="serit-ok"><button type="button" aria-label="Önceki ' + ad + '" onClick="' + geri + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
+            '<button type="button" aria-label="Sonraki ' + ad + '" onClick="' + ileri + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span>')
+
+
+SERIT_OK = serit_ok('ürünler')
+# KAY: okun satırından yukarı doğru, hemen ardından .noscroll şerit gelen ilk öğeyi bulur; yoksa bölümdeki ilk şerit
+KAY_JS = """function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
       if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+"""
+
+# Ürün galerisi okları (23 Eki, masaüstü: fareyle kaydırılamıyordu). Telefonda gizli (parmakla kayar); masaüstünde fotoğrafın iki yanında,
+# üzerine gelince belirir. Sondan başa döner. Elle kaydırmayla aynı: galerinin kendi onScroll'u sırayı ve otomatik geçişi günceller.
+GAL_OK = ('<button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button>'
+          '<button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>')
+GALOK_JS = """function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
 """
 
 # Ürün galerisi Shopify'daki gibi (kullanıcı, 19 Eki: "fotoğraf kısmını Shopify'daki ile aynı şekle getir"): canlı sıra, kare görsel.
@@ -123,6 +142,7 @@ MESAJ_ID = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddca
 MESAJ_CSS = r"""
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
+.mesaj-bol .serit-ok,.g-ok{display:none}
 .m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
 .mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
 .mkarma::-webkit-scrollbar{display:none}
@@ -140,7 +160,7 @@ def mesaj_bolum(baslik):
     """Başlık (panonun kendi h2 biçimiyle) + not + mesaj şeridi + büyük görünüm."""
     return ('\n  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->\n'
             '  <section class="bolum mesaj-bol" id="mesajlar">\n'
-            '    <div class="px">' + baslik + '<p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>\n'
+            '    <div class="px">' + baslik + '<p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p>' + serit_ok('mesajlar', '{{mGeri}}', '{{mIleri}}') + '</div>\n'
             '    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt">'
             '<img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>\n'
             '  </section>\n'
@@ -149,7 +169,7 @@ def mesaj_bolum(baslik):
 
 
 MESAJ_VERI = """var _mk = this;
-    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
+    """ + KAY_JS.replace('function KAY(', 'function _mKAY(') + GALOK_JS + """    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
     if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
     var mesajlar = """ + str(MESAJ_ID) + """.map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
       return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
@@ -161,5 +181,5 @@ def mesaj_js(js):
     i = js.index('renderVals()')
     j = js.index('\n    return ', i) + 1   # renderVals'ın kendi dönüşü: "return {" ya da "return Object.assign(R, {"
     k = js.index('{', j) + 1
-    return (js[:j] + '    ' + MESAJ_VERI + js[j:k] + ' mesajlar: mesajlar, buyuk: this.state.buyuk || \'\', buyukAd: this.state.buyukAd || \'\', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,'
+    return (js[:j] + '    ' + MESAJ_VERI + js[j:k] + ' mesajlar: mesajlar, buyuk: this.state.buyuk || \'\', buyukAd: this.state.buyukAd || \'\', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),'
             + js[k:])

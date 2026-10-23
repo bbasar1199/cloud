@@ -247,7 +247,8 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Telefon düzeni değişmez; masaüstü 1024 px ve üstünde ayrı katman. Ortak lacivert üst menü; telefon başlıkları gizli; duyuru şeridi ve alt bilgi kenardan kenara.
 - Ürün sayfası: solda kare galeri + özellik kartları, sağda satın alma (ad, fiyat, Dün, seçiciler, kargo, iki buton). Ödeme butonu ilk ekranda görünür.
 - Satın alma butonu ekrandan çıkınca menünün altından ince lacivert çubuk iner: ürün, seçim, kart butonu (sayfadaki etiketin aynısı), fiyatsız "Kapıda ödeme". Sayaç yok.
-- Koyu bölümler masaüstünde kenardan kenara gece bandı (içerik 1136 px); telefona göre kurulu bölümler küçük kart olarak ortada bırakılmaz, iki sütuna açılır. Kaydırmalı şeritler masaüstünde ızgara (fareyle kaydırma beklenmez).
+- Koyu bölümler masaüstünde kenardan kenara gece bandı (içerik 1136 px); telefona göre kurulu bölümler küçük kart olarak ortada bırakılmaz, iki sütuna açılır. Kısa şeritler (3-4 kart) masaüstünde ızgara; uzun şeritler (ürünler, mesajlar, fotoğraflar) tek satır kayar ve başlık satırında ok düğmeleri olur. Ürün galerisinde sağ üst köşede iki ok (üzerine gelince). Fareyle kaydırılamayan şerit bırakılmaz.
+- **Her bölüm bir ekrana sığar (23 Ekim):** 140 px üst menü + çubuk düşülünce 1280×800'de 660 px, 1024×768'de 628 px. Uzun bölüm iki sütuna açılır ya da ekran boyu bloklara bölünür. Teslimden önce 1024/1280/1440/1920 genişlikte bölüm yükseklikleri ve yana taşma ölçülür.
 - Ana sayfa: geniş slayt, ürünler 4 sütun; koleksiyon ve arama 4 sütun; sepet iki sütun (sağda yapışkan özet).
 - Masaüstü taşma, galeri yeri ve çubuk test.js'te denenir; teslimden önce 1440 px ekran görüntüsüne bakılır.
 

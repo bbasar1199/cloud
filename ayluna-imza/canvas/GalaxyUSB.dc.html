@@ -461,10 +461,11 @@ body{margin:0;background:#F2F4F8}
 .urs-s[open] .urs-ok{transform:rotate(180deg)}
 .urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:var(--soluk,#5C6078)}
 @media (prefers-reduced-motion:reduce){.urs-ay .evre,.urs-ok{transition:none}}
-.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok{display:none}
+.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok,.g-ok{display:none}
 
 /* Sizden gelen mesajlar (ortak.mesaj_bolum) */
 .mesaj-bol{padding-top:8px}
+.mesaj-bol .serit-ok,.g-ok{display:none}
 .m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
 .mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
 .mkarma::-webkit-scrollbar{display:none}
@@ -483,7 +484,7 @@ body{margin:0;background:#F2F4F8}
   <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
   <div class="urun-ust"><section class="hero kare" aria-label="Galaxy USB fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>
     <div class="u-ust"><button class="ikon" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(238,242,250,.6)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><button class="ikon" aria-label="Sepet"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></div>
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
@@ -577,7 +578,7 @@ body{margin:0;background:#F2F4F8}
 
   <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
   <section class="bolum mesaj-bol" id="mesajlar">
-    <div class="px"><h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p></div>
+    <div class="px"><h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler. Dokun, büyüsün.</p><span class="serit-ok"><button type="button" aria-label="Önceki mesajlar" onClick="{{mGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki mesajlar" onClick="{{mIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></div>
     <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
   </section>
   <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
@@ -702,7 +703,9 @@ class Component extends DCLogic {
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün fotoğrafıyla bize yaz. [Değişim süreci teyit edilecek.]' }
     ];
-function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), b = t && t.closest && t.closest('section'), s = b && b.querySelector('.noscroll');
+function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
       if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
     var PR = [
       { n: 'LunaDream Gece Lambası', p: 1699.99, c: 1999, id: 'e02351b3be4a1c555c5d760d0bbda723' },
@@ -715,12 +718,19 @@ function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.targe
     ];
     var shop = PR.map(function (x) { var d = x.c > x.p; return { n: x.n, src: B + x.id, price: TL(x.p, true), old: d ? TL(x.c, true) : '', pct: d ? '%' + Math.round((1 - x.p / x.c) * 100) : '' }; });
     var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
     function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
     if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
     var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
       return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
     var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
-    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat,
+    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay,
       disk: disk, dNo: S.disk + 1, dAd: DISK[S.disk][0],
       kim: kim,

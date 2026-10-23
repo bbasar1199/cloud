@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS
+from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -131,11 +131,11 @@ def hero(u):
     return ("""
   <!-- Galeri: kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur); başlık yalnız ilk fotoğrafta; küçük resim ve sayı yok -->
   <section class="hero kare" aria-label="%s fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>%s
     %s
     <div class="h-alt">%s<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
-""" % (AD[u], Y.ust('rgba(238,242,250,.6)'), gost))
+""" % (AD[u], GAL_OK, Y.ust('rgba(238,242,250,.6)'), gost))
 
 
 def ozler(u):

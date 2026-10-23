@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK
 import luna_e as E
 import luna_usb_yon as Y
 import urun_soru as US
@@ -560,7 +560,7 @@ HERO = ("""
   <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
   <section class="hero kare" aria-label="Galaxy USB fotoğrafları">
-    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>""" + GAL_OK + """
     """ + Y.ust('rgba(238,242,250,.6)') + """
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>

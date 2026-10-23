@@ -8,7 +8,7 @@
 # Ürün adları mağazadaki gibi (içerik dosyasındaki ad önerileri kullanıcıya soruldu).
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, canli_galeri, mesaj_bolum, mesaj_js, MESAJ_CSS
+from ortak import HEAD, TAIL, TL_JS, canli_galeri, mesaj_bolum, mesaj_js, MESAJ_CSS, GAL_OK
 import anasayfa as A
 import sayfalar as SY
 import urun_soru as US
@@ -134,7 +134,7 @@ def govde(u):
     return ad, gal, (serit +
         '  <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn\'de geçer -->\n'
         '  <div class="urun-ust"><div class="ust-sol">\n'  # masaüstünde sol sütun (galeri); telefonda etkisiz
-        '  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div>'
+        '  <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div>' + GAL_OK +
         '<div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.acls}}"></i></sc-for></div></div>\n'
         '  </div><div class="ust-sag">\n'  # masaüstünde sağ sütun (satın alma)
         '  <section class="bilgi" id="siparis"><h1>%s<span>.</span></h1><p class="kisa">%s</p>'

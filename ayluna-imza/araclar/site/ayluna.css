@@ -6,6 +6,8 @@ body{margin:0;min-height:100vh;background:var(--ay-zemin,#F6F1E9)}
 .pg{width:100%!important;max-width:430px;margin-left:auto!important;margin-right:auto!important;overflow:clip!important}
 @supports not (overflow:clip){.pg{overflow:hidden!important}}
 img{max-width:100%}
+/* Yavaş kayan oda/sahne kartı fotoğrafları kartın %108'i; genel sınır onları kırpınca sağda 16 px siyah şerit kalıyordu (23 Eki) */
+.sk img,.oda-k img{max-width:none}
 /* Sepet rozeti: her başlıktaki sepet düğmesinde gerçek adet */
 [data-ay-adet]{position:relative}
 [data-ay-adet] i{display:none!important}
@@ -94,6 +96,12 @@ img{max-width:100%}
   .ay-masa .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .ay-masa [data-ay-adet]::after{top:3px;right:1px;background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
   .ay-masa a:focus-visible,.ay-masa button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* 1024-1199 px: menü sığsın (1024'te 30 px yana taşıyordu) */
+  @media (max-width:1199px){
+    .ay-masa-ic{gap:20px;padding:0 24px}
+    .ay-masa nav{gap:18px}
+    .ay-masa nav a{font-size:14px}
+  }
   /* Telefon başlıkları */
   #kok header.ust,#kok .sahne>header,#kok .u-ust{display:none!important}
   /* Genel: içerik sayfaları ortada okunur sütun */
@@ -167,6 +175,22 @@ img{max-width:100%}
   html[data-ay-tur=urun] .serit-ok button:active{transform:scale(.96)}
   html[data-ay-tur=urun] .serit-ok button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
   html[data-ay-tur=urun] .serit-ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  /* Mesaj ve fotoğraf şeritleri: oklar başlık satırının sağında ("Dokun" ipucu masaüstünde yok) */
+  html[data-ay-tur=urun] .yara{justify-content:flex-start;align-items:center;gap:16px}
+  html[data-ay-tur=urun] .yara .dokun{display:none}
+  html[data-ay-tur=urun] .yara .serit-ok{margin-left:auto}
+  html[data-ay-tur=urun] .mesaj-bol>.px{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:end}
+  html[data-ay-tur=urun] .mesaj-bol>.px>:not(.serit-ok){grid-column:1}
+  html[data-ay-tur=urun] .mesaj-bol>.px>.serit-ok{grid-column:2;grid-row:1/span 2}
+  /* Ürün galerisi okları: sağ üst köşede yan yana (afişlerde yazı solda, sağ üst hep boş), galerinin üzerine gelince ya da klavyeyle odaklanınca belirir */
+  html[data-ay-tur=urun] .g-ok{position:absolute;top:16px;z-index:3;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.94);color:#1A2142;box-shadow:0 6px 18px rgba(12,16,39,.22);cursor:pointer;opacity:0;transition:opacity .25s cubic-bezier(.2,.7,.2,1),transform .2s cubic-bezier(.2,.7,.2,1)}
+  html[data-ay-tur=urun] .g-geri{right:72px}
+  html[data-ay-tur=urun] .g-ileri{right:16px}
+  html[data-ay-tur=urun] .sahne:hover .g-ok,html[data-ay-tur=urun] .hero:hover .g-ok,html[data-ay-tur=urun] .gal:hover .g-ok,html[data-ay-tur=urun] .g-ok:focus-visible{opacity:1}
+  html[data-ay-tur=urun] .g-ok:active{transform:scale(.96)}
+  html[data-ay-tur=urun] .g-ok:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  html[data-ay-tur=urun] .g-ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  @media (hover:none){html[data-ay-tur=urun] .g-ok{opacity:1}}
   /* LunaDream · Odası böyle görünecek (Gece vitrini, 21 Eki): şerit kenardan kenara; ortadaki kart 360×480, yanlardakiler ekran kenarına kadar
      görünür (kesik sütun kenarı yok); yazı ve aylar altta ortada */
   html[data-ay-tur=urun] .vitrin>.h2{padding:0!important;text-align:center}
@@ -182,25 +206,72 @@ img{max-width:100%}
   html[data-ay-tur=urun] .gece#diskler>.px:nth-child(2){grid-area:tavan;margin-top:0!important}
   html[data-ay-tur=urun] .gece#diskler>.noscroll{grid-area:disk;align-self:start;flex-wrap:wrap;gap:10px!important;padding-top:0!important}
   html[data-ay-tur=urun] .gece#diskler .tavan{height:460px;border-radius:24px}
+  /* Masaüstü sığdırma (23 Eki, kullanıcı: "tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın"):
+     her bölüm, üst menü + satın alma çubuğu (140 px) düşüldükten sonra 768 px yüksek ekrana sığar; dar telefon sütunu kalmaz */
+  /* LunaDream · Neler yapabiliyor (dergi kapağı): 1136 px geniş yayılım; söz ve yazı solda, lamba sağda */
+  html[data-ay-tur=urun] .pg>section#neler{max-width:1136px!important;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #neler .dg{zoom:1;width:100%;height:500px;margin-top:24px}
+  html[data-ay-tur=urun] #neler .dg-soz{left:52px;top:34px;height:200px;font-size:184px;line-height:200px}
+  html[data-ay-tur=urun] #neler .dg-alt{left:58px;bottom:108px;width:380px;height:96px;font-size:20px}
+  html[data-ay-tur=urun] #neler .dg-urun{right:14%;bottom:36px;width:250px;height:440px}
+  html[data-ay-tur=urun] #neler .dg .ur{--uh:430px}
+  html[data-ay-tur=urun] #neler .dg.erkek .ur{--uh:340px}
+  html[data-ay-tur=urun] #neler .dg.erkek .dg-urun{width:280px;height:350px}
+  html[data-ay-tur=urun] #neler .dg.erkek .dg-alt{width:380px}
+  html[data-ay-tur=urun] #neler .dg-bar{left:40px;right:auto;width:440px;padding:0}
+  /* LunaDream · Odası böyle görünecek: yazı ve aylar solda, kart şeridi sağda (bölüm 592 px; eskiden 928 px, ekrana sığmıyordu) */
+  html[data-ay-tur=urun] .pg>section.vitrin#odalar{display:grid;grid-template-columns:320px minmax(0,1fr);grid-template-rows:1fr auto auto auto 1fr;grid-template-areas:". serit" "bas serit" "metin serit" "aylar serit" ". serit";column-gap:56px;padding:56px max(32px,calc(50vw - 568px))!important}
+  html[data-ay-tur=urun] #odalar.vitrin>.h2{grid-area:bas;text-align:left}
+  html[data-ay-tur=urun] #odalar.vitrin>.h2 br{display:inline}
+  html[data-ay-tur=urun] .pg>section.vitrin#odalar .vt-serit{grid-area:serit;margin:0;padding:0 calc(50% - 180px)!important;border-radius:24px}
+  html[data-ay-tur=urun] #odalar .vt-metin{grid-area:metin;padding:20px 0 0;text-align:left}
+  html[data-ay-tur=urun] #odalar .vt-m{align-items:flex-start}
+  html[data-ay-tur=urun] #odalar .vt-yazi{max-width:320px}
+  html[data-ay-tur=urun] #odalar .vt-sec{padding:0}
+  html[data-ay-tur=urun] #odalar .vt-aylar{grid-area:aylar;justify-content:flex-start;margin-top:12px}
+  html[data-ay-tur=urun] #odalar .vt-aylar::before{left:24px;width:228px;margin-left:0}
+  /* LunaDream · Aileler ne diyor: 1136 px; mesaj şeridi tam genişlik, altta solda fotoğraflar + öne çıkan yorum, sağda yorum listesi (1505 → ~1000 px) */
+  html[data-ay-tur=urun] .pg>section.yorum-b{max-width:1136px!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas bas" "ml ml" "mk mk" "el yl" "ek yl" "yo yl";grid-template-rows:auto auto auto auto auto 1fr;column-gap:56px;align-items:start}
+  html[data-ay-tur=urun] .yorum-b>*{min-width:0}
+  html[data-ay-tur=urun] .yorum-b>.px,html[data-ay-tur=urun] .yorum-b>.noscroll{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(1){grid-area:bas}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(2){grid-area:ml}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(3){grid-area:mk}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(4){grid-area:yo;margin-top:20px!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(5){grid-area:el;margin-top:40px!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(6){grid-area:ek}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(7){grid-area:yl;margin-top:40px!important}
+  html[data-ay-tur=urun] .yorum-b .karma button{height:380px}
+  html[data-ay-tur=urun] .yorum-b .karma.kucuk button{height:220px}
   /* LunaDream · Odası böyle görünecek: iki oda yan yana */
   /* Galaxy USB · Bu gece tavanda: üç sahne yan yana */
   html[data-ay-tur=urun] .sahne-serit{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important}
-  html[data-ay-tur=urun] .sahne-serit .sk{height:520px}
+  html[data-ay-tur=urun] .sahne-serit .sk{height:440px}
   /* Galaxy USB ve imza sayfaları · Diskler: yansıma solda büyük, başlık ve diskler sağda */
   html[data-ay-tur=urun] .pg>section.koyu#diskler{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"sahne bas" "sahne iz";column-gap:64px;row-gap:20px;align-items:end}
   html[data-ay-tur=urun] .koyu#diskler>.px:first-child{grid-area:bas}
   html[data-ay-tur=urun] .koyu#diskler>.dk-sahne{grid-area:sahne;height:495px}
+  /* Galaksi Night: dönen gök sahnesi (kb-s) iki satıra yayılır; yoksa ilk satıra düşüp bölümü 763 px yapıyordu */
+  html[data-ay-tur=urun] .koyu#diskler>.kb-s{grid-area:sahne;align-self:center}
   html[data-ay-tur=urun] .koyu#diskler>.px:last-child{grid-area:iz;align-self:start}
   html[data-ay-tur=urun] .koyu#diskler .dk-yansi{top:6px;width:354px;height:354px;margin-left:-177px}
   html[data-ay-tur=urun] .koyu#diskler .dk-isik{top:222px;width:375px;height:144px;margin-left:-187px}
   html[data-ay-tur=urun] .koyu#diskler .dk-urun{bottom:-15px;height:156px;margin-left:-33px}
   html[data-ay-tur=urun] .koyu#diskler .dk-ad{left:0}
   /* Galaxy USB · Herkesin odasına: yazı solda, oda kartı sağda */
-  html[data-ay-tur=urun] .pg>section#odalar:has(>.hk){max-width:1136px!important;display:grid;grid-template-columns:minmax(0,1fr) 560px;grid-template-areas:"bas hk" "alt hk" "not hk";column-gap:64px;align-content:center;align-items:start}
-  html[data-ay-tur=urun] #odalar:has(>.hk)>h2{grid-area:bas;align-self:end}
+  html[data-ay-tur=urun] .pg>section#odalar:has(>.hk){max-width:1136px!important;display:grid;grid-template-columns:minmax(0,1fr) 560px;grid-template-rows:1fr auto auto auto 1fr;grid-template-areas:". hk" "bas hk" "alt hk" "not hk" ". hk";column-gap:64px;align-items:start;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #odalar:has(>.hk)>h2{grid-area:bas}
+  html[data-ay-tur=urun] .pg>section .hk-sec{padding:0 12px!important}
   html[data-ay-tur=urun] #odalar:has(>.hk)>.alt-b{grid-area:alt}
   html[data-ay-tur=urun] #odalar:has(>.hk)>.alt-not{grid-area:not}
-  html[data-ay-tur=urun] #odalar>.hk{grid-area:hk;height:620px;margin-top:0}
+  html[data-ay-tur=urun] #odalar>.hk{grid-area:hk;height:560px;margin-top:0}
+  /* Sizden gelen mesajlar (USB, imza ve sade sayfalar): 1136 px, şerit kesilmez */
+  html[data-ay-tur=urun] .pg>section.mesaj-bol{max-width:1136px!important}
+  html[data-ay-tur=urun] .mesaj-bol>.px,html[data-ay-tur=urun] .mesaj-bol>.noscroll{padding-left:0!important;padding-right:0!important}
+  /* AyFeneri ve Galaksi Night · Hangi odada nasıl durur: dört oda tek satır ızgara (1024'te 158 px yana taşıyordu) */
+  html[data-ay-tur=urun] .pg>section .oda-serit{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px!important}
+  html[data-ay-tur=urun] .oda-serit>span[aria-hidden]{display:none}
+  html[data-ay-tur=urun] .oda-k{height:400px}
 
   /* Ana sayfa: geniş slayt, 5'li yorum, 4 sütun ürün, yan yana bloklar */
   html[data-ay-tur=ana] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}

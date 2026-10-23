@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS, serit_ok, GAL_OK, GALOK_JS
 import sihirli2_varyant as S2
 import ozellik4_varyant as OZ4
 
@@ -415,10 +415,10 @@ YORUM_HTML = ("""  <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "
     <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 32px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <!-- Kullanıcı (19 Eki): "WP mesajları falan gidiyor" → mesajlar karışık şeritte kayboluyordu; bölümün başında kendi başlıklı şeridi,
          fotoğraflar ayrı ve küçük şeritte -->
-    <p class="px yara">Sizden gelen mesajlar<span>Dokun, büyüsün</span></p>
+    <p class="px yara">Sizden gelen mesajlar<span class="dokun">Dokun, büyüsün</span>""" + serit_ok('mesajlar') + """</p>
     <div class="noscroll karma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="k-msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
     <figure class="px yone"><span class="tirnak" aria-hidden="true">“</span><q>{{oneQ.q}}</q><figcaption><b>{{oneQ.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure>
-    <p class="px yara">Evlerinizden<span>Müşteri fotoğrafları</span></p>
+    <p class="px yara">Evlerinizden<span>Müşteri fotoğrafları</span>""" + serit_ok('fotoğraflar') + """</p>
     <div class="noscroll karma kucuk"><sc-for list="{{fsira}}" as="f" hint-placeholder-count="4"><button class="k-foto" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
     <div class="px yl"><sc-for list="{{revRest}}" as="r" hint-placeholder-count="3"><figure class="yr"><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure></sc-for><a href="#" class="cip yhep">{{reviews}} yorumun hepsini oku</a><p class="ynot">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı.</p></div>
   </section>
@@ -431,7 +431,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
     <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px">""" + LOGO + """<span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
-    <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>
+    <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>""" + GAL_OK + """
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; fotoğrafın en altında ince çizgiler, geçtikçe beyazlar. -->
     <div class="seritler">
       <span class="ay-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="9"><i class="{{f.acls}}"></i></sc-for></span>
@@ -711,7 +711,7 @@ JS = """class Component extends DCLogic {
     var discs = DISCS.map(function (d, i) { var on = i === S.disc; return { n: d.n, src: B + d.id, on: on ? 'true' : 'false', cls: on ? 'dbtn on' : 'dbtn', pick: function () { self.setState({ disc: i }); } }; });
     var proj = DISCS.map(function (d, i) { return { src: B + d.id, cls: i === S.disc ? 'yansima on' : 'yansima' }; });
     // Görseller yazısız ürün kesimleri (23 Eki): mağaza afişlerindeki "153.748 yıldız detayı", "1 Yıl Garanti" gibi teyitsiz yazılar kartta yok (canvas/capraz)
-""" + KAY_JS + """    var PR = [
+""" + KAY_JS + GALOK_JS + """    var PR = [
       { n: 'Yıldız Işığı Nemlendirici', p: 849.99, c: 1099, id: '18992c2375dc098b76ce965f442b1fac' },
       { n: 'Ayluna Galaksi Night Projektör', p: 2199, c: 2999, id: '8dec4fb3201c17c5af97a727f760fc22' },
       { n: 'Astronot Oda Nemlendirici', p: 799, c: 0, id: 'd8080b6820c271f87bc04c6e4740f45e' },
@@ -780,7 +780,7 @@ JS = """class Component extends DCLogic {
       yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
-      odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1), faq: faq,
+      odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1), galGeri: GALOK(-1), galIleri: GALOK(1), faq: faq,
       urs: URS
     };
   }
