@@ -265,10 +265,11 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const kiz = await pg.locator('.sih .lmb.rb').count(); await pg.locator('.yarim-iz button').nth(1).click(); await pg.waitForTimeout(300);
     const rb = await pg.locator('.sih .lmb.rb').count(), lk = await pg.locator('.sih .lmb:not(.rb)').count(); await pg.locator('.yarim-iz button').nth(0).click(); await pg.waitForTimeout(300);
     not(kiz === 0 && rb === 3 && lk === 0, `Sihirli ikonu modele bağlı: Kız'da robot ${kiz}, Erkek'te robot ${rb}, atlıkarınca ${lk}`); }
-  // 22 Eki ("disk kartı tam sığmıyor"): 360 px telefonda disk şeridi kart ekranına sığar, "Diskleri gör" bölünmez
+  // 23 Eki ("boş kısımları sil, kurumsal"): kartlarda gri ekran yok, gösterge 28 px; 360 px telefonda göstergeler kartın içinde, "Diskleri gör" bölünmez
   { const k = await b.newContext({ viewport: { width: 360, height: 800 } }), p = await k.newPage(); await p.goto(KOK + 'lunadream-gece-lambasi.html'); await p.waitForTimeout(500);
-    const r = await p.evaluate(() => { const s = document.querySelector('#siparis .sih .ui-serit'), e = s.closest('.sh-ek'); return { s: Math.round(s.getBoundingClientRect().width), e: Math.round(e.getBoundingClientRect().width), u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
-    not(r.s <= r.e && r.u === 1, `360 px: disk şeridi kart ekranına sığar (${r.s} ≤ ${r.e}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
+    const r = await p.evaluate(() => { const ks = [...document.querySelectorAll('#siparis .sih .a-kart')]; return { tas: ks.filter(k => { const g = k.querySelector('.kv').getBoundingClientRect(), c = k.getBoundingClientRect(); return g.right > c.right - 8 || g.height > 30; }).length,
+      gri: ks.filter(k => getComputedStyle(k.querySelector('.sh-ek')).backgroundColor !== 'rgba(0, 0, 0, 0)').length, u: document.querySelector('#siparis .a-kart u').getClientRects().length }; });
+    not(r.tas === 0 && r.gri === 0 && r.u === 1, `360 px: Sihirli göstergeleri kartta (${r.tas} taşan), gri ekran yok (${r.gri}), "Diskleri gör" tek satır (${r.u})`); await k.close(); }
   // Ürün soruları (22 Eki): teslim kartının hemen altında, aynı kart; yalnız 4 soru ("o kadar çok soru olmasın"); açılınca dolunay;
   // diğer ürün soruları alttaki SSS'de; aynı soru iki yerde yok; pil süresi sorusu yok
   { const r = await pg.evaluate(() => { const t = document.querySelector('#siparis .teslim'), u = t.nextElementSibling;

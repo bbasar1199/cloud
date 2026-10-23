@@ -475,7 +475,12 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Büyük site inceliği: kalınlık ve ikon karoları (23 Ekim, en güncel)
+## LunaDream fiyat sırası + kurumsal özellik kartları (23 Ekim, en güncel)
+- Kullanıcı (ekran görüntüsüyle): "Aradaki boşluğu kapat, bir de fiyat çok büyük; 1.999 olarak gelsin, çizgi çekilsin, yana kayıp gerçek fiyat gelsin, sonra o üstü çizilen fiyat gidip yerine %15 indirim yazısı gelsin." `luna_e.py`: `.fiyat-satir` = `fy-yeni` + `fy-yuva` (eski fiyat ve rozet aynı ızgara hücresinde). Eski fiyat başta `translateX(calc(-100% - 10px))` ile gerçek fiyatın yerinde (tabular rakam, aynı genişlik), çizilir, yerine kayıp .82'ye küçülür, gerçek fiyat belirir, sonra eski fiyat gider ve "%15 indirim" gelir (3 sn, bir kez). Fiyat 20 → 17 px. Ad satırında puan sağda yüzer (`position:absolute`), ad ile fiyat arası 4 px.
+- Kullanıcı: "Her bir emoji benefitin bu kadar kısmı çalışıyor, boş olan kısımları silebilirsin, tamamen kurumsal bir hissiyat versin, her şey yerli yerinde olsun." `luna_e.kart_k`: gri ekran kutusu kalktı; her kartta solda 28 px'lik çalışan gösterge (3 disk, lamba + 3 kademe çubuğu, telefon ··· lamba + ses çubukları, lamba + pil), başlık 14/600, açıklama 13 px; beyaz kart, 1 px gri çizgi. Model değişince lamba/robot ikonu yine değişir. Test: 360 px'te gösterge kartta, gri ekran yok, "Diskleri gör" tek satır.
+- Pano boyu LunaDreamE 7244.
+
+## Büyük site inceliği: kalınlık ve ikon karoları (23 Ekim)
 - Kullanıcı: "Hâlâ biraz büyük geliyor gözüme; mükemmel otursun, tüm kısımlar, tüm section'lar, tüm yazılar büyük olmasın; büyük sitelerin tasarımlarından örnek alabilirsin."
 - Ölçüm (`scratchpad/ref-olc.js`, izleyiciler engelli, sepet/form yok): Hatch Restore 3 (ad 32/500, fiyat 22/500, h2 28), Loftie Lamp (36/400, 17, h2 25-34), Glossier (28/500, 14), Allbirds (24/400), Oura (40/400). Yazı boyumuz onlardan büyük değil; fark kalınlıkta (bizde 700-800) ve dolu lacivert 44-48 px ikon karolarında.
 - Yapılan: USB başlık yazı tipi (Bricolage) 800 → 600 (600 yüklendi), AyFeneri (Big Shoulders) 800 → 700, Galaksi Night (Sora) 700 → 600; fiyatlar 700 → 600 (LunaDream, sade); özellik ikon karosu `.mini` 48 → 36 (ikon 22), güven karosu `.gv-ik` 44 → 36 (ikon 20); alt çubukta ürün adı 17 → 15/600; LunaDream öne çıkan yorum 21 → 18, yorum listesi 17 → 15; dergi kapağı sözcüğü 128 → 104 px.

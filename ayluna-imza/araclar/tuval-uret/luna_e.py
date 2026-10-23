@@ -17,6 +17,23 @@ def ay(f, r=9, c=12):
     return 'M%d %dA%d %d 0 0 1 %d %dA%.2f %d 0 0 %d %d %dZ' % (c, c - r, r, r, c, c + r, rx, r, 0 if f < .5 else 1, c, c - r)
 
 
+# Sihirli kartı kurumsal (kullanıcı, 23 Eki: "her emoji benefitin bu kadar kısmı çalışıyor, boş kısımları sil, tamamen kurumsal
+# bir his, her şey yerli yerinde"): gri ekran kutusu yok; solda 28 px'lik çalışan gösterge (diskler, kademe, telefon→lamba, pil),
+# altında başlık ve tek satır açıklama. Sınıflar (a-kart, sh-ek) testler ve masaüstü için aynı kalır.
+def kart_k(k):
+    a, b, t = k[0], k[1], k[2]
+    if a == 'disk':
+        g = '<span class="kv kv-disk">' + ''.join('<img src="/_blob/%s" alt="">' % i for _, i in S2.DISK[:3]) + '</span>'
+    elif a == 'isik':
+        g = '<span class="kv kv-isik">' + S2.IKON + '<span class="kad3"><i></i><i></i><i></i></span></span>'
+    elif a == 'bt':
+        g = '<span class="kv kv-bt">' + S2.TEL + '<span class="akis"><i></i><i></i><i></i></span>' + S2.IKON + '<span class="eq"><i></i><i></i><i></i><i></i></span></span>'
+    else:
+        g = '<span class="kv kv-sarj">' + S2.IKON + '<span class="pil"><i></i><i></i><i></i><i></i></span></span>'
+    ic = '<span class="sh-ek" aria-hidden="true">%s</span><span><b>%s</b><span class="t">%s%s</span></span>' % (g, b, t, ' <u>Diskleri gör</u>' if a == 'disk' else '')
+    return ('<a class="a-kart" href="#diskler">%s</a>' if a == 'disk' else '<div class="a-kart">%s</div>') % ic
+
+
 def muhur():
     # 30 gün mührü: halkada 8 ay evresi (yeni aydan dolunaya ve geri); 30 gün ≈ bir ay döngüsü
     g = ''
@@ -85,7 +102,8 @@ CSS = r""".pg{background:#F6F1E9}
 .sayac-ay{width:14px;height:14px;flex:none}.sayac-ay circle{fill:none;stroke:rgba(185,190,214,.6);stroke-width:1.6}.sayac-ay path{fill:#F2A65A}
 .duyuru b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#F2A65A}
 /* Ad satırı: solda ad, sağda puan (iki satır, sağa yaslı); puanın yıldızları ışık, tek amber */
-.ad-satir{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px}
+.ad-satir{position:relative;margin-top:6px;padding-right:96px}
+.ad-satir .puan{position:absolute;right:0;top:50%;transform:translateY(-50%)}
 .ad-satir .dev{margin:0}
 .puan{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;min-height:48px;text-decoration:none;color:#1A2142;white-space:nowrap}
 .puan-ust{display:flex;align-items:center;gap:6px;font-size:15px;line-height:1}
@@ -246,24 +264,27 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .yol.on .yol-lamba{animation-play-state:running}
 @keyframes yk-lamba{0%,58%{opacity:0;transform:translateY(4px)}66%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
 @media (prefers-reduced-motion:reduce){.yol-lamba{animation:none!important;opacity:1;transform:none}}
-/* Fiyat düşüşü: 0–0,7 sn ₺1.999,00 büyük; 0,7 sn çizilir; 1,1 sn sağa kayıp küçülür ve söner, yerine soluk eski fiyat gelir;
-   aynı anda indirimli fiyat 10px yukarıdan düşer; 1,6 sn rozet belirir. Yalnız transform/opacity, bir kez. */
-.fiyat-satir{position:relative;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:8px 0 0;min-height:28px;font-variant-numeric:tabular-nums}
-.fy-yeni{font-size:20px;font-weight:600;letter-spacing:-.01em}
-.fy-eski{font-size:14px;color:#5C6078}
-.fy-ilk{position:absolute;left:0;top:0;font-size:20px;font-weight:600;letter-spacing:-.01em;color:#1A2142;opacity:0;pointer-events:none;transform-origin:0 70%}
-.fy-ilk::after{content:"";position:absolute;left:-2px;right:-2px;top:55%;height:2px;border-radius:1px;background:#1A2142;transform:scaleX(0);transform-origin:0 50%}
-@keyframes fy-ilk{0%{opacity:1;transform:none}55%{opacity:1;transform:none}100%{opacity:0;transform:translateX(118px) scale(.7)}}
-@keyframes fy-cizgi{0%,30%{transform:scaleX(0)}55%,100%{transform:scaleX(1)}}
-@keyframes fy-dus{0%,55%{opacity:0;transform:translateY(-12px)}100%{opacity:1;transform:none}}
-@keyframes fy-gel{0%,60%{opacity:0}100%{opacity:1}}
-@keyframes fy-rozet{0%,75%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:none}}
-.fy-ilk{animation:fy-ilk 1.6s cubic-bezier(.2,.7,.2,1) .3s both}
-.fy-ilk::after{animation:fy-cizgi 1.6s cubic-bezier(.2,.7,.2,1) .3s both}
-.fy-yeni{animation:fy-dus 1.6s cubic-bezier(.2,.7,.2,1) .3s both}
-.fy-eski{animation:fy-gel 1.6s cubic-bezier(.2,.7,.2,1) .3s both}
-.fy-rozet{animation:fy-rozet 2s cubic-bezier(.2,.7,.2,1) .3s both}
-@media (prefers-reduced-motion:reduce){.fy-ilk,.fy-ilk::after,.fy-yeni,.fy-eski,.fy-rozet{animation:none}.fy-ilk{opacity:0}}
+/* Fiyat (kullanıcı, 23 Eki): önce ₺1.999,00 gelir, üstü çizilir, yana kayıp küçülür ve yerine gerçek fiyat gelir; sonra çizili fiyat
+   gider, aynı yerde "%15 indirim" belirir. Eski fiyat ve rozet aynı ızgara hücresinde; eski fiyat başta -100% (fiyatla aynı genişlik,
+   tabular rakam) kayarak gerçek fiyatın yerinde durur. Yalnız transform/opacity, bir kez (3 sn). Hareket azaltılmışsa son hâl. */
+.fiyat-satir{display:flex;align-items:center;gap:10px;margin:4px 0 0;font-variant-numeric:tabular-nums}
+.fy-yeni{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.fy-yuva{display:grid;align-items:center;justify-items:start}
+.fy-yuva>*{grid-area:1/1}
+.fy-eski{position:relative;font-size:17px;font-weight:600;line-height:1.2;letter-spacing:-.01em;color:#1A2142;text-decoration:none;transform-origin:0 50%;opacity:0}
+.fy-eski::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;border-radius:1px;background:currentColor;transform:scaleX(0);transform-origin:0 50%}
+.fy-rozet{opacity:0}
+@keyframes fy-eski{0%,30%{opacity:1;transform:translateX(calc(-100% - 10px))}
+  48%,76%{opacity:.55;transform:scale(.82)}
+  88%,100%{opacity:0;transform:translateY(6px) scale(.82)}}
+@keyframes fy-cizgi{0%,10%{transform:scaleX(0)}26%,100%{transform:scaleX(1)}}
+@keyframes fy-yeni{0%,36%{opacity:0;transform:translateX(-8px)}52%,100%{opacity:1;transform:none}}
+@keyframes fy-rozet{0%,82%{opacity:0;transform:scale(.86)}96%,100%{opacity:1;transform:none}}
+.fy-eski{animation:fy-eski 3s cubic-bezier(.2,.7,.2,1) .3s both}
+.fy-eski::after{animation:fy-cizgi 3s cubic-bezier(.2,.7,.2,1) .3s both}
+.fy-yeni{animation:fy-yeni 3s cubic-bezier(.2,.7,.2,1) .3s both}
+.fy-rozet{animation:fy-rozet 3s cubic-bezier(.2,.7,.2,1) .3s both}
+@media (prefers-reduced-motion:reduce){.fy-eski,.fy-eski::after,.fy-yeni,.fy-rozet{animation:none}.fy-eski{opacity:0}.fy-rozet,.fy-yeni{opacity:1}}
 /* Bölümler */
 .bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
@@ -447,12 +468,12 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <a class="puan" href="#yorumlar" aria-label="5 üzerinden {{rating}} puan, {{reviews}} yorum"><span class="puan-ust">""" + STAR + """<b>{{rating}}</b></span><span class="puan-alt">{{reviews}} yorum</span></a>
     </div>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
-    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><span class="fy-ilk" aria-hidden="true">{{c1}}</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><s class="fy-eski" aria-hidden="true">{{c1}}</s><span class="indirim fy-rozet" aria-hidden="true">%{{pct}} indirim</span></p>
+    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><b class="fy-yeni" aria-hidden="true">{{p1}}</b><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{c1}}</s><span class="indirim fy-rozet">%{{pct}} indirim</span></span></p>
 """ + DUN_SATIR + """
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). Canlı kartlar (21 Eki): her kartta küçük ekran ve sekans -->
     <p class="ust-yazi" style="margin-top: 22px; margin-bottom: 0">Sihirli özellikler</p>
-    <div class="sih">""" + ''.join(S2.kart_a(k) for k in S2.OZ) + """
+    <div class="sih">""" + ''.join(kart_k(k) for k in S2.OZ) + """
     </div>
 
     <!-- Seçiciler (Tur 25, kullanıcı "Satır kartlar"ı seçti): model yan yana iki yarım kart, paket alt alta satır kart,
@@ -808,11 +829,29 @@ def sihirli(h):
 # Önce: Sihirli kart 164 px, model 74, paket 82, ad 17 px, fiyat 18 px, düğme 62/56. Dokunma alanı ≥ 48 px, yazı ≥ 12 px korunur.
 BOYUT_CSS = """
 .sih{gap:8px;margin-top:10px}
-.a-kart{gap:8px;padding:6px 6px 10px;border-radius:16px}
-.a-kart .sh-ek{height:54px;border-radius:12px}
-.a-kart .sh-ek .ui{transform:scale(.8)}
-.a-kart b{padding:0 4px;font-size:14px}
-.a-kart span.t{padding:0 4px;font-size:13px;line-height:1.35}
+.a-kart{gap:10px;padding:12px;border-radius:14px;background:#FFFFFF;border:1px solid #E4E6EB}
+.a-kart .sh-ek{display:flex;align-items:center;justify-content:flex-start;height:28px;padding:0;border-radius:0;background:none;overflow:visible}
+.a-kart b{padding:0;font-size:14px;font-weight:600}
+.a-kart span.t{padding:0;font-size:13px;line-height:1.4}
+.kv{display:flex;align-items:center;gap:6px;height:28px}
+.kv .lmb{width:26px;height:26px}
+.kv .tel{width:20px;height:20px}
+.kv-disk img{width:26px;height:26px;margin-left:-8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFFFF}
+.kv-disk img:first-child{margin-left:0}
+.kad3{display:flex;align-items:flex-end;gap:3px;height:16px;margin-left:2px}
+.kad3 i{width:4px;border-radius:2px;background:#F2A65A}
+.kad3 i:nth-child(1){height:6px}
+.kad3 i:nth-child(2){height:11px;animation:kd2 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.kad3 i:nth-child(3){height:16px;animation:kd3 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+@keyframes kd2{0%,30%{opacity:.22}37%,92%{opacity:1}100%{opacity:.22}}
+@keyframes kd3{0%,63%{opacity:.22}70%,92%{opacity:1}100%{opacity:.22}}
+.kv-isik .isk{animation:lisk 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.kv-bt .akis{width:28px}
+.kv-bt .akis::before{content:"";position:absolute;left:0;right:0;top:3px;border-top:1.5px dotted #C9CED8}
+.kv-bt .eq{height:14px}.kv-bt .eq i{height:14px}
+.kv-sarj .isk{animation:sisk 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+.kv-sarj .pil{width:34px;height:18px;margin-left:2px}
+@media (prefers-reduced-motion:reduce){.kad3 i,.kv .isk{animation:none!important;opacity:1}}
 .kt{border-width:1px;border-radius:14px}
 .sat{min-height:60px;gap:10px;padding:6px 12px 6px 6px;border-radius:13px}
 .tl{width:44px;height:48px;border-radius:10px}
@@ -855,5 +894,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7307)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7244)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))
