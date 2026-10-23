@@ -181,18 +181,11 @@ body{margin:0;background:#F2F4F8}
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}
 .on .nokta i{opacity:1;transform:none}
 .kurdele{position:absolute;right:14px;top:-11px;padding:2px 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
-/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok */
-.dun{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:14px;color:var(--soluk)}
-.dun b{color:var(--lac);font-variant-numeric:tabular-nums}
-.dun svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v2);stroke-width:1.8;stroke-linecap:round}
-/* Dün satırı girişi (kullanıcı, 18 Eki: "hafif bir animasyon"): fiyat ve rozet oturunca bir kez; satır aşağıdan gelir,
-   sayı yukarıdan düşer, simge rozet gibi belirir. Sayan rakam yok. */
-.dun{animation:dun-gel .5s var(--ease) 1.2s both}
-.dun b{display:inline-block;animation:dun-dus .7s var(--ease) 1.35s both}
-.dun svg{animation:pop .5s var(--ease) 1.5s both}
+/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok. 23 Eki: canlı sitedeki gibi dönen şerit (ortak.tk_html);
+   fiyat ve rozet oturunca bir kez aşağıdan gelir */
+.dun.dsr{animation:dun-gel .5s var(--ease) 1.2s both}
 @keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes dun-dus{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.dun,.dun b,.dun svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.dun.dsr{animation:none}}
 /* Dönen satır (kullanıcı, 18 Eki): "Her kutuda 12 film diski" ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde;
    dönerken yükseklik değişmez. Giren alttan, çıkan yukarı. Hareket azaltılmışsa ikisi alt alta. */
 /* Renk (kullanıcı, 18 Eki: LunaDream'deki lacivert hap USB'ye de): lacivert zemin, beyaz yazı; diskler lacivert halkalı. */
@@ -477,6 +470,19 @@ body{margin:0;background:#F2F4F8}
 .mbuyuk img{width:auto;max-width:100%;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);border-radius:16px;object-fit:contain}
 .mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
 .mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+.dsr{display:block;margin:8px 0 0;font-size:13px;font-weight:700;line-height:24px;color:var(--lac)}
+.dsr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.dsr-pen{position:relative;display:block;height:24px;overflow:hidden}
+.dsr-iz{display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.dsr-iz.anlik{transition:none}
+.dsr-s{display:flex;align-items:center;gap:8px;height:24px;white-space:nowrap;overflow:hidden}
+.dsr-s>span{overflow:hidden;text-overflow:ellipsis}
+.dsr-s b{font-weight:700;color:var(--v2);font-variant-numeric:tabular-nums}
+.dsr-s svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--v2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dsr-nokta{position:relative;flex:none;width:8px;height:8px;margin:0 4px;border-radius:50%;background:var(--v2)}
+.dsr-nokta::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--v2);animation:dsr-nabiz 1.5s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes dsr-nabiz{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+@media (prefers-reduced-motion:reduce){.dsr-iz{transition:none}.dsr-nokta::after{animation:none}}
 
 </style>
 </helmet>
@@ -495,7 +501,7 @@ body{margin:0;background:#F2F4F8}
     <p class="alt-b">2'si 1 arada: galaksi projektörü ve gece lambası.</p>
     <!-- Üstü çizili fiyat için son 10 günün fiyat kaydı gerekir (mevzuat kural 1b); teyit bekliyor -->
     <p class="fiyat" aria-label="₺1.599,00, önceki fiyat ₺1.999,00, %20 indirim"><b aria-hidden="true">₺1.599,00</b><s aria-hidden="true">₺1.999,00</s><span class="rozet" aria-hidden="true">%20 indirim</span></p>
-    <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>62</b> kişi satın aldı</span></p>
+    <p class="dun dsr"><span class="dsr-sr">Dün 62 kişi satın aldı. Ücretsiz kargo ile kapına. 30 gün iade hakkı. Kartla öde, %5 indirim.</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)"><span class="dsr-s"><i class="dsr-nokta"></i><span>Dün <b>62 kişi</b> satın aldı</span></span><span class="dsr-s"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span><b>Ücretsiz kargo</b> ile kapına</span></span><span class="dsr-s"><svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path></svg><span><b>30 gün</b> iade hakkı</span></span><span class="dsr-s"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg><span>Kartla öde, <b>%5 indirim</b></span></span><span class="dsr-s"><i class="dsr-nokta"></i><span>Dün <b>62 kişi</b> satın aldı</span></span></span></span></p>
 
 
     <div class="ozler">
@@ -635,6 +641,9 @@ class Component extends DCLogic {
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % 3; o.kBas = t; }
       if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
+      if (!azH) { var tkd = t - (S.tkT || 0);
+        if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = t - 1; o.tkAn = true; }
+        else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = t; o.tkAn = false; } }
       self.setState(o);
     }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
@@ -741,6 +750,7 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
       onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd',
+      tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''),
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
       alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1)

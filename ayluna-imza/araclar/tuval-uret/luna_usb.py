@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK
+from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK, tk_html, tk_css, tk_adim, TK_DEGER
 import luna_e as E
 import luna_usb_yon as Y
 import urun_soru as US
@@ -282,18 +282,11 @@ CSS = r"""
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}
 .on .nokta i{opacity:1;transform:none}
 .kurdele{position:absolute;right:14px;top:-11px;padding:2px 10px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
-/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok */
-.dun{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:14px;color:var(--soluk)}
-.dun b{color:var(--lac);font-variant-numeric:tabular-nums}
-.dun svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v2);stroke-width:1.8;stroke-linecap:round}
-/* Dün satırı girişi (kullanıcı, 18 Eki: "hafif bir animasyon"): fiyat ve rozet oturunca bir kez; satır aşağıdan gelir,
-   sayı yukarıdan düşer, simge rozet gibi belirir. Sayan rakam yok. */
-.dun{animation:dun-gel .5s var(--ease) 1.2s both}
-.dun b{display:inline-block;animation:dun-dus .7s var(--ease) 1.35s both}
-.dun svg{animation:pop .5s var(--ease) 1.5s both}
+/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok. 23 Eki: canlı sitedeki gibi dönen şerit (ortak.tk_html);
+   fiyat ve rozet oturunca bir kez aşağıdan gelir */
+.dun.dsr{animation:dun-gel .5s var(--ease) 1.2s both}
 @keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes dun-dus{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.dun,.dun b,.dun svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.dun.dsr{animation:none}}
 /* Dönen satır (kullanıcı, 18 Eki): "Her kutuda 12 film diski" ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde;
    dönerken yükseklik değişmez. Giren alttan, çıkan yukarı. Hareket azaltılmışsa ikisi alt alta. */
 /* Renk (kullanıcı, 18 Eki: LunaDream'deki lacivert hap USB'ye de): lacivert zemin, beyaz yazı; diskler lacivert halkalı. */
@@ -532,7 +525,7 @@ DUN = '62'  # kullanıcı, 18 Eki: LunaDream'deki gibi
 STOK = '23'  # kullanıcı, 18 Eki
 AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % E.ay(.15)
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
-DUN_SATIR = ('    <p class="dun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
+DUN_SATIR = tk_html(DUN) if DUN else ''  # 23 Eki: canlı sitedeki gibi dönen şerit
 SAAT = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>'
 # Güven: kartla ödeme kapıda ödemenin önünde (iade kapıda %28,6, ön ödemede %0,8). ₺80 kapıda ücreti formda ve SSS'de.
 GUVEN = ('<div class="ozler dort">'
@@ -711,7 +704,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS, t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('var(--lac)', 'var(--v2)', 'var(--v2)'), t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -728,7 +721,7 @@ JS = """class Component extends DCLogic {
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % """ + str(len(KIM)) + """; o.kBas = t; }
       if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
-      self.setState(o);
+""" + tk_adim('t') + """      self.setState(o);
     }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');
@@ -806,6 +799,7 @@ JS = """class Component extends DCLogic {
       onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd',
+      """ + TK_DEGER + """
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
       alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1)

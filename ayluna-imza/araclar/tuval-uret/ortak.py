@@ -77,6 +77,55 @@ KAY_JS = """function KAY(y) { return function (e) { var t = e && (e.currentTarge
       if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
 """
 
+# "Dün X kişi satın aldı" dönen şeridi (23 Eki, kullanıcı: "dün 62 kişi satın aldı kısmı şu an sitemdeki gibi dönen ücretsiz kargo vesaire
+# olan kısım gibi olsun"). Canlıdaki live-checkout mantığı: 24 px tek satır penceresi, satırlar alt alta, 3 sn'de bir yukarı kayar (0,5 sn),
+# ilk satırda nabız noktası, vurgu kalın. Yalnız doğru bilgi: canlıdaki "31 kişi şu anda inceliyor" ve "3 günde 399 adet satıldı"
+# (uydurma sayı) ile teyitsiz "son 10 günün en düşük fiyatı" alınmadı; emoji yerine çizgi ikon. Sona ilk satırın kopyası eklenir ki
+# başa dönüş görünmeden olsun. Hareket azaltılmışsa yalnız ilk satır durur.
+TK_IKON = {'kargo': '<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle>',
+           'iade': '<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path>',
+           'kart': '<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>'}
+
+
+def tk_html(dun):
+    import re
+    sat = [('', 'Dün <b>%s kişi</b> satın aldı' % dun), ('kargo', '<b>Ücretsiz kargo</b> ile kapına'),
+           ('iade', '<b>30 gün</b> iade hakkı'), ('kart', 'Kartla öde, <b>%5 indirim</b>')]
+    def bir(ik, t):
+        on = '<i class="dsr-nokta"></i>' if not ik else '<svg viewBox="0 0 24 24">' + TK_IKON[ik] + '</svg>'
+        return '<span class="dsr-s">' + on + '<span>' + t + '</span></span>'
+    sr = ' '.join(re.sub('<[^>]+>', '', t) + '.' for _, t in sat)
+    return ('    <p class="dun dsr"><span class="dsr-sr">' + sr + '</span><span class="dsr-pen" aria-hidden="true">'
+            '<span class="{{tkCls}}" style="transform: translateY({{tkY}}px)">' + ''.join(bir(*x) for x in sat) + bir(*sat[0]) + '</span></span></p>\n')
+
+
+def tk_css(metin, vurgu, nokta):
+    return (""".dsr{display:block;margin:8px 0 0;font-size:13px;font-weight:700;line-height:24px;color:%(m)s}
+.dsr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%%);white-space:nowrap}
+.dsr-pen{position:relative;display:block;height:24px;overflow:hidden}
+.dsr-iz{display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.dsr-iz.anlik{transition:none}
+.dsr-s{display:flex;align-items:center;gap:8px;height:24px;white-space:nowrap;overflow:hidden}
+.dsr-s>span{overflow:hidden;text-overflow:ellipsis}
+.dsr-s b{font-weight:700;color:%(v)s;font-variant-numeric:tabular-nums}
+.dsr-s svg{width:16px;height:16px;flex:none;fill:none;stroke:%(v)s;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dsr-nokta{position:relative;flex:none;width:8px;height:8px;margin:0 4px;border-radius:50%%;background:%(n)s}
+.dsr-nokta::after{content:"";position:absolute;inset:0;border-radius:50%%;background:%(n)s;animation:dsr-nabiz 1.5s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes dsr-nabiz{0%%{opacity:.55;transform:scale(1)}100%%{opacity:0;transform:scale(2.6)}}
+@media (prefers-reduced-motion:reduce){.dsr-iz{transition:none}.dsr-nokta::after{animation:none}}
+""" % {'m': metin, 'v': vurgu, 'n': nokta})
+
+
+# Zamanlayıcıya (her saniye) eklenir: tik = saniye sayacı adı, S = durum, o = yeni durum. 4 satır + kopya; her satır 3 sn.
+def tk_adim(tik):
+    return ("      if (!azH) { var tkd = %(t)s - (S.tkT || 0);\n"
+            "        if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = %(t)s - 1; o.tkAn = true; }\n"
+            "        else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = %(t)s; o.tkAn = false; } }\n") % {'t': tik}
+
+
+TK_DEGER = "tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''),"
+
+
 # Ürün galerisi okları (23 Eki, masaüstü: fareyle kaydırılamıyordu). Telefonda gizli (parmakla kayar); masaüstünde fotoğrafın iki yanında,
 # üzerine gelince belirir. Sondan başa döner. Elle kaydırmayla aynı: galerinin kendi onScroll'u sırayı ve otomatik geçişi günceller.
 def gal_ok(ad='fotoğraf'):

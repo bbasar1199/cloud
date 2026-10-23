@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS, serit_ok, GAL_OK, GALOK_JS
+from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS, serit_ok, GAL_OK, GALOK_JS, tk_html, tk_css, tk_adim, TK_DEGER
 import sihirli2_varyant as S2
 import ozellik4_varyant as OZ4
 
@@ -92,19 +92,12 @@ CSS = r""".pg{background:#F6F1E9}
 .puan-ust .yildiz{font-size:14px}
 .puan-ust b{font-weight:700;font-variant-numeric:tabular-nums}
 .puan-alt{font-size:13px;line-height:1.2;color:#5C6078;text-decoration:underline;text-decoration-color:#D6CAB6;text-underline-offset:3px}
-/* Dün satırı (kullanıcı, 18 Eki: "Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı"): sayı elle girilir, boşsa satır yok */
-.dun{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;color:#5C6078}
-.dun b{color:#1A2142;font-variant-numeric:tabular-nums}
-.dun i{position:relative;flex:none;width:8px;height:8px;border-radius:50%;background:#2E6B4F}
-/* Dün satırı girişi (kullanıcı, 18 Eki: "hafif bir animasyon, tasarım diline uygun"): fiyat düşüşünün devamı, bir kez.
-   Fiyat 1,9 sn'de yerine oturunca satır 6px aşağıdan gelir, sayı fiyattaki gibi yukarıdan düşer, nokta üç kez yumuşak halka verir.
-   Sayan rakam yok; yalnız transform/opacity. */
-.dun{animation:dun-gel .5s cubic-bezier(.2,.7,.2,1) 1.9s both}
-.dun b{display:inline-block;animation:fy-dus 1s cubic-bezier(.2,.7,.2,1) 1.9s both}
-.dun i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#2E6B4F;opacity:0;animation:dun-hale 1.8s cubic-bezier(.2,.7,.2,1) 2.5s 3}
+/* Dün satırı (kullanıcı, 18 Eki: "Stokta'yı kaldıralım, altına dün şu kadar kişi satın aldı"): sayı elle girilir, boşsa satır yok.
+   23 Eki: canlı sitedeki gibi dönen şerit (ortak.tk_html / tk_css): Dün 62 → ücretsiz kargo → 30 gün iade → kartla %5. Fiyat 1,9 sn'de
+   yerine oturunca şerit 6 px aşağıdan bir kez gelir. */
+.dun.dsr{animation:dun-gel .5s cubic-bezier(.2,.7,.2,1) 1.9s both}
 @keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes dun-hale{0%{opacity:.45;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
-@media (prefers-reduced-motion:reduce){.dun,.dun b,.dun i::after{animation:none}}
+@media (prefers-reduced-motion:reduce){.dun.dsr{animation:none}}
 .indirim{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7;color:#A05A1C}
 /* Bölüm geçişi (Tur 12, kullanıcı isteği): kaydırınca bölüm 20px aşağıdan ve saydamdan gelir. Yalnız transform/opacity.
    Tarayıcı desteklemiyorsa ya da azaltılmış hareket açıksa hiç oynamaz, içerik hep görünür. */
@@ -396,7 +389,7 @@ STOK = '18'
 # Azalan ay: hediye satırındaki hilalin aynası (ışık solda), "azalıyor" der; oranlı çubuk yerine.
 AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path transform="matrix(-1 0 0 1 24 0)" d="%s"></path></svg>' % ay(.15)
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
-DUN_SATIR = ('    <p class="dun"><i aria-hidden="true"></i><span>Dün <b>%s</b> kişi satın aldı</span></p>\n' % DUN) if DUN else ''
+DUN_SATIR = tk_html(DUN) if DUN else ''  # 23 Eki: canlı sitedeki gibi dönen şerit
 # Galeri · premium fotoğraf seti (22 Eki; kullanıcı ChatGPT'de üretti, istemler ogrenme/chatgpt-istemleri-lunadream.txt).
 # Galeri = satış afişleri, 2. tur (23 Eki; kullanıcı: "satış odaklı değil, yorum görseli yapılmamış, çok sönük"). araclar/gorsel/afis_uret.py:
 # açılış (Kız, gece, tavanda yansıma) · yorum (Loox'taki gerçek alıcılar) · diskler · Erkek (Uzay Kaşifi, etiketli) · kutudan ne çıkıyor + güven şeridi.
@@ -609,7 +602,7 @@ JS = """class Component extends DCLogic {
     this.tik = 0; this.iv = setInterval(function () { self.tik++; var S = self.state, o = { now: Date.now() };
       if (S.gOto !== false && self.tik % 5 === 0) self.galGit((S.g + 1) % Math.max(1, document.querySelectorAll('.kf').length));
       if (!azH && self.tik - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = self.tik; }
-      self.setState(o); }, 1000);
+""" + tk_adim('self.tik') + """      self.setState(o); }, 1000);
     // Stok kurdelesi: buton ekrana girince bir kez belirir (gözlemci yoksa hemen)
     var al = document.querySelector('.al-on');
     if (al && typeof IntersectionObserver !== 'undefined') {
@@ -790,6 +783,7 @@ JS = """class Component extends DCLogic {
       onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, kgAria: KG.aria,
+      """ + TK_DEGER + """
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
@@ -810,5 +804,5 @@ def sihirli(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='LunaDream · E', css=CSS + SERIT_OK_CSS + tk_css('#1A2142', '#A05A1C', '#F2A65A')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS)))
     print('yazıldı:', os.path.abspath(OUT))
