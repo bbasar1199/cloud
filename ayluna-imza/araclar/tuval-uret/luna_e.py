@@ -803,6 +803,45 @@ def sihirli(h):
     return h[i:h.index('\n    </div>', h.index('<div class="sih">', i)) + len('\n    </div>')]
 
 
+# Satın alma kutusu olağan boyutta (23 Eki, kullanıcı: "emoji benefit kısmı, model seçimi kısmı vesaire çok büyük, daha default bir
+# boyuta getir, orantısızlıkları düzelt"): Sihirli kartları, model ve paket kartları, düğmeler Shopify ürün sayfası ölçüsüne yakın.
+# Önce: Sihirli kart 164 px, model 74, paket 82, ad 17 px, fiyat 18 px, düğme 62/56. Dokunma alanı ≥ 48 px, yazı ≥ 12 px korunur.
+BOYUT_CSS = """
+.sih{gap:8px;margin-top:10px}
+.a-kart{gap:8px;padding:6px 6px 10px;border-radius:16px}
+.a-kart .sh-ek{height:54px;border-radius:12px}
+.a-kart .sh-ek .ui{transform:scale(.8)}
+.a-kart b{padding:0 4px;font-size:14px}
+.a-kart span.t{padding:0 4px;font-size:13px;line-height:1.35}
+.kt{border-width:1px;border-radius:14px}
+.sat{min-height:60px;gap:10px;padding:6px 12px 6px 6px;border-radius:13px}
+.tl{width:44px;height:48px;border-radius:10px}
+.tl img{bottom:4px;height:38px}
+.tl.cift{width:54px}.tl.cift img{height:34px}
+.yarim{min-height:56px;padding:6px 10px 6px 6px}
+.yarim .tl{width:40px;height:44px}.yarim .tl img{height:34px}
+.yarim-iz{gap:8px;margin-top:8px}
+.pk-liste{gap:12px;margin-top:12px}
+.ad{font-size:15px;letter-spacing:-.01em}
+.alt{margin-top:2px;font-size:12.5px}
+.fiyat{font-size:16px;letter-spacing:-.01em}
+.ayr{width:20px;height:20px}
+.kurdele{top:-10px;padding:1px 9px}
+.donen{padding:8px 12px;border-radius:12px;font-size:13px}
+.al-on{margin-top:20px}
+.btn-on{min-height:52px;margin-top:16px;border-radius:16px}
+.btn-kp{min-height:48px;margin-top:10px;border-radius:16px}
+.teslim{margin-top:16px;border-radius:16px}
+.teslim::before{height:52px;border-radius:12px}
+.teslim .yol{padding-top:12px}
+.teslim .yol::before{top:26px}
+.teslim .yol-akis{top:25.25px}
+.teslim .yol .evre{margin-bottom:18px}
+.urs{border-radius:16px}
+.urs-s summary{min-height:48px;font-size:14px}
+"""
+
+
 # Zemin beyaz, renkler sade (23 Eki, kullanıcı: "arka planı beyaza çevir, renk olarak daha sade bir renge getir"; kapsam: yalnız LunaDream).
 # Açık paletin bej tonları nötre çevrilir: krem zemin ve krem kart beyaz, bej panel açık gri, bej çizgi gri, kehribar küçük başlıklar lacivert.
 # Koyu bölümler (gece, vitrin, alt bilgi), amber düğme ve yıldızlar olduğu gibi kalır. --zemin: site ve temada sayfanın dış zemini.
@@ -817,5 +856,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s')) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7647)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7430)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

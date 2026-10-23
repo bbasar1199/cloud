@@ -475,7 +475,10 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## LunaDream zemini beyaz, renkler sade (23 Ekim, en güncel)
+## Satın alma kutusu olağan boyutta (23 Ekim, en güncel)
+- Kullanıcı: "Emoji benefit kısmı, model seçimi kısmı vesaire çok büyük, daha default bir boyuta getir, orantısızlıkları düzelt." `luna_e.py` `BOYUT_CSS` (CSS'in sonuna eklenir, yalnız LunaDream): Sihirli 164 → 135 px, model 74 → 58, paket 82 → 62, düğmeler 62/56 → 52/48, teslim 137 → 125, 4 soru satırı 54 → 48. Kutu 1524 → 1323 px; E_H 7647 → 7430.
+
+## LunaDream zemini beyaz, renkler sade (23 Ekim)
 - Kullanıcı: "Fazla mı animasyon var?" → ölçüldü (ilk 3 telefon ekranında Sihirli kartları, teslim kartı sürekli; iki dönen satır, iki sayaç, galeri). Öneri verildi (Sihirli ve teslim ekrana girince bir tur oynayıp dursun; Dün şeridinde satır içi hareket yalnız ilk satırda); kullanıcı henüz seçmedi.
 - Kullanıcı: "Arka planı beyaza çevir, renk olarak daha sade bir renge getir." Kapsam: yalnız LunaDream. `luna_e.py` `SADE` + `sade()` yazarken açık paleti çevirir: #F6F1E9/#FFFDF9 → #FFFFFF, #F1E8DA → #F3F4F7, #EFE6D8 → #ECEEF2, #E3D8C7 → #E4E6EB, #D6CAB6 → #C9CED8, #766B5B → #6B7080, #A05A1C → #1A2142. `.pg{--zemin:#FFFFFF}` ile site/tema dış zemini beyaz. Koyu bölümler, amber düğme, yeşil Dün şeridi aynı.
 - Site testleri 169 HEPSİ TAMAM; tema benzetimi tamam, Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.27.zip`; tuval Sürüm 155, site Sürüm 44.
