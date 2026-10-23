@@ -485,7 +485,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Dönen satır (kullanıcı, 18 Eki: "ilk hali öyle başlasın, sonra bugün 16'ya kadar verilen siparişler aynı gün kargoda, orada bir sayaç dönsün").
          Hediye 4 sn, kargo 6 sn. Simge yoldaki gibi: hilal hediye, yarım ay kargoda. Ekran okuyucu ikisini düz metin okur, sayacı saniye saniye okumaz.
          16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
-    <p class="donen"><span class="dn-sr">Her kutuda 6 hediye masal diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda +6 hediye masal diski</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.5) + """'></path></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
+    <p class="donen"><span class="dn-sr">Her kutuda 6 masal diski. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.22) + """'></path></svg>Her kutuda 6 masal diski</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d='""" + ay(.5) + """'></path></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
     <!-- Stok kurdelesi (kullanıcı, 18 Eki: stok denemelerinden C seçildi): Güvenli Ödeme butonunun üst kenarında. Sayı elle
          (tema ayarı: sayı + aç/kapa; Shopify stoğuna bağlı değil), boşsa kurdele yok ve buton eski yerine döner. -->
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn-on" type="button">{{onLabel}}</button>""" + ('</div>' if STOK else '') + """
@@ -540,7 +540,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Diskler: tavana yansıt -->
   <section class="gece gir" id="diskler">
-    <div class="px"><h2 class="h2" style="color: #FFFDF9">Kutuda altı masal,<br>altı da hediye<span class="n">.</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
+    <div class="px"><h2 class="h2" style="color: #FFFDF9">Bu gece<br>hangi masal<span class="n">?</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
       <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>

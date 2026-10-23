@@ -221,6 +221,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - **ChatGPT de kullanılır** (kullanıcı, 21 Eki: "ChatGPT'den yaptır"). Oturumda `OPENAI_API_KEY` yoksa kopyala-yapıştır istem + numaralı referans paketi hazırlanır; anahtar istenmez.
 - **Kurumsal fotoğraf dili:** iki fon (sıcak krem stüdyo, derin lacivert gece), yumuşak ışık, 85 mm; fotoğrafın kendisi yazısız, mor-neon ve rozet yok. Çekim listesi `ogrenme/premium-fotograf-seti.md`.
 - **Ürün galerisi = satış afişleri** (kullanıcı, 22 Eki: "satış odaklı görseller olsun, USB'ninki gibi"): her kare tek mesaj, iki satır serif başlık (ikinci satır vurgu), bir satır alt yazı, 3 çizgi ikon + etiket ya da kutu listesi, sol üstte marka işareti. Zemin premium fotoğraf, ürün yazının altında kalmaz. Yazı HTML katmanında basılır (`araclar/gorsel/afis_uret.py`), görsel aracına yazdırılmaz; yalnız teyitli bilgi, rozet/yıldız/yorum yok.
+- **Afiş sönük olmaz** (23 Eki: "satış odaklı değil, yorum görseli yok, çok sönük"): yansıma görünür, doygun gece rengi, kalın büyük başlık, galeride bir gerçek yorum karesi (Loox, birebir; puan/sayı gömülmez), güven şeridi (ücretsiz kargo · 30 gün iade · kapıda ödeme). Krem zeminli ince serifli afiş galeride kullanılmaz.
 - Görselde yazı üretilmez; metin HTML'de eklenir.
 - Gerçek müşteri fotoğrafı ve videosu önceliklidir.
 
