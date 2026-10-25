@@ -9,7 +9,7 @@
 # filtre yerine iki görselin geçişi; AyFeneri'ne de alıcı fotoğrafları ve Loox satırı; A'nın ad/fiyat boyu küçüldü; 12px altı yazı yok.
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK
+from ortak import UST_CSS, TAIL, TL_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK
 import luna_e as E
 import luna_usb_yon as Y
 import luna_usb as U
@@ -135,7 +135,7 @@ def hero(u):
     %s
     <div class="h-alt">%s<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
-""" % (AD[u], GAL_OK, Y.ust('rgba(238,242,250,.6)'), gost))
+""" % (AD[u], GAL_OK, '', gost))
 
 
 def ozler(u):
@@ -393,6 +393,7 @@ def js(u):
     var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
 """ + KAY_JS + """    var PR = """ + json.dumps(shop, ensure_ascii=False) + """;
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
@@ -400,7 +401,7 @@ def js(u):
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
       kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
-      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
+      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
       yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
@@ -416,12 +417,12 @@ DOSYA = {'af': ('AyFeneri.dc.html', 'af-a'), 'gn': ('GalaksiNight.dc.html', 'gn-
 def sayfa(u):
     dosya, yon = DOSYA[u]
     t = O.YON[yon]
-    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS
+    css = O.tema_css(dict(t, ek='')) + U.CSS + O.CSS + t.get('ek', '') + '\n' + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + UST_CSS
     return U.head(AD[u], css, t['font']) + govde(u)
 
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
-        h = int(os.environ.get('S_H_' + u, {'af': 6722, 'gn': 7047}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
+        h = int(os.environ.get('S_H_' + u, {'af': 6712, 'gn': 7037}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
         open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

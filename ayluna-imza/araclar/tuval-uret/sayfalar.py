@@ -14,8 +14,8 @@ import anasayfa as A
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
 
-DUYURU = re.search(r'  <div class="duyuru".*?</div>\n', A.HTML, re.S).group(0)
-UST = re.search(r'  <header class="ust">.*?</header>\n', A.HTML, re.S).group(0)
+DUYURU = re.search(r'  <div class="duyuru[^"]*".*?<\/div>\n', A.HTML, re.S).group(0)
+UST = re.search(r'  <header class="ust[^"]*">.*?</header>\n', A.HTML, re.S).group(0)
 ALT = re.search(r'  <footer class="alt">.*?</footer>\n', A.HTML, re.S).group(0)
 YUKARI = re.search(r'  <button class="yukari".*?</button>\n', A.HTML, re.S).group(0)
 OK = A.OK

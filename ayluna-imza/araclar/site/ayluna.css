@@ -96,6 +96,18 @@ img{max-width:100%}
   .ay-masa .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .ay-masa [data-ay-adet]::after{top:3px;right:1px;background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
   .ay-masa a:focus-visible,.ay-masa button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* Üst blok renk döngüsü (25 Eki): beyaz zemin, lacivert yazı; lacivert kopya (.gk) 16 sn'de bir yumuşakça belirip kaybolur (yalnız opacity) */
+  .ay-masa{background:#FFFFFF;color:#1A2142;box-shadow:inset 0 -1px 0 #E4E6EB}
+  .ay-masa .ay-logo{color:#1A2142}.ay-masa .ay-logo circle{stroke:#C9CED8}
+  .ay-masa nav a{color:#5C6078}.ay-masa nav a:hover{color:#1A2142}.ay-masa nav a[aria-current]{color:#1A2142}
+  .ay-masa-sag a,.ay-masa-sag button{color:#1A2142}
+  .ay-masa-sag a:hover,.ay-masa-sag button:hover{background:rgba(26,33,66,.06)}
+  .ay-masa [data-ay-adet]::after{background:#1A2142;color:#fff;box-shadow:0 0 0 2px #fff}
+  .ay-masa>.gk{position:absolute;inset:0;background:#1A2142;color:#fff;pointer-events:none;opacity:0;animation:rd-gece 16s cubic-bezier(.45,0,.55,1) var(--rd-t,0s) infinite}
+  .ay-masa>.gk .ay-logo{color:#fff}.ay-masa>.gk .ay-logo circle{stroke:rgba(255,255,255,.6)}
+  .ay-masa>.gk nav a{color:#C9CFE2}.ay-masa>.gk nav a[aria-current]{color:#fff}
+  .ay-masa>.gk .ay-masa-sag a,.ay-masa>.gk .ay-masa-sag button{color:#fff}
+  .ay-masa>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
   /* 1024-1199 px: menü sığsın (1024'te 30 px yana taşıyordu) */
   @media (max-width:1199px){
     .ay-masa-ic{gap:20px;padding:0 24px}
@@ -413,3 +425,6 @@ img{max-width:100%}
 html.ay-shop [data-ay-kapida]{display:none!important}
 .ay-dis:not(:empty){margin-top:12px}
 .ay-arka{position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);visibility:hidden;pointer-events:none}
+/* Üst blok renk döngüsü: masaüstü başlığı için ortak anahtar kareler (sayfa CSS'inde de var) */
+@keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.ay-masa>.gk{animation:none}}

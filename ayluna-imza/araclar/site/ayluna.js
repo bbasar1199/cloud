@@ -233,7 +233,7 @@
   Sepet.bildir = bildir;
 
   // Menü
-  var MENU = [['Ana sayfa', './'], ['Tüm ürünler', 'tum-urunler.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
+  var MENU = [['Ana sayfa', './'], ['Ara', 'arama.html'], ['Tüm ürünler', 'tum-urunler.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
     ['Ayluna AyFeneri', 'lamba.html'], ['Galaksi Night Projektör', 'ayluna-galaksi-night-projektor.html'], ['Kargo takip', 'kargo-takip.html'], ['İade ve değişim', 'iade.html'], ['İletişim', 'iletisim.html']];
   var menu = null;
   function menuAc() {
@@ -274,6 +274,14 @@
     }
     var k = SAYFA === 'urun' ? URUN : SAYFA, l = masa.querySelectorAll('nav a');
     for (var i = 0; i < l.length; i++) { if (l[i].getAttribute('data-k') === k) l[i].setAttribute('aria-current', 'page'); else l[i].removeAttribute('aria-current'); }
+    // Üst blok renk döngüsü (kullanıcı, 25 Eki): beyaz ↔ lacivert, yalnız opacity. Bütün lacivert katmanlar (sayfadaki .gk ve buradaki kopya)
+    // aynı saate bağlı: 16 sn'lik döngüde aynı an. Masaüstü başlığının lacivert kopyası dokunulmaz, ekran okuyucu görmez.
+    document.documentElement.style.setProperty('--rd-t', (-(Date.now() % 16000) / 1000).toFixed(2) + 's');
+    var g = masa.querySelector('.gk'); if (g) masa.removeChild(g);
+    g = document.createElement('div'); g.className = 'gk'; g.setAttribute('aria-hidden', 'true'); g.setAttribute('inert', '');
+    g.appendChild(masa.querySelector('.ay-masa-ic').cloneNode(true));
+    [].forEach.call(g.querySelectorAll('a,button'), function (x) { if (sepetDugmesi(x.getAttribute('aria-label') || '')) x.classList.add('gk-sepet'); x.removeAttribute('href'); x.removeAttribute('aria-label'); x.setAttribute('tabindex', '-1'); });
+    masa.appendChild(g);
   }
 
   // Masaüstü yapışkan satın alma çubuğu (eleştirmen önerisi, kullanıcı seçti 19 Eki): sayfanın satın alma butonu
@@ -576,6 +584,7 @@
     var n = Sepet.sayi();
     var b = document.querySelectorAll('[aria-label^="Sepet"]');
     for (var i = 0; i < b.length; i++) { if (b[i].closest('.ay-katman') || !sepetDugmesi(b[i].getAttribute('aria-label'))) continue; if (b[i].getAttribute('data-ay-adet') !== String(n)) b[i].setAttribute('data-ay-adet', String(n)); }
+    var gs = document.querySelectorAll('.gk-sepet'); for (var j = 0; j < gs.length; j++) if (gs[j].getAttribute('data-ay-adet') !== String(n)) gs[j].setAttribute('data-ay-adet', String(n));
     document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400);
   }
   window.addEventListener('scroll', function () { document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400); }, { passive: true });

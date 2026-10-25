@@ -12,7 +12,7 @@
 # "USB adaptör hediye", 2 Adet'te üstü çizili "2× eski fiyat", AMEX, sahte oranlı stok çubuğu.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK, tk_html, tk_css, tk_adim, TK_DEGER
+from ortak import ust_blok, UST_CSS, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_bolum, mesaj_js, MESAJ_CSS, SERIT_OK, SERIT_OK_CSS, KAY_JS, GAL_OK, tk_html, tk_css, tk_adim, TK_DEGER
 import luna_e as E
 import luna_usb_yon as Y
 import urun_soru as US
@@ -547,14 +547,14 @@ TAK = ('<div class="tak">'
 
 OTUZ = ''.join('<i style="transform: rotate(%ddeg); animation-delay: %.2fs"></i>' % (k * 12, k * .1) for k in range(30))
 
-SERIT = '<div class="serit" role="timer" aria-label="{{cdAria}}"><span>Bugüne özel fiyat</span><span class="sy" aria-hidden="true"><b>{{hh}}</b><i>:</i><b>{{mm}}</b><i>:</i><b class="{{snCls}}">{{ss}}</b></span></div>'
+# Üst blok (25 Eki): sayaç şeridi + beyaz başlık, beyaz ↔ lacivert yumuşak döngü (ortak.ust_blok)
+SERIT = ust_blok('{{hh}}:{{mm}}:{{ss}}', E.isaret(22, '#C9CED8'))
 
 HERO = ("""
   <!-- Kare galeri (Shopify'daki görseller): parmakla kaydırılır, 5 sn'de kendiliğinden geçer (kaydırınca durur).
        Küçük resimler yok (kullanıcı: "görünmesin, kaydırılır olsun"); altta fotoğraf ilerledikçe dolan film diskleri. -->
   <section class="hero kare" aria-label="Galaxy USB fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>""" + GAL_OK + """
-    """ + Y.ust('rgba(238,242,250,.6)') + """
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 """)
@@ -704,7 +704,7 @@ def sayfa(tema, kesit=None):
         govde = '<div class="pg">' + secenek_etiket(kesit, t) + SERIT + HERO + AL + DISKLER + '</div>\n'
     else:
         govde = '<div class="pg">\n  ' + SERIT + HERO + AL + SAHNELER + GERISI + '</div>\n'
-    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('var(--lac)', '#2E6B4F', '#2E9E62', '1.2s'), t['font']) + govde
+    return head('Galaxy USB Projektör' + (' · ' + t['ad'] if kesit else ''), tema_css(t) + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('var(--lac)', '#2E6B4F', '#2E9E62', '1.2s') + UST_CSS, t['font']) + govde
 
 
 JS = """class Component extends DCLogic {
@@ -769,6 +769,7 @@ JS = """class Component extends DCLogic {
     var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
     var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
     var faq = [
       // Kutu içeriği ve gece lambası teslim kartının altındaki sorularda (aynı soru iki yerde yok)
@@ -801,7 +802,7 @@ JS = """class Component extends DCLogic {
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd',
       """ + TK_DEGER + """
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''),
-      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugüne özel fiyatın bitmesine ' + hh + ' saat ' + mi + ' dakika',
+      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       alaGit: alaGit, faq: faq, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1)
     };
   }
@@ -817,7 +818,7 @@ def ozellik(h):
 SECENEK = ['kuzey', 'pembe', 'mercan', 'gumus']
 
 if __name__ == '__main__':
-    h = int(os.environ.get('U_H', 7166))
+    h = int(os.environ.get('U_H', 7156))
     open(os.path.join(CANVAS, 'GalaxyUSB.dc.html'), 'w', encoding='utf-8').write(urun_ust(sayfa(ANA_TEMA), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(JS))))
     print('yazıldı: GalaxyUSB.dc.html (tema %s, h %d)' % (ANA_TEMA, h))
     hs = int(os.environ.get('U_HS', 2600))

@@ -253,3 +253,59 @@ def mesaj_js(js):
     k = js.index('{', j) + 1
     return (js[:j] + '    ' + MESAJ_VERI + js[j:k] + ' mesajlar: mesajlar, buyuk: this.state.buyuk || \'\', buyukAd: this.state.buyukAd || \'\', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),'
             + js[k:])
+
+# Üst blok: sayaç şeridi + başlık, bütün sayfalarda aynı (kullanıcı, 25 Eki: "A iyi ama üstünde yine sayım olsun ve beyazdan bizim ana
+# rengimiz maviye değişsin, sürekli renk değişimi yapsın, yumuşak"). Beyaz (lacivert yazı) ↔ lacivert (beyaz yazı), 16 sn'lik döngü:
+# 5,5 sn beyaz, 2,5 sn geçiş, 5,5 sn lacivert, 2,5 sn geçiş. Yalnız opacity: içeriğin aria-hidden lacivert kopyası (.gk) üstte belirip
+# kaybolur; düğmeler alttaki beyaz katmanda kalır (kopya dokunmayı geçirir). Bütün katmanlar aynı saate bağlı (--rd-t, ayluna.js).
+UST_MENU = '<svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg>'
+UST_SEPET = '<svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>'
+
+
+import re
+
+
+def gece_kopya(ic):
+    k = re.sub(r'<(button|a)\b', '<span', ic)
+    k = re.sub(r'</(button|a)>', '</span>', k)
+    k = re.sub(r'\s(aria-label|role|onClick|href|type|tabindex)="[^"]*"', '', k)
+    k = k.replace('class="ikon sepet"', 'class="ikon sepet gk-sepet"')
+    return '<span class="gk" aria-hidden="true">' + k + '</span>'
+
+
+def ust_blok(zaman, isaret_svg, ay='{{cdAy}}', aria='{{cdAria}}'):
+    s_ic = ('<span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle>'
+            '<path d="%s"></path></svg><b>%s</b>' % (ay, zaman))
+    b_ic = ('<a class="marka" href="#" aria-label="Ayluna ana sayfa">' + isaret_svg + '<b>Ayluna</b></a>'
+            '<span class="ua-sag"><button class="ikon" type="button" aria-label="Menü">' + UST_MENU + '</button>'
+            '<button class="ikon sepet" type="button" aria-label="Sepet">' + UST_SEPET + '</button></span>')
+    return ('  <div class="duyuru ua-s rd" role="timer" aria-label="%s">' % aria + s_ic + gece_kopya(s_ic) + '</div>\n'
+            '  <header class="ust ua-b rd">' + b_ic + gece_kopya(b_ic) + '</header>\n')
+
+
+UST_CSS = """
+/* Üst blok (25 Eki): beyaz ↔ lacivert yumuşak döngü; yalnız opacity */
+.rd{position:relative;isolation:isolate}
+.rd>.gk{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:inherit;gap:inherit;padding:inherit;pointer-events:none;opacity:0;animation:rd-gece 16s cubic-bezier(.45,0,.55,1) var(--rd-t,0s) infinite}
+@keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.rd>.gk{animation:none}}
+.duyuru.ua-s{display:flex;justify-content:center;align-items:center;gap:8px;height:30px;margin:0;padding:0 12px;border:0;background:#F3F4F7;color:#1A2142;font-size:13px;font-weight:600}
+.duyuru.ua-s b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#1A2142}
+.duyuru.ua-s .sayac-ay{width:14px;height:14px;flex:none}
+.duyuru.ua-s .sayac-ay circle{fill:none;stroke:#9AA0AE;stroke-width:1.6}
+.duyuru.ua-s .sayac-ay path{fill:#F2A65A}
+.duyuru.ua-s>.gk{background:#0C1027;color:#B9BED6}
+.duyuru.ua-s>.gk b{color:#F2A65A}
+.duyuru.ua-s>.gk .sayac-ay circle{stroke:rgba(185,190,214,.6)}
+header.ua-b{display:flex;justify-content:space-between;align-items:center;height:52px;margin:0;padding:0 4px 0 14px;background:#FFFFFF;color:#1A2142;box-shadow:inset 0 -1px 0 #E4E6EB}
+.ua-b .marka{display:flex;align-items:center;gap:7px;min-height:48px;color:inherit;text-decoration:none}
+.ua-b .marka b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:19px;letter-spacing:-.01em}
+.ua-b .isaret circle{stroke:#C9CED8}
+.ua-b .ua-sag{display:flex}
+.ua-b .ikon{position:relative;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}
+.ua-b .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
+.ua-b>.gk .isaret circle{stroke:rgba(255,253,249,.55)}
+.ua-b>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142}
+.ua-b .ikon:focus-visible,.ua-b .marka:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:12px}
+"""

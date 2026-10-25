@@ -133,6 +133,31 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .yukari{position:sticky;bottom:18px;z-index:5;display:grid;place-items:center;width:48px;height:48px;margin:-66px 18px 18px auto;border:0;border-radius:50%;background:#FFFDF9;color:var(--lac);box-shadow:inset 0 0 0 1.5px var(--lac)}
 .yukari svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
+/* Üst blok (25 Eki): beyaz ↔ lacivert yumuşak döngü; yalnız opacity */
+.rd{position:relative;isolation:isolate}
+.rd>.gk{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:inherit;gap:inherit;padding:inherit;pointer-events:none;opacity:0;animation:rd-gece 16s cubic-bezier(.45,0,.55,1) var(--rd-t,0s) infinite}
+@keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.rd>.gk{animation:none}}
+.duyuru.ua-s{display:flex;justify-content:center;align-items:center;gap:8px;height:30px;margin:0;padding:0 12px;border:0;background:#F3F4F7;color:#1A2142;font-size:13px;font-weight:600}
+.duyuru.ua-s b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#1A2142}
+.duyuru.ua-s .sayac-ay{width:14px;height:14px;flex:none}
+.duyuru.ua-s .sayac-ay circle{fill:none;stroke:#9AA0AE;stroke-width:1.6}
+.duyuru.ua-s .sayac-ay path{fill:#F2A65A}
+.duyuru.ua-s>.gk{background:#0C1027;color:#B9BED6}
+.duyuru.ua-s>.gk b{color:#F2A65A}
+.duyuru.ua-s>.gk .sayac-ay circle{stroke:rgba(185,190,214,.6)}
+header.ua-b{display:flex;justify-content:space-between;align-items:center;height:52px;margin:0;padding:0 4px 0 14px;background:#FFFFFF;color:#1A2142;box-shadow:inset 0 -1px 0 #E4E6EB}
+.ua-b .marka{display:flex;align-items:center;gap:7px;min-height:48px;color:inherit;text-decoration:none}
+.ua-b .marka b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:19px;letter-spacing:-.01em}
+.ua-b .isaret circle{stroke:#C9CED8}
+.ua-b .ua-sag{display:flex}
+.ua-b .ikon{position:relative;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}
+.ua-b .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
+.ua-b>.gk .isaret circle{stroke:rgba(255,253,249,.55)}
+.ua-b>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142}
+.ua-b .ikon:focus-visible,.ua-b .marka:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:12px}
+
 .sb{padding:28px 16px 0}
 .sb h1{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.02em;color:var(--lac)}
 .sb h1 span{color:var(--amber)}
@@ -311,8 +336,8 @@ a{color:#1A2142}a:hover{color:#2B3463}
 </style>
 </helmet>
 <div class="pg" style="padding-bottom: 0">
-  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cd}}</b></div>
-  <header class="ust"><button class="ikon" type="button" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(26,33,66,.45)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a><span class="sag"><button class="ikon" type="button" aria-label="Ara"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path></svg></button><button class="ikon" type="button" aria-label="Sepet, 0 ürün"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg><i>0</i></button></span></header>
+  <div class="duyuru ua-s rd" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cd}}</b><span class="gk" aria-hidden="true"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cd}}</b></span></div>
+  <header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>
   <!-- Galeri: sitedeki görseller (uydurma yorum kartı ve sağlık iddialı afişler alınmadı); kaydırılır, 5 sn'de geçer -->
   <div class="urun-ust"><div class="ust-sol">
   <div class="gal"><div class="g-iz" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="gs"><img src="{{f.src}}" alt="{{f.alt}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button><div class="g-alt" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.acls}}"></i></sc-for></div></div>
@@ -339,7 +364,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3146}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3134}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: null, sec: 0 }); }
   componentDidMount() { var self = this;

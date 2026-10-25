@@ -5,7 +5,7 @@
 # Önceki E (Literata + Atkinson, D'nin dili) git geçmişinde: Tur 20.
 import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS, serit_ok, GAL_OK, GALOK_JS, tk_html, tk_css, tk_adim, TK_DEGER
+from ortak import ust_blok, UST_CSS, HEAD, TAIL, TL_JS, KARGO_JS, urun_ust, masa_bayrak, SERIT_OK, SERIT_OK_CSS, KAY_JS, serit_ok, GAL_OK, GALOK_JS, tk_html, tk_css, tk_adim, TK_DEGER
 import sihirli2_varyant as S2
 import ozellik4_varyant as OZ4
 
@@ -447,11 +447,9 @@ YORUM_HTML = ("""  <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "
 """).replace('{{tik}}', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>')
 
 HTML = """<div class="pg" style="padding-bottom: 0">
-  <!-- Üst şerit: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
-  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cdShort}}</b></div>
-  <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
+  <!-- Üst blok (25 Eki, ortak.ust_blok): sayaç şeridi + beyaz başlık, beyaz ↔ lacivert yumuşak döngü. Sayaç: bugüne özel fiyat, her gece 23:59'da (İstanbul) sıfırlanır. Kullanıcı kararı: toptancı zammı her an gelebildiği için gerçek; gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur. -->
+""" + ust_blok('{{cdShort}}', isaret(22, '#C9CED8')) + """  <!-- Sahne: oda sahneleri logo bandının altına kadar uzanır (tek parça); yazılı afişler bandın altından başlar (çift logo/yazı çakışması olmasın) -->
   <section class="sahne" aria-label="LunaDream fotoğrafları">
-    <header><button class="ikon" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><span style="display: flex; align-items: center; gap: 6px">""" + LOGO + """<span class="ser" style="font-size: 18px">Ayluna</span></span><button class="ikon" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></header>
     <div class="kare-foto" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="kf"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div>""" + GAL_OK + """
     <!-- Kaydırılır galeri, 5 sn'de kendiliğinden geçer (elle kaydırınca durur). Küçük resim yok; fotoğrafın en altında ince çizgiler, geçtikçe beyazlar. -->
     <div class="seritler">
@@ -894,5 +892,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7244)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS + UST_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7234)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

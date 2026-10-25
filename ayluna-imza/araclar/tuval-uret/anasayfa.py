@@ -10,7 +10,7 @@
 # Dil: marka çekirdeği (sepetle aynı) lacivert #1A2142 + krem #F6F1E9, Ayluna işareti; Young Serif + Onest.
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import HEAD, TAIL, TL_JS, gal_ok, GALOK_JS
+from ortak import HEAD, TAIL, TL_JS, gal_ok, GALOK_JS, ust_blok, UST_CSS
 import luna_e as E
 CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 OUT = os.path.join(CANVAS, 'Ayluna-Anasayfa.dc.html')  # arşivdeki eski Anasayfa.dc.html korunur
@@ -179,12 +179,10 @@ GUVEN = [('<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><cir
          ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez.'),
          ('<path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path>', 'Kapıda ödeme', 'Ürün gelince öde; +₺80 kapıda ödeme ücreti.')]
 
+CSS = CSS + UST_CSS  # üst blok (25 Eki); sade ürünler ve diğer sayfalar bu CSS'i devralır
+
 HTML = ('<div class="pg" style="padding-bottom: 0">\n'
-        '  <div class="duyuru" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{cd}}</b></div>\n'
-        '  <header class="ust"><button class="ikon" type="button" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button>'
-        '<a class="marka" href="#" aria-label="Ayluna ana sayfa">' + E.isaret(22, 'rgba(26,33,66,.45)') + '<b>Ayluna</b></a>'
-        '<span class="sag"><button class="ikon" type="button" aria-label="Ara"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path></svg></button>'
-        '<button class="ikon" type="button" aria-label="Sepet, 0 ürün"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg><i>0</i></button></span></header>\n'
+        + ust_blok('{{cd}}', E.isaret(22, '#C9CED8')) +
         '  <!-- Slayt: kaydırılır, 5 sn\'de geçer (elle kaydırınca durur). Yazılar HTML; görsele gömülü yazı yok. Altta ay evreleri dolar. -->\n'
         '  <section class="slayt" aria-label="Öne çıkan ürünler">\n'
         '    <div class="s-iz" onScroll="{{sKay}}"><sc-for list="{{slayt}}" as="s" hint-placeholder-count="3"><div class="{{s.cls}}"><img src="{{s.src}}" alt="{{s.alt}}" style="object-position: {{s.pos}}"><div class="sl-y"><small>{{s.ust}}</small><h2>{{s.bas}}</h2><p>{{s.alt2}}</p><a href="#">{{s.cta}}' + OK + '</a></div></div></sc-for></div>\n'
@@ -250,5 +248,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4180)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4168)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))
