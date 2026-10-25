@@ -143,8 +143,15 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   await pg.fill('input[type=search]', 'nemlendirici'); await pg.press('input[type=search]', 'Enter'); await pg.waitForTimeout(500);
   not(pg.url().includes('arama.html?q=nemlendirici') && (await pg.locator('.izg a').count()) === 3, '404 arama → 3 nemlendirici');
   await pg.goto(KOK + 'index.html'); await pg.waitForTimeout(300);
-  await pg.locator('#kok [aria-label="Ara"]').click(); await pg.waitForTimeout(300);
-  not(pg.url().endsWith('arama.html'), 'başlık Ara → arama.html');
+  // 25 Eki: başlıkta arama yok (üst blok: menü + sepet); arama menüde
+  await pg.locator('#kok header.ust [aria-label="Menü"]').click(); await pg.waitForTimeout(300);
+  await pg.locator('.ay-menu a', { hasText: 'Ara' }).first().click(); await pg.waitForTimeout(300);
+  not(pg.url().endsWith('arama.html'), 'menü Ara → arama.html');
+  // Üst blok: sayaç şeridi + başlık, beyaz ↔ lacivert döngüsü iki katmanda aynı an; kopya dokunulmaz ve ekran okuyucuya kapalı
+  { await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
+    const r = await pg.evaluate(() => { const a = document.getAnimations().filter(x => x.animationName === 'rd-gece'); const gk = [...document.querySelectorAll('#kok .rd>.gk')];
+      return { n: a.length, ayni: new Set(a.map(x => Math.round((x.currentTime % 16000) / 100))).size, gizli: gk.every(g => g.getAttribute('aria-hidden') === 'true' && getComputedStyle(g).pointerEvents === 'none' && !g.querySelector('button,a')), sayac: !!document.querySelector('#kok .duyuru.ua-s b'), ust: !!document.querySelector('#kok header.ust.ua-b [aria-label="Sepet"]') }; });
+    not(r.n === 2 && r.ayni === 1 && r.gizli && r.sayac && r.ust, `üst blok: 2 lacivert katman aynı an (${r.n}, ${r.ayni}), kopya gizli/dokunulmaz (${r.gizli}), sayaç ve sepet var`); }
 
   // Baskı satırları (18 Eki): fiyatta "Stokta" yok, altında "Dün [X]"; dönen satır hediye → aynı gün kargo + 16.00 sayacı (İstanbul saati)
   // 23 Eki: sadeleştirme geri alındı (kullanıcı: "yaptığımız sadeleştirmeleri geri getir"): LunaDream'de yine dönen satır, Dün 62 ve çubukta sayaç
