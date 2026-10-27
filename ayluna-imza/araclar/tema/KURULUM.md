@@ -1,7 +1,7 @@
 # Ayluna teması 1.0.31 · kurulum
 
 Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.31.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
-Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi; kapıda ödeme EasySell'de.
+Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme yalnız kartla; kapıda ödeme yok (27 Eki).
 
 ## 1. Yükle (yayınlamadan)
 1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.31.zip`.
@@ -28,10 +28,7 @@ Yeni temada uygulama yerleştirmeleri kapalı gelir. Özelleştir → sol altta 
 - **Kaching Bundles: aç.** Paket indirimi (2 Adet ₺2.749,99 gibi) buradan gelir. Tema Kaching kutusunu görünmez kurar; müşteri tasarımdaki paket kartını seçince arkada Kaching'deki aynı paket seçilir. Açılışta seçili paket yok (eski temadaki gibi); seçmeden alırsa 1 adet.
   - Ürün bölümüne **Kaching bloğu ekleme**: kutu zaten var, eklersen ikinci kez görünür.
   - Paket fiyatları Kaching'tekiyle aynı (19 Eki'de karşılaştırıldı). Kaching'te fiyat değişirse bana yaz, kartları güncellerim.
-- **EasySell (kapıda ödeme): sen koyarsın.** Tema kendi Kapıda düğmesini koymaz. EasySell yerleştirmesini açınca kendi düğmesi "Güvenli Ödeme ile Al" düğmesinin hemen altına gelir. İstersen tema düzenleyicide "Ayluna ürün sayfası" bölümüne EasySell bloğu ekleyebilirsin; o da aynı yere gelir.
-  - EasySell formu paket adedini ve indirimi Kaching'ten okur (eski temadaki gibi).
-  - Bilinen sınır: LunaDream 2'li pakette iki farklı model (Kız + Erkek) seçilirse kapıda formu iki lambayı da 1. lambanın modeli görür. Kartla ödemede sorun yok (sepete iki ayrı satır, ikisi de indirimli).
-  - EasySell'in yapışkan alt düğmesi (sticky) açıksa tasarımın kendi alt çubuğuyla üst üste biner; birini kapat.
+- **Kapıda ödeme yok (27 Eki).** Temada kapıda düğmesi, formu ya da yazısı yok. **EasySell'in yerleştirmesini kapat** (Uygulama yerleştirmeleri) ya da uygulamayı kaldır; açık kalırsa kendi "Kapıda Ödeme" düğmesini sayfaya ekler. Shopify ödeme ayarlarında "Kapıda ödeme (COD)" yöntemi açıksa onu da kapat.
 - **Loox, Track123:** yerleştirmelerini aç. Yorum kartları tasarımda (gerçek yorumlardan); "Kargo takip" `/apps/track123`'e gider (tema ayarından değişir).
 - **Kartla %5 indirim:** Sepette "Kartla toplam" %5 düşük gösterilir. Ödeme sayfasında da bu indirimin uygulandığını denetle (otomatik indirim ya da ödeme sağlayıcısı). Uygulanmıyorsa yayınlama.
 
@@ -44,7 +41,7 @@ Yeni temada uygulama yerleştirmeleri kapalı gelir. Özelleştir → sol altta 
 - [ ] Fiyatlar mağazadakiyle aynı. Ürün sayfasındaki tasarım fiyatı mağaza fiyatından farklıysa tema düzenleyicide "Uyarı: bu sayfadaki fiyat…" yazar; o zaman temayı yeniden üretmem gerekir.
 - [ ] Ürün sayfası açılışta hiçbir paket seçili değil.
 - [ ] LunaDream: 2 Adet + model seç → Güvenli Ödeme → sepette doğru model ve adet, ödeme sayfasında toplam ₺2.749,99 (Kaching indirimi).
-- [ ] 2 Adet seç → EasySell düğmesi → formda 2 adet ve ₺2.749,99 + ₺80 kapıda ücreti.
+- [ ] Ürün sayfasında, sepette ve ödeme sayfasında hiçbir yerde "Kapıda" yazmıyor (EasySell kapalı).
 - [ ] Telefonda sayfa ekrana tam sığıyor (yana kaymıyor). Sığmıyorsa ekran görüntüsünü bana gönder.
 - [ ] Sepet: adet değiştir, sil, "Siparişine özel" ekle-çıkar; rozet adedi doğru.
 - [ ] İletişim formu ve bülten kaydı yönetimde görünüyor (Müşteriler / E-posta). Bültende vaat edilen %5 kodu gerçekten gidiyor mu?

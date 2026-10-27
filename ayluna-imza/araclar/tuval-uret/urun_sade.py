@@ -124,7 +124,7 @@ def govde(u):
         al = ('  <!-- Stok satırı ELLE girilir (Shopify bölüm ayarı: sayı + aç/kapa); boşsa gizlenir -->\n'
               '  <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>\n'
               '  <div class="al"><button class="btn1" type="button"><span class="b-ic"><span>Güvenli Ödeme ile Al</span><small>Kartla %5 indirim dahil</small></span>' + A.OK + '</button>'
-              '<button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button><div class="ay-dis" data-ay-dis></div></div>\n')
+              '<div class="ay-dis" data-ay-dis></div></div>\n')
     else:
         al = ('  <div class="al" style="margin-top: 18px"><button class="btn1" type="button" disabled><span class="b-ic"><span>Tükendi</span><small>Yeniden gelince haber verelim</small></span></button>'
               '<button class="btn2" type="button">Gelince haber ver</button></div>\n')

@@ -40,7 +40,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(2200);
   not(await pg.locator('#siparis [aria-pressed="true"]').filter({ hasText: 'Adet' }).count() === 0, 'açılışta paket seçili değil');
   not(await pg.evaluate(() => !!document.querySelector('kaching-bundle kaching-bundles-block') && !document.querySelector('kaching-bundle input:checked')), 'Kaching kutusu kuruldu, paketi seçili değil');
-  not(await pg.evaluate(() => getComputedStyle(document.querySelector('#siparis .btn-kp')).display === 'none' && !!document.querySelector('#siparis [data-ay-dis] easysell-form')), 'Kapıda düğmesi gizli, EasySell yuvası (easysell-form) yerinde');
+  not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn-kp, #siparis .btn2').length === 0 && !!document.querySelector('#siparis [data-ay-dis]')), 'Kapıda düğmesi yok (27 Eki), uygulama yuvası yerinde');
   const kalem = await pg.evaluate(() => { window.__istek = []; const f = window.fetch; window.fetch = function (u, o) { if (o && o.body && /cart\/add/.test(u)) window.__istek.push(JSON.parse(o.body)); return f.apply(this, arguments); }; });
   await pg.locator('#siparis .pk button, #siparis .paket button, #siparis [class*="pk"] button').filter({ hasText: '2 Adet' }).first().click().catch(() => {});
   await pg.waitForTimeout(300);
@@ -74,24 +74,23 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   await pg.locator('#kok .sil').first().click(); await pg.waitForTimeout(700);
   c = await sepet(); not(c.items.filter(i => !(i.properties || {})._ek).length === 1, 'satır silindi');
 
-  // 6) Ödeme: kart → /checkout. Sepette Kapıda düğmesi ve kapıda notu gizli (kapıda ödeme EasySell'de)
-  not(await pg.evaluate(() => [...document.querySelectorAll('#kok .btn2, #kok .s-not')].filter(e => /kapıda ödeme/i.test(e.textContent)).every(e => getComputedStyle(e).display === 'none')), 'sepette Kapıda düğmesi ve notu gizli');
+  // 6) Ödeme: kart → /checkout. Sepette kapıda düğmesi ve notu yok (kapıda ödeme kaldırıldı, 27 Eki)
+  not(await pg.evaluate(() => !/kapıda/i.test(document.getElementById('kok').innerText)), 'sepette kapıda yok');
   const odeme = await pg.evaluate(() => { let git = null; const s = Object.getOwnPropertyDescriptor(window.Location.prototype, 'href'); return null; });
   await pg.route('**/checkout', r => r.fulfill({ status: 200, body: 'checkout' }));
   await pg.locator('#kok .s-sag .btn1, #kok .btn1').filter({ hasText: 'Güvenli Ödeme' }).first().click(); await pg.waitForTimeout(800);
   not(pg.url().endsWith('/checkout'), 'Güvenli Ödeme ile Öde → /checkout');
 
-  // 7) Kapıda ödemeyi mağaza sahibi EasySell ile koyar (19 Eki): tasarımdaki Kapıda düğmesi gizli; EasySell'in easysell-form
-  //    kancasının yanına koyduğu düğme sayfa yeniden çizilince yerinde kalır; gizli ürün formu seçime eşit
+  // 7) Kapıda ödeme yok (27 Eki). Bölüme eklenen uygulama düğmesi sayfa yeniden çizilince yuvada kalır; gizli ürün formu seçime eşit
   await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(2200);
-  not(await pg.evaluate(() => getComputedStyle(document.querySelector('#siparis .btn2')).display === 'none'), 'USB: Kapıda düğmesi gizli');
+  not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn2').length === 0), 'USB: Kapıda düğmesi yok');
   await pg.evaluate(() => { const b = document.createElement('button'); b.className = 'es-popup-button'; b.textContent = 'Kapıda Ödeme ile Sipariş Ver'; document.querySelector('easysell-form').after(b); });
   await pg.locator('#siparis button', { hasText: '2 Adet' }).first().click(); await pg.waitForTimeout(1300);
   const form = await pg.evaluate(() => { const f = document.querySelector('form[data-ay-urun-formu]'); return { id: f.querySelector('[name=id]').value, q: f.querySelector('[name=quantity]').value, es: !!document.querySelector('#siparis [data-ay-dis] .es-popup-button'), kb: (document.querySelector('kaching-bundle input:checked') || {}).value }; });
-  not(form.es, 'EasySell düğmesi yeniden çizimden sonra yuvada');
+  not(form.es, 'uygulama düğmesi yeniden çizimden sonra yuvada');
   not(/^\d+$/.test(form.id) && form.q === '2' && form.kb === 'bar-2', 'gizli ürün formu ve Kaching seçime eşit (varyant ' + form.id + ', adet ' + form.q + ', Kaching ' + form.kb + ')');
   await pg.goto(K + '/products/lamba'); await pg.waitForTimeout(2200);
-  not(await pg.evaluate(() => getComputedStyle(document.querySelector('#siparis .btn2')).display === 'none' && !document.querySelector('#siparis [aria-pressed="true"]')), 'AyFeneri: Kapıda gizli, paket seçili değil');
+  not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn2').length === 0 && !document.querySelector('#siparis [aria-pressed="true"]')), 'AyFeneri: Kapıda yok, paket seçili değil');
 
   // 8) Koleksiyonda Sepete ekle
   await pg.goto(K + '/collections/all'); await pg.waitForTimeout(600);
@@ -119,7 +118,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   not(uyari.some(u => /tasarımdaki fiyat/.test(u)), 'tasarım fiyatı ≠ mağaza fiyatı uyarısı (Sunset)');
   await m.goto(K + '/products/lunadream-gece-lambasi'); await m.waitForTimeout(800);
   await m.evaluate(() => window.scrollTo(0, 2400)); await m.waitForTimeout(800);
-  not(await m.locator('.ay-al.on').count() === 1 && await m.evaluate(() => { const k = document.querySelector('.ay-al [data-kp]'); return !k || getComputedStyle(k).display === 'none'; }), 'masaüstü satın alma çubuğu (Kapıda bağlantısı gizli)');
+  not(await m.locator('.ay-al.on').count() === 1 && await m.evaluate(() => { const k = document.querySelector('.ay-al [data-kp]'); return !k || getComputedStyle(k).display === 'none'; }), 'masaüstü satın alma çubuğu (kapıda bağlantısı yok)');
 
   console.log('\n' + (log.length ? log.join('\n') : 'konsol hatası yok'));
   console.log(hata ? `\n${hata} HATA` : '\nHEPSİ TAMAM');

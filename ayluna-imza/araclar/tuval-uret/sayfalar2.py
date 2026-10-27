@@ -87,7 +87,7 @@ POLITIKA = {
         kart('Süreler', L('<b>Kargoya veriliş:</b> iş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir (hafta sonu ve resmî tatiller hariç).',
                          '<b>Teslim:</b> Türkiye geneli 3–7 iş günü.', '<b>Hızlı Kargo (₺79,99):</b> sepette seçilirse sipariş sıranın önüne alınır, öncelikli hazırlanıp kargolanır.',
                          'Yasal üst sınır: sipariş en geç 30 gün içinde teslim edilir; gecikirse sana haber verir, istersen siparişi iptal ederiz.')),
-        kart('Ücretler', L('Kargo tüm siparişlerde ücretsiz.', '<b>Kapıda ödeme ücreti ₺80.</b> Kartla ödemede bu ücret yoktur, üstelik %5 indirim uygulanır.')),
+        kart('Ücretler', L('Kargo tüm siparişlerde ücretsiz.', 'Kartla ödemede %5 indirim uygulanır.')),
         kart('Kargo firmaları ve takip', L('Aras Kargo, DHL, PTT [hangisi ne zaman kullanılıyor: teyit].', 'Kargoya verilince takip numarası SMS ve e-postayla gelir; "Kargo takip" sayfasından da bakabilirsin.')),
         kart('Teslimatta', L('Paket hasarlıysa kargo görevlisine tutanak tutturup teslim almayabilirsin.', 'Kırık ya da eksik ürün için teslim aldığın gün fotoğrafla bize yaz; değişim ya da iade ücretsiz.',
                              'Adreste bulunamazsan paket kargo şubesinde [X] gün bekler.', 'Yurt dışına gönderim yapılmıyor.')),
@@ -99,7 +99,7 @@ POLITIKA = {
         kart('Neden işliyoruz? (hukuki sebep)', L('Siparişini almak, göndermek ve iade/değişimini yapmak: sözleşmenin kurulması ve ifası (KVKK m.5/2-c).',
                                                  'Fatura ve kayıt yükümlülükleri: kanunlarda öngörülme ve hukuki yükümlülük (m.5/2-a, ç).', 'Sorularını yanıtlamak, dolandırıcılığı önlemek: meşru menfaat (m.5/2-f).',
                                                  'Kampanya e-postası, SMS ve reklam çerezleri: yalnız açık rızanla; istediğin an geri alabilirsin.')),
-        kart('Kimlerle paylaşıyoruz?', L('Kargo firmaları (teslimat için).', 'Ödeme kuruluşu (kartla ödemede).', 'Altyapı ve hizmet sağlayıcılar: Shopify (mağaza altyapısı, yurt dışında), kapıda ödeme formu, yorum (Loox) ve kargo takip uygulamaları.',
+        kart('Kimlerle paylaşıyoruz?', L('Kargo firmaları (teslimat için).', 'Ödeme kuruluşu (kartla ödemede).', 'Altyapı ve hizmet sağlayıcılar: Shopify (mağaza altyapısı, yurt dışında), yorum (Loox) ve kargo takip uygulamaları.',
                                          'Reklam ölçümü (Meta) yalnız çerez iznin varsa.', 'Yetkili kamu kurumları (talep olursa).', 'Yurt dışına aktarım KVKK m.9\'a uygun yapılır. [Aktarım dayanağı: teyit]')),
         kart('Ne kadar saklıyoruz?', P('Sipariş ve fatura kayıtları ilgili kanunlardaki süre boyunca [10 yıl, teyit]; pazarlama izinleri geri alınana kadar; diğerleri amaç bitince silinir ya da anonimleştirilir.')),
         kart('Hakların (KVKK m.11)', L('Verinin işlenip işlenmediğini öğrenme, bilgi isteme.', 'Yanlışsa düzeltilmesini, gerekmiyorsa silinmesini isteme.', 'Aktarıldığı kişileri öğrenme.',
@@ -112,20 +112,19 @@ POLITIKA = {
         kart('1. Taraflar', P('<b>Satıcı:</b> Ayluna (ayluna.shop)'), P('<b>Alıcı:</b> siparişte bilgilerini yazan kişi (ad soyad, adres, telefon, e-posta sipariş özetindedir).')),
         kart('2. Konu', P('Alıcının ayluna.shop üzerinden elektronik ortamda siparişini verdiği ürünün satışı ve teslimine ilişkin hak ve yükümlülükler.')),
         kart('3. Ürün ve fiyat', L('Ürünün temel nitelikleri, adedi, satış fiyatı (KDV dahil) ve varsa ek ürünler sipariş özetinde ve ürün sayfasında yazar.',
-                                  'Kartla ödemede %5 indirim uygulanır. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir. Kargo ücretsizdir; Hızlı Kargo seçilirse ₺79,99.')),
+                                  'Ödeme kartla yapılır; kartla ödemede %5 indirim uygulanır. Kargo ücretsizdir; Hızlı Kargo seçilirse ₺79,99.')),
         kart('4. Teslimat', L('Ürün alıcının yazdığı adrese kargoyla teslim edilir; sipariş 1 iş gününde kargoya verilir, teslim 3–7 iş günüdür.', 'Teslim süresi yasal 30 günü geçemez.',
                              'Hasarlı paket kargo görevlisine tutanakla bildirilir.')),
         kart('5. Cayma hakkı', L('Alıcı, ürünü teslim aldığı günden itibaren <b>14 gün</b> içinde gerekçe göstermeden ve cezai şart ödemeden cayabilir. Ayluna bu süreyi <b>30 güne</b> uzatır.',
                                 'Cayma bildirimi e-postayla (ecom11001@gmail.com) yapılır. Satıcı iade kodu gönderir; iade kargosu ücretsizdir.',
-                                'Ürün, bildirimden sonra 10 gün içinde eksiksiz geri gönderilir. Bedel, ürün satıcıya ulaştıktan sonra en geç 14 gün içinde ödeme yöntemine göre iade edilir.',
-                                'Kapıda ödeme ücretinin iadesi: [teyit].')),
+                                'Ürün, bildirimden sonra 10 gün içinde eksiksiz geri gönderilir. Bedel, ürün satıcıya ulaştıktan sonra en geç 14 gün içinde ödemenin yapıldığı karta iade edilir.')),
         kart('6. Cayma hakkının kullanılamadığı durumlar', P('Yönetmelik m.15\'te sayılan hâller (ör. alıcının isteğiyle kişiye özel hazırlanan ürünler). Ayluna ürünlerinde bu istisna [yok, teyit].')),
         kart('7. Uyuşmazlık', P('Şikâyet ve itirazlar, Ticaret Bakanlığının her yıl belirlediği parasal sınırlar içinde alıcının ya da satıcının yerleşim yerindeki Tüketici Hakem Heyetine, sınırı aşanlar Tüketici Mahkemesine yapılır.')),
         kart('8. Yürürlük', P('Alıcı, siparişi onaylamadan önce ön bilgilendirme formunu okuduğunu ve bu sözleşmeyi kabul ettiğini beyan eder. Sözleşme siparişin onaylandığı anda kurulur.')),
     ]),
     'Politika-OnBilgi.dc.html': ('Ayluna · Ön bilgilendirme formu', 'Ön bilgilendirme<br>formu', 'Siparişini onaylamadan önce bilmen gerekenler.', [
         TASLAK,
-        kart('Ürün ve ödeme', L('Ürünün temel nitelikleri ürün sayfasında, toplam fiyatı (KDV dahil) sipariş özetinde yazar.', 'Ödeme: kartla (%5 indirimli) ya da kapıda (₺80 kapıda ödeme ücretiyle).',
+        kart('Ürün ve ödeme', L('Ürünün temel nitelikleri ürün sayfasında, toplam fiyatı (KDV dahil) sipariş özetinde yazar.', 'Ödeme: kartla (%5 indirimli).',
                                'Kargo ücretsiz; Hızlı Kargo ₺79,99.')),
         kart('Teslimat', P('1 iş gününde kargoda, Türkiye geneli 3–7 iş gününde teslim; en geç 30 gün.')),
         kart('Cayma hakkı', P('Teslimden itibaren 14 gün yasal cayma hakkın var; Ayluna bunu 30 güne uzatır. İade kargosu ücretsizdir. Ayrıntı: Mesafeli Satış Sözleşmesi ve İade sayfası.')),
@@ -204,7 +203,7 @@ ODEME = ("""<div class="pg" style="padding-bottom: 24px">
   <div class="o-blok"><h2>Ödeme</h2>
     <div class="o-sec on" role="img" aria-label="Kart ile öde seçili"><i></i><span>Kartla öde<small>Tüm kredi ve banka kartları · %5 indirim</small></span><em>VISA · MC · Troy</em></div>
     <div class="o-kart">Kart bilgilerin ödeme kuruluşunun güvenli alanına girilir, Ayluna'ya gelmez.<div><span class="g">Kart numarası</span><span>AA / YY</span><span>CVC</span><span class="g">Kart üzerindeki ad</span></div></div>
-    <button class="btn-c" type="button" onClick="{{kapida}}">Kapıda ödemeyle sipariş ver (+₺80)</button></div>
+</div>
   <p class="o-hata" role="alert">{{hata}}</p>
   <div style="margin: 0 16px"><button class="btn-l" type="submit">Şimdi öde · {{toplam}}</button></div>
   <p class="o-not">Siparişi onaylayarak Ön Bilgilendirme Formu'nu ve Mesafeli Satış Sözleşmesi'ni kabul edersin. Bu ekran Shopify ödeme sayfasının önizlemesidir; kart bilgisi alınmaz.</p>
@@ -248,7 +247,7 @@ TAMAM = ("""
     <li><em>2</em><span><b>İş günü 16.00’ya kadar aynı gün kargoda</b><span>Takip numarası SMS ve e-postayla gelir.</span></span></li>
     <li><em>3</em><span><b>3–7 günde kapında</b><span>{{adim3}}</span></span></li></ol></div>
   <div class="kart-k"><h2>Özet</h2><ul class="satirlar"><sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><li><span>{{u.ad}}</span><b>{{u.tutar}}</b></li></sc-for>
-    <li><span>Kargo</span><b>{{kargo}}</b></li><sc-if value="{{kapidaVar}}" hint-placeholder-val="{{false}}"><li><span>Kapıda ödeme ücreti</span><b>₺80,00</b></li></sc-if>
+    <li><span>Kargo</span><b>{{kargo}}</b></li>
     <sc-if value="{{indVar}}" hint-placeholder-val="{{true}}"><li><span>Kartla ödeme indirimi</span><b>−{{ind}}</b></li></sc-if><li><span><b style="color: var(--lac)">Toplam</b></span><b>{{toplam}}</b></li></ul>
     <p style="margin-top: 10px">{{adres}}</p></div>
   <div style="margin: 16px 16px 0"><a class="btn-l" href="#">Kargo takip</a><a class="btn-c" href="#">Alışverişe devam et</a></div>

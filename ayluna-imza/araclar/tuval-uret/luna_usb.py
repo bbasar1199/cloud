@@ -527,16 +527,14 @@ AZALAN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r=
 STOK_KURDELE = '<div class="al-on"><span class="{{stokCls}}">' + AZALAN + 'Son %s adet</span>' % STOK
 DUN_SATIR = tk_html(DUN) if DUN else ''  # 23 Eki: canlı sitedeki gibi dönen şerit
 SAAT = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>'
-# Güven: kartla ödeme kapıda ödemenin önünde (iade kapıda %28,6, ön ödemede %0,8). ₺80 kapıda ücreti formda ve SSS'de.
+# Güven: ücretsiz kargo, 30 gün iade, kartla güvenli öde (geniş). Kapıda ödeme kaldırıldı (kullanıcı, 27 Eki).
 GUVEN = ('<div class="ozler dort">'
          '<div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span>'
          '<b>Ücretsiz kargo</b><span class="t">1 iş gününde kargoda, adım adım takip.</span></div>'
          '<div class="oz"><span class="gz"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></span>'
          '<b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div>'
-         '<div class="oz"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span>'
-         '<b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div>'
-         '<div class="oz"><span class="gz"><span class="gv-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span></span>'
-         '<b>Kapıda ödeme</b><span class="t">Ürün gelince öde; ₺80 kapıda ödeme ücreti eklenir.</span></div></div>'
+         '<div class="oz genis"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span>'
+         '<b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></div></div>'
          '<div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span><span>[Ödeme altyapısı]</span></div>')
 
 TAK = ('<div class="tak">'
@@ -585,7 +583,6 @@ AL = ("""
     <!-- Stok kurdelesi: butonun üst kenarında. Stok ELLE girilir (kullanıcı, 18 Eki: "stoklar elle girilecek"): Shopify'da bölüm ayarı
          sayı + aç/kapa; Shopify stoğuna bağlı değil, boşsa kurdele yok. "Dün" fiyatın altında. -->
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>""" + ('</div>' if STOK else '') + """
-    <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
     <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><span class="y-ik" aria-hidden="true">""" + uk_ik() + """</span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
     <!-- Ürün soruları (22 Eki, LunaDream'deki gibi): teslim kartının altında 4 soru; kalanı SSS'de (urun_soru.py) -->
@@ -776,7 +773,7 @@ JS = """class Component extends DCLogic {
       { q: 'En net görüntü için ne yapmalıyım?', a: 'Odayı karart, başlığı tavana çevir ve ucundaki halkayı yavaşça çevir. Oda ne kadar karanlıksa görüntü o kadar belirgin olur.' },
       { q: 'Disk nasıl değişir?', a: '[Adımlar teyit edilecek.]' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır. Takip bağlantısı sana gönderilir.' },
-      { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
+      { q: 'Nasıl ödeyebilirim?', a: 'Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez.' },
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' },
       { q: 'Kırık ya da eksik gelirse?', a: 'Teslim aldığın gün fotoğrafıyla bize yaz. [Değişim süreci teyit edilecek.]' }
     ];

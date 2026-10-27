@@ -99,6 +99,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .guven{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:40px 16px 0;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
 .guven div{display:flex;flex-direction:column;gap:4px;padding:16px 14px}
 .guven div:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}.guven div:nth-child(odd){border-right:1px solid var(--cizgi)}
+.guven div:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .guven svg{width:26px;height:26px;margin-bottom:6px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .guven b{font-size:15px}.guven span{font-size:13px;color:var(--soluk);line-height:1.35}
 /* AyFeneri: görsel + metin */
@@ -301,14 +302,14 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <div class="o-blok"><h2>Ödeme</h2>
     <div class="o-sec on" role="img" aria-label="Kart ile öde seçili"><i></i><span>Kartla öde<small>Tüm kredi ve banka kartları · %5 indirim</small></span><em>VISA · MC · Troy</em></div>
     <div class="o-kart">Kart bilgilerin ödeme kuruluşunun güvenli alanına girilir, Ayluna'ya gelmez.<div><span class="g">Kart numarası</span><span>AA / YY</span><span>CVC</span><span class="g">Kart üzerindeki ad</span></div></div>
-    <button class="btn-c" type="button" onClick="{{kapida}}">Kapıda ödemeyle sipariş ver (+₺80)</button></div>
+</div>
   <p class="o-hata" role="alert">{{hata}}</p>
   <div style="margin: 0 16px"><button class="btn-l" type="submit">Şimdi öde · {{toplam}}</button></div>
   <p class="o-not">Siparişi onaylayarak Ön Bilgilendirme Formu'nu ve Mesafeli Satış Sözleşmesi'ni kabul edersin. Bu ekran Shopify ödeme sayfasının önizlemesidir; kart bilgisi alınmaz.</p>
   </form>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1677}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1900}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { hata: '', demo: {"satirlar": [{"id": "ld", "ad": "LunaDream Gece Lambası", "varyant": "2 adet · Kız + Erkek", "birim": 2749.99, "adet": 1, "img": "/_blob/ec56ce61ebfa99daa425df6a99f3c7cc"}], "ekler": {}, "hizli": false} }; }
   componentDidMount() { var self = this; window.addEventListener('ayluna-sepet', function () { self.setState({}); }); if (window.AylunaSepet && !window.AylunaSepet.oku().satirlar.length && window.Ayluna) window.Ayluna.git('sepet.html'); }

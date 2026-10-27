@@ -500,10 +500,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <!-- Stok kurdelesi (kullanıcı, 18 Eki: stok denemelerinden C seçildi): Güvenli Ödeme butonunun üst kenarında. Sayı elle
          (tema ayarı: sayı + aç/kapa; Shopify stoğuna bağlı değil), boşsa kurdele yok ve buton eski yerine döner. -->
     """ + (STOK_KURDELE if STOK else '') + """<button class="btn-on" type="button">{{onLabel}}</button>""" + ('</div>' if STOK else '') + """
-    <!-- Canlıda kapıda ödeme uygulamasının formunu açar. Butonda fiyat yok (kullanıcı, Tur 25); ₺80 ücret ve toplam,
-         sipariş onaylanmadan önce formun özetinde yazar (mevzuat: ek ücret sözleşmeden önce bildirilir). SSS'de de var. -->
-    <button class="btn-kp" type="button">Kapıda Ödeme ile Sipariş Ver</button>
-    <!-- Shopify: Kapıda düğmesi yok, kapıda ödemeyi kullanıcı EasySell ile koyar; düğmesi bu yuvaya gelir -->
+    <!-- Kapıda ödeme kaldırıldı (kullanıcı, 27 Eki). Yuva: Shopify'da bölüme eklenen uygulama blokları satın al düğmesinin altına gelir -->
     <div class="ay-dis" data-ay-dis></div>
     <div class="teslim"><ol class="{{yolCls}}" aria-label="Siparişten teslime"><span class="yol-akis" aria-hidden="true"><i></i><i></i><span class="yol-paket">""" + KUTU + """</span></span>""" + YOL + """</ol></div>
     <!-- Ürün soruları (22 Eki, kullanıcı: mağazadaki açılır soruları "kargo takibin altına ekle, o kısma mükemmel otursun").
@@ -791,7 +788,7 @@ JS = """class Component extends DCLogic {
       { q: 'Bluetooth bağlanmıyor, ne yapmalıyım?', a: 'Telefonda Bluetooth’u kapatıp aç, lambayı kapatıp aç. Eski eşleşmeyi “unut” deyip yeniden bağlan ve yakından dene. Olmazsa İletişim sayfasından yaz, yardımcı olalım.' },
       { q: 'Kaç yaş için uygun?', a: 'Her yaş için uygun.' },
       { q: 'Kargo ne zaman gelir?', a: 'İş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir; Türkiye geneline 3–7 günde ulaşır.' },
-      { q: 'Kartla mı, kapıda mı ödeyeyim?', a: 'Tüm kredi ve banka kartları geçer; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez. Kapıda ödemede ₺80 kapıda ödeme ücreti eklenir; ürün geldiğinde nakit ya da kartla ödersin.' },
+      { q: 'Nasıl ödeyebilirim?', a: 'Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez.' },
       { q: 'Beğenmezsem iade edebilir miyim?', a: '30 gün içinde iade edebilirsin. Sana iade kodunu göndeririz, kargosu ücretsizdir. İlk 14 gün yasal cayma hakkındır.' }
     ];
     """ + OZ4.js_dk_deger("S.model === 'erkek'") + """    return { ...dkV,
@@ -799,7 +796,7 @@ JS = """class Component extends DCLogic {
       kiz: kiz, erkek: !kiz, paket: paket, ikinci: ikinci, modelEtiket: S.adet === 2 ? '1. lamba' : 'Model', adetName: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet',
       onLabel: 'Güvenli Ödeme ile Al', onPrice: TL(online, true),  // düğmede fiyat yok (kullanıcı, 19 Eki)
       p1: TL(P1, true), c1: TL(C1, true), pct: Math.round((1 - P1 / C1) * 100),
-      onNote: 'Kartla %5 indirimli · ' + TL(kapida - online, true) + ' daha az',
+      onNote: 'Kartla %5 indirimli · ' + TL(total - online, true) + ' daha az',
       kargo: KG.bugun ? 'Bugün' : kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, kgAria: KG.aria,
       """ + TK_DEGER + """

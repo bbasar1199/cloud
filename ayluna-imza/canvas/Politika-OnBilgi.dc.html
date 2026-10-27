@@ -99,6 +99,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .guven{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:40px 16px 0;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
 .guven div{display:flex;flex-direction:column;gap:4px;padding:16px 14px}
 .guven div:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}.guven div:nth-child(odd){border-right:1px solid var(--cizgi)}
+.guven div:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .guven svg{width:26px;height:26px;margin-bottom:6px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .guven b{font-size:15px}.guven span{font-size:13px;color:var(--soluk);line-height:1.35}
 /* AyFeneri: görsel + metin */
@@ -288,7 +289,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>
   <section class="sb"><h1>Ön bilgilendirme<br>formu<span>.</span></h1><p>Siparişini onaylamadan önce bilmen gerekenler.</p></section>
   <p class="taslak">Taslak metin: köşeli yerler doldurulup hukukçuya onaylatılmadan yayına girmez.</p>
-  <div class="pm"><h2>Ürün ve ödeme</h2><ul><li>Ürünün temel nitelikleri ürün sayfasında, toplam fiyatı (KDV dahil) sipariş özetinde yazar.</li><li>Ödeme: kartla (%5 indirimli) ya da kapıda (₺80 kapıda ödeme ücretiyle).</li><li>Kargo ücretsiz; Hızlı Kargo ₺79,99.</li></ul></div>
+  <div class="pm"><h2>Ürün ve ödeme</h2><ul><li>Ürünün temel nitelikleri ürün sayfasında, toplam fiyatı (KDV dahil) sipariş özetinde yazar.</li><li>Ödeme: kartla (%5 indirimli).</li><li>Kargo ücretsiz; Hızlı Kargo ₺79,99.</li></ul></div>
   <div class="pm"><h2>Teslimat</h2><p>1 iş gününde kargoda, Türkiye geneli 3–7 iş gününde teslim; en geç 30 gün.</p></div>
   <div class="pm"><h2>Cayma hakkı</h2><p>Teslimden itibaren 14 gün yasal cayma hakkın var; Ayluna bunu 30 güne uzatır. İade kargosu ücretsizdir. Ayrıntı: Mesafeli Satış Sözleşmesi ve İade sayfası.</p></div>
   <div class="pm"><h2>Şikâyet</h2><p>E-postayla bize yaz. Çözülmezse Tüketici Hakem Heyeti ya da Tüketici Mahkemesine başvurabilirsin.</p></div>
@@ -297,7 +298,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2022}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2600}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, {}); }
   componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }

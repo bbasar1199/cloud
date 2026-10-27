@@ -172,7 +172,6 @@ def al(u):
     <!-- Stok ELLE girilir (bölüm ayarı: sayı + aç/kapa); boşsa satır gizlenir -->
     <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span><small>Kartla %%5 indirim dahil</small></span>%s</button>
-    <button class="btn2" type="button">Kapıda Ödeme ile Sipariş Ver</button>
     <div class="ay-dis" data-ay-dis></div>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
     <!-- Ürün soruları (22 Eki, LunaDream'deki gibi): teslim çizgisinin altında 4 soru; kalanı SSS'de (urun_soru.py) -->

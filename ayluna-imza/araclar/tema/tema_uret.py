@@ -161,10 +161,9 @@ window.AYLUNA_SEPET = {{ cart | json }};
         + '{%- endcase -%}\n\n{% schema %}\n' + json.dumps({'name': 'Ayluna sayfası', 'class': 'ay-bolum', 'settings': [
             {'type': 'select', 'id': 'sayfa', 'label': 'Sayfa', 'options': secenek, 'default': 'ana'}]}, ensure_ascii=False, indent=2) + '\n{% endschema %}\n')
     yaz('sections/ayluna-urun.liquid', '''{%- comment -%} Ayluna · ürün sayfası. Her ürünün kendi tasarım panosu var; panosu olmayan yeni ürün sade sayfayla açılır.
-  Gizli ürün formu kapıda ödeme (EasySell) ve Kaching içindir: ayluna.js seçilen modeli/paketi buraya yazar (data-ay-urun-formu).
+  Gizli ürün formu Kaching içindir: ayluna.js seçilen modeli/paketi buraya yazar (data-ay-urun-formu). Kapıda ödeme yok (27 Eki).
   Kaching paket kutusu görünmez durur; tasarımdaki paket kartları onu seçer (kapıda formu paketi ve indirimi oradan okur).
-  Kapıda ödeme düğmesini mağaza sahibi EasySell ile koyar; tema koymaz. EasySell düğmesi ve bu bölüme eklenen uygulama blokları
-  tasarımda satın al düğmesinin altındaki yuvaya taşınır. {%- endcomment -%}
+  Bu bölüme eklenen uygulama blokları tasarımda satın al düğmesinin altındaki yuvaya taşınır. {%- endcomment -%}
 {%- assign ay_pano = true -%}
 {%- case product.handle -%}
 ''' + ''.join("  {%%- when '%s' -%%}{%% render '%s' %%}\n" % (h, ad(p)) for h, p in URUN_PANO) + '''  {%- else -%}
@@ -310,7 +309,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
     yaz('config/settings_schema.json', json.dumps([
         {'name': 'theme_info', 'theme_name': 'Ayluna', 'theme_version': SURUM, 'theme_author': 'Ayluna', 'theme_documentation_url': 'https://ayluna.shop', 'theme_support_url': 'https://ayluna.shop'},
         {'name': 'Ayluna', 'settings': [
-            {'type': 'paragraph', 'content': 'Kapıda ödeme: EasySell ayarlarında özel düğme seçicisine [data-ay-kapida] yazın. Paket fiyatları için Kaching Bundles ya da otomatik indirim tanımlı olmalı (KURULUM).'},
+            {'type': 'paragraph', 'content': 'Ödeme yalnız kartla (kapıda ödeme yok). Paket fiyatları için Kaching Bundles ya da otomatik indirim tanımlı olmalı (KURULUM).'},
             {'type': 'text', 'id': 'kargo_takip_url', 'label': 'Kargo takip adresi', 'default': '/apps/track123'}]}], ensure_ascii=False, indent=2) + '\n')
     yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123'}}, indent=2) + '\n')
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')

@@ -202,8 +202,7 @@ POLITIKA = ("""
     <li>İlk 14 gün yasal cayma hakkındır; Ayluna bu süreyi 30 güne uzatır.</li>
     <li>Ürün kutusu ve parçaları eksiksiz olmalı. [Kullanılmış ürün şartı: teyit]</li>
     <li>Kırık ya da eksik gelen ürün için teslim aldığın gün fotoğrafla yaz. [Değişim süreci: teyit]</li>
-    <li>Kapıda ödemede ödediğin ₺80 kapıda ödeme ücretinin iadesi: [teyit]</li>
-    <li>Para iadesi kartla ödemede karta, kapıda ödemede [IBAN'a] yapılır.</li></ul></div>
+    <li>Para iadesi ödemenin yapıldığı karta yapılır.</li></ul></div>
   <div class="kart-k pol-link"><h2 style="margin-bottom: 8px">Diğer politikalar</h2>
     <a href="#">Kargo politikası<small>3–7 gün, ücretsiz</small></a><a href="#">Gizlilik ve KVKK<small>Kişisel veriler</small></a>
     <a href="#">Mesafeli Satış Sözleşmesi<small>Sipariş sözleşmesi</small></a><a href="#">Ön Bilgilendirme Formu<small>Siparişten önce</small></a><a href="#">Hizmet şartları<small>Site kullanımı</small></a></div>

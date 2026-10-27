@@ -99,6 +99,7 @@ a{color:#1A2142}a:hover{color:#2B3463}
 .guven{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:40px 16px 0;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
 .guven div{display:flex;flex-direction:column;gap:4px;padding:16px 14px}
 .guven div:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}.guven div:nth-child(odd){border-right:1px solid var(--cizgi)}
+.guven div:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .guven svg{width:26px;height:26px;margin-bottom:6px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .guven b{font-size:15px}.guven span{font-size:13px;color:var(--soluk);line-height:1.35}
 /* AyFeneri: görsel + metin */
@@ -288,7 +289,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>
   <section class="sb"><h1>Kargo ve<br>teslimat<span>.</span></h1><p>Kargo ücretsiz; 16.00’ya kadar verilen sipariş aynı gün kargoda.</p></section>
   <div class="pm"><h2>Süreler</h2><ul><li><b>Kargoya veriliş:</b> iş günü 16.00’ya kadar verilen sipariş aynı gün, sonrakiler ertesi iş günü kargoya verilir (hafta sonu ve resmî tatiller hariç).</li><li><b>Teslim:</b> Türkiye geneli 3–7 iş günü.</li><li><b>Hızlı Kargo (₺79,99):</b> sepette seçilirse sipariş sıranın önüne alınır, öncelikli hazırlanıp kargolanır.</li><li>Yasal üst sınır: sipariş en geç 30 gün içinde teslim edilir; gecikirse sana haber verir, istersen siparişi iptal ederiz.</li></ul></div>
-  <div class="pm"><h2>Ücretler</h2><ul><li>Kargo tüm siparişlerde ücretsiz.</li><li><b>Kapıda ödeme ücreti ₺80.</b> Kartla ödemede bu ücret yoktur, üstelik %5 indirim uygulanır.</li></ul></div>
+  <div class="pm"><h2>Ücretler</h2><ul><li>Kargo tüm siparişlerde ücretsiz.</li><li>Kartla ödemede %5 indirim uygulanır.</li></ul></div>
   <div class="pm"><h2>Kargo firmaları ve takip</h2><ul><li>Aras Kargo, DHL, PTT [hangisi ne zaman kullanılıyor: teyit].</li><li>Kargoya verilince takip numarası SMS ve e-postayla gelir; "Kargo takip" sayfasından da bakabilirsin.</li></ul></div>
   <div class="pm"><h2>Teslimatta</h2><ul><li>Paket hasarlıysa kargo görevlisine tutanak tutturup teslim almayabilirsin.</li><li>Kırık ya da eksik ürün için teslim aldığın gün fotoğrafla bize yaz; değişim ya da iade ücretsiz.</li><li>Adreste bulunamazsan paket kargo şubesinde [X] gün bekler.</li><li>Yurt dışına gönderim yapılmıyor.</li></ul></div>
   <div class="kart-k pol-link"><h2 style="margin-bottom: 8px">Diğer politikalar</h2><a href="#">İade politikası<small>30 gün, iade kargosu ücretsiz</small></a><a href="#">Kargo politikası<small>3–7 gün, ücretsiz</small></a><a href="#">Gizlilik ve KVKK<small>Kişisel veriler</small></a><a href="#">Mesafeli Satış Sözleşmesi<small>Sipariş sözleşmesi</small></a><a href="#">Ön Bilgilendirme Formu<small>Siparişten önce</small></a><a href="#">Hizmet şartları<small>Site kullanımı</small></a></div>
@@ -296,7 +297,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2288}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2600}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, {}); }
   componentDidMount() { var self = this; this.iv = setInterval(function () { self.setState({ now: Date.now() }); }, 1000); }

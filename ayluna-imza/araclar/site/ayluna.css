@@ -320,7 +320,8 @@ img{max-width:100%}
   html[data-ay-tur=ana] .uk b{min-height:0;font-size:15px}
   html[data-ay-tur=ana] .uk .f strong{font-size:16px}
   html[data-ay-tur=ana] .tum{width:320px;margin:32px auto 0}
-  html[data-ay-tur=ana] .guven{grid-template-columns:repeat(4,minmax(0,1fr));margin:80px 0 0}
+  html[data-ay-tur=ana] .guven{grid-template-columns:repeat(3,minmax(0,1fr));margin:80px 0 0}
+  html[data-ay-tur=ana] .guven div:last-child:nth-child(odd){grid-column:auto}
   html[data-ay-tur=ana] .guven div{padding:24px 22px;border:0!important;border-right:1px solid var(--cizgi)!important}
   html[data-ay-tur=ana] .guven div:last-child{border-right:0!important}
   html[data-ay-tur=ana] .ay-blok{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);margin:80px 0 0}

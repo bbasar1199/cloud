@@ -285,7 +285,7 @@
   }
 
   // Masaüstü yapışkan satın alma çubuğu (eleştirmen önerisi, kullanıcı seçti 19 Eki): sayfanın satın alma butonu
-  // ekranın üstünden çıkınca menünün altından iner. Ürün, seçim, kartla al butonu (sayfadaki etiketin aynısı) ve fiyatsız Kapıda bağlantısı.
+  // ekranın üstünden çıkınca menünün altından iner. Ürün, seçim ve kartla al butonu (sayfadaki etiketin aynısı).
   // Yalnız transform/opacity; sayaç yok; telefonda görünmez (oradaki yapışkan çubuk sayfanın kendisinde).
   var cubuk = null, cubukIO = null, cubukKay = false;
   function anaBtn() { return document.querySelector('#kok .urun-ust .btn-on, #kok .urun-ust .btn1'); }
@@ -302,13 +302,11 @@
     if (SAYFA !== 'urun' || !U || U.stok === false || !b || !window.IntersectionObserver) return;
     if (!cubuk) {
       cubuk = el('<div class="ay-al" role="region" aria-label="Hızlı satın alma"><div class="ay-al-ic"><img alt=""><span class="ay-al-y"><b></b><small data-v></small></span>' +
-        '<button type="button" class="ay-al-kp" data-kp>Kapıda ödeme</button><button type="button" class="ay-al-btn" data-al><span data-l></span></button></div></div>');
+        '<button type="button" class="ay-al-btn" data-al><span data-l></span></button></div></div>');  // kapıda ödeme kaldırıldı (27 Eki)
       document.body.appendChild(cubuk);
       cubuk.addEventListener('click', function (e) {
         if (e.target.closest('[data-al]')) sepeteAt(URUN, 'kart');
-        else if (e.target.closest('[data-kp]')) { if (SHOP) { formEsitle(); if (!easySell()) sepeteAt(URUN, 'kart'); } else sepeteAt(URUN, 'kapida'); }
       });
-      if (SHOP) cubuk.querySelector('[data-kp]').setAttribute('data-ay-kapida', '');
     }
     cubuk.querySelector('img').src = gorsel(U.img); cubuk.querySelector('b').textContent = U.ad;
     cubukIO = new IntersectionObserver(function (g) {

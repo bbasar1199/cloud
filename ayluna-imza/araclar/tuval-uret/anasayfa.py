@@ -123,6 +123,7 @@ CSS = r""".pg{--lac:#1A2142;--koyu:#0C1027;--krem:#F6F1E9;--kart:#FFFDF9;--amber
 .guven{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:40px 16px 0;border-radius:20px;background:var(--kart);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
 .guven div{display:flex;flex-direction:column;gap:4px;padding:16px 14px}
 .guven div:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}.guven div:nth-child(odd){border-right:1px solid var(--cizgi)}
+.guven div:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .guven svg{width:26px;height:26px;margin-bottom:6px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .guven b{font-size:15px}.guven span{font-size:13px;color:var(--soluk);line-height:1.35}
 /* AyFeneri: görsel + metin */
@@ -176,8 +177,7 @@ def urun_kart(h, ad, p, c, var):
 
 GUVEN = [('<path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle>', 'Ücretsiz kargo', 'Türkiye geneline, takip numarasıyla.'),
          ('<path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path>', '30 gün iade', 'Beğenmezsen geri gönder, kargosu ücretsiz.'),
-         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez.'),
-         ('<path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path>', 'Kapıda ödeme', 'Ürün gelince öde; +₺80 kapıda ödeme ücreti.')]
+         ('<rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path>', 'Kartla %5 indirim', 'Kart bilgin bize gelmez.')]  # kapıda ödeme kaldırıldı (27 Eki)
 
 CSS = CSS + UST_CSS  # üst blok (25 Eki); sade ürünler ve diğer sayfalar bu CSS'i devralır
 

@@ -59,20 +59,12 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(await pg.evaluate(() => AylunaSepet.sayi()) === 0, 'sipariş sonrası sepet boş');
   await pg.screenshot({ path: path.join(OUT, 'akis-tamam.png'), fullPage: true });
 
-  // 3) Kapıda ödeme: Galaxy USB → kapıda formu → sipariş
-  await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.waitForTimeout(400);
-  await pg.locator('#siparis .btn2').click(); await pg.waitForTimeout(600);
-  not(await pg.locator('.ay-kf.on').count() === 1, 'Galaxy USB: Kapıda Ödeme → form açıldı');
-  not((await pg.locator('.kf-top').textContent()).includes('80,00'), 'formda ₺80 kapıda ücreti');
-  await pg.screenshot({ path: path.join(OUT, 'akis-kapida.png') });
-  await pg.locator('.ay-kf [data-vazgec]').click(); await pg.waitForTimeout(200);
-  not(await pg.locator('.kf-bekle:not([hidden])').count() === 1, 'kapatınca "Bekle!" teklifi');
-  await pg.locator('[data-devam]').click();
-  await pg.fill('.ay-kf input[name=ad]', 'Mehmet Can'); await pg.fill('.ay-kf input[name=tel]', '05321112233'); await pg.selectOption('.ay-kf select[name=il]', 'Ankara');
-  await pg.fill('.ay-kf input[name=ilce]', 'Çankaya'); await pg.fill('.ay-kf textarea[name=adres]', 'Kızılay Mah. Atatürk Bulv. No 5');
-  await pg.locator('.ay-kf button[type=submit]').click(); await pg.waitForURL(/siparis-alindi/, { timeout: 5000 }).catch(() => {});
-  await pg.waitForTimeout(400);
-  not(pg.url().includes('siparis-alindi') && (await pg.locator('.tamam').textContent()).includes('kapına gelince'), 'kapıda sipariş → teşekkür (kapıda yazısı)');
+  // 3) Kapıda ödeme kaldırıldı (kullanıcı, 27 Eki): ürün sayfalarında, sepette, ödemede ve politikalarda "kapıda" yazmaz
+  for (const f of ['lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba', 'index', 'sepet', 'odeme', 'kargo', 'iade', 'mesafeli-satis', 'on-bilgilendirme', 'kvkk']) {
+    await pg.goto(KOK + f + '.html'); await pg.waitForTimeout(350);
+    const t = await pg.evaluate(() => document.body.innerText);
+    not(!/kapıda|kapida/i.test(t), f + ': kapıda ödeme yok' + (/kapıda/i.test(t) ? ' → "' + t.slice(Math.max(0, t.search(/kapıda/i) - 30), t.search(/kapıda/i) + 40).replace(/\s+/g, ' ') + '"' : ''));
+  }
 
   // 4) LunaDream: açılışta paket seçili değil (19 Eki), seçimsiz alım 1 adet; 2 Adet seçilince 2 lamba sepete doğru gidiyor
   await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(500);
@@ -117,7 +109,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(await pg.locator('.bos-s').count() === 1, 'hepsini kaldırınca boş sepet');
   await pg.screenshot({ path: path.join(OUT, 'sepet-bos.png') });
 
-  // 6) Seçenekli ürün, tükendi ürün, çekmeceden kapıda, formlar, rozet çekmecede yok
+  // 6) Seçenekli ürün, tükendi ürün, çekmecede kapıda yok, formlar, rozet çekmecede yok
   await pg.goto(KOK + 'egitici-akilli-cizim-tahtasi.html'); await pg.waitForTimeout(400);
   const secB = pg.locator('[aria-pressed]', { hasText: /Mavi|Pembe|Yeşil|Sarı|Turuncu|Mor/ });
   if (await secB.count() > 1) { await secB.nth(1).click(); await pg.waitForTimeout(200); }
@@ -126,8 +118,8 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   not(s2 && s2.h === 'egitici-akilli-cizim-tahtasi' && s2.varyant.split('·').length >= 2, 'seçenekli ürün sepette: ' + (s2 && s2.varyant));
   const xRozet = await pg.frameLocator('.ay-cek iframe').locator('[aria-label="Sepeti kapat"][data-ay-adet]').count();
   not(xRozet === 0, 'çekmecedeki kapat düğmesinde rozet yok');
-  await pg.frameLocator('.ay-cek iframe').locator('.btn2').click(); await pg.waitForTimeout(600);
-  not(await pg.locator('.ay-kf.on').count() === 1 && await pg.locator('.ay-cek.on').count() === 0, 'çekmeceden Kapıda Ödeme → form (çekmece kapandı)');
+  not(await pg.frameLocator('.ay-cek iframe').locator('.btn2').count() === 0, 'çekmecede Kapıda düğmesi yok');
+  await pg.evaluate(() => Ayluna.cekmeceKapat()); await pg.waitForTimeout(300);
   await pg.goto(KOK + 'aroma-terapi-nemlendirici.html'); await pg.waitForTimeout(400);
   not(await pg.locator('.btn1[disabled]').count() === 1, 'tükendi ürün: buton kapalı');
   await pg.locator('.btn2').click(); await pg.waitForTimeout(300);
@@ -245,16 +237,14 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   // Galaxy USB canlı kartlar (21 Eki): 5 özellik hücresinde ekran, disk şeridi, teslim kartında USB ikonu
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.waitForTimeout(500);
   not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .ui-serit .sd').count() === 7 && await pg.locator('#siparis .teslim .y-ik').count() === 1, 'Galaxy USB: 5 özellik ekranı, disk şeridi, teslim kartında ikon');
-  // Satın alma butonları sepeti katlamaz (kartla dene → kapat → kapıda), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
+  // Satın alma butonu sepeti katlamaz (iki kez Güvenli Ödeme → tek satır), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);
-  await pg.evaluate(() => { AylunaSepet.koy({ h: 'galayx-usb-projektor', ad: 'Galaxy USB', varyant: '2 adet', paket: 2, birim: 2279.99, eski: null }); });
-  await pg.locator('#siparis .btn2').click(); await pg.waitForTimeout(500);
-  await pg.evaluate(() => Ayluna.kapidaKapat()); await pg.locator('#siparis .btn2').click(); await pg.waitForTimeout(500);
+  await pg.locator('#siparis .btn1').first().click(); await pg.waitForTimeout(600); await pg.evaluate(() => Ayluna.cekmeceKapat()); await pg.waitForTimeout(300);
+  await pg.locator('#siparis .btn1').first().click(); await pg.waitForTimeout(600); await pg.evaluate(() => Ayluna.cekmeceKapat()); await pg.waitForTimeout(300);
   { const s = await pg.evaluate(() => AylunaSepet.oku().satirlar.filter(x => x.h === 'galayx-usb-projektor'));
-    not(s.length === 1 && s[0].adet === 1, `Galaxy USB: iki kez Kapıda → sepette tek satır (${s.length} satır, adet ${s[0] && s[0].adet})`);
+    not(s.length === 1 && s[0].adet === 1, `Galaxy USB: iki kez Güvenli Ödeme → sepette tek satır (${s.length} satır, adet ${s[0] && s[0].adet})`);
     const p = await pg.evaluate(() => { const s = AylunaSepet.oku(); return s.satirlar.map(x => x.eski); });
     not(p.every(e => e === null || e === undefined) || (await pg.evaluate(() => AylunaSepet.oku().satirlar[0].paket)) === 1, 'paket satırında üstü çizili eski fiyat yok'); }
-  await pg.evaluate(() => Ayluna.kapidaKapat());
 
   await pg.goto(KOK + 'lunadream-gece-lambasi.html'); await pg.waitForTimeout(500);
   not(await pg.locator('#siparis .sih').count() === 1 && await pg.locator('.sol-oz').count() === 0, 'telefon: Sihirli Özellikler satın alma kutusunda, masaüstü kopyası yok');
@@ -384,15 +374,13 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     });
     not(r.sw === 1440 && r.masa && !r.tel && r.yap, `masaüstü ${f}: taşma ${r.sw}, üst menü ${r.masa}, telefon başlığı gizli ${!r.tel}, galeri üst kısımda ${r.yap}`);
   }
-  // Masaüstü yapışkan satın alma çubuğu: üstte kapalı, satın alma butonu geçince açılır; Kapıda → form, sepette tek satır
+  // Masaüstü yapışkan satın alma çubuğu: üstte kapalı, satın alma butonu geçince açılır; kapıda bağlantısı yok (27 Eki)
   await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.evaluate(() => localStorage.clear()); await mp.reload(); await mp.waitForTimeout(900);
   const c0 = await mp.locator('.ay-al.on').count();
   await mp.evaluate(() => window.scrollTo(0, 2400)); await mp.waitForTimeout(800);
   const cl = await mp.locator('.ay-al.on [data-l]').textContent().catch(() => '');
   not(c0 === 0 && cl.trim() === 'Güvenli Ödeme ile Al', 'masaüstü çubuğu: üstte kapalı, aşağıda açık, düğmede fiyat yok (19 Eki) "' + cl + '"');
-  not(!/₺/.test(await mp.locator('.ay-al [data-kp]').textContent()), 'çubukta Kapıda bağlantısında fiyat yok');
-  await mp.locator('.ay-al [data-kp]').click(); await mp.waitForTimeout(600);
-  not(await mp.locator('.ay-kf.on').count() === 1 && await mp.evaluate(() => AylunaSepet.oku().satirlar.length) === 1, 'çubuktan Kapıda → form açıldı, sepette tek satır');
+  not(await mp.locator('.ay-al [data-kp]').count() === 0 && !/kapıda/i.test(await mp.locator('.ay-al').textContent()), 'masaüstü çubuğunda kapıda bağlantısı yok');
   // Masaüstü: özellik kartları sol sütunda tek kopya; Gece vitrini kenardan kenara bant, yazı solda şerit sağda (23 Eki, ekrana sığsın); 4. ay → 4. oda ortada
   await mp.goto(KOK + 'lunadream-gece-lambasi.html'); await mp.waitForTimeout(800);
   { const r = await mp.evaluate(() => { const s = document.querySelector('#siparis .sih'), g = document.querySelector('.urun-ust>.sahne'); return { tek: document.querySelectorAll('.sih').length, sol: document.querySelectorAll('.sol-oz').length, sag: !!s && !!g && s.getBoundingClientRect().left > g.getBoundingClientRect().right }; });
