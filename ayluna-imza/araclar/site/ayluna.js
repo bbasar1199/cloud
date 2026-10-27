@@ -18,7 +18,7 @@
     Object.keys(V.urun).forEach(function (h) {
       var u = V.urun[h], c = CANLI[h]; TUVAL_FIYAT[h] = u.p;
       if (!c) { u.yok = true; return; }
-      u.p = c.p / 100; u.c = c.c > c.p ? c.c / 100 : null; u.stok = !!c.stok; u.vid = c.vid; u.vs = c.v || []; u.url = c.url;
+      u.p = c.p / 100; u.c = c.c > c.p ? c.c / 100 : null; u.stok = !!c.stok; u.vid = c.vid; u.vs = c.v || []; u.url = c.url; u.dun = c.dun; u.kd = c.kd;
     });
   }
   var TL = function (n) { var s = (Math.round(n * 100) / 100).toFixed(2).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + s[1]; };
@@ -79,7 +79,7 @@
     for (var i = el.attributes.length - 1; i >= 0; i--) { var nm = el.attributes[i].name; if (!(nm in v.a) && !koru(el, nm)) el.removeAttribute(nm); }
     for (var k in v.a) if (el.getAttribute(k) !== v.a[k]) try { el.setAttribute(k, v.a[k]); } catch (e) {}
     dinle(el, v.h);
-    if (el.hasAttribute('data-ay-dis')) return;  // uygulama yuvası (EasySell düğmesi, uygulama blokları): içi bizim değil
+    if (el.hasAttribute('data-ay-dis') || el.hasAttribute('data-ay-dolu')) return;  // uygulama yuvası (EasySell düğmesi, uygulama blokları) ve dolan yorum kutusu: içi bizim değil
     cocuklar(el, v.c);
   }
   function cocuklar(el, vc) {
@@ -554,7 +554,28 @@
   function yuvaDoldur() {
     var y = document.querySelector('#kok [data-ay-dis]'); if (!y || y.__dolu) return; y.__dolu = 1;
     y.appendChild(document.createElement('easysell-form'));
-    var ub = document.querySelector('.ay-uygulama-bloklari'); if (ub) { while (ub.firstChild) y.appendChild(ub.firstChild); }
+    // Yorum uygulaması (Loox) satın alma yuvasına değil, sayfadaki yorum kutusuna (data-ay-yorum); kutu Loox gelince görünür (ayluna.css)
+    var yk = document.querySelector('#kok [data-ay-yorum]'), ub = document.querySelector('.ay-uygulama-bloklari');
+    if (ub) while (ub.firstChild) {
+      var b = ub.firstChild;
+      if (yk && b.nodeType === 1 && /loox/i.test(b.innerHTML)) { if (!yk.hasAttribute('data-ay-dolu')) { yk.textContent = ''; yk.setAttribute('data-ay-dolu', ''); } yk.appendChild(b); }
+      else y.appendChild(b);
+    }
+  }
+  // Dün satırı ve stok kurdelesi: sayı ürünün ayluna.dun_satis / ayluna.stok_kurdele alanından (elle girilir, KURULUM).
+  // Alan boşsa tasarımdaki sayı kalır, 0 ise satır gizlenir.
+  function elleSayi() {
+    var u = V.urun[URUN]; if (!u) return;
+    sayiYaz('.dun', u.dun, /\d+(?= kişi)/g); sayiYaz('.stok-kd', u.kd, /\d+(?= adet)/g);
+  }
+  function sayiYaz(sec, n, re) {
+    if (n === null || n === undefined || n === '') return;
+    var el = document.querySelectorAll('#kok ' + sec);
+    for (var i = 0; i < el.length; i++) {
+      if (!(+n > 0)) { if (!el[i].hasAttribute('data-ay-gizli')) el[i].setAttribute('data-ay-gizli', ''); continue; }
+      var w = document.createTreeWalker(el[i], NodeFilter.SHOW_TEXT), t;
+      while ((t = w.nextNode())) { var s = t.nodeValue.replace(re, String(Math.round(+n))); if (s !== t.nodeValue) t.nodeValue = s; }
+    }
   }
   function shopSusle() {
     var k = document.querySelectorAll('#kok .btn2, #kok .btn-kp');
@@ -569,7 +590,7 @@
       if (es) { var et = u.c ? TL(u.c) : ''; if (es.textContent !== et) es.textContent = et; }
       if (rz && !rz.classList.contains('tukendi')) { var rt = u.c ? '%' + Math.round((1 - u.p / u.c) * 100) : ''; if (rz.textContent !== rt) rz.textContent = rt; rz.hidden = !rt; }
     }
-    if (SAYFA === 'urun') { formEsitle(); kachingEsitle(); yuvaDoldur(); }
+    if (SAYFA === 'urun') { formEsitle(); kachingEsitle(); yuvaDoldur(); elleSayi(); }
   }
   function formEsitle() {
     var f = document.querySelector('form[data-ay-urun-formu]'), s = satir(URUN); if (!f || !s) return;

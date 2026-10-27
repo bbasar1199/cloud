@@ -200,7 +200,7 @@ img{max-width:100%}
   html[data-ay-tur=urun] .mesaj-bol>.px>.serit-ok{grid-column:2;grid-row:1/span 2}
   /* Ürün galerisi ve ana sayfa slaytı okları (23 Eki): görselin sol ve sağ kenarının ortasında, yarısı dışarıda. 26 galeri karesine bakıldı:
      sağ üst, orta ve alt hep bir afiş yazısına biniyordu; kenarın 22 px'i hiçbir yazıya değmiyor. Hep görünür. */
-  html[data-ay-tur=urun] .g-ok,html[data-ay-tur=ana] .slayt .g-ok{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:44px;height:44px;margin-top:-22px;padding:0;border:0;border-radius:50%;background:#FFFDF9;color:#1A2142;box-shadow:0 6px 16px rgba(12,16,39,.2),0 0 0 1px rgba(26,33,66,.08);cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+  html[data-ay-tur=urun] .g-ok,html[data-ay-tur=ana] .slayt .g-ok{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:48px;height:48px;margin-top:-24px;padding:0;border:0;border-radius:50%;background:#FFFDF9;color:#1A2142;box-shadow:0 6px 16px rgba(12,16,39,.2),0 0 0 1px rgba(26,33,66,.08);cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
   html[data-ay-tur=urun] .g-geri,html[data-ay-tur=ana] .slayt .g-geri{left:-22px}
   html[data-ay-tur=urun] .g-ileri,html[data-ay-tur=ana] .slayt .g-ileri{right:-22px}
   html[data-ay-tur=urun] .g-ok:hover,html[data-ay-tur=ana] .slayt .g-ok:hover{transform:scale(1.06)}
@@ -424,6 +424,9 @@ img{max-width:100%}
 /* Shopify kipi (19 Eki): kapıda ödeme düğmesini mağaza sahibi EasySell ile koyar; tasarımdaki Kapıda düğmeleri ve sepetteki kapıda notu gizli.
    Satın al düğmesinin altındaki yuva EasySell düğmesini ve uygulama bloklarını taşır. Kaching paket kutusu görünmez çalışır. */
 html.ay-shop [data-ay-kapida]{display:none!important}
+/* Shopify: Loox bloğu gelmediyse yorum kutusu görünmez; ürün alanında 0 yazan Dün/stok satırı gizli (ayluna.js elleSayi) */
+html.ay-shop [data-ay-yorum]:not([data-ay-dolu]),html.ay-shop [data-ay-gizli]{display:none!important}
+[data-ay-yorum][data-ay-dolu]{padding:0;border:0;text-align:left}
 .ay-dis:not(:empty){margin-top:12px}
 .ay-arka{position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);visibility:hidden;pointer-events:none}
 /* Üst blok renk döngüsü: masaüstü başlığı için ortak anahtar kareler (sayfa CSS'inde de var) */

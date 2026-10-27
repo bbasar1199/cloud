@@ -304,7 +304,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
 .urs-s+.urs-s{border-top:1px solid #EFE6D8;border-top-color:color-mix(in srgb,var(--cizgi,#E3D8C7) 60%,transparent)}
 .urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 0;font-size:14px;font-weight:600;line-height:1.3;color:var(--lac,#1A2142);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .urs-s summary::-webkit-details-marker{display:none}
-.urs-s summary:focus-visible{outline:2px solid var(--v,#F2A65A);outline-offset:2px;border-radius:8px}
+.urs-s summary:focus-visible{outline:2px solid var(--v2,#1A2142);outline-offset:2px;border-radius:8px}
 .urs-ay{position:relative;flex:none;width:22px;height:22px}
 .urs-ay .evre{position:absolute;inset:0;width:22px;height:22px;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
 .urs-ay .evre circle{fill:var(--yuzey,#FFFDF9);stroke:var(--lac,#1A2142);stroke-width:1.4}
@@ -368,7 +368,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <button class="yukari" type="button" aria-label="Yukarı çık"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3306}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3246}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: null, sec: 0 }); }
   componentDidMount() { var self = this;
@@ -405,10 +405,12 @@ class Component extends DCLogic {
 function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
       if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
       s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
-    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
-    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
+    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
     var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
-      return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
     return Object.assign(R, { mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
   }
 }

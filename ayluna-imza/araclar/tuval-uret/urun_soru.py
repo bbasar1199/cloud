@@ -15,7 +15,7 @@ URS_CSS = """
 .urs-s+.urs-s{border-top:1px solid #EFE6D8;border-top-color:color-mix(in srgb,var(--cizgi,#E3D8C7) 60%,transparent)}
 .urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 0;font-size:14px;font-weight:600;line-height:1.3;color:var(--lac,#1A2142);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .urs-s summary::-webkit-details-marker{display:none}
-.urs-s summary:focus-visible{outline:2px solid var(--v,#F2A65A);outline-offset:2px;border-radius:8px}
+.urs-s summary:focus-visible{outline:2px solid var(--v2,#1A2142);outline-offset:2px;border-radius:8px}
 .urs-ay{position:relative;flex:none;width:22px;height:22px}
 .urs-ay .evre{position:absolute;inset:0;width:22px;height:22px;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
 .urs-ay .evre circle{fill:var(--yuzey,#FFFDF9);stroke:var(--lac,#1A2142);stroke-width:1.4}

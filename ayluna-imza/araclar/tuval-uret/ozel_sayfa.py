@@ -162,7 +162,7 @@ def al(u):
     <p class="alt-b">%s</p>
     <!-- Loox yıldızı: puan ve sayı uygulamadan otomatik (AyFeneri 43 yorum, Galaksi Night 6 yorum; 18 Eki) -->
     <p class="loox"><i aria-hidden="true">★★★★★</i><span>[Loox: puan · yorum sayısı otomatik]</span></p>
-    <p class="fiyat" aria-label="%s, önceki fiyat %s, %%%d indirim"><b aria-hidden="true">%s</b><s aria-hidden="true">%s</s><span class="rozet" aria-hidden="true">%%%d indirim</span></p>
+    <p class="fiyat"><span class="sr-m">Fiyat %s, önceki fiyat %s, %%%d indirim</span><b aria-hidden="true">%s</b><s aria-hidden="true">%s</s><span class="rozet" aria-hidden="true">%%%d indirim</span></p>
     %s%s
     <div class="pk-bas">Çok al, az öde</div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
@@ -422,6 +422,6 @@ def sayfa(u):
 
 if __name__ == '__main__':
     for u, (dosya, yon) in DOSYA.items():
-        h = int(os.environ.get('S_H_' + u, {'af': 6712, 'gn': 7037}[u]))  # ölçülen pano boyu (22 Eki, teslim altı ürün soruları)
+        h = int(os.environ.get('S_H_' + u, {'af': 6574, 'gn': 6907}[u]))  # ölçülen pano boyu (27 Eki, kapıda ödeme kalktıktan sonra)
         open(os.path.join(CANVAS, dosya), 'w', encoding='utf-8').write(urun_ust(sayfa(u), '<section class="hero kare"') + TAIL.format(h=h, js=masa_bayrak(mesaj_js(js(u)))))
         print('yazıldı:', dosya, h)

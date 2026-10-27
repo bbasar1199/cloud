@@ -248,5 +248,5 @@ JS = """class Component extends DCLogic {
 }"""
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4168)), js=JS))
+    open(OUT, 'w', encoding='utf-8').write(HEAD.format(title='Ayluna · Ana sayfa', css=CSS) + HTML + TAIL.format(h=int(os.environ.get('A_H', 4151)), js=JS))
     print('yazıldı:', os.path.abspath(OUT))

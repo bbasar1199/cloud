@@ -285,6 +285,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .fy-yeni{animation:fy-yeni 3s cubic-bezier(.2,.7,.2,1) .3s both}
 .fy-rozet{animation:fy-rozet 3s cubic-bezier(.2,.7,.2,1) .3s both}
 @media (prefers-reduced-motion:reduce){.fy-eski,.fy-eski::after,.fy-yeni,.fy-rozet{animation:none}.fy-eski{opacity:0}.fy-rozet,.fy-yeni{opacity:1}}
+/* Ekran okuyucu fiyatı görünmez metinden okur (27 Eki denetim: aria-label'lı paragrafın içi aria-hidden olunca boş okunuyordu) */
+.sr-m{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 /* Bölümler */
 .bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#A05A1C}
@@ -466,7 +468,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
       <a class="puan" href="#yorumlar" aria-label="5 üzerinden {{rating}} puan, {{reviews}} yorum"><span class="puan-ust">""" + STAR + """<b>{{rating}}</b></span><span class="puan-alt">{{reviews}} yorum</span></a>
     </div>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
-    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><b class="fy-yeni" aria-hidden="true">{{p1}}</b><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{c1}}</s><span class="indirim fy-rozet">%{{pct}} indirim</span></span></p>
+    <p class="fiyat-satir"><span class="sr-m">Fiyat {{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{c1}}</s><span class="indirim fy-rozet">%{{pct}} indirim</span></span></p>
 """ + DUN_SATIR + """
 
     <!-- Sihirli Özellikler: fiyatın hemen altında; model seçimi bunun altında (Tur 9, kullanıcı isteği). Canlı kartlar (21 Eki): her kartta küçük ekran ve sekans -->
@@ -889,5 +891,5 @@ def sade(h):
 
 
 if __name__ == '__main__':
-    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS + UST_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7234)), js=masa_bayrak(JS))))
+    open(OUT, 'w', encoding='utf-8').write(sade(HEAD.format(title='LunaDream · E', css='.pg{--zemin:#FFFFFF}\n' + CSS + SERIT_OK_CSS + tk_css('#1A2142', '#2E6B4F', '#2E9E62', '1.9s') + BOYUT_CSS + UST_CSS) + urun_ust(HTML, '<section class="sahne"') + TAIL.format(h=int(os.environ.get('E_H', 7186)), js=masa_bayrak(JS))))
     print('yazıldı:', os.path.abspath(OUT))

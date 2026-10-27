@@ -9,7 +9,7 @@ KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(KOK, 'araclar', 'site'))
 import site_uret as S
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.31'
+SURUM = '1.0.32'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
@@ -98,11 +98,12 @@ def main():
     yaz('assets/ayluna.css', css + '\nbody{background:var(--ay-zemin,#F6F1E9)}\n')
 
     # 3) Canlı ürün verisi ve sepet
-    yaz('snippets/ay-canli.liquid', '''{%- comment -%} Mağazanın kendi verisi: fiyat (kuruş), eski fiyat, stok, varyantlar, adres; ilk sepet {%- endcomment -%}
+    yaz('snippets/ay-canli.liquid', '''{%- comment -%} Mağazanın kendi verisi: fiyat (kuruş), eski fiyat, stok, varyantlar, adres; elle girilen Dün ve stok kurdelesi sayısı
+(ürün alanları ayluna.dun_satis, ayluna.stok_kurdele; boşsa tasarımdaki sayı, 0 ise satır yok); ilk sepet {%- endcomment -%}
 <script>
 window.AYLUNA_CANLI = {
 {%- for p in collections.all.products -%}
-{{ p.handle | json }}: {"p": {{ p.price }}, "c": {{ p.compare_at_price | default: 0 }}, "stok": {{ p.available | json }}, "vid": {{ p.selected_or_first_available_variant.id | json }}, "url": {{ p.url | json }}, "v": [
+{{ p.handle | json }}: {"p": {{ p.price }}, "c": {{ p.compare_at_price | default: 0 }}, "stok": {{ p.available | json }}, "vid": {{ p.selected_or_first_available_variant.id | json }}, "url": {{ p.url | json }}, "dun": {{ p.metafields.ayluna.dun_satis.value | json }}, "kd": {{ p.metafields.ayluna.stok_kurdele.value | json }}, "v": [
 {%- for v in p.variants -%}{"id": {{ v.id }}, "t": {{ v.title | json }}, "a": {{ v.available | json }}, "p": {{ v.price }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
 ]}{%- unless forloop.last -%},{%- endunless %}
 {%- endfor -%}

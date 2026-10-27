@@ -12,7 +12,7 @@ Ayluna (ayluna.shop) Shopify mağazasının LunaDream ürün sayfası ve tema b�
 - Mobil önce (390px).
 - Shopify kodu kopyala-yapıştır `.txt` olarak verilir (`shopify/`).
 - Seçilen tasarım `canvas/Main.dc.html`. Shopify bölümleri buna göre yazılır.
-- Ödeme: kartla öde varsayılan (%5 indirim), kapıda ödeme ikinci.
+- Ödeme: yalnız kartla (%5 indirim). Kapıda ödeme yok (kullanıcı, 27 Eki).
 - Teyitsiz bilgi köşeli yer tutucu kalır: [X] cm.
 
 ## Tasarım kararı süreci (hata düzeltmede gerekmez)

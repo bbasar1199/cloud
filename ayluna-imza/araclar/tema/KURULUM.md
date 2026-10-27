@@ -1,10 +1,10 @@
-# Ayluna teması 1.0.31 · kurulum
+# Ayluna teması 1.0.32 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.31.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.32.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme yalnız kartla; kapıda ödeme yok (27 Eki).
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.31.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.32.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
    Yayınlanmamış temayı denemek satışı etkilemez: müşteriler eski temayı görür, sipariş kaçmaz. Uygulamaları da (3. madde) yayınlamadan bu temanın düzenleyicisinde açıp önizlemede denersin.
 
@@ -30,6 +30,8 @@ Yeni temada uygulama yerleştirmeleri kapalı gelir. Özelleştir → sol altta 
   - Paket fiyatları Kaching'tekiyle aynı (19 Eki'de karşılaştırıldı). Kaching'te fiyat değişirse bana yaz, kartları güncellerim.
 - **Kapıda ödeme yok (27 Eki).** Temada kapıda düğmesi, formu ya da yazısı yok. **EasySell'in yerleştirmesini kapat** (Uygulama yerleştirmeleri) ya da uygulamayı kaldır; açık kalırsa kendi "Kapıda Ödeme" düğmesini sayfaya ekler. Shopify ödeme ayarlarında "Kapıda ödeme (COD)" yöntemi açıksa onu da kapat.
 - **Loox, Track123:** yerleştirmelerini aç. Yorum kartları tasarımda (gerçek yorumlardan); "Kargo takip" `/apps/track123`'e gider (tema ayarından değişir).
+- **Galaxy USB yorumları (27 Eki):** Özelleştir → ürün şablonu → "Ayluna ürün sayfası" bölümüne **Loox ürün yorumları** uygulama bloğunu ekle. Tema onu sayfadaki "Alanlar ne diyor?" kutusuna taşır. Blok eklenmezse kutu görünmez (yer tutucu yazı müşteriye çıkmaz).
+- **Dün satılan ve "Son N adet" (27 Eki):** Ayarlar → Özel veriler → Ürünler → Tanım ekle: `ayluna.dun_satis` ("Dün satılan", tam sayı) ve `ayluna.stok_kurdele` ("Stok kurdelesi", tam sayı). Her ürünün sayfasında sayıyı elle yaz. Boş bırakırsan tasarımdaki sayı kalır (LunaDream: Dün 62, Son 18; Galaxy USB: Dün 62, Son 23); **0** yazarsan satır hiç görünmez.
 - **Kartla %5 indirim:** Sepette "Kartla toplam" %5 düşük gösterilir. Ödeme sayfasında da bu indirimin uygulandığını denetle (otomatik indirim ya da ödeme sağlayıcısı). Uygulanmıyorsa yayınlama.
 
 ## 4. Tema ayarları

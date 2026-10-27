@@ -475,7 +475,27 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Üst blok: sayaç şeridi + beyaz başlık, beyaz ↔ lacivert döngü (25 Ekim, en güncel)
+## Kapıda ödeme kalktı + Galaxy USB iyileştirmeleri (27 Ekim, en güncel)
+- Kullanıcı: "Artık yüklüyorum siteyi; kapıda ödemeyi kaldır, bir de USB projektör ürün sayfasındaki yapılması gereken iyileştirmeleri de yap."
+- Kapıda ödeme: bütün sitede ve temada kapıda düğmesi, formu, sepet notu, SSS ve politika maddeleri kalktı (commit 0dad574); ödeme yalnız kartla (%5). KURULUM: EasySell yerleştirmesini ve Shopify COD yöntemini kapat.
+- Galaxy USB (`luna_usb.py`; eleştirmen + `design-review` denetimi):
+  - Fiyat LunaDream sırasıyla (`.fiyat-satir`, 20 px/600); ekran okuyucu görünmez metni okur (`.sr-m`). Aynı erişilebilirlik düzeltmesi LunaDream, AyFeneri, Galaksi Night'ta.
+  - Özellik kartları kurumsal: 28 px gösterge (fiş, 3 disk yığını, boyun, gece lambası halesi, cetvel), gri ekran ve dönen etiketler yok; lens rengi animasyonu (fill) kalktı.
+  - "İçin rahat olsun" güven kutusu satın almanın hemen altında; "[Ödeme altyapısı]" çipi kalktı, "Kartla güvenli öde" geniş kartı düzeldi.
+  - Sahneler: alt yazılar "Kutudaki Dolunay/Satürn diski"; üçüncü kart (tavanda galaksi yok) "Gece lambası · Gövdesi yumuşak ışıkla yanar" oldu.
+  - Başlıklarda zorla satır kırma yok. "Disk N / 12" sayacı yerine "Kutudaki disk". Kurulum numarası 32 px, SSS artısı ince halka, kart çipleri 700.
+  - Yer tutucular: "Disk nasıl değişir?" (cevap teyitsiz) SSS'den kalktı; "Kırık ya da eksik" cevabı teyitli bilgiyle; kurulum adım 2'deki köşeli not kalktı.
+  - Yorumlar tek akış: "Alanlar ne diyor?" → müşteri mesajları (küçük etiket) → Loox kutusu. Shopify'da bölüme eklenen Loox bloğu bu kutuya taşınır, blok yoksa kutu görünmez (`ayluna.js` `data-ay-yorum`).
+  - Paket alt yazısı "₺798,01 kazanç" (LunaDream gibi). Çapraz satış kartları yazısız kesim (canvas/capraz).
+  - Yapışkan "Satın al" paketlerin başına iner (paket, düğme, teslim aynı ekranda). Oda kartında görünmez ileri/geri dokunuşu turu durdurur.
+  - Hareket: düğme oku 2 kez, güven ikonları 3 döngü, oda çipindeki disk dönmez. Kullanıcının sevdiği hareketler (fiş, boyun, lamba, cetvel, kargo, tavana düşen disk, 30 çentik) kaldı.
+  - Erişilebilirlik: koyu zeminde odak halkası açık ton; yapışkan çubuk odağı örtmez (`scroll-padding-bottom: 88px`); mesaj büyütme penceresi odağı alır, Tab içeride kalır, kapanınca geri verir (bütün ürün sayfaları); ürün sorularında odak halkası koyu ton; galeri canlı bölgesi yalnız elle geçişte okur; ilk galeri görseli öncelikli, diğer görseller tembel yüklenir. Masaüstü galeri okları 48 px.
+- Shopify: "Dün N kişi" ve "Son N adet" ürün alanından (`ayluna.dun_satis`, `ayluna.stok_kurdele`; boşsa tasarımdaki sayı, 0 ise satır yok; KURULUM). Benzetimde deneniyor (`BENZETIM_ELLE`, `BENZETIM_LOOX`).
+- Pano boyları (kapıda ödeme sonrası ölçüldü): LunaDreamE 7186, GalaxyUSB 6579, AyFeneri 6574, GalaksiNight 6907, Ayluna-Anasayfa 4151, Sepet 1191, sade ürünler `yukseklik.json`; politika, ödeme, arama, koleksiyon sayfaları boy-olc ile.
+- Site testleri 179 HEPSİ TAMAM; tema benzetimi HEPSİ TAMAM (Loox kutusu + elle sayı dahil), Theme Check 31 RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.32.zip`; tuval Sürüm 164, site Sürüm 49.
+- Açık: USB'de "Dün 62" LunaDream'in sayısı (kullanıcı 18 Eki) — USB için gerçek sayı ya da 0; %5 kart indirimi ödeme sayfasında uygulanıyor mu; galerinin ilk iki görselindeki "5K HD" ve "7 katmanlı optik lens" yazıları teyitsiz (galeri canlı mağazanın görselleri, temaya gömülü; kalsın mı, çıksın mı, Flow'da yazısız mı üretilsin, kullanıcı karar verecek); "Disk nasıl değişir?" adımları.
+
+## Üst blok: sayaç şeridi + beyaz başlık, beyaz ↔ lacivert döngü (25 Ekim)
 - Kullanıcı (ekran görüntüsüyle, üstteki lacivert sayaç şeridi ve lacivert başlık): "Şu kısmını beğenmiyorum dostum, hem de hiç; neler yapabiliriz, biraz akıl üret." Gerçek LunaDream sayfasına 4 yön giydirildi (`scratchpad/baslik-yon.js`): A beyaz başlık + sayaç fiyatta, B ince açık şerit, C tek lacivert bant, D beyaz başlık + kategori çipleri. Eleştirmen: A 8, B 6, C 5, D 3 (çipler ürün sayfasında müşteriyi dağıtır; ana sayfa/koleksiyonda işe yarar).
 - Kullanıcı: "Buradaki A iyi ama üstünde yine sayım olsun ve beyazdan bizim ana rengimiz maviye değişsin, sürekli renk değişimi yapsın, yumuşak."
 - Yapılan: `ortak.ust_blok(zaman, işaret)` + `ortak.UST_CSS` + `ortak.gece_kopya`. Bütün sayfalar aynı bloğu kullanır: LunaDream (`luna_e`, galerinin içindeki başlık kalktı), Galaxy USB / AyFeneri / Galaksi Night (`luna_usb.SERIT`, galerideki `.u-ust` kalktı, "Bugüne özel fiyat" → "Bugünkü fiyat garantisi", ay evresi `cdAy` eklendi), ana sayfa ve ondan türeyen sade ürün + diğer sayfalar (`anasayfa`, `sayfalar` düzenli ifadeleri güncellendi).

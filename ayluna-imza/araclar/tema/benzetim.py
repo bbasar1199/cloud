@@ -13,6 +13,8 @@ TEMA = os.path.join(KOK, 'tema')
 ham = json.load(open(os.path.join(KOK, 'ogrenme', 'canli-urunler.json')))
 URUNLER = ham['products'] if isinstance(ham, dict) else ham
 FIYAT_DEGIS = json.loads(os.environ.get('BENZETIM_FIYAT', '{}'))  # {"handle": kuruş} → canlı fiyat farkı denemesi
+ELLE = json.loads(os.environ.get('BENZETIM_ELLE', '{}'))  # {"handle": {"dun": n, "kd": n}} → ürün alanları ayluna.dun_satis / stok_kurdele
+LOOX = [h for h in os.environ.get('BENZETIM_LOOX', '').split(',') if h]  # bu ürünlerde bölüme eklenmiş Loox uygulama bloğu taklidi
 CANLI, VARYANT = {}, {}
 for p in URUNLER:
     vs = [dict(id=v['id'], t=v['title'], a=bool(v.get('available', True)), p=int(round(float(v['price']) * 100))) for v in p['variants']]
@@ -20,7 +22,8 @@ for p in URUNLER:
         for v in vs: v['p'] = FIYAT_DEGIS[p['handle']]
     ilk = next((v for v in vs if v['a']), vs[0])
     c = max([int(round(float(v['compare_at_price']) * 100)) for v in p['variants'] if v.get('compare_at_price')] or [0])
-    CANLI[p['handle']] = dict(p=ilk['p'], c=c, stok=any(v['a'] for v in vs), vid=ilk['id'], url='/products/' + p['handle'], v=vs)
+    CANLI[p['handle']] = dict(p=ilk['p'], c=c, stok=any(v['a'] for v in vs), vid=ilk['id'], url='/products/' + p['handle'], v=vs, dun=None, kd=None)
+    CANLI[p['handle']].update(ELLE.get(p['handle'], {}))
     for v in vs: VARYANT[v['id']] = dict(h=p['handle'], ad=p['title'], vt=v['t'], p=v['p'], c=c, img=(p.get('images') or [{}])[0].get('src', ''))
 
 SEPET = {'satir': []}  # {key, id, adet, ozellik}
@@ -106,6 +109,8 @@ def rota(yol):
             form += ('<script class="kaching-bundles-product" data-product-id="1" data-main="true" type="application/json">{}</script>'
                      '<script class="kaching-bundles-deal-block-settings" data-product-id="1" type="application/json">%s</script>'
                      '<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="1"></kaching-bundle></div>' % json.dumps(dict(dealBars=bars)) + KACHING_JS)
+        if h in LOOX:
+            form += '<div class="ay-uygulama-bloklari" hidden><div class="ay-uygulama"><div id="looxReviews" class="loox-benzetim">Loox yorumları (benzetim)</div></div></div>'
         return snippet(T.ad(pano)) + form, h
     m = re.match(r'^/pages/([\w-]+)$', yol)
     if m:

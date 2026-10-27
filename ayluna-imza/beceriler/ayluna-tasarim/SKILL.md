@@ -27,6 +27,13 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Her değişiklikten sonra telefon genişliğinde ekran görüntüsü alıp bakılır (`araclar/ekran-goruntusu.js`, `araclar/dc-onizle.js`).
 - Kararlar `DEVAM.md`'ye ve tuval notuna yazılır. Kullanıcı yorum bırakmıyor; iz yalnız orada kalır.
 
+## Yayın kuralları (27 Eki, kullanıcı siteyi yüklüyor; aşağıdaki eski kapıda ödeme kurallarından önce gelir)
+- **Kapıda ödeme yok** (27 Eki: "kapıda ödemeyi kaldır"). Hiçbir sayfada kapıda düğmesi, formu, ₺80 notu, SSS'si, politika maddesi ya da güven kutusu yok; ödeme yalnız kartla, %5 indirim. EasySell yerleştirmesi ve Shopify COD yöntemi kapalı. Aşağıda kapıda ödemeyi anlatan eski maddeler geçersiz.
+- **Müşteriye köşeli yer tutucu görünmez.** Teyitsiz bilgi yazılmaz (soru kalkar, cümle kısalır); uygulamadan gelecek kutu (Loox) Shopify'da blok yoksa gizlenir. Tuvalde ve önizlemede yer tutucu kalabilir.
+- **Elle girilen baskı sayıları mağazadan değişir:** "Dün N kişi" ve "Son N adet" ürün alanından (`ayluna.dun_satis`, `ayluna.stok_kurdele`); boşsa tasarımdaki sayı, 0 ise satır yok. Temaya sabit sayı gömülüp bırakılmaz.
+- Ürün sayfası düzeni (Galaxy USB, 27 Eki): fiyat LunaDream sırasıyla (eski fiyat çizilir, gerçek fiyat gelir, rozet oturur; bir kez); özellik kartları kurumsal (28 px gösterge, ekran ve dönen etiket yok); güven kutusu satın almanın hemen altında; yapışkan "Satın al" paketlerin başına iner; çapraz satış kartında yazısız kesim; başlıkta zorla satır kırma yok (`text-wrap: balance`); sürekli dönen küçük süsler (düğme oku, güven ikonları) sınırlı tekrar.
+- Erişilebilirlik (27 Eki denetim): fiyat görünmez metinle okunur (`aria-label`'lı paragrafın içi `aria-hidden` olmaz); açık zeminde odak halkası koyu ton; açılan pencere odağı alır ve geri verir; yapışkan çubuk odağı örtmez (`scroll-padding-bottom`); galeri dışındaki görseller `loading="lazy"`.
+
 ## Kullanıcının zevki
 - **Sevmez:**
   - emoji ikon
@@ -69,7 +76,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
   - noktalı teslim çizgisi
   - Pano: `canvas/YonBPlus-GecePostasi.dc.html`.
 - **Nihai tasarım (18 Eki): LunaDream E** (`canvas/LunaDreamE.dc.html`).
-- **Her ürün sayfasının kendi tasarım dili** (18 Eki, kullanıcı): renk, yazı tipi, bölüm biçimi ve imza bölümü ürüne ve gerçek kitlesine göre (Galaxy USB: çocuk, ebeveyn, genç, çift). Ortak çekirdek yalnız Ayluna işareti + yazısı, satın alma akışı (kartla %5 önce, kapıda ikinci, kapıda butonunda fiyat yok), 30 gün iade, yer tutucu kuralı ve yasaklar.
+- **Her ürün sayfasının kendi tasarım dili** (18 Eki, kullanıcı): renk, yazı tipi, bölüm biçimi ve imza bölümü ürüne ve gerçek kitlesine göre (Galaxy USB: çocuk, ebeveyn, genç, çift). Ortak çekirdek yalnız Ayluna işareti + yazısı, satın alma akışı (yalnız kartla, %5; kapıda ödeme yok, 27 Eki), 30 gün iade, yer tutucu kuralı ve yasaklar.
 - **Marka rengi sabit** (18 Eki, kullanıcı): koyu lacivert #1A2142 her ürün sayfasında; ürüne göre değişen yalnız ikinci renk ve zemin (Galaxy USB: buz mavisi #8FD3FF + #F2F4F8). Sarı kullanılmaz. Ürün gerçek renginde gösterilir (Galaxy USB beyaz).
 - **Hareket:** her özellik kendi işini gösteren sakin bir döngüyle anlatılır (fiş takılır, disk döner); yıldız parıltısı gibi süs hareketi yok.
 - **Kutu içeriği afişle birebir:** diskler mağaza afişinden kırpılıp gerçek hâliyle gösterilir; kutuda olmayan desen ya da aksesuar (Galaxy USB: adaptör) gösterilmez, yazılmaz.
@@ -155,7 +162,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
    - Model (küçük stüdyo fotoğraflı kartlar)
    - Paket: canlı sitedeki 1 Adet / 2 Adet kartları ve hediye disk şeridi
    - ince ay sonu şeridi, birlikte al
-   - **İki buton: "Güvenli Ödeme İle Al" (%5) üstte, "Kapıda Ödeme ile Sipariş Ver" altta.** Kapıda ödeme ücreti ₺80 baştan yazılır.
+   - **Tek buton: "Güvenli Ödeme ile Al" (kartla %5).** Kapıda ödeme yok (27 Eki).
    - güven üçlüsü, müşteri fotoğrafları
 3. Odası böyle görünecek · Gece vitrini (21 Eki; Bir gece, beş an kalktı).
 4. Çipli yorumlar.

@@ -234,9 +234,19 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
     await pg.keyboard.press('Escape');
     not(!kalan.length, 'WhatsApp ve şirket bilgisi hiçbir sayfada yok' + (kalan.length ? ': ' + kalan.join(', ') : '')); }
 
-  // Galaxy USB canlı kartlar (21 Eki): 5 özellik hücresinde ekran, disk şeridi, teslim kartında USB ikonu
+  // Galaxy USB özellik kartları (27 Eki, kurumsal): 5 hücrede 28 px gösterge, 3 disk yığını, teslim kartında USB ikonu
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.waitForTimeout(500);
-  not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .ui-serit .sd').count() === 7 && await pg.locator('#siparis .teslim .y-ik').count() === 1, 'Galaxy USB: 5 özellik ekranı, disk şeridi, teslim kartında ikon');
+  not(await pg.locator('#siparis .ozler .uk-ek').count() === 5 && await pg.locator('#siparis .ozler .uk-disk img').count() === 3 && await pg.locator('#siparis .teslim .y-ik').count() === 1
+    && Math.round((await pg.locator('#siparis .ozler .uk-ek').first().boundingBox()).height) === 28, 'Galaxy USB: 5 özellik göstergesi (28 px), disk yığını, teslim kartında USB ikonu');
+  // Galaxy USB iyileştirmeleri (27 Eki): fiyat ekran okuyucuda dolu, satın alma kutusunda ve SSS'de yer tutucu yok, güven kutusu satın almanın
+  // hemen altında, yapışkan "Satın al" paketleri ve düğmeyi aynı ekrana getirir
+  { const r = await pg.evaluate(() => { const f = document.querySelector('#siparis .fiyat-satir'), sr = f && f.querySelector('.sr-m');
+      const al = document.getElementById('siparis'), son = al.nextElementSibling || al.parentNode.nextElementSibling;  // masaüstü düzeninde #siparis .urun-ust içinde
+      return { sr: sr ? sr.textContent : '', etiket: !!f && f.hasAttribute('aria-label'), koseli: /\[[^\]]+\]/.test(al.textContent + (son ? son.textContent : '')),
+        guven: !!son && !!son.querySelector('.ozler.dort'), sss: [...document.querySelectorAll('.sss p')].some(p => /\[/.test(p.textContent)) }; });
+    await pg.locator('.yapis button').click(); await pg.waitForTimeout(1400);
+    const g = await pg.evaluate(() => { const b = document.querySelector('#siparis .btn1').getBoundingClientRect(), p = document.querySelector('#siparis .pk-k').getBoundingClientRect(); return p.top >= 0 && b.bottom <= innerHeight - 76; });
+    not(/Fiyat ₺1\.599,00, önceki fiyat ₺1\.999,00/.test(r.sr) && !r.etiket && !r.koseli && r.guven && !r.sss && g, 'Galaxy USB: fiyat okunur, yer tutucu yok, güven hemen altta, Satın al paketlere iner ' + JSON.stringify(r) + ' ' + g); }
   // Satın alma butonu sepeti katlamaz (iki kez Güvenli Ödeme → tek satır), paket satırında "2 × eski fiyat" üstü çizili yok (§7 kural 2)
   await pg.goto(KOK + 'galayx-usb-projektor.html'); await pg.evaluate(() => localStorage.clear()); await pg.reload(); await pg.waitForTimeout(400);
   await pg.locator('#siparis .btn1').first().click(); await pg.waitForTimeout(600); await pg.evaluate(() => Ayluna.cekmeceKapat()); await pg.waitForTimeout(300);

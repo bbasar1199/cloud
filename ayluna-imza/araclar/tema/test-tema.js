@@ -1,4 +1,5 @@
-// Ayluna teması · Shopify benzetiminde uçtan uca deneme. Önce: BENZETIM_FIYAT='{"sunset-lamba":64900,"ask-saati":74900}' python3 araclar/tema/benzetim.py 8790
+// Ayluna teması · Shopify benzetiminde uçtan uca deneme. Önce: BENZETIM_FIYAT='{"sunset-lamba":64900,"ask-saati":74900}'
+//   BENZETIM_ELLE='{"galayx-usb-projektor":{"dun":7,"kd":0}}' BENZETIM_LOOX=galayx-usb-projektor python3 araclar/tema/benzetim.py 8790
 // Çalıştır: NODE_PATH=$(npm root -g) node araclar/tema/test-tema.js
 const { chromium } = require('playwright');
 const K = process.env.TEMA_URL || 'http://127.0.0.1:8790';
@@ -91,6 +92,17 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   not(/^\d+$/.test(form.id) && form.q === '2' && form.kb === 'bar-2', 'gizli ürün formu ve Kaching seçime eşit (varyant ' + form.id + ', adet ' + form.q + ', Kaching ' + form.kb + ')');
   await pg.goto(K + '/products/lamba'); await pg.waitForTimeout(2200);
   not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn2').length === 0 && !document.querySelector('#siparis [aria-pressed="true"]')), 'AyFeneri: Kapıda yok, paket seçili değil');
+
+  // 7b) Galaxy USB (27 Eki): Loox bloğu yorum kutusuna taşınır, yer tutucu yazı görünmez; Dün sayısı ürün alanından, 0 olan stok kurdelesi gizli
+  await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1800);
+  const yk = await pg.evaluate(() => { const y = document.querySelector('#kok [data-ay-yorum]'), s = document.querySelector('#kok .stok-kd');
+    return { loox: !!(y && y.querySelector('.loox-benzetim')), gor: !!y && getComputedStyle(y).display !== 'none', yer: /\[Loox/.test(document.body.innerText),
+      dun: /Dün 7 kişi/.test(document.querySelector('#kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
+  await pg.waitForTimeout(1200);
+  const yk2 = await pg.evaluate(() => !!document.querySelector('#kok [data-ay-yorum] .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('#kok .dun').textContent));
+  not(yk.loox && yk.gor && !yk.yer && yk.dun && yk.kd && yk2, 'USB: Loox yorum kutusunda, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(1500);
+  not(await pg.evaluate(() => /Dün 62 kişi/.test(document.querySelector('#kok .dun').textContent)), 'LunaDream: ürün alanı boşsa tasarımdaki Dün sayısı kalır');
 
   // 8) Koleksiyonda Sepete ekle
   await pg.goto(K + '/collections/all'); await pg.waitForTimeout(600);

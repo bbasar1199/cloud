@@ -239,10 +239,12 @@ def mesaj_bolum(baslik):
 
 
 MESAJ_VERI = """var _mk = this;
-    """ + KAY_JS.replace('function KAY(', 'function _mKAY(') + GALOK_JS + """    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; }
-    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (e.key === 'Escape' && _mk.state.buyuk) _mKapat(); }; document.addEventListener('keydown', _mk._mEsc); }
+    """ + KAY_JS.replace('function KAY(', 'function _mKAY(') + GALOK_JS + """    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
     var mesajlar = """ + str(MESAJ_ID) + """.map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
-      return { src: src, n: n, ac: function () { _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; } }; });
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
 """
 
 

@@ -458,6 +458,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .fy-yeni{animation:fy-yeni 3s cubic-bezier(.2,.7,.2,1) .3s both}
 .fy-rozet{animation:fy-rozet 3s cubic-bezier(.2,.7,.2,1) .3s both}
 @media (prefers-reduced-motion:reduce){.fy-eski,.fy-eski::after,.fy-yeni,.fy-rozet{animation:none}.fy-eski{opacity:0}.fy-rozet,.fy-yeni{opacity:1}}
+/* Ekran okuyucu fiyatı görünmez metinden okur (27 Eki denetim: aria-label'lı paragrafın içi aria-hidden olunca boş okunuyordu) */
+.sr-m{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 /* Bölümler */
 .bolum{padding-top:36px}
 .ust-yazi{margin:0 0 6px;font-size:13px;font-weight:700;color:#1A2142}
@@ -696,7 +698,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
       <a class="puan" href="#yorumlar" aria-label="5 üzerinden {{rating}} puan, {{reviews}} yorum"><span class="puan-ust"><span class="yildiz" aria-hidden="true">★★★★★<i style="width: {{starPct}}%">★★★★★</i></span><b>{{rating}}</b></span><span class="puan-alt">{{reviews}} yorum</span></a>
     </div>
     <!-- Fiyat (kullanıcı: "girince 1999 yazsın, hafif bir animasyonla indirimli fiyata düşsün"): bir kez oynar. Canlıda sayfa açılınca. -->
-    <p class="fiyat-satir" aria-label="{{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim"><b class="fy-yeni" aria-hidden="true">{{p1}}</b><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{c1}}</s><span class="indirim fy-rozet">%{{pct}} indirim</span></span></p>
+    <p class="fiyat-satir"><span class="sr-m">Fiyat {{p1}}, önceki fiyat {{c1}}, %{{pct}} indirim</span><b class="fy-yeni" aria-hidden="true">{{p1}}</b><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{c1}}</s><span class="indirim fy-rozet">%{{pct}} indirim</span></span></p>
     <p class="dun dsr"><span class="dsr-sr">Dün 62 kişi satın aldı. Ücretsiz kargo ile kapına. 30 gün iade hakkı. Kartla öde, %5 indirim.</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)"><span class="{{tkC0}}"><i class="dsr-nokta"></i><span>Dün <b>62 kişi</b> satın aldı</span></span><span class="{{tkC1}}"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span><b>Ücretsiz kargo</b> ile kapına</span></span><span class="{{tkC2}}"><svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path></svg><span><b>30 gün</b> iade hakkı</span></span><span class="{{tkC3}}"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg><span>Kartla öde, <b>%5 indirim</b></span></span><span class="{{tkC4}}"><i class="dsr-nokta"></i><span>Dün <b>62 kişi</b> satın aldı</span></span></span></span></p>
 
 
@@ -849,7 +851,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7234}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":7186}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { g: 0, model: 'kiz', adet: null, l2: null, topic: 'Tümü', disc: 1, oda: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
