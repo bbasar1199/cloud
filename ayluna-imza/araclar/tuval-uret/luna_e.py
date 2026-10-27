@@ -371,7 +371,6 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
 .vid-alt b{font-size:14px}
 .vid-alt span{font-size:13px;color:#B9BED6}
-.vid-etiket{position:absolute;left:10px;top:10px;z-index:1;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(12,16,39,.6)}
 /* Müşteri kanıtı tek bölüm (kullanıcı, 19 Eki: "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım"; B · Tek akış seçildi) */
 .ynot{margin:12px 0 0;font-size:13px;color:#5C6078;text-align:center;line-height:1.45}
 .yhep{display:flex;justify-content:center;width:100%;margin-top:16px;text-decoration:none}
@@ -519,7 +518,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <section class="bolum gir" id="videolar">
     <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
-      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-etiket">[video]</span><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
+      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
   </section>
@@ -648,10 +647,11 @@ JS = """class Component extends DCLogic {
     """ + TL_JS + """
     // Galeri Shopify'daki gibi (kullanıcı, 19 Eki): canlı mağazanın görselleri, aynı sıra, kare (ogrenme/galeri-canli.json).
     // Çıkarılanlar: 'Temalar' afişi (kutuda olmayan diskler), 'Elif K.' kartı ve yorum kolajı (uydurma yorum).
-    var G = """ + str(P_GAL) + """;
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, G = MEDYA ? MEDYA.map(function (m) { return { src: m.src, n: m.alt }; }) : """ + str(P_GAL) + """;
     // Ay göstergesi: i. fotoğrafın evresi (i+1)/N; geçilenler ve o anki yanar, son fotoğrafta dolunay
     function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
-    var gal = G.map(function (g, i) { var on = i === S.g; return { src: B + g.id, n: g.n, pos: '50% 50%', top: 56, h: 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    var gal = G.map(function (g, i) { var on = i === S.g; return { src: g.src || B + g.id, n: g.n, pos: '50% 50%', top: 56, h: 390, ay: AYE((i + 1) / G.length), acls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto !== false && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
     var kiz = S.model === 'kiz';

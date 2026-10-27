@@ -29,6 +29,14 @@
 
   /* ---------- 1. Şablon motoru ---------- */
   var kok = null, sablon = null, C = null, planli = false, ilk = true;
+  // Shopify bölümleri (28 Eki, kullanıcı: "sectionları tek tek bölümler kısmında görüp düzenleyebileceğim hale getir"): her bölüm
+  // kendi parçasını taşır (template.ay-parca + hemen ardından .ay-kok); hepsi tek bileşenle, aynı durumla çizilir
+  var parcalar = null;
+  function parcaTopla() {
+    var t = document.querySelectorAll('template.ay-parca'), l = [];
+    for (var i = 0; i < t.length; i++) { var k = t[i].nextElementSibling; if (k && k.classList.contains('ay-kok')) l.push({ s: t[i].content, k: k }); }
+    return l.length ? l : null;
+  }
   function DCLogic(p) { this.props = p || {}; this.state = {}; }
   DCLogic.prototype.setState = function (o) { Object.assign(this.state, typeof o === 'function' ? o(this.state) : o); planla(); };
   window.DCLogic = DCLogic;
@@ -95,8 +103,8 @@
   function ciz() {
     planli = false;
     var vals = C.renderVals(), out = [];
-    for (var c = sablon.firstChild; c; c = c.nextSibling) vyap(c, vals, out);
-    cocuklar(kok, out);
+    if (parcalar) parcalar.forEach(function (p) { var o = []; for (var c2 = p.s.firstChild; c2; c2 = c2.nextSibling) vyap(c2, vals, o); cocuklar(p.k, o); });
+    else { for (var c = sablon.firstChild; c; c = c.nextSibling) vyap(c, vals, out); cocuklar(kok, out); }
     // Süsleme (rozet, EasySell işareti, gizli form) hata verse de sayfanın hareketleri (galeri, kaydırma) başlasın
     try { suslen(); } catch (e) { if (window.console) console.warn('Ayluna: süsleme', e); }
     if (ilk) { ilk = false; if (C.componentDidMount) C.componentDidMount(); }
@@ -288,7 +296,7 @@
   // ekranın üstünden çıkınca menünün altından iner. Ürün, seçim ve kartla al butonu (sayfadaki etiketin aynısı).
   // Yalnız transform/opacity; sayaç yok; telefonda görünmez (oradaki yapışkan çubuk sayfanın kendisinde).
   var cubuk = null, cubukIO = null, cubukKay = false;
-  function anaBtn() { return document.querySelector('#kok .urun-ust .btn-on, #kok .urun-ust .btn1'); }
+  function anaBtn() { return document.querySelector('.ay-kok .urun-ust .btn-on, .ay-kok .urun-ust .btn1'); }
   function cubukYaz() {
     if (!cubuk) return;
     var b = anaBtn(), s = satir(URUN);
@@ -432,7 +440,7 @@
     [/hesabına giriş|giriş yap/, 'hesap.html']];
   function metinYonu(m) { m = norm(m); for (var i = 0; i < YON.length; i++) if (YON[i][0].test(m)) return YON[i][1]; return null; }
 
-  var KOKEL = document.getElementById('kok');  // Shopify'da betik <head>'de yüklenir; sayfa türü baslat'ta okunur
+  var KOKEL = document.querySelector('.ay-kok');  // Shopify'da betik <head>'de yüklenir; sayfa türü baslat'ta okunur
   var SAYFA = KOKEL ? KOKEL.getAttribute('data-sayfa') || '' : '', URUN = KOKEL ? KOKEL.getAttribute('data-urun') || '' : '';
   function sepeteAt(h, yolu) {
     var V2 = V.urun[h]; if (!V2) return;
@@ -552,10 +560,10 @@
   // Uygulama yuvası (tasarımda satın al düğmesinin altı): EasySell düğmesi (easysell-form kancasının yanına kendisi koyar) ve
   // tema düzenleyicide ürün bölümüne eklenen uygulama blokları
   function yuvaDoldur() {
-    var y = document.querySelector('#kok [data-ay-dis]'); if (!y || y.__dolu) return; y.__dolu = 1;
+    var y = document.querySelector('.ay-kok [data-ay-dis]'); if (!y || y.__dolu) return; y.__dolu = 1;
     y.appendChild(document.createElement('easysell-form'));
     // Yorum uygulaması (Loox) satın alma yuvasına değil, sayfadaki yorum kutusuna (data-ay-yorum); kutu Loox gelince görünür (ayluna.css)
-    var yk = document.querySelector('#kok [data-ay-yorum]'), ub = document.querySelector('.ay-uygulama-bloklari');
+    var yk = document.querySelector('.ay-kok [data-ay-yorum]'), ub = document.querySelector('.ay-uygulama-bloklari');
     if (ub) while (ub.firstChild) {
       var b = ub.firstChild;
       if (yk && b.nodeType === 1 && /loox/i.test(b.innerHTML)) { if (!yk.hasAttribute('data-ay-dolu')) { yk.textContent = ''; yk.setAttribute('data-ay-dolu', ''); } yk.appendChild(b); }
@@ -570,7 +578,7 @@
   }
   function sayiYaz(sec, n, re) {
     if (n === null || n === undefined || n === '') return;
-    var el = document.querySelectorAll('#kok ' + sec);
+    var el = document.querySelectorAll('.ay-kok ' + sec);
     for (var i = 0; i < el.length; i++) {
       if (!(+n > 0)) { if (!el[i].hasAttribute('data-ay-gizli')) el[i].setAttribute('data-ay-gizli', ''); continue; }
       var w = document.createTreeWalker(el[i], NodeFilter.SHOW_TEXT), t;
@@ -578,11 +586,11 @@
     }
   }
   function shopSusle() {
-    var k = document.querySelectorAll('#kok .btn2, #kok .btn-kp');
+    var k = document.querySelectorAll('.ay-kok .btn2, .ay-kok .btn-kp');
     for (var i = 0; i < k.length; i++) if (/kapıda/i.test(k[i].textContent) && !k[i].hasAttribute('data-ay-kapida')) k[i].setAttribute('data-ay-kapida', '');
     // Sepetteki "Kapıda ödemede ₺80…" notu Kapıda düğmesiyle birlikte gizlenir (kapıda ödeme EasySell'de)
-    var sn = document.querySelectorAll('#kok .s-not'); for (var z = 0; z < sn.length; z++) if (/kapıda ödeme ücreti/i.test(sn[z].textContent) && !sn[z].hasAttribute('data-ay-kapida')) sn[z].setAttribute('data-ay-kapida', '');
-    var kart = document.querySelectorAll('#kok .uk[data-h]');
+    var sn = document.querySelectorAll('.ay-kok .s-not'); for (var z = 0; z < sn.length; z++) if (/kapıda ödeme ücreti/i.test(sn[z].textContent) && !sn[z].hasAttribute('data-ay-kapida')) sn[z].setAttribute('data-ay-kapida', '');
+    var kart = document.querySelectorAll('.ay-kok .uk[data-h]');
     for (var j = 0; j < kart.length; j++) {
       var u = V.urun[kart[j].getAttribute('data-h')]; if (!u || u.yok) continue;
       var st = kart[j].querySelector('.f strong'), es = kart[j].querySelector('.f s'), rz = kart[j].querySelector('em');
@@ -628,9 +636,16 @@
   window.Ayluna = {
     tek: TEK, geri: geri, gorsel: gorsel, baslatTek: function () { window.addEventListener('hashchange', rota); rota(); },
     baslat: function (Comp) {
-      kok = document.getElementById('kok'); sablon = document.getElementById('T').content;
+      if (C) return;  // her bölüm panonun betiğini yükler; bileşen bir kez kurulur
+      parcalar = parcaTopla();
+      if (parcalar) { kok = parcalar[0].k; document.documentElement.classList.add('ay-coklu'); }
+      else { kok = document.getElementById('kok'); sablon = document.getElementById('T').content; }
       SAYFA = kok.getAttribute('data-sayfa') || ''; URUN = kok.getAttribute('data-urun') || '';
-      masaUst(); C = new Comp({}); ciz(); cubukKur();
+      masaUst(); C = new Comp({}); ciz(); cubukKur(); videoKur();
+      // Tema düzenleyici: bölüm eklenince, değişince, silinince ya da yeri değişince parçalar yeniden toplanır ve çizilir
+      if (parcalar) ['shopify:section:load', 'shopify:section:unload', 'shopify:section:reorder'].forEach(function (ad) {
+        document.addEventListener(ad, function () { setTimeout(function () { var p = parcaTopla(); if (p) { parcalar = p; kok = p[0].k; planla(); setTimeout(function () { cubukKur(); videoKur(); }, 60); } }, 0); });
+      });
       // Shopify: sayfadaki tasarım fiyatı mağaza fiyatından farklıysa uyar (yalnız tema düzenleyicide ve konsolda)
       if (SHOP && SAYFA === 'urun' && V.urun[URUN] && Math.abs((TUVAL_FIYAT[URUN] || 0) - V.urun[URUN].p) > 0.009) {
         console.warn('Ayluna: tasarımdaki fiyat', TUVAL_FIYAT[URUN], 'mağaza fiyatı', V.urun[URUN].p);
@@ -642,11 +657,36 @@
       if (!SHOP) return l;
       return l.map(function (x) { var u = V.urun[x.h]; if (!u || u.yok) return x; var c = u.c && u.c > u.p ? u.c : null; return Object.assign({}, x, { p: u.p, c: c, var: !!u.stok }); });
     },
-    shopify: SHOP, adres: adres,
+    shopify: SHOP, adres: adres, medya: medya,
     cekmeceAc: cekmeceAc, cekmeceKapat: cekmeceKapat, cekmecede: function () { return !!ust(); }, kapidaAc: kapidaAc, kapidaKapat: kapidaKapat, menuAc: menuAc, git: git, siparisVer: siparisVer, bildir: bildir, TL: TL, satir: satir, urunBul: urunBul,
     odemeyeGec: function () { if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; } git('odeme.html'); }
   };
   document.addEventListener('DOMContentLoaded', suslen);
+  // Ürün galerisi (28 Eki, kullanıcı: "görsel olarak senin içine koyduklarını çekiyor"): Shopify'da ürünün kendi görselleri
+  // (layout'taki #ay-medya; tema ayarından kapatılabilir). Boşsa panodaki tasarım galerisi kalır.
+  function medya() {
+    if (!SHOP) return null;
+    var e = document.getElementById('ay-medya'); if (!e) return null;
+    try { var l = JSON.parse(e.textContent); return l && l.length ? l : null; } catch (x) { return null; }
+  }
+  // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): bölüm bloklarındaki Shopify videoları. Ekrandayken sessiz döner,
+  // dokununca sesli ve tam ekran. Hareket azaltılmışsa kendiliğinden dönmez.
+  var vidIO = null;
+  function videoKur() {
+    var v = document.querySelectorAll('.ay-vid video'); if (!v.length) return;
+    var az = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (vidIO) vidIO.disconnect();
+    if (!az && window.IntersectionObserver) {
+      vidIO = new IntersectionObserver(function (g) { g.forEach(function (x) { var t = x.target; if (!t.muted) return; if (x.isIntersecting) { var p = t.play(); if (p && p.catch) p.catch(function () {}); } else t.pause(); }); }, { threshold: .4 });
+      for (var i = 0; i < v.length; i++) vidIO.observe(v[i]);
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.ay-vid'); if (!b) return;
+    var v = b.querySelector('video'); if (!v) return;
+    v.muted = false; v.controls = true; v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {});
+    var f = v.requestFullscreen || v.webkitRequestFullscreen || v.webkitEnterFullscreen; if (f) try { f.call(v); } catch (x) {}
+  });
   // Shopify temasında betik defer ile yüklenir; panolar kendilerini kuyruğa koyar (window.AYLUNA_KUYRUK), burada çalışır
   var kuyruk = window.AYLUNA_KUYRUK || [];
   window.AYLUNA_KUYRUK = { push: function (f) { f(); } };

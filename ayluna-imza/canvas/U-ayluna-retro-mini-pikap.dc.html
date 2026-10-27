@@ -387,7 +387,8 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/8d3e5f85d80b23391136a85114dcc765", "/_blob/e2ddcfcdf81dc809b5e3d777448cba55", "/_blob/7222b35f56c1dd410e291840d17d19b9", "/_blob/224e6899b9f2c0eabbe73bedc7ae0f34", "/_blob/8771c295460d3eb76aba203bd05fd501", "/_blob/6064265e6366d07198f3a8d4e7aeb5e8", "/_blob/b0d5ad75fd0fd1eb42049fa77ae091dc", "/_blob/205d9e8a89460f909159ff4c77be1df6", "/_blob/7aa05fe98d7c221adcd27dc9d9f6efa5"], AD = "Retro Mini Pikap";
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : ["/_blob/8d3e5f85d80b23391136a85114dcc765", "/_blob/e2ddcfcdf81dc809b5e3d777448cba55", "/_blob/7222b35f56c1dd410e291840d17d19b9", "/_blob/224e6899b9f2c0eabbe73bedc7ae0f34", "/_blob/8771c295460d3eb76aba203bd05fd501", "/_blob/6064265e6366d07198f3a8d4e7aeb5e8", "/_blob/b0d5ad75fd0fd1eb42049fa77ae091dc", "/_blob/205d9e8a89460f909159ff4c77be1df6", "/_blob/7aa05fe98d7c221adcd27dc9d9f6efa5"], AD = "Retro Mini Pikap";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

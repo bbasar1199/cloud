@@ -1,12 +1,37 @@
-# Ayluna teması 1.0.32 · kurulum
+# Ayluna teması 1.0.33 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.32.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.33.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme yalnız kartla; kapıda ödeme yok (27 Eki).
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.32.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.33.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
    Yayınlanmamış temayı denemek satışı etkilemez: müşteriler eski temayı görür, sipariş kaçmaz. Uygulamaları da (3. madde) yayınlamadan bu temanın düzenleyicisinde açıp önizlemede denersin.
+
+## 1b. Ürün şablonlarını ata (1.0.33, bir kez)
+Dört ürünün kendi şablonu var; her bölümü ayrı düzenlenebilsin diye. Ürünler → ürünü aç → sağda **Tema şablonu**:
+
+| Ürün | Tema şablonu |
+|---|---|
+| LunaDream Gece Lambası (`lunadream-gece-lambasi`) | `lunadream` |
+| Galaxy USB Projektör (`galayx-usb-projektor`) | `galaxy-usb` |
+| AyFeneri (`lamba`) | `ayfeneri` |
+| Galaksi Night Projektör (`ayluna-galaksi-night-projektor`) | `galaksi-night` |
+
+Diğer bütün ürünler **Varsayılan ürün** şablonunda kalır (ortak 6 bölüm, her ürün kendi tasarımıyla). Atamayı yapmasan da sayfa açılır
+(tek parça hâliyle), ama bölümler ayrı görünmez.
+
+## 1c. Bölümler (1.0.33)
+- Özelleştir'de ana sayfa ve her ürün şablonu bölüm bölüm görünür (Üst kısım, Galeri ve satın alma, İçin rahat olsun, …).
+  Bölümün yazıları ve görselleri sağdaki ayarlarda; görsel seçmezsen tasarımdaki görsel kalır.
+- **Bölümü silme, gizle** (göz simgesi): silinen bölüm "Bölüm ekle" listesinde yok, geri eklenemez. Sürükleyerek sırası değişir.
+- **Loox:** yorum bölümünde ("Alanlar ne diyor?" / "Aileler ne diyor?") → **Blok ekle → Uygulamalar → Loox**. Loox o başlığın altında görünür.
+  İstersen herhangi bir yere **Bölüm ekle → Uygulama bloğu** ekleyip Loox'u oraya koy. LunaDream'deki tasarım yorum kartlarını istemezsen
+  "Aileler ne diyor?" bölümünü gizle, yerine Uygulama bloğu ekle. Loox bloğu eklenmeyen yorum yer tutucusu sayfada görünmez.
+- **Videolar (LunaDream):** önce İçerik → Dosyalar'a videoları yükle. Sonra LunaDream şablonu → **Videolar** bölümü → **Blok ekle → Video** →
+  videoyu seç, başlık ve alt yazıyı yaz. Video eklenmezse bölüm görünmez. Sayfada ekrandayken sessiz döner, dokununca sesli ve tam ekran açılır.
+- **Galeri:** ürün galerileri Shopify'daki ürün görsellerinden gelir (ürüne görsel ekle/sırala, sayfa aynen gösterir).
+  Tema ayarları → Ayluna → "Ürün galerisi Shopify'daki ürün görsellerinden gelsin" kapatılırsa tasarımdaki galeri kullanılır.
 
 ## 2. Sayfalar (bir kez)
 Tasarımlı sayfalar adrese göre açılır. Online Mağaza → Sayfalar'da bu adreslerle **boş** sayfa oluştur (içerik temadan gelir):
@@ -26,11 +51,11 @@ Menüleri ayrıca kurmana gerek yok; üst menü ve alt bilgi temanın içinde.
 ## 3. Uygulamalar (yeni temada ayrıca açılır)
 Yeni temada uygulama yerleştirmeleri kapalı gelir. Özelleştir → sol altta **Uygulama yerleştirmeleri** (App embeds):
 - **Kaching Bundles: aç.** Paket indirimi (2 Adet ₺2.749,99 gibi) buradan gelir. Tema Kaching kutusunu görünmez kurar; müşteri tasarımdaki paket kartını seçince arkada Kaching'deki aynı paket seçilir. Açılışta seçili paket yok (eski temadaki gibi); seçmeden alırsa 1 adet.
-  - Ürün bölümüne **Kaching bloğu ekleme**: kutu zaten var, eklersen ikinci kez görünür.
+  - "Galeri ve satın alma" bölümüne **Kaching bloğu ekleme**: kutu zaten var, eklersen ikinci kez görünür.
   - Paket fiyatları Kaching'tekiyle aynı (19 Eki'de karşılaştırıldı). Kaching'te fiyat değişirse bana yaz, kartları güncellerim.
 - **Kapıda ödeme yok (27 Eki).** Temada kapıda düğmesi, formu ya da yazısı yok. **EasySell'in yerleştirmesini kapat** (Uygulama yerleştirmeleri) ya da uygulamayı kaldır; açık kalırsa kendi "Kapıda Ödeme" düğmesini sayfaya ekler. Shopify ödeme ayarlarında "Kapıda ödeme (COD)" yöntemi açıksa onu da kapat.
 - **Loox, Track123:** yerleştirmelerini aç. Yorum kartları tasarımda (gerçek yorumlardan); "Kargo takip" `/apps/track123`'e gider (tema ayarından değişir).
-- **Galaxy USB yorumları (27 Eki):** Özelleştir → ürün şablonu → "Ayluna ürün sayfası" bölümüne **Loox ürün yorumları** uygulama bloğunu ekle. Tema onu sayfadaki "Alanlar ne diyor?" kutusuna taşır. Blok eklenmezse kutu görünmez (yer tutucu yazı müşteriye çıkmaz).
+- **Loox yorumları:** 1c'deki gibi yorum bölümüne blok olarak eklenir.
 - **Dün satılan ve "Son N adet" (27 Eki):** Ayarlar → Özel veriler → Ürünler → Tanım ekle: `ayluna.dun_satis` ("Dün satılan", tam sayı) ve `ayluna.stok_kurdele` ("Stok kurdelesi", tam sayı). Her ürünün sayfasında sayıyı elle yaz. Boş bırakırsan tasarımdaki sayı kalır (LunaDream: Dün 62, Son 18; Galaxy USB: Dün 62, Son 23); **0** yazarsan satır hiç görünmez.
 - **Kartla %5 indirim:** Sepette "Kartla toplam" %5 düşük gösterilir. Ödeme sayfasında da bu indirimin uygulandığını denetle (otomatik indirim ya da ödeme sağlayıcısı). Uygulanmıyorsa yayınlama.
 

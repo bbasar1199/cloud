@@ -733,7 +733,7 @@ JS = """class Component extends DCLogic {
     // Tek saat: sayaçlar, galeri (5 sn), disk (3 sn), oda kartı (5 sn), dönen satır (disk 4 sn, kargo 6 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % """ + str(len(GAL)) + """);
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || """ + str(len(GAL)) + """));
       if (S.dOto && t % 3 === 0) o.disk = (S.disk + 1) % 12;
       if (S.kOto && t - S.kBas >= 5) { o.kim = (S.kim + 1) % """ + str(len(KIM)) + """; o.kBas = t; }
       if (!azH && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
@@ -755,8 +755,10 @@ JS = """class Component extends DCLogic {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
     var I = """ + str(I) + """;
-    var GAL = """ + str([list(x) for x in GAL]) + """;
-    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: B + g[0], n: g[1], pos: g[2], ilk: i === 0, yuk: i ? 'lazy' : 'eager', onc: i ? 'auto' : 'high', cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : """ + str([[B + x[0], x[1], x[2]] for x in GAL]) + """;
+    self.galN = GAL.length;
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], ilk: i === 0, yuk: i ? 'lazy' : 'eager', onc: i ? 'auto' : 'high', cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     // Kaydırma: hangi fotoğraf ortadaysa o; elle kaydırılınca kendiliğinden geçiş durur
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

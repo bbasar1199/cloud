@@ -98,7 +98,7 @@ SABLON = '''<!doctype html>
 </head>
 <body>
 <template id="T">%(govde)s</template>
-<div id="kok" data-sayfa="%(tur)s" data-urun="%(urun)s"></div>
+<div id="kok" class="ay-kok" data-sayfa="%(tur)s" data-urun="%(urun)s"></div>
 <noscript><p style="padding:24px;font-family:sans-serif">Ayluna sayfası için JavaScript gerekiyor.</p></noscript>
 <script src="veri.js"></script>
 <script src="ayluna.js"></script>
@@ -184,7 +184,7 @@ TEK_SABLON = '''<!doctype html>
 </head>
 <body>
 %(sablonlar)s
-<div id="kok"></div>
+<div id="kok" class="ay-kok"></div>
 <script>window.AYLUNA_TEK = true;</script>
 <script>%(veri)s</script>
 <script>%(runtime)s</script>

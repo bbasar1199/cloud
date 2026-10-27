@@ -1,5 +1,6 @@
 // Ayluna teması · Shopify benzetiminde uçtan uca deneme. Önce: BENZETIM_FIYAT='{"sunset-lamba":64900,"ask-saati":74900}'
-//   BENZETIM_ELLE='{"galayx-usb-projektor":{"dun":7,"kd":0}}' BENZETIM_LOOX=galayx-usb-projektor python3 araclar/tema/benzetim.py 8790
+//   BENZETIM_ELLE='{"galayx-usb-projektor":{"dun":7,"kd":0}}' BENZETIM_LOOX=galayx-usb-projektor BENZETIM_VARSAYILAN=ayluna-galaksi-night-projektor
+//   BENZETIM_MEDYA=sunset-lamba BENZETIM_VIDEO=lunadream-gece-lambasi python3 araclar/tema/benzetim.py 8790
 // Çalıştır: NODE_PATH=$(npm root -g) node araclar/tema/test-tema.js
 const { chromium } = require('playwright');
 const K = process.env.TEMA_URL || 'http://127.0.0.1:8790';
@@ -19,7 +20,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   for (const y of ['/', '/collections/all', '/cart', '/search', '/products/lunadream-gece-lambasi', '/products/galayx-usb-projektor', '/products/lamba',
     '/products/ayluna-galaksi-night-projektor', '/products/sunset-lamba', '/products/egitici-akilli-cizim-tahtasi', '/pages/iletisim', '/pages/iade', '/pages/kvkk', '/olmayan']) {
     await pg.goto(K + y); await pg.waitForTimeout(500);
-    const n = await pg.evaluate(() => document.querySelector('#kok') ? document.querySelector('#kok').childElementCount : -1);
+    const n = await pg.evaluate(() => [...document.querySelectorAll('.ay-kok')].reduce((t, k) => t + k.childElementCount, 0) || -1);
     not(n > 0, 'açıldı ' + y + ' (' + n + ' öğe)');
   }
 
@@ -31,7 +32,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
 
   // 3) Adresler: masaüstü/menü bağlantıları mağaza adresleri
   await pg.goto(K + '/'); await pg.waitForTimeout(500);
-  await pg.locator('#kok [aria-label="Menü"]').first().click(); await pg.waitForTimeout(400);
+  await pg.locator('.ay-kok [aria-label="Menü"]').first().click(); await pg.waitForTimeout(400);
   const menu = await pg.evaluate(() => [...document.querySelectorAll('.ay-menu a')].map(a => a.getAttribute('href')));
   not(menu.includes('/collections/all') && menu.includes('/products/lunadream-gece-lambasi') && menu.includes('/apps/track123'), 'menü adresleri: ' + menu.slice(0, 4).join(' '));
   await pg.keyboard.press('Escape');
@@ -57,29 +58,29 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   not(c.items.every(i => i.properties && /"bid":"bar-2"/.test(i.properties.__kaching_bundles || '')), 'iki satırda da Kaching indirim özelliği (__kaching_bundles)');
   not((await pg.evaluate(() => fetch('/__istek').then(r => r.json()))).some(u => /kaching_bundles=true/.test(u)), 'sepete ekleme Kaching\'in değiştirmesine kapalı (kaching_bundles=true)');
   await pg.waitForTimeout(600);
-  const satir = await pg.locator('#kok .urun').count();
+  const satir = await pg.locator('.ay-kok .urun').count();
   not(satir === 2, 'sepet sayfasında 2 satır (' + satir + ')');
 
   // 5) Sepet: adet arttır, teklif ekle (mağaza fiyatıyla), sil
-  await pg.locator('#kok .adet button[aria-label="Arttır"]').first().click(); await pg.waitForTimeout(700);
+  await pg.locator('.ay-kok .adet button[aria-label="Arttır"]').first().click(); await pg.waitForTimeout(700);
   c = await sepet(); not(c.item_count === 3, 'adet arttı (toplam ' + c.item_count + ')');
-  const tek = pg.locator('#kok .teklif').first();
+  const tek = pg.locator('.ay-kok .teklif').first();
   const tekMetin = await tek.textContent().catch(() => '');
   not(!/Mağazada/.test(tekMetin), 'teklifte "Mağazada" indirimi yazmıyor (indirim tanımlı değil)');
   await tek.click(); await pg.waitForTimeout(700);
   c = await sepet(); not(c.items.some(i => i.properties && i.properties._ek), 'teklif sepete eklendi (_ek)');
-  not(await pg.locator('#kok .teklif.on').count() === 1, 'teklif seçili görünüyor');
-  not(await pg.locator('#kok .tes').count() === 0, 'kargo seçimi gizli (ödeme adımında seçilir)');
+  not(await pg.locator('.ay-kok .teklif.on').count() === 1, 'teklif seçili görünüyor');
+  not(await pg.locator('.ay-kok .tes').count() === 0, 'kargo seçimi gizli (ödeme adımında seçilir)');
   const rozet = await pg.evaluate(() => document.querySelector('[data-ay-adet]') && document.querySelector('[data-ay-adet]').getAttribute('data-ay-adet'));
   not(rozet === String(c.item_count), 'sepet rozeti Shopify adedi (' + rozet + ')');
-  await pg.locator('#kok .sil').first().click(); await pg.waitForTimeout(700);
+  await pg.locator('.ay-kok .sil').first().click(); await pg.waitForTimeout(700);
   c = await sepet(); not(c.items.filter(i => !(i.properties || {})._ek).length === 1, 'satır silindi');
 
   // 6) Ödeme: kart → /checkout. Sepette kapıda düğmesi ve notu yok (kapıda ödeme kaldırıldı, 27 Eki)
-  not(await pg.evaluate(() => !/kapıda/i.test(document.getElementById('kok').innerText)), 'sepette kapıda yok');
+  not(await pg.evaluate(() => !/kapıda/i.test(document.querySelector('.ay-kok').innerText)), 'sepette kapıda yok');
   const odeme = await pg.evaluate(() => { let git = null; const s = Object.getOwnPropertyDescriptor(window.Location.prototype, 'href'); return null; });
   await pg.route('**/checkout', r => r.fulfill({ status: 200, body: 'checkout' }));
-  await pg.locator('#kok .s-sag .btn1, #kok .btn1').filter({ hasText: 'Güvenli Ödeme' }).first().click(); await pg.waitForTimeout(800);
+  await pg.locator('.ay-kok .s-sag .btn1, .ay-kok .btn1').filter({ hasText: 'Güvenli Ödeme' }).first().click(); await pg.waitForTimeout(800);
   not(pg.url().endsWith('/checkout'), 'Güvenli Ödeme ile Öde → /checkout');
 
   // 7) Kapıda ödeme yok (27 Eki). Bölüme eklenen uygulama düğmesi sayfa yeniden çizilince yuvada kalır; gizli ürün formu seçime eşit
@@ -93,16 +94,44 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   await pg.goto(K + '/products/lamba'); await pg.waitForTimeout(2200);
   not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn2').length === 0 && !document.querySelector('#siparis [aria-pressed="true"]')), 'AyFeneri: Kapıda yok, paket seçili değil');
 
-  // 7b) Galaxy USB (27 Eki): Loox bloğu yorum kutusuna taşınır, yer tutucu yazı görünmez; Dün sayısı ürün alanından, 0 olan stok kurdelesi gizli
+  // 7b) Bölüm bölüm sayfa (28 Eki): Loox bloğu yorum bölümünde ("Alanlar ne diyor?" başlığının altında) görünür, yer tutucu yazı yok;
+  // Dün sayısı ürün alanından, 0 olan stok kurdelesi gizli; bölüm sırası ve sayısı şablondaki gibi
   await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1800);
-  const yk = await pg.evaluate(() => { const y = document.querySelector('#kok [data-ay-yorum]'), s = document.querySelector('#kok .stok-kd');
-    return { loox: !!(y && y.querySelector('.loox-benzetim')), gor: !!y && getComputedStyle(y).display !== 'none', yer: /\[Loox/.test(document.body.innerText),
-      dun: /Dün 7 kişi/.test(document.querySelector('#kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
+  const yk = await pg.evaluate(() => { const l = document.querySelector('.ay-uyg .loox-benzetim'), s = document.querySelector('.ay-kok .stok-kd');
+    const b = [...document.querySelectorAll('.ay-kok h2')].find(h => /Alanlar ne diyor/.test(h.textContent));
+    return { loox: !!l && l.getBoundingClientRect().height > 0, sira: !!(l && b && (b.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING)),
+      yer: /\[Loox/.test(document.body.innerText), bolum: document.querySelectorAll('.shopify-section').length, kok: document.querySelectorAll('.ay-kok').length,
+      dun: /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
   await pg.waitForTimeout(1200);
-  const yk2 = await pg.evaluate(() => !!document.querySelector('#kok [data-ay-yorum] .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('#kok .dun').textContent));
-  not(yk.loox && yk.gor && !yk.yer && yk.dun && yk.kd && yk2, 'USB: Loox yorum kutusunda, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  const yk2 = await pg.evaluate(() => !!document.querySelector('.ay-uyg .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent));
+  not(yk.loox && yk.sira && !yk.yer && yk.bolum === 16 && yk.kok === 15 && yk.dun && yk.kd && yk2, 'USB: 16 bölüm (bloksuz Loox yer tutucusu gizli), Loox yorum bölümünde, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  // LunaDream: video bölümü bloktaki Shopify videosuyla çıkar, dokununca sesli oynar; ürün alanı boşsa tasarımdaki Dün sayısı kalır
   await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(1500);
-  not(await pg.evaluate(() => /Dün 62 kişi/.test(document.querySelector('#kok .dun').textContent)), 'LunaDream: ürün alanı boşsa tasarımdaki Dün sayısı kalır');
+  not(await pg.evaluate(() => /Dün 62 kişi/.test(document.querySelector('.ay-kok .dun').textContent)), 'LunaDream: ürün alanı boşsa tasarımdaki Dün sayısı kalır');
+  const vd = await pg.evaluate(() => ({ n: document.querySelectorAll('#videolar .ay-vid video').length, etiket: /\[video\]/.test(document.body.innerText) }));
+  await pg.locator('#videolar .ay-vid').first().click({ force: true }).catch(() => {}); await pg.waitForTimeout(300);
+  const ses = await pg.evaluate(() => { const v = document.querySelector('#videolar .ay-vid video'); return !!v && v.muted === false && v.controls === true; });
+  not(vd.n === 1 && !vd.etiket && ses, 'LunaDream: video bloğu oynar (sesli, denetimli), [video] etiketi yok ' + JSON.stringify(vd) + ' ' + ses);
+  // Tema düzenleyici taklidi: bölüm ayarı değişince Shopify bölümü yeniden gönderir (shopify:section:load); sayfa yeni yazıyı çizer,
+  // diğer bölümler ve sayfanın durumu bozulmaz. Bölüm gizlenince (unload) kalan bölümler çizilmeye devam eder.
+  await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1500);
+  const duz = await pg.evaluate(async () => {
+    const s = [...document.querySelectorAll('.shopify-section')].find(x => /İçin rahat olsun/.test(x.textContent));
+    const t = document.createElement('div'); t.innerHTML = s.innerHTML; const tpl = t.querySelector('template.ay-parca');
+    tpl.innerHTML = tpl.innerHTML.replace('İçin rahat olsun', 'Gönül rahatlığıyla al'); t.querySelector('.ay-kok').innerHTML = '';
+    s.innerHTML = t.innerHTML; s.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true, detail: { sectionId: s.id } }));
+    await new Promise(r => setTimeout(r, 400));
+    const h = s.querySelector('.ay-kok h2'); const b = [...document.querySelectorAll('.shopify-section')].find(x => /Bu gece tavanda/.test(x.textContent));
+    b.remove(); document.dispatchEvent(new CustomEvent('shopify:section:unload', { detail: {} })); await new Promise(r => setTimeout(r, 1300));
+    return { yazi: h ? h.textContent : '', dolu: [...document.querySelectorAll('.ay-kok')].every(k => k.childElementCount > 0), fiyat: !!document.querySelector('.ay-kok .fiyat-satir'), disk: !!document.querySelector('#diskler .dk-iz button') };
+  });
+  not(/Gönül rahatlığıyla al/.test(duz.yazi) && duz.dolu && duz.fiyat && duz.disk, 'düzenleyici: değişen bölüm yeniden çizilir, kalanlar sağlam ' + JSON.stringify(duz));
+  // Kendi şablonuna atanmamış özel ürün (Galaksi Night varsayılan şablonda): tek parça panosuyla eksiksiz açılır
+  await pg.goto(K + '/products/ayluna-galaksi-night-projektor'); await pg.waitForTimeout(1500);
+  not(await pg.evaluate(() => !!document.getElementById('kok') && document.getElementById('kok').childElementCount > 0 && !!document.querySelector('.ay-kok .urun-ust .btn1')), 'Galaksi Night varsayılan şablonda: tek parça panosu');
+  // Galeri Shopify ürün görsellerinden (Sunset: benzetimde #ay-medya)
+  await pg.goto(K + '/products/sunset-lamba'); await pg.waitForTimeout(1200);
+  not(await pg.evaluate(() => { const m = JSON.parse(document.getElementById('ay-medya').textContent); const i = [...document.querySelectorAll('.ay-kok img')].map(x => x.getAttribute('src')); return m.length > 0 && m.every(x => i.includes(x.src)); }), 'Sunset: galeri ürünün Shopify görsellerinden');
 
   // 8) Koleksiyonda Sepete ekle
   await pg.goto(K + '/collections/all'); await pg.waitForTimeout(600);
@@ -112,7 +141,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
 
   // 9) Formlar: iletişim ve bülten Shopify'a gider
   await pg.goto(K + '/pages/iletisim'); await pg.waitForTimeout(600);
-  const f = pg.locator('#kok form').filter({ has: pg.locator('textarea') }).first();
+  const f = pg.locator('.ay-kok form').filter({ has: pg.locator('textarea') }).first();
   await f.locator('input').first().fill('Ayşe Yılmaz'); await f.locator('input[type=email]').fill('ayse@ornek.com');
   if (await f.locator('input[type=tel]').count()) await f.locator('input[type=tel]').fill('05321112233');
   await f.locator('textarea').fill('Siparişim nerede?');

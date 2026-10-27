@@ -475,7 +475,18 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Kapıda ödeme kalktı + Galaxy USB iyileştirmeleri (27 Ekim, en güncel)
+## Tema bölüm bölüm (Loox, videolar, galeri) + yapışkan çubuk yönleri (28 Ekim, en güncel)
+- Canlı mağazada 1.0.32 yayında (ayluna.shop, role main). Kullanıcı: "İçine Loox eklenmemiş; Loox ekliyorum ama yorum kısmına koyamıyorum, senin koyduğun şekilde kalıyor. Videolar açılmıyor. Section'ları tek tek bölümler kısmında görüp düzenleyebileceğim hale getir; görsel olarak senin içine koyduklarını çekiyor; varsayılan ürün tarafında 2 ürün görünüyor sadece, hangilerini değiştirmek gerekiyorsa değiştir. Görseldeki video yazılarını da kaldır."
+- Tema 1.0.33 (`araclar/tema/bolumler.py`): panonun `.pg` çocukları bölümlere ayrılır (Üst kısım, Galeri ve satın alma, başlığı olan her bölüm, Alt bilgi, Yapışkan çubuk). Her bölüm parçasını `<template class="ay-parca">` + `.ay-kok` ile taşır; `ayluna.js` hepsini tek bileşenle çizer (`parcalar`, düzenleyicide `shopify:section:load/unload/reorder` ile yeniden toplar). Panonun kendi şablonunda yazılar (`m1…`) ve görseller (`g1…`, image_picker; boşsa tasarım görseli) bölüm ayarı.
+  - Şablonlar: `product.lunadream`, `product.galaxy-usb`, `product.ayfeneri`, `product.galaksi-night` (kullanıcı bu 4 ürüne atar, KURULUM 1b). `product.json` (varsayılan): sade 11 ürün ortak 6 bölüm (`ay-sade-01…06`, ürüne göre `case`); atanmamış özel ürün ilk bölümde tek parça panosuyla açılır. `index.json`: ana sayfa 7 bölüm.
+  - Loox: her bölüm `@app` blok alır, blok bölümün altında (`.ay-uyg`) görünür; "Uygulama bloğu" bölümü (`ayluna-uygulama`) her yere eklenir. "[Loox …]" yer tutuculu bölüm blok yoksa görünmez (düzenleyicide ipucu).
+  - Videolar (LunaDream): bölüm blokları (video ayarı, başlık, alt yazı), `video_tag`; ekrandayken sessiz döner, dokununca sesli tam ekran. Video yoksa bölüm yok. "[video]" etiketi tasarımdan da kalktı.
+  - Galeri: layout'ta `#ay-medya` (ürünün Shopify görselleri, tema ayarı `galeri_urun`); bütün ürün panoları `Ayluna.medya()` ile kullanır.
+  - Yapışkan çubuk bölümlü sayfada ekrana sabit (`html.ay-coklu .yapis`).
+- Benzetim artık şablonları python-liquid ile çizer (`pip install python-liquid==1.12.1`); `BENZETIM_LOOX`, `BENZETIM_VIDEO`, `BENZETIM_MEDYA`, `BENZETIM_VARSAYILAN`. Testler: tema benzetimi HEPSİ TAMAM (16 bölüm, Loox yorum bölümünde, video oynar, düzenleyici yeniden çizimi, atanmamış özel ürün, Shopify galerisi), site 179 TAMAM, Theme Check yalnız RemoteAsset (bölüm başına Google Fonts bağlantısı).
+- Yapışkan çubuk (kullanıcı: "burası yapışık kalıp çok fazla alan kaplıyor, neler yapabiliriz bak"): 4 taslak (A ince şerit 60 px, B yüzen düğme, C kaydırınca saklanan, D tam genişlik düğme). Eleştirmen: 1) A + paket alanında çekilme (8/10; 20 px üst köşe, 48 px düğme, lacivert basma gölgesi, sayaç ikinci satırda), 2) tek satır 56 px + aynı çekilme (7/10), 3) şimdiki + yalnız çekilme (6/10); B ve D'yi beğenmedi. Ayrıca: şimdiki çubuk ana düğme ekrandayken onun hemen altında (iki amber düğme), alt güvenli boşluk yok. Kullanıcı seçecek (`ogrenme/yapis-yonleri-28eki.png`: 1, 2, 3 ve paket alanında çekilmiş hâl; ilk taslaklar `ogrenme/yapis-taslaklar-28eki.png`).
+
+## Kapıda ödeme kalktı + Galaxy USB iyileştirmeleri (27 Ekim)
 - Kullanıcı: "Artık yüklüyorum siteyi; kapıda ödemeyi kaldır, bir de USB projektör ürün sayfasındaki yapılması gereken iyileştirmeleri de yap."
 - Kapıda ödeme: bütün sitede ve temada kapıda düğmesi, formu, sepet notu, SSS ve politika maddeleri kalktı (commit 0dad574); ödeme yalnız kartla (%5). KURULUM: EasySell yerleştirmesini ve Shopify COD yöntemini kapat.
 - Galaxy USB (`luna_usb.py`; eleştirmen + `design-review` denetimi):

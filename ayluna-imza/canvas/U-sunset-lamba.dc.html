@@ -385,7 +385,8 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/3f0a4bdbeb1c85f048a934b6c24ed40d", "/_blob/5162ca7da37a4bbb98b679d5a9ae6f30", "/_blob/f6e5baa24c9f3478e058ddf60573b06c", "/_blob/c709edd9aa7ce1597b257035f7d844d2"], AD = "Sunset Lamba";
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : ["/_blob/3f0a4bdbeb1c85f048a934b6c24ed40d", "/_blob/5162ca7da37a4bbb98b679d5a9ae6f30", "/_blob/f6e5baa24c9f3478e058ddf60573b06c", "/_blob/c709edd9aa7ce1597b257035f7d844d2"], AD = "Sunset Lamba";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

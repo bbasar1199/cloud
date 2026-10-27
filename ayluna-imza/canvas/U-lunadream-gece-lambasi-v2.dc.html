@@ -384,7 +384,8 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/936be51b2b610750acb7277d1e52c4da", "/_blob/25d67cbb36a8c5b71b08377534bd9d49", "/_blob/b7150a1c96371c2225336ece604091be", "/_blob/5851defe4bb1a12d9e8885c4dab5aa1f", "/_blob/916544209759a995d088894e9c68ee91", "/_blob/ea8252cfb72f88c69098d989040067cd", "/_blob/478bff528bb24faeceab8d940dfbaedf"], AD = "LunaDream Gece Lambası V2";
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : ["/_blob/936be51b2b610750acb7277d1e52c4da", "/_blob/25d67cbb36a8c5b71b08377534bd9d49", "/_blob/b7150a1c96371c2225336ece604091be", "/_blob/5851defe4bb1a12d9e8885c4dab5aa1f", "/_blob/916544209759a995d088894e9c68ee91", "/_blob/ea8252cfb72f88c69098d989040067cd", "/_blob/478bff528bb24faeceab8d940dfbaedf"], AD = "LunaDream Gece Lambası V2";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

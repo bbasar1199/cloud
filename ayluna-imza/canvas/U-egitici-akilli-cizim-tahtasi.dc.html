@@ -389,7 +389,8 @@ class Component extends DCLogic {
     var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
       dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
     
-    var GAL = ["/_blob/37fc749147469f002fcc83c86406a787", "/_blob/090651796147ad16adad7e3805aa4846", "/_blob/ae584ba49548ff9fe2ab9602951320f0", "/_blob/64b2ea3cfd3420dd8f4125b9244a4a07", "/_blob/155d777e6f4f50007eec1613cdf450c6", "/_blob/62c03a3cb7a4c53fd291c1e2bdd04ff1"], AD = "Eğitici Akıllı Çizim Tahtası";
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : ["/_blob/37fc749147469f002fcc83c86406a787", "/_blob/090651796147ad16adad7e3805aa4846", "/_blob/ae584ba49548ff9fe2ab9602951320f0", "/_blob/64b2ea3cfd3420dd8f4125b9244a4a07", "/_blob/155d777e6f4f50007eec1613cdf450c6", "/_blob/62c03a3cb7a4c53fd291c1e2bdd04ff1"], AD = "Eğitici Akıllı Çizim Tahtası";
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

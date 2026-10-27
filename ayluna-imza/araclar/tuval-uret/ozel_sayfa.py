@@ -355,7 +355,7 @@ def js(u):
     // Tek saat: sayaç, galeri (5 sn), fener (2 sn kapalı → 7 sn açık), huzme (3 sn), disk (4 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
-      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % """ + str(len(gal)) + """);
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || """ + str(len(gal)) + """));
       if (S.yOto && t - S.yBas >= (S.yak ? 7 : 2)) { o.yak = !S.yak; o.yBas = t; }
       if (S.hOto && t % 3 === 0) o.hz = (S.hz + 1) % 4;
       if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % 12;
@@ -368,7 +368,9 @@ def js(u):
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     """ + TL_JS + """
-    var GAL = """ + json.dumps(gal, ensure_ascii=False) + """;
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : """ + json.dumps(gal, ensure_ascii=False) + """;
+    self.galN = GAL.length;
     var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

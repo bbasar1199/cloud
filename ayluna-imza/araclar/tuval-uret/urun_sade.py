@@ -158,7 +158,8 @@ def js(u, gal):
     sec = (u.get('secenek') or [{}])[0].get('degerler', []) if u.get('secenek') else []
     st = "{ g: 0, gOto: true, pk: %s, sec: 0 }" % ('null' if len(paket) > 1 else '1')  # açılışta paket seçili değil (19 Eki)
     ek = """
-    var GAL = """ + json.dumps(gal) + """, AD = """ + json.dumps(AD.get(u['handle'], u['ad']), ensure_ascii=False) + """;
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : """ + json.dumps(gal) + """, AD = """ + json.dumps(AD.get(u['handle'], u['ad']), ensure_ascii=False) + """;
     var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }

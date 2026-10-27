@@ -14,7 +14,10 @@ ham = json.load(open(os.path.join(KOK, 'ogrenme', 'canli-urunler.json')))
 URUNLER = ham['products'] if isinstance(ham, dict) else ham
 FIYAT_DEGIS = json.loads(os.environ.get('BENZETIM_FIYAT', '{}'))  # {"handle": kuruş} → canlı fiyat farkı denemesi
 ELLE = json.loads(os.environ.get('BENZETIM_ELLE', '{}'))  # {"handle": {"dun": n, "kd": n}} → ürün alanları ayluna.dun_satis / stok_kurdele
-LOOX = [h for h in os.environ.get('BENZETIM_LOOX', '').split(',') if h]  # bu ürünlerde bölüme eklenmiş Loox uygulama bloğu taklidi
+LOOX = [h for h in os.environ.get('BENZETIM_LOOX', '').split(',') if h]  # bu ürünlerde yorum bölümüne eklenmiş Loox uygulama bloğu taklidi
+VARSAYILAN = [h for h in os.environ.get('BENZETIM_VARSAYILAN', '').split(',') if h]  # kendi şablonuna atanmamış özel ürün denemesi
+MEDYA = [h for h in os.environ.get('BENZETIM_MEDYA', '').split(',') if h]  # bu ürünlerde galeri Shopify ürün görsellerinden (#ay-medya)
+VIDEO = [h for h in os.environ.get('BENZETIM_VIDEO', '').split(',') if h]  # bu ürünlerin video bölümüne bir video bloğu eklenmiş gibi
 CANLI, VARYANT = {}, {}
 for p in URUNLER:
     vs = [dict(id=v['id'], t=v['title'], a=bool(v.get('available', True)), p=int(round(float(v['price']) * 100))) for v in p['variants']]
@@ -75,6 +78,65 @@ def ekle(kalem):
     SEPET['satir'].append(dict(key='%d:%d' % (vid, len(SEPET['satir']) + int(threading.get_ident() % 997)), id=vid, adet=n, ozellik=oz))
 
 
+# Bölümlü şablonlar (28 Eki): templates/*.json'daki bölümler python-liquid ile çizilir (Shopify'ın Liquid'inin bu temada kullanılan kısmı)
+from liquid import Environment
+from liquid.loaders import FileExtensionLoader
+LQ = Environment(loader=FileExtensionLoader(os.path.join(TEMA, 'snippets'), ext='.liquid'))
+LQ.add_filter('asset_url', lambda s: '/assets/' + str(s))
+LQ.add_filter('stylesheet_tag', lambda s: '<link rel="stylesheet" href="%s">' % s)
+LQ.add_filter('json', lambda v: json.dumps(v, ensure_ascii=False))
+LQ.add_filter('image_url', lambda v, width=None, **k: (v.get('src') if isinstance(v, dict) else str(v)))
+LQ.add_filter('image_tag', lambda u, **k: '<img src="%s" alt="">' % u)
+LQ.add_filter('money', lambda n: '₺%.2f' % (int(n or 0) / 100))
+LQ.add_filter('video_tag', lambda v, **k: '<video src="%s" muted loop playsinline preload="metadata"></video>' % (v or {}).get('src', ''))
+LQ.add_filter('date', lambda v, f='': '2026')
+
+
+def lq_hazirla(s):
+    s = re.sub(r'\{%-?\s*schema\s*-?%\}.*?\{%-?\s*endschema\s*-?%\}', '', s, flags=re.S)
+    s = s.replace('{% render block %}', '{{ block.html }}')
+    s = re.sub(r"\{%-?\s*form 'product'.*?-?%\}", '<form method="post" action="/cart/add" data-ay-urun-formu data-ay-shopify hidden class="ay-urun-formu">', s)
+    s = re.sub(r'\{%-?\s*endform\s*-?%\}', '</form>', s)
+    return s
+
+
+def bolum_sema(tip):
+    s = open(os.path.join(TEMA, 'sections', tip + '.liquid'), encoding='utf-8').read()
+    m = re.search(r'\{% schema %\}(.*?)\{% endschema %\}', s, re.S)
+    return s, json.loads(m.group(1)) if m else {}
+
+
+def urun_baglam(h):
+    p = next(x for x in URUNLER if x['handle'] == h); c = CANLI[h]
+    return dict(handle=h, id=p['id'], title=p['title'], available=c['stok'], price=c['p'], compare_at_price=c['c'], media=[], description='',
+                images=[dict(src=i['src'], alt='') for i in p.get('images') or []], selected_or_first_available_variant=dict(id=c['vid']), has_only_default_variant=True)
+
+
+def sablon_ciz(ad, h):
+    t = json.load(open(os.path.join(TEMA, 'templates', ad + '.json'), encoding='utf-8'))
+    urun = urun_baglam(h) if h else None
+    out = []
+    if urun and h in MEDYA:
+        out.append('<script type="application/json" id="ay-medya">%s</script>' % json.dumps([dict(src=i['src'], alt=urun['title']) for i in urun['images']], ensure_ascii=False))
+    for kim in t['order']:
+        b = t['sections'][kim]
+        if b.get('disabled'): continue
+        kaynak, sema = bolum_sema(b['type'])
+        ayar = dict((x['id'], x.get('default')) for x in sema.get('settings', []) if 'id' in x); ayar.update(b.get('settings') or {})
+        bloklar = []
+        for bk in (b.get('block_order') or []):
+            bb = b['blocks'][bk]; bloklar.append(dict(type=bb['type'], settings=bb.get('settings') or {}, shopify_attributes='', html=bb.get('html', '')))
+        if h in VIDEO and sema.get('name') == 'Videolar':
+            bloklar.append(dict(type='video', settings=dict(video=dict(src='/assets/benzetim.mp4'), baslik='Bir müşterimizin akşamı', alt='Müşteri videosu'), shopify_attributes='', html=''))
+        # Loox benzetimi: yorum bölümüne eklenmiş uygulama bloğu
+        if h in LOOX and ('Alanlar ne diyor' in sema.get('name', '') or 'Aileler ne diyor' in sema.get('name', '')):
+            bloklar.append(dict(type='@app', settings={}, shopify_attributes='', html='<div id="looxReviews" class="loox-benzetim">Loox yorumları (benzetim)</div>'))
+        html = LQ.from_string(lq_hazirla(kaynak)).render(section=dict(id=kim, settings=ayar, blocks=bloklar), product=urun, request=dict(design_mode=False),
+                                                         settings=dict(galeri_urun=True))
+        out.append('<div id="shopify-section-template--1__%s" class="shopify-section">%s</div>' % (kim, html))
+    return '\n'.join(out)
+
+
 def snippet(ad):
     s = open(os.path.join(TEMA, 'snippets', ad + '.liquid'), encoding='utf-8').read()
     s = re.sub(r'\{%-? comment -?%\}.*?\{%-? endcomment -?%\}', '', s, flags=re.S)
@@ -92,26 +154,24 @@ def sayfa(govde, baslik):
 
 
 def rota(yol):
-    if yol in ('/', ''): return snippet('ay-ayluna-anasayfa'), 'Ayluna'
+    if yol in ('/', ''): return sablon_ciz('index', None), 'Ayluna'
     if yol in ('/collections/all', '/collections'): return snippet('ay-koleksiyon'), 'Tüm ürünler'
     if yol == '/cart': return snippet('ay-sepet'), 'Sepet'
     if yol == '/search': return snippet('ay-arama'), 'Ara'
     m = re.match(r'^/products/([\w-]+)$', yol)
     if m:
-        h = m.group(1); pano = dict(T.URUN_PANO).get(h)
-        if not pano or h not in CANLI: return None
-        c = CANLI[h]
-        form = ('<form method="post" action="/cart/add" data-ay-urun-formu data-ay-shopify hidden class="ay-urun-formu"><input type="hidden" name="id" value="%d">'
-                '<input type="hidden" name="quantity" value="1"></form>' % c['vid'])
+        h = m.group(1)
+        if h not in CANLI: return None
+        # Özel ürün kendi şablonunda (Shopify'da atanmış gibi); BENZETIM_VARSAYILAN'daki ürünler varsayılan şablonda (atanmamış hâl)
+        pano = dict(T.URUN_PANO).get(h)
+        sonek = T.SONEK.get(pano) if h not in VARSAYILAN else None
+        govde = sablon_ciz('product' + ('.' + sonek if sonek else ''), h)
         pk = [b for b in (V_URUN.get(h) or {}).get('paket') or []]
-        if len(pk) > 1:  # paketli ürün: Kaching ayarı + gizli kutu
+        if len(pk) > 1:  # paketli ürün: Kaching ayarı (gizli kutu satın alma bölümünde, <kaching-bundle>)
             bars = [dict(id='bar-%d' % b['n'], title='%d Adet' % b['n'], quantity=b['n']) for b in pk]
-            form += ('<script class="kaching-bundles-product" data-product-id="1" data-main="true" type="application/json">{}</script>'
-                     '<script class="kaching-bundles-deal-block-settings" data-product-id="1" type="application/json">%s</script>'
-                     '<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="1"></kaching-bundle></div>' % json.dumps(dict(dealBars=bars)) + KACHING_JS)
-        if h in LOOX:
-            form += '<div class="ay-uygulama-bloklari" hidden><div class="ay-uygulama"><div id="looxReviews" class="loox-benzetim">Loox yorumları (benzetim)</div></div></div>'
-        return snippet(T.ad(pano)) + form, h
+            govde += ('<script class="kaching-bundles-product" data-product-id="1" data-main="true" type="application/json">{}</script>'
+                      '<script class="kaching-bundles-deal-block-settings" data-product-id="1" type="application/json">%s</script>' % json.dumps(dict(dealBars=bars)) + KACHING_JS)
+        return govde, h
     m = re.match(r'^/pages/([\w-]+)$', yol)
     if m:
         for el, pano, _ in T.ICERIK_PANO:

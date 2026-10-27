@@ -115,14 +115,14 @@ img{max-width:100%}
     .ay-masa nav a{font-size:14px}
   }
   /* Telefon başlıkları */
-  #kok header.ust,#kok .sahne>header,#kok .u-ust{display:none!important}
+  .ay-kok header.ust,.ay-kok .sahne>header,.ay-kok .u-ust{display:none!important}
   /* Genel: içerik sayfaları ortada okunur sütun */
   .pg{max-width:760px;overflow:visible!important}
   .yapis{display:none!important}
   body{overflow-x:clip}
   /* Duyuru şeritleri ve alt bilgi kenardan kenara */
-  #kok .pg>.duyuru,#kok .pg>.serit,#kok .pg>.u-serit{width:100vw;margin-left:calc(50% - 50vw)!important}
-  #kok .pg>.duyuru~.u-serit{margin-top:0!important}
+  .ay-kok .pg>.duyuru,.ay-kok .pg>.serit,.ay-kok .pg>.u-serit{width:100vw;margin-left:calc(50% - 50vw)!important}
+  .ay-kok .pg>.duyuru~.u-serit{margin-top:0!important}
 
   /* Ürün sayfası: üstte iki sütun (.urun-ust: solda yapışkan kare galeri, sağda satın alma), altta ortada bölümler */
   html[data-ay-tur=urun] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
@@ -376,15 +376,15 @@ img{max-width:100%}
   html[data-ay-tur=sepet] .urun-fiyat br{display:none}
   html[data-ay-tur=sepet] .urun .sil{min-height:40px}
   /* Ürün sayfası alt bilgisi (imza sayfaları, footer.alt-bilgi): solda kapanış + buton, sağda bağlantılar ve yasal bilgi */
-  #kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
-  #kok .pg>footer.alt-bilgi>.px{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas link" "btn link" "imza imza" "telif telif";column-gap:64px;row-gap:0;align-items:start;padding:0 max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
+  .ay-kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas link" "btn link" "imza imza" "telif telif";column-gap:64px;row-gap:0;align-items:start;padding:0 max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
   /* 5 öğe (23 Eki, masaüstü denetimi: kural 6 öğe varsayıyordu, imza sağa, telif sol yarıya düşüyordu): başlık, buton, bağlantılar, imza, telif */
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:34px!important}
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(1) br{display:none}
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(2){grid-area:btn;justify-self:start;width:440px!important;max-width:100%;margin-top:24px!important}
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(3){grid-area:link;margin-top:0!important}
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(4){grid-area:imza;margin-top:48px!important}
-  #kok .pg>footer.alt-bilgi>.px>:nth-child(5){grid-area:telif;margin-top:32px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:34px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(1) br{display:none}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(2){grid-area:btn;justify-self:start;width:440px!important;max-width:100%;margin-top:24px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(3){grid-area:link;margin-top:0!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(4){grid-area:imza;margin-top:48px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(5){grid-area:telif;margin-top:32px!important}
   /* Yapışkan satın alma çubuğu (ayluna.js cubukKur) */
   .ay-al{display:block;position:fixed;left:0;right:0;top:72px;z-index:899;background:#1A2142;color:#fff;font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 10px 24px rgba(12,16,39,.18);transform:translateY(-100%);opacity:0;visibility:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s linear .35s}
   .ay-al.on{transform:none;opacity:1;visibility:visible;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s}
@@ -399,19 +399,19 @@ img{max-width:100%}
   .ay-al-btn:active{transform:translateY(2px)}
   .ay-al button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
   /* Alt bilgi (ana sayfa ve içerik sayfaları): kenardan kenara, solda imza, sağda bağlantılar */
-  #kok .pg>footer.alt{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:96px;box-sizing:border-box;padding:56px max(32px,calc(50vw - 568px)) 40px;border-radius:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"imza sut" "yasal sut" "kart sut" "telif telif";grid-template-rows:auto auto 1fr auto;column-gap:64px;align-content:start}
-  #kok .pg>footer.alt .imza{grid-area:imza;margin-top:0}
-  #kok .pg>footer.alt .imza span{font-size:72px}
-  #kok .pg>footer.alt .sut{grid-area:sut}
-  #kok .pg>footer.alt .yasal{grid-area:yasal}
+  .ay-kok .pg>footer.alt{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:96px;box-sizing:border-box;padding:56px max(32px,calc(50vw - 568px)) 40px;border-radius:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"imza sut" "yasal sut" "kart sut" "telif telif";grid-template-rows:auto auto 1fr auto;column-gap:64px;align-content:start}
+  .ay-kok .pg>footer.alt .imza{grid-area:imza;margin-top:0}
+  .ay-kok .pg>footer.alt .imza span{font-size:72px}
+  .ay-kok .pg>footer.alt .sut{grid-area:sut}
+  .ay-kok .pg>footer.alt .yasal{grid-area:yasal}
   /* Sağ sütun uzunsa boşluk kart logolarının altına gider (imza ile logolar arasında 208 px boş satır kalıyordu) */
-  #kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
-  #kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
+  .ay-kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
+  .ay-kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
   /* "Yukarı" düğmesi masaüstünde ekranın sağ alt köşesinde (sütunun içinde kartları ve alt bilgi bağlantılarını örtüyordu) */
   .yukari{position:fixed!important;right:24px;bottom:24px;margin:0!important;z-index:880}
   /* Telefon ipucu masaüstünde yok ("Dokun, büyüsün"); Galaksi Night'taki telefon ara boşluğu masaüstünde bölüm aralığına eklenmez */
   .dokun{display:none}
-  #kok .pg>.ara{display:none}
+  .ay-kok .pg>.ara{display:none}
   /* İçerik sayfalarında başlıktaki zorunlu satır sonu masaüstünde yok ("Siparişin / nerede?") */
   html[data-ay-tur=politika] .pg h1 br,html[data-ay-tur=politika] .pg .h2 br,html[data-ay-tur=kargo-takip] .pg h1 br,html[data-ay-tur=kargo-takip] .pg .h2 br,html[data-ay-tur=iletisim] .pg h1 br,html[data-ay-tur=iletisim] .pg .h2 br{display:none}
 }
@@ -432,3 +432,14 @@ html.ay-shop [data-ay-yorum]:not([data-ay-dolu]),html.ay-shop [data-ay-gizli]{di
 /* Üst blok renk döngüsü: masaüstü başlığı için ortak anahtar kareler (sayfa CSS'inde de var) */
 @keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.ay-masa>.gk{animation:none}}
+
+/* Shopify bölümleri (28 Eki): sayfa bölüm bölüm çizilir (html.ay-coklu). Yapışkan çubuk bölümün içinde kalamayacağı için
+   ekrana sabitlenir; uygulama blokları (Loox vb.) bulundukları bölümün altında, sayfa sütununda durur. */
+html.ay-coklu .yapis{position:fixed!important;left:0;right:0;bottom:0;z-index:20;margin:0!important;padding-bottom:env(safe-area-inset-bottom)}
+@media (max-width:1023px){html.ay-coklu body{padding-bottom:76px}}
+.ay-uyg{max-width:760px;margin:0 auto;padding:8px 16px 28px;background:var(--ay-zemin,#fff)}
+.ay-uyg:empty{display:none}
+html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
+/* Videolar (28 Eki): bölüm bloklarındaki Shopify videoları; kapak videonun kendi karesi */
+.ay-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ay-vid-not{margin:12px 16px;padding:14px 16px;border-radius:14px;background:#F3F4F7;color:#5C6078;font:14px/1.5 Onest,system-ui,sans-serif}

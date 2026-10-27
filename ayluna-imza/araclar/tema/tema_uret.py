@@ -8,10 +8,14 @@ import os, re, sys, json, shutil, zipfile
 KOK = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(KOK, 'araclar', 'site'))
 import site_uret as S
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.32'
+SURUM = '1.0.33'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
+# Kendi ürün şablonu olan özel panolar (28 Eki): bölüm bölüm düzenlenir; ürün Shopify'da bu şablona atanır (KURULUM)
+SONEK = {'LunaDreamE': 'lunadream', 'GalaxyUSB': 'galaxy-usb', 'AyFeneri': 'ayfeneri', 'GalaksiNight': 'galaksi-night'}
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
               ('arama', 'Arama', 'arama', 'Arama'), ('404', 'Sayfa404', '404', 'Bulunamadı')]
 URUN_PANO = [(h, S.OZEL_SAYFA.get(h, 'U-' + h)) for h, *_ in S.A.URUN]
@@ -36,7 +40,7 @@ def pano_snippet(pano, tur, urun=''):
     return ('{%- comment -%} Ayluna · ' + pano + ' panosu. araclar/tema/tema_uret.py üretir; elle düzenlenmez (tuvalden yeniden üretilir). {%- endcomment -%}\n'
             + fontlar + '\n<style>body{--ay-zemin:' + (z.group(1) if z else '#F6F1E9') + '}</style>\n'
             + '{%- raw -%}\n<style>' + css + '</style>\n<template id="T">' + govde + '</template>\n{%- endraw -%}\n'
-            + '<div id="kok" data-sayfa="' + tur + '" data-urun="' + urun + '"></div>\n'
+            + '<div id="kok" class="ay-kok" data-sayfa="' + tur + '" data-urun="' + urun + '"></div>\n'
             + '{%- raw -%}\n<script>\n(window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {\n' + js + '\nAyluna.baslat(Component);\n});\n</script>\n{%- endraw -%}\n'), govde + js + css
 
 
@@ -74,10 +78,28 @@ def main():
     # 1) Pano snippet'leri
     for _, pano, tur, _ in SAYFA_PANO:
         sn, ham = pano_snippet(pano, tur); yaz('snippets/%s.liquid' % ad(pano), sn); ids(ham)
-    for h, pano in URUN_PANO:
-        sn, ham = pano_snippet(pano, 'urun', h); yaz('snippets/%s.liquid' % ad(pano), sn); ids(ham)
+    for h, pano in URUN_PANO:  # tek parça snippet yalnız özel ürünlere (kendi şablonuna atanmadan önceki yedek); sade ürünler bölüm bölüm
+        sn, ham = pano_snippet(pano, 'urun', h); ids(ham)
+        if pano in SONEK: yaz('snippets/%s.liquid' % ad(pano), sn)
     for _, pano, tur in ICERIK_PANO:
         sn, ham = pano_snippet(pano, tur); yaz('snippets/%s.liquid' % ad(pano), sn); ids(ham)
+
+    # 1b) Bölüm bölüm sayfalar (28 Eki): özel ürünler kendi şablonunda, sade ürünler varsayılan ürün şablonunda, ana sayfa
+    def zemin(css):
+        z = re.search(r'--zemin:(#[0-9A-Fa-f]{6})', css); return z.group(1) if z else '#F6F1E9'
+    def bolum_yaz(liste):
+        for dosya, _, l in liste: yaz('sections/%s.liquid' % dosya, l)
+    OZEL = dict((h, p) for h, p in URUN_PANO if p in SONEK)
+    for h, pano in OZEL.items():
+        kod = ad(pano); liste, css, js = B.pano_bolumleri(kod, pano, S.parcala, 'urun', h); bolum_yaz(liste)
+        yaz('assets/%s.css' % kod, B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % kod, B.varlik_js(js, pano))
+        yaz('templates/product.%s.json' % SONEK[pano], B.sablon_json([d for d, _, _ in liste]))
+    liste, css, js = B.pano_bolumleri('ay-ana', 'Ayluna-Anasayfa', S.parcala, 'ana', ''); bolum_yaz(liste)
+    yaz('assets/ay-ana.css', B.varlik_css(css, zemin(css))); yaz('assets/ay-ana.js', B.varlik_js(js, 'Ayluna-Anasayfa'))
+    ANA_SABLON = B.sablon_json([d for d, _, _ in liste])
+    SADE = [(h, p) for h, p in URUN_PANO if h not in OZEL]
+    SADE_LISTE, SADE_VARLIK = None, None
+    yaz('sections/ayluna-uygulama.liquid', B.UYGULAMA_BOLUMU)
 
     # 2) Veri ve görseller
     V = S.veri()
@@ -128,6 +150,9 @@ window.AYLUNA_SEPET = {{ cart | json }};
   {{ 'ayluna.css' | asset_url | stylesheet_tag }}
   {% render 'ay-gorseller' %}
   {% render 'ay-canli' %}
+  {%- if template.name == 'product' and settings.galeri_urun -%}
+  <script type="application/json" id="ay-medya">[{%- for i in product.images -%}{"src": {{ i | image_url: width: 1200 | json }}, "alt": {{ i.alt | default: product.title | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+  {%- endif -%}
   <script>
     window.AYLUNA_SHOPIFY = true;
     window.AYLUNA_AYAR = { takip: {{ settings.kargo_takip_url | default: '/apps/track123' | json }} };
@@ -161,15 +186,8 @@ window.AYLUNA_SEPET = {{ cart | json }};
         + ''.join("  {%%- when '%s' -%%}{%% render '%s' %%}\n" % (k, ad(p)) for k, p, _, _ in SAYFA_PANO)
         + '{%- endcase -%}\n\n{% schema %}\n' + json.dumps({'name': 'Ayluna sayfası', 'class': 'ay-bolum', 'settings': [
             {'type': 'select', 'id': 'sayfa', 'label': 'Sayfa', 'options': secenek, 'default': 'ana'}]}, ensure_ascii=False, indent=2) + '\n{% endschema %}\n')
-    yaz('sections/ayluna-urun.liquid', '''{%- comment -%} Ayluna · ürün sayfası. Her ürünün kendi tasarım panosu var; panosu olmayan yeni ürün sade sayfayla açılır.
-  Gizli ürün formu Kaching içindir: ayluna.js seçilen modeli/paketi buraya yazar (data-ay-urun-formu). Kapıda ödeme yok (27 Eki).
-  Kaching paket kutusu görünmez durur; tasarımdaki paket kartları onu seçer (kapıda formu paketi ve indirimi oradan okur).
-  Bu bölüme eklenen uygulama blokları tasarımda satın al düğmesinin altındaki yuvaya taşınır. {%- endcomment -%}
-{%- assign ay_pano = true -%}
-{%- case product.handle -%}
-''' + ''.join("  {%%- when '%s' -%%}{%% render '%s' %%}\n" % (h, ad(p)) for h, p in URUN_PANO) + '''  {%- else -%}
-    {%- assign ay_pano = false -%}
-    ''' + GENEL_CSS.replace('\n', '\n    ') + GENEL_UST + '''    <main class="ay-g"><div class="ay-g-urun">
+    # Panosu olmayan yeni ürün: sade Shopify ürün düzeni (varsayılan şablonun ilk bölümünde, bolumler.sade_bolumleri)
+    GENEL_URUN = ('    ' + GENEL_CSS.replace('\n', '\n    ') + GENEL_UST + '''    <main class="ay-g"><div class="ay-g-urun">
       <div>{%- for m in product.media limit: 6 -%}{{ m.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.title }}{%- endfor -%}</div>
       <div>
         <h1>{{ product.title }}</h1>
@@ -183,20 +201,11 @@ window.AYLUNA_SEPET = {{ cart | json }};
         <div class="rte">{{ product.description }}</div>
       </div>
     </div></main>
-    ''' + GENEL_ALT + '''{%- endcase -%}
-{%- if ay_pano -%}
-{%- form 'product', product, data-ay-urun-formu: '', data-ay-shopify: '', hidden: 'hidden', class: 'ay-urun-formu' -%}
-  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-  <input type="hidden" name="quantity" value="1">
-{%- endform -%}
-<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="{{ product.id }}"></kaching-bundle></div>
-<div class="ay-uygulama-bloklari" hidden>{%- for block in section.blocks -%}{%- case block.type -%}{%- when '@app' -%}<div class="ay-uygulama" {{ block.shopify_attributes }}>{% render block %}</div>{%- endcase -%}{%- endfor -%}</div>
-{%- endif -%}
-
-{% schema %}
-{ "name": "Ayluna ürün sayfası", "class": "ay-bolum", "settings": [], "blocks": [{ "type": "@app" }] }
-{% endschema %}
-''')
+    ''' + GENEL_ALT)
+    SADE_LISTE, SADE_VARLIK = B.sade_bolumleri(SADE, S.parcala, ad, OZEL, GENEL_URUN)
+    bolum_yaz(SADE_LISTE)
+    for pano, (css, js) in SADE_VARLIK.items():
+        yaz('assets/%s.css' % ad(pano), B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % ad(pano), B.varlik_js(js, pano))
     vakalar = ''.join("  {%%- when %s -%%}{%% render '%s' %%}\n" % (', '.join("'%s'" % x for x in el), ad(p)) for el, p, _ in ICERIK_PANO)
     yaz('sections/ayluna-icerik.liquid', '''{%- comment -%} Ayluna · sayfalar. İletişim ve yasal metinlerin tasarım panosu sayfa adresine (handle) göre seçilir;
   diğer sayfalar, blog ve yazılar sade düzenle açılır. {%- endcomment -%}
@@ -251,13 +260,13 @@ window.AYLUNA_SEPET = {{ cart | json }};
         b = {'type': tip}
         if ayar: b['settings'] = ayar
         return json.dumps({'sections': {bolum: b}, 'order': [bolum]}, ensure_ascii=False, indent=2) + '\n'
-    yaz('templates/index.json', sablon('ayluna-sayfa', {'sayfa': 'ana'}))
+    yaz('templates/index.json', ANA_SABLON)
     yaz('templates/collection.json', sablon('ayluna-sayfa', {'sayfa': 'koleksiyon'}))
     yaz('templates/list-collections.json', sablon('ayluna-sayfa', {'sayfa': 'koleksiyon'}))
     yaz('templates/cart.json', sablon('ayluna-sayfa', {'sayfa': 'sepet'}))
     yaz('templates/search.json', sablon('ayluna-sayfa', {'sayfa': 'arama'}))
     yaz('templates/404.json', sablon('ayluna-sayfa', {'sayfa': '404'}))
-    yaz('templates/product.json', sablon('ayluna-urun', bolum='urun'))
+    yaz('templates/product.json', B.sablon_json([d for d, _, _ in SADE_LISTE]))
     for t in ('page', 'blog', 'article'):
         yaz('templates/%s.json' % t, sablon('ayluna-icerik', bolum='icerik'))
     yaz('templates/password.json', json.dumps({'layout': 'password', 'sections': {'sifre': {'type': 'ayluna-sifre'}}, 'order': ['sifre']}, indent=2) + '\n')
@@ -311,8 +320,10 @@ window.AYLUNA_SEPET = {{ cart | json }};
         {'name': 'theme_info', 'theme_name': 'Ayluna', 'theme_version': SURUM, 'theme_author': 'Ayluna', 'theme_documentation_url': 'https://ayluna.shop', 'theme_support_url': 'https://ayluna.shop'},
         {'name': 'Ayluna', 'settings': [
             {'type': 'paragraph', 'content': 'Ödeme yalnız kartla (kapıda ödeme yok). Paket fiyatları için Kaching Bundles ya da otomatik indirim tanımlı olmalı (KURULUM).'},
-            {'type': 'text', 'id': 'kargo_takip_url', 'label': 'Kargo takip adresi', 'default': '/apps/track123'}]}], ensure_ascii=False, indent=2) + '\n')
-    yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123'}}, indent=2) + '\n')
+            {'type': 'text', 'id': 'kargo_takip_url', 'label': 'Kargo takip adresi', 'default': '/apps/track123'},
+            {'type': 'checkbox', 'id': 'galeri_urun', 'label': 'Ürün galerisi Shopify\'daki ürün görsellerinden gelsin', 'default': True,
+             'info': 'Kapalıysa tasarımdaki galeri görselleri kullanılır.'}]}], ensure_ascii=False, indent=2) + '\n')
+    yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123', 'galeri_urun': True}}, indent=2) + '\n')
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')
 
     # 8) Zip
