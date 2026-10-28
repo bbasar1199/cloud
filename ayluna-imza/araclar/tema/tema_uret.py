@@ -11,7 +11,7 @@ import site_uret as S
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.36'
+SURUM = '1.0.37'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 # Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
@@ -90,12 +90,25 @@ def main():
         z = re.search(r'--zemin:(#[0-9A-Fa-f]{6})', css); return z.group(1) if z else '#F6F1E9'
     def bolum_yaz(liste):
         for dosya, _, l in liste: yaz('sections/%s.liquid' % dosya, l)
+    # Videolar bölümünün ürün şablonundaki ilk hali: tasarımdaki kartların başlıkları ve fotoğrafları (video seçilince yerine geçer)
+    def VIDEO_SABLON(h, pano, parcala):
+        js = parcala(pano)[3]
+        kart = re.findall(r"\{ t: '([^']+)', al: '[^']*', k: '([^']*)', src: B \+ '([0-9a-f]{32})'", js)
+        bl = [('v%d' % (n + 1), 'video', {'baslik': t, 'alt': k}) for n, (t, k, _) in enumerate(kart)]
+        ayar = {'baslik': 'Işık kapanınca ne oluyor', 'urun': h, 'tasarim': True, 'tasarim_gorsel': ','.join(b + '.jpg' for _, _, b in kart)}
+        return ('%s-video' % SONEK[pano][0], 'ay-videolar', bl, ayar)
     OZEL = dict((h, p) for h, p in URUN_PANO if p in SONEK)
     URUN_BOLUMLERI = []
+    # JS ile çizilen görsellerin blok haritası (araclar/tema/gorsel_harita.js üretir): {pano: {blok: [(blob, etiket)]}}
+    HP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gorsel-harita.json')
+    HARITA = json.load(open(HP, encoding='utf-8')) if os.path.exists(HP) else {}
+    yaz('sections/ay-videolar.liquid', B.video_bolumu())
     for h, pano in OZEL.items():
         kod = ad(pano); kisa, isim = SONEK[pano]
-        l, css, js, bl = B.urun_sayfasi(kod, pano, h, isim, S.parcala)
-        yaz('sections/ay-%s.liquid' % kisa, l); URUN_BOLUMLERI.append((kisa, 'ay-' + kisa, bl))
+        bolumler, css, js, vs = B.urun_sayfasi(kod, pano, h, isim, S.parcala, HARITA.get(pano))
+        for k, (ek, _, l, bl) in enumerate(bolumler):
+            yaz('sections/ay-%s%s.liquid' % (kisa, ek), l); URUN_BOLUMLERI.append((kisa + ek, 'ay-' + kisa + ek, bl))
+            if k == vs: URUN_BOLUMLERI.append(VIDEO_SABLON(h, pano, S.parcala))
         yaz('assets/%s.css' % kod, B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % kod, B.varlik_js(js, pano))
     SADE = []
     for h, pano in URUN_PANO:
@@ -103,7 +116,7 @@ def main():
         kod = ad(pano); l, css, js, g = B.sade_snippet(kod, pano, h, S.parcala)
         yaz('snippets/%s.liquid' % kod, l); SADE.append((h, kod, g))
         yaz('assets/%s.css' % kod, B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % kod, B.varlik_js(js, pano))
-    liste, css, js = B.pano_bolumleri('ay-ana', 'Ayluna-Anasayfa', S.parcala, 'ana', ''); bolum_yaz(liste)
+    liste, css, js = B.pano_bolumleri('ay-ana', 'Ayluna-Anasayfa', S.parcala, 'ana', '', HARITA.get('Ayluna-Anasayfa')); bolum_yaz(liste)
     yaz('assets/ay-ana.css', B.varlik_css(css, zemin(css))); yaz('assets/ay-ana.js', B.varlik_js(js, 'Ayluna-Anasayfa'))
     ANA_SABLON = B.sablon_json([d for d, _, _ in liste])
     yaz('sections/ayluna-uygulama.liquid', B.UYGULAMA_BOLUMU)

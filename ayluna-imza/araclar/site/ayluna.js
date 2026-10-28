@@ -28,6 +28,18 @@
   var HTMLNS = 'http://www.w3.org/1999/xhtml';
   // Tek dosya kipi (site-tek/index.html): bütün sayfalar tek dosyada, adres #sayfa ile değişir
   var TEK = !!window.AYLUNA_TEK;
+  // Blok içi görsel seçicileri (28 Eki, kullanıcı: "odası böyle görünecekteki görselleri de değiştirmek istiyorum ama sabit"): her blok
+  // seçilen görselleri <script class="ay-gorsel-esle"> içinde verir (tasarımdaki görselin kimliği → Shopify görseli); tasarım görselinin yerine geçer.
+  var BLOB0 = V.blob ? Object.assign({}, V.blob) : null;  // seçim temizlenirse tasarım görseline dönmek için
+  function gorselEsle() {
+    if (!SHOP) return;
+    if (BLOB0) V.blob = Object.assign({}, BLOB0);
+    var e = document.querySelectorAll('script.ay-gorsel-esle');
+    for (var i = 0; i < e.length; i++) {
+      try { var m = JSON.parse(e[i].textContent); Object.keys(m).forEach(function (k) { if (/^[0-9a-f]{32}$/.test(k) && m[k]) { V.blob = V.blob || {}; V.blob[k] = m[k]; } }); } catch (x) {}
+    }
+  }
+  gorselEsle();
   function gorsel(u) { return String(u || '').replace(/\/_blob\/([0-9a-f]{32})/g, function (m, i) { return (V.blob && V.blob[i]) || m; }); }
 
   /* ---------- 1. Şablon motoru ---------- */
@@ -710,7 +722,7 @@
       masaUst(); C = new Comp({}); ciz(); cubukKur(); videoKur();
       // Tema düzenleyici: bölüm eklenince, değişince, silinince ya da yeri değişince parçalar yeniden toplanır ve çizilir
       if (parcalar) ['shopify:section:load', 'shopify:section:unload', 'shopify:section:reorder'].forEach(function (ad) {
-        document.addEventListener(ad, function () { setTimeout(function () { var p = parcaTopla(); if (p) { parcalar = p; kok = p[0].k; planla(); setTimeout(function () { cubukKur(); videoKur(); }, 60); } }, 0); });
+        document.addEventListener(ad, function () { setTimeout(function () { gorselEsle(); var p = parcaTopla(); if (p) { parcalar = p; kok = p[0].k; planla(); setTimeout(function () { cubukKur(); videoKur(); }, 60); } }, 0); });
       });
       // Shopify: sayfadaki tasarım fiyatı mağaza fiyatından farklıysa uyar (yalnız tema düzenleyicide ve konsolda)
       if (SHOP && SAYFA === 'urun' && V.urun[URUN] && Math.abs((TUVAL_FIYAT[URUN] || 0) - V.urun[URUN].p) > 0.009) {

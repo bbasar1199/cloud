@@ -115,7 +115,7 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
       bolum: document.querySelectorAll('.shopify-section').length, dun: /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
   await pg.waitForTimeout(1500);
   const yk2 = await pg.evaluate(() => !!document.querySelector('#looxReviews .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent));
-  not(yk.loox && yk.sira && !yk.yer && yk.blok === 16 && yk.kok === 16 && yk.bolum === 5 && yk.dun && yk.kd && yk2, 'USB: 16 blok, Loox yorum bölümünde kendiliğinden, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  not(yk.loox && yk.sira && !yk.yer && yk.blok === 16 && yk.kok === 16 && yk.bolum === 7 && yk.dun && yk.kd && yk2, 'USB: 16 blok, Loox yorum bölümünde kendiliğinden, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
   // Yapışkan çubuk: paketler ve ana düğme ekrandayken çekilir, sonra geri gelir; 60 px
   const yp = await pg.evaluate(async () => { const y = document.querySelector('.ay-kok .yapis'), d = () => y.hasAttribute('data-ay-cekil');
     scrollTo(0, 0); await new Promise(r => setTimeout(r, 300)); const ust = d();
@@ -127,17 +127,20 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(2200);
   not(await pg.evaluate(() => /Dün 62 kişi/.test(document.querySelector('.ay-kok .dun').textContent)), 'LunaDream: ürün alanı boşsa tasarımdaki Dün sayısı kalır');
   const vd = await pg.evaluate(() => { const s = document.getElementById('videolar'), b = [...document.querySelectorAll('.ay-kok h2')].find(h => /Aileler/.test(h.textContent)), l = document.getElementById('looxReviews');
-    return { n: document.querySelectorAll('#videolar .ay-vid video').length, gor: !!s && getComputedStyle(s).display !== 'none', etiket: /\[video\]/.test(document.body.innerText),
+    const ney = [...document.querySelectorAll('.ay-kok h2')].find(h => /Neler/.test(h.textContent)), sp = document.getElementById('siparis');
+    return { n: document.querySelectorAll('#videolar .ay-vid video').length, foto: document.querySelectorAll('.ay-vb #videolar .ay-vb-foto img').length, gor: !!s && getComputedStyle(s).display !== 'none', etiket: /\[video\]/.test(document.body.innerText),
+      bolum: !!(s && s.closest('.ay-vb')), sira: !!(s && sp && ney && (sp.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING) && (s.compareDocumentPosition(ney) & Node.DOCUMENT_POSITION_FOLLOWING)),
+      secim: !!document.querySelector('.ay-tb[data-blok="p02"] img[src*="benzetim-secim"]'),
       loox: !!(l && b && (b.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING)), blok: document.querySelectorAll('.ay-tb').length,
       // Loox açıkken tasarımdaki yorum kartları, puan ve fotoğraflar gizli; müşteri mesajları görünür (bloğun ayarı)
       tasGizli: [...document.querySelectorAll('.y-tas, .y-puan')].every(x => getComputedStyle(x).display === 'none'), msj: [...document.querySelectorAll('.y-msj')].some(x => getComputedStyle(x).display !== 'none') }; });
   await pg.locator('#videolar .ay-vid').first().click({ force: true }).catch(() => {}); await pg.waitForTimeout(300);
   const ses = await pg.evaluate(() => { const v = document.querySelector('#videolar .ay-vid video'); return !!v && v.muted === false && v.hasAttribute('data-ay-oynuyor'); });
-  not(vd.n === 1 && vd.gor && !vd.etiket && ses && vd.loox && vd.blok === 12 && vd.tasGizli && vd.msj, 'LunaDream: 12 blok, ürün videosu oynar (sesli), [video] etiketi yok, Loox yorumlarda ' + JSON.stringify(vd) + ' ' + ses);
+  not(vd.n === 1 && vd.foto === 3 && vd.bolum && vd.sira && vd.gor && !vd.etiket && ses && vd.loox && vd.blok === 11 && vd.tasGizli && vd.msj && vd.secim, 'LunaDream: Videolar ayrı bölüm (satın almanın altında; 1 video sesli oynar, 3 kart tasarım fotoğrafı), 11 blok, blokta seçilen görsel tasarımdakinin yerinde, Loox yorumlarda ' + JSON.stringify(vd) + ' ' + ses);
   // Videosu olmayan ürün: video bölümü yok (sahte kapak gösterilmez) — AyFeneri'de video bölümü tasarımda yok; LunaDream'i medyasız denemek için
   // Galaksi Night ve sade ürün de kendi bloklarıyla açılır
   await pg.goto(K + '/products/ayluna-galaksi-night-projektor'); await pg.waitForTimeout(1500);
-  not(await pg.evaluate(() => document.querySelectorAll('.ay-tb').length === 15 && !!document.querySelector('.ay-kok .urun-ust .btn1') && !document.getElementById('kok')), 'Galaksi Night: varsayılan şablonda kendi 15 bloğu');
+  not(await pg.evaluate(() => document.querySelectorAll('.ay-tb').length === 15 && !!document.querySelector('.ay-kok .urun-ust .btn1') && !document.getElementById('kok') && !document.querySelector('.ay-vb')), 'Galaksi Night: varsayılan şablonda kendi 15 bloğu, LunaDream videoları yok');
   // Tema düzenleyici taklidi: blok ayarı değişince Shopify bölümü yeniden gönderir (shopify:section:load); sayfa yeni yazıyı çizer,
   // diğer bloklar ve sayfanın durumu bozulmaz. Blok silinince kalanlar çizilmeye devam eder.
   await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1500);

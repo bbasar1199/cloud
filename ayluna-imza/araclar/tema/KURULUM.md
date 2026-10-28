@@ -1,14 +1,14 @@
-# Ayluna teması 1.0.36 · kurulum
+# Ayluna teması 1.0.37 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.36.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.37.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme kartla ya da EasySell ile kapıda.
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.36.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.37.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
    Yayınlanmamış temayı denemek satışı etkilemez: müşteriler eski temayı görür, sipariş kaçmaz. Uygulamaları da (3. madde) yayınlamadan bu temanın düzenleyicisinde açıp önizlemede denersin.
 
-## 1b. Bölümler ve bloklar (1.0.36; şablon ataması gerekmez)
+## 1b. Bölümler ve bloklar (1.0.37; şablon ataması gerekmez)
 - Bütün ürünler **Varsayılan ürün** şablonunda kalır. Önceki sürümde anlatılan şablon atamasını yaptıysan geri al (ürün → Tema şablonu → Varsayılan ürün).
 - Özelleştir → üstten Ürünler → Varsayılan ürün → önizlemede ürünü seç (LunaDream, Galaxy USB, …). Solda o ürünün bölümü açılır:
   **LunaDream sayfası**, **Galaxy USB sayfası**, **AyFeneri sayfası**, **Galaksi Night sayfası**, **Diğer ürünler sayfası**. Her bölüm yalnız kendi
@@ -18,8 +18,8 @@ Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. �
 - Ana sayfa (Özelleştir → Ana sayfa) parça parça bölüm.
 - **Loox:** Loox'un uygulama yerleştirmesi (App embeds → Loox) açıkken yorumlar kendiliğinden tasarımın yorum bölümünde çıkar
   (LunaDream'de "Aileler ne diyor?", diğerlerinde "Alanlar ne diyor?" altında). Blok eklemen gerekmez; **ürün bölümüne ayrıca Loox bloğu ekleme**, iki kez görünür.
-- **Videolar (LunaDream):** ürünün kendi sayfasında (Ürünler → LunaDream → Medya) video yükle. Sayfadaki video bölümü ürünün videolarını gösterir:
-  ekrandayken sessiz döner, dokununca sesli ve tam ekran açılır. Ürünün videosu yoksa bölüm tasarımdaki fotoğraflarla görünür; video ekleyince fotoğrafların yerini alır. Ürüne yüklemek istemezsen: Özelleştir → LunaDream sayfası → "Işık kapanınca ne oluyor" bloğu → Video 1-4. Videonun "alternatif metni" başlık olur.
+- **Videolar:** ayrı bir bölüm ("Videolar"). LunaDream sayfasında satın alma kutusunun altında hazır gelir. Özelleştir → soldaki "Videolar" → bir karta tıkla → **Video** seç ya da yükle, istersen **Kapak görseli** seç, başlığı yaz. "Blok ekle → Video" ile yeni kart eklenir, kartlar sürüklenir. Video yoksa kapak görseli, o da yoksa tasarım fotoğrafı görünür. Başka bir sayfaya da "Bölüm ekle → Videolar" ile eklenir; "Yalnız bu ürünün sayfasında göster" seçilirse yalnız o üründe çıkar.
+- **Görselleri değiştirmek:** her bloğun ayarında görseller var. Sayfada yazılı görseller "Görsel N", sayfanın kendisinin çizdiği görseller (Odası böyle görünecek, diskler, müşteri mesajları, ana sayfa slaytı…) "Bölümdeki görseller" başlığı altında. Boş bırakılan görselde tasarımdaki kalır.
 - **Galeri:** ürün galerileri Shopify'daki ürün görsellerinden gelir (ürüne görsel ekle/sırala, sayfa aynen gösterir).
   Tema ayarları → Ayluna → "Ürün galerisi Shopify'daki ürün görsellerinden gelsin" kapatılırsa tasarımdaki galeri kullanılır.
 

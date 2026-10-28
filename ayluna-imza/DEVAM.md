@@ -475,7 +475,13 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.35: EasySell seçimi, canlı denetim düzeltmeleri (28 Ekim, en güncel)
+## Tema 1.0.36-1.0.37: 404 düzeltmesi, Videolar bölümü, görsel seçiciler (28 Ekim, en güncel)
+- 1.0.35 yüklenince bütün ürün sayfaları 404: video bloğunda 4 ayarın varsayılanı boştu (`"default": ""`), Shopify LunaDream bölümünü reddetti. 1.0.36 düzeltir; `araclar/tema/sema_denetim.py` zip'ten önce yükleme kurallarını denetler.
+- 1.0.37: `sections/ay-videolar.liquid` (Liquid ile çizilen bağımsız bölüm; kart = `video` bloğu: video, kapak görseli, başlık, alt yazı; ayar `urun` ile ürüne sınırlanır, `tasarim`/`tasarim_gorsel` görsel seçilmeyen kartta tasarım fotoğrafı). LunaDream sayfası video noktasında ikiye bölündü: `ay-lunadream` (p01-p02) → `lunadream-video` → `ay-lunadream-2` (p04-p12). `bolumler.urun_sayfasi` artık bölüm listesi döndürür; `urun_sablonu` bölüm/blok ayarı alır.
+- JS görselleri: `araclar/tema/gorsel_harita.js` benzetimde (BENZETIM_MEDYA dört ürün, ayrı port) her bloğu açıp düğmelere basarak görselleri toplar → `araclar/tema/gorsel-harita.json`; `bolumler.gorsel_secici` blok/bölüm ayarına `d1…` görsel seçici ve `<script class="ay-gorsel-esle">` ekler; `ayluna.js gorselEsle()` V.blob'u değiştirir (düzenleyicide yeniden yüklemede sıfırdan). Ürün kartları ve galeri Shopify'dan geldiği için haritada yok. Sade ürün sayfalarında görsel seçici yok (bloklar 11 ürünün ortak bloğu).
+- Benzetim: `BENZETIM_DSEC` (ilk d1 dolu), Videolar bölümünün ilk kartında video (`BENZETIM_VIDEO`), ürün ayarı handle → nesne. Testler: tema HEPSİ TAMAM, site 179 TAMAM, Theme Check yalnız RemoteAsset.
+
+## Tema 1.0.35: EasySell seçimi, canlı denetim düzeltmeleri (28 Ekim)
 - Canlı denetim (ayluna.shop, 1.0.34; 440 px ve 1440 px, izleyiciler engelli, sipariş verilmedi): JS hatası yok.
 - EasySell (kullanıcı kapıda ödemeyi EasySell ile yeniden açtı): `ES_GET_VARIANT_ID` gizli formdan okuyup `/cart/update.js` ile ekliyordu; önceki model sepette kalıyor, karışık 2'li pakette iki Erkek gidiyordu. Çözüm: `formEsitle` → `window.pmpr_cart_item` = `kalemler(seçim)`; EasySell'in paket uygulaması kancası (`getBundlesAppUpdates`) sepeti boşaltıp yalnız bunları ekler. Form adedi ilk kalemin adedi; `properties[_paket]` eklendi. EasySell düğmesi gizli forma düşerse yuvaya (`[data-ay-dis]`) taşınır; `#es-sticky` varsa `html.ay-es-yapis` ile bizim `.yapis` gizli.
 - Sade sayfalar bozuktu: blok sarmalayıcısı `ay-blok` ana sayfa tasarımının sınıfıydı → `ay-tb`.

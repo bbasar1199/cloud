@@ -448,3 +448,24 @@ html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
 /* Yorum bloğu ayarları (28 Eki): Loox açıkken tasarımdaki yorum kartları, puan ve fotoğraflar kapalı; müşteri mesajları ayrıca kapatılabilir */
 .ay-ytasarimsiz .y-tas,.ay-ytasarimsiz .y-puan{display:none!important}
 .ay-ymsjsiz .y-msj{display:none!important}
+/* Videolar bölümü (28 Eki; Shopify'da bağımsız bölüm, kartlar blok): tasarımdaki video şeridinin görünüşü her sayfada aynı */
+.ay-vb{background:var(--ay-zemin,#fff);color:#1A2142}
+.ay-vb .bolum{padding-top:36px;padding-bottom:8px}
+.ay-vb .px{padding-left:16px;padding-right:16px}
+.ay-vb .h2{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.15;letter-spacing:-.02em}
+.ay-vb .h2 .n{color:#F2A65A}
+.ay-vb-alt{margin:6px 0 0;font-size:14px;color:#5C6078}
+.ay-vb-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 0;scrollbar-width:none}
+.ay-vb-serit::-webkit-scrollbar{display:none}
+.ay-vb .vid{position:relative;flex:0 0 172px;height:306px;scroll-snap-align:start;padding:0;border:0;border-radius:20px;overflow:hidden;background:#1A2142;cursor:pointer;color:#FFFDF9;text-align:left;font:inherit}
+.ay-vb .vid img,.ay-vb .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ay-vb .vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,16,39,.88) 0,rgba(12,16,39,0) 52%)}
+.ay-vb .vid-oyna{position:absolute;left:50%;top:42%;z-index:1;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,249,.94);box-shadow:0 6px 16px rgba(12,16,39,.35)}
+.ay-vb .vid-oyna svg{width:22px;height:22px;fill:#1A2142;margin-left:3px}
+.ay-vb .vid[data-ay-oynuyor] .vid-oyna,.ay-vb .vid:has(video[data-ay-oynuyor]) .vid-oyna{opacity:0}
+.ay-vb .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
+.ay-vb .vid-alt b{font-size:14px}
+.ay-vb .vid-alt span{font-size:13px;color:#B9BED6}
+.ay-vb-foto{cursor:default!important}
+.ay-vb-bos{background:repeating-linear-gradient(45deg,#1A2142 0 10px,#232B52 10px 20px)!important}
+@media (min-width:1024px){.ay-vb .bolum{max-width:760px;margin:0 auto;padding-top:56px}.ay-vb .px,.ay-vb-serit{padding-left:0;padding-right:0}.ay-vb .h2{font-size:30px}.ay-vb-serit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;overflow:visible}.ay-vb .vid{height:auto;aspect-ratio:9/16}.ay-vb-serit>span[aria-hidden]{display:none}}

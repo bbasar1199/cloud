@@ -198,14 +198,17 @@ def sema(ad, ayar, bloklar=None):
     return '\n{% schema %}\n' + json.dumps(s, ensure_ascii=False, indent=2) + '\n{% endschema %}\n'
 
 
-def pano_bolumleri(kod, pano, parcala, tur, urun):
-    """Parça başına bir bölüm (ana sayfa): [(dosya_adi, etiket, liquid)]. kod: varlık adı (ay-ana)."""
+def pano_bolumleri(kod, pano, parcala, tur, urun, harita=None):
+    """Parça başına bir bölüm (ana sayfa): [(dosya_adi, etiket, liquid)]. kod: varlık adı (ay-ana). harita: {'b01': [(blob, etiket)]}."""
     fontlar, css, govde, js = parcala(pano)
     acilis, ogeler = ust_cocuklar(govde)
     cikti = []
     for n, (gt, et, h) in enumerate(grupla(ogeler), 1):
         dosya = '%s-%02d' % (kod, n)
         tpl, ayar = parca_html(acilis, h, True)
+        statik = set(m.group(2)[7:] for m in GORSEL.finditer(h))
+        d_ayar, d_esle = gorsel_secici([x for x in (harita or {}).get('b%02d' % n) or [] if x[0] not in statik], len([a for a in ayar if a['type'] == 'image_picker']), 'section')
+        ayar = ayar + d_ayar; tpl = d_esle + tpl
         govdeL = ('{%- comment -%} Ayluna · ' + pano + ' · ' + et + '. araclar/tema/tema_uret.py üretir; elle düzenlenmez (yazı ve görseller bölüm ayarından). {%- endcomment -%}\n'
                   + varliklar(kod, fontlar) + yorum_sar(h, tpl + '\n' + kok(tur, urun)))
         if gt == 'satin':
@@ -273,20 +276,6 @@ YORUM_AYAR = [
     {'type': 'checkbox', 'id': 'mesajlar', 'label': 'Müşteri mesajları (WhatsApp ekran görüntüleri)', 'default': True},
     {'type': 'checkbox', 'id': 'tasarim_yorum', 'label': 'Tasarımdaki yorum kartları, puan ve müşteri fotoğrafları', 'default': False,
      'info': 'Loox yorumları bu bölümde kendiliğinden görünür. Bunu açarsan yorumlar iki kez görünür; Loox kapalıysa aç.'}]
-# Video bloğu (28 Eki, kullanıcı: "videolar görünmüyor"): videolar bloğun ayarından seçilir (İçerik → Dosyalar'daki videolar);
-# seçilmezse ürünün medyasındaki videolar; hiç video yoksa blok sayfada görünmez (düzenleyicide nasıl ekleneceği yazar).
-VIDEO_SAYI = 4
-VIDEO_AYAR = [{'type': 'paragraph', 'content': 'Videoyu seç; başlık videonun altında yazar. Video seçilmezse ürünün medyasındaki videolar gösterilir. Hiç video yoksa bu bölüm sayfada görünmez.'}]
-for _k in range(1, VIDEO_SAYI + 1):
-    VIDEO_AYAR += [{'type': 'video', 'id': 'v%d' % _k, 'label': 'Video %d' % _k},
-                   {'type': 'text', 'id': 'v%d_baslik' % _k, 'label': 'Video %d başlığı' % _k}]  # boş varsayılan yazılmaz: Shopify bölümü reddeder (28 Eki, 1.0.35 ürün sayfaları 404)
-VIDEO_VERI = ('<script type="application/json" class="ay-vid-veri">[' + ','.join(
-    "{%%- if block.settings.v%d -%%}{%%- assign ay_k = block.settings.v%d.sources | where: 'format', 'mp4' | last -%%}"
-    "{\"src\": {{ ay_k.url | json }}, \"poster\": {{ block.settings.v%d.preview_image | image_url: width: 600 | json }}, \"alt\": {{ block.settings.v%d_baslik | json }}}"
-    "{%%- else -%%}null{%%- endif -%%}" % (k, k, k, k) for k in range(1, VIDEO_SAYI + 1)) + ']</script>'
-    '{%- if request.design_mode -%}<p class="ay-vid-not ay-vid-ipucu">Videolar: bu bloğa tıkla, sağda "Video 1…4" seç. Ürünün medyasına yüklediğin videolar da burada çıkar. Video yoksa bu bölüm müşteriye görünmez.</p>{%- endif -%}')
-
-
 # Videolar bölümü (28 Eki, kullanıcı: "hala videolar görünmüyor, orayı section olarak ekle, ben içeriden seçebileyim görselleri de
 # videoları da; bu özellik hep olmalı"): tasarımın "Işık kapanınca ne oluyor?" şeridi bağımsız, Liquid ile çizilen bir bölüm. Her kart bir
 # blok: video (İçerik → Dosyalar ya da yükle), kapak görseli, başlık, alt yazı. Kart ekle/sil/sırala düzenleyiciden. Video yoksa kapak
@@ -295,17 +284,17 @@ VIDEO_VERI = ('<script type="application/json" class="ay-vid-veri">[' + ','.join
 VIDEO_BOLUMU = """{%- comment -%} Ayluna · Videolar bölümü (araclar/tema/bolumler.py üretir). Kartlar blok: video, kapak görseli, başlık. {%- endcomment -%}
 {%- liquid
   assign ay_goster = true
-  if section.settings.urun != blank
-    if product == blank or product.handle != section.settings.urun.handle
+  if section.settings.urun
+    if product == nil or product.handle != section.settings.urun.handle
       assign ay_goster = false
     endif
   endif
   assign ay_tasarim = section.settings.tasarim_gorsel | split: ','
   assign ay_kart = 0
   for block in section.blocks
-    if block.settings.video != blank or block.settings.gorsel != blank
+    if block.settings.video or block.settings.gorsel
       assign ay_kart = ay_kart | plus: 1
-    elsif section.settings.tasarim and ay_tasarim[forloop.index0] != blank
+    elsif section.settings.tasarim and ay_tasarim[forloop.index0].size > 0
       assign ay_kart = ay_kart | plus: 1
     endif
   endfor
@@ -313,29 +302,29 @@ VIDEO_BOLUMU = """{%- comment -%} Ayluna · Videolar bölümü (araclar/tema/bol
 {%- if ay_goster -%}
 {%- if ay_kart > 0 or request.design_mode -%}
 <div class="pg ay-vb"><section class="bolum" id="videolar">
-  {%- if section.settings.baslik != blank -%}<div class="px"><h2 class="h2">{{ section.settings.baslik | escape }}<span class="n">?</span></h2></div>{%- endif -%}
-  {%- if section.settings.alt != blank -%}<div class="px"><p class="ay-vb-alt">{{ section.settings.alt | escape }}</p></div>{%- endif -%}
+  {%- if section.settings.baslik != nil and section.settings.baslik != '' -%}<div class="px"><h2 class="h2">{{ section.settings.baslik | escape }}<span class="n">?</span></h2></div>{%- endif -%}
+  {%- if section.settings.alt != nil and section.settings.alt != '' -%}<div class="px"><p class="ay-vb-alt">{{ section.settings.alt | escape }}</p></div>{%- endif -%}
   <div class="noscroll ay-vb-serit">
     {%- for block in section.blocks -%}
       {%- liquid
         assign ay_v = block.settings.video
         assign ay_g = block.settings.gorsel
         assign ay_d = ''
-        if ay_g == blank and section.settings.tasarim and ay_tasarim[forloop.index0] != blank
+        if ay_g == nil and section.settings.tasarim and ay_tasarim[forloop.index0].size > 0
           assign ay_d = ay_tasarim[forloop.index0] | strip | asset_url
         endif
       -%}
-      {%- if ay_v != blank -%}
+      {%- if ay_v -%}
         <button class="vid ay-vid" type="button" aria-label="{{ block.settings.baslik | default: 'Video' | escape }}: videoyu oynat" {{ block.shopify_attributes }}>
-          <video muted loop playsinline preload="metadata" poster="{% if ay_g != blank %}{{ ay_g | image_url: width: 600 }}{% elsif ay_v.preview_image %}{{ ay_v.preview_image | image_url: width: 600 }}{% endif %}">
+          <video muted loop playsinline preload="metadata" poster="{% if ay_g %}{{ ay_g | image_url: width: 600 }}{% elsif ay_v.preview_image %}{{ ay_v.preview_image | image_url: width: 600 }}{% endif %}">
             {%- for s in ay_v.sources -%}{%- if s.format == 'mp4' -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endif -%}{%- endfor -%}
           </video>
           <span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span>
           <span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span>
         </button>
-      {%- elsif ay_g != blank or ay_d != '' -%}
+      {%- elsif ay_g or ay_d != '' -%}
         <div class="vid ay-vb-foto" {{ block.shopify_attributes }}>
-          {%- if ay_g != blank -%}{{ ay_g | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.baslik }}{%- else -%}<img src="{{ ay_d }}" alt="{{ block.settings.baslik | escape }}" loading="lazy" width="600" height="1067">{%- endif -%}
+          {%- if ay_g -%}{{ ay_g | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.baslik }}{%- else -%}<img src="{{ ay_d }}" alt="{{ block.settings.baslik | escape }}" loading="lazy" width="600" height="1067">{%- endif -%}
           <span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span>
         </div>
       {%- elsif request.design_mode -%}
@@ -371,33 +360,61 @@ def video_bolumu():
     return VIDEO_BOLUMU + '\n{% schema %}\n' + json.dumps(VIDEO_SEMA, ensure_ascii=False, indent=2) + '\n{% endschema %}\n'
 
 
-def urun_sayfasi(kod, pano, handle, ad_bolum, parcala):
-    """Özel ürünün sayfa bölümü: (liquid, css, js, blok_turleri)."""
+def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
+    """Özel ürünün sayfa bölümleri: ([(ek, ad, liquid, blok_turleri)], css, js, video_sirasi).
+    Tasarımda video şeridi varsa sayfa orada ikiye bölünür; araya bağımsız Videolar bölümü (ay-videolar) girer (video_sirasi: kaçıncı
+    bölümden sonra; yoksa None). harita: {blok türü: [(blob, etiket)]} JS ile çizilen görseller için blok içi görsel seçicileri."""
     fontlar, css, govde, js = parcala(pano)
     acilis, ogeler = ust_cocuklar(govde)
     gruplar = grupla(ogeler); ly = yorum_parcasi(gruplar)
-    bloklar, vakalar = [], ''
-    for n, (gt, et, h) in enumerate(gruplar):
-        tip = 'p%02d' % (n + 1)
-        p, ayar = ayarla(h, kaynak='block')
-        tpl = '<template class="ay-parca">' + liquid([(True, acilis)] + p + [(True, '</div>')]) + '</template>'
-        sinif, ek = 'ay-tb', ''  # tema bloğu sarmalayıcısı; tasarımdaki sınıflarla çakışmayan ad (28 Eki: 'ay-blok' ana sayfa tasarımının sınıfıydı, sade sayfaları bozuyordu)
-        if 'y-tas' in h or 'y-msj' in h:
-            ayar = YORUM_AYAR + ayar
-            sinif += "{% unless block.settings.tasarim_yorum %} ay-ytasarimsiz{% endunless %}{% unless block.settings.mesajlar %} ay-ymsjsiz{% endunless %}"
-        if gt == 'video':
-            ayar = VIDEO_AYAR + ayar; ek = VIDEO_VERI
-        vakalar += ("  {%- when '" + tip + "' -%}<div class=\"" + sinif + "\" {{ block.shopify_attributes }}>" + ek + tpl + kok('urun', handle)
-                    + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
-        bloklar.append({'type': tip, 'name': et, 'limit': 1, 'settings': ayar})
-    l = ('{%- comment -%} Ayluna · ' + ad_bolum + '. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.\n'
-         '  araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız ' + handle + ' ürününde çizilir. {%- endcomment -%}\n'
-         "{%- if product.handle == '" + handle + "' -%}\n" + varliklar(kod, fontlar)
-         + '{%- for block in section.blocks -%}{%- case block.type -%}\n' + vakalar
-         + "  {%- when '@app' -%}<div class=\"ay-uyg\" {{ block.shopify_attributes }}>{% render block %}</div>\n{%- endcase -%}{%- endfor -%}\n"
-         + URUN_FORMU + betik(kod) + '{%- endif -%}\n')
-    s = {'name': ad_bolum, 'class': 'ay-bolum', 'settings': [], 'blocks': bloklar + [{'type': '@app'}]}
-    return l + '\n{% schema %}\n' + json.dumps(s, ensure_ascii=False, indent=2) + '\n{% endschema %}\n', css, js, [b['type'] for b in bloklar]
+    kumeler, video_sirasi = [[]], None
+    for n, g in enumerate(gruplar):
+        if g[0] == 'video': video_sirasi = len(kumeler) - 1; kumeler.append([]); continue
+        kumeler[-1].append((n, g))
+    kumeler = [k for k in kumeler if k]
+    cikti = []
+    for ki, kume in enumerate(kumeler):
+        bloklar, vakalar, satin = [], '', False
+        for n, (gt, et, h) in kume:
+            tip = 'p%02d' % (n + 1)
+            p, ayar = ayarla(h, kaynak='block')
+            tpl = '<template class="ay-parca">' + liquid([(True, acilis)] + p + [(True, '</div>')]) + '</template>'
+            sinif, ek = 'ay-tb', ''  # tema bloğu sarmalayıcısı; tasarımdaki sınıflarla çakışmayan ad (28 Eki: 'ay-blok' ana sayfa tasarımının sınıfıydı, sade sayfaları bozuyordu)
+            if gt == 'satin': satin = True
+            if 'y-tas' in h or 'y-msj' in h:
+                ayar = YORUM_AYAR + ayar
+                sinif += "{% unless block.settings.tasarim_yorum %} ay-ytasarimsiz{% endunless %}{% unless block.settings.mesajlar %} ay-ymsjsiz{% endunless %}"
+            statik = set(m.group(2)[7:] for m in GORSEL.finditer(h))  # yazılı görsellerin seçicisi zaten var (g…)
+            d_ayar, d_esle = gorsel_secici([x for x in (harita or {}).get(tip) or [] if x[0] not in statik], len([a for a in ayar if a['type'] == 'image_picker']))
+            ayar = ayar + d_ayar; ek += d_esle
+            vakalar += ("  {%- when '" + tip + "' -%}<div class=\"" + sinif + "\" {{ block.shopify_attributes }}>" + ek + tpl + kok('urun', handle)
+                        + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
+            bloklar.append({'type': tip, 'name': et, 'limit': 1, 'settings': ayar})
+        ad = ad_bolum if ki == 0 else kisalt(ad_bolum + ' (devam)', 25)
+        l = ('{%- comment -%} Ayluna · ' + ad + '. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.\n'
+             '  araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız ' + handle + ' ürününde çizilir. {%- endcomment -%}\n'
+             "{%- if product.handle == '" + handle + "' -%}\n" + varliklar(kod, fontlar)
+             + '{%- for block in section.blocks -%}{%- case block.type -%}\n' + vakalar
+             + "  {%- when '@app' -%}<div class=\"ay-uyg\" {{ block.shopify_attributes }}>{% render block %}</div>\n{%- endcase -%}{%- endfor -%}\n"
+             + (URUN_FORMU if satin else '') + betik(kod) + '{%- endif -%}\n')
+        sm = {'name': ad, 'class': 'ay-bolum', 'settings': [], 'blocks': bloklar + [{'type': '@app'}]}
+        cikti.append(('' if ki == 0 else '-%d' % (ki + 1), ad,
+                      l + '\n{% schema %}\n' + json.dumps(sm, ensure_ascii=False, indent=2) + '\n{% endschema %}\n', [b['type'] for b in bloklar]))
+    return cikti, css, js, video_sirasi
+
+
+def gorsel_secici(liste, var_olan=0, kaynak='block'):
+    """JS ile çizilen görseller (28 Eki, kullanıcı: "odası böyle görünecekteki görselleri de değiştirmek istiyorum ama sabit, değişemiyorum"):
+    her görsel için bloğun ayarında bir görsel seçici (d1…). Seçilen görsel, ayluna.js'te tasarımdaki görselin (blob kimliği) yerine geçer.
+    → (ayarlar, eşleme betiği)."""
+    if not liste: return [], ''
+    ayar = [{'type': 'header', 'content': 'Bölümdeki görseller'},
+             {'type': 'paragraph', 'content': 'Değiştirmek istediğin görseli seç; boş bırakırsan tasarımdaki görsel kalır.'}]
+    parca = []
+    for k, (blob, et) in enumerate(liste, 1):
+        ayar.append({'type': 'image_picker', 'id': 'd%d' % k, 'label': kisalt('Görsel %d%s' % (var_olan + k, (': ' + et) if et else ''), 60)})
+        parca.append('{%%- if %s.settings.d%d -%%},%s:{{ %s.settings.d%d | image_url: width: 1600 | json }}{%%- endif -%%}' % (kaynak, k, json.dumps(blob), kaynak, k))
+    return ayar, '<script type="application/json" class="ay-gorsel-esle">{"_":0' + ''.join(parca) + '}</script>'
 
 
 def sade_snippet(kod, pano, handle, parcala):
@@ -436,8 +453,14 @@ def sade_sayfasi(sade, ozel, genel):
 
 
 def urun_sablonu(bolumler):
-    """product.json: [(kimlik, bölüm türü, blok türleri)] → bölümler ve blokları sırasıyla."""
+    """product.json: [(kimlik, bölüm türü, bloklar[, bölüm ayarları])]; blok = tür adı ya da (kimlik, tür, ayarlar)."""
     s = {}
-    for kim, tur, bl in bolumler:
-        s[kim] = {'type': tur, 'blocks': {b: {'type': b} for b in bl}, 'block_order': list(bl)}
-    return json.dumps({'sections': s, 'order': [k for k, _, _ in bolumler]}, ensure_ascii=False, indent=2) + '\n'
+    for b in bolumler:
+        kim, tur, bl = b[:3]
+        bloklar, sira = {}, []
+        for x in bl:
+            if isinstance(x, str): bloklar[x] = {'type': x}; sira.append(x)
+            else: bloklar[x[0]] = {'type': x[1], 'settings': x[2]}; sira.append(x[0])
+        s[kim] = {'type': tur, 'blocks': bloklar, 'block_order': sira}
+        if len(b) > 3: s[kim]['settings'] = b[3]
+    return json.dumps({'sections': s, 'order': [b[0] for b in bolumler]}, ensure_ascii=False, indent=2) + '\n'

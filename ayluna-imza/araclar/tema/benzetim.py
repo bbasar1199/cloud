@@ -17,6 +17,8 @@ ELLE = json.loads(os.environ.get('BENZETIM_ELLE', '{}'))  # {"handle": {"dun": n
 LOOX = [h for h in os.environ.get('BENZETIM_LOOX', '').split(',') if h]  # bu ürünlerde yorum bölümüne eklenmiş Loox uygulama bloğu taklidi
 VARSAYILAN = [h for h in os.environ.get('BENZETIM_VARSAYILAN', '').split(',') if h]  # kendi şablonuna atanmamış özel ürün denemesi
 MEDYA = [h for h in os.environ.get('BENZETIM_MEDYA', '').split(',') if h]  # bu ürünlerde galeri Shopify ürün görsellerinden (#ay-medya)
+DSEC = [h for h in os.environ.get('BENZETIM_DSEC', '').split(',') if h]  # bu ürünlerde JS görsellerinin ilk seçicisi dolu
+DSEC_OLDU = []
 VIDEO = [h for h in os.environ.get('BENZETIM_VIDEO', '').split(',') if h]  # bu ürünlerin video bölümüne bir video bloğu eklenmiş gibi
 CANLI, VARYANT = {}, {}
 for p in URUNLER:
@@ -114,6 +116,7 @@ def urun_baglam(h):
 
 
 def sablon_ciz(ad, h):
+    del DSEC_OLDU[:]
     t = json.load(open(os.path.join(TEMA, 'templates', ad + '.json'), encoding='utf-8'))
     urun = urun_baglam(h) if h else None
     out = []
@@ -128,13 +131,17 @@ def sablon_ciz(ad, h):
         if b.get('disabled'): continue
         kaynak, sema = bolum_sema(b['type'])
         ayar = dict((x['id'], x.get('default')) for x in sema.get('settings', []) if 'id' in x); ayar.update(b.get('settings') or {})
+        for x in sema.get('settings', []):  # ürün ayarı: şablonda handle yazılı, Liquid'de ürün nesnesi
+            if x.get('type') == 'product' and isinstance(ayar.get(x['id']), str): ayar[x['id']] = dict(handle=ayar[x['id']])
         bloklar, bsema = [], dict((x['type'], x) for x in sema.get('blocks', []))
         for bk in (b.get('block_order') or []):
             bb = b['blocks'][bk]
             if bb.get('disabled'): continue
             ba = dict((x['id'], x.get('default')) for x in bsema.get(bb['type'], {}).get('settings', []) if 'id' in x); ba.update(bb.get('settings') or {})
-            if h in VIDEO and 'v1' in ba:  # video bloğunda Video 1 seçilmiş gibi
-                ba['v1'] = dict(sources=[dict(format='mp4', url='/assets/benzetim.mp4')], preview_image=dict(src='')); ba['v1_baslik'] = 'Bir müşterimizin akşamı'
+            if h in VIDEO and b['type'] == 'ay-videolar' and bk == b['block_order'][0]:  # Videolar bölümünün ilk kartında video seçilmiş gibi
+                ba['video'] = dict(sources=[dict(format='mp4', url='/assets/benzetim.mp4', mime_type='video/mp4')], preview_image=dict(src=''))
+            if h in DSEC and 'd1' in ba and not DSEC_OLDU:  # JS görsellerinden ilkine görsel seçilmiş gibi (görsel seçici denemesi)
+                ba['d1'] = dict(src='https://cdn.shopify.com/s/files/benzetim-secim.jpg'); DSEC_OLDU.append(bk)
             bloklar.append(dict(id=bk, type=bb['type'], settings=ba, shopify_attributes='data-blok="%s"' % bk, html=bb.get('html', '')))
         html = LQ.from_string(lq_hazirla(kaynak)).render(section=dict(id=kim, settings=ayar, blocks=bloklar), product=urun, request=dict(design_mode=False),
                                                          settings=dict(galeri_urun=True))
