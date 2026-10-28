@@ -1199,3 +1199,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 ## Yılbaşı ağacı · ikna turu (28 Eki)
 - Eleştirmen ikna denetimi; dürüst olanlar uygulandı (sıra, tekrar budama, "Hediye için" kurdelesi, mesaj başlığı). Tema 1.0.39. Ekran: `onizleme/yilbasi-yon/imza-sayfa-v9.jpg`.
 - Açık sorular: üst günlük sayaç mı ay sonu sayacı mı (ikisi çakışıyor); boyut [X] cm; gerçek fiyat + karşılaştırma + 2 adet fiyatı; disk sayısı; karanlık oda tavan videosu; "Kartla %5" sitenin geri kalanından kalksın mı.
+- 29 Eki: yılbaşı özellik kartları LunaDream Sihirli kurgusunda yeniden (ikon + canlı mini arayüz). Tema 1.0.40.

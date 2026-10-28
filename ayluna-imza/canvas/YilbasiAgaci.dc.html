@@ -766,37 +766,78 @@ html:has(.pg .yapis){scroll-padding-bottom:72px}
 .vid-oyna svg{width:22px;height:22px;fill:#123A2A;margin-left:3px}
 .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
 .vid-alt b{font-size:14px}.vid-alt span{font-size:13px;color:#E9DDBF}
-/* 6. tur (28 Eki, kullanıcı: "emoji benefit kısmını LunaDream'den al, bu ürüne özel yap"): LunaDream "Sihirli özellikler" kurumsal kart dili
-   (2×2 beyaz kart, solda 28 px çalışan gösterge, başlık + tek satır). Göstergeler ürüne özel; yalnız transform/opacity. */
-.ozb{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B5246}
-.yo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
-.yo-k{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;background:#FFFDFB;border:1px solid #EAD6C8;color:#123A2A;text-decoration:none}
+/* Özellik kartları (29 Eki, kullanıcı: "emoji benefit LunaDream gibi düzgün ve iyi animasyonlarla olsun"): LunaDream "Sihirli özellikler"
+   ile aynı kurgu. Her kartta 28 px'lik iki parçalı gösterge: ürünün ikonu + yanında çalışan küçük arayüz (adım çubukları, disk dizisi,
+   fiş → akış → yanan ağaç, açılan kutu). 6 sn'lik tek döngü, kartlar 0,6 sn arayla; yalnız transform/opacity; başlık + iki satır. */
+.ozb{margin:22px 0 0;font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B5246}
+.yo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.yo-k{display:flex;flex-direction:column;gap:12px;padding:14px 12px 14px;border-radius:20px;background:#FFFDFB;border:1px solid #EAD6C8;color:#123A2A;text-decoration:none;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+a.yo-k:active{transform:scale(.985)}
 .yo-k:nth-child(2){--gec:.6s}.yo-k:nth-child(3){--gec:1.2s}.yo-k:nth-child(4){--gec:1.8s}
-.yo-k b{display:block;font-size:14px;font-weight:600;line-height:1.25}
-.yo-k .t{display:block;margin-top:2px;font-size:13px;line-height:1.4;color:#6B5246}
-.yo-k u{color:#8C5E10;text-underline-offset:3px;white-space:nowrap}
-.yg{display:flex;align-items:center;gap:6px;height:28px}
-.yg svg{height:28px;overflow:visible;fill:none;stroke:#123A2A;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-/* Kendin kur: ağaca süs sırayla sarılır */
-.yg-agac .s{stroke:#C99A3A;stroke-width:2;opacity:0;animation:ygs 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(var(--gec,0s) + var(--d))}
-@keyframes ygs{0%,8%{opacity:0}18%,80%{opacity:1}92%,100%{opacity:0}}
-.yg-agac .yz{fill:#F3C978;stroke:none;transform-origin:14px 3px;animation:ygy 6s ease-in-out infinite;animation-delay:var(--gec,0s)}
-@keyframes ygy{0%,40%{opacity:.25;transform:scale(.6)}55%,85%{opacity:1;transform:none}100%{opacity:.25;transform:scale(.6)}}
-/* Değişen desenler: üç disk, ortadaki yavaşça döner */
-.yg-disk img{width:26px;height:26px;margin-left:-8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFDFB}
-.yg-disk img:first-child{margin-left:0}
-.yg-disk img:nth-child(2){animation:ygd 9s linear infinite}
-@keyframes ygd{to{transform:rotate(360deg)}}
-/* USB ile yanar: fiş yuvaya girer, ağaç ışıldar */
-.yg-usb .fis{animation:ygf 5s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
-@keyframes ygf{0%,15%{transform:translateX(-6px)}35%,85%{transform:none}100%{transform:translateX(-6px)}}
-.yg-usb .hal{fill:#F3C978;stroke:none;opacity:0;animation:ygh 5s ease-in-out infinite;animation-delay:var(--gec,0s)}
-@keyframes ygh{0%,35%{opacity:0}50%,85%{opacity:.55}100%{opacity:0}}
-/* Hediye kutusunda: kapak hafifçe kalkar, ışık sızar */
-.yg-kutu .kap{animation:ygk 5s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
-@keyframes ygk{0%,20%,90%,100%{transform:none}40%,75%{transform:translateY(-4px) rotate(-6deg)}}
-.yg-kutu .isk{fill:#F3C978;stroke:none;opacity:0;animation:ygi 5s ease-in-out infinite;animation-delay:var(--gec,0s)}
-@keyframes ygi{0%,30%,90%,100%{opacity:0}45%,75%{opacity:.9}}
+.yo-k b{display:block;font-size:15px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.yo-k .t{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:#6B5246}
+.yo-k u{color:#8C5E10;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
+.yg{display:flex;align-items:center;gap:8px;height:28px}
+.yg svg{flex:none;height:28px;width:auto;overflow:visible;fill:none;stroke:#123A2A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.yg *{animation-duration:6s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,.7,.2,1);animation-fill-mode:both}
+/* 1 · Kendin kur: dört adım çubuğu sırayla dolar (Sar, Süsle, Tak, Yansıt); ağaca süs sarılır, sonda tepe yıldızı yanar */
+.yg-agac .s{stroke:#C99A3A;stroke-width:1.8;opacity:0}
+.yg-agac .s1{animation-name:yga1}.yg-agac .s2{animation-name:yga2}.yg-agac .s3{animation-name:yga3}
+@keyframes yga1{0%,10%{opacity:0}16%,92%{opacity:1}100%{opacity:0}}
+@keyframes yga2{0%,30%{opacity:0}36%,92%{opacity:1}100%{opacity:0}}
+@keyframes yga3{0%,50%{opacity:0}56%,92%{opacity:1}100%{opacity:0}}
+.yg-agac .yz{fill:#E3B65A;stroke:none;transform-box:fill-box;transform-origin:center;animation-name:ygyz}
+@keyframes ygyz{0%,66%{opacity:.2;transform:scale(.5)}72%,92%{opacity:1;transform:none}100%{opacity:.2;transform:scale(.5)}}
+.adm{display:flex;gap:3px}
+.adm i{width:9px;height:4px;border-radius:2px;background:#123A2A;opacity:.14}
+.adm i:nth-child(1){animation-name:ygm1}.adm i:nth-child(2){animation-name:ygm2}.adm i:nth-child(3){animation-name:ygm3}.adm i:nth-child(4){animation-name:ygm4;background:#E3B65A}
+@keyframes ygm1{0%,10%{opacity:.14}16%,92%{opacity:1}100%{opacity:.14}}
+@keyframes ygm2{0%,30%{opacity:.14}36%,92%{opacity:1}100%{opacity:.14}}
+@keyframes ygm3{0%,50%{opacity:.14}56%,92%{opacity:1}100%{opacity:.14}}
+@keyframes ygm4{0%,66%{opacity:.14}72%,92%{opacity:1}100%{opacity:.14}}
+/* 2 · Değişen desenler: disk dizisi; sıradaki disk öne gelir ve döner (LunaDream disk kartının dili) */
+.yg-disk{gap:0}
+.yg-disk span{position:relative;display:block;width:28px;height:28px;margin-left:-7px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #FFFDFB;transform:scale(.82);opacity:.55}
+.yg-disk span:first-child{margin-left:0}
+.yg-disk img{display:block;width:100%;height:100%;object-fit:cover}
+.yg-disk span:nth-child(1){animation-name:ygd1;z-index:3}.yg-disk span:nth-child(2){animation-name:ygd2;z-index:2}.yg-disk span:nth-child(3){animation-name:ygd3;z-index:1}
+.yg-disk span:nth-child(1) img{animation-name:ygdr1}.yg-disk span:nth-child(2) img{animation-name:ygdr2}.yg-disk span:nth-child(3) img{animation-name:ygdr3}
+@keyframes ygd1{0%,30%{transform:none;opacity:1}36%,94%{transform:scale(.82);opacity:.55}100%{transform:none;opacity:1}}
+@keyframes ygd2{0%,30%{transform:scale(.82);opacity:.55}36%,63%{transform:none;opacity:1}69%,100%{transform:scale(.82);opacity:.55}}
+@keyframes ygd3{0%,63%{transform:scale(.82);opacity:.55}69%,94%{transform:none;opacity:1}100%{transform:scale(.82);opacity:.55}}
+@keyframes ygdr1{0%{transform:none}33%,100%{transform:rotate(-120deg)}}
+@keyframes ygdr2{0%,33%{transform:none}66%,100%{transform:rotate(-120deg)}}
+@keyframes ygdr3{0%,66%{transform:none}97%,100%{transform:rotate(-120deg)}}
+/* 3 · USB ile yanar: fiş girer → üç nokta akar → ağaç yanar, hale açılır (LunaDream telefon → lamba kartının dili) */
+.yg-usb .fis{animation-name:ygf}
+@keyframes ygf{0%,6%{transform:translateX(-5px);opacity:.5}18%,92%{transform:none;opacity:1}100%{transform:translateX(-5px);opacity:.5}}
+.akis2{position:relative;width:24px;height:6px}
+.akis2 i{position:absolute;left:0;top:1px;width:4px;height:4px;border-radius:50%;background:#C99A3A;opacity:0;animation-name:ygak}
+.akis2 i:nth-child(2){animation-delay:.2s}.akis2 i:nth-child(3){animation-delay:.4s}
+@keyframes ygak{0%,18%{transform:none;opacity:0}21%{opacity:1}34%{transform:translateX(20px);opacity:0}100%{transform:translateX(20px);opacity:0}}
+.yg-usb .ag{animation-name:ygag}
+@keyframes ygag{0%,36%{opacity:.35}42%,92%{opacity:1}100%{opacity:.35}}
+.yg-usb .dol{fill:#F6DFA6;stroke:none;opacity:0;animation-name:ygic}
+.yg-usb .ic{fill:#E3B65A;stroke:none;opacity:0;animation-name:ygic}
+@keyframes ygic{0%,36%{opacity:0}42%,92%{opacity:1}100%{opacity:0}}
+.yg-usb .hal{fill:none;stroke:#E3B65A;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation-name:yghl}
+@keyframes yghl{0%,40%{opacity:0;transform:scale(.6)}48%{opacity:.9}66%,100%{opacity:0;transform:scale(1.25)}}
+/* 4 · Hediye kutusunda: kapak kalkar, içinden yıldız, disk ve süs çubuğu sırayla yükselir */
+.yg-kutu .kap{transform-box:fill-box;transform-origin:0% 100%;animation-name:ygkp}
+@keyframes ygkp{0%,12%{transform:none}22%,80%{transform:translateY(-3px) rotate(-14deg)}90%,100%{transform:none}}
+.cik{display:flex;align-items:flex-end;gap:5px;height:24px}
+.cik i{display:block;opacity:0;transform:translateY(8px)}
+.cik i:nth-child(1){animation-name:ygc1}.cik i:nth-child(2){animation-name:ygc2}.cik i:nth-child(3){animation-name:ygc3}
+.cik .c-y{width:10px;height:10px;background:#E3B65A;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.cik .c-d{width:12px;height:12px;border-radius:50%;border:1.5px solid #123A2A;box-shadow:inset 0 0 0 2.5px #FFFDFB;background:#8E2A22}
+.cik .c-c{width:4px;height:18px;border-radius:2px;background:#2F6B45}
+@keyframes ygc1{0%,22%{opacity:0;transform:translateY(8px)}30%,80%{opacity:1;transform:none}88%,100%{opacity:0;transform:translateY(8px)}}
+@keyframes ygc2{0%,32%{opacity:0;transform:translateY(8px)}40%,80%{opacity:1;transform:none}88%,100%{opacity:0;transform:translateY(8px)}}
+@keyframes ygc3{0%,42%{opacity:0;transform:translateY(8px)}50%,80%{opacity:1;transform:none}88%,100%{opacity:0;transform:translateY(8px)}}
+.yg *{animation-delay:var(--gec,0s)}
+.akis2 i:nth-child(2){animation-delay:calc(var(--gec,0s) + .2s)}.akis2 i:nth-child(3){animation-delay:calc(var(--gec,0s) + .4s)}
+/* Duran kare (hareket azaltılmış): dolu adımlar, öndeki disk, yanan ağaç, açık kutu */
+@media (prefers-reduced-motion:reduce){.yg *{animation:none!important}.yg-agac .s,.adm i,.yg-usb .ic,.cik i{opacity:1;transform:none}.yg-disk span:first-child{opacity:1;transform:none}.yg-usb .ag,.yg-usb .dol{opacity:1}}
 /* Ay sonu fiyatı: küçük, paket başlığının sağında (LunaDream "Kampanya · 1–31 Ekim" yeri) */
 .pk-bas{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .pk-bas .ays-k{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#8E2A22;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -1009,7 +1050,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
     <p class="fiyat"><b>₺999,00</b></p>
     <!-- Dönen güven şeridi (LunaDream dili): "Dün N kişi" yalnız ürün alanı ayluna.dun_satis doluysa; diğerleri gerçek koşullar -->
     <p class="ser"><span class="ser-pen" aria-live="polite"><span class="{{serCls}}" style="transform: translateY({{serY}}px)"><sc-for list="{{ser}}" as="r" hint-placeholder-count="4"><span class="ser-s">{{r.t}}</span></sc-for></span></span></p>
-    <p class="ozb">YILBAŞI AĞACININ ÖZELLİKLERİ</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 28 28" width="28"><path d="M14 3 L23 24 H5 Z"></path><path d="M14 24v3"></path><path class="s" style="--d: 0s" d="M11 11 Q14 13 17 10"></path><path class="s" style="--d: .5s" d="M9 16 Q14 19 19 15"></path><path class="s" style="--d: 1s" d="M7 21 Q14 24 21 20"></path><circle class="yz" cx="14" cy="3" r="2.4"></circle></svg></span><span><b>Kendin kur</b><span class="t">Çubukları kabloya sar, ağacını sen şekillendir.</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><img src="/_blob/0143de9991a1bc82ff5a2fcafd262ce8" alt=""><img src="/_blob/b9ca1f3036b0d671cec2c053a491141c" alt=""><img src="/_blob/29f34f185f858518e19adeb0a09ce92e" alt=""></span><span><b>Değişen desenler</b><span class="t">Diski değiştir, tavan değişsin. <u>Desenleri gör</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 56 28" width="56"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h5v4h-5"></path></g><path d="M20 14h12" style="stroke-dasharray: 2 3"></path><circle class="hal" cx="44" cy="14" r="11"></circle><path d="M44 4 L51 22 H37 Z"></path><path d="M44 22v3"></path></svg></span><span><b>USB ile yanar</b><span class="t">Telefon şarj başlığı ya da powerbank; adaptör kutuda yok.</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 30 28" width="30"><circle class="isk" cx="15" cy="9" r="5"></circle><rect x="5" y="12" width="20" height="14" rx="1.5"></rect><path d="M15 12v14"></path><g class="kap"><rect x="3" y="8" width="24" height="5" rx="1.2"></rect><path d="M15 8c-2-4-7-5-6-1M15 8c2-4 7-5 6-1"></path></g></svg></span><span><b>Hediye kutusunda</b><span class="t">Yılbaşı baskılı kutusu ve süsleriyle.</span></span></div></div>
+    <p class="ozb">YILBAŞI AĞACININ ÖZELLİKLERİ</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>Kendin kur</b><span class="t">Çubukları sar, ağacını sen şekillendir.</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="/_blob/0143de9991a1bc82ff5a2fcafd262ce8" alt=""></span><span><img src="/_blob/b9ca1f3036b0d671cec2c053a491141c" alt=""></span><span><img src="/_blob/29f34f185f858518e19adeb0a09ce92e" alt=""></span></span><span><b>Değişen desenler</b><span class="t">Diski değiştir, tavan değişsin. <u>Desenleri gör</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>USB ile yanar</b><span class="t">Şarj başlığı ya da powerbank yeter.</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>Hediye kutusunda</b><span class="t">Baskılı kutusu ve süsleriyle gelir.</span></span></div></div>
     <div class="pk-bas"><span>Kaç tane?</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
       <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Hediye için</span></sc-if><span class="pk-g"><img src="/_blob/7a2ab002ed463caf8f2ec81db098e551" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b></span></button>
