@@ -320,3 +320,4 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Yeni ürün ekleme (28 Eki): sade sayfa kalıbıyla, ürün listelerinin sonuna (ana sayfa görsel seçicileri kaymaz). Kullanıcıya tam tema değil, yalnız yeni/değişen dosyalar verilir; görseller Shopify ürününe yüklenir.
 - İmza ürün sayfası sade olmaz (28 Eki: "çok sade ve sıkıcı"): en az 3 ürüne özgü an (ışık anı, dergi kapağı kelimeleri, etkileşimli önizleme) ve renk bantlarıyla ritim; beyaz kart dizisi yalnız sade sayfalarda.
 - Ürüne özel sayfanın paleti ürünün kendi kutusundan/ambalajından alınır (28 Eki, yılbaşı ağacı: pudra + çam yeşili + yaldız + kozalak kırmızısı). Hazır Noel şablonu (pastel kırmızı-yeşil, serpiştirilmiş altın noktalar) yok.
+- Özellik ve güven kartlarında ikon dizisi kullanma (28 Eki: "emoji gibi, beğenmedim"); yerine fotoğraflı kart ya da ikonsuz düz liste. Baskı öğeleri yalnız gerçek veriden: ay sonu fiyatı, ürün alanındaki stok, alan doluysa "Dün N kişi".
