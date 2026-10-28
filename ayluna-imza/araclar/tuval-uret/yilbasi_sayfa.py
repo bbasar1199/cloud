@@ -9,7 +9,7 @@
 # Görseller: kullanıcının kutu fotoğrafı ve montaj videosu kareleri; tavan ve disk görselleri satıcı afişinin yazısız kısmı (canvas/ozel/yb-*).
 import os, sys, json, re
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from ortak import UST_CSS, TAIL, TL_JS, KARGO_JS, canli_galeri, urun_ust, masa_bayrak, mesaj_js, MESAJ_CSS, SERIT_OK_CSS, KAY_JS, GAL_OK
+from ortak import UST_CSS, TAIL, TL_JS, KARGO_JS, tk_css, tk_adim, TK_DEGER, TK_IKON, canli_galeri, urun_ust, masa_bayrak, mesaj_js, MESAJ_CSS, SERIT_OK_CSS, KAY_JS, GAL_OK
 import luna_usb as U
 import ozel_yon as O
 import ozel_sayfa as OS
@@ -45,7 +45,7 @@ HEDIYE_IK = '<svg viewBox="0 0 28 28"><rect x="4" y="11" width="20" height="14" 
 AGAC_IK = '<svg viewBox="0 0 28 28"><path d="M14 3l6 8h-3l5 7h-4l4 5H6l4-5H6l5-7H8z"></path><path d="M14 23v3"></path></svg>'
 
 CSS = r"""
-.al h1{font-size:26px;line-height:1.08}
+.al h1{font-size:24px;line-height:1.15}
 .fiyat b{font-size:22px}
 .dsk-y{display:flex}.dsk-y img{width:26px;height:26px;border-radius:50%;object-fit:cover;margin-left:-9px;box-shadow:0 0 0 2px #fff}.dsk-y img:first-child{margin-left:0}
 /* Yılbaşından önce kapında: gerçek tarih (1 iş gününde kargo + en geç 7 gün) */
@@ -106,14 +106,14 @@ CSS = r"""
 /* Özellik kartları (29 Eki, kullanıcı: "emoji benefit LunaDream gibi düzgün ve iyi animasyonlarla olsun"): LunaDream "Sihirli özellikler"
    ile aynı kurgu. Her kartta 28 px'lik iki parçalı gösterge: ürünün ikonu + yanında çalışan küçük arayüz (adım çubukları, disk dizisi,
    fiş → akış → yanan ağaç, açılan kutu). 6 sn'lik tek döngü, kartlar 0,6 sn arayla; yalnız transform/opacity; başlık + iki satır. */
-.ozb{margin:22px 0 0;font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B5246}
-.yo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-.yo-k{display:flex;flex-direction:column;gap:12px;padding:14px 12px 14px;border-radius:20px;background:#FFFFFF;border:1px solid #ECE7E1;color:#123A2A;text-decoration:none;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.ozb{margin:22px 0 0;font-size:13px;font-weight:700;color:#123A2A}
+.yo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.yo-k{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;background:#fff;border:1px solid #E4E6EB;color:#123A2A;text-decoration:none;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 a.yo-k:active{transform:scale(.985)}
 .yo-k:nth-child(2){--gec:.6s}.yo-k:nth-child(3){--gec:1.2s}.yo-k:nth-child(4){--gec:1.8s}
-.yo-k b{display:block;font-size:15px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
-.yo-k .t{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:#6B5246}
-.yo-k u{color:#8C5E10;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
+.yo-k b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.yo-k .t{display:block;margin-top:2px;font-size:13px;line-height:1.4;color:#5C6078}
+.yo-k u{color:#123A2A;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap}
 .yg{display:flex;align-items:center;gap:8px;height:28px}
 .yg svg{flex:none;height:28px;width:auto;overflow:visible;fill:none;stroke:#123A2A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .yg *{animation-duration:6s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,.7,.2,1);animation-fill-mode:both}
@@ -134,7 +134,7 @@ a.yo-k:active{transform:scale(.985)}
 @keyframes ygm4{0%,66%{opacity:.14}72%,92%{opacity:1}100%{opacity:.14}}
 /* 2 · Değişen desenler: disk dizisi; sıradaki disk öne gelir ve döner (LunaDream disk kartının dili) */
 .yg-disk{gap:0}
-.yg-disk span{position:relative;display:block;width:28px;height:28px;margin-left:-7px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #FFFFFF;transform:scale(.82);opacity:.55}
+.yg-disk span{position:relative;display:block;width:28px;height:28px;margin-left:-7px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #fff;transform:scale(.82);opacity:.55}
 .yg-disk span:first-child{margin-left:0}
 .yg-disk img{display:block;width:100%;height:100%;object-fit:cover}
 .yg-disk span:nth-child(1){animation-name:ygd1;z-index:3}.yg-disk span:nth-child(2){animation-name:ygd2;z-index:2}.yg-disk span:nth-child(3){animation-name:ygd3;z-index:1}
@@ -193,6 +193,10 @@ a.yo-k:active{transform:scale(.985)}
 .al .teslim .yol{margin-top:0}
 .y-yazi .sayac-ay{width:12px;height:12px;margin:0 3px 0 0;vertical-align:-1px}
 .y-yazi .sayac-ay circle{fill:none;stroke:rgba(255,255,255,.6);stroke-width:2}.y-yazi .sayac-ay path{fill:#E3B65A}
+.teslim::before,.teslim .yd{background:#EEF2EF}
+.teslim .yol-iz em::before{box-shadow:0 0 0 2px #EEF2EF,0 0 0 3.5px var(--lac)}
+.pk-k .nokta{margin-left:4px}.pk-k.on .nokta{box-shadow:inset 0 0 0 1.6px #123A2A}.pk-k.on .nokta i{opacity:1;transform:none;background:#123A2A}
+.fy-rozet{background:#123A2A;color:#fff}
 /* Ay sonu fiyatı: küçük, paket başlığının sağında (LunaDream "Kampanya · 1–31 Ekim" yeri) */
 .pk-bas{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .pk-bas .ays-k{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#8E2A22;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -235,12 +239,13 @@ a.yo-k:active{transform:scale(.985)}
 .pg .mesaj-bol img{border-radius:14px;box-shadow:0 0 0 6px #fff,0 0 0 7px #ECE7E1}
 .pg .koyu{background:radial-gradient(120% 70% at 50% 0%,#1B4433 0%,#0D261C 70%)}
 .pg .h2 .n,.pg .bas-y .n{color:var(--v2)}.pg .koyu .n,.pg footer .n,.pg .yak .n{color:var(--v)}
-.pg .al h1{color:#123A2A;text-shadow:0 1px 0 #E9C98E}
+.pg .al h1{color:#123A2A}
 /* Ağacı yak: oda karanlık; dokununca ışık alttan (lambadan) tavana yayılır. 2 sn kapalı → 7 sn açık; dokununca durur */
 .yak{position:relative;border-radius:24px;overflow:hidden;background:#05100B;color:#fff}
-.yak-g{position:relative;height:470px;overflow:hidden}
+.yak-g{position:relative;height:420px;overflow:hidden}
+.pg .al{padding-bottom:8px}.pg #yak{padding-top:20px}
 .yak-g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
-.yak .k0{filter:brightness(.13) saturate(.3)}
+.yak .k0{filter:brightness(.42) saturate(.55)}
 .yak .k1{clip-path:circle(0% at 50% 100%);transition:clip-path 1.8s var(--ease) .1s}
 .yak.on .k1{clip-path:circle(150% at 50% 100%)}
 .yak .kor{position:absolute;left:50%;bottom:22px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--v);box-shadow:0 0 18px 6px rgba(227,182,90,.55);transition:opacity .6s var(--ease)}
@@ -354,7 +359,7 @@ def ozler():
          ('kutu', kutu, 'Hediye kutusunda', 'Baskılı kutusu ve süsleriyle gelir.', '')]
     kart = ''.join(('<a class="yo-k" href="#diskler">%s</a>' if a == 'disk' else '<div class="yo-k">%s</div>')
                    % ('<span class="yg yg-%s" aria-hidden="true">%s</span><span><b>%s</b><span class="t">%s%s</span></span>' % (a, g, b, t, u)) for a, g, b, t, u in k)
-    return '<p class="ozb">YILBAŞI AĞACININ ÖZELLİKLERİ</p><div class="yo">' + kart + '</div>'
+    return '<p class="ozb">Yılbaşı ağacının özellikleri</p><div class="yo">' + kart + '</div>'
 
 
 def hero():
@@ -369,20 +374,25 @@ def hero():
 
 
 def al():
-    # 29 Eki (canlıda 999 görünüyordu): fiyat satırı da canlı fiyattan; karşılaştırma fiyatı varsa çizili eski fiyat + indirim rozeti
-    fiyat = ('<p class="fiyat"><b>{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><s>{{fyC}}</s><span class="rozet">%{{fyPct}} indirim</span></sc-if></p>')
-    return ("""
+    # 29 Eki (kullanıcı: "ürün bilgileri kısmında diğerlerine göre çok eksik var, ana iskeleti koruyacağız"): Galaxy USB / LunaDream
+    # satın alma iskeleti birebir: ad, fiyat satırı (canlı fiyat; karşılaştırma fiyatı varsa çizili eski fiyat + rozet, LunaDream animasyonu),
+    # tek satır açıklama, dönen güven satırı (Dün N yalnız ürün alanı doluysa), özellik kartları, paket, kargo şeridi, stok, butonlar, teslim, 4 soru.
+    dsr_ik = lambda ik: '<svg viewBox="0 0 24 24">' + ik + '</svg>'
+    HED = '<rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M3 7.5h18v3H3zM12 7.5V20M12 7.5c-1.6-3.4-5.6-4-4.8-.6M12 7.5c1.6-3.4 5.6-4 4.8-.6"></path>'
+    sat = [('<i class="dsr-nokta"></i>', '{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}'), (dsr_ik(TK_IKON['kargo']), '<b>Ücretsiz kargo</b> ile kapına'),
+           (dsr_ik(TK_IKON['iade']), '<b>30 gün</b> iade hakkı'), (dsr_ik(HED), '<b>Hediye kutusunda</b>, süsleriyle')]
+    bir = lambda i, ik, t: '<span class="{{tkC%d}}">' % i + ik + '<span>' + t + '</span></span>'
+    dsr = ('    <p class="dun dsr"><span class="dsr-sr">{{tkSr}}</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)">'
+           + ''.join(bir(i, *x) for i, x in enumerate(sat)) + bir(4, *sat[0]) + '</span></span></p>\n')
+    return (("""
   <section class="al" id="siparis">
-    <p class="yil-c"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Biraz ışık, bolca yılbaşı</p>
     <h1 class="bas-y">%s</h1>
-    <p class="alt-b">Kendin süslediğin minik yılbaşı ağacı; USB’ye takınca tavana yılbaşı desenleri yansıtır.</p>
-    %s
-    <!-- Dönen güven şeridi (LunaDream dili): "Dün N kişi" yalnız ürün alanı ayluna.dun_satis doluysa; diğerleri gerçek koşullar -->
-    <p class="ser"><span class="ser-pen" aria-live="polite"><span class="{{serCls}}" style="transform: translateY({{serY}}px)"><sc-for list="{{ser}}" as="r" hint-placeholder-count="4"><span class="ser-s">{{r.t}}</span></sc-for></span></span></p>
-    %s
-    <div class="pk-bas"><span>Kaç tane?</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
+    <p class="fiyat-satir"><span class="sr-m">{{fySr}}</span><b class="fy-yeni" aria-hidden="true">{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{fyC}}</s><span class="rozet fy-rozet">%%{{fyPct}} indirim</span></span></sc-if></p>
+    <p class="alt-b">Kendin süsle, USB’ye tak; tavan yılbaşı olsun.</p>
+""" + dsr + """    %s
+    <div class="pk-bas"><span>Paket</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
-      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Hediye için</span></sc-if><span class="pk-g"><img src="%s" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span></button>
+      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Hediye için</span></sc-if><span class="pk-g"><img src="%s" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span><span class="nokta"><i></i></span></button>
     </sc-for></div>
     <!-- Dönen kargo şeridi (29 Eki, LunaDream'deki gibi): hediye kutusu 4 sn ↔ 16.00 aynı gün kargo + sayaç 6 sn -->
     <p class="donen"><span class="dn-sr">Yılbaşı baskılı hediye kutusunda. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Yılbaşı baskılı hediye kutusunda</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24" class="dn-kt"><rect x="3" y="7" width="13" height="10" rx="1.5"></rect><path d="M16 10h3l2 3v4h-5"></path><circle cx="7" cy="18" r="1.6"></circle><circle cx="18" cy="18" r="1.6"></circle></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
@@ -393,7 +403,7 @@ def al():
     <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
     %s
   </section>
-""" % (AD, fiyat, ozler(), I('yb-kare'), U.OK, US.urs_html(US.sorular(OS.ICERIK[H])[0])))
+""") % (AD, ozler(), I('yb-kare'), U.OK, US.urs_html(US.sorular(OS.ICERIK[H])[0])))
 
 
 YANINCA = """
@@ -453,7 +463,12 @@ def adimlar():
 
 def gerisi():
     g = OS.gerisi('af')
-    g = re.sub(r'\n  <!-- Yorumlar:.*?</section>\n', '\n', g, flags=re.S)  # yeni ürün: yorum yok, bölüm konmadı
+    # 29 Eki (kullanıcı: "yorum kısmı eklememişsin onu ekle"): AyFeneri'deki Loox yorum bölümü kalır; tema Loox kutusunu buraya koyar
+    # Bölüm değil div: temada önceki bloğun içine girer, blok sayısı ve product.json değişmez (kurulu temada editör ayarları korunur)
+    Y0 = '<section class="px" id="yorumlar" style="padding-bottom: 44px">'
+    assert Y0 in g
+    i = g.index(Y0); j = g.index('</section>', i)
+    g = g[:i] + '<div class="px" id="yorumlar" style="padding-top: 44px; padding-bottom: 44px">' + g[i + len(Y0):j] + '</div>' + g[j + len('</section>'):]
     g = g.replace('Bu gece duvarında <br>ay olsun', 'Bu yılbaşı<br>tavana bak').replace('@@af-ay-yakin@@', '@@yb-kare@@').replace('<b>AyFeneri</b>', '<b>Yılbaşı Ağacı</b>')
     g = g.replace('<small style="color: var(--koyu)">Kartla %5 indirim dahil</small>', '')
     Y = '<b>Yılbaşı Ağacı</b><span>{{adetName}}</span>'
@@ -554,7 +569,7 @@ def js():
     shop = [[n, p, c, B + BA['u-%s.jpg' % h]] for h, n, p, c in PR]
     nk = ''.join("nk%d: S.nk === %d ? 'on' : '', nkOn%d: S.nk === %d ? 'true' : 'false', nkSec%d: function () { self.setState({ nk: %d }); },\n      " % (i, i, i, i, i, i) for i in range(len(PARCA)))
     return """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -568,6 +583,8 @@ def js():
       if (S.dgOto && t % 3 === 0) o.dg = (S.dg + 1) % 4;
       if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
       if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
+      var azH = self.azHareket;
+""" + tk_adim('t', 1) + """
       self.setState(o);
     }, 1000);
   }
@@ -586,7 +603,7 @@ def js():
     var VU = ((window.AYLUNA_VERI || {}).urun || {})[""" + json.dumps(H) + """] || {}, P1 = VU.p || """ + str(P1) + """;
     var C1v = VU.c > P1 ? VU.c : null, fyPct = C1v ? Math.round((1 - P1 / C1v) * 100) : 0;
     var paket = [
-      { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: 'Kendine ya da evine', rib: false },
+      { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: C1v ? '%' + fyPct + ' indirim' : 'Kendine ya da evine', rib: false },
       { n: 2, t: '2 Adet', p: TL(2 * P1, true), old: C1v ? TL(2 * C1v, true) : '', sub: 'Biri sana, biri hediye', rib: false }
     ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
@@ -627,6 +644,10 @@ def js():
     var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
     return {
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      """ + TK_DEGER + """
+      tk0a: dunN ? 'Dün ' : '', tk0b: dunN ? dunN + ' kişi' : 'Kapıda ödeme', tk0c: dunN ? ' satın aldı' : ' de var',
+      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Kapıda ödeme de var. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
+      fySr: 'Fiyat ' + TL(P1, true) + (C1v ? ', önceki fiyat ' + TL(C1v, true) + ', %' + fyPct + ' indirim' : ''),
       onLabel: 'Güvenli Ödeme ile Al', fyP: TL(P1, true), fyInd: !!C1v, fyC: C1v ? TL(C1v, true) : '', fyPct: fyPct,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, cdTiny: IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı',
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
@@ -653,7 +674,7 @@ DOSYA = 'YilbasiAgaci.dc.html'
 
 
 def sayfa():
-    css = O.tema_css(dict(TEMA, ek='')) + U.CSS + O.CSS + '\n' + OS.CSS + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + UST_CSS
+    css = O.tema_css(dict(TEMA, ek='')) + U.CSS + O.CSS + '\n' + OS.CSS + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('#123A2A', '#2F6B45', '#2E9E62', '1.2s') + UST_CSS
     return U.head(AD, css, TEMA['font']) + govde()
 
 

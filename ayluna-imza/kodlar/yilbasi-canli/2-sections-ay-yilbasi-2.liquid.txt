@@ -28,7 +28,12 @@
   {%- when 'p09' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<section class="bolum px">
     <h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>olsun<span class="n">.</span></h2>
     <ul class="gv-l"><li><b>{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</span></li><li><b>{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</span></li></ul>
-  </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+  </section><!-- Yorumlar: yalnız bu ürünün Loox yorumları, hepsi (m.28/B); olumsuzlar da görünür. Afişteki uydurma yorum kartları yok. -->
+<div class="px" id="yorumlar" style="padding-top: 44px; padding-bottom: 44px">
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.m6 | escape }}{% raw %} {% endraw %}{% raw %}<br>diyor<span class="n">?</span></h2>
+    <p class="yer">{% endraw %}{{ block.settings.m7 | escape }}{% raw %}</p>
+  </div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+<div class="ay-uyg ay-loox"><div id="looxReviews" data-product-id="{{ product.id }}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div></div>
 </div>
   {%- when 'p10' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
 <section class="bolum mesaj-bol" id="mesajlar">
@@ -202,6 +207,18 @@
           "id": "m5",
           "label": "Yazı: Kart bilgin bize gelmez; kapıda ödeme de var",
           "default": "Kart bilgin bize gelmez; kapıda ödeme de var."
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Yazı: Alanlar ne",
+          "default": "Alanlar ne"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Yazı: [Loox: bu ürünün tüm yorumları, fotoğraflı olanlar ba…",
+          "default": "[Loox: bu ürünün tüm yorumları, fotoğraflı olanlar başta; puan dağılımı ve sayı otomatik]"
         }
       ]
     },

@@ -13,16 +13,14 @@
   </section>
 
   <section class="al" id="siparis">
-    <p class="yil-c"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Biraz ışık, bolca yılbaşı</p>
     <h1 class="bas-y">{% endraw %}{{ block.settings.m1 | escape }}{% raw %}</h1>
+    <p class="fiyat-satir"><span class="sr-m">{{fySr}}</span><b class="fy-yeni" aria-hidden="true">{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{fyC}}</s><span class="rozet fy-rozet">%{{fyPct}} indirim</span></span></sc-if></p>
     <p class="alt-b">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</p>
-    <p class="fiyat"><b>{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><s>{{fyC}}</s><span class="rozet">%{{fyPct}} indirim</span></sc-if></p>
-    <!-- Dönen güven şeridi (LunaDream dili): "Dün N kişi" yalnız ürün alanı ayluna.dun_satis doluysa; diğerleri gerçek koşullar -->
-    <p class="ser"><span class="ser-pen" aria-live="polite"><span class="{{serCls}}" style="transform: translateY({{serY}}px)"><sc-for list="{{ser}}" as="r" hint-placeholder-count="4"><span class="ser-s">{{r.t}}</span></sc-for></span></span></p>
-    <p class="ozb">{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="{% endraw %}{%- if block.settings.g1 -%}{{ block.settings.g1 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.g2 -%}{{ block.settings.g2 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.g3 -%}{{ block.settings.g3 | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt=""></span></span><span><b>{% endraw %}{{ block.settings.m6 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m7 | escape }}{% raw %} {% endraw %}{% raw %}<u>{% endraw %}{{ block.settings.m8 | escape }}{% raw %}</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>{% endraw %}{{ block.settings.m9 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m10 | escape }}{% raw %}</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>{% endraw %}{{ block.settings.m11 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m12 | escape }}{% raw %}</span></span></div></div>
-    <div class="pk-bas"><span>{% endraw %}{{ block.settings.m13 | escape }}{% raw %}</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
+    <p class="dun dsr"><span class="dsr-sr">{{tkSr}}</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)"><span class="{{tkC0}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span><span class="{{tkC1}}"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span><b>{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</b> ile kapına</span></span><span class="{{tkC2}}"><svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path></svg><span><b>{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</b> iade hakkı</span></span><span class="{{tkC3}}"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M3 7.5h18v3H3zM12 7.5V20M12 7.5c-1.6-3.4-5.6-4-4.8-.6M12 7.5c1.6-3.4 5.6-4 4.8-.6"></path></svg><span><b>{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</b>, süsleriyle</span></span><span class="{{tkC4}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span></span></span></p>
+    <p class="ozb">{% endraw %}{{ block.settings.m6 | escape }}{% raw %}</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>{% endraw %}{{ block.settings.m7 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m8 | escape }}{% raw %}</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="{% endraw %}{%- if block.settings.g1 -%}{{ block.settings.g1 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.g2 -%}{{ block.settings.g2 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.g3 -%}{{ block.settings.g3 | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt=""></span></span><span><b>{% endraw %}{{ block.settings.m9 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m10 | escape }}{% raw %} {% endraw %}{% raw %}<u>{% endraw %}{{ block.settings.m11 | escape }}{% raw %}</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>{% endraw %}{{ block.settings.m12 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m13 | escape }}{% raw %}</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.m14 | escape }}{% raw %}</span></span></div></div>
+    <div class="pk-bas"><span>{% endraw %}{{ block.settings.m15 | escape }}{% raw %}</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
-      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.m14 | escape }}{% raw %}</span></sc-if><span class="pk-g"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span></button>
+      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.m16 | escape }}{% raw %}</span></sc-if><span class="pk-g"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span><span class="nokta"><i></i></span></button>
     </sc-for></div>
     <!-- Dönen kargo şeridi (29 Eki, LunaDream'deki gibi): hediye kutusu 4 sn ↔ 16.00 aynı gün kargo + sayaç 6 sn -->
     <p class="donen"><span class="dn-sr">Yılbaşı baskılı hediye kutusunda. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Yılbaşı baskılı hediye kutusunda</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24" class="dn-kt"><rect x="3" y="7" width="13" height="10" rx="1.5"></rect><path d="M16 10h3l2 3v4h-5"></path><circle cx="7" cy="18" r="1.6"></circle><circle cx="18" cy="18" r="1.6"></circle></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
@@ -30,8 +28,8 @@
     <div class="al-on"><sc-if value="{{stokVar}}" hint-placeholder-val="{{false}}"><span class="stk"><i aria-hidden="true"></i>Bu yılbaşı için son {{stokN}} adet</span></sc-if>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div>
     <div class="ay-dis" data-ay-dis></div>
-    <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>{% endraw %}{{ block.settings.m15 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m16 | escape }}{% raw %}</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>{% endraw %}{{ block.settings.m17 | escape }}{% raw %}</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>{% endraw %}{{ block.settings.m18 | escape }}{% raw %}</span></li></ol></div>
-    <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m19 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m20 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m21 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m22 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m23 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m24 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m25 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m26 | escape }}{% raw %}</p></details></div>
+    <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>{% endraw %}{{ block.settings.m17 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m18 | escape }}{% raw %}</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>{% endraw %}{{ block.settings.m19 | escape }}{% raw %}</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>{% endraw %}{{ block.settings.m20 | escape }}{% raw %}</span></li></ol></div>
+    <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m21 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m22 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m23 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m24 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m25 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m26 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.m27 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.m28 | escape }}{% raw %}</p></details></div>
   </section></div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p03' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Ağacı yak (imza anı, AyFeneri'ndeki "Feneri yak" gibi): oda karanlık; ışık lambadan (alttan) tavana yayılır -->
@@ -111,24 +109,42 @@
         {
           "type": "text",
           "id": "m2",
-          "label": "Yazı: Kendin süslediğin minik yılbaşı ağacı; USB’ye takınca…",
-          "default": "Kendin süslediğin minik yılbaşı ağacı; USB’ye takınca tavana yılbaşı desenleri yansıtır."
+          "label": "Yazı: Kendin süsle, USB’ye tak; tavan yılbaşı olsun",
+          "default": "Kendin süsle, USB’ye tak; tavan yılbaşı olsun."
         },
         {
           "type": "text",
           "id": "m3",
-          "label": "Yazı: YILBAŞI AĞACININ ÖZELLİKLERİ",
-          "default": "YILBAŞI AĞACININ ÖZELLİKLERİ"
+          "label": "Yazı: Ücretsiz kargo",
+          "default": "Ücretsiz kargo"
         },
         {
           "type": "text",
           "id": "m4",
+          "label": "Yazı: 30 gün",
+          "default": "30 gün"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Yazı: Hediye kutusunda",
+          "default": "Hediye kutusunda"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Yazı: Yılbaşı ağacının özellikleri",
+          "default": "Yılbaşı ağacının özellikleri"
+        },
+        {
+          "type": "text",
+          "id": "m7",
           "label": "Yazı: Kendin kur",
           "default": "Kendin kur"
         },
         {
           "type": "text",
-          "id": "m5",
+          "id": "m8",
           "label": "Yazı: Çubukları sar, ağacını sen şekillendir",
           "default": "Çubukları sar, ağacını sen şekillendir."
         },
@@ -149,55 +165,49 @@
         },
         {
           "type": "text",
-          "id": "m6",
+          "id": "m9",
           "label": "Yazı: Değişen desenler",
           "default": "Değişen desenler"
         },
         {
           "type": "text",
-          "id": "m7",
+          "id": "m10",
           "label": "Yazı: Diski değiştir, tavan değişsin",
           "default": "Diski değiştir, tavan değişsin."
         },
         {
           "type": "text",
-          "id": "m8",
+          "id": "m11",
           "label": "Yazı: Desenleri gör",
           "default": "Desenleri gör"
         },
         {
           "type": "text",
-          "id": "m9",
+          "id": "m12",
           "label": "Yazı: USB ile yanar",
           "default": "USB ile yanar"
         },
         {
           "type": "text",
-          "id": "m10",
+          "id": "m13",
           "label": "Yazı: Şarj başlığı ya da powerbank yeter",
           "default": "Şarj başlığı ya da powerbank yeter."
         },
         {
           "type": "text",
-          "id": "m11",
-          "label": "Yazı: Hediye kutusunda",
-          "default": "Hediye kutusunda"
-        },
-        {
-          "type": "text",
-          "id": "m12",
+          "id": "m14",
           "label": "Yazı: Baskılı kutusu ve süsleriyle gelir",
           "default": "Baskılı kutusu ve süsleriyle gelir."
         },
         {
           "type": "text",
-          "id": "m13",
-          "label": "Yazı: Kaç tane?",
-          "default": "Kaç tane?"
+          "id": "m15",
+          "label": "Yazı: Paket",
+          "default": "Paket"
         },
         {
           "type": "text",
-          "id": "m14",
+          "id": "m16",
           "label": "Yazı: Hediye için",
           "default": "Hediye için"
         },
@@ -208,73 +218,73 @@
         },
         {
           "type": "text",
-          "id": "m15",
+          "id": "m17",
           "label": "Yazı: Bugün",
           "default": "Bugün"
         },
         {
           "type": "text",
-          "id": "m16",
+          "id": "m18",
           "label": "Yazı: Sipariş verildi",
           "default": "Sipariş verildi"
         },
         {
           "type": "text",
-          "id": "m17",
+          "id": "m19",
           "label": "Yazı: Kargoda",
           "default": "Kargoda"
         },
         {
           "type": "text",
-          "id": "m18",
+          "id": "m20",
           "label": "Yazı: Kapında",
           "default": "Kapında"
         },
         {
           "type": "text",
-          "id": "m19",
+          "id": "m21",
           "label": "Yazı: Bu ürün ne işe yarıyor?",
           "default": "Bu ürün ne işe yarıyor?"
         },
         {
           "type": "textarea",
-          "id": "m20",
+          "id": "m22",
           "label": "Yazı: Kendin süsleyip kurduğun minik bir yılbaşı ağacı lamb…",
           "default": "Kendin süsleyip kurduğun minik bir yılbaşı ağacı lambası: USB’ye takınca tavana yılbaşı desenleri yansıtır."
         },
         {
           "type": "text",
-          "id": "m21",
+          "id": "m23",
           "label": "Yazı: Nasıl kurulur?",
           "default": "Nasıl kurulur?"
         },
         {
           "type": "textarea",
-          "id": "m22",
+          "id": "m24",
           "label": "Yazı: Tüylü çubukları kabloya sarıp ağaç şekli verirsin, de…",
           "default": "Tüylü çubukları kabloya sarıp ağaç şekli verirsin, desenli çıkartmayı altın abajura yapıştırıp takarsın, istersen altın şerit ve inci çıkartmalarla süslersin. Kutudaki kartın QR kodunda montaj videosu var. USB ucunu ve projektör lensini kapatma."
         },
         {
           "type": "text",
-          "id": "m23",
+          "id": "m25",
           "label": "Yazı: Prize takılır mı?",
           "default": "Prize takılır mı?"
         },
         {
           "type": "textarea",
-          "id": "m24",
+          "id": "m26",
           "label": "Yazı: USB ile çalışır: telefon şarj adaptörüne, powerbank’e…",
           "default": "USB ile çalışır: telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; USB adaptör kutuda yok."
         },
         {
           "type": "text",
-          "id": "m25",
+          "id": "m27",
           "label": "Yazı: Kutu içeriğinde neler var?",
           "default": "Kutu içeriğinde neler var?"
         },
         {
           "type": "textarea",
-          "id": "m26",
+          "id": "m28",
           "label": "Yazı: USB projektör modülü (kablolu, lensli), altın abajur,…",
           "default": "USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, \"Merry Christmas\" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok."
         }

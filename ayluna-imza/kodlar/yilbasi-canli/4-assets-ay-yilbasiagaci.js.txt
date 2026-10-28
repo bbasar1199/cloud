@@ -2,7 +2,7 @@
 (window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {
 
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -16,6 +16,11 @@ class Component extends DCLogic {
       if (S.dgOto && t % 3 === 0) o.dg = (S.dg + 1) % 4;
       if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
       if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
+      var azH = self.azHareket;
+      if (!azH) { var tkd = t - (S.tkT === undefined ? 1 : S.tkT);
+        if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = t - 1; o.tkAn = true; }
+        else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = t; o.tkAn = false; } }
+
       self.setState(o);
     }, 1000);
   }
@@ -34,7 +39,7 @@ class Component extends DCLogic {
     var VU = ((window.AYLUNA_VERI || {}).urun || {})["yilbasi-agaci-projektor-lamba"] || {}, P1 = VU.p || 999.0;
     var C1v = VU.c > P1 ? VU.c : null, fyPct = C1v ? Math.round((1 - P1 / C1v) * 100) : 0;
     var paket = [
-      { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: 'Kendine ya da evine', rib: false },
+      { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: C1v ? '%' + fyPct + ' indirim' : 'Kendine ya da evine', rib: false },
       { n: 2, t: '2 Adet', p: TL(2 * P1, true), old: C1v ? TL(2 * C1v, true) : '', sub: 'Biri sana, biri hediye', rib: false }
     ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var DISK = [["Klasik yılbaşı", "/_blob/0143de9991a1bc82ff5a2fcafd262ce8"], ["Yeni yıl mesajı", "/_blob/b9ca1f3036b0d671cec2c053a491141c"], ["Kar taneleri", "/_blob/29f34f185f858518e19adeb0a09ce92e"], ["Ren geyikleri", "/_blob/a67e07583769ee524096661940ef6093"], ["Kardan adam", "/_blob/d54bbc54da481894b03a90633027d408"], ["Çanlar", "/_blob/b6e597a7824d07a8917cc638f657ba46"]];
@@ -105,6 +110,10 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
     var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
     return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''), tkC0: 'dsr-s' + ((S.tk || 0) === 0 && !(0 === 0 && S.tkAn) ? ' on' : ''), tkC1: 'dsr-s' + ((S.tk || 0) === 1 && !(1 === 0 && S.tkAn) ? ' on' : ''), tkC2: 'dsr-s' + ((S.tk || 0) === 2 && !(2 === 0 && S.tkAn) ? ' on' : ''), tkC3: 'dsr-s' + ((S.tk || 0) === 3 && !(3 === 0 && S.tkAn) ? ' on' : ''), tkC4: 'dsr-s' + ((S.tk || 0) === 4 && !(4 === 0 && S.tkAn) ? ' on' : ''),
+      tk0a: dunN ? 'Dün ' : '', tk0b: dunN ? dunN + ' kişi' : 'Kapıda ödeme', tk0c: dunN ? ' satın aldı' : ' de var',
+      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Kapıda ödeme de var. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
+      fySr: 'Fiyat ' + TL(P1, true) + (C1v ? ', önceki fiyat ' + TL(C1v, true) + ', %' + fyPct + ' indirim' : ''),
       onLabel: 'Güvenli Ödeme ile Al', fyP: TL(P1, true), fyInd: !!C1v, fyC: C1v ? TL(C1v, true) : '', fyPct: fyPct,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, cdTiny: IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı',
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
