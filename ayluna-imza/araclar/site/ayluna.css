@@ -469,16 +469,26 @@ html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
 .ay-vb-foto{cursor:default!important}
 .ay-vb-bos{background:repeating-linear-gradient(45deg,#1A2142 0 10px,#232B52 10px 20px)!important}
 @media (min-width:1024px){.ay-vb .bolum{max-width:760px;margin:0 auto;padding-top:56px}.ay-vb .px,.ay-vb-serit{padding-left:0;padding-right:0}.ay-vb .h2{font-size:30px}.ay-vb-serit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;overflow:visible}.ay-vb .vid{height:auto;aspect-ratio:9/16}.ay-vb-serit>span[aria-hidden]{display:none}}
-/* Ana sayfa slaytı (28 Eki): görsel kenardan kenara, yazı ve düğme görselin altında açık zeminde (telefon ve tablet) */
+/* Ana sayfa slaytı (28 Eki, seçim C): kenardan kenara, 500 px, tam genişlik düğme (telefon ve tablet) */
 @media (max-width:1023px){
-  html[data-ay-tur=ana] .slayt{margin:0!important;border-radius:0!important;height:auto!important;background:transparent!important;color:#1A2142!important}
-  html[data-ay-tur=ana] .slayt .s-iz{position:relative!important}
-  html[data-ay-tur=ana] .slayt .sl>img{position:relative!important;display:block;width:100%;height:auto!important;aspect-ratio:4/4.3}
-  html[data-ay-tur=ana] .slayt .sl::after{display:none!important}
-  html[data-ay-tur=ana] .slayt .sl-y{position:relative!important;left:0!important;right:0!important;bottom:0!important;min-height:178px;padding:22px 20px 4px;box-sizing:border-box}
-  html[data-ay-tur=ana] .slayt .sl-y small{color:#8A7F6E!important}
-  html[data-ay-tur=ana] .slayt .sl-y h2{color:#1A2142}
-  html[data-ay-tur=ana] .slayt .sl-y p{color:#5C6078!important}
-  html[data-ay-tur=ana] .slayt .sl-y a{background:#1A2142!important;color:#FFFDF9!important}
-  html[data-ay-tur=ana] .slayt .ay-iz{top:calc(min(100vw,500px) * 1.075 - 32px)!important;bottom:auto!important;left:50%!important;transform:translateX(-50%)}
+  html[data-ay-tur=ana] .slayt{margin:0!important;border-radius:0!important;height:500px!important}
+  html[data-ay-tur=ana] .slayt .sl::after{background:linear-gradient(180deg,rgba(12,16,39,0) 30%,rgba(12,16,39,.55) 52%,rgba(12,16,39,.94) 86%)!important}
+  html[data-ay-tur=ana] .slayt .sl-y{bottom:56px!important}
+  html[data-ay-tur=ana] .slayt .sl-y h2{font-size:34px}
+  html[data-ay-tur=ana] .slayt .sl-y a{display:flex!important;justify-content:center;width:100%;box-sizing:border-box;min-height:52px;border-radius:14px!important}
+  html[data-ay-tur=ana] .slayt .ay-iz{left:50%!important;bottom:20px!important;transform:translateX(-50%)}
 }
+/* Menü (28 Eki): beyaz liste, altta gece şeridi (hilal, yıldız, güven satırı) */
+.ay-menu .ay-panel,.ay-menu .ay-p-ust{background:#FFFFFF}
+.ay-menu .ay-p-ust{border-bottom:1px solid #EFE7DA}
+.ay-menu li a{border-bottom:1px solid #F3EDE3}
+.ay-menu li svg{color:#F2A65A}
+.ay-menu .ay-panel::after{content:"Kartla %5 indirim · Kapıda ödeme · 30 gün iade";flex:1 0 auto;min-height:170px;margin-top:auto;padding:22px 20px;box-sizing:border-box;border-radius:24px 24px 0 0;color:#D9D4CC;font-size:14px;font-weight:600;line-height:1.4;background:
+radial-gradient(circle at calc(80% - 9px) calc(58% - 7px),#1A2142 0 22px,transparent 23px),radial-gradient(circle at 80% 58%,#F5F3EF 0 24px,transparent 25px),
+radial-gradient(circle at 80% 58%,rgba(243,181,98,.12) 0 40px,transparent 70px),radial-gradient(2.4px 2.4px at 47% 57%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 12% 52%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 80% 51%,#F5F3EF 50%,transparent 52%),radial-gradient(2.4px 2.4px at 17% 75%,#F5F3EF 50%,transparent 52%),radial-gradient(2.4px 2.4px at 36% 53%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 78% 55%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 86% 85%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 80% 73%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 11% 83%,#F5F3EF 50%,transparent 52%),radial-gradient(1.6px 1.6px at 59% 57%,#F3B562 50%,transparent 52%),radial-gradient(1.8px 1.8px at 45% 83%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 80% 84%,#F5F3EF 50%,transparent 52%),linear-gradient(180deg,#1A2142,#10182B)}
+@media (max-height:700px){.ay-menu .ay-panel::after{display:none}}
+/* Loox yorumları kısa başlar; "Tüm yorumları gör" ile açılır (28 Eki) */
+.ay-loox-kisa{position:relative;max-height:880px;overflow:hidden}
+.ay-loox-kisa::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(180deg,rgba(255,255,255,0),var(--ay-zemin,#fff) 72%);pointer-events:none}
+.ay-loox-ac{position:absolute;left:50%;bottom:18px;z-index:1;transform:translateX(-50%);min-height:48px;padding:0 24px;border:1.5px solid #1A2142;border-radius:999px;background:#FFFDF9;color:#1A2142;font-family:"Figtree",system-ui,sans-serif;font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer}
+.ay-loox-ac:active{transform:translateX(-50%) scale(.97)}

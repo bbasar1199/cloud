@@ -782,3 +782,15 @@
   window.AYLUNA_KUYRUK = { push: function (f) { f(); } };
   kuyruk.forEach(function (f) { f(); });
 })();
+/* Loox yorumları kısa başlar; "Tüm yorumları gör" ile açılır (28 Eki) */
+(function () {
+  function kur() {
+    var l = document.getElementById('looxReviews'), k = l && l.parentElement;
+    if (!k || k.__kisa) return; k.__kisa = 1; k.classList.add('ay-loox-kisa');
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ay-loox-ac'; b.textContent = 'Tüm yorumları gör';
+    b.addEventListener('click', function () { k.classList.remove('ay-loox-kisa'); b.remove(); });
+    k.appendChild(b);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kur); else kur();
+  setTimeout(kur, 2000);
+})();
