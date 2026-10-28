@@ -356,24 +356,22 @@ img{max-width:100%}
   html[data-ay-tur=arama] .izg{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;margin:20px 0 0}
   html[data-ay-tur=arama] .izg span{padding:14px 16px 16px;font-size:15px}
   /* Sepet: solda ürünler ve seçenekler, sağda yapışkan özet */
-  html[data-ay-tur=sepet] .pg{max-width:1080px!important;margin-top:32px!important;margin-bottom:64px!important;border-radius:24px;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .pg{max-width:1080px!important;margin-top:32px!important;margin-bottom:64px!important;border-radius:24px;box-shadow:inset 0 0 0 1px #E7E5EA}
   html[data-ay-tur=sepet] .s-ust{height:76px;padding:0 16px 0 32px}
   html[data-ay-tur=sepet] .s-ust h2{font-size:28px}
   html[data-ay-tur=sepet] .s-govde{display:grid;grid-template-columns:minmax(0,1fr) 380px;column-gap:48px;align-items:start;padding:12px 32px 32px}
   html[data-ay-tur=sepet] .s-sol>*,html[data-ay-tur=sepet] .s-sag>*{margin-left:0!important;margin-right:0!important}
-  html[data-ay-tur=sepet] .s-sag{position:sticky;top:96px;margin-top:12px;padding:20px 24px 4px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .s-sag{position:sticky;top:96px;margin-top:12px;padding:20px 24px 4px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #E7E5EA}
   html[data-ay-tur=sepet] .s-sag .ozet{border-top:0;padding-top:0;margin-top:0}
   html[data-ay-tur=sepet] .s-sag .btn1,html[data-ay-tur=sepet] .s-sag .btn2,html[data-ay-tur=sepet] .s-sol>button{width:100%!important}
   html[data-ay-tur=sepet] .bos-s{max-width:480px;margin:48px auto!important}
   /* Sepet satırı masaüstünde tek sıra: görsel | ad | adet | fiyat + Kaldır (satır 160 → ~90 px); 1024'te panel ekran kenarına yapışmaz */
   html[data-ay-tur=sepet] .pg{width:calc(100% - 48px)!important}
-  html[data-ay-tur=sepet] .urun>div{display:grid;grid-template-columns:minmax(0,1fr) auto 150px;grid-template-areas:"ad adet fiyat" "alt adet fiyat";column-gap:24px;align-items:center;align-content:center}
-  html[data-ay-tur=sepet] .urun>div>b{grid-area:ad;align-self:end}
-  html[data-ay-tur=sepet] .urun>div>small{grid-area:alt;align-self:start}
+  html[data-ay-tur=sepet] .urun>.u-sag{display:grid;grid-template-columns:minmax(0,1fr) auto 150px;grid-template-areas:"ad adet fiyat";column-gap:24px;align-items:center}
+  html[data-ay-tur=sepet] .u-bas{grid-area:ad;align-items:center}
   html[data-ay-tur=sepet] .urun-alt{display:contents}
   html[data-ay-tur=sepet] .urun .adet{grid-area:adet}
   html[data-ay-tur=sepet] .urun-fiyat{grid-area:fiyat;display:flex;flex-direction:column;align-items:flex-end}
-  html[data-ay-tur=sepet] .urun-fiyat br{display:none}
   html[data-ay-tur=sepet] .urun .sil{min-height:40px}
   /* Ürün sayfası alt bilgisi (imza sayfaları, footer.alt-bilgi): solda kapanış + buton, sağda bağlantılar ve yasal bilgi */
   .ay-kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
@@ -546,3 +544,10 @@ html:has(.shopify-policy__container) body{margin:0;background:#F6F1E9;color:#1A2
 .ay-bsk .fg b{color:#A05A1C;font-variant-numeric:tabular-nums}
 .ay-bsk .kd{display:flex;width:max-content;align-items:center;gap:6px;margin:10px 0 -23px 14px;padding:4px 10px 4px 8px;border-radius:999px;background:#F3B562;color:#1A2142;font-size:12px;font-weight:700;line-height:15px;box-shadow:0 0 0 3px #FFFFFF}
 .ay-bsk .kd i{width:6px;height:6px;border-radius:50%;background:#1A2142}
+/* Sepet telefonda ekranı doldurur (29 Eki, kullanıcı: "alttaki boşluğa bak"): özet + ödeme düğmesi ekranın altına oturur, boşluk altta kalmaz */
+@media (max-width:1023px){
+  html[data-ay-tur=sepet] .pg{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+  html[data-ay-tur=sepet] .s-govde{flex:1;display:flex;flex-direction:column}
+  html[data-ay-tur=sepet] .s-sag{margin-top:auto;padding-bottom:max(4px,env(safe-area-inset-bottom))}
+  html[data-ay-tur=sepet] .guven{margin-bottom:16px}
+}
