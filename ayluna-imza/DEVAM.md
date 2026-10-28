@@ -1175,3 +1175,10 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - Yerelde yalnız `canvas/magaza/` görselleri var. Chrome'da tuval açılınca donuyor, bu yüzden yerel önizleme kullan.
 - Flow (Nano Banana Pro) iş akışı: flow.google.com, "Eki 17 - 02:24" projesi; + ile projeden referans seç (lunadream-8.png kız, lunadream-erkek.png robot), istem yaz. Görseli almak için büyük img'yi sayfaya sabit katman olarak koyup save_to_disk ekran görüntüsü al (ilk deneme zaman aşımına düşebilir, ikinci denemede çalışır), PIL ile kırp.
 - Mağaza ürün verisi: Chrome'da `ayluna.shop/products.json?limit=250` (kabuktan ayluna.shop ve cdn.shopify.com engelli).
+
+## Sepet: indirim, küçültme, beyaz, C2 baskı (28 Ekim)
+- Sepette karşılaştırma fiyatından indirim görünür: satırda −%X + üstü çizili; özet Ürünler → İndirim → Kargo → Toplam.
+- Sepet yazı ve parçaları küçüldü (başlık 20, satır 14, Toplam 22, düğme 15; dokunma alanları 48 px).
+- Sepet zemini beyaz; site krem kalır.
+- Baskı: C2 son hâl ("Ekim fiyatı X gün Y sa sonra bitiyor" + stok kurdelesi düğmeye yarı biner). B teslim çizelgesi kaldırıldı.
+- Kullanıcıya verilen: `kodlar/nihai/ay-sepet.liquid` (snippets/ay-sepet.liquid tamamı) + ayluna.css/ayluna.js sonundaki baskı blokları.

@@ -15,78 +15,82 @@ OUT = os.path.join(HERE, '..', '..', 'canvas', 'Sepet.dc.html')
 B = '/_blob/'
 IMG = dict(ld='ec56ce61ebfa99daa425df6a99f3c7cc', astronot='ec1ada6af6ab5b345bc0a6c49e46d7be', kum='ceaf4cf66048150f068cf32120aa9eb1', nem='bf1b4c56f2b7c2d2e4b44ece808b0887')
 
-CSS = r""".pg{background:#F6F1E9;font-family:"Onest",ui-sans-serif,system-ui,sans-serif;font-size:15px;--lac:#1A2142;--soluk:#5C6078;--cizgi:#E3D8C7;--zemin:#EFE6D8;--ease:cubic-bezier(.2,.7,.2,1)}
+CSS = r"""body{background:#FFFFFF}
+.pg{background:#FFFFFF;font-family:"Onest",ui-sans-serif,system-ui,sans-serif;font-size:15px;--lac:#1A2142;--soluk:#5C6078;--cizgi:#E7E5EA;--zemin:#FFFFFF;--acik:#F4F3F1;--ease:cubic-bezier(.2,.7,.2,1)}
 .pg button{font:inherit;color:inherit;cursor:pointer}
 .pg button:focus-visible{outline:2px solid #1A2142;outline-offset:3px}
 /* Üst: başlık + kapat */
-.s-ust{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 6px 0 16px;border-bottom:1px solid var(--cizgi)}
-.s-ust h2{display:flex;align-items:center;gap:10px;margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px;letter-spacing:-.02em}
-.s-ust h2 span{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 7px;border-radius:999px;background:var(--lac);color:#fff;font-family:"Onest",sans-serif;font-size:13px;font-weight:700}
+.s-ust{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 4px 0 16px;border-bottom:1px solid var(--cizgi)}
+.s-ust h2{display:flex;align-items:center;gap:10px;margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;letter-spacing:-.02em}
+.s-ust h2 span{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--lac);color:#fff;font-family:"Onest",sans-serif;font-size:12px;font-weight:700}
 .kapat{width:48px;height:48px;display:grid;place-items:center;border:0;background:transparent}
 .kapat svg,.ik svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.kargo-serit{display:flex;align-items:center;gap:8px;margin:12px 16px 0;padding:10px 12px;border-radius:12px;background:var(--zemin);font-size:13px;font-weight:600}
-.kargo-serit svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.kargo-serit{display:flex;align-items:center;gap:8px;margin:10px 16px 0;padding:8px 12px;border-radius:10px;background:var(--acik);font-size:12px;font-weight:600}
+.kargo-serit svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 /* Ürün satırı */
-.urun{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;margin:14px 16px 0;padding-bottom:16px;border-bottom:1px solid var(--cizgi)}
-.urun img{width:76px;height:76px;border-radius:12px;object-fit:cover;background:var(--zemin)}
-.urun b{display:block;font-size:15px;line-height:1.3}
-.urun small{display:block;margin-top:2px;font-size:13px;color:var(--soluk)}
-.urun-alt{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.adet{display:inline-flex;align-items:center;height:48px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
-.adet button{width:48px;height:48px;border:0;background:transparent;font-size:18px}
-.adet span{min-width:22px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.urun{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;margin:12px 16px 0;padding-bottom:10px;border-bottom:1px solid var(--cizgi)}
+.urun img{width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--acik)}
+.urun b{display:block;font-size:14px;line-height:1.3}
+.urun small{display:block;margin-top:1px;font-size:12px;color:var(--soluk)}
+.urun-alt{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.adet{display:inline-flex;align-items:center;height:36px;margin:6px 0;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.adet button{position:relative;width:36px;height:36px;border:0;background:transparent;font-size:16px}
+.adet button::after{content:"";position:absolute;inset:-6px}
+.adet span{min-width:18px;text-align:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 .urun-fiyat{text-align:right;font-variant-numeric:tabular-nums}
-.urun-fiyat b{font-size:16px}
-.sil{display:inline-flex;align-items:center;min-height:48px;margin-top:0;padding:0;border:0;background:transparent;font-size:13px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
+.urun-fiyat b{display:inline;font-size:14px}
+.sil{position:relative;display:inline-flex;align-items:center;min-height:24px;margin-top:0;padding:0;border:0;background:transparent;font-size:12px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
+.sil::after{content:"";position:absolute;inset:-12px -8px}
 /* Siparişine özel: dokununca eklenir, ay dolar */
-.blok-bas{display:flex;align-items:baseline;justify-content:space-between;margin:22px 16px 10px}
-.blok-bas b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;letter-spacing:-.01em}
+.blok-bas{display:flex;align-items:baseline;justify-content:space-between;margin:16px 16px 8px}
+.blok-bas b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:16px;letter-spacing:-.01em}
 .blok-bas span{font-size:12px;color:var(--soluk)}
-.teklif{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;width:calc(100% - 32px);margin:0 16px 10px;padding:10px 12px 10px 10px;border:0;border-radius:16px;background:#FFFDF9;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
+.teklif{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;width:calc(100% - 32px);margin:0 16px 8px;padding:8px 10px 8px 8px;border:0;border-radius:12px;background:#FFFFFF;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
 .teklif:active{transform:scale(.985)}
-.teklif.on{box-shadow:inset 0 0 0 2px var(--lac);background:#FFFDF9}
-.teklif img{width:56px;height:56px;border-radius:12px;object-fit:cover;background:var(--zemin)}
-.teklif b{display:block;font-size:14px;line-height:1.3}
-.teklif small{display:block;margin-top:2px;font-size:12px;color:var(--soluk)}
-.teklif .tf{display:block;margin-top:3px;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
-.ekle{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 8px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--lac);font-size:13px;font-weight:700;white-space:nowrap}
-.ekle svg{width:20px;height:20px}
+.teklif.on{box-shadow:inset 0 0 0 2px var(--lac);background:#FFFFFF}
+.teklif img{width:44px;height:44px;border-radius:8px;object-fit:cover;background:var(--acik)}
+.teklif b{display:block;font-size:13px;line-height:1.25}
+.teklif small{display:none;font-size:12px;color:var(--soluk)}
+.teklif .tf{display:block;margin-top:1px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.ekle{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 10px 0 6px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--lac);font-size:12px;font-weight:700;white-space:nowrap}
+.ekle svg{width:18px;height:18px}
 .ekle svg circle{fill:none;stroke:var(--lac);stroke-width:1.6}
 .ekle svg path{fill:var(--lac);opacity:0;transform-origin:12px 12px;transform:scale(.4) rotate(-30deg);transition:opacity .35s var(--ease),transform .45s var(--ease)}
 .on .ekle{background:var(--lac);color:#fff}
 .on .ekle svg circle{stroke:#fff}.on .ekle svg path{fill:#fff;opacity:1;transform:none}
 /* Teslimat seçimi */
-.tes{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;width:calc(100% - 32px);margin:0 16px 10px;padding:14px 14px 14px 12px;border:0;border-radius:16px;background:#FFFDF9;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.tes{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;width:calc(100% - 32px);margin:0 16px 8px;padding:10px 12px 10px 10px;border:0;border-radius:12px;background:#FFFFFF;text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
 .tes.on{box-shadow:inset 0 0 0 2px var(--lac)}
-.tes b{display:block;font-size:15px}
-.tes small{display:block;margin-top:2px;font-size:13px;color:var(--soluk);line-height:1.4}
+.tes b{display:block;font-size:14px}
+.tes small{display:block;margin-top:1px;font-size:12px;color:var(--soluk);line-height:1.4}
 .tes em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .nokta{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8C0D2}
 .nokta i{display:block;width:12px;height:12px;margin:5px;border-radius:50%;background:var(--lac);opacity:0;transform:scale(.3);transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}.on .nokta i{opacity:1;transform:none}
 /* Özet ve ödeme */
-.ozet{margin:12px 16px 0;padding:14px 0 0;border-top:1px solid var(--cizgi);font-variant-numeric:tabular-nums}
-.ozet p{display:flex;justify-content:space-between;margin:0 0 8px;font-size:14px;color:var(--soluk)}
+.ozet{margin:8px 16px 0;padding:12px 0 0;border-top:1px solid var(--cizgi);font-variant-numeric:tabular-nums}
+.ozet p{display:flex;justify-content:space-between;margin:0 0 6px;font-size:13px;color:var(--soluk)}
 .ozet p b{color:var(--lac);font-weight:600}
 .ozet p.ind b{color:#2E6B4F}
-.ozet .top{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px dashed var(--cizgi);color:var(--lac)}
-.ozet .top span{font-size:15px;font-weight:600}
-.ozet .top b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-.02em}
-.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:52px;margin:16px 16px 0;padding:6px 16px;border:0;border-radius:16px;background:var(--lac);transition:transform .12s var(--ease)}
+.ozet .top{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:10px;border-top:1px dashed var(--cizgi);color:var(--lac)}
+.ozet .top span{font-size:14px;font-weight:600}
+.ozet .top b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.02em}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:calc(100% - 32px);min-height:50px;margin:12px 16px 0;padding:6px 16px;border:0;border-radius:12px;background:var(--lac);transition:transform .12s var(--ease)}
 .pg .btn1{color:#fff}
 .btn1:active{transform:translateY(3px)}
 .btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
-.btn1 .b-ic>span{font-size:16px;font-weight:700}
+.btn1 .b-ic>span{font-size:15px;font-weight:700}
 .btn1 .b-ic small{margin-top:2px;font-size:12px;font-weight:600;color:#C9D2EC}
 .btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) 1s 3}
 @keyframes durt{0%,58%,100%{transform:none}68%{transform:translateX(5px)}78%{transform:none}86%{transform:translateX(3px)}94%{transform:none}}
 .btn2{display:flex;align-items:center;justify-content:center;width:calc(100% - 32px);min-height:48px;margin:12px 16px 0;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
-.guven{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 16px 24px;text-align:center}
+.guven{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 16px 20px;text-align:center}
 .guven span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--soluk);line-height:1.3}
-.guven svg{width:22px;height:22px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.guven svg{width:18px;height:18px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .s-not{margin:0 16px 20px;font-size:12px;color:var(--soluk)}
 .urun-fiyat s{display:block;font-size:12px;color:var(--soluk)}
-.bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
+.urun-fiyat i{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:999px;background:#E3EFE7;color:#2E6B4F;font-size:12px;font-style:normal;font-weight:700;vertical-align:1px}
+.bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
 .bos-s>svg{display:block;margin:0 auto 10px}
 .bos-s h3{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px}
 .bos-s p{margin:6px 0 0;font-size:15px;color:var(--soluk)}
@@ -116,7 +120,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   <sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><div class="urun"><img src="{{u.img}}" alt="{{u.ad}}">
     <div><b>{{u.ad}}</b><small>{{u.varyant}}</small>
       <div class="urun-alt"><span class="adet"><button type="button" onClick="{{u.azalt}}" aria-label="Azalt">−</button><span aria-live="polite">{{u.adet}}</span><button type="button" onClick="{{u.arttir}}" aria-label="Arttır">+</button></span>
-        <span class="urun-fiyat"><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
+        <span class="urun-fiyat"><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><i>−%{{u.yuzde}}</i></sc-if><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
 
   <!-- Siparişine özel: canlı sepetteki üç teklif. Dokununca eklenir; ay dolar. Mağaza fiyatı düz yazı (üstü çizili değil). -->
   <sc-if value="{{teklifVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas"><b>Siparişine özel</b><span>{{teklifNot}}</span></div>
@@ -128,6 +132,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </div><div class="s-sag">
   <div class="ozet">
     <p><span>Ürünler</span><b>{{araUrun}}</b></p>
+    <sc-if value="{{indVar}}" hint-placeholder-val="{{true}}"><p class="ind"><span>İndirim</span><b>−{{indirim}}</b></p></sc-if>
     <sc-if value="{{ekVar}}" hint-placeholder-val="{{true}}"><p><span>Siparişine özel</span><b>{{araEk}}</b></p></sc-if>
     <p><span>Kargo</span><b>{{kargoT}}</b></p>
     <div class="top"><span>Toplam</span><b>{{toplam}}</b></div>
@@ -157,7 +162,9 @@ JS = """class Component extends DCLogic {
     if (SHOP) T = T.filter(function (t) { return VU[t.h] && !VU[t.h].yok && VU[t.h].stok !== false; }).map(function (t) { return Object.assign({}, t, { p: VU[t.h].p, alt: 'Tek dokunuşla siparişine ekle' }); });
     var teklif = T.map(function (t) { var on = !!ekler[t.k]; return { n: t.n, alt: t.alt, p: TL(t.p, true), src: B + t.img, on: on ? 'true' : 'false', cls: on ? 'teklif on' : 'teklif', btn: on ? 'Eklendi' : 'Ekle',
       pick: function () { if (SP) SP.ek(t.k); else demo(function (d) { d.ekler[t.k] = !d.ekler[t.k]; }); } }; });
-    var satirlar = sp.satirlar.map(function (x) { return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: !!(x.eski && x.eski > x.birim && (x.paket || 1) === 1 && x.adet === 1), eski: x.eski ? TL(x.eski, true) : '',
+    // 28 Eki (kullanıcı: "1999'sa %15 indirim yaptıysak o da sepette görünsün"): birim liste fiyatı = Shopify karşılaştırma fiyatı (ürün sayfasındaki üstü çizili) ya da sepetteki ilk fiyat
+    function liste(x) { var c = (VU[x.h] && VU[x.h].c) || 0; if (!SHOP) c *= (x.paket || 1); return Math.max(x.eski || 0, c, x.birim); }
+    var satirlar = sp.satirlar.map(function (x) { var L = liste(x); return { ad: x.ad, varyant: x.varyant, img: x.img, adet: x.adet, tutar: TL(x.birim * x.adet, true), eskiVar: L > x.birim + .005, eski: TL(L * x.adet, true), yuzde: Math.round((1 - x.birim / L) * 100),
       azalt: function () { if (x.adet > 1) { if (SP) SP.adet(x.id, x.adet - 1); else demo(function (d) { d.satirlar[0].adet--; }); } },
       arttir: function () { if (x.adet < 9) { if (SP) SP.adet(x.id, x.adet + 1); else demo(function (d) { d.satirlar[0].adet++; }); } },
       sil: function () { if (SP) SP.sil(x.id); else demo(function (d) { d.satirlar = []; }); } }; });
@@ -171,17 +178,18 @@ JS = """class Component extends DCLogic {
       { n: 'Standart kargo', t: kGun + ' kargoda, ' + teslim + ' kapında', p: 'Ücretsiz', h: false },
       { n: 'Hızlı Kargo', t: 'Siparişin sıranın önüne alınır, öncelikli hazırlanıp kargolanır.', p: TL(HIZLI, true), h: true }
     ].map(function (d) { var on = !!sp.hizli === d.h; return { n: d.n, t: d.t, p: d.p, on: on ? 'true' : 'false', cls: on ? 'tes on' : 'tes', pick: function () { if (SP) SP.hizli(d.h); else demo(function (x) { x.hizli = d.h; }); } }; });
-    var urun = 0, adetT = 0, ek = 0, ekSay = 0;
-    sp.satirlar.forEach(function (x) { urun += x.birim * x.adet; adetT += x.adet; });
+    var urun = 0, listeT = 0, adetT = 0, ek = 0, ekSay = 0;
+    sp.satirlar.forEach(function (x) { urun += x.birim * x.adet; listeT += liste(x) * x.adet; adetT += x.adet; });
     T.forEach(function (t) { if (ekler[t.k]) { ek += t.p; ekSay++; } });
     var kargo = sp.hizli ? HIZLI : 0;
-    var indirim = 0;  // 28 Eki: sepette kartla %5 indirim yok (kullanıcı: "ödemeye geçince normal fiyatta görünüyor")
-    var toplam = Math.round((urun + ek - indirim + kargo) * 100) / 100;
+    // Kartla %5 sepette yok (28 Eki). İndirim = karşılaştırma fiyatından düşüş; toplam yine gerçek ödenen (ürünler + ekler + kargo).
+    var indirim = Math.round((listeT - urun) * 100) / 100;
+    var toplam = Math.round((urun + ek + kargo) * 100) / 100;
     var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
       bos: !sp.satirlar.length, dolu: sp.satirlar.length > 0, satirlar: satirlar, adetToplam: adetT + ekSay,
       teklif: teklif, teslimat: teslimat, teklifVar: teklif.length > 0, teklifNot: SHOP ? 'Birlikte iyi gider' : 'Yalnız bu siparişte', teslimatVar: !SHOP, kargoSerit: sp.hizli ? 'Hızlı Kargo · öncelikli hazırlanır' : 'Kargo ücretsiz · ' + (KG.bugun ? 'bugün' : kGun) + ' kargoda',
-      araUrun: TL(urun, true), ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
+      araUrun: TL(listeT, true), indVar: indirim > 0, ekVar: ekSay > 0, araEk: TL(ek, true), kargoT: kargo ? TL(kargo, true) : 'Ücretsiz',
       indirim: TL(indirim, true), toplam: TL(toplam, true),
       kapat: function () { if (!window.Ayluna) return; if (cek) window.parent.postMessage({ ayluna: 'kapat' }, '*'); else window.Ayluna.geri(); },
       odeme: function () { if (window.Ayluna) window.Ayluna.odemeyeGec(); },
