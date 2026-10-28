@@ -22,7 +22,8 @@ AD = 'Yılbaşı Ağacı Projektör Lamba'
 P1 = 999.0   # GEÇİCİ: ürün Shopify'da yok (28 Eki); canlıda fiyat Shopify'dan gelir (ayluna.js)
 C1 = None
 
-TEMA = dict(v='#F2A65A', v2='#8A4F0F', zemin='#FFFFFF', cizgi='#E7E5EA', koyu='#10182B', koyu2='#1A2142',
+# 2. tur (28 Eki, kullanıcı: "çok sade ve sıkıcı olmuş"): çam yeşili + altın bantlar, dört imza anı (Ağacı yak, dergi kapağı, dönen tavan, takvim yaprağı)
+TEMA = dict(v='#E3B65A', v2='#8C5E10', zemin='#FFFDF8', cizgi='#ECE4D6', koyu='#0D261C', koyu2='#173828',
             fb='"Young Serif"', fg='"Onest"', bk=400, bls='-.02em',
             font='family=Young+Serif&family=Onest:wght@400;500;600;700;800')
 
@@ -92,7 +93,76 @@ CSS = r"""
 .adm figcaption b{display:flex;align-items:center;gap:8px;margin-bottom:2px;font-size:16px;color:var(--lac)}
 .adm figcaption b i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-size:12px}
 .qr{margin:12px 16px 0;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac);font-size:13px}
-@media (prefers-reduced-motion:reduce){.tav img,.kut button{transition:none}}
+.pg{--lac:#123A2A;--kirmizi:#B8342A}
+.pg .koyu{background:radial-gradient(120% 70% at 50% 0%,#1B4433 0%,#0D261C 70%)}
+.pg .h2 .n,.bas-y .n{color:var(--v)}
+/* Ağacı yak: oda karanlık; dokununca ışık alttan (lambadan) tavana yayılır. 2 sn kapalı → 7 sn açık; dokununca durur */
+.yak{position:relative;border-radius:24px;overflow:hidden;background:#05100B;color:#fff}
+.yak-g{position:relative;height:470px;overflow:hidden}
+.yak-g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.yak .k0{filter:brightness(.13) saturate(.3)}
+.yak .k1{clip-path:circle(0% at 50% 100%);transition:clip-path 1.8s var(--ease) .1s}
+.yak.on .k1{clip-path:circle(150% at 50% 100%)}
+.yak .kor{position:absolute;left:50%;bottom:22px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--v);box-shadow:0 0 18px 6px rgba(227,182,90,.55);transition:opacity .6s var(--ease)}
+.yak.on .kor{opacity:0}
+.yak-y{position:absolute;left:18px;right:18px;top:20px}
+.yak-y .bas-y{margin:0;font-size:40px;line-height:1;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.yak-alt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:#0D261C}
+.yak-alt span{font-size:14px;color:#D9E3DC}
+.anah{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 6px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font:700 14px var(--fg)}
+.anah i{position:relative;width:46px;height:28px;border-radius:999px;background:#33473E;transition:background-color .3s var(--ease)}
+.anah i::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .3s var(--ease)}
+.yak.on .anah i{background:var(--v)}.yak.on .anah i::after{transform:translateX(18px)}
+/* Dergi kapağı: dev tek kelime, arkasında o adımın karesi; 2,6 sn'de bir değişir, dokununca durur */
+.dg{position:relative;height:520px;margin-top:16px;border-radius:24px;overflow:hidden;background:#0D261C}
+.dg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .6s var(--ease),transform 2.6s var(--ease)}
+.dg img.on{opacity:.92;transform:none}
+.dg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,24,17,.92) 0%,rgba(8,24,17,.15) 55%,rgba(8,24,17,0) 70%);pointer-events:none}
+.dg-k{position:absolute;left:16px;right:16px;bottom:72px;z-index:1;margin:0;font-family:var(--fb);font-weight:400;font-size:96px;line-height:.9;letter-spacing:-.04em;color:#fff}
+.dg-k span{display:inline-block;animation:dgk .55s var(--ease) both}
+.dg-k em{font-style:normal;color:var(--v)}
+@keyframes dgk{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.dg-t{position:absolute;left:16px;right:16px;bottom:22px;z-index:1;margin:0;font-size:15px;color:#E4ECE6}
+.dg-s{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+.dg-s button{min-height:48px;border:0;border-radius:12px;background:#F2EEE5;color:var(--lac);font:700 14px var(--fg);box-shadow:inset 0 -3px 0 transparent}
+.dg-s button.on{background:var(--lac);color:#fff;box-shadow:inset 0 -3px 0 var(--v)}
+/* Dönen tavan: seçili desen tavanda ağır ağır döner */
+.tav-d{position:absolute;inset:0;animation:tavd 90s linear infinite}
+@keyframes tavd{to{transform:rotate(360deg)}}
+/* Kime hediye? */
+.hd{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px}
+.hd-k{flex:0 0 220px;scroll-snap-align:start;padding:18px 16px;border-radius:20px;color:#fff;min-height:200px;display:flex;flex-direction:column}
+.hd-k svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hd-k b{display:block;margin-top:auto;font-family:var(--fb);font-weight:400;font-size:24px;line-height:1.05}
+.hd-k span{display:block;margin-top:6px;font-size:13px;line-height:1.4;opacity:.88}
+.hd-k.y{background:#163828}.hd-k.k{background:#8E2A22}.hd-k.a{background:#E9D3A4;color:#3B2A0E}.hd-k.l{background:#1A2142}
+/* Takvim yaprağı: yılbaşından önce teslim için son sipariş günü (gerçek hesap) */
+.tkv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center}
+.tkv-y{position:relative;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center;transform:rotate(-3deg)}
+.tkv-y b{display:block;padding:6px 0;background:var(--kirmizi);color:#fff;font-size:13px;letter-spacing:.08em}
+.tkv-y strong{display:block;padding:6px 0 2px;font-family:var(--fb);font-weight:400;font-size:62px;line-height:1;color:var(--lac)}
+.tkv-y small{display:block;padding-bottom:10px;font-size:12px;color:#5C6078}
+.tkv-y::before{content:"";position:absolute;left:0;right:0;top:30px;height:6px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 0 0/12px 6px}
+.tkv-m{text-align:left}.tkv-m b{display:block;font-family:var(--fb);font-weight:400;font-size:22px;line-height:1.1;color:#fff}
+.tkv-m span{display:block;margin-top:6px;font-size:14px;color:#D9E3DC}
+.tkv-m .btn1{width:100%;margin-top:14px;background:var(--v);justify-content:center}.pg .tkv-m .btn1,.pg .tkv-m .btn1 .b-ic>span{color:#14231B}.pg .tkv-m .btn1 svg{stroke:#14231B}
+/* 3. tur (eleştirmen 6,5 → ilk ekran): satın alma kutusu yeni dile bağlanır */
+.pg .yb-k{background:#123A2A;box-shadow:none;color:#fff}.pg .yb-k .gk{background:var(--v);color:#123A2A}.pg .yb-k span.t{color:#C9D6CE}
+.pg .al .ozler{gap:6px;border:0;box-shadow:none;background:none}
+.pg .al .ozler .oz{border:0;border-radius:14px;background:#F4EFE4;box-shadow:none}
+.yil-c{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;padding:4px 10px;border-radius:999px;background:#123A2A;color:var(--v);font-size:12px;font-weight:700}
+.yil-c svg{width:14px;height:14px;fill:var(--v)}
+.pg .yapis{background:#0D261C}
+.yak-ic{position:absolute;right:14px;bottom:14px;width:84px;height:84px;border-radius:16px;overflow:hidden;box-shadow:0 0 0 3px rgba(255,255,255,.85);opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease) .9s,transform .5s var(--ease) .9s}
+.yak-ic img{width:100%;height:100%;object-fit:cover}
+.yak-ic small{position:absolute;left:0;right:0;bottom:0;padding:2px 0;background:rgba(13,38,28,.82);color:#fff;font-size:12px;text-align:center}
+.yak.on .yak-ic{opacity:1;transform:none}
+.hd-k{padding:0;overflow:hidden}
+.hd-k .hd-g{height:118px;background-size:cover;background-position:center}
+.hd-k .hd-y{display:flex;flex-direction:column;flex:1;padding:12px 14px 16px}
+.hd-k .hd-y b{margin-top:0}
+.hd-k.k{background:#7A2E24}
+@media (prefers-reduced-motion:reduce){.tav img,.kut button,.yak .k1,.dg img,.anah i,.anah i::after,.kor,.yak-ic{transition:none}.tav-d,.dg-k span{animation:none}}
 """
 
 
@@ -123,6 +193,7 @@ def al():
     fiyat = ('<p class="fiyat"><b>%s</b>%s</p>' % (tl(P1), ('<s>%s</s><span class="rozet">%%%d indirim</span>' % (tl(C1), round((1 - P1 / C1) * 100))) if C1 else ''))
     return ("""
   <section class="al" id="siparis">
+    <p class="yil-c"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Yılbaşı koleksiyonu</p>
     <h1 class="bas-y">%s</h1>
     <p class="alt-b">Kendin süslediğin minik yılbaşı ağacı; USB’ye takınca tavana yılbaşı desenleri yansıtır.</p>
     %s
@@ -178,8 +249,8 @@ def gece():
     return ("""
   <!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
   <section class="koyu bolum" id="diskler">
-    <div class="px"><h2 class="bas-y h2">Bu gece<br>hangisi<span class="n">?</span></h2><p class="alt-b">Diski değiştir, tavan değişsin.</p>
-    <div class="tav" aria-hidden="true"><sc-for list="{{disk}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for></div>
+    <div class="px"><h2 class="bas-y h2" style="color: #fff">Bu gece<br>hangisi<span class="n">?</span></h2><p class="alt-b" style="color: #C9D6CE">Diski değiştir; desen tavanda ağır ağır dönsün.</p>
+    <div class="tav" aria-hidden="true"><div class="tav-d"><sc-for list="{{disk}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for></div></div>
     <span class="tav-ad" aria-live="polite">{{dAd}}</span>
     <div class="dk"><sc-for list="{{disk}}" as="d" hint-placeholder-count="6"><button class="{{d.bcls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><img src="{{d.src}}" alt="">{{d.n}}</button></sc-for></div>
     <p class="alt-not">Disk değiştirmek: fişi çek, abajuru kaldır, diski değiştir, abajuru tak. Desen görselleri ürün afişinden; tavanda daha yumuşak görünür.</p></div>
@@ -208,8 +279,53 @@ def gerisi():
     return g
 
 
+YAK = """
+  <!-- Ağacı yak (imza anı, AyFeneri'ndeki "Feneri yak" gibi): oda karanlık; ışık lambadan (alttan) tavana yayılır -->
+  <section class="bolum px" id="yak">
+    <div class="{{yakCls}}">
+      <div class="yak-g"><img class="k0" src="@@yb-tavan@@" alt=""><img class="k1" src="@@yb-tavan@@" alt="Tavana yansıyan yılbaşı desenleri"><span class="kor" aria-hidden="true"></span><span class="yak-ic"><img src="@@yb-adim4@@" alt="Kurulan yılbaşı ağacı lambası"><small>Kutudan çıkan</small></span>
+        <div class="yak-y"><p class="bas-y">{{yakYazi}}</p></div></div>
+      <div class="yak-alt"><span>{{yakAlt}}</span><button class="anah" type="button" onClick="{{yakSw}}" aria-pressed="{{yakOn}}">{{yakEt}}<i></i></button></div>
+    </div>
+  </section>
+"""
+
+DERGI = """
+  <!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
+  <section class="bolum px" id="nasil">
+    <h2 class="bas-y h2">Dört kelimede<br>yılbaşı<span class="n">.</span></h2>
+    <div class="dg"><sc-for list="{{dg}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for>
+      <p class="dg-k" aria-live="polite"><span>{{dgK}}<em>.</em></span></p><p class="dg-t">{{dgT}}</p></div>
+    <div class="dg-s" role="tablist"><sc-for list="{{dg}}" as="d" hint-placeholder-count="4"><button class="{{d.bcls}}" type="button" role="tab" aria-selected="{{d.on}}" onClick="{{d.pick}}">{{d.k}}</button></sc-for></div>
+    <p class="alt-b" style="margin-top: 12px; font-size: 13px">Kurulum videosu kutudaki QR kodda.</p>
+  </section>
+"""
+
+HEDIYE = """
+  <!-- Kime hediye? (hediye rehberi; ürün bilgisine dayalı, iddia yok) -->
+  <section class="bolum" id="hediye">
+    <div class="px"><h2 class="bas-y h2">Kime<br>hediye<span class="n">?</span></h2><p class="alt-b">Kutusuyla hazır; açması da kurması da hediye.</p></div>
+    <div class="hd noscroll">
+      <div class="hd-k y"><span class="hd-g" style="background-image: url(@@yb-d-kar@@)" aria-hidden="true"></span><span class="hd-y"><b>Çocuğuna</b><span>Ağacı birlikte kurun; yatmadan tavana kar taneleri.</span></span></div>
+      <div class="hd-k k"><span class="hd-g" style="background-image: url(@@yb-d-mesaj@@)" aria-hidden="true"></span><span class="hd-y"><b>Sevdiğine</b><span>Yeni yıl mesajlı diskle tavana "Merry Christmas".</span></span></div>
+      <div class="hd-k a"><span class="hd-g" style="background-image: url(@@yb-adim3@@)" aria-hidden="true"></span><span class="hd-y"><b>Anneannene</b><span>Torunla bir akşam etkinliği; sonra komodinde süs.</span></span></div>
+      <div class="hd-k l"><span class="hd-g" style="background-image: url(@@yb-kare@@)" aria-hidden="true"></span><span class="hd-y"><b>Kendine</b><span>Masanda minik ağaç; USB’ye tak, oda yılbaşı olsun.</span></span></div>
+      <span aria-hidden="true" style="flex: 0 0 6px"></span>
+    </div>
+  </section>
+"""
+
+TAKVIM = """
+  <!-- Takvim yaprağı: yılbaşından önce teslim için son sipariş günü (1 iş gününde kargo + en geç 7 gün; sayaç değil) -->
+  <section class="koyu bolum px" id="takvim">
+    <div class="tkv"><div class="tkv-y" aria-hidden="true"><b>{{tkAy}}</b><strong>{{tkGun}}</strong><small>{{tkHafta}}</small></div>
+      <div class="tkv-m"><b>{{tkBas}}</b><span>{{tkAlt}}</span><button class="btn1" type="button" onClick="{{alaGit}}"><span class="b-ic"><span>Şimdi sipariş ver</span></span>""" + U.OK + """</button></div></div>
+  </section>
+"""
+
+
 def govde():
-    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YANINCA + kutuda() + gece() + adimlar() + gerisi() + '</div>\n')
+    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YAK + DERGI + kutuda() + gece() + HEDIYE + TAKVIM + gerisi() + '</div>\n')
     return re.sub(r'@@([\w-]+)@@', lambda m: I(m.group(1)), h)
 
 
@@ -221,6 +337,8 @@ def js():
     gal = [[B + i, '%s görseli %d' % (AD, k + 1), '50% 50%'] for k, i in enumerate(canli_galeri(H))]
     disk = [[n, I(k)] for n, k in DISK]
     parca = [[n, a] for n, a, _, _ in PARCA]
+    dg = [['Sar', 'Tüylü çubukları USB kablonun etrafına sar.', I('yb-adim1')], ['Süsle', 'Desenli çıkartmayı altın abajura giydir; inciler senden.', I('yb-adim3')],
+          ['Tak', 'Abajuru tak, USB’ye bağla.', I('yb-adim4')], ['Yansıt', 'Işığı kapat: tavan yılbaşı olur.', I('yb-tavan')]]
     BA = OS.BA
     PR = [('lunadream-gece-lambasi', 'LunaDream Gece Lambası', 1699.99, 1999), ('galayx-usb-projektor', 'Galaxy USB Projektör', 1599, 1999),
           ('lamba', 'Ayluna AyFeneri', 1649.99, 2499), ('ayluna-galaksi-night-projektor', 'Ayluna Galaksi Night Projektör', 2199, 2999),
@@ -228,15 +346,17 @@ def js():
     shop = [[n, p, c, B + BA['u-%s.jpg' % h]] for h, n, p, c in PR]
     nk = ''.join("nk%d: S.nk === %d ? 'on' : '', nkOn%d: S.nk === %d ? 'true' : 'false', nkSec%d: function () { self.setState({ nk: %d }); },\n      " % (i, i, i, i, i, i) for i in range(len(PARCA)))
     return """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, t: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ dOto: false });
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ dOto: false, yOto: false, yak: true, dgOto: false });
     // Tek saat: şerit sayacı, galeri (5 sn), disk (4 sn)
     this.iv = setInterval(function () {
       var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
       if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || """ + str(len(gal)) + """));
       if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % """ + str(len(DISK)) + """;
+      if (S.yOto && t - S.yBas >= (S.yak ? 7 : 2)) { o.yak = !S.yak; o.yBas = t; }
+      if (S.dgOto && t % 3 === 0) o.dg = (S.dg + 1) % 4;
       self.setState(o);
     }, 1000);
   }
@@ -260,6 +380,7 @@ def js():
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var PARCA = """ + json.dumps(parca, ensure_ascii=False) + """;
+    var DG = """ + json.dumps(dg, ensure_ascii=False) + """, GUNA = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'], AYU = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
@@ -285,6 +406,12 @@ def js():
       ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       disk: disk, dAd: DISK[S.disk][0],
+      yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Tavan yılbaşı oldu.' : 'Işığı kapat, ağacı yak.',
+      yakAlt: S.yak ? 'Desenler tavanda; diski değiştirince değişir.' : 'Lamba kapalı. Dokun, yansısın.', yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
+      dg: DG.map(function (d, i) { var on = i === S.dg; return { k: d[0], src: d[2], cls: on ? 'on' : '', bcls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ dg: i, dgOto: false }); } }; }),
+      dgK: DG[S.dg][0], dgT: DG[S.dg][1],
+      tkAy: son ? AYU[son.getMonth()].toLocaleUpperCase('tr') : AYU[t2.getMonth()].toLocaleUpperCase('tr'), tkGun: son ? String(son.getDate()) : String(t2.getDate()), tkHafta: son ? GUNA[son.getDay()] : 'tahmini teslim',
+      tkBas: yetisir ? 'Yılbaşından önce kapında olması için son sipariş günü.' : 'Bu yıl yılbaşına yetişmeyebilir.', tkAlt: yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Bugün verirsen ' + kd.getDate() + ' ' + AYU[kd.getMonth()] + ' kargoda.') : ('Tahmini teslim: ' + teslim + '.'),
       nkNo: S.nk + 1, nkAd: PARCA[S.nk][0], nkAlt: PARCA[S.nk][1],
       """ + nk + """alaGit: alaGit, faq: """ + json.dumps(faq(), ensure_ascii=False) + """, kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
     };
