@@ -294,7 +294,7 @@ const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + m); if (!ok) h
   { const kotu = [], k2 = await b.newContext({ viewport: { width: 390, height: 844 } }), p2 = await k2.newPage();  // LunaDream sayfası (pg) yerinde kalsın
     for (const f of ['galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor', 'sunset-lamba', 'ayluna-retro-mini-pikap', 'egitici-akilli-cizim-tahtasi',
       'dokunmatik-ambiyans-lamba', 'ayluna-cocuk-gece-feneri', 'galaksiambiyanisigi', 'lunadream-gece-lambasi-v2', 'aroma-terapi-nemlendirici',
-      'yildiz-isigi-nemlendirici', 'ask-saati', 'astronot-oda-nemlendirici-aroma-difuzor', 'yilbasi-agaci-projektor-lamba']) {
+      'yildiz-isigi-nemlendirici', 'ask-saati', 'astronot-oda-nemlendirici-aroma-difuzor']) {  // yılbaşı ağacının kendi imza sayfası var (28 Eki)
       await p2.goto(KOK + f + '.html'); await p2.waitForTimeout(300);
       const r = await p2.evaluate(() => { const u = document.querySelector('.urs'), o = u && u.previousElementSibling, s0 = u && u.querySelector('.urs-s summary');
         const q = [...document.querySelectorAll('.urs-s summary')].map(x => x.textContent.trim()), sss = [...document.querySelectorAll('details.sss summary')].map(x => x.textContent.replace('+', '').trim());

@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Yılbaşı Ağacı Projektör Lamba</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap">
+<style>
+body{margin:0;background:#F2F4F8}
+.pg{--v:#F2A65A;--v2:#8A4F0F;--zemin:#FFFFFF;--cizgi:#E7E5EA;--koyu:#10182B;--koyu2:#1A2142;--fb:"Young Serif",ui-sans-serif,system-ui,sans-serif;--fg:"Onest",ui-sans-serif,system-ui,sans-serif;--bk:400;--bls:-.02em}
+
+
+.pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--yuzey:#FFFFFF;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
+  width:390px;margin:0 auto;background:var(--zemin);color:var(--lac);font-family:var(--fg);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:clip;position:relative}
+@supports not (overflow:clip){.pg{overflow:hidden}}
+.pg *{box-sizing:border-box}
+.pg button{font:inherit;color:inherit;cursor:pointer}
+.pg a{color:inherit}
+.pg button:focus-visible,.pg a:focus-visible,.pg summary:focus-visible{outline:2px solid var(--v2);outline-offset:3px}
+.koyu button:focus-visible,.hero button:focus-visible,.hk button:focus-visible{outline-color:var(--v)}
+.px{padding-left:16px;padding-right:16px}
+.bas-y{font-family:var(--fb);font-weight:var(--bk);letter-spacing:var(--bls);line-height:1;margin:0;text-wrap:balance;font-optical-sizing:auto}
+.h2{font-size:24px}
+.bas-y .n{color:var(--v2)}
+.koyu{background:var(--koyu);color:#EEF2FA}
+.koyu .bas-y .n{color:var(--v)}
+.bolum{padding-top:44px;padding-bottom:44px}
+.alt-b{margin:8px 0 0;font-size:15px;color:var(--soluk)}
+.koyu .alt-b{color:var(--acik)}
+.alt-not{margin:14px 0 0;font-size:12px;color:var(--soluk)}
+.koyu .alt-not{color:var(--acik)}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+@keyframes sol{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes don{to{transform:rotate(360deg)}}
+@keyframes dol{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+
+/* Üst: marka işareti + yazısı (ortak çekirdek) */
+.marka{display:flex;align-items:center;gap:6px}
+.marka b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:18px;letter-spacing:-.01em}
+.u-ust{display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 6px}
+.ikon{width:48px;height:48px;display:grid;place-items:center;border:0;background:transparent}
+.ikon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* Tek sayaç: üst şerit; saniye kutusu her saniye tıklar */
+.serit{display:flex;justify-content:center;align-items:center;gap:10px;height:40px;background:var(--koyu);color:#EEF2FA;font-size:13px;font-weight:600}
+.serit .sy{display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
+.serit .sy b{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 4px;border-radius:6px;background:#2A3466;font-size:13px}
+.serit .sy b.sn{background:var(--v);color:var(--koyu)}
+.serit .sy i{font-style:normal;color:var(--acik)}
+@keyframes tikA{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes tikB{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.sn.tA{animation:tikA .45s var(--ease)}.sn.tB{animation:tikB .45s var(--ease)}
+
+/* Sinema galeri (Yön A): tam ekran fotoğraf; başlık ve küçük resimler görselin içinde. 5 sn'de geçer, dokununca durur. */
+.hero{position:relative;height:560px;overflow:hidden;background:var(--koyu);color:#fff}
+.h-iz{position:absolute;left:0;right:0;top:52px;bottom:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.hs{position:relative;flex:0 0 100%;overflow:hidden;scroll-snap-align:start;background:var(--koyu)}
+.hs>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hs.on>img{animation:kb 7s linear both}
+.hs.afis>img{top:50%;bottom:auto;height:auto;aspect-ratio:1/1;transform:translateY(-58%)}
+.hs.afis.on>img{animation:none}
+.hs::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,26,54,.35) 0,rgba(20,26,54,0) 12%,rgba(20,26,54,0) 50%,rgba(20,26,54,.92) 92%)}
+.hero .u-ust{position:relative;z-index:2}
+.hero-y{position:absolute;left:16px;right:16px;bottom:64px;z-index:2}
+.hero-y .bas-y{font-size:44px;line-height:.96}
+.hero-y .bas-y>span{display:block;overflow:hidden;padding-bottom:4px}
+.hero-y .bas-y i{display:block;font-style:normal;animation:satir .9s var(--ease) both}
+.hero-y .bas-y>span+span i{animation-delay:.12s}
+.hero-y .bas-y em{font-style:normal;color:var(--v)}
+@keyframes satir{from{transform:translateY(105%)}to{transform:none}}
+.hero-y p{margin:10px 0 0;font-size:16px;color:#D5DBEA;animation:sol .8s var(--ease) .35s both}
+/* Kare galeri (kullanıcı, 19 Eki: Shopify'daki gibi): logo bandının altında tam kare görsel; üstüne başlık ya da gölge binmez, gösterge altta.
+   AyFeneri ve Galaksi Night da bunu kullanır (ozel_sayfa.py, U.CSS). */
+/* Kullanıcı (19 Eki, "Şerit kalksın"): fotoğrafın altındaki koyu bant yok; logo bandı koyu kalır, gösterge sayfanın zemininde. */
+.hero.kare{height:auto;display:flex;flex-direction:column;padding-bottom:0;background:transparent;color:var(--lac)}
+.hero.kare .u-ust{order:-1;background:var(--koyu);color:#fff}
+.hero.kare .h-iz{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:1/1}
+.hero.kare .hs::after{display:none}
+.hero.kare .hs>img,.hero.kare .hs.on>img{animation:none;object-fit:cover}
+/* Kullanıcı (19 Eki): "o gömülü olsun fotoğrafların değiştiği zımbırtı; estetiği bozan hiçbir detay istemiyorum" → gösterge fotoğrafın içinde,
+   en alt kenarda ortada ince çizgiler (her fotoğrafa bir; geçilenler beyaz). Simgeler afişlerin alt yazısına biniyordu; çizgi binmez.
+   Altında satır ya da "Temsilî görseller" yok. AyFeneri ve Galaksi Night da bunu kullanır. */
+.hero.kare .h-alt{left:0;right:0;bottom:6px;justify-content:center}
+.hero.kare .d-iz{gap:4px;filter:drop-shadow(0 1px 1.5px rgba(12,16,39,.5))}
+.hero.kare .d-iz i{display:block;width:16px;height:3px;border-radius:2px;background:rgba(255,253,249,.4);transition:background-color .3s var(--ease)}
+.hero.kare .d-iz .lit{background:#FFFDF9}
+/* Galeri göstergesi (küçük resimlerin yerine): fotoğraf ilerledikçe film diskleri dolar, o anki disk döner */
+.h-alt{position:absolute;left:16px;right:16px;bottom:20px;z-index:2;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.d-iz{display:flex;align-items:center;gap:10px}
+.d-iz svg{width:16px;height:16px;fill:none;stroke:rgba(238,242,250,.42);stroke-width:1.6;stroke-linecap:round;transition:transform .4s var(--ease)}
+.d-iz .ark{opacity:0}
+.d-iz .lit{stroke:var(--v)}.d-iz .lit .ic{fill:var(--v)}.d-iz .lit .ark{opacity:1}
+.d-iz .on{transform:scale(1.35)}
+.d-iz .on .ark{transform-origin:12px 12px;animation:don 2.4s linear infinite}
+.h-alt .sira{display:flex;flex-direction:column;align-items:flex-end;font-size:13px;font-weight:600;color:#D5DBEA;font-variant-numeric:tabular-nums;line-height:1.3}
+.h-alt .sira small{font-size:12px;font-weight:500;color:var(--acik)}
+
+/* Satın alma */
+.al{padding:24px 16px 40px}
+.al h1{font-size:24px}
+.fiyat{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;font-variant-numeric:tabular-nums}
+.fiyat b{font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;line-height:1;animation:sol .7s var(--ease) .15s both}
+.fiyat s{position:relative;font-size:14px;color:var(--soluk);text-decoration:none}
+.fiyat s::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:var(--soluk);transform-origin:0 50%;animation:dol .6s var(--ease) .55s both}
+.rozet{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;animation:pop .5s var(--ease) .85s both}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
+/* Fiyat sırası (27 Eki, LunaDream'deki gibi): eski fiyat görünür, çizilir, küçülüp söner; gerçek fiyat gelir, yerine indirim rozeti oturur.
+   Bir kez, 3 sn. Ekran okuyucu görünmez metni okur (.sr-m). AyFeneri ve Galaksi Night .fiyat'ı kullanır. */
+.fiyat-satir{display:flex;align-items:center;gap:10px;margin:6px 0 0;font-variant-numeric:tabular-nums}
+.fy-yeni,.fy-eski{font-family:var(--fb);font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.fy-yuva{display:grid;align-items:center;justify-items:start}
+.fy-yuva>*{grid-area:1/1}
+.fy-eski{position:relative;color:var(--lac);text-decoration:none;transform-origin:0 50%;opacity:0}
+.fy-eski::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;border-radius:1px;background:currentColor;transform:scaleX(0);transform-origin:0 50%}
+@keyframes fy-eski{0%,30%{opacity:1;transform:translateX(calc(-100% - 10px))}48%,76%{opacity:.55;transform:scale(.82)}88%,100%{opacity:0;transform:translateY(6px) scale(.82)}}
+@keyframes fy-cizgi{0%,10%{transform:scaleX(0)}26%,100%{transform:scaleX(1)}}
+@keyframes fy-yeni{0%,36%{opacity:0;transform:translateX(-8px)}52%,100%{opacity:1;transform:none}}
+@keyframes fy-rozet{0%,82%{opacity:0;transform:scale(.86)}96%,100%{opacity:1;transform:none}}
+.fy-eski{animation:fy-eski 3s var(--ease) .3s both}
+.fy-eski::after{animation:fy-cizgi 3s var(--ease) .3s both}
+.fy-yeni{animation:fy-yeni 3s var(--ease) .3s both}
+.fiyat-satir .fy-rozet{animation:fy-rozet 3s var(--ease) .3s both}
+.sr-m{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Birleşik çizgili kutu (Yön A): özellikler ve güven aynı kalıpta; kart yığını yok */
+.ozler{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:22px;border-radius:16px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);overflow:hidden}
+.oz{display:flex;flex-direction:column;gap:2px;padding:12px}
+.oz:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}
+.oz:nth-child(3),.oz:nth-child(4){border-bottom:1px solid var(--cizgi)}
+.ozler.dort .oz:nth-child(3),.ozler.dort .oz:nth-child(4){border-bottom:0}
+.oz:nth-child(odd):not(.genis){border-right:1px solid var(--cizgi)}
+.oz .gz{display:flex;align-items:center;height:40px;margin-bottom:6px}
+.oz b{font-size:14px;line-height:1.25}
+.oz .t{display:block;font-size:12.5px;color:var(--soluk);line-height:1.35}
+.oz.genis{grid-column:1/-1;flex-direction:row;align-items:center;gap:16px}
+.oz.genis .gz{margin:0}
+.fis-a{width:60px;height:30px;overflow:hidden}
+.fis-a .uc{fill:#C9D0DE}.fis-a .gv{fill:var(--lac)}.fis-a .kb{fill:none;stroke:var(--lac);stroke-width:2.6;stroke-linecap:round}
+.fis{animation:fis 3.2s var(--ease) infinite}
+@keyframes fis{0%,10%{transform:translateX(16px)}36%,80%{transform:none}100%{transform:translateX(16px)}}
+.port{position:relative;flex:none;width:22px;height:22px;border-radius:5px;box-shadow:inset 0 0 0 1.8px var(--lac)}
+.port::after{content:"";position:absolute;inset:5px;border-radius:2px;background:var(--v2);opacity:.15;animation:led 3.2s var(--ease) infinite}
+@keyframes led{0%,34%{opacity:.15}42%,78%{opacity:1}90%,100%{opacity:.15}}
+.dn{display:flex}
+.dn img{width:44px;height:44px;border-radius:50%;margin-left:-18px;box-shadow:0 0 0 2px var(--yuzey)}
+.dn img:first-child{position:relative;z-index:2;margin-left:0;animation:don 14s linear infinite}
+.dn img:nth-child(2){z-index:1;position:relative}
+.karo{position:relative;flex:none;width:48px;height:48px;border-radius:12px;background:var(--lac);overflow:hidden}
+.karo img{position:absolute;left:50%;bottom:-4px;height:50px;width:auto;margin-left:-10px}
+.karo.salla img{transform-origin:50% 100%;animation:salla 3.4s ease-in-out infinite alternate}
+@keyframes salla{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+.karo .hale{position:absolute;left:50%;top:18px;width:30px;height:30px;margin-left:-15px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,226,.95) 0,rgba(255,244,226,0) 68%);animation:hale 2.8s ease-in-out infinite alternate}
+@keyframes hale{from{opacity:.3;transform:scale(.8)}to{opacity:1;transform:scale(1.15)}}
+.cetvel{position:relative;flex:none;width:120px;height:30px;border:1.6px solid var(--lac);border-radius:6px;background:repeating-linear-gradient(90deg,var(--lac) 0 1.4px,transparent 1.4px 9px) 5px 0/108px 8px no-repeat}
+.cetvel i{position:absolute;left:5px;right:5px;bottom:5px;height:6px;border-radius:3px;background:var(--v2);transform-origin:0 50%;animation:cetvel 4s var(--ease) infinite}
+@keyframes cetvel{0%{transform:scaleX(.08);opacity:0}15%{opacity:1}60%,85%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.gv-ik{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lac);overflow:hidden}
+.gv-ik svg{width:20px;height:20px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.kamyon svg{animation:kamyon 2.6s ease-in-out 3}
+@keyframes kamyon{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+.kamyon .yl{stroke-dasharray:3 4;animation:yolak .9s linear 9}
+@keyframes yolak{to{transform:translateX(-7px)}}
+.donus svg{animation:donus 4s var(--ease) 3}
+@keyframes donus{0%,55%{transform:rotate(0)}85%,100%{transform:rotate(-360deg)}}
+.kart-ik svg{animation:kart 3s var(--ease) 3}
+@keyframes kart{0%,60%,100%{transform:none}75%{transform:translateY(-2px) rotate(-6deg)}}
+.yaz circle{fill:var(--v);stroke:none;animation:yaz 1.2s ease-in-out infinite}
+.yaz circle:nth-of-type(2){animation-delay:.2s}.yaz circle:nth-of-type(3){animation-delay:.4s}
+@keyframes yaz{0%,100%{opacity:.25}40%{opacity:1}}
+.kartlar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:14px}
+.km{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:12px;font-weight:700;letter-spacing:.02em}
+
+/* Paket: satır kart; beyaz ürün lacivert karoda */
+.pk-bas{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:14px;font-weight:700}
+.pk-bas::after{content:"";flex:1;height:1px;background:var(--cizgi)}
+.pk{display:flex;flex-direction:column;gap:12px}
+.pk-k{position:relative;display:flex;align-items:center;gap:10px;width:100%;min-height:62px;padding:6px 12px 6px 6px;border:0;border-radius:14px;background:var(--yuzey);text-align:left;box-shadow:inset 0 0 0 1.5px var(--cizgi);transition:transform .2s var(--ease)}
+.pk-k:active{transform:scale(.985)}
+.pk-k.on{box-shadow:inset 0 0 0 2px var(--lac)}
+.pk-g{position:relative;flex:none;width:48px;height:48px;border-radius:10px;background:var(--lac);overflow:hidden}
+.pk-g img{position:absolute;bottom:-2px;left:50%;height:46px;width:auto;margin-left:-10px}
+.pk-g.iki img:first-child{margin-left:-17px;transform:rotate(-8deg)}.pk-g.iki img:nth-child(2){margin-left:-2px;transform:rotate(8deg)}
+.pk-o{flex:1;min-width:0;line-height:1.25}
+.pk-o b{display:block;font-size:15px}
+.pk-o span{display:block;margin-top:2px;font-size:12.5px;color:var(--soluk)}
+.pk-s{display:flex;flex-direction:column;align-items:flex-end;text-align:right;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pk-s b{font-size:16px}
+.pk-s s,.pk-s span{margin-top:2px;font-size:12.5px;color:var(--soluk)}
+.nokta{flex:none;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.6px #B8C0D2}
+.nokta i{display:block;width:12px;height:12px;margin:5px;border-radius:50%;background:var(--lac);opacity:0;transform:scale(.3);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.on .nokta{box-shadow:inset 0 0 0 1.6px var(--lac)}
+.on .nokta i{opacity:1;transform:none}
+.kurdele{position:absolute;right:14px;top:-10px;padding:1px 9px;border-radius:999px;background:var(--lac);color:var(--v);font-size:12px;font-weight:700;line-height:1.5;white-space:nowrap}
+/* Dün satırı (kullanıcı, 18 Eki): sayı elle girilir, boşsa satır yok. 23 Eki: canlı sitedeki gibi dönen şerit (ortak.tk_html);
+   fiyat ve rozet oturunca bir kez aşağıdan gelir */
+.dun.dsr{animation:dun-gel .5s var(--ease) 1.2s both}
+@keyframes dun-gel{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.dun.dsr{animation:none}}
+/* Dönen satır (kullanıcı, 18 Eki): "Her kutuda 12 film diski" ↔ aynı gün kargo + 16.00 sayacı. İki satır aynı ızgara hücresinde;
+   dönerken yükseklik değişmez. Giren alttan, çıkan yukarı. Hareket azaltılmışsa ikisi alt alta. */
+/* Renk (kullanıcı, 18 Eki: LunaDream'deki lacivert hap USB'ye de): lacivert zemin, beyaz yazı; diskler lacivert halkalı. */
+.donen{position:relative;display:grid;margin:14px 0 0;padding:10px 14px;border-radius:14px;background:var(--lac);color:#fff;font-size:14px;font-weight:600;overflow:hidden}
+.dn-s{grid-area:1/1;display:flex;align-items:center;gap:12px;min-height:30px;opacity:0;transform:translateY(80%);transition:opacity .36s var(--ease),transform .36s var(--ease)}
+.dn-s.on{opacity:1;transform:none}.dn-s.ust{transform:translateY(-80%)}
+.donen .dn img{width:30px;height:30px;margin-left:-12px;box-shadow:0 0 0 2px var(--lac)}
+.donen .dn img:first-child{margin-left:0}
+.dn-ik{flex:none;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center}
+.dn-ik svg{width:18px;height:18px;fill:none;stroke:var(--v);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dn-m{flex:1;min-width:0;font-size:13px;line-height:1.3}
+.dn-sy{flex:none;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.dn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.donen{row-gap:10px}.dn-s{grid-area:auto;opacity:1;transform:none;transition:none}}
+/* Baskı: tek satır, butonun hemen üstünde; stok elle yazılır, veri yoksa satır gizlenir */
+.stok{display:flex;align-items:center;gap:10px;margin:22px 0 0;font-size:14px;font-weight:600}
+.ping{position:relative;flex:none;width:10px;height:10px;margin:0 2px;border-radius:50%;background:var(--v2)}
+.ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--v2);animation:ping 1.8s var(--ease) 3}
+@keyframes ping{from{transform:scale(1);opacity:.7}to{transform:scale(2.8);opacity:0}}
+/* Stok kurdelesi: buton lacivert olduğu için kurdele ay gümüşü, yazı lacivert (paket kurdelesinin tersi). Dokunmayı engellemez,
+   buton ekrana girince bir kez 8px aşağıdan gelir. */
+.al-on{position:relative;margin-top:24px}
+.al-on .btn1{margin-top:0;min-height:58px;padding-top:13px}  /* iki satırlı buton: yazı kurdelenin altında kalmasın */
+.stok-kd{position:absolute;left:18px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:var(--v);color:var(--lac);box-shadow:0 0 0 2px var(--zemin);font-size:12px;font-weight:700;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.stok-kd.on{opacity:1;transform:none}
+.stok-kd svg{width:14px;height:14px;flex:none}.stok-kd circle{fill:none;stroke:rgba(26,33,66,.55);stroke-width:1.6}.stok-kd path{fill:var(--lac)}
+@media (prefers-reduced-motion:reduce){.stok-kd{opacity:1;transform:none;transition:none}}
+.btn1{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:52px;margin-top:12px;padding:6px 16px;border:0;border-radius:16px;background:var(--lac);box-shadow:0 3px 0 #0C1027;transition:transform .12s var(--ease)}
+.pg .btn1{color:#fff}
+.btn1:active{transform:translateY(3px)}
+.btn1 .b-ic{display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.btn1 .b-ic>span{font-size:16px;font-weight:700}
+.btn1 .b-ic small{margin-top:2px;font-size:12px;font-weight:600;color:var(--v)}
+.btn1 svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--v);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:durt 2.4s var(--ease) 2}
+@keyframes durt{0%,58%,100%{transform:none}68%{transform:translateX(5px)}78%{transform:none}86%{transform:translateX(3px)}94%{transform:none}}
+.btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:12px;border-radius:16px;background:transparent;color:var(--lac);border:1.5px solid var(--lac);font-size:15px;font-weight:600}
+.pg .btn-b{border:0;border-radius:14px;background:var(--v);color:var(--koyu);font-weight:700;box-shadow:0 3px 0 var(--v2)}
+.pg .btn-b svg{stroke:var(--koyu)}
+
+/* Kargo döngüsü: çizgi dolar, paket ilerler, adımlar yanar (8 sn) */
+.yol{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;margin:28px 0 0;padding:0;text-align:center}
+.yol::before{content:"";position:absolute;left:16.6%;right:16.6%;top:9px;border-top:1.5px dashed #B8C0D2}
+.yol li{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.yol b{font-size:14px}.yol li>span:last-child{font-size:13px;color:var(--soluk)}
+.yd{position:relative;width:20px;height:20px;margin-bottom:6px;border-radius:50%;background:var(--zemin);box-shadow:inset 0 0 0 2px var(--lac)}
+.yd::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--lac)}
+.y2 .yd::after{animation:yk2 8s var(--ease) infinite}.y3 .yd::after{animation:yk3 8s var(--ease) infinite}
+.yol-iz{position:absolute;left:16.6%;right:16.6%;top:9px;height:2px}
+.yol-iz i{position:absolute;top:-.25px;width:50%;height:2px;background:var(--lac);transform-origin:0 50%}
+.yol-iz i:first-child{left:0;animation:yc1 8s var(--ease) infinite}.yol-iz i:nth-child(2){left:50%;animation:yc2 8s var(--ease) infinite}
+.yol-iz em{position:absolute;left:0;top:0;width:100%;height:0;z-index:2;animation:ypk 8s var(--ease) infinite}
+.yol-iz em::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--v2);box-shadow:0 0 0 2px var(--zemin),0 0 0 3.5px var(--lac)}
+@keyframes yc1{0%,6%{transform:scaleX(0);opacity:1}26%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
+@keyframes yc2{0%,38%{transform:scaleX(0);opacity:1}57%,88%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
+@keyframes ypk{0%,4%{transform:none;opacity:0}6%{transform:none;opacity:1}26%,38%{transform:translateX(50%);opacity:1}57%{transform:translateX(100%);opacity:1}60%,100%{transform:translateX(100%);opacity:0}}
+@keyframes yk2{0%,26%{opacity:0;transform:scale(.3)}33%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes yk3{0%,57%{opacity:0;transform:scale(.3)}64%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
+
+/* Özellik kartları (27 Eki, LunaDream'in kurumsal kartları gibi): her hücrede 28 px gösterge; ekran ve dönen etiket yok.
+   Fiş girer, boyun döner, gece lambası halesi yanar, cetvel dolar. Yalnız transform/opacity. */
+.uk-ek{position:relative;display:flex;align-items:center;justify-content:flex-start;height:28px;margin-bottom:10px}
+.oz.genis .uk-ek{flex:none;margin:0}
+.uk{position:relative;display:flex;align-items:center;gap:2px}
+.uk-ik{width:26px;height:26px;overflow:visible;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.uk-ik rect{fill:var(--yuzey)}
+.uk-ik .uk-lens{fill:var(--v2)}
+.uk-ik .uk-isin{stroke:var(--v2);opacity:0}
+.uk-ik .uk-hale{fill:none;stroke:var(--v2);stroke-width:1.2;opacity:0}
+/* USB tak: fiş girer (3,2 sn döngü), ışın yanar */
+.uk-sira{display:flex;align-items:center;gap:2px}
+.uk-tak .port{width:16px;height:16px;border-radius:4px}
+.uk-tak .port::after{inset:4px}
+.uk-tak .fis-a{width:38px;height:19px}
+.uk-tak .uk-isin{animation:uisin 3.2s var(--ease) infinite}
+@keyframes uisin{0%,40%{opacity:0}46%,80%{opacity:1}90%,100%{opacity:0}}
+.uk-disk{display:flex}
+.uk-disk img{width:26px;height:26px;margin-left:-8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--yuzey)}
+.uk-disk img:first-child{margin-left:0}
+.uk-genis .cetvel{width:84px;height:22px;border-width:1.5px;border-radius:5px;background-size:72px 6px}
+.uk-genis .cetvel i{bottom:4px;height:5px}
+/* Esnek boyun: baş tabandan döner (tavan 0°, duvar 62°, köşe 32°), ışın hep yanar */
+.uk-boyun .uk-bas{transform-box:view-box;transform-origin:16px 24px;animation:boyun 9.6s var(--ease) infinite}
+.uk-boyun .uk-isin{opacity:1}
+.uk-boyun .uk-lens{fill:var(--v2)}
+@keyframes boyun{0%,28%{transform:none}34%,61%{transform:rotate(62deg)}67%,94%{transform:rotate(32deg)}100%{transform:none}}
+/* Gece lambası da: projeksiyonda ışın + yıldızlar; gece lambasında başlıkta hale, ışın yok (6 sn) */
+.uk-yildiz{position:absolute;left:50%;top:-7px;width:30px;height:8px;margin-left:-15px}
+.uk-yildiz i{position:absolute;top:0;width:3px;height:3px;border-radius:50%;background:var(--v2);opacity:0;animation:uyil 6s var(--ease) infinite}
+.uk-yildiz i:nth-child(1){left:2px}.uk-yildiz i:nth-child(2){left:13px;top:-3px}.uk-yildiz i:nth-child(3){left:25px}
+@keyframes uyil{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+.uk-mod .uk-isin{animation:uisin2 6s var(--ease) infinite}
+.uk-mod .uk-hale{transform-box:fill-box;transform-origin:50% 50%;animation:uhale 6s var(--ease) infinite}
+@keyframes uisin2{0%,4%{opacity:0}10%,44%{opacity:1}50%,100%{opacity:0}}
+@keyframes uhale{0%,50%{opacity:0;transform:scale(.8)}58%,94%{opacity:1;transform:none}100%{opacity:0}}
+/* Teslim kartı (21 Eki): beyaz kart, ekranda noktalar ve paket; Kapında'da USB ikonu belirir */
+.teslim{position:relative;margin-top:22px;padding:8px 8px 12px;border-radius:16px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi)}
+.teslim::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:52px;border-radius:12px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol{margin:0;padding-top:16px}
+.teslim .yol::before,.teslim .yol-iz{top:25px}
+.teslim .yd{margin-bottom:22px;background:#EEF1F7;background:color-mix(in srgb,var(--v) 32%,#fff)}
+.teslim .yol-iz em::before{box-shadow:0 0 0 2px #EEF1F7,0 0 0 3.5px var(--lac)}
+.y-ik{position:absolute;left:calc(50% + 14px);top:-8px;width:34px;height:34px;opacity:0;animation:yik 8s var(--ease) infinite}
+.y-ik .uk-lens{fill:var(--v2)}
+.y-ik .uk-ik{width:34px;height:34px}
+@keyframes yik{0%,58%{opacity:0;transform:translateY(4px)}66%,88%{opacity:1;transform:none}97%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.y-ik{opacity:1}.uk-ik .uk-isin{opacity:1}}
+
+/* Bu gece tavanda ne olsun? (Yön A'dan, kullanıcı istedi): yaşam fotoğrafı, yazı görselin içinde; fotoğraflar yavaşça süzülür */
+.sahne-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
+.sk{position:relative;flex:0 0 272px;height:380px;border-radius:16px;overflow:hidden;scroll-snap-align:start;background:#000}
+.sk img{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;animation:suz 16s ease-in-out infinite alternate}
+.sk:nth-child(2) img{animation-delay:-4s}.sk:nth-child(3) img{animation-delay:-8s}.sk:nth-child(4) img{animation-delay:-12s}
+@keyframes suz{from{transform:scale(1) translateX(-2%)}to{transform:scale(1.06) translateX(2%)}}
+.sk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,54,0) 55%,rgba(20,26,54,.88) 100%)}
+.sk b{position:absolute;left:16px;bottom:36px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:-.02em;color:#fff}
+.sk span{position:absolute;left:16px;bottom:14px;z-index:1;font-size:13px;color:#D5DBEA}
+
+/* 12 disk: seçilen disk tavana düşer; kendiliğinden sırayla gezer, dokununca durur. Yazı görselin içinde. */
+.dk-sahne{position:relative;height:330px;margin-top:6px;overflow:hidden}
+.dk-yansi{position:absolute;left:50%;top:4px;width:236px;height:236px;margin-left:-118px;animation:nefes 6s ease-in-out infinite alternate}
+@keyframes nefes{from{transform:scale(.97)}to{transform:scale(1.03)}}
+.dk-yansi img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;opacity:0;transform:scale(.84) rotate(-24deg);transition:opacity .7s var(--ease),transform 1s var(--ease);-webkit-mask-image:radial-gradient(circle,#000 50%,transparent 71%);mask-image:radial-gradient(circle,#000 50%,transparent 71%)}
+.dk-yansi img.on{opacity:.95;transform:none}
+.dk-isik{position:absolute;left:50%;top:148px;width:250px;height:96px;margin-left:-125px;background:linear-gradient(0deg,rgba(214,232,255,.32),rgba(214,232,255,0));clip-path:polygon(47% 100%,53% 100%,100% 0,0 0);animation:isik 3.6s ease-in-out infinite alternate}
+@keyframes isik{from{opacity:.5}to{opacity:1}}
+.dk-urun{position:absolute;left:50%;bottom:-10px;height:104px;width:auto;margin-left:-22px}
+.dk-ad{position:absolute;left:16px;bottom:12px;display:flex;flex-direction:column;line-height:1.2}
+.dk-ad span{font-size:12px;color:var(--acik);font-variant-numeric:tabular-nums}
+.dk-ad b{font-family:var(--fb);font-weight:var(--bk);font-size:20px;letter-spacing:-.02em}
+.dk-iz{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 8px;margin-top:18px}
+.dk-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease)}
+.dk-iz button img{display:block;width:100%;height:100%;border-radius:50%}
+.dk-iz button.on{box-shadow:0 0 0 2.5px var(--v);transform:scale(1.1)}
+
+/* Herkesin odasına: hikâye kartı; oda çipleri görselin içinde, çubuklar dolar, dokun: ileri/geri */
+.hk{position:relative;height:500px;margin-top:20px;border-radius:22px;overflow:hidden;background:var(--koyu);color:#fff;isolation:isolate}
+.hk-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease)}
+.hk-f.on{opacity:1;animation:kb 6s linear both}
+.hk::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(20,26,54,.7) 0,rgba(20,26,54,0) 24%,rgba(20,26,54,0) 46%,rgba(20,26,54,.94) 86%)}
+.hk-cub{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;gap:4px}
+.hk-cub span{position:relative;flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.hk-cub i{position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:0 50%}
+.hk-cub .bitti i,.hk-cub .dur i{transform:none}
+.hk-cub .on i{animation:dol 5s linear both}
+.hk-sec{position:absolute;left:0;right:0;top:24px;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:0 12px}
+.hk-sec button{flex:none;min-height:48px;padding:0 14px;border:0;border-radius:999px;background:rgba(20,26,54,.62);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);color:#fff;font-size:13px;font-weight:700}
+.pg .hk-sec button.on{background:var(--v);color:var(--koyu);box-shadow:none}
+.hk-git{position:absolute;top:76px;bottom:0;z-index:2;padding:0;border:0;background:transparent}
+.hk-git.geri{left:0;width:35%}.hk-git.ileri{right:0;width:65%}
+.hk-y{position:absolute;left:16px;right:16px;bottom:18px;z-index:3;pointer-events:none;opacity:0;visibility:hidden}
+.hk-y.on{opacity:1;visibility:visible}
+.hk-y .bas-y{max-width:300px;font-size:28px;line-height:1.02}
+.hk-y p{margin:8px 0 0;font-size:15px;color:#D5DBEA}
+.hk-y.on .bas-y,.hk-y.on p,.hk-y.on .hk-disk{animation:sol .7s var(--ease) both}
+.hk-y.on p{animation-delay:.1s}.hk-y.on .hk-disk{animation-delay:.2s}
+.hk-disk{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:4px 12px 4px 4px;border-radius:999px;background:rgba(20,26,54,.72);box-shadow:inset 0 0 0 1px rgba(238,242,250,.18);font-size:13px;font-weight:600}
+.hk-disk img{width:28px;height:28px;border-radius:50%}
+
+/* Nereye takılır (Yön A koyu karolar): fiş takılır, cihazın ışığı yanar */
+.tak{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:20px}
+.tk{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 6px 14px;border-radius:16px;background:var(--koyu2);text-align:center}
+.tk-g{position:relative;display:flex;align-items:center;height:44px;margin-bottom:6px}
+.tk-g>svg:first-child{width:36px;height:36px;flex:none;fill:none;stroke:#EEF2FA;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tk-g .fis-a{width:48px;height:24px;margin-left:-2px}
+.tk-g .fis-a .gv{fill:#EEF2FA}.tk-g .fis-a .kb{stroke:#EEF2FA}.tk-g .fis-a .uc{fill:#8D96B5}
+.tk-g::after{content:"";position:absolute;left:28px;top:4px;width:7px;height:7px;border-radius:50%;background:var(--v);opacity:.15;animation:led 3.2s var(--ease) infinite}
+.tk:nth-child(2) .fis,.tk:nth-child(2) .tk-g::after{animation-delay:.5s}.tk:nth-child(3) .fis,.tk:nth-child(3) .tk-g::after{animation-delay:1s}
+.tk b{font-size:14px}.tk span{font-size:12px;color:var(--acik);line-height:1.3}
+
+/* Kurulum: gerçek sıra olduğu için numaralı */
+.kur{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--cizgi)}
+.kur li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--cizgi)}
+.kur em{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--lac);color:var(--v);font-style:normal;font-family:var(--fb);font-weight:var(--bk);font-size:15px}
+.kur b{display:block;font-size:16px;line-height:1.3;margin-top:5px}
+.kur li>span>span{display:block;margin-top:2px;font-size:14px;color:var(--soluk)}
+
+/* Yorumlar tek akış (27 Eki): başlık → müşteri mesajları (küçük etiket) → Loox kutusu */
+.yorum-bas{padding-top:44px}
+.yorum-bas+.mesaj-bol{padding-top:12px;padding-bottom:0}
+.m-etiket{margin:0;font-size:15px;font-weight:700}
+.alt-bilgi a:focus-visible,.yapis button:focus-visible{outline-color:var(--v)}
+html:has(.pg .yapis){scroll-padding-bottom:72px}
+.yer{margin:16px 0 0;padding:20px 16px;border:1.5px dashed #B8C0D2;border-radius:18px;font-size:14px;color:var(--soluk);text-align:center}
+
+/* 30 gün: 30 çentik sırayla yanar */
+.otuz{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:center;padding:18px;border-radius:22px;background:var(--lac);color:#EEF2FA}
+.ot-h{position:relative;width:112px;height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.ot-h i{position:absolute;left:55px;top:2px;width:2px;height:9px;border-radius:1px;background:var(--v);transform-origin:1px 54px;opacity:.18;animation:gun 6s linear infinite}
+@keyframes gun{0%{opacity:.18}4%,66%{opacity:1}82%,100%{opacity:.18}}
+.ot-h b{font-family:var(--fb);font-weight:var(--bk);font-size:30px;letter-spacing:-.04em}
+.ot-h small{margin-top:2px;font-size:12px;font-weight:700;color:var(--v)}
+.otuz>span:last-child b{display:block;font-size:17px;line-height:1.25}
+.otuz>span:last-child span{display:block;margin-top:4px;font-size:14px;color:var(--acik)}
+
+.sss{border-bottom:1px solid var(--cizgi)}
+.sss summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;font-weight:700;font-size:15px;cursor:pointer}
+.sss summary::-webkit-details-marker{display:none}
+.sss .arti{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--lac);color:var(--lac);font-size:18px;font-weight:400;transition:transform .25s var(--ease)}
+.sss[open] .arti{transform:rotate(45deg)}
+.sss p{margin:0 0 16px;font-size:14px;color:var(--soluk)}
+
+.kart{flex:0 0 168px;scroll-snap-align:start;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);text-decoration:none}
+.kart>span:first-child{position:relative;aspect-ratio:1/1;overflow:hidden;background:#E6EAF2}
+.kart img{display:block;width:100%;height:100%;object-fit:cover}
+.kart i{position:absolute;left:8px;top:8px;padding:2px 8px;border-radius:999px;background:var(--lac);color:var(--v);font-style:normal;font-size:12px;font-weight:700}
+.kart>span:last-child{display:flex;flex-direction:column;gap:4px;padding:10px 12px 12px}
+.kart b{font-size:14px;font-weight:600;line-height:1.25;min-height:35px}
+
+.alt-bilgi{margin-top:44px;padding:36px 0 112px;border-radius:28px 28px 0 0;background:var(--lac);color:var(--acik)}
+.alt-bilgi a{display:flex;align-items:center;min-height:48px;color:#fff;text-decoration:none}
+/* Yapışkan çubuk (28 Eki, kullanıcı: "çok fazla alan kaplıyor"; eleştirmenin 1. önerisi): 60 px ince şerit, 36 px karo, 48 px düğme;
+   paketler ve ana düğme ekrandayken aşağı çekilir (ayluna.js, data-ay-cekil) */
+.yapis{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;height:calc(60px + env(safe-area-inset-bottom,0px));margin-top:calc(-60px - env(safe-area-inset-bottom,0px));padding:0 10px env(safe-area-inset-bottom,0px) 12px;border-radius:20px 20px 0 0;background:var(--koyu);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.yapis[data-ay-cekil]{transform:translateY(calc(100% + 8px));opacity:0;pointer-events:none}
+.yapis .karo{width:36px;height:36px;border-radius:10px;background:#2A3466}
+.yapis .karo img{height:34px;margin-left:-8px}
+.yapis .y-yazi{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2;color:#fff;font-variant-numeric:tabular-nums}
+.yapis .y-yazi b{font-size:14px;font-weight:600}.yapis .y-yazi span{font-size:12px;color:var(--acik)}
+.pg .yapis .btn1{flex:none;width:auto;min-height:48px;height:48px;margin:0;padding:0 22px;border-radius:14px;font-size:15px;box-shadow:0 3px 0 #0C1027}
+@media (prefers-reduced-motion:reduce){.yapis{transition:none}}
+
+/* Seçenek panosu etiketi */
+.secenek{padding:16px 16px 14px;background:#fff;border-bottom:1px solid var(--cizgi)}
+.secenek b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1.1}
+.secenek span{display:block;margin-top:4px;font-size:13px;color:var(--soluk)}
+.secenek .renk{display:flex;gap:6px;margin-top:10px}
+.secenek .renk i{width:28px;height:28px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+
+@media (prefers-reduced-motion:reduce){.pg *,.pg *::before,.pg *::after{animation:none!important;transition:none!important}.yol-iz em{display:none}}
+
+.serit .sy b{background:var(--koyu2)}
+.pk-g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;margin:0}
+.pk-g .x2{position:absolute;right:4px;bottom:4px;padding:0 5px;border-radius:6px;background:var(--lac);color:var(--v);font-size:11px;font-weight:800;line-height:1.6}
+.kutu-not{display:flex;align-items:center;gap:10px;margin:14px 0 0;font-size:14px;font-weight:600}
+.kutu-not .dn img{width:30px;height:30px;margin-left:-12px}.kutu-not .dn img:first-child{margin-left:0}
+
+/* AyFeneri galeri göstergesi: küçük deniz fenerleri; geçilen fotoğrafın feneri yanık, o anki fenerin huzmesi döner */
+.f-iz{display:flex;align-items:flex-end;gap:14px}
+.f-iz svg{width:14px;height:22px;overflow:visible;fill:none;stroke:rgba(238,242,250,.5);stroke-width:1.3;stroke-linejoin:round;transition:transform .4s var(--ease)}
+.f-iz .fn{fill:transparent;transition:fill .4s}
+.f-iz .lit{stroke:rgba(238,242,250,.95)}.f-iz .lit .fn{fill:var(--v)}
+.f-iz .hz{fill:var(--v);stroke:none;opacity:0;transform-origin:7px 6.5px}
+.f-iz .on{transform:scale(1.3);transform-origin:50% 100%}
+.f-iz .on .hz{opacity:.5;animation:hz 2.6s ease-in-out infinite}
+@keyframes hz{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+
+/* Galaksi galeri göstergesi: yörünge; geçilen gezegen dolu, o anki gezegenin ayı döner */
+.y-iz{display:flex;align-items:center;gap:8px}
+.y-iz svg{width:20px;height:20px;overflow:visible;transition:transform .4s var(--ease)}
+.y-iz .gz{fill:rgba(238,242,250,.38)}.y-iz .lit .gz{fill:var(--v)}
+.y-iz .yr{fill:none;stroke:rgba(238,242,250,.35);stroke-width:1;opacity:0;transition:opacity .4s}
+.y-iz .ay{fill:#fff;opacity:0}
+.y-iz .on{transform:scale(1.2)}.y-iz .on .yr,.y-iz .on .ay{opacity:1}
+.y-iz .on .yo{transform-origin:10px 10px;animation:don 3s linear infinite}
+
+/* Özellik kutusu küçük hareketleri */
+.mini{position:relative;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lac);overflow:hidden}
+.mini svg{width:22px;height:22px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mini .ayi{fill:var(--v);stroke:none;animation:ayi 3s ease-in-out infinite alternate}
+@keyframes ayi{from{opacity:.55;transform:scale(.9)}to{opacity:1;transform:scale(1.05)}}
+.mini .ayi{transform-origin:14px 14px}
+.esit{display:flex;align-items:flex-end;gap:3px;height:22px}
+.esit i{width:4px;height:100%;border-radius:2px;background:var(--v);transform-origin:50% 100%;animation:esit 1.1s ease-in-out infinite alternate}
+.esit i:nth-child(2){animation-delay:-.3s}.esit i:nth-child(3){animation-delay:-.6s}.esit i:nth-child(4){animation-delay:-.9s}
+@keyframes esit{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.dalga path{stroke-dasharray:6 4;animation:dalga 1.6s linear infinite}
+.dalga path:nth-child(2){animation-duration:2.2s}
+@keyframes dalga{to{stroke-dashoffset:-20}}
+.sinyal path{opacity:.2;animation:sinyal 2.4s ease-in-out infinite}
+.sinyal path:nth-of-type(2){animation-delay:.25s}.sinyal path:nth-of-type(3){animation-delay:.5s}
+@keyframes sinyal{0%,20%{opacity:.2}40%,70%{opacity:1}90%,100%{opacity:.2}}
+.egil .bs{transform-origin:14px 19px;animation:egil 4s var(--ease) infinite}
+@keyframes egil{0%,30%{transform:rotate(-35deg)}50%,80%{transform:rotate(35deg)}100%{transform:rotate(-35deg)}}
+.halka-ik{animation:halka 5s var(--ease) infinite;transform-origin:14px 14px}
+@keyframes halka{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(120deg)}}
+.dn.don img:first-child{animation:don 20s linear infinite}
+
+/* ===== AyFeneri A · Feneri yak: oda karanlık; anahtara basınca ışık fenerden yayılır, duvarda ay doğar ===== */
+.yak{position:relative;height:470px;margin-top:20px;border-radius:22px;overflow:hidden;background:#07090F;color:#fff}
+.yak img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.yak .k0{filter:brightness(.13) saturate(.3)}
+.yak .k1{clip-path:circle(0% at 54% 35%);transition:clip-path 1.6s var(--ease)}
+.yak.on .k1{clip-path:circle(130% at 54% 35%)}
+.yak .kor{position:absolute;left:54%;top:35%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--v);box-shadow:0 0 18px 6px rgba(243,181,98,.45);opacity:.9;transition:opacity .6s}
+.yak.on .kor{opacity:0}
+.yak::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,9,15,.55) 0,rgba(7,9,15,0) 26%,rgba(7,9,15,0) 62%,rgba(7,9,15,.85) 100%)}
+.yak-y{position:absolute;left:18px;right:18px;top:18px;z-index:2}
+.yak-y .bas-y{font-size:40px;line-height:.92;color:#fff}
+.yak-y .bas-y span{display:block;transition:color .6s}
+.yak.on .yak-y .bas-y span:last-child{color:var(--v)}
+.yak-alt{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.yak-alt p{margin:0;font-size:14px;color:#D5DBEA;line-height:1.35}
+.anahtar{flex:none;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 6px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.pg .anahtar{color:#fff}
+.anahtar b{font-size:14px}
+.anahtar i{position:relative;width:56px;height:34px;border-radius:999px;background:#2A3149;transition:background .4s var(--ease)}
+.anahtar i::after{content:"";position:absolute;left:4px;top:4px;width:26px;height:26px;border-radius:50%;background:#fff;transition:transform .4s var(--ease)}
+.yak.on .anahtar i{background:var(--v)}.yak.on .anahtar i::after{transform:translateX(22px)}
+
+/* ===== AyFeneri A · Fener huzmesi: dört iş; huzme sırayla birine döner ===== */
+.hzm{position:relative;margin-top:20px;padding:8px 16px 8px 100px;border-radius:22px;background:var(--koyu);color:#EEF2FA;overflow:hidden;list-style:none}
+.hzm-f{position:absolute;left:22px;top:50%;width:44px;height:120px;margin-top:-24px;fill:none;stroke:#EEF2FA;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;z-index:2}
+.hzm-f .fn{fill:var(--v);stroke:var(--v)}
+.hzm-h{position:absolute;left:44px;top:50%;width:420px;height:150px;margin-top:-75px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(243,181,98,.6),rgba(243,181,98,.05) 80%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);transition:transform .9s var(--ease);z-index:1}
+.hzm.k0 .hzm-h{transform:rotate(-33deg)}.hzm.k1 .hzm-h{transform:rotate(-11deg)}.hzm.k2 .hzm-h{transform:rotate(11deg)}.hzm.k3 .hzm-h{transform:rotate(33deg)}
+.hzm li{position:relative;z-index:2;padding:13px 0;border-bottom:1px solid rgba(238,242,250,.1);opacity:.42;transition:opacity .5s var(--ease)}
+.hzm li:last-child{border-bottom:0}
+.hzm li.on{opacity:1}
+.hzm li b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1}
+.hzm li span{display:block;margin-top:4px;font-size:14px;color:#C9D0E2}
+.hzm li button{position:absolute;inset:0;width:100%;border:0;background:transparent}
+
+/* ===== AyFeneri B · Bu akşam hangisi: dört mod; görsel ve köşedeki hareketli işaret değişir ===== */
+.mod{position:relative;height:500px;margin-top:20px;border-radius:22px;overflow:hidden;background:var(--koyu);color:#fff;isolation:isolate}
+.mod-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease)}
+.mod-f.on{opacity:1;animation:kb 7s linear both}
+.mod::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(15,22,48,.72) 0,rgba(15,22,48,0) 26%,rgba(15,22,48,0) 48%,rgba(15,22,48,.94) 88%)}
+.mod-sec{position:absolute;left:0;right:0;top:14px;z-index:3;display:flex;gap:6px;overflow-x:auto;padding:0 14px}
+.mod-sec button{flex:none;min-height:48px;padding:0 15px;border:0;border-radius:999px;background:rgba(15,22,48,.6);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);font-size:14px;font-weight:600}
+.pg .mod-sec button{color:#fff}
+.pg .mod-sec button.on{background:var(--v);color:var(--koyu);box-shadow:none}
+.mod-y{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;opacity:0;visibility:hidden}
+.mod-y.on{opacity:1;visibility:visible}
+.mod-y.on>*{animation:sol .7s var(--ease) both}.mod-y.on p{animation-delay:.1s}
+.mod-y .bas-y{font-size:40px;line-height:.95}
+.mod-y p{margin:8px 0 0;font-size:15px;color:#D5DBEA;max-width:300px}
+.mod-i{display:inline-grid;place-items:center;width:52px;height:52px;margin-bottom:12px;border-radius:16px;background:rgba(15,22,48,.7);box-shadow:inset 0 0 0 1px rgba(238,242,250,.2)}
+.mod-i svg{width:30px;height:30px;fill:none;stroke:var(--v);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mod-i .ayi{fill:var(--v);stroke:none;transform-origin:14px 14px;animation:ayi 3s ease-in-out infinite alternate}
+.mod-i .isin{transform-origin:15px 15px;animation:don 14s linear infinite}
+.mod-i .esit{height:26px}.mod-i .esit i{width:5px}
+
+/* ===== AyFeneri B · Boy kartı: cetvel tabandan tepeye dolar ===== */
+.boy{position:relative;height:440px;margin-top:20px;border-radius:22px;overflow:hidden;background:#1C1714;color:#fff}
+.boy img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.boy::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,22,48,.82) 0,rgba(15,22,48,.2) 46%,rgba(15,22,48,0) 70%)}
+.boy-c{position:absolute;right:30px;top:40px;bottom:36px;width:2px;z-index:2;background:rgba(255,255,255,.25)}
+.boy-c i{position:absolute;left:0;right:0;bottom:0;height:100%;background:var(--v);transform-origin:50% 100%;animation:boyc 4.5s var(--ease) infinite}
+.boy-c::before,.boy-c::after{content:"";position:absolute;left:-7px;width:16px;height:2px;background:#fff}
+.boy-c::before{top:0}.boy-c::after{bottom:0}
+@keyframes boyc{0%{transform:scaleY(0)}45%,85%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.boy-y{position:absolute;left:18px;top:22px;bottom:22px;z-index:2;display:flex;flex-direction:column;justify-content:space-between;max-width:200px}
+.boy-y .bas-y{font-size:40px;line-height:.95}
+.boy-y em{display:block;font-style:normal;font-family:var(--fb);font-size:56px;line-height:.9;color:var(--v)}
+.boy-y em small{font-size:22px}
+.boy-y p{margin:6px 0 0;font-size:14px;color:#D5DBEA}
+
+/* ===== Galaksi A · Tavanda dönen gök: seçilen disk yavaşça döner; kendiliğinden gezer, dokununca durur ===== */
+.kb-s{position:relative;height:350px;margin-top:6px;overflow:hidden}
+.kubbe{position:absolute;left:50%;top:6px;width:300px;height:300px;margin-left:-150px;border-radius:50%;overflow:hidden;-webkit-mask-image:radial-gradient(circle,#000 54%,transparent 71%);mask-image:radial-gradient(circle,#000 54%,transparent 71%)}
+.kubbe-d{position:absolute;inset:0;animation:don 70s linear infinite}
+.kubbe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.9);transition:opacity 1.1s var(--ease),transform 1.4s var(--ease);filter:saturate(1.15)}
+.kubbe img.on{opacity:1;transform:none}
+.kb-isik{position:absolute;left:50%;top:170px;width:220px;height:180px;margin-left:-110px;background:linear-gradient(0deg,rgba(180,169,255,.34),rgba(180,169,255,0));clip-path:polygon(46% 100%,54% 100%,100% 0,0 0);animation:isik 3.6s ease-in-out infinite alternate}
+.kb-ad{position:absolute;left:16px;bottom:10px;display:flex;align-items:center;gap:10px}
+.kb-ad b{font-family:var(--fb);font-weight:var(--bk);font-size:20px;letter-spacing:-.02em}
+.kb-ad svg{width:22px;height:22px;fill:none;stroke:var(--v);stroke-width:1.8;stroke-linecap:round;animation:don 6s linear infinite}
+.kb-iz{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 8px;margin-top:16px}
+.kb-iz button{aspect-ratio:1;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:0 0 0 1.5px rgba(238,242,250,.16);transition:transform .3s var(--ease)}
+.kb-iz button img{display:block;width:100%;height:100%;border-radius:50%}
+.kb-iz button.on{box-shadow:0 0 0 2.5px var(--v);transform:scale(1.1)}
+
+/* ===== Galaksi A · Netlik halkası: görüntü bulanıktan netleşir, halka döner ===== */
+.net{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center;margin-top:20px;padding:18px;border-radius:22px;background:var(--koyu);color:#EEF2FA}
+.net-g{position:relative;width:150px;height:150px}
+.net-g img{position:absolute;inset:14px;width:122px;height:122px;border-radius:50%;object-fit:cover;animation:net 5s var(--ease) infinite}
+@keyframes net{0%,12%{filter:blur(7px)}55%,90%{filter:blur(0)}100%{filter:blur(7px)}}
+.net-g svg{position:absolute;inset:0;width:150px;height:150px;fill:none;stroke:var(--v);stroke-width:1.6;animation:netr 5s var(--ease) infinite}
+@keyframes netr{0%,12%{transform:rotate(0)}55%,90%{transform:rotate(100deg)}100%{transform:rotate(0)}}
+.net b{display:block;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1.1}
+.net span>span{display:block;margin-top:6px;font-size:14px;color:#C9CEE6}
+
+/* ===== Galaksi B · Tavan mı, duvar mı: oda kesiti; başlık eğilir, ışık tavandan duvara geçer ===== */
+.oda{position:relative;height:300px;margin-top:20px;border-radius:22px;overflow:hidden;background:var(--koyu)}
+.oda::before{content:"";position:absolute;left:18px;right:18px;top:18px;height:0;border-top:1.5px solid rgba(238,242,250,.25)}
+.oda::after{content:"";position:absolute;right:18px;top:18px;bottom:18px;width:0;border-right:1.5px solid rgba(238,242,250,.25)}
+.oda-z{position:absolute;left:18px;right:18px;bottom:18px;height:0;border-top:1.5px solid rgba(238,242,250,.25)}
+.komo{position:absolute;left:58px;bottom:19px;width:84px;height:56px;border-radius:6px 6px 0 0;background:var(--koyu2);box-shadow:inset 0 0 0 1.5px rgba(238,242,250,.25)}
+.pj{position:absolute;left:82px;bottom:75px;width:36px;height:36px;border-radius:50%;background:#F4F5FA}
+.pj i{position:absolute;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:conic-gradient(#111 0 50%,transparent 50%);transform:rotate(-90deg);transition:transform 1s var(--ease)}
+.oda.duvar .pj i{transform:rotate(0deg)}
+.yama{position:absolute;overflow:hidden;opacity:0;transition:opacity .9s var(--ease) .3s}
+.yama img{width:100%;height:100%;object-fit:cover;display:block}
+.yama.t{left:40px;top:19px;width:240px;height:46px;border-radius:0 0 50% 50%/0 0 100% 100%}
+.yama.d{right:19px;top:40px;width:46px;height:200px;border-radius:50% 0 0 50%/50% 0 0 50%}
+.koni{position:absolute;opacity:0;transition:opacity .9s var(--ease) .2s;background:linear-gradient(0deg,rgba(156,195,255,.4),rgba(156,195,255,.05))}
+.koni.t{left:40px;top:64px;width:240px;height:166px;clip-path:polygon(25% 100%,35% 100%,100% 0,0 0)}
+.koni.d{left:100px;top:40px;right:64px;height:200px;background:linear-gradient(270deg,rgba(156,195,255,.4),rgba(156,195,255,.05));clip-path:polygon(0 74%,0 86%,100% 100%,100% 0)}
+.oda.tavan .t,.oda.duvar .d{opacity:1}
+.oda-sec{position:absolute;left:30px;top:94px;display:flex;gap:6px;z-index:3}
+.oda-sec button{min-height:44px;padding:0 14px;border:0;border-radius:999px;background:rgba(238,242,250,.1);box-shadow:inset 0 0 0 1px rgba(238,242,250,.22);font-size:13px;font-weight:700}
+.pg .oda-sec button{color:#fff}
+.pg .oda-sec button.on{background:var(--v);color:var(--koyu);box-shadow:none}
+
+/* Pococo referansı (kullanıcı, 18 Eki): fiyatın altında alıcı fotoğrafları, koyu bilgi karoları, sayfa içi sekmeler, temalı disk setleri */
+.alici{margin:16px 0 0}
+.alici>span{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.alici>span small{font-size:12px;font-weight:500;color:var(--soluk)}
+.alici div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.alici i{aspect-ratio:1;border-radius:12px;border:1.5px dashed #B8C0D2;display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--soluk)}
+.karo3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:20px}
+.karo3 div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:92px;padding:12px 6px;border-radius:14px;background:var(--lac);color:#fff;text-align:center}
+.karo3 b{font-family:var(--fb);font-weight:var(--bk);font-stretch:118%;font-size:22px;letter-spacing:-.02em;line-height:1;color:var(--v)}
+.karo3 span{font-size:12px;line-height:1.3;color:#D5DBEA}
+.liste{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--cizgi)}
+.liste li{display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--cizgi);font-size:15px}
+.liste li b{flex:none;width:150px}
+.liste li span{color:var(--soluk);font-size:14px}
+.sekmeler{position:sticky;top:0;z-index:4;display:flex;gap:4px;padding:8px 12px;background:var(--zemin);border-bottom:1px solid var(--cizgi)}
+.sekmeler a{flex:1;display:grid;place-items:center;min-height:44px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none}
+.sekmeler a.on{background:var(--lac);color:#fff}
+.setler{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 4px}
+.set{flex:0 0 250px;scroll-snap-align:start;padding:16px;border-radius:20px;background:var(--koyu);color:#EEF2FA}
+.set-d{position:relative;height:150px}
+.set-d img{position:absolute;top:10px;width:110px;height:110px;border-radius:50%;box-shadow:0 0 0 3px var(--koyu)}
+.set-d img:nth-child(1){left:0;z-index:3;animation:don 30s linear infinite}.set-d img:nth-child(2){left:60px;z-index:2}.set-d img:nth-child(3){left:120px;z-index:1}
+.set b{display:block;font-family:var(--fb);font-weight:var(--bk);font-stretch:118%;font-size:20px;letter-spacing:-.02em}
+.set span{display:block;margin-top:4px;font-size:13px;color:#C9CEE6;line-height:1.4}
+.set small{display:inline-block;margin-top:10px;padding:2px 10px;border-radius:999px;background:var(--koyu2);font-size:12px;font-weight:700;color:var(--v)}
+
+/* ===== Galaksi B · Haftanın gökleri: gün seç, o gecenin diski döner ===== */
+.hafta{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:18px}
+.hafta button{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:72px;padding:8px 0;border:0;border-radius:14px;background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--cizgi);font-size:12px;font-weight:700}
+.hafta button img{width:28px;height:28px;border-radius:50%}
+.pg .hafta button.on{background:var(--lac);color:#fff;box-shadow:none}
+.gece{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center;margin-top:12px;padding:18px;border-radius:22px;background:var(--koyu);color:#EEF2FA}
+.gece-d{position:relative;width:150px;height:150px;border-radius:50%;overflow:hidden;-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 71%);mask-image:radial-gradient(circle,#000 58%,transparent 71%)}
+.gece-d>span{position:absolute;inset:0;animation:don 50s linear infinite}
+.gece-d img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s var(--ease)}
+.gece-d img.on{opacity:1}
+.gece small{display:block;font-size:13px;font-weight:700;color:var(--v)}
+.gece b{display:block;margin-top:2px;font-family:var(--fb);font-weight:var(--bk);font-size:22px;letter-spacing:var(--bls);line-height:1.1}
+.gece span>span{display:block;margin-top:6px;font-size:14px;color:#C9CEE6}
+
+
+/* Ad ve fiyat boyu (eleştirmen: A'da 40/36px büyüktü; kullanıcı daha önce "fiyat çok büyük" demişti) */
+.al h1{font-size:30px}
+.fiyat b{font-size:22px}
+.loox{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:13px;color:var(--soluk)}
+.loox i{font-style:normal;letter-spacing:2px;color:var(--v2)}
+.pk-g .x2{font-size:12px}
+.alici i{font-size:12px}
+
+/* AyFeneri göstergesi büyüdü (18×28), huzme 4 sn'de bir salınır, tepe ışığı opaklıkla yanar */
+.f-iz{gap:16px}
+.f-iz svg{width:18px;height:28px}
+.f-iz .fn{fill:var(--v);opacity:0;transition:opacity .4s var(--ease)}
+.f-iz .lit .fn{opacity:1;fill:var(--v)}
+.f-iz .on .hz{animation-duration:4s}
+
+/* Galaksi göstergesi: yörünge çizgisi hep görünür, gezegenler geçtikçe dolar, o anki gezegenin ayı döner */
+.y-iz{gap:10px}
+.y-iz svg{width:24px;height:24px}
+.y-iz .yr{opacity:.45}
+.y-iz .on .yr{opacity:1;stroke:var(--v)}
+
+/* ===== Feneri yak (düzeltildi): sahnenin tamamı görünür (fener + ay); yazı ve anahtar alt şeritte.
+   Kapalı: oda karanlık, fenerin tepesinde amber kor. Açık: ışık fenerden dairesel yayılır, duvarda ay belirir.
+   Kendiliğinden: 2 sn kapalı → yanar, 7 sn açık kalır; dokununca durur. ===== */
+.yak{position:relative;margin-top:20px;border-radius:22px;overflow:hidden;background:#0A0F1F;color:#fff;height:auto}
+.yak::after{display:none}
+.yak-g{position:relative;height:440px;overflow:hidden}
+.yak-g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:77% 50%}
+.yak .k0{filter:brightness(.16) saturate(.4)}
+.yak .k1{clip-path:circle(0% at 17% 39%);transition:clip-path 1.8s var(--ease) .15s}
+.yak.on .k1{clip-path:circle(150% at 17% 39%)}
+.yak .kor{left:17%;top:39%;width:16px;height:16px;margin:-8px 0 0 -8px}
+.yak-g::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,rgba(10,15,31,0),#0A0F1F)}
+/* Kapalıyken ay yok: duvarın karanlık tonuyla örtülür, fener yanınca örtü kalkar */
+.ay-ort{position:absolute;left:74.6%;top:22.5%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;background:radial-gradient(circle,#070A12 50%,rgba(7,10,18,.6) 62%,rgba(7,10,18,0) 72%);transition:opacity .9s var(--ease) .9s}
+.yak.on .ay-ort{opacity:0}
+.yak .k0{filter:brightness(.11) saturate(.35)}
+.ay-hale{position:absolute;left:74.6%;top:22.5%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,rgba(230,236,255,.28) 0,rgba(230,236,255,0) 68%);opacity:0;transition:opacity 1s var(--ease) 1.2s}
+.yak.on .ay-hale{opacity:1;animation:hale 4s ease-in-out 2.2s infinite alternate}
+.yak-alt{position:relative;left:auto;right:auto;bottom:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 18px 20px}
+.yak-alt .bas-y{font-size:28px;line-height:.98;color:#fff;margin:0}
+.yak-alt .bas-y span{display:block;transition:color .6s var(--ease)}
+.yak.on .yak-alt .bas-y span:last-child{color:var(--v)}
+.yak-alt small{display:block;margin-top:6px;font-size:13px;color:#C9D0E2}
+
+/* ===== Oda sahneleri: yazı görselin içinde; fotoğraflar yavaşça süzülür ===== */
+.oda-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:18px 16px 0}
+.oda-k{position:relative;flex:0 0 280px;height:400px;border-radius:18px;overflow:hidden;scroll-snap-align:start;background:#000;color:#fff}
+.oda-k img{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;animation:suz 16s ease-in-out infinite alternate}
+.oda-k:nth-child(2) img{animation-delay:-4s}.oda-k:nth-child(3) img{animation-delay:-8s}.oda-k:nth-child(4) img{animation-delay:-12s}
+.oda-k::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,.5) 0,rgba(10,15,31,0) 26%,rgba(10,15,31,0) 54%,rgba(10,15,31,.9) 100%)}
+.oda-k small{position:absolute;left:16px;top:14px;z-index:1;padding:3px 10px;border-radius:999px;background:rgba(10,15,31,.6);font-size:12px;font-weight:700;color:var(--v)}
+.oda-k b{position:absolute;left:16px;right:16px;bottom:40px;z-index:1;font-family:var(--fb);font-weight:var(--bk);font-size:24px;letter-spacing:var(--bls);line-height:1}
+.oda-k span{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;font-size:14px;color:#D5DBEA}
+
+/* ===== Büyük görsel kart (hediye / avucuna sığar): yazı görselin içinde ===== */
+.buyuk{position:relative;height:460px;border-radius:22px;overflow:hidden;background:#000;color:#fff}
+.buyuk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.buyuk.on img{animation:kb 9s linear infinite alternate}
+.buyuk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,31,0) 40%,rgba(10,15,31,.88) 100%)}
+.buyuk.acik::after{background:linear-gradient(180deg,rgba(26,33,66,0) 45%,rgba(26,33,66,.86) 100%)}
+.buyuk-y{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
+.buyuk-y .bas-y{font-size:30px;line-height:.98;color:#fff}
+.buyuk-y p{margin:8px 0 0;font-size:15px;color:#E3E7F2}
+
+/* Netlik halkası: bulanık ve net iki görselin opaklık geçişi (filtre animasyonu yok) */
+.net-g img{animation:none}
+.net-g .nt{animation:netgec 5s var(--ease) infinite}
+@keyframes netgec{0%,12%{opacity:0}55%,90%{opacity:1}100%{opacity:0}}
+.net span>span{font-size:14px}
+
+.al h1{font-size:26px;line-height:1.08}
+.fiyat b{font-size:22px}
+.dsk-y{display:flex}.dsk-y img{width:26px;height:26px;border-radius:50%;object-fit:cover;margin-left:-9px;box-shadow:0 0 0 2px #fff}.dsk-y img:first-child{margin-left:0}
+/* Yılbaşından önce kapında: gerçek tarih (1 iş gününde kargo + en geç 7 gün) */
+.yb-k{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center;margin:14px 0 0;padding:12px 14px;border-radius:16px;background:#F3F7F4;box-shadow:inset 0 0 0 1px #D7E6DC;color:var(--lac)}
+.yb-k .gk{display:grid;place-items:center;align-content:center;width:52px;height:52px;border-radius:14px;background:#2E6B4F;color:#fff;font-weight:800;font-size:19px;line-height:1;font-variant-numeric:tabular-nums}
+.yb-k .gk small{display:block;margin-top:3px;font-size:12px;font-weight:700}
+.yb-k b{display:block;font-size:15px;line-height:1.3}
+.yb-k span.t{display:block;margin-top:2px;font-size:13px;color:var(--soluk)}
+.yb-k.gecti{background:#FFF6EC;box-shadow:inset 0 0 0 1px #F1DEC6}.yb-k.gecti .gk{background:var(--v2)}
+.adapt{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;font-size:13px;color:var(--soluk)}
+.adapt svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* Yaparken / Yanınca */
+.ikili{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:16px}
+.ikili figure{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#0E1220}
+.ikili img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ikili figcaption{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:999px;background:#fff;color:var(--lac);font-size:12px;font-weight:700}
+.ikili-w .ok{position:absolute;left:50%;top:50%;z-index:1;display:grid;place-items:center;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:var(--v);box-shadow:0 0 0 4px #fff}
+.ikili-w .ok svg{width:16px;height:16px;fill:none;stroke:var(--lac);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ikili-w{position:relative}
+/* Kutuda ne var? */
+.kut{position:relative;margin-top:16px;border-radius:20px;overflow:hidden;background:#EFE6D8}
+.kut img{display:block;width:100%;height:auto}
+.kut button{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--lac);font:800 13px var(--fg);box-shadow:0 0 0 2px var(--lac),0 4px 10px rgba(0,0,0,.25);transition:transform .25s var(--ease),background-color .25s var(--ease)}
+.kut button::after{content:"";position:absolute;inset:-9px}
+.kut button.on{background:var(--lac);color:#fff;transform:scale(1.18)}
+.kl{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:center;margin-top:12px;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac)}
+.kl em{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-weight:800;font-size:13px}
+.kl b{display:block;font-size:15px}.kl span{display:block;font-size:13px;color:var(--soluk)}
+.kliste{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:14px 0 0;padding:0;font-size:13px;color:var(--lac)}
+.kliste li{display:flex;gap:6px}.kliste li::before{content:"";flex:none;width:6px;height:6px;margin-top:7px;border-radius:50%;background:var(--v)}
+.kyok{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:#FFF6EC;color:#6B3D0B;font-size:13px}
+/* Bu gece hangisi? (tek gece bandı) */
+.tav{position:relative;width:260px;height:260px;margin:18px auto 0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 6px rgba(255,255,255,.06),0 0 70px rgba(242,166,90,.22)}
+.tav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:rotate(-5deg) scale(1.06);transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.tav img.on{opacity:1;transform:none}
+.tav-ad{display:block;margin-top:12px;text-align:center;font-weight:700;color:#fff}
+.dk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.dk button{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:48px;padding:8px 4px;border:0;border-radius:14px;background:rgba(255,255,255,.06);color:#E6E8F2;font:600 12px var(--fg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.dk button img{width:46px;height:46px;border-radius:50%;object-fit:cover}
+.dk button.on{box-shadow:inset 0 0 0 2px var(--v);color:#fff}
+.koyu .alt-not{margin:14px 0 0;font-size:12px;color:#A9AEC6;text-align:center}
+/* 3 adım */
+.adm{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px}
+.adm figure{flex:0 0 240px;margin:0;scroll-snap-align:start;border-radius:18px;background:#F6F7F9;overflow:hidden}
+.adm img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.adm figcaption{padding:12px 14px 14px;font-size:13px;color:var(--soluk)}
+.adm figcaption b{display:flex;align-items:center;gap:8px;margin-bottom:2px;font-size:16px;color:var(--lac)}
+.adm figcaption b i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-size:12px}
+.qr{margin:12px 16px 0;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac);font-size:13px}
+@media (prefers-reduced-motion:reduce){.tav img,.kut button{transition:none}}
+
+.urs{margin-top:12px;padding:2px 16px;border-radius:20px;background:var(--yuzey,#FFFDF9);border:1px solid var(--cizgi,#E3D8C7);text-align:left}
+.urs-s+.urs-s{border-top:1px solid #EFE6D8;border-top-color:color-mix(in srgb,var(--cizgi,#E3D8C7) 60%,transparent)}
+.urs-s summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 0;font-size:14px;font-weight:600;line-height:1.3;color:var(--lac,#1A2142);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.urs-s summary::-webkit-details-marker{display:none}
+.urs-s summary:focus-visible{outline:2px solid var(--v2,#1A2142);outline-offset:2px;border-radius:8px}
+.urs-ay{position:relative;flex:none;width:22px;height:22px}
+.urs-ay .evre{position:absolute;inset:0;width:22px;height:22px;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
+.urs-ay .evre circle{fill:var(--yuzey,#FFFDF9);stroke:var(--lac,#1A2142);stroke-width:1.4}
+.urs-ay .evre path{fill:var(--v,#F2A65A)}
+.urs-ay .dolu,.urs-s[open] .urs-ay .hilal{opacity:0}
+.urs-s[open] .urs-ay .dolu{opacity:1}
+.urs-q{flex:1;min-width:0}
+.urs-ok{flex:none;width:18px;height:18px;fill:none;stroke:var(--soluk,#5C6078);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.urs-s[open] .urs-ok{transform:rotate(180deg)}
+.urs-s p{margin:0;padding:0 0 16px 34px;font-size:14px;line-height:1.55;color:var(--soluk,#5C6078)}
+@media (prefers-reduced-motion:reduce){.urs-ay .evre,.urs-ok{transition:none}}
+.serit-sag{display:flex;align-items:center;gap:12px}.serit-ok,.g-ok{display:none}
+
+/* Sizden gelen mesajlar (ortak.mesaj_bolum) */
+.mesaj-bol{padding-top:8px}
+.mesaj-bol .serit-ok,.g-ok{display:none}
+.m-alt{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5C6078}
+.mkarma{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px;scrollbar-width:none}
+.mkarma::-webkit-scrollbar{display:none}
+.mkarma button{flex:none;height:320px;aspect-ratio:9/16;padding:0;border:1px solid #E3D8C7;border-radius:18px;overflow:hidden;background:#FFFDF9;scroll-snap-align:start;cursor:pointer}
+.mkarma button:active{transform:scale(.98)}
+.mkarma img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mbuyuk{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:56px 16px 24px;background:rgba(12,16,39,.92)}
+/* Büyük görünüm üst menünün (900) ve satın alma çubuğunun üstünde; görsel ekran boyunu aşmaz (23 Eki, masaüstü denetimi) */
+.mbuyuk img{width:auto;max-width:100%;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);border-radius:16px;object-fit:contain}
+.mb-x{position:absolute;top:10px;right:10px;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,253,249,.14);display:grid;place-items:center;cursor:pointer}
+.mb-x svg{width:22px;height:22px;fill:none;stroke:#FFFDF9;stroke-width:2;stroke-linecap:round}
+
+/* Üst blok (25 Eki): beyaz ↔ lacivert yumuşak döngü; yalnız opacity */
+.rd{position:relative;isolation:isolate}
+.rd>.gk{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:inherit;gap:inherit;padding:inherit;pointer-events:none;opacity:0;animation:rd-gece 16s cubic-bezier(.45,0,.55,1) var(--rd-t,0s) infinite}
+@keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.rd>.gk{animation:none}}
+.duyuru.ua-s{display:flex;justify-content:center;align-items:center;gap:8px;height:30px;margin:0;padding:0 12px;border:0;background:#F3F4F7;color:#1A2142;font-size:13px;font-weight:600}
+.duyuru.ua-s b{font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.02em;color:#1A2142}
+.duyuru.ua-s .sayac-ay{width:14px;height:14px;flex:none}
+.duyuru.ua-s .sayac-ay circle{fill:none;stroke:#9AA0AE;stroke-width:1.6}
+.duyuru.ua-s .sayac-ay path{fill:#F2A65A}
+.duyuru.ua-s>.gk{background:#0C1027;color:#B9BED6}
+.duyuru.ua-s>.gk b{color:#F2A65A}
+.duyuru.ua-s>.gk .sayac-ay circle{stroke:rgba(185,190,214,.6)}
+header.ua-b{display:flex;justify-content:space-between;align-items:center;height:52px;margin:0;padding:0 4px 0 14px;background:#FFFFFF;color:#1A2142;box-shadow:inset 0 -1px 0 #E4E6EB}
+.ua-b .marka{display:flex;align-items:center;gap:7px;min-height:48px;color:inherit;text-decoration:none}
+.ua-b .marka b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:19px;letter-spacing:-.01em}
+.ua-b .isaret circle{stroke:#C9CED8}
+.ua-b .ua-sag{display:flex}
+.ua-b .ikon{position:relative;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}
+.ua-b .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
+.ua-b>.gk .isaret circle{stroke:rgba(255,253,249,.55)}
+.ua-b>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142}
+.ua-b .ikon:focus-visible,.ua-b .marka:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:12px}
+
+</style>
+</helmet>
+<div class="pg">
+    <div class="duyuru ua-s rd" role="timer" aria-label="{{cdAria}}"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b><span class="gk" aria-hidden="true"><span>Bugünkü fiyat garantisi</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b></span></div>
+  <header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>Ayluna</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>
+
+  <!-- Galeri: Shopify'da ürünün kendi görselleri; kaydırılır, 5 sn'de kendiliğinden geçer -->
+  <div class="urun-ust"><section class="hero kare" aria-label="Yılbaşı Ağacı Projektör Lamba fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
+  </section>
+
+  <section class="al" id="siparis">
+    <h1 class="bas-y">Yılbaşı Ağacı Projektör Lamba</h1>
+    <p class="alt-b">Kendin süslediğin minik yılbaşı ağacı; USB’ye takınca tavana yılbaşı desenleri yansıtır.</p>
+    <p class="fiyat"><b>₺999,00</b></p>
+    <div class="ozler dort"><div class="oz"><span class="gz" aria-hidden="true"><span class="mini"><svg viewBox="0 0 28 28"><path d="M14 3l6 8h-3l5 7h-4l4 5H6l4-5H6l5-7H8z"></path><path d="M14 23v3"></path></svg></span></span><b>Kendin yap</b><span class="t">Çubukları kabloya sar, ağacı süsle.</span></div><div class="oz"><span class="gz"><span class="dsk-y" aria-hidden="true"><img src="/_blob/0143de9991a1bc82ff5a2fcafd262ce8" alt=""><img src="/_blob/b9ca1f3036b0d671cec2c053a491141c" alt=""><img src="/_blob/29f34f185f858518e19adeb0a09ce92e" alt=""></span></span><b>Tavana yılbaşı</b><span class="t">Desen diski değişir, tavan değişir.</span></div><div class="oz"><span class="gz" aria-hidden="true"><span class="mini"><svg viewBox="0 0 28 28"><rect x="9" y="3" width="10" height="9" rx="1.5"></rect><path d="M11 6h2M15 6h2"></path><path d="M14 12v8"></path><path d="M14 20c-4 0-6 2-6 5M14 20c4 0 6 2 6 5"></path></svg></span></span><b>USB ile çalışır</b><span class="t">Şarj adaptörü, powerbank ya da bilgisayar.</span></div><div class="oz"><span class="gz" aria-hidden="true"><span class="mini"><svg viewBox="0 0 28 28"><rect x="4" y="11" width="20" height="14" rx="2"></rect><path d="M3 11h22M14 11v14"></path><path d="M14 11c-2-5-8-6-8-2 0 2 4 2 8 2zM14 11c2-5 8-6 8-2 0 2-4 2-8 2z"></path></svg></span></span><b>Hediye kutusunda</b><span class="t">Açması da kurması da hediye.</span></div></div>
+    <!-- Yılbaşından önce kapında (gerçek tarih; sayaç değil) -->
+    <div class="{{ybCls}}"><span class="gk">{{ybGun}}<small>{{ybGunEt}}</small></span><span><b>{{ybBas}}</b><span class="t">{{ybAlt}}</span></span></div>
+    <div class="pk-bas">Kaç tane?</div>
+    <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
+      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Hediye için</span></sc-if><span class="pk-g"><img src="/_blob/7a2ab002ed463caf8f2ec81db098e551" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b></span></button>
+    </sc-for></div>
+    <!-- Stok ELLE girilir (ürün alanı ayluna.stok_kurdele); boşsa satır gizlenir -->
+    <p class="stok"><span class="ping" aria-hidden="true"></span><span>Stokta son <b>[N]</b> adet</span></p>
+    <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
+    <div class="ay-dis" data-ay-dis></div>
+    <p class="adapt"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="8" rx="1.5"></rect><path d="M12 10v6M8 22h8M12 16v6"></path></svg><span>Telefon şarj adaptörüyle, powerbank ya da bilgisayarla çalışır. Adaptör kutuda yok; pil gerekmez.</span></p>
+    <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
+    <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Bu ürün ne işe yarıyor?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Kendin süsleyip kurduğun minik bir yılbaşı ağacı lambası: USB’ye takınca tavana yılbaşı desenleri yansıtır.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Nasıl kurulur?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Tüylü çubukları kabloya sarıp ağaç şekli verirsin, desenli çıkartmayı altın abajura yapıştırıp takarsın, istersen altın şerit ve inci çıkartmalarla süslersin. Kutudaki kartın QR kodunda montaj videosu var. USB ucunu ve projektör lensini kapatma.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Prize takılır mı?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>USB ile çalışır: telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; USB adaptör kutuda yok.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Kutu içeriğinde neler var?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, "Merry Christmas" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok.</p></details></div>
+  </section></div>
+
+  <!-- Yaparken / Yanınca: kurulum karesi (kullanıcının videosu) ve tavandaki desen -->
+  <section class="bolum px">
+    <h2 class="bas-y h2">Kutudan çıkar,<br>tavana yansıt<span class="n">.</span></h2>
+    <p class="alt-b">Bir akşam birlikte kurarsınız; ışığı kapatınca tavan yılbaşı olur.</p>
+    <div class="ikili-w"><div class="ikili">
+      <figure><img src="/_blob/2af6383513e2c4589e4fd534538dfe5d" alt="Tüylü çubuklar kabloya sarılırken"><figcaption>Yaparken</figcaption></figure>
+      <figure><img src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt="Tavanda yılbaşı desenleri" style="object-position: 50% 30%"><figcaption>Yanınca</figcaption></figure>
+    </div><span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></span></div>
+  </section>
+
+  <!-- Kutuda ne var? (eleştirmen 1. fikir): gerçek kutu fotoğrafında numaralı noktalar; dokununca parça adı. Altta düz liste. -->
+  <section class="bolum px" id="kutu">
+    <h2 class="bas-y h2">Kutuda<br>ne var<span class="n">?</span></h2>
+    <p class="alt-b">Fotoğraftaki numaralara dokun.</p>
+    <div class="kut"><img src="/_blob/4d01f14032ee55720b5baa41900bfc8b" alt="Kutudan çıkan parçalar"><button style="left: 52%; top: 18%" class="{{nk0}}" type="button" onClick="{{nkSec0}}" aria-label="Hediye kutusu" aria-pressed="{{nkOn0}}">1</button><button style="left: 36%; top: 43%" class="{{nk1}}" type="button" onClick="{{nkSec1}}" aria-label="Altın abajur" aria-pressed="{{nkOn1}}">2</button><button style="left: 77%; top: 48%" class="{{nk2}}" type="button" onClick="{{nkSec2}}" aria-label="Desenli çıkartma" aria-pressed="{{nkOn2}}">3</button><button style="left: 60%; top: 60%" class="{{nk3}}" type="button" onClick="{{nkSec3}}" aria-label="İnci çıkartmalar" aria-pressed="{{nkOn3}}">4</button><button style="left: 63%; top: 70%" class="{{nk4}}" type="button" onClick="{{nkSec4}}" aria-label=""Merry Christmas" çıkartması" aria-pressed="{{nkOn4}}">5</button><button style="left: 83%; top: 77%" class="{{nk5}}" type="button" onClick="{{nkSec5}}" aria-label="Tüylü süs çubukları" aria-pressed="{{nkOn5}}">6</button><button style="left: 36%; top: 85%" class="{{nk6}}" type="button" onClick="{{nkSec6}}" aria-label="Projektör ve desen diskleri" aria-pressed="{{nkOn6}}">7</button><button style="left: 22%; top: 52%" class="{{nk7}}" type="button" onClick="{{nkSec7}}" aria-label="Montaj kartı" aria-pressed="{{nkOn7}}">8</button></div>
+    <div class="kl"><em>{{nkNo}}</em><span><b>{{nkAd}}</b><span>{{nkAlt}}</span></span></div>
+    <ul class="kliste"><li>Hediye kutusu</li><li>Altın abajur</li><li>Desenli çıkartma</li><li>İnci çıkartmalar</li><li>"Merry Christmas" çıkartması</li><li>Tüylü süs çubukları</li><li>Projektör ve desen diskleri</li><li>Montaj kartı</li></ul>
+    <p class="kyok">USB adaptör kutuda yok: evdeki telefon şarj başlığı, powerbank ya da bilgisayar yeter.</p>
+  </section>
+
+  <!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
+  <section class="koyu bolum" id="diskler">
+    <div class="px"><h2 class="bas-y h2">Bu gece<br>hangisi<span class="n">?</span></h2><p class="alt-b">Diski değiştir, tavan değişsin.</p>
+    <div class="tav" aria-hidden="true"><sc-for list="{{disk}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for></div>
+    <span class="tav-ad" aria-live="polite">{{dAd}}</span>
+    <div class="dk"><sc-for list="{{disk}}" as="d" hint-placeholder-count="6"><button class="{{d.bcls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><img src="{{d.src}}" alt="">{{d.n}}</button></sc-for></div>
+    <p class="alt-not">Disk değiştirmek: fişi çek, abajuru kaldır, diski değiştir, abajuru tak. Desen görselleri ürün afişinden; tavanda daha yumuşak görünür.</p></div>
+  </section>
+
+  <!-- 3 adımda ağaç: kullanıcının montaj videosundan kareler -->
+  <section class="bolum" id="kurulum">
+    <div class="px"><h2 class="bas-y h2">Üç adımda<br>ağaç<span class="n">.</span></h2><p class="alt-b">Videodaki gibi; kaydır.</p></div>
+    <div class="adm noscroll"><figure><img src="/_blob/f514229183a4a0e7a2725a366d5280b1" alt="Sar"><figcaption><b><i>1</i>Sar</b>Tüylü çubukları USB kablonun etrafına sar, bükerek ağaç şekli ver.</figcaption></figure><figure><img src="/_blob/08a867b1ecb484b2ebd40b863bde844d" alt="Giydir"><figcaption><b><i>2</i>Giydir</b>Desenli çıkartmayı altın abajura yapıştır; istersen inci çıkartmalarla süsle.</figcaption></figure><figure><img src="/_blob/e99d81de13ab7ed59f13efed5ebaced2" alt="Tak, tavana çevir"><figcaption><b><i>3</i>Tak, tavana çevir</b>Abajuru tak, USB’ye bağla, ışığı kapat.</figcaption></figure><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <p class="qr">Montaj kartının QR kodunda video var. USB ucunu ve projektör lensini kapatma. İnci çıkartmalar küçük parça: küçük çocuklar bir yetişkinle yapsın.</p>
+  </section>
+
+  <section class="bolum px">
+    <h2 class="bas-y h2">İçin rahat<br>olsun<span class="n">.</span></h2>
+    <div class="ozler dort"><div class="oz"><span class="gz"><span class="gv-ik kamyon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle><path class="yl" d="M1 21h22"></path></svg></span></span><b>Ücretsiz kargo</b><span class="t">1 iş gününde kargoda, adım adım takip.</span></div><div class="oz"><span class="gz"><span class="gv-ik donus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg></span></span><b>30 gün iade</b><span class="t">Beğenmezsen geri gönder, iade kargosu ücretsiz.</span></div><div class="oz genis"><span class="gz"><span class="gv-ik kart-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span></span><span><b>Kartla güvenli öde</b><span class="t">%5 indirim; kart bilgin bize gelmez.</span></span></div></div><div class="kartlar"><span class="km">VISA</span><span class="km">Mastercard</span><span class="km">Troy</span></div>
+  </section>
+
+
+  <!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
+  <section class="bolum mesaj-bol" id="mesajlar">
+    <div class="px"><h2 class="bas-y h2">Sizden gelen<br>mesajlar<span class="n">.</span></h2><p class="m-alt">LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler.<span class="dokun"> Dokun, büyüsün.</span></p><span class="serit-ok"><button type="button" aria-label="Önceki mesajlar" onClick="{{mGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki mesajlar" onClick="{{mIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></div>
+    <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+  </section>
+  <sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
+
+  <section class="px">
+    <div class="otuz"><span class="ot-h" aria-hidden="true"><i style="transform: rotate(0deg); animation-delay: 0.00s"></i><i style="transform: rotate(12deg); animation-delay: 0.10s"></i><i style="transform: rotate(24deg); animation-delay: 0.20s"></i><i style="transform: rotate(36deg); animation-delay: 0.30s"></i><i style="transform: rotate(48deg); animation-delay: 0.40s"></i><i style="transform: rotate(60deg); animation-delay: 0.50s"></i><i style="transform: rotate(72deg); animation-delay: 0.60s"></i><i style="transform: rotate(84deg); animation-delay: 0.70s"></i><i style="transform: rotate(96deg); animation-delay: 0.80s"></i><i style="transform: rotate(108deg); animation-delay: 0.90s"></i><i style="transform: rotate(120deg); animation-delay: 1.00s"></i><i style="transform: rotate(132deg); animation-delay: 1.10s"></i><i style="transform: rotate(144deg); animation-delay: 1.20s"></i><i style="transform: rotate(156deg); animation-delay: 1.30s"></i><i style="transform: rotate(168deg); animation-delay: 1.40s"></i><i style="transform: rotate(180deg); animation-delay: 1.50s"></i><i style="transform: rotate(192deg); animation-delay: 1.60s"></i><i style="transform: rotate(204deg); animation-delay: 1.70s"></i><i style="transform: rotate(216deg); animation-delay: 1.80s"></i><i style="transform: rotate(228deg); animation-delay: 1.90s"></i><i style="transform: rotate(240deg); animation-delay: 2.00s"></i><i style="transform: rotate(252deg); animation-delay: 2.10s"></i><i style="transform: rotate(264deg); animation-delay: 2.20s"></i><i style="transform: rotate(276deg); animation-delay: 2.30s"></i><i style="transform: rotate(288deg); animation-delay: 2.40s"></i><i style="transform: rotate(300deg); animation-delay: 2.50s"></i><i style="transform: rotate(312deg); animation-delay: 2.60s"></i><i style="transform: rotate(324deg); animation-delay: 2.70s"></i><i style="transform: rotate(336deg); animation-delay: 2.80s"></i><i style="transform: rotate(348deg); animation-delay: 2.90s"></i><b>30</b><small>gün</small></span><span><b>Beğenmezsen iade et</b><span>Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz.</span></span></div>
+  </section>
+
+  <section class="bolum px" id="sss">
+    <h2 class="bas-y h2">Merak<br>edilenler<span class="n">.</span></h2>
+    <div style="margin-top: 14px; border-top: 1px solid var(--cizgi)">
+      <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p>{{f.a}}</p></details></sc-for>
+    </div>
+  </section>
+
+  <section>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">Odanın geri<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
+    <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
+      <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
+    </div>
+  </section>
+
+  <footer class="alt-bilgi">
+    <div class="px">
+      <h2 class="bas-y" style="font-size: 28px; color: #fff">Bu yılbaşı<br>tavana bak<span class="n" style="color: var(--v)">.</span></h2>
+      <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">Mesafeli Satış Sözleşmesi</a><a href="#">KVKK</a><a href="#">İade Politikası</a><a href="#">İletişim</a></div>
+      <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">Ayluna</span></div>
+      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">Fiyatlara KDV dahildir. © 2026 Ayluna</p>
+    </div>
+  </footer>
+
+  <!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
+  <div class="yapis">
+    <span class="karo"><img src="/_blob/7a2ab002ed463caf8f2ec81db098e551" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0"></span>
+    <span class="y-yazi"><b>Yılbaşı Ağacı</b><span>{{adetName}}</span></span>
+    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">Satın al</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6200}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, t: 0, now: Date.now() }; }
+  componentDidMount() {
+    var self = this;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ dOto: false });
+    // Tek saat: şerit sayacı, galeri (5 sn), disk (4 sn)
+    this.iv = setInterval(function () {
+      var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || 4));
+      if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % 6;
+      self.setState(o);
+    }, 1000);
+  }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    var self = this, S = this.state, B = '/_blob/';
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : [["/_blob/403192141ff415de19d7f08114a1bd74", "Yılbaşı Ağacı Projektör Lamba görseli 1", "50% 50%"], ["/_blob/487093d37ccb10be7cb78ab98f19dc84", "Yılbaşı Ağacı Projektör Lamba görseli 2", "50% 50%"], ["/_blob/d059329bb1316bb397f9b92644998065", "Yılbaşı Ağacı Projektör Lamba görseli 3", "50% 50%"], ["/_blob/1e70f03680e23baed50aea084c92b03e", "Yılbaşı Ağacı Projektör Lamba görseli 4", "50% 50%"]];
+    self.galN = GAL.length;
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
+    // Fiyat: Shopify'da canlı fiyat (V.urun), tuvalde geçici fiyat. 2 adette indirim tanımlı değil: tasarruf yazılmaz.
+    var VU = ((window.AYLUNA_VERI || {}).urun || {})["yilbasi-agaci-projektor-lamba"] || {}, P1 = VU.p || 999.0;
+    var paket = [
+      { n: 1, t: '1 Adet', p: TL(P1, true), sub: 'Kendine ya da evine', rib: false },
+      { n: 2, t: '2 Adet', p: TL(2 * P1, true), sub: 'Biri sana, biri hediye', rib: true }
+    ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
+    var DISK = [["Klasik yılbaşı", "/_blob/0143de9991a1bc82ff5a2fcafd262ce8"], ["Yeni yıl mesajı", "/_blob/b9ca1f3036b0d671cec2c053a491141c"], ["Kar taneleri", "/_blob/29f34f185f858518e19adeb0a09ce92e"], ["Ren geyikleri", "/_blob/a67e07583769ee524096661940ef6093"], ["Kardan adam", "/_blob/d54bbc54da481894b03a90633027d408"], ["Çanlar", "/_blob/b6e597a7824d07a8917cc638f657ba46"]];
+    var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
+    var PARCA = [["Hediye kutusu", "Yılbaşı baskılı, kağıt dolgulu."], ["Altın abajur", "Desenli çıkartmayı giydirirsin."], ["Desenli çıkartma", "Abajurun etrafına sarılır."], ["İnci çıkartmalar", "Kırmızı ve altın; kendinden yapışkanlı."], ["\"Merry Christmas\" çıkartması", "Ağacın tepesine süs."], ["Tüylü süs çubukları", "Kabloya sarılır, ağaç olur."], ["Projektör ve desen diskleri", "USB kablolu, lensli modül; diskler değişir."], ["Montaj kartı", "QR kodunda montaj videosu."]];
+    var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'], AYU = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
+    var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+    // Yılbaşından önce teslim için son sipariş: 31 Aralık'tan 7 gün teslim + 1 iş günü kargo geriye; hafta sonu atlanır
+    var g0 = new Date(now.getFullYear(), now.getMonth(), now.getDate()), yil = now.getMonth() === 0 && now.getDate() < 7 ? null : new Date(now.getFullYear(), 11, 31);
+    var son = yil ? new Date(yil.getFullYear(), 11, 23) : null; if (son) while (son.getDay() === 0 || son.getDay() === 6) son.setDate(son.getDate() - 1);
+    var gunYil = yil ? Math.round((yil - g0) / 864e5) : 0, yetisir = son && g0 <= son;
+    var ybCls = yetisir ? 'yb-k' : 'yb-k gecti', ybGun = yetisir ? String(gunYil) : '', ybGunEt = yetisir ? 'gün' : '';
+    var ybBas = yetisir ? 'Yılbaşından önce kapında' : 'Yılbaşına yetişmeyebilir', ybAlt = yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Yılbaşından önce teslim için son sipariş: ' + son.getDate() + ' ' + AYU[son.getMonth()] + '.') : ('Tahmini teslim: ' + teslim + '.');
+    function IKI(n) { return n < 10 ? '0' + n : String(n); }
+    var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
+    var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
+function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    var PR = [["LunaDream Gece Lambası", 1699.99, 1999, "/_blob/f4f724c3d02ba1e40788a962f9e3fe77"], ["Galaxy USB Projektör", 1599, 1999, "/_blob/88c17ac1f221cab147f23e1a46b7f55e"], ["Ayluna AyFeneri", 1649.99, 2499, "/_blob/d326933d74a22adce90d7f6ac3eabf43"], ["Ayluna Galaksi Night Projektör", 2199, 2999, "/_blob/3df93f38bf4441cdf4dc64b625a1e22d"], ["Galaksi Ambiyans Işığı", 1499, 2898, "/_blob/9e6102bb76acbfeb101fca8e2fc1024e"], ["Ayluna Kum Saati Lamba", 799, 999, "/_blob/0307a2c24e8297579b82099467f001d9"]];
+    var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
+    var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
+    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
+      gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      onLabel: 'Güvenli Ödeme ile Al', kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
+      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
+      disk: disk, dAd: DISK[S.disk][0],
+      nkNo: S.nk + 1, nkAd: PARCA[S.nk][0], nkAlt: PARCA[S.nk][1],
+      nk0: S.nk === 0 ? 'on' : '', nkOn0: S.nk === 0 ? 'true' : 'false', nkSec0: function () { self.setState({ nk: 0 }); },
+      nk1: S.nk === 1 ? 'on' : '', nkOn1: S.nk === 1 ? 'true' : 'false', nkSec1: function () { self.setState({ nk: 1 }); },
+      nk2: S.nk === 2 ? 'on' : '', nkOn2: S.nk === 2 ? 'true' : 'false', nkSec2: function () { self.setState({ nk: 2 }); },
+      nk3: S.nk === 3 ? 'on' : '', nkOn3: S.nk === 3 ? 'true' : 'false', nkSec3: function () { self.setState({ nk: 3 }); },
+      nk4: S.nk === 4 ? 'on' : '', nkOn4: S.nk === 4 ? 'true' : 'false', nkSec4: function () { self.setState({ nk: 4 }); },
+      nk5: S.nk === 5 ? 'on' : '', nkOn5: S.nk === 5 ? 'true' : 'false', nkSec5: function () { self.setState({ nk: 5 }); },
+      nk6: S.nk === 6 ? 'on' : '', nkOn6: S.nk === 6 ? 'true' : 'false', nkSec6: function () { self.setState({ nk: 6 }); },
+      nk7: S.nk === 7 ? 'on' : '', nkOn7: S.nk === 7 ? 'true' : 'false', nkSec7: function () { self.setState({ nk: 7 }); },
+      alaGit: alaGit, faq: [{"q": "Diski nasıl değiştiririm?", "a": "Fişi çek, abajuru kaldır, diski çıkar, yenisini tak ve abajuru geri koy. Sonra lambayı tavana çevir."}, {"q": "Çocuklar yapabilir mi?", "a": "İnci çıkartmalar gibi küçük parçalar var; küçük çocuklar bir yetişkinle birlikte yapsın."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Nasıl ödeyebilirim?", "a": "Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
+    };
+  }
+}
+</script>
+</body>
+</html>

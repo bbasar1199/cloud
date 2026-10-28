@@ -16,7 +16,7 @@ SURUM = '1.0.38'
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 # Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
 SONEK = {'LunaDreamE': ('lunadream', 'LunaDream sayfası'), 'GalaxyUSB': ('galaxy-usb', 'Galaxy USB sayfası'), 'AyFeneri': ('ayfeneri', 'AyFeneri sayfası'),
-         'GalaksiNight': ('galaksi-night', 'Galaksi Night sayfası')}
+         'GalaksiNight': ('galaksi-night', 'Galaksi Night sayfası'), 'YilbasiAgaci': ('yilbasi', 'Yılbaşı Ağacı sayfası')}
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
               ('arama', 'Arama', 'arama', 'Arama'), ('404', 'Sayfa404', '404', 'Bulunamadı')]
 URUN_PANO = [(h, S.OZEL_SAYFA.get(h, 'U-' + h)) for h, *_ in S.A.URUN]

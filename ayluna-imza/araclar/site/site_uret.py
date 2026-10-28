@@ -57,7 +57,8 @@ ADLAR = {'lunadream-gece-lambasi': ['LunaDream Gece Lambası', 'LunaDream'], 'ga
 OZEL_PAKET = {'lunadream-gece-lambasi': [(1, 1699.99, 1999), (2, 2749.99, None)], 'galayx-usb-projektor': [(1, 1599, 1999), (2, 2399.99, None)],
               'lamba': [(1, O.URUN['af']['P1'], O.URUN['af']['C1']), (2, O.URUN['af']['P2'], None)],
               'ayluna-galaksi-night-projektor': [(1, O.URUN['gn']['P1'], O.URUN['gn']['C1']), (2, O.URUN['gn']['P2'], None)]}
-OZEL_SAYFA = {'lunadream-gece-lambasi': 'LunaDreamE', 'galayx-usb-projektor': 'GalaxyUSB', 'lamba': 'AyFeneri', 'ayluna-galaksi-night-projektor': 'GalaksiNight'}
+OZEL_SAYFA = {'lunadream-gece-lambasi': 'LunaDreamE', 'galayx-usb-projektor': 'GalaxyUSB', 'lamba': 'AyFeneri', 'ayluna-galaksi-night-projektor': 'GalaksiNight',
+              'yilbasi-agaci-projektor-lamba': 'YilbasiAgaci'}  # 28 Eki: yılbaşı ağacı imza sayfası (yilbasi_sayfa.py)
 
 
 def veri():
