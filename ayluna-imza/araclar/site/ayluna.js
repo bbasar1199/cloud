@@ -432,8 +432,8 @@
   /* ---------- 4. Yönlendirme ---------- */
   function tekHash(u) { if (!u || u === './' || u === 'index.html') return '#'; var m = String(u).match(/^([\w-]+)\.html(\?.*)?$/); return m ? '#' + m[1] + (m[2] || '') : u; }
   var ADRES = { './': '/', 'index.html': '/', 'tum-urunler.html': '/collections/all', 'sepet.html': '/cart', 'odeme.html': '/checkout', 'arama.html': '/search',
-    'hesap.html': '/account', 'kargo-takip.html': AYAR.takip || '/apps/track123', 'iletisim.html': '/pages/iletisim', 'iade.html': '/pages/iade', 'kargo.html': '/pages/kargo',
-    'kvkk.html': '/pages/kvkk', 'mesafeli-satis.html': '/pages/mesafeli-satis', 'on-bilgilendirme.html': '/pages/on-bilgilendirme', 'hizmet-sartlari.html': '/pages/hizmet-sartlari', 'siparis-alindi.html': '/' };
+    'hesap.html': '/account', 'kargo-takip.html': AYAR.takip || '/apps/track123', 'iletisim.html': '/pages/contact', 'iade.html': '/policies/refund-policy', 'kargo.html': '/policies/shipping-policy',
+    'kvkk.html': '/policies/privacy-policy', 'mesafeli-satis.html': '/policies/terms-of-service', 'on-bilgilendirme.html': '/policies/terms-of-service', 'hizmet-sartlari.html': '/policies/terms-of-service', 'siparis-alindi.html': '/' };
   function adres(u) {
     if (!SHOP) return u;
     var m = String(u || './').match(/^([^?#]*)([?#].*)?$/), y = m[1] || './', q = m[2] || '';
@@ -793,4 +793,19 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kur); else kur();
   setTimeout(kur, 2000);
+})();
+
+/* Politika sayfaları (28 Eki): marka başlığı, güven şeridi, "Bize yaz" kartı ve diğer politikalar */
+(function () {
+  var c = document.querySelector('.shopify-policy__container'); if (!c || c.__ay) return; c.__ay = 1;
+  var f = document.createElement('link'); f.rel = 'stylesheet'; f.href = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap'; document.head.appendChild(f);
+  var ust = document.createElement('header'); ust.className = 'ay-pol-ust';
+  ust.innerHTML = '<a href="/" aria-label="Ayluna ana sayfa"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="#F3B562" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18a6 9 0 0 1 0-18z" fill="#F3B562"/></svg><b>Ayluna</b></a><a class="ay-pol-geri" href="/collections/all">Mağazaya dön</a>';
+  c.parentNode.insertBefore(ust, c);
+  var y = location.pathname, P = [['/policies/refund-policy', 'İade ve değişim'], ['/policies/shipping-policy', 'Kargo'], ['/policies/privacy-policy', 'Gizlilik ve KVKK'], ['/policies/terms-of-service', 'Hizmet şartları ve satış sözleşmesi']];
+  var alt = document.createElement('div'); alt.className = 'ay-pol-alt';
+  alt.innerHTML = '<div class="ay-pol-serit"><span>30 gün iade</span><span>Ücretsiz kargo</span><span>Kapıda ödeme</span><span>Kartla %5 indirim</span></div>' +
+    '<a class="ay-pol-kart" href="/pages/contact"><span><b>Sorunun mu var?</b><small>Sipariş numaranı yaz, hemen dönelim.</small></span><i aria-hidden="true">→</i></a>' +
+    '<nav class="ay-pol-diger" aria-label="Diğer politikalar">' + P.filter(function (x) { return x[0] !== y; }).map(function (x) { return '<a href="' + x[0] + '">' + x[1] + '</a>'; }).join('') + '<a href="/pages/contact">İletişim</a></nav>';
+  c.parentNode.insertBefore(alt, c.nextSibling);
 })();

@@ -505,3 +505,26 @@ html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
 .ay-loox-kisa::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(180deg,rgba(255,255,255,0),var(--ay-zemin,#fff) 72%);pointer-events:none}
 .ay-loox-ac{position:absolute;left:50%;bottom:18px;z-index:1;transform:translateX(-50%);min-height:48px;padding:0 24px;border:1.5px solid #1A2142;border-radius:999px;background:#FFFDF9;color:#1A2142;font-family:"Figtree",system-ui,sans-serif;font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer}
 .ay-loox-ac:active{transform:translateX(-50%) scale(.97)}
+
+/* Politika sayfaları (28 Eki): İade, Kargo, Gizlilik, Hizmet şartları marka görünüşünde */
+html:has(.shopify-policy__container) body{margin:0;background:#F6F1E9;color:#1A2142;font-family:"Figtree",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.ay-pol-ust{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 8px 0 16px;background:#1A2142;color:#F5F3EF}
+.ay-pol-ust a{display:flex;align-items:center;gap:8px;min-height:48px;color:inherit;text-decoration:none}
+.ay-pol-ust b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.02em}
+.ay-pol-ust .ay-pol-geri{padding:0 12px;border-radius:999px;font-size:14px;font-weight:600;color:#F3B562}
+.shopify-policy__container{max-width:680px!important;margin:0 auto!important;padding:28px 18px 8px!important;box-sizing:border-box}
+.shopify-policy__title h1{margin:0 0 18px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1.08;letter-spacing:-.02em;text-align:left;color:#1A2142}
+.shopify-policy__title h1::after{content:".";color:#F2A65A}
+.shopify-policy__body .rte{padding:22px 20px;border-radius:16px;background:#FFFDF9;box-shadow:0 1px 0 #EADFCF,0 10px 30px rgba(26,33,66,.06);font-size:16px;line-height:1.7;color:#3A3F5C}
+.shopify-policy__body .rte strong,.shopify-policy__body .rte b{display:block;margin:22px 0 4px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;line-height:1.2;color:#1A2142}
+.shopify-policy__body .rte p:first-child strong:first-child{margin-top:0}
+.shopify-policy__body .rte a{color:#1A2142;text-decoration:underline;text-decoration-color:#F2A65A;text-underline-offset:3px;text-decoration-thickness:2px}
+.ay-pol-alt{max-width:680px;margin:0 auto;padding:16px 18px 40px;box-sizing:border-box}
+.ay-pol-serit{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.ay-pol-serit span{padding:8px 12px;border-radius:999px;background:#EFE7DA;font-size:13px;font-weight:600;color:#1A2142}
+.ay-pol-kart{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-radius:16px;background:#1A2142;color:#F5F3EF;text-decoration:none}
+.ay-pol-kart b{display:block;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px}
+.ay-pol-kart small{display:block;margin-top:2px;font-size:14px;color:#C9CEE2}
+.ay-pol-kart i{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#F3B562;color:#1A2142;font-style:normal;font-size:20px;font-weight:700}
+.ay-pol-diger{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:18px;font-size:14px}
+.ay-pol-diger a{color:#5C6078;min-height:44px;display:inline-flex;align-items:center}
