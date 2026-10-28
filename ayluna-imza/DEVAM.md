@@ -475,7 +475,16 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
-## Tema 1.0.34: ürünler blok blok, Loox gömülü, ürün videoları, ince yapışkan çubuk (28 Ekim, en güncel)
+## Tema 1.0.35: EasySell seçimi, canlı denetim düzeltmeleri (28 Ekim, en güncel)
+- Canlı denetim (ayluna.shop, 1.0.34; 440 px ve 1440 px, izleyiciler engelli, sipariş verilmedi): JS hatası yok.
+- EasySell (kullanıcı kapıda ödemeyi EasySell ile yeniden açtı): `ES_GET_VARIANT_ID` gizli formdan okuyup `/cart/update.js` ile ekliyordu; önceki model sepette kalıyor, karışık 2'li pakette iki Erkek gidiyordu. Çözüm: `formEsitle` → `window.pmpr_cart_item` = `kalemler(seçim)`; EasySell'in paket uygulaması kancası (`getBundlesAppUpdates`) sepeti boşaltıp yalnız bunları ekler. Form adedi ilk kalemin adedi; `properties[_paket]` eklendi. EasySell düğmesi gizli forma düşerse yuvaya (`[data-ay-dis]`) taşınır; `#es-sticky` varsa `html.ay-es-yapis` ile bizim `.yapis` gizli.
+- Sade sayfalar bozuktu: blok sarmalayıcısı `ay-blok` ana sayfa tasarımının sınıfıydı → `ay-tb`.
+- Köşeli yer tutucular canlıda görünüyordu → `yerTutucuGizle` (Shopify'da soru/madde/satırla gizler). LunaDream "[gerçek tavan fotoğrafı]" etiketi kaldırıldı.
+- Video bölümü: mağazada video yok; bölüm artık gizlenmez, tasarım fotoğrafları oynat işaretsiz kalır. Remotion videoları `onizleme/v/` kullanıcıya gönderildi (ürün medyasına yüklenebilir).
+- Aynı sürümde (önceden): ürün kartı görselleri Shopify'dan, yorum tasarım kartları varsayılan kapalı (Loox varken), video bloğunda video seçici, Erkek seçilince galeri varyant görseline kayar, menüde LunaDream ürün sayfasına gider, `.pg` 500 px.
+- Testler: tema benzetimi HEPSİ TAMAM (yeni: EasySell kalemleri, düğme yuvada, yapışkan gizli), site 179 TAMAM, Theme Check yalnız RemoteAsset. Tema `tema-zip/ayluna-SHOPIFY-TEMA-1.0.35.zip`.
+
+## Tema 1.0.34: ürünler blok blok, Loox gömülü, ürün videoları, ince yapışkan çubuk (28 Ekim)
 - Canlıda 1.0.33 yayındaydı ama dört özel ürün kendi şablonuna atanmamıştı (canlı sayfada hepsi `template--…__b01…b06`); sayfalar tek parça açılıyordu.
   Kullanıcı: "Hâlâ section'lar çalışmıyor; Loox'u yüklüyorum, direkt senin yaptığın yorum kısmında olması gerekiyor; videolar açılmıyor; tüm section'lar erişilebilir değil; görselde gönderdiğim kısım hâlâ aynı."
 - 1.0.34: şablon ataması yok. `product.json` = 5 bölüm: `ay-lunadream` (12 blok), `ay-galaxy-usb` (16), `ay-ayfeneri` (14), `ay-galaksi-night` (15), `ay-urun-diger` (6; sade ürünler, parçalar `snippets/ay-u-<handle>.liquid`). Her bölüm yalnız kendi ürününde çizilir; tasarım parçaları blok (`p01…`, yazı `m…` ve görsel `g…` blok ayarı, `limit: 1`). `bolumler.urun_sayfasi`, `sade_snippet`, `sade_sayfasi`, `urun_sablonu`.

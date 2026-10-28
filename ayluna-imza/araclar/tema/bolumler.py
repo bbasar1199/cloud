@@ -266,6 +266,27 @@ def yorum_parcasi(gruplar):
     return -1
 
 
+# Yorum bloğu ayarları (28 Eki, kullanıcı: "hem Loox görünüyor hem senin koydukların görünüyor"): tasarımdaki yorum kartları, puan ve
+# müşteri fotoğrafları (y-tas, y-puan; Loox'taki yorumların kopyası) varsayılan kapalı, müşteri mesajları (y-msj) açık. Bloğun ayarından değişir.
+YORUM_AYAR = [
+    {'type': 'header', 'content': 'Bu bölümde görünenler'},
+    {'type': 'checkbox', 'id': 'mesajlar', 'label': 'Müşteri mesajları (WhatsApp ekran görüntüleri)', 'default': True},
+    {'type': 'checkbox', 'id': 'tasarim_yorum', 'label': 'Tasarımdaki yorum kartları, puan ve müşteri fotoğrafları', 'default': False,
+     'info': 'Loox yorumları bu bölümde kendiliğinden görünür. Bunu açarsan yorumlar iki kez görünür; Loox kapalıysa aç.'}]
+# Video bloğu (28 Eki, kullanıcı: "videolar görünmüyor"): videolar bloğun ayarından seçilir (İçerik → Dosyalar'daki videolar);
+# seçilmezse ürünün medyasındaki videolar; hiç video yoksa blok sayfada görünmez (düzenleyicide nasıl ekleneceği yazar).
+VIDEO_SAYI = 4
+VIDEO_AYAR = [{'type': 'paragraph', 'content': 'Videoyu seç; başlık videonun altında yazar. Video seçilmezse ürünün medyasındaki videolar gösterilir. Hiç video yoksa bu bölüm sayfada görünmez.'}]
+for _k in range(1, VIDEO_SAYI + 1):
+    VIDEO_AYAR += [{'type': 'video', 'id': 'v%d' % _k, 'label': 'Video %d' % _k},
+                   {'type': 'text', 'id': 'v%d_baslik' % _k, 'label': 'Video %d başlığı' % _k, 'default': ''}]
+VIDEO_VERI = ('<script type="application/json" class="ay-vid-veri">[' + ','.join(
+    "{%%- if block.settings.v%d -%%}{%%- assign ay_k = block.settings.v%d.sources | where: 'format', 'mp4' | last -%%}"
+    "{\"src\": {{ ay_k.url | json }}, \"poster\": {{ block.settings.v%d.preview_image | image_url: width: 600 | json }}, \"alt\": {{ block.settings.v%d_baslik | json }}}"
+    "{%%- else -%%}null{%%- endif -%%}" % (k, k, k, k) for k in range(1, VIDEO_SAYI + 1)) + ']</script>'
+    '{%- if request.design_mode -%}<p class="ay-vid-not ay-vid-ipucu">Videolar: bu bloğa tıkla, sağda "Video 1…4" seç. Ürünün medyasına yüklediğin videolar da burada çıkar. Video yoksa bu bölüm müşteriye görünmez.</p>{%- endif -%}')
+
+
 def urun_sayfasi(kod, pano, handle, ad_bolum, parcala):
     """Özel ürünün sayfa bölümü: (liquid, css, js, blok_turleri)."""
     fontlar, css, govde, js = parcala(pano)
@@ -276,7 +297,13 @@ def urun_sayfasi(kod, pano, handle, ad_bolum, parcala):
         tip = 'p%02d' % (n + 1)
         p, ayar = ayarla(h, kaynak='block')
         tpl = '<template class="ay-parca">' + liquid([(True, acilis)] + p + [(True, '</div>')]) + '</template>'
-        vakalar += ("  {%- when '" + tip + "' -%}<div class=\"ay-blok\" {{ block.shopify_attributes }}>" + tpl + kok('urun', handle)
+        sinif, ek = 'ay-tb', ''  # tema bloğu sarmalayıcısı; tasarımdaki sınıflarla çakışmayan ad (28 Eki: 'ay-blok' ana sayfa tasarımının sınıfıydı, sade sayfaları bozuyordu)
+        if 'y-tas' in h or 'y-msj' in h:
+            ayar = YORUM_AYAR + ayar
+            sinif += "{% unless block.settings.tasarim_yorum %} ay-ytasarimsiz{% endunless %}{% unless block.settings.mesajlar %} ay-ymsjsiz{% endunless %}"
+        if gt == 'video':
+            ayar = VIDEO_AYAR + ayar; ek = VIDEO_VERI
+        vakalar += ("  {%- when '" + tip + "' -%}<div class=\"" + sinif + "\" {{ block.shopify_attributes }}>" + ek + tpl + kok('urun', handle)
                     + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
         bloklar.append({'type': tip, 'name': et, 'limit': 1, 'settings': ayar})
     l = ('{%- comment -%} Ayluna · ' + ad_bolum + '. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.\n'
@@ -315,7 +342,7 @@ def sade_sayfasi(sade, ozel, genel):
          + cagir("'varlik'") + '\n'
          + '{%- for block in section.blocks -%}{%- case block.type -%}\n'
          + "  {%- when '@app' -%}<div class=\"ay-uyg\" {{ block.shopify_attributes }}>{% render block %}</div>\n"
-         + '  {%- else -%}<div class="ay-blok" {{ block.shopify_attributes }}>' + cagir('block.type') + '</div>\n'
+         + '  {%- else -%}<div class="ay-tb" {{ block.shopify_attributes }}>' + cagir('block.type') + '</div>\n'
          + '{%- endcase -%}{%- endfor -%}\n' + URUN_FORMU + cagir("'betik'") + '\n'
          + "{%- when " + ', '.join("'%s'" % h for h in ozel) + " -%}\n"
          + '{%- else -%}\n' + genel + '{%- endcase -%}\n')

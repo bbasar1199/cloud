@@ -443,16 +443,17 @@ LOGO = isaret(22)
 YORUM_HTML = ("""  <!-- Müşteri kanıtı tek bölümde (kullanıcı, 19 Eki: "yorum kısımlarının hepsi karmaşık, bir düzen oturtalım"). Üç yön gösterildi (A sekmeli, B tek akış, C duvar); eleştirmen B 8/10, kullanıcı B'yi seçti:
        puan → mesajlar şeridi → öne çıkan tek yorum → fotoğraf şeridi → kısa yorum listesi → hepsini oku (mesajlar karışık şeritte kaybolduğu için ayrıldı).
        Konu çipleri ve ayrı "Sizden gelen mesajlar" bölümü kalktı. -->
+  <!-- y-puan / y-msj / y-tas: temada yorum bloğunun ayarıyla açılıp kapanır (28 Eki; Loox açıkken tasarım kartları kapalı) -->
   <section id="yorumlar" class="bolum gir yorum-b">
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 28px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px"><h2 class="h2">Aileler<br>ne diyor<span class="n">?</span></h2><span class="y-puan" style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1"><b class="ser" style="font-size: 28px; font-weight: 400">{{rating}}</b><span style="margin-top: 6px">""" + STAR + """</span><span style="font-size: 13px; color: #5C6078; margin-top: 4px">{{reviews}} yorum</span></span></div>
     <!-- Kullanıcı (19 Eki): "WP mesajları falan gidiyor" → mesajlar karışık şeritte kayboluyordu; bölümün başında kendi başlıklı şeridi,
          fotoğraflar ayrı ve küçük şeritte -->
-    <p class="px yara">Sizden gelen mesajlar<span class="dokun">Dokun, büyüsün</span>""" + serit_ok('mesajlar') + """</p>
-    <div class="noscroll karma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="k-msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
-    <figure class="px yone"><span class="tirnak" aria-hidden="true">“</span><q>{{oneQ.q}}</q><figcaption><b>{{oneQ.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure>
-    <p class="px yara">Evlerinizden<span>Müşteri fotoğrafları</span>""" + serit_ok('fotoğraflar') + """</p>
-    <div class="noscroll karma kucuk"><sc-for list="{{fsira}}" as="f" hint-placeholder-count="4"><button class="k-foto" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
-    <div class="px yl"><sc-for list="{{revRest}}" as="r" hint-placeholder-count="3"><figure class="yr"><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure></sc-for><a href="#" class="cip yhep">{{reviews}} yorumun hepsini oku</a><p class="ynot">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı.</p></div>
+    <p class="px yara y-msj">Sizden gelen mesajlar<span class="dokun">Dokun, büyüsün</span>""" + serit_ok('mesajlar') + """</p>
+    <div class="noscroll karma y-msj"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button class="k-msj" type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <figure class="px yone y-tas"><span class="tirnak" aria-hidden="true">“</span><q>{{oneQ.q}}</q><figcaption><b>{{oneQ.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure>
+    <p class="px yara y-tas">Evlerinizden<span>Müşteri fotoğrafları</span>""" + serit_ok('fotoğraflar') + """</p>
+    <div class="noscroll karma kucuk y-tas"><sc-for list="{{fsira}}" as="f" hint-placeholder-count="4"><button class="k-foto" type="button" onClick="{{f.ac}}" aria-label="{{f.alt}}, büyüt"><img src="{{f.src}}" alt="{{f.alt}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="px yl y-tas"><sc-for list="{{revRest}}" as="r" hint-placeholder-count="3"><figure class="yr"><q>{{r.q}}</q><figcaption><b>{{r.name}}</b><span class="dog">{{tik}}Satın aldı</span></figcaption></figure></sc-for><a href="#" class="cip yhep">{{reviews}} yorumun hepsini oku</a><p class="ynot">Yorumlar yalnız sipariş verenlerden; hepsi yayımlanır. Mesajlar izinle paylaşıldı.</p></div>
   </section>
 
 """).replace('{{tik}}', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>')
@@ -524,11 +525,11 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </section>
 
   <!-- Videolar: gerçek ürün videoları; kalır (kullanıcı, 23 Eki: "gerçek ürün videoları olan kısım gitmiş oldu ama"; sadeleştirmede yanlışlıkla kaldırılmıştı).
-       Canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
+       Canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa tasarımdaki fotoğraflar görünür (oynat işareti yok; 28 Eki, kullanıcı: "ışık kapanınca ne oluyor kısmı tamamen yok"). Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
   <section class="{{vidCls}}" id="videolar">
     <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
-      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid ay-vid" type="button" aria-label="{{v.t}}: videoyu oynat"><sc-if value="{{v.gercek}}" hint-placeholder-val="{{false}}"><video src="{{v.vsrc}}" poster="{{v.src}}" muted loop playsinline preload="metadata"></video></sc-if><sc-if value="{{v.kapak}}" hint-placeholder-val="{{true}}"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"></sc-if><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
+      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid ay-vid" type="button" aria-label="{{v.al}}"><sc-if value="{{v.gercek}}" hint-placeholder-val="{{false}}"><video src="{{v.vsrc}}" poster="{{v.src}}" muted loop playsinline preload="metadata"></video></sc-if><sc-if value="{{v.kapak}}" hint-placeholder-val="{{true}}"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"></sc-if><sc-if value="{{v.gercek}}" hint-placeholder-val="{{false}}"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span></sc-if><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
   </section>
@@ -563,7 +564,6 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <div class="px"><h2 class="h2" style="color: #FFFDF9">Bu gece<br>hangi masal<span class="n">?</span></h2><p style="margin: 8px 0 0; font-size: 14px; color: #B9BED6">Diski seç, desenini gör.</p></div>
     <div class="px" style="margin-top: 16px"><div class="tavan">
       <sc-for list="{{proj}}" as="p" hint-placeholder-count="2"><span class="{{p.cls}}" aria-hidden="true"><img src="{{p.src}}" alt=""></span></sc-for>
-      <span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 600; color: #FFFDF9; background: rgba(12,16,39,.6); padding: 3px 9px; border-radius: 999px">[gerçek tavan fotoğrafı]</span>
       <span style="position: absolute; left: 14px; bottom: 14px; display: flex; flex-direction: column; line-height: 1.2; color: #FFFDF9"><span style="font-size: 12px; color: #B9BED6">Disk</span><b class="ser" style="font-size: 18px; font-weight: 400">{{discName}}</b></span>
     </div></div>
     <div class="noscroll" style="display: flex; gap: 6px; overflow-x: auto; padding: 14px 16px 0">
@@ -704,15 +704,15 @@ JS = """class Component extends DCLogic {
     function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var cdAy = AYY(Math.round(kalan / 864000) / 100);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
-    // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): Shopify'da ürünün medyasındaki videolar oynar; video yoksa bölüm görünmez.
+    // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): Shopify'da ürünün medyasındaki ya da bloğa seçilen videolar oynar; video yoksa tasarımdaki fotoğraflar kalır.
     // Önizlemede tasarımdaki kapaklar.
     var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
-    var vids = VID ? VID.map(function (v) { return { t: v.alt || 'LunaDream videosu', k: 'Dokun, sesli izle', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; })
+    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'LunaDream videosu', k: 'Dokun, sesli izle', al: (v.alt || 'LunaDream videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; })
       : [
-      { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%', gercek: false, kapak: true },
-      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%', gercek: false, kapak: true },
-      { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%', gercek: false, kapak: true },
-      { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%', gercek: false, kapak: true }
+      { t: 'Işık kapanınca tavanda masal', al: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Bir müşterimizin akşamı', al: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Uzay Kaşifi tavanda', al: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%', gercek: false, kapak: true },
+      { t: 'Disk nasıl takılır', al: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%', gercek: false, kapak: true }
     ];
     // Müşteri fotoğrafları (Loox foto yorumları)
     // Gerçek müşteri içeriği. Eski sitedeki "mutlu kullanıcı" fotoğraflarının 5'i Higgsfield üretimi (hf_): müşteri diye konmaz; yalnız IMG_4145 (minikesnaftr hikâyesi) alındı.
@@ -820,7 +820,7 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, vidCls: 'bolum gir' + (vids.length ? '' : ' ay-yok'), mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, vidCls: 'bolum gir', mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1), galGeri: GALOK(-1), galIleri: GALOK(1), faq: faq,

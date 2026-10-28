@@ -20,12 +20,13 @@ MEDYA = [h for h in os.environ.get('BENZETIM_MEDYA', '').split(',') if h]  # bu 
 VIDEO = [h for h in os.environ.get('BENZETIM_VIDEO', '').split(',') if h]  # bu ürünlerin video bölümüne bir video bloğu eklenmiş gibi
 CANLI, VARYANT = {}, {}
 for p in URUNLER:
-    vs = [dict(id=v['id'], t=v['title'], a=bool(v.get('available', True)), p=int(round(float(v['price']) * 100))) for v in p['variants']]
+    vs = [dict(id=v['id'], t=v['title'], a=bool(v.get('available', True)), p=int(round(float(v['price']) * 100)), i=(v.get('featured_image') or {}).get('src')) for v in p['variants']]
     if p['handle'] in FIYAT_DEGIS:
         for v in vs: v['p'] = FIYAT_DEGIS[p['handle']]
     ilk = next((v for v in vs if v['a']), vs[0])
     c = max([int(round(float(v['compare_at_price']) * 100)) for v in p['variants'] if v.get('compare_at_price')] or [0])
-    CANLI[p['handle']] = dict(p=ilk['p'], c=c, stok=any(v['a'] for v in vs), vid=ilk['id'], url='/products/' + p['handle'], v=vs, dun=None, kd=None)
+    CANLI[p['handle']] = dict(p=ilk['p'], c=c, stok=any(v['a'] for v in vs), vid=ilk['id'], url='/products/' + p['handle'], v=vs, dun=None, kd=None,
+                              img=((p.get('images') or [{}])[0].get('src') if p['handle'] in MEDYA else None))
     CANLI[p['handle']].update(ELLE.get(p['handle'], {}))
     for v in vs: VARYANT[v['id']] = dict(h=p['handle'], ad=p['title'], vt=v['t'], p=v['p'], c=c, img=(p.get('images') or [{}])[0].get('src', ''))
 
@@ -119,7 +120,7 @@ def sablon_ciz(ad, h):
     if urun:  # layout'taki #ay-medya: galeri görselleri (BENZETIM_MEDYA) ve ürün videoları (BENZETIM_VIDEO)
         out.append('<script type="application/json" id="ay-medya">%s</script>' % json.dumps(dict(
             g=[dict(src=i['src'], alt=urun['title']) for i in urun['images']] if h in MEDYA else [],
-            v=[dict(src='/assets/benzetim.mp4', poster='', alt='Bir müşterimizin akşamı')] if h in VIDEO else []), ensure_ascii=False))
+            v=[]), ensure_ascii=False))
     if urun and h in LOOX:  # Loox yerleştirmesinin betiği gibi: sayfadaki #looxReviews kutusunu biraz sonra doldurur
         out.append('<script>setTimeout(function () { var l = document.getElementById("looxReviews"); if (l) l.innerHTML = \'<div class="loox-benzetim">Loox yorumları (benzetim)</div>\'; }, 900);</script>')
     for kim in t['order']:
@@ -132,6 +133,8 @@ def sablon_ciz(ad, h):
             bb = b['blocks'][bk]
             if bb.get('disabled'): continue
             ba = dict((x['id'], x.get('default')) for x in bsema.get(bb['type'], {}).get('settings', []) if 'id' in x); ba.update(bb.get('settings') or {})
+            if h in VIDEO and 'v1' in ba:  # video bloğunda Video 1 seçilmiş gibi
+                ba['v1'] = dict(sources=[dict(format='mp4', url='/assets/benzetim.mp4')], preview_image=dict(src='')); ba['v1_baslik'] = 'Bir müşterimizin akşamı'
             bloklar.append(dict(id=bk, type=bb['type'], settings=ba, shopify_attributes='data-blok="%s"' % bk, html=bb.get('html', '')))
         html = LQ.from_string(lq_hazirla(kaynak)).render(section=dict(id=kim, settings=ayar, blocks=bloklar), product=urun, request=dict(design_mode=False),
                                                          settings=dict(galeri_urun=True))

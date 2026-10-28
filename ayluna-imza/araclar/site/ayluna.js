@@ -20,6 +20,9 @@
       if (!c) { u.yok = true; return; }
       u.p = c.p / 100; u.c = c.c > c.p ? c.c / 100 : null; u.stok = !!c.stok; u.vid = c.vid; u.vs = c.v || []; u.url = c.url; u.dun = c.dun; u.kd = c.kd;
     });
+    // Ürün kartı görselleri (28 Eki): tasarımdaki kart görseli (V.kart: görsel kimliği → ürün) Shopify'daki ürünün ana görseliyle değişir
+    // (tema ayarı "Ürün görselleri Shopify'dan"; kapalıysa CANLI'da img yok, tasarım görseli kalır)
+    if (V.kart) Object.keys(V.kart).forEach(function (id) { var c = CANLI[V.kart[id]]; if (c && c.img) { V.blob = V.blob || {}; V.blob[id] = c.img; } });
   }
   var TL = function (n) { var s = (Math.round(n * 100) / 100).toFixed(2).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + s[1]; };
   var HTMLNS = 'http://www.w3.org/1999/xhtml';
@@ -484,6 +487,9 @@
     if (a.tagName !== 'A') return;
     if (href && href !== '#' && href.charAt(0) === '#') { if (TEK) { e.preventDefault(); var hed = document.getElementById(href.slice(1)); if (hed) hed.scrollIntoView({ behavior: 'smooth', block: 'start' }); } return; }  // sayfa içi çapa
     e.preventDefault();
+    // Gerçek adresi olan bağlantı (menü, kart) adresine gider (28 Eki, kullanıcı: "LunaDream'e basınca direkt LunaDream'in kendi sayfasına
+    // yönlendir, ürün arama kısmına değil"); metinden yön bulma yalnız adressiz (#) tasarım bağlantıları için
+    if (href && href !== '#') { git(href); return; }
     var h2 = urunBul(m) || urunBul(a.getAttribute('aria-label'));
     var y = metinYonu(m);
     if (/^(gece lambası|projektör|nemlendirici|lunadream)$/i.test(norm(m))) { git('arama.html?q=' + encodeURIComponent(m.trim())); return; }
@@ -560,8 +566,11 @@
   // Uygulama yuvası (tasarımda satın al düğmesinin altı): EasySell düğmesi (easysell-form kancasının yanına kendisi koyar) ve
   // tema düzenleyicide ürün bölümüne eklenen uygulama blokları
   function yuvaDoldur() {
-    var y = document.querySelector('.ay-kok [data-ay-dis]'); if (!y || y.__dolu) return; y.__dolu = 1;
-    y.appendChild(document.createElement('easysell-form'));
+    var y = document.querySelector('.ay-kok [data-ay-dis]'); if (!y) return;
+    // EasySell sayfa düğmesi yuvadan önce kurulursa gizli ürün formunun içine düşer ve görünmez; yuvaya taşınır
+    var eb = document.querySelector('form[data-ay-urun-formu] .es-popup-button'); if (eb) y.appendChild(eb);
+    if (y.__dolu) return; y.__dolu = 1;
+    y.insertBefore(document.createElement('easysell-form'), y.firstChild);
     // Yorum uygulaması (Loox) satın alma yuvasına değil, sayfadaki yorum kutusuna (data-ay-yorum); kutu Loox gelince görünür (ayluna.css)
     var yk = document.querySelector('.ay-kok [data-ay-yorum]'), ub = document.querySelector('.ay-uygulama-bloklari');
     if (ub) while (ub.firstChild) {
@@ -585,7 +594,23 @@
       while ((t = w.nextNode())) { var s = t.nodeValue.replace(re, String(Math.round(+n))); if (s !== t.nodeValue) t.nodeValue = s; }
     }
   }
+  // Teyitsiz yer tutucular ([N], [foto], [teyit], [garanti]…) canlı mağazada görünmez: bulunduğu soru, madde ya da satır gizlenir
+  // (28 Eki, kullanıcı: "gerçek bir shopify mağazası yapacaksın"). Uygulama yuvası ve Loox kutusu dokunulmaz.
+  var YER_TUTUCU = /\[[^\]\n]{1,60}\]/;
+  function yerTutucuGizle() {
+    var k = document.querySelectorAll('.ay-kok');
+    for (var i = 0; i < k.length; i++) {
+      var w = document.createTreeWalker(k[i], NodeFilter.SHOW_TEXT), t;
+      while ((t = w.nextNode())) {
+        if (!YER_TUTUCU.test(t.nodeValue)) continue;
+        var e = t.parentElement; if (!e || e.closest('.yer,[data-ay-dis],[data-ay-dolu],[data-ay-yorum],script,style')) continue;
+        var h = e.closest('details,li,.stok,.alici,.ozet3>div') || e;
+        if (!h.hasAttribute('data-ay-gizli')) h.setAttribute('data-ay-gizli', '');
+      }
+    }
+  }
   function shopSusle() {
+    yerTutucuGizle();
     var k = document.querySelectorAll('.ay-kok .btn2, .ay-kok .btn-kp');
     for (var i = 0; i < k.length; i++) if (/kapıda/i.test(k[i].textContent) && !k[i].hasAttribute('data-ay-kapida')) k[i].setAttribute('data-ay-kapida', '');
     // Sepetteki "Kapıda ödemede ₺80…" notu Kapıda düğmesiyle birlikte gizlenir (kapıda ödeme EasySell'de)
@@ -600,10 +625,36 @@
     }
     if (SAYFA === 'urun') { formEsitle(); kachingEsitle(); yuvaDoldur(); elleSayi(); }
   }
+  // Varyant görseli (28 Eki, kullanıcı: "Erkek seçilince varyasyondaki seçtiğim ürün gelmeli"): seçilen varyantın Shopify'daki görseli
+  // galeride varsa galeri ona kayar; varyantın görseli yoksa ilk görsele döner. Açılışta galeri yerinde kalır.
+  var sonVar = null;
+  function varyantGorsel(vid) {
+    if (sonVar === null || vid === sonVar) { sonVar = vid; return; }
+    sonVar = vid;
+    var U = V.urun[URUN], v = U && (U.vs || []).filter(function (x) { return x.id === vid; })[0]; if (!v) return;
+    var yol = function (s) { return String(s || '').split('?')[0].replace(/^https?:/, ''); };
+    var resimler = document.querySelectorAll('.ay-kok .urun-ust img');
+    var im = v.i ? [].filter.call(resimler, function (x) { return yol(x.getAttribute('src')) === yol(v.i); })[0] : null;
+    if (v.i && !im) return;  // varyantın görseli galeride yok (galeri tasarım görselleriyle)
+    var hedef = im || resimler[0];
+    for (var el = hedef && hedef.parentElement; el && el !== document.body; el = el.parentElement) {
+      if (el.scrollWidth > el.clientWidth + 4 && /auto|scroll/.test(getComputedStyle(el).overflowX)) {
+        var sl = hedef; while (sl.parentElement !== el) sl = sl.parentElement;
+        var x = im ? el.scrollLeft + sl.getBoundingClientRect().left - el.getBoundingClientRect().left : 0;
+        el.scrollTo({ left: x, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        return;
+      }
+    }
+  }
   function formEsitle() {
     var f = document.querySelector('form[data-ay-urun-formu]'), s = satir(URUN); if (!f || !s) return;
-    var k = kalemler(s)[0]; if (!k) return;
-    var ad = { id: k.id, quantity: s.paket || 1, 'properties[_secim]': s.varyant };
+    var ks = kalemler(s), k = ks[0]; if (!k) return;
+    varyantGorsel(k.id);
+    // Kapıda ödeme (EasySell) siparişi bu listeden kurar: sepeti boşaltıp yalnız sayfadaki seçimi ekler (EasySell'in paket uygulaması kancası).
+    // Yoksa önceki model sepette kalıyor, karışık 2'li pakette (Erkek + Kız) iki aynı model gidiyordu (28 Eki, kullanıcı: "varyasyon seçince
+    // kapıda ödemede doğru görünmüyor").
+    window.pmpr_cart_item = ks.map(function (x) { return { id: x.id, quantity: x.quantity, properties: x.properties }; });
+    var ad = { id: k.id, quantity: k.quantity, 'properties[_secim]': s.varyant, 'properties[_paket]': String(s.paket || 1) };
     Object.keys(ad).forEach(function (n) { var i = f.querySelector('[name="' + n + '"]'); if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.appendChild(i); } if (i.value !== String(ad[n])) i.value = ad[n]; });
   }
   function suslen() {
@@ -619,6 +670,8 @@
   // ekrandayken çubuk aşağı çekilir (data-ay-cekil; yalnız transform/opacity), ekrandan çıkınca geri gelir. Aynı anda iki düğme görünmez.
   function yapisBak() {
     var y = document.querySelectorAll('.ay-kok .yapis'); if (!y.length) return;
+    // EasySell'in kendi yapışkan düğmesi açıksa bizim çubuk gizlenir; ikisi üst üste binmesin (28 Eki)
+    var es = !!document.getElementById('es-sticky'); if (es !== document.documentElement.classList.contains('ay-es-yapis')) document.documentElement.classList.toggle('ay-es-yapis', es);
     var b = anaBtn(), p = document.querySelector('.ay-kok .urun-ust .pk-liste, .ay-kok .urun-ust .pk'), cek = false;
     if (b) { var ust = (p || b).getBoundingClientRect().top, alt = b.getBoundingClientRect().bottom; cek = ust < window.innerHeight - 60 && alt > 0; }
     for (var i = 0; i < y.length; i++) if (cek !== y[i].hasAttribute('data-ay-cekil')) { if (cek) y[i].setAttribute('data-ay-cekil', ''); else y[i].removeAttribute('data-ay-cekil'); }
@@ -685,7 +738,15 @@
   function medya() { var m = medyaOku(); return m && m.g && m.g.length ? m.g : null; }
   // Ürün videoları (28 Eki): ürünün Shopify medyasındaki videolar. Shopify'da video yoksa boş liste (video bölümü görünmez);
   // önizlemede null (tasarımdaki kapaklar kalır)
-  function videolar() { var m = medyaOku(); return m ? (m.v || []).filter(function (v) { return v && v.src; }) : null; }
+  function videolar() {
+    if (!SHOP) return null;
+    // Önce video bloğunun ayarında seçilen videolar (.ay-vid-veri), yoksa ürünün medyasındaki videolar
+    var b = [], e = document.querySelectorAll('.ay-vid-veri');
+    for (var i = 0; i < e.length; i++) { try { b = b.concat(JSON.parse(e[i].textContent) || []); } catch (x) {} }
+    b = b.filter(function (v) { return v && v.src; });
+    if (b.length) return b;
+    var m = medyaOku(); return m ? (m.v || []).filter(function (v) { return v && v.src; }) : [];
+  }
   // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): bölüm bloklarındaki Shopify videoları. Ekrandayken sessiz döner,
   // dokununca sesli ve tam ekran. Hareket azaltılmışsa kendiliğinden dönmez.
   var vidIO = null;

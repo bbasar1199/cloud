@@ -11,7 +11,7 @@ import site_uret as S
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.34'
+SURUM = '1.0.35'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 # Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
@@ -110,6 +110,21 @@ def main():
 
     # 2) Veri ve görseller
     V = S.veri()
+    # Ürün kartı görselleri (28 Eki, kullanıcı: "ürün görselleri tema içerisindekiler olarak mı kalmış, onu nasıl düzelticem"): tasarımda
+    # bir ürünü gösteren kart görseli (ana sayfa, koleksiyon, arama, "Odanın geri kalanı için", sepet önerileri, masaüstü çubuğu) →
+    # o ürünün handle'ı. Shopify'da ayluna.js bunları ürünün kendi ana görseliyle değiştirir (tema ayarı galeri_urun).
+    def sade_ad(s): return re.sub(r'\s+', ' ', s.lower().replace('ı', 'i').replace('İ', 'i')).strip()
+    ad_h = {}
+    for h, u in V['urun'].items():
+        for a in [u['ad']] + list(u.get('adlar') or []): ad_h[sade_ad(a)] = h
+    kart = {}
+    for h, u in V['urun'].items(): kart[u['img'][7:]] = h
+    for e in V['ekler']:
+        if e.get('h'): kart[e['img'][7:]] = e['h']
+    for pano in [p for _, p, _, _ in SAYFA_PANO] + [p for _, p in URUN_PANO]:
+        for m in re.finditer(r"\{ n: '([^']+)', p: [\d.]+, c: [\d.]+, id: '([0-9a-f]{32})' \}", S.parcala(pano)[3]):
+            if sade_ad(m.group(1)) in ad_h: kart[m.group(2)] = ad_h[sade_ad(m.group(1))]
+    V['kart'] = kart
     for u in V['urun'].values(): kullanilan.add(u['img'][7:])
     for e in V['ekler']: kullanilan.add(e['img'][7:])
     gorsel = {}
@@ -132,8 +147,8 @@ def main():
 <script>
 window.AYLUNA_CANLI = {
 {%- for p in collections.all.products -%}
-{{ p.handle | json }}: {"p": {{ p.price }}, "c": {{ p.compare_at_price | default: 0 }}, "stok": {{ p.available | json }}, "vid": {{ p.selected_or_first_available_variant.id | json }}, "url": {{ p.url | json }}, "dun": {{ p.metafields.ayluna.dun_satis.value | json }}, "kd": {{ p.metafields.ayluna.stok_kurdele.value | json }}, "v": [
-{%- for v in p.variants -%}{"id": {{ v.id }}, "t": {{ v.title | json }}, "a": {{ v.available | json }}, "p": {{ v.price }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+{{ p.handle | json }}: {"p": {{ p.price }}, "c": {{ p.compare_at_price | default: 0 }}, "stok": {{ p.available | json }}, "vid": {{ p.selected_or_first_available_variant.id | json }}, "url": {{ p.url | json }}, "img": {% if settings.galeri_urun and p.featured_image %}{{ p.featured_image | image_url: width: 800 | json }}{% else %}null{% endif %}, "dun": {{ p.metafields.ayluna.dun_satis.value | json }}, "kd": {{ p.metafields.ayluna.stok_kurdele.value | json }}, "v": [
+{%- for v in p.variants -%}{"id": {{ v.id }}, "t": {{ v.title | json }}, "a": {{ v.available | json }}, "p": {{ v.price }}, "i": {% if v.featured_image %}{{ v.featured_image | image_url: width: 1200 | json }}{% else %}null{% endif %}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
 ]}{%- unless forloop.last -%},{%- endunless %}
 {%- endfor -%}
 };
@@ -332,8 +347,8 @@ window.AYLUNA_SEPET = {{ cart | json }};
         {'name': 'Ayluna', 'settings': [
             {'type': 'paragraph', 'content': 'Ödeme yalnız kartla (kapıda ödeme yok). Paket fiyatları için Kaching Bundles ya da otomatik indirim tanımlı olmalı (KURULUM).'},
             {'type': 'text', 'id': 'kargo_takip_url', 'label': 'Kargo takip adresi', 'default': '/apps/track123'},
-            {'type': 'checkbox', 'id': 'galeri_urun', 'label': 'Ürün galerisi Shopify\'daki ürün görsellerinden gelsin', 'default': True,
-             'info': 'Kapalıysa tasarımdaki galeri görselleri kullanılır.'}]}], ensure_ascii=False, indent=2) + '\n')
+            {'type': 'checkbox', 'id': 'galeri_urun', 'label': 'Ürün görselleri Shopify\'daki ürün görsellerinden gelsin', 'default': True,
+             'info': 'Ürün sayfası galerisi ürünün görsellerinden, ürün kartları (ana sayfa, koleksiyon, öneriler) ürünün ana görselinden gelir. Kapalıysa tasarımdaki görseller kullanılır.'}]}], ensure_ascii=False, indent=2) + '\n')
     yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123', 'galeri_urun': True}}, indent=2) + '\n')
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')
 
