@@ -4,7 +4,7 @@
 {{ 'ay-yilbasiagaci.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap">
 {%- for block in section.blocks -%}{%- case block.type -%}
-  {%- when 'p07' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
+  {%- when 'p07' -%}<div class="ay-tb" {{ block.shopify_attributes }}><script type="application/json" class="ay-gorsel-esle">{"_":0{%- if block.settings.df5142291 -%},"f514229183a4a0e7a2725a366d5280b1":{{ block.settings.df5142291 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.d08a867b1 -%},"08a867b1ecb484b2ebd40b863bde844d":{{ block.settings.d08a867b1 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.de99d81de -%},"e99d81de13ab7ed59f13efed5ebaced2":{{ block.settings.de99d81de | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.dce7dadd8 -%},"ce7dadd85b37a8089d0df5ce000d6f54":{{ block.settings.dce7dadd8 | image_url: width: 1600 | json }}{%- endif -%}}</script><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
 <section class="bolum px" id="nasil">
     <h2 class="bas-y h2">{% endraw %}{{ block.settings.yaa9db787 | escape }}{% raw %} {% endraw %}{% raw %}<br>yılbaşı<span class="n">.</span></h2>
     <div class="dg"><sc-for list="{{dg}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for>
@@ -103,6 +103,34 @@
           "id": "y300e5cb3",
           "label": "Yazı: Kurulum videosu kutudaki QR kodda",
           "default": "Kurulum videosu kutudaki QR kodda."
+        },
+        {
+          "type": "header",
+          "content": "Bölümdeki görseller"
+        },
+        {
+          "type": "paragraph",
+          "content": "Değiştirmek istediğin görseli seç; boş bırakırsan tasarımdaki görsel kalır."
+        },
+        {
+          "type": "image_picker",
+          "id": "df5142291",
+          "label": "Görsel 1: Dört kelime: Sar"
+        },
+        {
+          "type": "image_picker",
+          "id": "d08a867b1",
+          "label": "Görsel 2: Dört kelime: Süsle"
+        },
+        {
+          "type": "image_picker",
+          "id": "de99d81de",
+          "label": "Görsel 3: Dört kelime: Tak"
+        },
+        {
+          "type": "image_picker",
+          "id": "dce7dadd8",
+          "label": "Görsel 4: Dört kelime: Yansıt"
         }
       ]
     },

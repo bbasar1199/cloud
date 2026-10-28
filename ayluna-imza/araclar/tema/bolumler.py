@@ -389,7 +389,7 @@ def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
                 ayar = YORUM_AYAR + ayar
                 sinif += "{% unless block.settings.tasarim_yorum %} ay-ytasarimsiz{% endunless %}{% unless block.settings.mesajlar %} ay-ymsjsiz{% endunless %}"
             statik = set(m.group(2)[7:] for m in GORSEL.finditer(h))  # yazılı görsellerin seçicisi zaten var (g…)
-            d_ayar, d_esle = gorsel_secici([x for x in (harita or {}).get(tip) or [] if x[0] not in statik], len([a for a in ayar if a['type'] == 'image_picker']))
+            d_ayar, d_esle = gorsel_secici([x for x in (harita or {}).get(tip) or [] if x[0] not in statik], len([a for a in ayar if a['type'] == 'image_picker']), kararli=(pano == 'YilbasiAgaci'))
             ayar = ayar + d_ayar; ek += d_esle
             vakalar += ("  {%- when '" + tip + "' -%}<div class=\"" + sinif + "\" {{ block.shopify_attributes }}>" + ek + tpl + kok('urun', handle)
                         + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
@@ -407,7 +407,7 @@ def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
     return cikti, css, js, video_sirasi
 
 
-def gorsel_secici(liste, var_olan=0, kaynak='block'):
+def gorsel_secici(liste, var_olan=0, kaynak='block', kararli=False):
     """JS ile çizilen görseller (28 Eki, kullanıcı: "odası böyle görünecekteki görselleri de değiştirmek istiyorum ama sabit, değişemiyorum"):
     her görsel için bloğun ayarında bir görsel seçici (d1…). Seçilen görsel, ayluna.js'te tasarımdaki görselin (blob kimliği) yerine geçer.
     → (ayarlar, eşleme betiği)."""
@@ -416,8 +416,9 @@ def gorsel_secici(liste, var_olan=0, kaynak='block'):
              {'type': 'paragraph', 'content': 'Değiştirmek istediğin görseli seç; boş bırakırsan tasarımdaki görsel kalır.'}]
     parca = []
     for k, (blob, et) in enumerate(liste, 1):
-        ayar.append({'type': 'image_picker', 'id': 'd%d' % k, 'label': kisalt('Görsel %d%s' % (var_olan + k, (': ' + et) if et else ''), 60)})
-        parca.append('{%%- if %s.settings.d%d -%%},%s:{{ %s.settings.d%d | image_url: width: 1600 | json }}{%%- endif -%%}' % (kaynak, k, json.dumps(blob), kaynak, k))
+        kim = ('d' + blob[:8]) if kararli else 'd%d' % k  # kararlı: görselin kimliğinden (yılbaşı, 29 Eki)
+        ayar.append({'type': 'image_picker', 'id': kim, 'label': kisalt('Görsel %d%s' % (var_olan + k, (': ' + et) if et else ''), 60)})
+        parca.append('{%%- if %s.settings.%s -%%},%s:{{ %s.settings.%s | image_url: width: 1600 | json }}{%%- endif -%%}' % (kaynak, kim, json.dumps(blob), kaynak, kim))
     return ayar, '<script type="application/json" class="ay-gorsel-esle">{"_":0' + ''.join(parca) + '}</script>'
 
 

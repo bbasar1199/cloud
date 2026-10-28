@@ -17,3 +17,13 @@ Temada her görsel yerinin bir **görsel seçicisi** var (Tema düzenleyici → 
 | Dört kelime: Sar / Süsle / Tak / Yansıt | 3:4 dik, 4 kare | Aynı masada aynı ışıkta dört adım: kabloya çubuk sarma; abajura çıkartma yapıştırma; abajuru takma; karanlıkta tavana yansıma. |
 | Bu gece hangisi (6 disk) | 1:1 | Her disk için karanlık tavanda gerçek yansıma fotoğrafı (klasik yılbaşı, yeni yıl mesajı, kar taneleri, ren geyikleri, kardan adam, çanlar). Mümkünse gerçek çekim. |
 | Kime hediye (4 kart) | 4:3 | Çocuk odası komodini; çiftin salonu; anneanne ve torun masada; çalışma masası. Hepsinde aynı ağaç lamba yanıyor. |
+
+## Her gece başka bir tavan · 4 oda kartı (29 Eki)
+Oran 4:5 dik. Yer: Tema düzenleyici → ürün sayfası → Yılbaşı Ağacı bölümü → "Her gece başka bir tavan" bloğu → Görsel 1–4 (kart sırası). Her istemde kendi tavan fotoğrafını ve ürün fotoğrafını **referans yükle**, "ürünü ve desenleri değiştirme" de; görselde yazı olmasın.
+
+| Kart | İstem |
+|---|---|
+| 1 · Çocuk odasında (Klasik yılbaşı diski) | Karanlık, sıcak bir çocuk odası; yatakta battaniyeye sarılmış çocuk tavana bakıyor (yüz net değil); komodinde referanstaki minik yılbaşı ağacı lamba yanıyor; tavanda referanstaki gibi Noel Baba, ağaç, kar tanesi desenleri. Telefonla çekilmiş gerçek fotoğraf hissi. |
+| 2 · Salonda (Kar taneleri diski) | Akşam, ışıkları kapalı salon; koltukta battaniye ve sıcak içecek; sehpada minik ağaç lamba; tavan ve duvara yayılan beyaz-altın kar taneleri. Abartısız, gerçek ev. |
+| 3 · Yatak odasında (Yeni yıl mesajı diski) | Loş yatak odası, iki kişi yatakta tavana bakıyor (arkadan/yandan, yüz yok); komodinde ağaç lamba; tavanda "Merry Christmas" yazılı desen referanstaki diskteki gibi. |
+| 4 · Çalışma masanda (Ren geyikleri diski) | Gece, çalışma masası; laptopa USB ile takılı minik ağaç lamba; arkadaki duvar ve tavanda ren geyiği desenleri; masada kupa ve defter. |

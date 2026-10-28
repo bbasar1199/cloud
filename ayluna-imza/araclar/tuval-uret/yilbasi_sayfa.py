@@ -486,22 +486,25 @@ def gerisi():
     return g
 
 
-YAK = """
-  <!-- Işığı kapat, ağacı yak (29 Eki, kullanıcı: "bu tasarım kötü ve sıkıcı"): parmakla kaydırılan karşılaştırma. Sol karanlık oda,
-       sağ ağaç yanınca tavan; kendiliğinden gidip gelir, dokununca durur. Hareket yalnız transform. -->
-  <section class="bolum px" id="yak">
-    <h2 class="bas-y h2">Işığı kapat,<br>ağacı yak<span class="n">.</span></h2>
-    <p class="alt-b">Parmağınla kaydır: aynı oda, ağaç yanınca.</p>
-    <div class="{{kaCls}}">
-      <img class="ka-on" src="@@yb-tavan@@" alt="Ağaç yanınca tavandaki yılbaşı desenleri">
-      <div class="ka-off" style="transform: translateX({{kaA}}%)"><img src="@@yb-tavan@@" alt="" style="transform: translateX({{kaB}}%)"></div>
-      <span class="ka-et ka-et1">Işık kapalı</span><span class="ka-et ka-et2">Ağaç yanınca</span>
-      <span class="ka-cz" style="transform: translateX({{kaX}}%)" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg></i></span>
-      <input class="ka-in" type="range" min="0" max="100" step="1" value="{{kaX}}" onInput="{{kaKay}}" aria-label="Karanlık oda ile yanan ağacı karşılaştır">
-    </div>
-    <div class="ka-alt"><span><b>USB</b> ile yanar</span><span><b>Diski</b> değişir</span><span><b>Kutusuyla</b> hediye</span></div>
+# 29 Eki (kullanıcı: "ışık kapalıyken güzel durmuyor; yerine 4'lü kaydırmalı farklı projeksiyonların görünüşleri, lifestyle'ları; satış odaklı"):
+# karşılaştırma kalktı. 4 oda kartı: oda + kullanılan disk + tek satır; altında satın al. Kart görselleri temada görsel seçici (lifestyle
+# kareler ogrenme/istemler-yilbasi-agaci.md ile üretilip seçilir); şimdilik eldeki kareler.
+TAVAN = [('yb-tavan', '50% 20%', 'yb-d-klasik', 'Klasik yılbaşı', 'Çocuk odasında', 'Yatmadan önce tavan Noel Baba’yla dolar.'),
+         ('yb-kare', '50% 50%', 'yb-d-kar', 'Kar taneleri', 'Salonda', 'Işıkları kapat; tavana kar yağsın.'),
+         ('yb-d-mesaj', '50% 50%', 'yb-d-mesaj', 'Yeni yıl mesajı', 'Yatak odasında', 'Tavanda “Merry Christmas”, yanında sevdiğin.'),
+         ('yb-d-geyik', '50% 50%', 'yb-d-geyik', 'Ren geyikleri', 'Çalışma masanda', 'USB’ye tak; masan bile yılbaşı olsun.')]
+YAK = ("""
+  <!-- Her gece başka bir tavan: 4'lü kaydırmalı oda kartları (lifestyle) + satın al -->
+  <section class="bolum" id="tavanlar">
+    <div class="px"><h2 class="bas-y h2">Her gece<br>başka bir tavan<span class="n">.</span></h2><p class="alt-b">Diski değiştir; odanın havası değişsin.</p></div>
+    <div class="ls noscroll">"""
+       + ''.join('<figure class="ls-k"><img class="ls-f" src="@@%s@@" alt="%s: %s diski" loading="lazy" style="object-position: %s">'
+                 '<figcaption><span class="ls-c"><img src="@@%s@@" alt="">%s</span><span class="ls-y"><b>%s</b><span>%s</span></span></figcaption></figure>'
+                 % (g, oda, dn, pos, dk, dn, oda, t) for g, pos, dk, dn, oda, t in TAVAN)
+       + """<span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="ls-al"><p>Desenlerin hepsi tek kutuda.</p><button class="ls-b" type="button" onClick="{{alaGit}}">Ağacını al<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div>
   </section>
-"""
+""")
 
 DERGI = """
   <!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
@@ -681,6 +684,8 @@ def js():
 
 
 CSS2 = '\n/* 29 Eki (kullanıcı: "çok fazla yeşil boğuyor; kötü ve sıkıcı; özenilmiş ve satış odaklı görünmüyor"): ana buton ve rozet yılbaşı\n   kırmızısı, stok kurdelesi altın, yapışkan çubuk beyaz; paket satırı LunaDream gibi sade; Işığı kapat kaydırmalı karşılaştırma. */\n.pg .al .btn1{background:#B3362B;color:#fff;box-shadow:0 4px 0 #7A1F17}\n.pg .al .btn1 .b-ic>span{color:#fff}.pg .al .btn1 svg{stroke:#F6D58C}\n.pg .fy-rozet,.pg .fiyat .rozet{background:#B3362B;color:#fff}\n.pg .stk{background:#E3B65A;color:#3A2A08;box-shadow:0 0 0 3px #fff}.pg .stk i{background:#B3362B}\n.pg .yapis{background:#fff;box-shadow:0 -1px 0 #ECE7E1,0 -8px 24px rgba(13,38,28,.08)}\n.pg .yapis .y-yazi{color:#123A2A}.pg .yapis .y-yazi span{color:#5C6078}.pg .yapis .y-yazi .sayac-ay circle{stroke:#C9CED8}\n.pg .yapis .btn1{background:#B3362B;color:#fff;box-shadow:0 3px 0 #7A1F17}\n.pg .yapis .karo{background:#F6F3EE}\n.pg .pk-bas::after{display:none}\n.pg .pk-bas .ays-k{color:#5C6078;font-weight:600}.pg .pk-bas .ays-k svg{display:none}\n.ka{position:relative;margin-top:14px;height:420px;border-radius:20px;overflow:hidden;background:#05100B;isolation:isolate}\n.ka:focus-within{box-shadow:0 0 0 3px #E3B65A}\n.ka img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}\n.ka-off{position:absolute;inset:0;overflow:hidden;z-index:1;transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka-off img{filter:brightness(.16) saturate(.2);transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka-cz{position:absolute;inset:0;z-index:2;pointer-events:none;transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka.el .ka-off,.ka.el .ka-off img,.ka.el .ka-cz{transition:none}\n.ka-cz::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:#F3D58C;box-shadow:0 0 12px rgba(243,213,140,.7)}\n.ka-cz i{position:absolute;left:-22px;top:50%;display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}\n.ka-cz svg{width:22px;height:22px;fill:none;stroke:#123A2A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}\n.ka-et{position:absolute;top:14px;z-index:3;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;pointer-events:none}\n.ka-et1{left:14px;background:rgba(0,0,0,.6);color:#fff}.ka-et2{right:14px;background:#F3D58C;color:#3A2A08}\n.ka-in{position:absolute;inset:0;z-index:4;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y;-webkit-appearance:none;appearance:none}\n.ka-alt{display:flex;gap:8px;margin-top:12px}\n.ka-alt span{flex:1;padding:10px 4px;border-radius:12px;background:#F6F3EE;font-size:12.5px;white-space:nowrap;text-align:center;color:#123A2A}\n@media (prefers-reduced-motion:reduce){.ka-off,.ka-off img,.ka-cz{transition:none}}\n'
+
+CSS2 += '\n/* Her gece başka bir tavan (29 Eki): 4\'lü kaydırmalı oda kartları */\n.ls{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:14px 16px 4px}\n.ls-k{position:relative;flex:0 0 76%;max-width:300px;aspect-ratio:4/5;margin:0;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:#0D1A14}\n.ls-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}\n.ls-k::after{content:"";position:absolute;left:0;right:0;bottom:0;height:56%;background:linear-gradient(rgba(5,12,9,0),rgba(5,12,9,.86))}\n.ls-c{position:absolute;left:12px;top:12px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;background:rgba(255,255,255,.94);color:#123A2A;font-size:12px;font-weight:700}\n.ls-c img{width:22px;height:22px;border-radius:50%;object-fit:cover}\n.ls-y{position:absolute;left:16px;right:16px;bottom:16px;z-index:1;color:#fff}\n.ls-y b{display:block;font-family:var(--fb);font-weight:400;font-size:26px;line-height:1.05}\n.ls-y span{display:block;margin-top:6px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.9)}\n.ls-al{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 16px 0;padding:12px 12px 12px 16px;border-radius:16px;background:#F6F3EE}\n.ls-al p{margin:0;font-size:14px;font-weight:600;color:#123A2A}\n.ls-b{display:inline-flex;align-items:center;gap:8px;flex:none;min-height:48px;padding:0 18px;border:0;border-radius:14px;background:#B3362B;color:#fff;font:inherit;font-size:15px;font-weight:700;box-shadow:0 3px 0 #7A1F17;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1)}\n.ls-b:active{transform:translateY(3px)}\n.pg .ls-b{color:#fff}\n.ls-b svg{width:18px;height:18px;fill:none;stroke:#F6D58C;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}\n@media (min-width:1024px){.ls-k{flex-basis:300px}}\n'
 
 DOSYA = 'YilbasiAgaci.dc.html'
 

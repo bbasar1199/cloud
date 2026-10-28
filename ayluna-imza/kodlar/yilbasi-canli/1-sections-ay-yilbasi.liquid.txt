@@ -32,22 +32,14 @@
     <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.yc01aba9e | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.y4da41ae7 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.y95890173 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.y29a8de57 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.yfe304372 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.yb70d5da1 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.y7ce9daea | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.ya29ff3ff | escape }}{% raw %}</p></details></div>
   </section></div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
-  {%- when 'p03' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Işığı kapat, ağacı yak (29 Eki, kullanıcı: "bu tasarım kötü ve sıkıcı"): parmakla kaydırılan karşılaştırma. Sol karanlık oda,
-       sağ ağaç yanınca tavan; kendiliğinden gidip gelir, dokununca durur. Hareket yalnız transform. -->
-<section class="bolum px" id="yak">
-    <h2 class="bas-y h2">{% endraw %}{{ block.settings.y93ac0193 | escape }}{% raw %} {% endraw %}{% raw %}<br>ağacı yak<span class="n">.</span></h2>
-    <p class="alt-b">{% endraw %}{{ block.settings.y00e290a9 | escape }}{% raw %}</p>
-    <div class="{{kaCls}}">
-      <img class="ka-on" src="{% endraw %}{%- if block.settings.r613c7ca4 -%}{{ block.settings.r613c7ca4 | image_url: width: 1600 }}{%- else -%}/_blob/ce7dadd85b37a8089d0df5ce000d6f54{%- endif -%}{% raw %}" alt="Ağaç yanınca tavandaki yılbaşı desenleri">
-      <div class="ka-off" style="transform: translateX({{kaA}}%)"><img src="{% endraw %}{%- if block.settings.r613c7ca4 -%}{{ block.settings.r613c7ca4 | image_url: width: 1600 }}{%- else -%}/_blob/ce7dadd85b37a8089d0df5ce000d6f54{%- endif -%}{% raw %}" alt="" style="transform: translateX({{kaB}}%)"></div>
-      <span class="ka-et ka-et1">{% endraw %}{{ block.settings.y3d03a4f0 | escape }}{% raw %}</span><span class="ka-et ka-et2">{% endraw %}{{ block.settings.y12dc1c63 | escape }}{% raw %}</span>
-      <span class="ka-cz" style="transform: translateX({{kaX}}%)" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg></i></span>
-      <input class="ka-in" type="range" min="0" max="100" step="1" value="{{kaX}}" onInput="{{kaKay}}" aria-label="Karanlık oda ile yanan ağacı karşılaştır">
-    </div>
-    <div class="ka-alt"><span><b>{% endraw %}{{ block.settings.y7aca5ec6 | escape }}{% raw %}</b> ile yanar</span><span><b>{% endraw %}{{ block.settings.yc2aaed03 | escape }}{% raw %}</b> değişir</span><span><b>{% endraw %}{{ block.settings.yaed4ed9a | escape }}{% raw %}</b> hediye</span></div>
+  {%- when 'p03' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Her gece başka bir tavan: 4'lü kaydırmalı oda kartları (lifestyle) + satın al -->
+<section class="bolum" id="tavanlar">
+    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.yc7542629 | escape }}{% raw %} {% endraw %}{% raw %}<br>başka bir tavan<span class="n">.</span></h2><p class="alt-b">{% endraw %}{{ block.settings.yc6e2dbd5 | escape }}{% raw %}</p></div>
+    <div class="ls noscroll"><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r613c7ca4 -%}{{ block.settings.r613c7ca4 | image_url: width: 1600 }}{%- else -%}/_blob/ce7dadd85b37a8089d0df5ce000d6f54{%- endif -%}{% raw %}" alt="Çocuk odasında: Klasik yılbaşı diski" loading="lazy" style="object-position: 50% 20%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r9010bb17 -%}{{ block.settings.r9010bb17 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt="">Klasik yılbaşı</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y912ead72 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y7009182d | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r393f9fd9 -%}{{ block.settings.r393f9fd9 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt="Salonda: Kar taneleri diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r8468b87b -%}{{ block.settings.r8468b87b | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt="">Kar taneleri</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y865c14fb | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.ya70a1fe0 | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt="Yatak odasında: Yeni yıl mesajı diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt="">Yeni yıl mesajı</span><span class="ls-y"><b>{% endraw %}{{ block.settings.ydab49de3 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y606f81bf | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r581ad20c -%}{{ block.settings.r581ad20c | image_url: width: 1600 }}{%- else -%}/_blob/a67e07583769ee524096661940ef6093{%- endif -%}{% raw %}" alt="Çalışma masanda: Ren geyikleri diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r581ad20c -%}{{ block.settings.r581ad20c | image_url: width: 1600 }}{%- else -%}/_blob/a67e07583769ee524096661940ef6093{%- endif -%}{% raw %}" alt="">Ren geyikleri</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y61ff810e | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y7cba7bef | escape }}{% raw %}</span></span></figcaption></figure><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="ls-al"><p>{% endraw %}{{ block.settings.y430740e5 | escape }}{% raw %}</p><button class="ls-b" type="button" onClick="{{alaGit}}">{% endraw %}{{ block.settings.y73990cba | escape }}{% raw %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div>
   </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
-  {%- when 'p04' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
+  {%- when 'p04' -%}<div class="ay-tb" {{ block.shopify_attributes }}><script type="application/json" class="ay-gorsel-esle">{"_":0{%- if block.settings.d0143de99 -%},"0143de9991a1bc82ff5a2fcafd262ce8":{{ block.settings.d0143de99 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.db9ca1f30 -%},"b9ca1f3036b0d671cec2c053a491141c":{{ block.settings.db9ca1f30 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.d29f34f18 -%},"29f34f185f858518e19adeb0a09ce92e":{{ block.settings.d29f34f18 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.da67e0758 -%},"a67e07583769ee524096661940ef6093":{{ block.settings.da67e0758 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.dd54bbc54 -%},"d54bbc54da481894b03a90633027d408":{{ block.settings.dd54bbc54 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.db6e597a7 -%},"b6e597a7824d07a8917cc638f657ba46":{{ block.settings.db6e597a7 | image_url: width: 1600 | json }}{%- endif -%}}</script><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
 <section class="koyu bolum" id="diskler">
     <div class="px"><h2 class="bas-y h2" style="color: #fff">{% endraw %}{{ block.settings.y6af5f89c | escape }}{% raw %} {% endraw %}{% raw %}<br>hangisi<span class="n">?</span></h2><p class="alt-b" style="color: #C9D6CE">{% endraw %}{{ block.settings.y835e5fc2 | escape }}{% raw %}</p>
     <div class="tav" aria-hidden="true"><div class="tav-d"><sc-for list="{{disk}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for></div></div>
@@ -298,55 +290,110 @@
     },
     {
       "type": "p03",
-      "name": "Işığı kapat, ağacı yak",
+      "name": "Her gece başka bir tavan",
       "limit": 1,
       "settings": [
         {
           "type": "text",
-          "id": "y93ac0193",
-          "label": "Yazı: Işığı kapat,",
-          "default": "Işığı kapat,"
+          "id": "yc7542629",
+          "label": "Yazı: Her gece",
+          "default": "Her gece"
         },
         {
           "type": "text",
-          "id": "y00e290a9",
-          "label": "Yazı: Parmağınla kaydır: aynı oda, ağaç yanınca",
-          "default": "Parmağınla kaydır: aynı oda, ağaç yanınca."
+          "id": "yc6e2dbd5",
+          "label": "Yazı: Diski değiştir; odanın havası değişsin",
+          "default": "Diski değiştir; odanın havası değişsin."
         },
         {
           "type": "image_picker",
           "id": "r613c7ca4",
-          "label": "Görsel 1: Ağaç yanınca tavandaki yılbaşı desenleri"
+          "label": "Görsel 1: Çocuk odasında: Klasik yılbaşı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "r9010bb17",
+          "label": "Görsel 2"
         },
         {
           "type": "text",
-          "id": "y3d03a4f0",
-          "label": "Yazı: Işık kapalı",
-          "default": "Işık kapalı"
+          "id": "y912ead72",
+          "label": "Yazı: Çocuk odasında",
+          "default": "Çocuk odasında"
         },
         {
           "type": "text",
-          "id": "y12dc1c63",
-          "label": "Yazı: Ağaç yanınca",
-          "default": "Ağaç yanınca"
+          "id": "y7009182d",
+          "label": "Yazı: Yatmadan önce tavan Noel Baba’yla dolar",
+          "default": "Yatmadan önce tavan Noel Baba’yla dolar."
+        },
+        {
+          "type": "image_picker",
+          "id": "r393f9fd9",
+          "label": "Görsel 3: Salonda: Kar taneleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "r8468b87b",
+          "label": "Görsel 4"
         },
         {
           "type": "text",
-          "id": "y7aca5ec6",
-          "label": "Yazı: USB",
-          "default": "USB"
+          "id": "y865c14fb",
+          "label": "Yazı: Salonda",
+          "default": "Salonda"
         },
         {
           "type": "text",
-          "id": "yc2aaed03",
-          "label": "Yazı: Diski",
-          "default": "Diski"
+          "id": "ya70a1fe0",
+          "label": "Yazı: Işıkları kapat; tavana kar yağsın",
+          "default": "Işıkları kapat; tavana kar yağsın."
+        },
+        {
+          "type": "image_picker",
+          "id": "re3c790f3",
+          "label": "Görsel 5: Yatak odasında: Yeni yıl mesajı diski"
         },
         {
           "type": "text",
-          "id": "yaed4ed9a",
-          "label": "Yazı: Kutusuyla",
-          "default": "Kutusuyla"
+          "id": "ydab49de3",
+          "label": "Yazı: Yatak odasında",
+          "default": "Yatak odasında"
+        },
+        {
+          "type": "text",
+          "id": "y606f81bf",
+          "label": "Yazı: Tavanda “Merry Christmas”, yanında sevdiğin",
+          "default": "Tavanda “Merry Christmas”, yanında sevdiğin."
+        },
+        {
+          "type": "image_picker",
+          "id": "r581ad20c",
+          "label": "Görsel 6: Çalışma masanda: Ren geyikleri diski"
+        },
+        {
+          "type": "text",
+          "id": "y61ff810e",
+          "label": "Yazı: Çalışma masanda",
+          "default": "Çalışma masanda"
+        },
+        {
+          "type": "text",
+          "id": "y7cba7bef",
+          "label": "Yazı: USB’ye tak; masan bile yılbaşı olsun",
+          "default": "USB’ye tak; masan bile yılbaşı olsun."
+        },
+        {
+          "type": "text",
+          "id": "y430740e5",
+          "label": "Yazı: Desenlerin hepsi tek kutuda",
+          "default": "Desenlerin hepsi tek kutuda."
+        },
+        {
+          "type": "text",
+          "id": "y73990cba",
+          "label": "Yazı: Ağacını al",
+          "default": "Ağacını al"
         }
       ]
     },
@@ -372,6 +419,44 @@
           "id": "y36975a5d",
           "label": "Yazı: Disk değiştirmek: fişi çek, abajuru kaldır, diski değ…",
           "default": "Disk değiştirmek: fişi çek, abajuru kaldır, diski değiştir, abajuru tak. Desen görselleri ürün afişinden; tavanda daha yumuşak görünür."
+        },
+        {
+          "type": "header",
+          "content": "Bölümdeki görseller"
+        },
+        {
+          "type": "paragraph",
+          "content": "Değiştirmek istediğin görseli seç; boş bırakırsan tasarımdaki görsel kalır."
+        },
+        {
+          "type": "image_picker",
+          "id": "d0143de99",
+          "label": "Görsel 1: Klasik yılbaşı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "db9ca1f30",
+          "label": "Görsel 2: Yeni yıl mesajı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "d29f34f18",
+          "label": "Görsel 3: Kar taneleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "da67e0758",
+          "label": "Görsel 4: Ren geyikleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "dd54bbc54",
+          "label": "Görsel 5: Kardan adam diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "db6e597a7",
+          "label": "Görsel 6: Çanlar diski"
         }
       ]
     },
