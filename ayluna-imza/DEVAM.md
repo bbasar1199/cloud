@@ -1195,3 +1195,7 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 2.–3. tur (28 Eki, kullanıcı: "çok sade ve sıkıcı"): çam yeşili + altın bantlar; Ağacı yak (ışık anı + "Kutudan çıkan" küçük kare), dergi kapağı Sar./Süsle./Tak./Yansıt., dönen tavan + disk seçici, görselli "Kime hediye?" kartları, takvim yaprağı (son sipariş 23 Aralık), yeşil satın alma kutusu ve yapışkan çubuk. Eleştirmen 2. tur 6,5; ilk ekran önerileri uygulandı. Önizleme `onizleme/yilbasi-yon/imza-sayfa-v3.jpg`.
 - 5. tur (28 Eki): teslim kartı/takvim kalktı; ay sonu fiyat kartı + stok kurdelesi + dönen güven şeridi; fotoğraflı üç kart; ikonsuz güven listesi. Görsel istemleri `ogrenme/istemler-yilbasi-agaci.md`. Önizleme `onizleme/yilbasi-yon/imza-sayfa-v6.jpg`.
 - 6. tur (28 Eki): LunaDream Sihirli kart dili yılbaşı ağacına uyarlandı (4 çalışan gösterge), ay sonu fiyatı küçük satır, Videolar bölümü (temada yilbasi-video). Önizleme `onizleme/yilbasi-yon/imza-sayfa-v7.jpg`.
+
+## Yılbaşı ağacı · ikna turu (28 Eki)
+- Eleştirmen ikna denetimi; dürüst olanlar uygulandı (sıra, tekrar budama, "Hediye için" kurdelesi, mesaj başlığı). Tema 1.0.39. Ekran: `onizleme/yilbasi-yon/imza-sayfa-v9.jpg`.
+- Açık sorular: üst günlük sayaç mı ay sonu sayacı mı (ikisi çakışıyor); boyut [X] cm; gerçek fiyat + karşılaştırma + 2 adet fiyatı; disk sayısı; karanlık oda tavan videosu; "Kartla %5" sitenin geri kalanından kalksın mı.

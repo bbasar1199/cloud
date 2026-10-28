@@ -287,7 +287,7 @@ def ozler():
             '<g class="kap"><rect x="3" y="8" width="24" height="5" rx="1.2"></rect><path d="M15 8c-2-4-7-5-6-1M15 8c2-4 7-5 6-1"></path></g></svg>')
     k = [('agac', agac, 'Kendin kur', 'Çubukları kabloya sar, ağacını sen şekillendir.', ''),
          ('disk', disk, 'Değişen desenler', 'Diski değiştir, tavan değişsin.', ' <u>Desenleri gör</u>'),
-         ('usb', usb, 'USB ile yanar', 'Şarj adaptörü, powerbank ya da bilgisayar.', ''),
+         ('usb', usb, 'USB ile yanar', 'Telefon şarj başlığı ya da powerbank; adaptör kutuda yok.', ''),
          ('kutu', kutu, 'Hediye kutusunda', 'Yılbaşı baskılı kutusu ve süsleriyle.', '')]
     kart = ''.join(('<a class="yo-k" href="#diskler">%s</a>' if a == 'disk' else '<div class="yo-k">%s</div>')
                    % ('<span class="yg yg-%s" aria-hidden="true">%s</span><span><b>%s</b><span class="t">%s%s</span></span>' % (a, g, b, t, u)) for a, g, b, t, u in k)
@@ -324,7 +324,6 @@ def al():
     <div class="al-on"><sc-if value="{{stokVar}}" hint-placeholder-val="{{false}}"><span class="stk"><i aria-hidden="true"></i>Bu yılbaşı için son {{stokN}} adet</span></sc-if>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span></span>%s</button></div>
     <div class="ay-dis" data-ay-dis></div>
-    <p class="adapt"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="8" rx="1.5"></rect><path d="M12 10v6M8 22h8M12 16v6"></path></svg><span>Telefon şarj adaptörüyle, powerbank ya da bilgisayarla çalışır. Adaptör kutuda yok; pil gerekmez.</span></p>
     <ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol>
     %s
   </section>
@@ -394,8 +393,10 @@ def gerisi():
     # 5. tur: ikonlu güven kartları yerine ikonsuz liste (kullanıcı: "emoji benefit kısımlarını beğenmedim")
     assert U.GUVEN in g
     g = g.replace(U.GUVEN, '<ul class="gv-l"><li><b>Ücretsiz kargo</b><span>1 iş gününde kargoda, adım adım takip.</span></li>'
-                  '<li><b>30 gün iade</b><span>Beğenmezsen geri gönder; iade kargosu ücretsiz.</span></li>'
                   '<li><b>Güvenli ödeme</b><span>Kart bilgin bize gelmez; kapıda ödeme de var.</span></li></ul>')
+    M1 = 'Sizden gelen<br>mesajlar'; M2 = 'LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler.'
+    assert M1 in g and M2 in g
+    g = g.replace(M1, 'Ayluna’dan alanlar<br>yazıyor').replace(M2, 'Diğer lambalarımızı alan müşterilerimizden, izinleriyle.')
     assert 'yb-kare' in g and 'Yılbaşı Ağacı' in g
     return g
 
@@ -463,7 +464,7 @@ VIDEO = """
 
 
 def govde():
-    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YAK + VIDEO + DIZI + DERGI + kutuda() + gece() + HEDIYE + gerisi() + '</div>\n')
+    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YAK + gece() + kutuda() + VIDEO + DIZI + DERGI + HEDIYE + gerisi() + '</div>\n')
     return re.sub(r'@@([\w-]+)@@', lambda m: I(m.group(1)), h)
 
 
@@ -515,7 +516,7 @@ def js():
     var VU = ((window.AYLUNA_VERI || {}).urun || {})[""" + json.dumps(H) + """] || {}, P1 = VU.p || """ + str(P1) + """;
     var paket = [
       { n: 1, t: '1 Adet', p: TL(P1, true), sub: 'Kendine ya da evine', rib: false },
-      { n: 2, t: '2 Adet', p: TL(2 * P1, true), sub: 'Biri sana, biri hediye', rib: true }
+      { n: 2, t: '2 Adet', p: TL(2 * P1, true), sub: 'Biri sana, biri hediye', rib: false }
     ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });

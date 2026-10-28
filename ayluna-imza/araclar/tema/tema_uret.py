@@ -11,7 +11,7 @@ import site_uret as S
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.38'
+SURUM = '1.0.39'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 # Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
