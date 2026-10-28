@@ -478,14 +478,14 @@ html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
   html[data-ay-tur=ana] .slayt .sl-y a{display:flex!important;justify-content:center;width:100%;box-sizing:border-box;min-height:52px;border-radius:14px!important}
   html[data-ay-tur=ana] .slayt .ay-iz{left:50%!important;bottom:20px!important;transform:translateX(-50%)}
 }
-/* Menü (28 Eki): beyaz liste, altta gece şeridi (hilal, yıldız, güven satırı) */
-.ay-menu .ay-panel,.ay-menu .ay-p-ust{background:#FFFFFF}
-.ay-menu .ay-p-ust{border-bottom:1px solid #EFE7DA}
-.ay-menu li a{border-bottom:1px solid #F3EDE3}
-.ay-menu li svg{color:#F2A65A}
-.ay-menu .ay-panel::after{content:"Kartla %5 indirim · Kapıda ödeme · 30 gün iade";flex:1 0 auto;min-height:170px;margin-top:auto;padding:22px 20px;box-sizing:border-box;border-radius:24px 24px 0 0;color:#D9D4CC;font-size:14px;font-weight:600;line-height:1.4;background:
-radial-gradient(circle at calc(80% - 9px) calc(58% - 7px),#1A2142 0 22px,transparent 23px),radial-gradient(circle at 80% 58%,#F5F3EF 0 24px,transparent 25px),
-radial-gradient(circle at 80% 58%,rgba(243,181,98,.12) 0 40px,transparent 70px),radial-gradient(2.4px 2.4px at 47% 57%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 12% 52%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 80% 51%,#F5F3EF 50%,transparent 52%),radial-gradient(2.4px 2.4px at 17% 75%,#F5F3EF 50%,transparent 52%),radial-gradient(2.4px 2.4px at 36% 53%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 78% 55%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 86% 85%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 80% 73%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 11% 83%,#F5F3EF 50%,transparent 52%),radial-gradient(1.6px 1.6px at 59% 57%,#F3B562 50%,transparent 52%),radial-gradient(1.8px 1.8px at 45% 83%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 80% 84%,#F5F3EF 50%,transparent 52%),linear-gradient(180deg,#1A2142,#10182B)}
+/* Menü (28 Eki, seçim B): lacivert gece; yıldızlar ve hilal listenin altındaki boşlukta, yazıya karışmaz */
+.ay-menu .ay-panel{background:#10182B;color:#F5F3EF}
+.ay-menu .ay-p-ust{background:#10182B;border-bottom:1px solid rgba(245,243,239,.12);color:#F5F3EF}
+.ay-menu .ay-x{color:#F5F3EF}
+.ay-menu li a{color:#F5F3EF;border-bottom:1px solid rgba(245,243,239,.09)}
+.ay-menu li a:focus-visible{outline:2px solid #F3B562;outline-offset:-2px}
+.ay-menu li svg{color:#F3B562}
+.ay-menu .ay-panel::after{content:"Kartla %5 indirim · Kapıda ödeme · 30 gün iade";flex:1 0 auto;min-height:170px;padding:24px 20px;box-sizing:border-box;color:#B9BED6;font-size:14px;font-weight:600;line-height:1.4;background:radial-gradient(circle at calc(80% - 9px) calc(60% - 7px),#10182B 0 22px,transparent 23px),radial-gradient(circle at 80% 60%,#F5F3EF 0 24px,transparent 25px),radial-gradient(2.4px 2.4px at 62% 75%,#F3B562 50%,transparent 52%),radial-gradient(2.8px 2.8px at 70% 94%,#F5F3EF 50%,transparent 52%),radial-gradient(2.8px 2.8px at 28% 91%,#F3B562 50%,transparent 52%),radial-gradient(1.8px 1.8px at 85% 79%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 62% 59%,#F5F3EF 50%,transparent 52%),radial-gradient(1.6px 1.6px at 73% 91%,#F3B562 50%,transparent 52%),radial-gradient(2.8px 2.8px at 62% 81%,#F5F3EF 50%,transparent 52%),radial-gradient(2.8px 2.8px at 84% 40%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 12% 42%,#F5F3EF 50%,transparent 52%),radial-gradient(2.4px 2.4px at 81% 41%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 61% 77%,#F5F3EF 50%,transparent 52%),radial-gradient(1.6px 1.6px at 68% 40%,#F3B562 50%,transparent 52%),radial-gradient(1.6px 1.6px at 57% 75%,#F5F3EF 50%,transparent 52%),radial-gradient(1.8px 1.8px at 45% 88%,#F5F3EF 50%,transparent 52%),radial-gradient(2.8px 2.8px at 8% 44%,#F5F3EF 50%,transparent 52%),radial-gradient(2px 2px at 56% 46%,#F3B562 50%,transparent 52%)}
 @media (max-height:700px){.ay-menu .ay-panel::after{display:none}}
 /* Loox yorumları kısa başlar; "Tüm yorumları gör" ile açılır (28 Eki) */
 .ay-loox-kisa{position:relative;max-height:880px;overflow:hidden}
