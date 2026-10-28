@@ -115,8 +115,8 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
       bolum: document.querySelectorAll('.shopify-section').length, dun: /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
   await pg.waitForTimeout(1500);
   const yk2 = await pg.evaluate(() => !!document.querySelector('#looxReviews .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent));
-  // 28 Eki: Yılbaşı Ağacı sayfası şablona bir bölüm ekledi (başka üründe boş çizilir) → 8
-  not(yk.loox && yk.sira && !yk.yer && yk.blok === 16 && yk.kok === 16 && yk.bolum === 8 && yk.dun && yk.kd && yk2, 'USB: 16 blok, Loox yorum bölümünde kendiliğinden, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  // 28 Eki: Yılbaşı Ağacı sayfası şablona üç bölüm ekledi (sayfa, videolar, devamı; başka üründe boş çizilir) → 10
+  not(yk.loox && yk.sira && !yk.yer && yk.blok === 16 && yk.kok === 16 && yk.bolum === 10 && yk.dun && yk.kd && yk2, 'USB: 16 blok, Loox yorum bölümünde kendiliğinden, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
   // Yapışkan çubuk: paketler ve ana düğme ekrandayken çekilir, sonra geri gelir; 60 px
   const yp = await pg.evaluate(async () => { const y = document.querySelector('.ay-kok .yapis'), d = () => y.hasAttribute('data-ay-cekil');
     scrollTo(0, 0); await new Promise(r => setTimeout(r, 300)); const ust = d();

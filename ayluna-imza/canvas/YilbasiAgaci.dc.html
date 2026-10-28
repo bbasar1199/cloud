@@ -759,6 +759,49 @@ html:has(.pg .yapis){scroll-padding-bottom:72px}
 .adm figcaption b i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-size:12px}
 .qr{margin:12px 16px 0;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac);font-size:13px}
 .pg{--lac:#123A2A;--kirmizi:#8E2A22}
+/* 6. tur (28 Eki, kullanıcı: "emoji benefit kısmını LunaDream'den al, bu ürüne özel yap"): LunaDream "Sihirli özellikler" kurumsal kart dili
+   (2×2 beyaz kart, solda 28 px çalışan gösterge, başlık + tek satır). Göstergeler ürüne özel; yalnız transform/opacity. */
+.ozb{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B5246}
+.yo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.yo-k{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;background:#FFFDFB;border:1px solid #EAD6C8;color:#123A2A;text-decoration:none}
+.yo-k:nth-child(2){--gec:.6s}.yo-k:nth-child(3){--gec:1.2s}.yo-k:nth-child(4){--gec:1.8s}
+.yo-k b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.yo-k .t{display:block;margin-top:2px;font-size:13px;line-height:1.4;color:#6B5246}
+.yo-k u{color:#8C5E10;text-underline-offset:3px;white-space:nowrap}
+.yg{display:flex;align-items:center;gap:6px;height:28px}
+.yg svg{height:28px;overflow:visible;fill:none;stroke:#123A2A;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+/* Kendin kur: ağaca süs sırayla sarılır */
+.yg-agac .s{stroke:#C99A3A;stroke-width:2;opacity:0;animation:ygs 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(var(--gec,0s) + var(--d))}
+@keyframes ygs{0%,8%{opacity:0}18%,80%{opacity:1}92%,100%{opacity:0}}
+.yg-agac .yz{fill:#F3C978;stroke:none;transform-origin:14px 3px;animation:ygy 6s ease-in-out infinite;animation-delay:var(--gec,0s)}
+@keyframes ygy{0%,40%{opacity:.25;transform:scale(.6)}55%,85%{opacity:1;transform:none}100%{opacity:.25;transform:scale(.6)}}
+/* Değişen desenler: üç disk, ortadaki yavaşça döner */
+.yg-disk img{width:26px;height:26px;margin-left:-8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFDFB}
+.yg-disk img:first-child{margin-left:0}
+.yg-disk img:nth-child(2){animation:ygd 9s linear infinite}
+@keyframes ygd{to{transform:rotate(360deg)}}
+/* USB ile yanar: fiş yuvaya girer, ağaç ışıldar */
+.yg-usb .fis{animation:ygf 5s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+@keyframes ygf{0%,15%{transform:translateX(-6px)}35%,85%{transform:none}100%{transform:translateX(-6px)}}
+.yg-usb .hal{fill:#F3C978;stroke:none;opacity:0;animation:ygh 5s ease-in-out infinite;animation-delay:var(--gec,0s)}
+@keyframes ygh{0%,35%{opacity:0}50%,85%{opacity:.55}100%{opacity:0}}
+/* Hediye kutusunda: kapak hafifçe kalkar, ışık sızar */
+.yg-kutu .kap{animation:ygk 5s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:var(--gec,0s)}
+@keyframes ygk{0%,20%,90%,100%{transform:none}40%,75%{transform:translateY(-4px) rotate(-6deg)}}
+.yg-kutu .isk{fill:#F3C978;stroke:none;opacity:0;animation:ygi 5s ease-in-out infinite;animation-delay:var(--gec,0s)}
+@keyframes ygi{0%,30%,90%,100%{opacity:0}45%,75%{opacity:.9}}
+/* Ay sonu fiyatı: küçük, paket başlığının sağında (LunaDream "Kampanya · 1–31 Ekim" yeri) */
+.pk-bas{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pk-bas .ays-k{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#8E2A22;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pk-bas .ays-k svg{width:14px;height:14px;fill:none;stroke:#C9A27A;stroke-width:1.6}.pk-bas .ays-k path{fill:#E3B65A;stroke:none}
+/* Videolar (Shopify'da ürünün videoları; tasarımda kurulum videosu karesi) */
+.vd{position:relative;display:block;margin-top:14px;border-radius:20px;overflow:hidden;aspect-ratio:9/12;background:#0D261C}
+.vd img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.vd .oy{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(255,253,251,.92)}
+.vd .oy svg{width:22px;height:22px;margin-left:3px;fill:#123A2A}
+.vd figcaption{position:absolute;left:14px;right:14px;bottom:12px;color:#fff;font-size:14px;font-weight:600}
+@media (prefers-reduced-motion:reduce){.yg *{animation:none!important;opacity:1}}
+
 .gv-l{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid #EAD6C8}.gv-l li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #EAD6C8}.gv-l b{font-family:var(--fb);font-weight:400;font-size:17px;color:#123A2A}.gv-l span{font-size:13px;color:#6B5246}
 /* Fotoğraflı üç kart (ikon yok) */
 .fk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 0}
@@ -959,11 +1002,8 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
     <p class="fiyat"><b>₺999,00</b></p>
     <!-- Dönen güven şeridi (LunaDream dili): "Dün N kişi" yalnız ürün alanı ayluna.dun_satis doluysa; diğerleri gerçek koşullar -->
     <p class="ser"><span class="ser-pen" aria-live="polite"><span class="{{serCls}}" style="transform: translateY({{serY}}px)"><sc-for list="{{ser}}" as="r" hint-placeholder-count="4"><span class="ser-s">{{r.t}}</span></sc-for></span></span></p>
-    <!-- Ay sonu fiyatı (gerçek: mağaza fiyatı her ay yükseliyor; kullanıcı 23 Eki). Gün ve saat İstanbul saatiyle ayın sonuna. -->
-    <div class="ays"><span class="ays-ay" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg></span>
-      <span><b>{{aysBas}}</b><span class="t">{{aysAlt}}</span></span><span class="ays-s" aria-label="{{aysAria}}"><b>{{aysG}}</b><small>gün</small><b>{{aysS}}</b><small>sa</small></span></div>
-    <div class="fk"><figure><img src="/_blob/f514229183a4a0e7a2725a366d5280b1" alt="Kendin kur"><figcaption><b>Kendin kur</b><span>Çubukları kabloya sar, ağaç senin elinde şekillensin.</span></figcaption></figure><figure><img src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt="Tavana yansıt"><figcaption><b>Tavana yansıt</b><span>Işığı kapat; tavan yılbaşı desenleriyle dolsun.</span></figcaption></figure><figure><img src="/_blob/4d01f14032ee55720b5baa41900bfc8b" alt="Kutusuyla hediye"><figcaption><b>Kutusuyla hediye</b><span>Yılbaşı baskılı kutusunda; açması da bir an.</span></figcaption></figure></div>
-    <div class="pk-bas">Kaç tane?</div>
+    <p class="ozb">YILBAŞI AĞACININ ÖZELLİKLERİ</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 28 28" width="28"><path d="M14 3 L23 24 H5 Z"></path><path d="M14 24v3"></path><path class="s" style="--d: 0s" d="M11 11 Q14 13 17 10"></path><path class="s" style="--d: .5s" d="M9 16 Q14 19 19 15"></path><path class="s" style="--d: 1s" d="M7 21 Q14 24 21 20"></path><circle class="yz" cx="14" cy="3" r="2.4"></circle></svg></span><span><b>Kendin kur</b><span class="t">Çubukları kabloya sar, ağacını sen şekillendir.</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><img src="/_blob/0143de9991a1bc82ff5a2fcafd262ce8" alt=""><img src="/_blob/b9ca1f3036b0d671cec2c053a491141c" alt=""><img src="/_blob/29f34f185f858518e19adeb0a09ce92e" alt=""></span><span><b>Değişen desenler</b><span class="t">Diski değiştir, tavan değişsin. <u>Desenleri gör</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 56 28" width="56"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h5v4h-5"></path></g><path d="M20 14h12" style="stroke-dasharray: 2 3"></path><circle class="hal" cx="44" cy="14" r="11"></circle><path d="M44 4 L51 22 H37 Z"></path><path d="M44 22v3"></path></svg></span><span><b>USB ile yanar</b><span class="t">Şarj adaptörü, powerbank ya da bilgisayar.</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 30 28" width="30"><circle class="isk" cx="15" cy="9" r="5"></circle><rect x="5" y="12" width="20" height="14" rx="1.5"></rect><path d="M15 12v14"></path><g class="kap"><rect x="3" y="8" width="24" height="5" rx="1.2"></rect><path d="M15 8c-2-4-7-5-6-1M15 8c2-4 7-5 6-1"></path></g></svg></span><span><b>Hediye kutusunda</b><span class="t">Yılbaşı baskılı kutusu ve süsleriyle.</span></span></div></div>
+    <div class="pk-bas"><span>Kaç tane?</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
       <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">Hediye için</span></sc-if><span class="pk-g"><img src="/_blob/7a2ab002ed463caf8f2ec81db098e551" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b></span></button>
     </sc-for></div>
@@ -983,6 +1023,13 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
         <div class="yak-y"><p class="bas-y">{{yakYazi}}</p></div></div>
       <div class="yak-alt"><span>{{yakAlt}}</span><button class="anah" type="button" onClick="{{yakSw}}" aria-pressed="{{yakOn}}">{{yakEt}}<i></i></button></div>
     </div>
+  </section>
+
+  <!-- Videolar: temada ayrı bölüm (ay-videolar; ürünün Shopify'daki videoları, ör. montaj videosu). Tasarımda kurulum karesi. -->
+  <section class="bolum px" id="videolar">
+    <h2 class="bas-y h2">Videoda<br>gör<span class="n">.</span></h2>
+    <p class="alt-b">Kutudan çıkıp tavanda yanana kadar.</p>
+    <figure class="vd"><img src="/_blob/08a867b1ecb484b2ebd40b863bde844d" alt="Kurulum videosu karesi"><span class="oy" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"></path></svg></span><figcaption>Kurulum videosu</figcaption></figure>
   </section>
 <div class="dizi" aria-hidden="true"><svg viewBox="0 0 390 34" preserveAspectRatio="none"><path class="tel" d="M0 6 Q48 26 97 8 T195 8 T292 8 T390 6"></path><circle class="hale" cx="24" cy="15" r="8"></circle><circle class="amp" cx="24" cy="15" r="4" fill="#F3C978"></circle><circle class="hale" cx="58" cy="19" r="8"></circle><circle class="amp" cx="58" cy="19" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="97" cy="10" r="8"></circle><circle class="amp" cx="97" cy="10" r="4" fill="#F3C978"></circle><circle class="hale" cx="136" cy="16" r="8"></circle><circle class="amp" cx="136" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="175" cy="11" r="8"></circle><circle class="amp" cx="175" cy="11" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="214" cy="11" r="8"></circle><circle class="amp" cx="214" cy="11" r="4" fill="#F3C978"></circle><circle class="hale" cx="253" cy="16" r="8"></circle><circle class="amp" cx="253" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="292" cy="10" r="8"></circle><circle class="amp" cx="292" cy="10" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="331" cy="16" r="8"></circle><circle class="amp" cx="331" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="366" cy="12" r="8"></circle><circle class="amp" cx="366" cy="12" r="4" fill="#F3C978"></circle></svg></div>
   <!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
@@ -1171,7 +1218,7 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
       tkBas: yetisir ? 'Yılbaşından önce kapında olması için son sipariş günü.' : 'Bu yıl yılbaşına yetişmeyebilir.', tkAlt: yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Bugün verirsen ' + kd.getDate() + ' ' + AYU[kd.getMonth()] + ' kargoda.') : ('Tahmini teslim: ' + teslim + '.'),
       ser: SER.concat([SER[0]]).map(function (t) { return { t: t }; }), serY: -24 * serI, serCls: serI === 0 ? 'ser-iz anlik' : 'ser-iz',
       aysYol: AYY(1 - aysOran), aysBas: AYU[now.getMonth()] + ' fiyatı bitiyor', aysAlt: 'Fiyatlar her ay güncelleniyor; bu fiyat ay sonuna kadar.', aysG: String(aysGun), aysS: String(aysSa), aysAria: AYU[now.getMonth()] + ' fiyatının bitmesine ' + aysGun + ' gün ' + aysSa + ' saat',
-      stokVar: stokN > 0, stokN: stokN,
+      aysAy: AYU[now.getMonth()], stokVar: stokN > 0, stokN: stokN,
       nkNo: S.nk + 1, nkAd: PARCA[S.nk][0], nkAlt: PARCA[S.nk][1],
       nk0: S.nk === 0 ? 'on' : '', nkOn0: S.nk === 0 ? 'true' : 'false', nkSec0: function () { self.setState({ nk: 0 }); },
       nk1: S.nk === 1 ? 'on' : '', nkOn1: S.nk === 1 ? 'true' : 'false', nkSec1: function () { self.setState({ nk: 1 }); },
