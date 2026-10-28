@@ -1200,3 +1200,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Eleştirmen ikna denetimi; dürüst olanlar uygulandı (sıra, tekrar budama, "Hediye için" kurdelesi, mesaj başlığı). Tema 1.0.39. Ekran: `onizleme/yilbasi-yon/imza-sayfa-v9.jpg`.
 - Açık sorular: üst günlük sayaç mı ay sonu sayacı mı (ikisi çakışıyor); boyut [X] cm; gerçek fiyat + karşılaştırma + 2 adet fiyatı; disk sayısı; karanlık oda tavan videosu; "Kartla %5" sitenin geri kalanından kalksın mı.
 - 29 Eki: yılbaşı özellik kartları LunaDream Sihirli kurgusunda yeniden (ikon + canlı mini arayüz). Tema 1.0.40.
+- 29 Eki: canlı denetim (tema 1.0.40 yayında). Yılbaşı: canlı fiyat + indirim, dönen kargo şeridi, yapışkan sayaç, beyaz zemin. Yapıştırmalık 4 dosya `kodlar/yilbasi-canli/`. Shopify'da ürüne karşılaştırma fiyatı, görsel ve ayluna.stok_kurdele girilmeli.

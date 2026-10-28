@@ -1,0 +1,138 @@
+/* Ayluna · YilbasiAgaci bileşeni (araclar/tema/tema_uret.py). Her bölüm bu dosyayı yükler; bileşen bir kez kurulur. */
+(window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {
+
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  componentDidMount() {
+    var self = this;
+    this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (this.azHareket) this.setState({ dOto: false, yOto: false, yak: true, dgOto: false });
+    // Tek saat: şerit sayacı, galeri (5 sn), disk (4 sn)
+    this.iv = setInterval(function () {
+      var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || 4));
+      if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % 6;
+      if (S.yOto && t - S.yBas >= (S.yak ? 7 : 2)) { o.yak = !S.yak; o.yBas = t; }
+      if (S.dgOto && t % 3 === 0) o.dg = (S.dg + 1) % 4;
+      if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
+      if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
+      self.setState(o);
+    }, 1000);
+  }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    var self = this, S = this.state, B = '/_blob/';
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : [["/_blob/403192141ff415de19d7f08114a1bd74", "Yılbaşı Ağacı Projektör Lamba görseli 1", "50% 50%"], ["/_blob/487093d37ccb10be7cb78ab98f19dc84", "Yılbaşı Ağacı Projektör Lamba görseli 2", "50% 50%"], ["/_blob/d059329bb1316bb397f9b92644998065", "Yılbaşı Ağacı Projektör Lamba görseli 3", "50% 50%"], ["/_blob/1e70f03680e23baed50aea084c92b03e", "Yılbaşı Ağacı Projektör Lamba görseli 4", "50% 50%"]];
+    self.galN = GAL.length;
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
+    // Fiyat: Shopify'da canlı fiyat (V.urun), tuvalde geçici fiyat. 2 adette indirim tanımlı değil: tasarruf yazılmaz.
+    var VU = ((window.AYLUNA_VERI || {}).urun || {})["yilbasi-agaci-projektor-lamba"] || {}, P1 = VU.p || 999.0;
+    var C1v = VU.c > P1 ? VU.c : null, fyPct = C1v ? Math.round((1 - P1 / C1v) * 100) : 0;
+    var paket = [
+      { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: 'Kendine ya da evine', rib: false },
+      { n: 2, t: '2 Adet', p: TL(2 * P1, true), old: C1v ? TL(2 * C1v, true) : '', sub: 'Biri sana, biri hediye', rib: false }
+    ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
+    var DISK = [["Klasik yılbaşı", "/_blob/0143de9991a1bc82ff5a2fcafd262ce8"], ["Yeni yıl mesajı", "/_blob/b9ca1f3036b0d671cec2c053a491141c"], ["Kar taneleri", "/_blob/29f34f185f858518e19adeb0a09ce92e"], ["Ren geyikleri", "/_blob/a67e07583769ee524096661940ef6093"], ["Kardan adam", "/_blob/d54bbc54da481894b03a90633027d408"], ["Çanlar", "/_blob/b6e597a7824d07a8917cc638f657ba46"]];
+    var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
+    var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
+    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Ağacı videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Ağacı videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
+      { t: 'Kutudan çıkanlar', al: 'Kutudan çıkanlar', k: 'Kutu açılışı', src: B + '4d01f14032ee55720b5baa41900bfc8b', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Ağacı sarmak', al: 'Ağacı sarmak', k: 'Kurulum', src: B + 'f514229183a4a0e7a2725a366d5280b1', pos: '50% 50%', gercek: false, kapak: true },
+      { t: 'Abajuru giydirmek', al: 'Abajuru giydirmek', k: 'Süsleme', src: B + '08a867b1ecb484b2ebd40b863bde844d', pos: '50% 50%', gercek: false, kapak: true },
+      { t: 'Işık kapanınca tavan', al: 'Işık kapanınca tavan', k: 'Tavanda yılbaşı', src: B + 'ce7dadd85b37a8089d0df5ce000d6f54', pos: '50% 30%', gercek: false, kapak: true }];
+    var PARCA = [["Hediye kutusu", "Yılbaşı baskılı, kağıt dolgulu."], ["Altın abajur", "Desenli çıkartmayı giydirirsin."], ["Desenli çıkartma", "Abajurun etrafına sarılır."], ["İnci çıkartmalar", "Kırmızı ve altın; kendinden yapışkanlı."], ["\"Merry Christmas\" çıkartması", "Ağacın tepesine süs."], ["Tüylü süs çubukları", "Kabloya sarılır, ağaç olur."], ["Projektör ve desen diskleri", "USB kablolu, lensli modül; diskler değişir."], ["Montaj kartı", "QR kodunda montaj videosu."]];
+    var DG = [["Sar", "Tüylü çubukları USB kablonun etrafına sar.", "/_blob/f514229183a4a0e7a2725a366d5280b1"], ["Süsle", "Desenli çıkartmayı altın abajura giydir; inciler senden.", "/_blob/08a867b1ecb484b2ebd40b863bde844d"], ["Tak", "Abajuru tak, USB’ye bağla.", "/_blob/e99d81de13ab7ed59f13efed5ebaced2"], ["Yansıt", "Işığı kapat: tavan yılbaşı olur.", "/_blob/ce7dadd85b37a8089d0df5ce000d6f54"]], GUNA = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+    var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'], AYU = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    function KARGO(ms) {
+      var ist = new Date(new Date(ms).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+      var isg = function (d) { return d.getDay() !== 0 && d.getDay() !== 6; }, IKI = function (n) { return n < 10 ? '0' + n : String(n); };
+      var gun0 = new Date(ist.getFullYear(), ist.getMonth(), ist.getDate()), kalan = gun0.getTime() + 16 * 3600000 - ist.getTime();
+      var bugun = isg(ist) && kalan > 0, gun = new Date(gun0);
+      if (!bugun) do { gun.setDate(gun.getDate() + 1); } while (!isg(gun));
+      var fark = Math.round((gun - gun0) / 86400000), GUN = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+      var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+      return { bugun: bugun, gun: gun, sayac: bugun ? IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss) : '',
+        metin: bugun ? 'Bugün 16.00’ya kadar verilen siparişler aynı gün kargoda' : 'Bugün verilen siparişler ' + (fark === 1 ? 'yarın' : GUN[gun.getDay()]) + ' kargoda',
+        aria: bugun ? 'Aynı gün kargo için ' + hh + ' saat ' + mi + ' dakika kaldı' : '' };
+    }
+    var KG = KARGO(S.now || Date.now()), kd = new Date(KG.gun);
+    var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
+    var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+    // Yılbaşından önce teslim için son sipariş: 31 Aralık'tan 7 gün teslim + 1 iş günü kargo geriye; hafta sonu atlanır
+    var g0 = new Date(now.getFullYear(), now.getMonth(), now.getDate()), yil = now.getMonth() === 0 && now.getDate() < 7 ? null : new Date(now.getFullYear(), 11, 31);
+    var son = yil ? new Date(yil.getFullYear(), 11, 23) : null; if (son) while (son.getDay() === 0 || son.getDay() === 6) son.setDate(son.getDate() - 1);
+    var gunYil = yil ? Math.round((yil - g0) / 864e5) : 0, yetisir = son && g0 <= son;
+    var ybCls = yetisir ? 'yb-k' : 'yb-k gecti', ybGun = yetisir ? String(gunYil) : '', ybGunEt = yetisir ? 'gün' : '';
+    var ybBas = yetisir ? 'Yılbaşından önce kapında' : 'Yılbaşına yetişmeyebilir', ybAlt = yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Yılbaşından önce teslim için son sipariş: ' + son.getDate() + ' ' + AYU[son.getMonth()] + '.') : ('Tahmini teslim: ' + teslim + '.');
+    function IKI(n) { return n < 10 ? '0' + n : String(n); }
+    // Ay sonu (İstanbul saatiyle) ve gerçek ürün alanları (Shopify: AYLUNA_CANLI; tuvalde yok → satır yok)
+    var aySon = new Date(now.getFullYear(), now.getMonth() + 1, 1), ayBas = new Date(now.getFullYear(), now.getMonth(), 1), istS = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kalanDk = Math.max(0, Math.floor((aySon - istS) / 60000)), aysGun = Math.floor(kalanDk / 1440), aysSa = Math.floor(kalanDk / 60) % 24, aysOran = Math.min(1, (istS - ayBas) / (aySon - ayBas));
+    var CN = (window.AYLUNA_CANLI || {})["yilbasi-agaci-projektor-lamba"] || {}, stokN = +CN.kd > 0 ? +CN.kd : 0, dunN = +CN.dun > 0 ? +CN.dun : 0;
+    var SER = (dunN ? ['Dün ' + dunN + ' kişi satın aldı'] : []).concat(['Ücretsiz kargo, 1 iş gününde kargoda', '30 gün iade hakkı', 'Kapıda ödeme de var', 'Yılbaşı baskılı hediye kutusunda']);
+    var serI = S.ser % (SER.length + 1); if (serI === SER.length && !self.serSifir) { self.serSifir = setTimeout(function () { self.serSifir = null; self.setState({ ser: 0 }); }, 520); }
+    var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
+    var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
+function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    var PR = [["LunaDream Gece Lambası", 1699.99, 1999, "/_blob/f4f724c3d02ba1e40788a962f9e3fe77"], ["Galaxy USB Projektör", 1599, 1999, "/_blob/88c17ac1f221cab147f23e1a46b7f55e"], ["Ayluna AyFeneri", 1649.99, 2499, "/_blob/d326933d74a22adce90d7f6ac3eabf43"], ["Ayluna Galaksi Night Projektör", 2199, 2999, "/_blob/3df93f38bf4441cdf4dc64b625a1e22d"], ["Galaksi Ambiyans Işığı", 1499, 2898, "/_blob/9e6102bb76acbfeb101fca8e2fc1024e"], ["Ayluna Kum Saati Lamba", 799, 999, "/_blob/0307a2c24e8297579b82099467f001d9"]];
+    var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
+    var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
+    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
+      gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      onLabel: 'Güvenli Ödeme ile Al', fyP: TL(P1, true), fyInd: !!C1v, fyC: C1v ? TL(C1v, true) : '', fyPct: fyPct,
+      kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, cdTiny: IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı',
+      dnA: 'dn-s' + (S.dn === 0 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : S.t - S.dnT < 1 ? ' ust' : ''), kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
+      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
+      disk: disk, dAd: DISK[S.disk][0],
+      yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Tavan yılbaşı oldu.' : 'Işığı kapat, ağacı yak.',
+      yakAlt: S.yak ? 'Desenler tavanda; diski değiştirince değişir.' : 'Lamba kapalı. Dokun, yansısın.', yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
+      dg: DG.map(function (d, i) { var on = i === S.dg; return { k: d[0], src: d[2], cls: on ? 'on' : '', bcls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ dg: i, dgOto: false }); } }; }),
+      dgK: DG[S.dg][0], dgT: DG[S.dg][1],
+      tkAy: son ? AYU[son.getMonth()].toLocaleUpperCase('tr') : AYU[t2.getMonth()].toLocaleUpperCase('tr'), tkGun: son ? String(son.getDate()) : String(t2.getDate()), tkHafta: son ? GUNA[son.getDay()] : 'tahmini teslim',
+      tkBas: yetisir ? 'Yılbaşından önce kapında olması için son sipariş günü.' : 'Bu yıl yılbaşına yetişmeyebilir.', tkAlt: yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Bugün verirsen ' + kd.getDate() + ' ' + AYU[kd.getMonth()] + ' kargoda.') : ('Tahmini teslim: ' + teslim + '.'),
+      ser: SER.concat([SER[0]]).map(function (t) { return { t: t }; }), serY: -24 * serI, serCls: serI === 0 ? 'ser-iz anlik' : 'ser-iz',
+      aysYol: AYY(1 - aysOran), aysBas: AYU[now.getMonth()] + ' fiyatı bitiyor', aysAlt: 'Fiyatlar her ay güncelleniyor; bu fiyat ay sonuna kadar.', aysG: String(aysGun), aysS: String(aysSa), aysAria: AYU[now.getMonth()] + ' fiyatının bitmesine ' + aysGun + ' gün ' + aysSa + ' saat',
+      vids: vids, aysAy: AYU[now.getMonth()], stokVar: stokN > 0, stokN: stokN,
+      nkNo: S.nk + 1, nkAd: PARCA[S.nk][0], nkAlt: PARCA[S.nk][1],
+      nk0: S.nk === 0 ? 'on' : '', nkOn0: S.nk === 0 ? 'true' : 'false', nkSec0: function () { self.setState({ nk: 0 }); },
+      nk1: S.nk === 1 ? 'on' : '', nkOn1: S.nk === 1 ? 'true' : 'false', nkSec1: function () { self.setState({ nk: 1 }); },
+      nk2: S.nk === 2 ? 'on' : '', nkOn2: S.nk === 2 ? 'true' : 'false', nkSec2: function () { self.setState({ nk: 2 }); },
+      nk3: S.nk === 3 ? 'on' : '', nkOn3: S.nk === 3 ? 'true' : 'false', nkSec3: function () { self.setState({ nk: 3 }); },
+      nk4: S.nk === 4 ? 'on' : '', nkOn4: S.nk === 4 ? 'true' : 'false', nkSec4: function () { self.setState({ nk: 4 }); },
+      nk5: S.nk === 5 ? 'on' : '', nkOn5: S.nk === 5 ? 'true' : 'false', nkSec5: function () { self.setState({ nk: 5 }); },
+      nk6: S.nk === 6 ? 'on' : '', nkOn6: S.nk === 6 ? 'true' : 'false', nkSec6: function () { self.setState({ nk: 6 }); },
+      nk7: S.nk === 7 ? 'on' : '', nkOn7: S.nk === 7 ? 'true' : 'false', nkSec7: function () { self.setState({ nk: 7 }); },
+      alaGit: alaGit, faq: [{"q": "Diski nasıl değiştiririm?", "a": "Fişi çek, abajuru kaldır, diski çıkar, yenisini tak ve abajuru geri koy. Sonra lambayı tavana çevir."}, {"q": "Çocuklar yapabilir mi?", "a": "İnci çıkartmalar gibi küçük parçalar var; küçük çocuklar bir yetişkinle birlikte yapsın."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Nasıl ödeyebilirim?", "a": "Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
+    };
+  }
+}
+
+Ayluna.baslat(Component);
+});
