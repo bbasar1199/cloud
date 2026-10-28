@@ -546,3 +546,5 @@ html:has(.shopify-policy__container) body{margin:0;background:#F6F1E9;color:#1A2
 .ay-bsk .fg b{color:#A05A1C;font-variant-numeric:tabular-nums}
 .ay-bsk .kd{display:flex;width:max-content;align-items:center;gap:6px;margin:10px 0 -23px 14px;padding:4px 10px 4px 8px;border-radius:999px;background:#F3B562;color:#1A2142;font-size:12px;font-weight:700;line-height:15px;box-shadow:0 0 0 3px #FFFFFF}
 .ay-bsk .kd i{width:6px;height:6px;border-radius:50%;background:#1A2142}
+
+body{background:var(--ay-zemin,#F6F1E9)}
