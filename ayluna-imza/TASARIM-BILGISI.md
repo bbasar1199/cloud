@@ -402,6 +402,8 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 28 Eki | "İletişim ve iade/değişim kısımları çalışmıyor, markama uygun yap" + "yorumlar hâlâ uzun" | Menü/alt bilgi /pages/iletisim, /pages/iade… gibi mağazada olmayan sayfalara gidiyordu (404); politika sayfaları (/policies/…) başlıksız düz metindi. Bağlantılar var olan adreslere (İletişim → /pages/contact, politikalar → /policies/…) çevrildi; politika sayfalarına marka başlığı, kart gövde, güven şeridi, "Sorunun mu var?" kartı. Loox kısaltma: canlıda JS yapıştırılmış, CSS eksikti. Kural: bağlantı yalnız mağazada var olan adrese gider; yapıştırılan kodun hepsi (CSS + JS) denetlenir. |
 | 28 Eki | "Sepetteki kartla ödeme %5 indirimini kaldıralım" | Sepette indirim satırı, "Kartla toplam" ve düğme altındaki "%5 indirim dahil" kalktı; toplam indirimsiz. (Ürün sayfası, menü ve politika şeritlerinde "Kartla %5 indirim" yazısı hâlâ var; kullanıcıya soruldu.) |
 | 28 Eki | Slayt: "alt kısmı eski karttaki gibi olsun ama tüm sayfayı kaplasın" | Kenardan kenara ve uzun (78svh, en çok 620 px), alt köşeler 24 px yuvarlak, ay noktaları solda, düğme hap. C'nin yerine geçer. |
+| 28 Eki | "Sepette baskılayıcı eksik" | Eleştirmen: B (teslim çizelgesi, ödeme düğmesinin üstünde) 8, A (üstte kargo sayacı) 6, C (stok + fiyat sayacı) 4. B uygulandı: Sipariş · Kargoda · Kapında ay evreleriyle, gerçek 16.00 kuralı, hafta sonu atlanır, "yetişmesi için X sa Y dk". Kural: sepetteki baskı yalnız gerçek kurala bağlanır; aynı sayaç iki yerde olmaz. |
+| 28 Eki | "Sepette %5 öyle görünüyor, ödemeye geçince normal fiyat" | Sepet bileşeni kendi %5'ini hesaplıyordu (ay-sepet şablonu); kaldırıldı, toplam ödemeyle aynı. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):

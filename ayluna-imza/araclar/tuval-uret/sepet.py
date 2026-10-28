@@ -132,6 +132,7 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <p><span>Kargo</span><b>{{kargoT}}</b></p>
     <div class="top"><span>Toplam</span><b>{{toplam}}</b></div>
   </div>
+  <div class="ay-bsk" data-ay-dis></div>
   <button class="btn1" type="button" onClick="{{odeme}}"><span class="b-ic"><span>Güvenli Ödeme ile Öde · {{toplam}}</span></span>""" + OK + """</button>
   <div class="guven">
     <span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg>30 gün iade</span>

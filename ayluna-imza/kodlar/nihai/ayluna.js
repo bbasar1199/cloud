@@ -809,3 +809,25 @@
     '<nav class="ay-pol-diger" aria-label="Diğer politikalar">' + P.filter(function (x) { return x[0] !== y; }).map(function (x) { return '<a href="' + x[0] + '">' + x[1] + '</a>'; }).join('') + '<a href="/pages/contact">İletişim</a></nav>';
   c.parentNode.insertBefore(alt, c.nextSibling);
 })();
+
+/* Sepet teslim çizelgesi (28 Eki): Sipariş · Kargoda · Kapında; 16.00'ya kadar bugün kargo, sonra sonraki iş günü (hafta sonu atlanır) */
+(function () {
+  var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'], GUN = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+  function ay(f) { var r = 9, c = 11, rx = Math.abs(1 - 2 * f) * r; return '<svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="#1A2142" stroke-width="1.6"/>' + (f > 0 ? '<path d="M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z" fill="#F2A65A"/>' : '') + '</svg>'; }
+  function hesap() {
+    var ist = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })), isg = function (d) { return d.getDay() !== 0 && d.getDay() !== 6; };
+    var g0 = new Date(ist.getFullYear(), ist.getMonth(), ist.getDate()), kalan = g0.getTime() + 16 * 3600000 - ist.getTime(), bugun = isg(ist) && kalan > 0, k = new Date(g0);
+    if (!bugun) do { k.setDate(k.getDate() + 1); } while (!isg(k));
+    var fark = Math.round((k - g0) / 86400000), t1 = new Date(k), t2 = new Date(k); t1.setDate(t1.getDate() + 3); t2.setDate(t2.getDate() + 7);
+    var tes = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+    var kg = bugun ? 'Bugün' : fark === 1 ? 'Yarın' : GUN[k.getDay()], sa = Math.floor(kalan / 3600000), dk = Math.floor(kalan / 60000) % 60;
+    return { kg: kg, tes: tes, dol: bugun ? .5 : .25,
+      not: bugun ? 'Bugün kargoya yetişmesi için <em>' + (sa ? sa + ' sa ' : '') + dk + ' dk</em> kaldı' : 'Şimdi öde, ' + kg.toLocaleLowerCase('tr') + ' ilk kargoda' };
+  }
+  function ciz() {
+    var el = document.querySelectorAll('.ay-bsk'); if (!el.length) return; var h = hesap();
+    var html = '<div class="ay-bsk-s" style="--ay-dol:' + h.dol + '"><span>' + ay(1) + '<b>Bugün</b>Sipariş</span><span>' + ay(.5) + '<b>' + h.kg + '</b>Kargoda</span><span>' + ay(0) + '<b>' + h.tes + '</b>Kapında</span></div><p>' + h.not + '</p>';
+    for (var i = 0; i < el.length; i++) if (el[i].__h !== html) { el[i].__h = html; el[i].innerHTML = html; }
+  }
+  ciz(); setInterval(ciz, 20000); new MutationObserver(function () { if (document.querySelector('.ay-bsk:empty')) ciz(); }).observe(document.documentElement, { childList: true, subtree: true });
+})();
