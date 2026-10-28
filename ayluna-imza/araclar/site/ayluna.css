@@ -469,3 +469,16 @@ html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
 .ay-vb-foto{cursor:default!important}
 .ay-vb-bos{background:repeating-linear-gradient(45deg,#1A2142 0 10px,#232B52 10px 20px)!important}
 @media (min-width:1024px){.ay-vb .bolum{max-width:760px;margin:0 auto;padding-top:56px}.ay-vb .px,.ay-vb-serit{padding-left:0;padding-right:0}.ay-vb .h2{font-size:30px}.ay-vb-serit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;overflow:visible}.ay-vb .vid{height:auto;aspect-ratio:9/16}.ay-vb-serit>span[aria-hidden]{display:none}}
+/* Ana sayfa slaytı (28 Eki): görsel kenardan kenara, yazı ve düğme görselin altında açık zeminde (telefon ve tablet) */
+@media (max-width:1023px){
+  html[data-ay-tur=ana] .slayt{margin:0!important;border-radius:0!important;height:auto!important;background:transparent!important;color:#1A2142!important}
+  html[data-ay-tur=ana] .slayt .s-iz{position:relative!important}
+  html[data-ay-tur=ana] .slayt .sl>img{position:relative!important;display:block;width:100%;height:auto!important;aspect-ratio:4/4.3}
+  html[data-ay-tur=ana] .slayt .sl::after{display:none!important}
+  html[data-ay-tur=ana] .slayt .sl-y{position:relative!important;left:0!important;right:0!important;bottom:0!important;min-height:178px;padding:22px 20px 4px;box-sizing:border-box}
+  html[data-ay-tur=ana] .slayt .sl-y small{color:#8A7F6E!important}
+  html[data-ay-tur=ana] .slayt .sl-y h2{color:#1A2142}
+  html[data-ay-tur=ana] .slayt .sl-y p{color:#5C6078!important}
+  html[data-ay-tur=ana] .slayt .sl-y a{background:#1A2142!important;color:#FFFDF9!important}
+  html[data-ay-tur=ana] .slayt .ay-iz{top:calc(min(100vw,500px) * 1.075 - 32px)!important;bottom:auto!important;left:50%!important;transform:translateX(-50%)}
+}
