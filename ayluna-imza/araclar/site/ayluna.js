@@ -821,7 +821,7 @@
     var g = Math.floor(s / 1440), sa = Math.floor(s / 60) % 24, dk = s % 60;
     return { ay: AY[ist.getMonth()], t: g ? g + ' gün ' + sa + ' sa' : sa ? sa + ' sa ' + dk + ' dk' : dk + ' dk' };
   }
-  var STOK0 = { 'lunadream-gece-lambasi': 18 };  // ürün sayfasındaki kurdelenin tasarım sayısı (luna_e.py STOK)
+  var STOK0 = { 'lunadream-gece-lambasi': 18, 'yilbasi-agaci-projektor-lamba': 12 };  // ürün sayfasındaki kurdelenin tasarım sayısı (luna_e.py STOK)
   function stok() {
     var C = window.AYLUNA_CANLI || {}, S = window.AylunaSepet && window.AylunaSepet.oku ? window.AylunaSepet.oku() : null, en = null;
     ((S && S.satirlar) || []).forEach(function (x) { var c = C[x.h], k = c && c.kd, n = k === null || k === undefined || k === '' ? STOK0[x.h] : +k; if (n > 0 && (!en || n < en.n)) en = { n: n, ad: x.ad.split(' ')[0] }; });

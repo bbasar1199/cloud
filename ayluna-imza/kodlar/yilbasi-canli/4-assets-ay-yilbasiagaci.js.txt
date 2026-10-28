@@ -79,7 +79,7 @@ class Component extends DCLogic {
     // Ay sonu (İstanbul saatiyle) ve gerçek ürün alanları (Shopify: AYLUNA_CANLI; tuvalde yok → satır yok)
     var aySon = new Date(now.getFullYear(), now.getMonth() + 1, 1), ayBas = new Date(now.getFullYear(), now.getMonth(), 1), istS = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kalanDk = Math.max(0, Math.floor((aySon - istS) / 60000)), aysGun = Math.floor(kalanDk / 1440), aysSa = Math.floor(kalanDk / 60) % 24, aysOran = Math.min(1, (istS - ayBas) / (aySon - ayBas));
-    var CN = (window.AYLUNA_CANLI || {})["yilbasi-agaci-projektor-lamba"] || {}, stokN = +CN.kd > 0 ? +CN.kd : 0, dunN = +CN.dun > 0 ? +CN.dun : 0;
+    var CN = (window.AYLUNA_CANLI || {})["yilbasi-agaci-projektor-lamba"] || {}, stokN = +CN.kd > 0 ? +CN.kd : 12, dunN = +CN.dun > 0 ? +CN.dun : 0;
     var SER = (dunN ? ['Dün ' + dunN + ' kişi satın aldı'] : []).concat(['Ücretsiz kargo, 1 iş gününde kargoda', '30 gün iade hakkı', 'Kapıda ödeme de var', 'Yılbaşı baskılı hediye kutusunda']);
     var serI = S.ser % (SER.length + 1); if (serI === SER.length && !self.serSifir) { self.serSifir = setTimeout(function () { self.serSifir = null; self.setState({ ser: 0 }); }, 520); }
     var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
@@ -111,8 +111,8 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
     return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       tkY: -24 * (S.tk || 0), tkCls: 'dsr-iz' + (S.tkAn ? ' anlik' : ''), tkC0: 'dsr-s' + ((S.tk || 0) === 0 && !(0 === 0 && S.tkAn) ? ' on' : ''), tkC1: 'dsr-s' + ((S.tk || 0) === 1 && !(1 === 0 && S.tkAn) ? ' on' : ''), tkC2: 'dsr-s' + ((S.tk || 0) === 2 && !(2 === 0 && S.tkAn) ? ' on' : ''), tkC3: 'dsr-s' + ((S.tk || 0) === 3 && !(3 === 0 && S.tkAn) ? ' on' : ''), tkC4: 'dsr-s' + ((S.tk || 0) === 4 && !(4 === 0 && S.tkAn) ? ' on' : ''),
-      tk0a: dunN ? 'Dün ' : '', tk0b: dunN ? dunN + ' kişi' : 'Kapıda ödeme', tk0c: dunN ? ' satın aldı' : ' de var',
-      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Kapıda ödeme de var. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
+      tk0a: dunN ? 'Dün ' : 'Bu yılbaşı için son ', tk0b: dunN ? dunN + ' kişi' : stokN + ' adet', tk0c: dunN ? ' satın aldı' : '',
+      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Bu yılbaşı için son ' + stokN + ' adet. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
       fySr: 'Fiyat ' + TL(P1, true) + (C1v ? ', önceki fiyat ' + TL(C1v, true) + ', %' + fyPct + ' indirim' : ''),
       onLabel: 'Güvenli Ödeme ile Al', fyP: TL(P1, true), fyInd: !!C1v, fyC: C1v ? TL(C1v, true) : '', fyPct: fyPct,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, cdTiny: IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı',

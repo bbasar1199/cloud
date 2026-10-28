@@ -21,6 +21,7 @@ H = 'yilbasi-agaci-projektor-lamba'
 AD = 'Yılbaşı Ağacı Projektör Lamba'
 P1 = 999.0   # GEÇİCİ: ürün Shopify'da yok (28 Eki); canlıda fiyat Shopify'dan gelir (ayluna.js)
 C1 = None
+STOK = 12  # kullanıcı, 29 Eki: "güvenli ödemede adet olarak 12 yaz"; Shopify'da ayluna.stok_kurdele doluysa o geçer
 
 # 2. tur (28 Eki, kullanıcı: "çok sade ve sıkıcı olmuş"): çam yeşili + altın bantlar, dört imza anı (Ağacı yak, dergi kapağı, dönen tavan, takvim yaprağı)
 # 4. tur (28 Eki, kullanıcı: "hem yılbaşı hem ürünle mükemmel uyumlu"): renkler ürünün kendi kutusundan (pudra pembesi zemin, altın yaldız,
@@ -232,7 +233,7 @@ a.yo-k:active{transform:scale(.985)}
 .ays-s small{margin:0 4px 0 2px;font-size:12px;color:#E9DDBF}
 /* Stok kurdelesi butonun üst kenarına yarı biner */
 .al-on{position:relative;margin-top:16px}.al-on .btn1{margin-top:0}
-.stk{position:absolute;left:16px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:#8E2A22;color:#fff;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #fff}
+.stk{position:absolute;left:16px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:#123A2A;color:#fff;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #fff}
 .stk i{width:7px;height:7px;border-radius:50%;background:#F3C978}
 
 .pg .otuz{background:#F6F3EE;color:#123A2A}.pg .otuz b,.pg .otuz>span:last-child span{color:#123A2A}
@@ -397,7 +398,7 @@ def al():
     <!-- Dönen kargo şeridi (29 Eki, LunaDream'deki gibi): hediye kutusu 4 sn ↔ 16.00 aynı gün kargo + sayaç 6 sn -->
     <p class="donen"><span class="dn-sr">Yılbaşı baskılı hediye kutusunda. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Yılbaşı baskılı hediye kutusunda</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24" class="dn-kt"><rect x="3" y="7" width="13" height="10" rx="1.5"></rect><path d="M16 10h3l2 3v4h-5"></path><circle cx="7" cy="18" r="1.6"></circle><circle cx="18" cy="18" r="1.6"></circle></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
     <!-- Stok kurdelesi: sayı ürün alanı ayluna.stok_kurdele'den (canlı); boşsa ya da 0 ise kurdele yok -->
-    <div class="al-on"><sc-if value="{{stokVar}}" hint-placeholder-val="{{false}}"><span class="stk"><i aria-hidden="true"></i>Bu yılbaşı için son {{stokN}} adet</span></sc-if>
+    <div class="al-on"><sc-if value="{{stokVar}}" hint-placeholder-val="{{false}}"><span class="stk"><i aria-hidden="true"></i>Son {{stokN}} adet</span></sc-if>
     <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span></span>%s</button></div>
     <div class="ay-dis" data-ay-dis></div>
     <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>Bugün</b><span>Sipariş verildi</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>Kargoda</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>Kapında</span></li></ol></div>
@@ -632,7 +633,7 @@ def js():
     // Ay sonu (İstanbul saatiyle) ve gerçek ürün alanları (Shopify: AYLUNA_CANLI; tuvalde yok → satır yok)
     var aySon = new Date(now.getFullYear(), now.getMonth() + 1, 1), ayBas = new Date(now.getFullYear(), now.getMonth(), 1), istS = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     var kalanDk = Math.max(0, Math.floor((aySon - istS) / 60000)), aysGun = Math.floor(kalanDk / 1440), aysSa = Math.floor(kalanDk / 60) % 24, aysOran = Math.min(1, (istS - ayBas) / (aySon - ayBas));
-    var CN = (window.AYLUNA_CANLI || {})[""" + json.dumps(H) + """] || {}, stokN = +CN.kd > 0 ? +CN.kd : 0, dunN = +CN.dun > 0 ? +CN.dun : 0;
+    var CN = (window.AYLUNA_CANLI || {})[""" + json.dumps(H) + """] || {}, stokN = +CN.kd > 0 ? +CN.kd : """ + str(STOK) + """, dunN = +CN.dun > 0 ? +CN.dun : 0;
     var SER = (dunN ? ['Dün ' + dunN + ' kişi satın aldı'] : []).concat(['Ücretsiz kargo, 1 iş gününde kargoda', '30 gün iade hakkı', 'Kapıda ödeme de var', 'Yılbaşı baskılı hediye kutusunda']);
     var serI = S.ser % (SER.length + 1); if (serI === SER.length && !self.serSifir) { self.serSifir = setTimeout(function () { self.serSifir = null; self.setState({ ser: 0 }); }, 520); }
     var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
@@ -645,8 +646,8 @@ def js():
     return {
       gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
       """ + TK_DEGER + """
-      tk0a: dunN ? 'Dün ' : '', tk0b: dunN ? dunN + ' kişi' : 'Kapıda ödeme', tk0c: dunN ? ' satın aldı' : ' de var',
-      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Kapıda ödeme de var. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
+      tk0a: dunN ? 'Dün ' : 'Bu yılbaşı için son ', tk0b: dunN ? dunN + ' kişi' : stokN + ' adet', tk0c: dunN ? ' satın aldı' : '',
+      tkSr: (dunN ? 'Dün ' + dunN + ' kişi satın aldı. ' : 'Bu yılbaşı için son ' + stokN + ' adet. ') + 'Ücretsiz kargo ile kapına. 30 gün iade hakkı. Hediye kutusunda, süsleriyle.',
       fySr: 'Fiyat ' + TL(P1, true) + (C1v ? ', önceki fiyat ' + TL(C1v, true) + ', %' + fyPct + ' indirim' : ''),
       onLabel: 'Güvenli Ödeme ile Al', fyP: TL(P1, true), fyInd: !!C1v, fyC: C1v ? TL(C1v, true) : '', fyPct: fyPct,
       kgMetin: KG.metin, kgBugun: KG.bugun, kgSayac: KG.sayac, cdTiny: IKI(hh) + ' sa ' + IKI(mi) + ' dk kaldı',

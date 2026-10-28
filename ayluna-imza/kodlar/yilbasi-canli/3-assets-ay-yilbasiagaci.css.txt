@@ -883,7 +883,7 @@ a.yo-k:active{transform:scale(.985)}
 .ays-s small{margin:0 4px 0 2px;font-size:12px;color:#E9DDBF}
 /* Stok kurdelesi butonun üst kenarına yarı biner */
 .al-on{position:relative;margin-top:16px}.al-on .btn1{margin-top:0}
-.stk{position:absolute;left:16px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:#8E2A22;color:#fff;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #fff}
+.stk{position:absolute;left:16px;top:-12px;z-index:1;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border-radius:999px;background:#123A2A;color:#fff;font-size:12px;font-weight:700;box-shadow:0 0 0 3px #fff}
 .stk i{width:7px;height:7px;border-radius:50%;background:#F3C978}
 
 .pg .otuz{background:#F6F3EE;color:#123A2A}.pg .otuz b,.pg .otuz>span:last-child span{color:#123A2A}
