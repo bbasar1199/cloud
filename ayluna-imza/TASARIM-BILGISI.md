@@ -397,6 +397,7 @@ Kullanıcı bir şeyi düzeltince bir satır eklenir. Kalıcı kural `beceriler/
 | 28 Eki | Ana sayfa slaytı: "C'yi yapayım" | C seçildi (kenardan kenara 500 px, tam genişlik düğme); B'nin yerine `ayluna.css` sonunda. Slayt görselleri bu düzene göre yeniden yapılacak (ürün üst yarıda, alt üçte bir boş ve koyu). |
 | 28 Eki | Menü: "beyaza çevirelim ya da yıldızlı, markamıza uygun eğlenceli" | Eleştirmen sırası C (beyaz liste + altta gece şeridi: hilal, yıldız, güven satırı), A (beyaz sade), B (tam lacivert yıldızlı; yıldız yazıya karışıyor). Kullanıcı B'yi seçti ("menüde B'yi ver, nihai kod"); eleştirmen notuyla yıldızlar listenin altındaki boşlukta, hilal + güven satırı. |
 | 28 Eki | "Loox yorumları çok uzun, yana kaydırmalı yapmanın yolu yok mu" | Loox yorumları bir iframe (4.800 px); içi temadan değiştirilemez. Kutu 880 px'ten başlar, "Tüm yorumları gör" ile açılır. Yana kaydırma için Loox'un kendi kaydırmalı (carousel) widget'ı gerekir. |
+| 28 Eki | Menü B canlıda: "dümdüz ve sıkıcı, yıldızlar parlıyor gibi olabilir" | Göğün her yerinde soluk yıldızlar yavaşça parlar (yalnız opacity, iki katman), açılışta satırlar sırayla kayar, hilal hafif ışır; azaltılmış harekette durur. Kural: koyu yüzeyde yıldız yazının altında soluk (≈%35) kalır, parlak yıldızlar boş alanda. |
 
 ## 11. Kararlar
 **Varsayılan olarak uygulanır** (kullanıcı itiraz ederse değişir):
