@@ -1189,3 +1189,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Kullanıcıya verilen: `kodlar/yilbasi/` (+ `kodlar/yilbasi-dosyalar.zip`). Tema 1.0.38 zip'i de hazır (yalnız gerekirse).
 - Simülatör: `BENZETIM_EK_URUN` ile mağazada olmayan ürün denenir.
 - Yeni ürünü sonra eklemek için yol: urun-icerik.json + urun_soru.SORU + anasayfa.URUN (sona) + sayfalar.KAT + site_uret.ADLAR + bloblar (görsel) → urun_sade.py, site_uret, tema_uret.
+- İmza sayfa yönleri (28 Eki): `onizleme/yilbasi-yon/` (A hediye kutusu 7/10, B tavan 5/10, C birlikte yap 6/10). Eleştirmen önerisi: Main sistemi + A'nın "Kutuda ne var?" + B'nin disk seçicisi (yalnız bir gece bandı) + C'nin "yaparken/yanınca" ikilisi. Kullanıcı seçimi bekleniyor; gerekenler: fiyat, 2'li paket fiyatı, gerçek tavan çekimi, disk/parça sayısı.
