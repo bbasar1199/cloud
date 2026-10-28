@@ -23,7 +23,9 @@ P1 = 999.0   # GEÇİCİ: ürün Shopify'da yok (28 Eki); canlıda fiyat Shopify
 C1 = None
 
 # 2. tur (28 Eki, kullanıcı: "çok sade ve sıkıcı olmuş"): çam yeşili + altın bantlar, dört imza anı (Ağacı yak, dergi kapağı, dönen tavan, takvim yaprağı)
-TEMA = dict(v='#E3B65A', v2='#8C5E10', zemin='#FFFDF8', cizgi='#ECE4D6', koyu='#0D261C', koyu2='#173828',
+# 4. tur (28 Eki, kullanıcı: "hem yılbaşı hem ürünle mükemmel uyumlu"): renkler ürünün kendi kutusundan (pudra pembesi zemin, altın yaldız,
+# çam yeşili, kırmızı kozalak); ışık dizisi ayraçları (kutudaki "A little light, a lot of joy" ışıkları), galeri göstergesi minik ağaçlar.
+TEMA = dict(v='#E3B65A', v2='#8C5E10', zemin='#FBF1EA', cizgi='#EAD6C8', koyu='#0D261C', koyu2='#173828',
             fb='"Young Serif"', fg='"Onest"', bk=400, bls='-.02em',
             font='family=Young+Serif&family=Onest:wght@400;500;600;700;800')
 
@@ -57,7 +59,7 @@ CSS = r"""
 .adapt svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 /* Yaparken / Yanınca */
 .ikili{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:16px}
-.ikili figure{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#0E1220}
+.ikili figure{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#0D261C}
 .ikili img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ikili figcaption{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:999px;background:#fff;color:var(--lac);font-size:12px;font-weight:700}
 .ikili-w .ok{position:absolute;left:50%;top:50%;z-index:1;display:grid;place-items:center;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:var(--v);box-shadow:0 0 0 4px #fff}
@@ -81,10 +83,10 @@ CSS = r"""
 .tav img.on{opacity:1;transform:none}
 .tav-ad{display:block;margin-top:12px;text-align:center;font-weight:700;color:#fff}
 .dk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
-.dk button{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:48px;padding:8px 4px;border:0;border-radius:14px;background:rgba(255,255,255,.06);color:#E6E8F2;font:600 12px var(--fg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.dk button{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:48px;padding:8px 4px;border:0;border-radius:14px;background:rgba(255,255,255,.06);color:#F4E7C8;font:600 12px var(--fg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
 .dk button img{width:46px;height:46px;border-radius:50%;object-fit:cover}
 .dk button.on{box-shadow:inset 0 0 0 2px var(--v);color:#fff}
-.koyu .alt-not{margin:14px 0 0;font-size:12px;color:#A9AEC6;text-align:center}
+.koyu .alt-not{margin:14px 0 0;font-size:12px;color:#C9D6CE;text-align:center}
 /* 3 adım */
 .adm{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px}
 .adm figure{flex:0 0 240px;margin:0;scroll-snap-align:start;border-radius:18px;background:#F6F7F9;overflow:hidden}
@@ -93,9 +95,12 @@ CSS = r"""
 .adm figcaption b{display:flex;align-items:center;gap:8px;margin-bottom:2px;font-size:16px;color:var(--lac)}
 .adm figcaption b i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-size:12px}
 .qr{margin:12px 16px 0;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac);font-size:13px}
-.pg{--lac:#123A2A;--kirmizi:#B8342A}
+.pg{--lac:#123A2A;--kirmizi:#8E2A22}
+.pg .otuz{background:#F6E3D6;color:#123A2A}.pg .otuz b,.pg .otuz>span:last-child span{color:#123A2A}
+.pg .mesaj-bol img{border-radius:14px;box-shadow:0 0 0 6px #fff,0 0 0 7px #EAD6C8}
 .pg .koyu{background:radial-gradient(120% 70% at 50% 0%,#1B4433 0%,#0D261C 70%)}
-.pg .h2 .n,.bas-y .n{color:var(--v)}
+.pg .h2 .n,.pg .bas-y .n{color:var(--v2)}.pg .koyu .n,.pg footer .n,.pg .yak .n{color:var(--v)}
+.pg .al h1{color:#123A2A;text-shadow:0 1px 0 #E9C98E}
 /* Ağacı yak: oda karanlık; dokununca ışık alttan (lambadan) tavana yayılır. 2 sn kapalı → 7 sn açık; dokununca durur */
 .yak{position:relative;border-radius:24px;overflow:hidden;background:#05100B;color:#fff}
 .yak-g{position:relative;height:470px;overflow:hidden}
@@ -135,21 +140,45 @@ CSS = r"""
 .hd-k svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .hd-k b{display:block;margin-top:auto;font-family:var(--fb);font-weight:400;font-size:24px;line-height:1.05}
 .hd-k span{display:block;margin-top:6px;font-size:13px;line-height:1.4;opacity:.88}
-.hd-k.y{background:#163828}.hd-k.k{background:#8E2A22}.hd-k.a{background:#E9D3A4;color:#3B2A0E}.hd-k.l{background:#1A2142}
+.hd-k.y{background:#163828}.hd-k.k{background:#8E2A22}.hd-k.a{background:#E9D3A4;color:#3B2A0E}.hd-k.l{background:#9A6A3A}
 /* Takvim yaprağı: yılbaşından önce teslim için son sipariş günü (gerçek hesap) */
 .tkv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center}
 .tkv-y{position:relative;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center;transform:rotate(-3deg)}
 .tkv-y b{display:block;padding:6px 0;background:var(--kirmizi);color:#fff;font-size:13px;letter-spacing:.08em}
 .tkv-y strong{display:block;padding:6px 0 2px;font-family:var(--fb);font-weight:400;font-size:62px;line-height:1;color:var(--lac)}
-.tkv-y small{display:block;padding-bottom:10px;font-size:12px;color:#5C6078}
+.tkv-y small{display:block;padding-bottom:10px;font-size:12px;color:#7A5A48}
 .tkv-y::before{content:"";position:absolute;left:0;right:0;top:30px;height:6px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 0 0/12px 6px}
 .tkv-m{text-align:left}.tkv-m b{display:block;font-family:var(--fb);font-weight:400;font-size:22px;line-height:1.1;color:#fff}
 .tkv-m span{display:block;margin-top:6px;font-size:14px;color:#D9E3DC}
 .tkv-m .btn1{width:100%;margin-top:14px;background:var(--v);justify-content:center}.pg .tkv-m .btn1,.pg .tkv-m .btn1 .b-ic>span{color:#14231B}.pg .tkv-m .btn1 svg{stroke:#14231B}
+/* 4. tur: kutunun dünyası */
+.pg .serit{background:#123A2A;color:#F4E7C8}.pg .serit .sy b{background:#1F4A33}
+.pg .duyuru.ua-s>.gk{background:#0D261C;color:#E9DDBF}.pg .duyuru.ua-s>.gk b{color:#F3C978}.pg header.ua-b>.gk{background:#123A2A}
+.dizi .hale{fill:#F3C978;opacity:.22}
+.pg .koyu,.pg footer.alt-bilgi{background:radial-gradient(120% 70% at 50% 0%,#1F4A33 0%,#0D261C 72%)}
+/* Işık dizisi ayracı: sarkan tel + yanıp sönen ampuller (yalnız opacity) */
+.dizi{position:relative;height:34px;margin:6px 0 -6px;overflow:hidden}
+.dizi svg{position:absolute;left:0;top:0;width:100%;height:34px}
+.dizi .tel{fill:none;stroke:#2C5A41;stroke-width:1.4}
+.dizi .amp{animation:amp 2.4s ease-in-out infinite}
+.dizi .amp:nth-child(4n){animation-delay:.8s}.dizi .amp:nth-child(4n+2){animation-delay:1.6s}
+@keyframes amp{0%,100%{opacity:1}50%{opacity:.35}}
+/* Galeri göstergesi: minik ağaçlar; geçilenler altın yanar */
+.pg .d-iz{gap:7px}
+.pg .d-iz i{width:11px;height:14px;border-radius:0;background:rgba(255,253,249,.45);clip-path:polygon(50% 0,72% 34%,62% 34%,86% 68%,70% 68%,100% 100%,0 100%,30% 68%,14% 68%,38% 34%,28% 34%)}
+.pg .d-iz .lit{background:#F3C978}
+.pg .d-iz .on{transform:scale(1.25);transform-origin:50% 100%}
+/* Başlık noktaları altın yıldız; kartlar kutunun pudra tonunda */
+.pg .al .ozler .oz{background:#F6E3D6}
+.pg .pk-k{background:#FFF8F3}
+.pg .kl,.pg .adm figure{background:#F6E3D6}
+.kut{background:#F3DCCD;box-shadow:0 0 0 6px #fff,0 0 0 7px #EAD6C8}
+.yil-c{background:linear-gradient(90deg,#123A2A,#1F4A33)}
+.pg .yb-k{background:#123A2A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath d='M0 4q10 8 20 0t20 0' fill='none' stroke='%232C5A41'/%3E%3Ccircle cx='10' cy='8' r='2' fill='%23F3C978'/%3E%3Ccircle cx='30' cy='8' r='2' fill='%23E06A55'/%3E%3C/svg%3E") top/40px 20px repeat-x;padding-top:18px}
 /* 3. tur (eleştirmen 6,5 → ilk ekran): satın alma kutusu yeni dile bağlanır */
 .pg .yb-k{background:#123A2A;box-shadow:none;color:#fff}.pg .yb-k .gk{background:var(--v);color:#123A2A}.pg .yb-k span.t{color:#C9D6CE}
 .pg .al .ozler{gap:6px;border:0;box-shadow:none;background:none}
-.pg .al .ozler .oz{border:0;border-radius:14px;background:#F4EFE4;box-shadow:none}
+.pg .al .ozler .oz{border:0;border-radius:14px;background:#F6E3D6;box-shadow:none}
 .yil-c{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;padding:4px 10px;border-radius:999px;background:#123A2A;color:var(--v);font-size:12px;font-weight:700}
 .yil-c svg{width:14px;height:14px;fill:var(--v)}
 .pg .yapis{background:#0D261C}
@@ -173,7 +202,7 @@ def ozler():
     yigin = '<span class="dsk-y" aria-hidden="true">' + ''.join('<img src="%s" alt="">' % I(k) for _, k in DISK[:3]) + '</span>'
     return ('<div class="ozler dort">'
             '<div class="oz">' + O.mini(AGAC_IK) + '<b>Kendin yap</b><span class="t">Çubukları kabloya sar, ağacı süsle.</span></div>'
-            '<div class="oz"><span class="gz">' + yigin + '</span><b>Tavana yılbaşı</b><span class="t">Desen diski değişir, tavan değişir.</span></div>'
+            '<div class="oz">' + O.mini(O.AY_IK) + '<b>Tavana yılbaşı</b><span class="t">Desen diski değişir, tavan değişir.</span></div>'
             '<div class="oz">' + O.mini(USB_IK) + '<b>USB ile çalışır</b><span class="t">Şarj adaptörü, powerbank ya da bilgisayar.</span></div>'
             '<div class="oz">' + O.mini(HEDIYE_IK) + '<b>Hediye kutusunda</b><span class="t">Açması da kurması da hediye.</span></div></div>')
 
@@ -324,8 +353,11 @@ TAKVIM = """
 """
 
 
+DIZI = '''<div class="dizi" aria-hidden="true"><svg viewBox="0 0 390 34" preserveAspectRatio="none"><path class="tel" d="M0 6 Q48 26 97 8 T195 8 T292 8 T390 6"></path><circle class="hale" cx="24" cy="15" r="8"></circle><circle class="amp" cx="24" cy="15" r="4" fill="#F3C978"></circle><circle class="hale" cx="58" cy="19" r="8"></circle><circle class="amp" cx="58" cy="19" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="97" cy="10" r="8"></circle><circle class="amp" cx="97" cy="10" r="4" fill="#F3C978"></circle><circle class="hale" cx="136" cy="16" r="8"></circle><circle class="amp" cx="136" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="175" cy="11" r="8"></circle><circle class="amp" cx="175" cy="11" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="214" cy="11" r="8"></circle><circle class="amp" cx="214" cy="11" r="4" fill="#F3C978"></circle><circle class="hale" cx="253" cy="16" r="8"></circle><circle class="amp" cx="253" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="292" cy="10" r="8"></circle><circle class="amp" cx="292" cy="10" r="4" fill="#FFE2A8"></circle><circle class="hale" cx="331" cy="16" r="8"></circle><circle class="amp" cx="331" cy="16" r="4" fill="#F3C978"></circle><circle class="hale" cx="366" cy="12" r="8"></circle><circle class="amp" cx="366" cy="12" r="4" fill="#F3C978"></circle></svg></div>'''
+
+
 def govde():
-    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YAK + DERGI + kutuda() + gece() + HEDIYE + TAKVIM + gerisi() + '</div>\n')
+    h = ('<div class="pg">\n  ' + U.SERIT + hero() + al() + YAK + DIZI + DERGI + kutuda() + gece() + HEDIYE + TAKVIM + gerisi() + '</div>\n')
     return re.sub(r'@@([\w-]+)@@', lambda m: I(m.group(1)), h)
 
 
