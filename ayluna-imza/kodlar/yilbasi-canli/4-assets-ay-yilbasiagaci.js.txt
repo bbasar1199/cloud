@@ -31,7 +31,7 @@ class Component extends DCLogic {
   renderVals() {
     var self = this, S = this.state, B = '/_blob/';
     function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
-    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : [["/_blob/403192141ff415de19d7f08114a1bd74", "Yılbaşı Ağacı Projektör Lamba görseli 1", "50% 50%"], ["/_blob/487093d37ccb10be7cb78ab98f19dc84", "Yılbaşı Ağacı Projektör Lamba görseli 2", "50% 50%"], ["/_blob/d059329bb1316bb397f9b92644998065", "Yılbaşı Ağacı Projektör Lamba görseli 3", "50% 50%"], ["/_blob/1e70f03680e23baed50aea084c92b03e", "Yılbaşı Ağacı Projektör Lamba görseli 4", "50% 50%"]];
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : [["/_blob/403192141ff415de19d7f08114a1bd74", "Yılbaşı Projektör görseli 1", "50% 50%"], ["/_blob/487093d37ccb10be7cb78ab98f19dc84", "Yılbaşı Projektör görseli 2", "50% 50%"], ["/_blob/d059329bb1316bb397f9b92644998065", "Yılbaşı Projektör görseli 3", "50% 50%"], ["/_blob/1e70f03680e23baed50aea084c92b03e", "Yılbaşı Projektör görseli 4", "50% 50%"]];
     self.galN = GAL.length;
     var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
     function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
@@ -46,7 +46,7 @@ class Component extends DCLogic {
     var DISK = [["Klasik yılbaşı", "/_blob/0143de9991a1bc82ff5a2fcafd262ce8"], ["Yeni yıl mesajı", "/_blob/b9ca1f3036b0d671cec2c053a491141c"], ["Kar taneleri", "/_blob/29f34f185f858518e19adeb0a09ce92e"], ["Ren geyikleri", "/_blob/a67e07583769ee524096661940ef6093"], ["Kardan adam", "/_blob/d54bbc54da481894b03a90633027d408"], ["Çanlar", "/_blob/b6e597a7824d07a8917cc638f657ba46"]];
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
-    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Ağacı videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Ağacı videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
+    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Projektör videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Projektör videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
       { t: 'Kutudan çıkanlar', al: 'Kutudan çıkanlar', k: 'Kutu açılışı', src: B + '4d01f14032ee55720b5baa41900bfc8b', pos: '50% 40%', gercek: false, kapak: true },
       { t: 'Ağacı sarmak', al: 'Ağacı sarmak', k: 'Kurulum', src: B + 'f514229183a4a0e7a2725a366d5280b1', pos: '50% 50%', gercek: false, kapak: true },
       { t: 'Abajuru giydirmek', al: 'Abajuru giydirmek', k: 'Süsleme', src: B + '08a867b1ecb484b2ebd40b863bde844d', pos: '50% 50%', gercek: false, kapak: true },

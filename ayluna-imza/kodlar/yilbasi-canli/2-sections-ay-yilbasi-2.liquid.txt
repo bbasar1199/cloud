@@ -2,7 +2,7 @@
   araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız yilbasi-agaci-projektor-lamba ürününde çizilir. {%- endcomment -%}
 {%- if product.handle == 'yilbasi-agaci-projektor-lamba' -%}
 {{ 'ay-yilbasiagaci.css' | asset_url | stylesheet_tag }}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600;700&amp;family=Young+Serif&amp;display=swap">
 {%- for block in section.blocks -%}{%- case block.type -%}
   {%- when 'p07' -%}<div class="ay-tb" {{ block.shopify_attributes }}><script type="application/json" class="ay-gorsel-esle">{"_":0{%- if block.settings.df5142291 -%},"f514229183a4a0e7a2725a366d5280b1":{{ block.settings.df5142291 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.d08a867b1 -%},"08a867b1ecb484b2ebd40b863bde844d":{{ block.settings.d08a867b1 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.de99d81de -%},"e99d81de13ab7ed59f13efed5ebaced2":{{ block.settings.de99d81de | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.dce7dadd8 -%},"ce7dadd85b37a8089d0df5ce000d6f54":{{ block.settings.dce7dadd8 | image_url: width: 1600 | json }}{%- endif -%}}</script><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
 <section class="bolum px" id="nasil">
@@ -72,7 +72,7 @@
   {%- when 'p15' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
 <div class="yapis">
     <span class="karo"><img src="{% endraw %}{%- if block.settings.r393f9fd9 -%}{{ block.settings.r393f9fd9 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0"></span>
-    <span class="y-yazi"><b>{% endraw %}{{ block.settings.yee96b7d3 | escape }}{% raw %}</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <span class="y-yazi"><b>{% endraw %}{{ block.settings.ye0b5f42d | escape }}{% raw %}</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
     <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">{% endraw %}{{ block.settings.yafd94a9a | escape }}{% raw %}</button>
   </div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
@@ -589,9 +589,9 @@
         },
         {
           "type": "text",
-          "id": "yee96b7d3",
-          "label": "Yazı: Yılbaşı Ağacı",
-          "default": "Yılbaşı Ağacı"
+          "id": "ye0b5f42d",
+          "label": "Yazı: Yılbaşı Projektör",
+          "default": "Yılbaşı Projektör"
         },
         {
           "type": "text",
@@ -602,6 +602,11 @@
         {
           "type": "header",
           "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "yee96b7d3",
+          "label": "Eski ayar yee96b7d3 (kullanılmıyor)"
         },
         {
           "type": "image_picker",

@@ -18,7 +18,7 @@ CANVAS = os.path.join(HERE, '..', '..', 'canvas')
 B = '/_blob/'
 I = OS.I
 H = 'yilbasi-agaci-projektor-lamba'
-AD = 'Yılbaşı Ağacı Projektör Lamba'
+AD = 'Yılbaşı Projektör'  # kullanıcı, 29 Eki: "ürün ismi sadece Yılbaşı Projektör"
 P1 = 999.0   # GEÇİCİ: ürün Shopify'da yok (28 Eki); canlıda fiyat Shopify'dan gelir (ayluna.js)
 C1 = None
 STOK = 12  # kullanıcı, 29 Eki: "güvenli ödemede adet olarak 12 yaz"; Shopify'da ayluna.stok_kurdele doluysa o geçer
@@ -27,8 +27,8 @@ STOK = 12  # kullanıcı, 29 Eki: "güvenli ödemede adet olarak 12 yaz"; Shopif
 # 4. tur (28 Eki, kullanıcı: "hem yılbaşı hem ürünle mükemmel uyumlu"): renkler ürünün kendi kutusundan (pudra pembesi zemin, altın yaldız,
 # çam yeşili, kırmızı kozalak); ışık dizisi ayraçları (kutudaki "A little light, a lot of joy" ışıkları), galeri göstergesi minik ağaçlar.
 TEMA = dict(v='#E3B65A', v2='#8C5E10', zemin='#FFFFFF', cizgi='#ECE7E1', koyu='#0D261C', koyu2='#173828',
-            fb='"Young Serif"', fg='"Onest"', bk=400, bls='-.02em',
-            font='family=Young+Serif&family=Onest:wght@400;500;600;700;800')
+            fb='"Bricolage Grotesque"', fg='"Figtree"', bk=700, bls='-.02em',  # kullanıcı, 29 Eki: font A (Galaxy USB ile aynı)
+            font='family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700')
 
 # Kutu fotoğrafındaki parçalar (montaj kartındaki "Kit contents" + fotoğraf); konum % (sol, üst)
 PARCA = [('Hediye kutusu', 'Yılbaşı baskılı, kağıt dolgulu.', 52, 18), ('Altın abajur', 'Desenli çıkartmayı giydirirsin.', 36, 43),
@@ -360,7 +360,7 @@ def ozler():
          ('kutu', kutu, 'Hediye kutusunda', 'Baskılı kutusu ve süsleriyle gelir.', '')]
     kart = ''.join(('<a class="yo-k" href="#diskler">%s</a>' if a == 'disk' else '<div class="yo-k">%s</div>')
                    % ('<span class="yg yg-%s" aria-hidden="true">%s</span><span><b>%s</b><span class="t">%s%s</span></span>' % (a, g, b, t, u)) for a, g, b, t, u in k)
-    return '<p class="ozb">Yılbaşı ağacının özellikleri</p><div class="yo">' + kart + '</div>'
+    return '<p class="ozb">Yılbaşı Projektör özellikleri</p><div class="yo">' + kart + '</div>'
 
 
 def hero():
@@ -389,7 +389,6 @@ def al():
   <section class="al" id="siparis">
     <h1 class="bas-y">%s</h1>
     <p class="fiyat-satir"><span class="sr-m">{{fySr}}</span><b class="fy-yeni" aria-hidden="true">{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{fyC}}</s><span class="rozet fy-rozet">%%{{fyPct}} indirim</span></span></sc-if></p>
-    <p class="alt-b">Kendin süsle, USB’ye tak; tavan yılbaşı olsun.</p>
 """ + dsr + """    %s
     <div class="pk-bas"><span>Paket</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
@@ -470,11 +469,11 @@ def gerisi():
     assert Y0 in g
     i = g.index(Y0); j = g.index('</section>', i)
     g = g[:i] + '<div class="px" id="yorumlar" style="padding-top: 44px; padding-bottom: 44px">' + g[i + len(Y0):j] + '</div>' + g[j + len('</section>'):]
-    g = g.replace('Bu gece duvarında <br>ay olsun', 'Bu yılbaşı<br>tavana bak').replace('@@af-ay-yakin@@', '@@yb-kare@@').replace('<b>AyFeneri</b>', '<b>Yılbaşı Ağacı</b>')
+    g = g.replace('Bu gece duvarında <br>ay olsun', 'Bu yılbaşı<br>tavana bak').replace('@@af-ay-yakin@@', '@@yb-kare@@').replace('<b>AyFeneri</b>', '<b>Yılbaşı Projektör</b>')
     g = g.replace('<small style="color: var(--koyu)">Kartla %5 indirim dahil</small>', '')
-    Y = '<b>Yılbaşı Ağacı</b><span>{{adetName}}</span>'
+    Y = '<b>Yılbaşı Projektör</b><span>{{adetName}}</span>'
     assert Y in g
-    g = g.replace(Y, '<b>Yılbaşı Ağacı</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span>')
+    g = g.replace(Y, '<b>Yılbaşı Projektör</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span>')
     # 5. tur: ikonlu güven kartları yerine ikonsuz liste (kullanıcı: "emoji benefit kısımlarını beğenmedim")
     assert U.GUVEN in g
     g = g.replace(U.GUVEN, '<ul class="gv-l"><li><b>Ücretsiz kargo</b><span>1 iş gününde kargoda, adım adım takip.</span></li>'
@@ -482,7 +481,7 @@ def gerisi():
     M1 = 'Sizden gelen<br>mesajlar'; M2 = 'LunaDream siparişlerinden; müşterilerimizin izniyle paylaşılan gerçek sohbetler.'
     assert M1 in g and M2 in g
     g = g.replace(M1, 'Ayluna’dan alanlar<br>yazıyor').replace(M2, 'Diğer lambalarımızı alan müşterilerimizden, izinleriyle.')
-    assert 'yb-kare' in g and 'Yılbaşı Ağacı' in g
+    assert 'yb-kare' in g and 'Yılbaşı Projektör' in g
     return g
 
 
@@ -620,7 +619,7 @@ def js():
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
     var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
-    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Ağacı videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Ağacı videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
+    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Projektör videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Projektör videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
       { t: 'Kutudan çıkanlar', al: 'Kutudan çıkanlar', k: 'Kutu açılışı', src: B + '""" + OS.BL['yb-kutu'] + """', pos: '50% 40%', gercek: false, kapak: true },
       { t: 'Ağacı sarmak', al: 'Ağacı sarmak', k: 'Kurulum', src: B + '""" + OS.BL['yb-adim1'] + """', pos: '50% 50%', gercek: false, kapak: true },
       { t: 'Abajuru giydirmek', al: 'Abajuru giydirmek', k: 'Süsleme', src: B + '""" + OS.BL['yb-adim3'] + """', pos: '50% 50%', gercek: false, kapak: true },
@@ -693,6 +692,7 @@ DOSYA = 'YilbasiAgaci.dc.html'
 
 def sayfa():
     css = O.tema_css(dict(TEMA, ek='')) + U.CSS + O.CSS + '\n' + OS.CSS + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('#1F2A24', '#B3362B', '#B3362B', '1.2s') + UST_CSS + CSS2
+    css = css.replace('font-family:var(--fb);font-weight:400', 'font-family:var(--fb);font-weight:700')  # Bricolage başlıklar ince kalmasın (29 Eki)
     return U.head(AD, css, TEMA['font']) + govde()
 
 

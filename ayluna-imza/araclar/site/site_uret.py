@@ -48,7 +48,7 @@ ICERIK = dict((x['handle'], x) for x in json.load(open(os.path.join(KOK, 'ogrenm
 BA = json.load(open(os.path.join(CANVAS, 'ana', 'bloblar.json')))
 ADLAR = {'lunadream-gece-lambasi': ['LunaDream Gece Lambası', 'LunaDream'], 'galayx-usb-projektor': ['Galaxy USB Projektör', 'Galaxy USB'],
          'lamba': ['Ayluna AyFeneri', 'AyFeneri'], 'ayluna-galaksi-night-projektor': ['Ayluna Galaksi Night Projektör', 'Galaksi Night Projektör', 'Galaksi Night'],
-         'galaksiambiyanisigi': ['Galaksi Ambiyans Işığı'], 'yilbasi-agaci-projektor-lamba': ['Yılbaşı Ağacı Projektör Lamba', 'Yılbaşı Ağacı Projektör', 'Yılbaşı Ağacı'],
+         'galaksiambiyanisigi': ['Galaksi Ambiyans Işığı'], 'yilbasi-agaci-projektor-lamba': ['Yılbaşı Projektör', 'Yılbaşı Ağacı Projektör Lamba', 'Yılbaşı Ağacı Projektör', 'Yılbaşı Ağacı'],
          'ayluna-cocuk-gece-feneri': ['Ayluna Çocuk Gece Feneri', 'Çocuk Gece Feneri'],
          'ask-saati': ['Ayluna Kum Saati Lamba', 'Kum Saati Lamba', 'Kum Saati'], 'yildiz-isigi-nemlendirici': ['Yıldız Işığı Nemlendirici'],
          'astronot-oda-nemlendirici-aroma-difuzor': ['Astronot Oda Nemlendirici', 'Astronot Nemlendirici'], 'sunset-lamba': ['Sunset Lamba'],

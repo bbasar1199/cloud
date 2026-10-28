@@ -1,6 +1,6 @@
 
 body{margin:0;background:#F2F4F8}
-.pg{--v:#E3B65A;--v2:#8C5E10;--zemin:#FFFFFF;--cizgi:#ECE7E1;--koyu:#0D261C;--koyu2:#173828;--fb:"Young Serif",ui-sans-serif,system-ui,sans-serif;--fg:"Onest",ui-sans-serif,system-ui,sans-serif;--bk:400;--bls:-.02em}
+.pg{--v:#E3B65A;--v2:#8C5E10;--zemin:#FFFFFF;--cizgi:#ECE7E1;--koyu:#0D261C;--koyu2:#173828;--fb:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--fg:"Figtree",ui-sans-serif,system-ui,sans-serif;--bk:700;--bls:-.02em}
 
 
 .pg{--lac:#1A2142;--koyu:#141A36;--koyu2:#1F2850;--yuzey:#FFFFFF;--soluk:#5C6078;--acik:#B9BED6;--ease:cubic-bezier(.2,.7,.2,1);
@@ -860,13 +860,13 @@ a.yo-k:active{transform:scale(.985)}
 .vd figcaption{position:absolute;left:14px;right:14px;bottom:12px;color:#fff;font-size:14px;font-weight:600}
 @media (prefers-reduced-motion:reduce){.yg *{animation:none!important;opacity:1}}
 
-.gv-l{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid #ECE7E1}.gv-l li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #ECE7E1}.gv-l b{font-family:var(--fb);font-weight:400;font-size:17px;color:#123A2A}.gv-l span{font-size:13px;color:#6B5246}
+.gv-l{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid #ECE7E1}.gv-l li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #ECE7E1}.gv-l b{font-family:var(--fb);font-weight:700;font-size:17px;color:#123A2A}.gv-l span{font-size:13px;color:#6B5246}
 /* Fotoğraflı üç kart (ikon yok) */
 .fk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 0}
 .fk figure{margin:0;border-radius:16px;overflow:hidden;background:#F6F3EE}
 .fk img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover}
 .fk figcaption{padding:8px 10px 10px}
-.fk b{display:block;font-family:var(--fb);font-weight:400;font-size:15px;line-height:1.1;color:#123A2A}
+.fk b{display:block;font-family:var(--fb);font-weight:700;font-size:15px;line-height:1.1;color:#123A2A}
 .fk span{display:block;margin-top:3px;font-size:12px;line-height:1.35;color:#6B5246}
 /* Dönen güven şeridi */
 .ser{margin:12px 0 0;font-size:13px;font-weight:600;color:#123A2A}
@@ -914,7 +914,7 @@ a.yo-k:active{transform:scale(.985)}
 .dg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .6s var(--ease),transform 2.6s var(--ease)}
 .dg img.on{opacity:.92;transform:none}
 .dg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,24,17,.92) 0%,rgba(8,24,17,.15) 55%,rgba(8,24,17,0) 70%);pointer-events:none}
-.dg-k{position:absolute;left:16px;right:16px;bottom:72px;z-index:1;margin:0;font-family:var(--fb);font-weight:400;font-size:96px;line-height:.9;letter-spacing:-.04em;color:#fff}
+.dg-k{position:absolute;left:16px;right:16px;bottom:72px;z-index:1;margin:0;font-family:var(--fb);font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.04em;color:#fff}
 .dg-k span{display:inline-block;animation:dgk .55s var(--ease) both}
 .dg-k em{font-style:normal;color:var(--v)}
 @keyframes dgk{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -929,17 +929,17 @@ a.yo-k:active{transform:scale(.985)}
 .hd{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 4px}
 .hd-k{flex:0 0 220px;scroll-snap-align:start;padding:18px 16px;border-radius:20px;color:#fff;min-height:200px;display:flex;flex-direction:column}
 .hd-k svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.hd-k b{display:block;margin-top:auto;font-family:var(--fb);font-weight:400;font-size:24px;line-height:1.05}
+.hd-k b{display:block;margin-top:auto;font-family:var(--fb);font-weight:700;font-size:24px;line-height:1.05}
 .hd-k span{display:block;margin-top:6px;font-size:13px;line-height:1.4;opacity:.88}
 .hd-k.y{background:#163828}.hd-k.k{background:#8E2A22}.hd-k.a{background:#E9D3A4;color:#3B2A0E}.hd-k.l{background:#9A6A3A}
 /* Takvim yaprağı: yılbaşından önce teslim için son sipariş günü (gerçek hesap) */
 .tkv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center}
 .tkv-y{position:relative;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center;transform:rotate(-3deg)}
 .tkv-y b{display:block;padding:6px 0;background:var(--kirmizi);color:#fff;font-size:13px;letter-spacing:.08em}
-.tkv-y strong{display:block;padding:6px 0 2px;font-family:var(--fb);font-weight:400;font-size:62px;line-height:1;color:var(--lac)}
+.tkv-y strong{display:block;padding:6px 0 2px;font-family:var(--fb);font-weight:700;font-size:62px;line-height:1;color:var(--lac)}
 .tkv-y small{display:block;padding-bottom:10px;font-size:12px;color:#7A5A48}
 .tkv-y::before{content:"";position:absolute;left:0;right:0;top:30px;height:6px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 0 0/12px 6px}
-.tkv-m{text-align:left}.tkv-m b{display:block;font-family:var(--fb);font-weight:400;font-size:22px;line-height:1.1;color:#fff}
+.tkv-m{text-align:left}.tkv-m b{display:block;font-family:var(--fb);font-weight:700;font-size:22px;line-height:1.1;color:#fff}
 .tkv-m span{display:block;margin-top:6px;font-size:14px;color:#D9E3DC}
 .tkv-m .btn1{width:100%;margin-top:14px;background:var(--v);justify-content:center}.pg .tkv-m .btn1,.pg .tkv-m .btn1 .b-ic>span{color:#14231B}.pg .tkv-m .btn1 svg{stroke:#14231B}
 /* 4. tur: kutunun dünyası */
@@ -1108,7 +1108,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
 .ls-c{position:absolute;left:12px;top:12px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;background:rgba(255,255,255,.94);color:#123A2A;font-size:12px;font-weight:700}
 .ls-c img{width:22px;height:22px;border-radius:50%;object-fit:cover}
 .ls-y{position:absolute;left:16px;right:16px;bottom:16px;z-index:1;color:#fff}
-.ls-y b{display:block;font-family:var(--fb);font-weight:400;font-size:26px;line-height:1.05}
+.ls-y b{display:block;font-family:var(--fb);font-weight:700;font-size:26px;line-height:1.05}
 .ls-y span{display:block;margin-top:6px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.9)}
 .ls-al{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 16px 0;padding:12px 12px 12px 16px;border-radius:16px;background:#F6F3EE}
 .ls-al p{margin:0;font-size:14px;font-weight:600;color:#123A2A}

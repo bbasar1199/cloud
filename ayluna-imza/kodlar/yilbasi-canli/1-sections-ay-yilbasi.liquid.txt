@@ -2,22 +2,21 @@
   araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız yilbasi-agaci-projektor-lamba ürününde çizilir. {%- endcomment -%}
 {%- if product.handle == 'yilbasi-agaci-projektor-lamba' -%}
 {{ 'ay-yilbasiagaci.css' | asset_url | stylesheet_tag }}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600;700&amp;family=Young+Serif&amp;display=swap">
 {%- for block in section.blocks -%}{%- case block.type -%}
   {%- when 'p01' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<div class="duyuru ua-s rd" role="timer" aria-label="{{cdAria}}"><span>{% endraw %}{{ block.settings.ycb5cd8e3 | escape }}{% raw %}</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b><span class="gk" aria-hidden="true"><span>{% endraw %}{{ block.settings.ycb5cd8e3 | escape }}{% raw %}</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b></span></div><header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>{% endraw %}{{ block.settings.y17921f90 | escape }}{% raw %}</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>{% endraw %}{{ block.settings.y17921f90 | escape }}{% raw %}</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p02' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Galeri: Shopify'da ürünün kendi görselleri; kaydırılır, 5 sn'de kendiliğinden geçer -->
-<div class="urun-ust"><section class="hero kare" aria-label="Yılbaşı Ağacı Projektör Lamba fotoğrafları">
+<div class="urun-ust"><section class="hero kare" aria-label="Yılbaşı Projektör fotoğrafları">
     <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>
     <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
   </section>
 
   <section class="al" id="siparis">
-    <h1 class="bas-y">{% endraw %}{{ block.settings.ycaade6ed | escape }}{% raw %}</h1>
+    <h1 class="bas-y">{% endraw %}{{ block.settings.ye0b5f42d | escape }}{% raw %}</h1>
     <p class="fiyat-satir"><span class="sr-m">{{fySr}}</span><b class="fy-yeni" aria-hidden="true">{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{fyC}}</s><span class="rozet fy-rozet">%{{fyPct}} indirim</span></span></sc-if></p>
-    <p class="alt-b">{% endraw %}{{ block.settings.yac5081da | escape }}{% raw %}</p>
     <p class="dun dsr"><span class="dsr-sr">{{tkSr}}</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)"><span class="{{tkC0}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span><span class="{{tkC1}}"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span><b>{% endraw %}{{ block.settings.y262c2d52 | escape }}{% raw %}</b> ile kapına</span></span><span class="{{tkC2}}"><svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path></svg><span><b>{% endraw %}{{ block.settings.y767ad9c2 | escape }}{% raw %}</b> iade hakkı</span></span><span class="{{tkC3}}"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M3 7.5h18v3H3zM12 7.5V20M12 7.5c-1.6-3.4-5.6-4-4.8-.6M12 7.5c1.6-3.4 5.6-4 4.8-.6"></path></svg><span><b>{% endraw %}{{ block.settings.y581647a1 | escape }}{% raw %}</b>, süsleriyle</span></span><span class="{{tkC4}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span></span></span></p>
-    <p class="ozb">{% endraw %}{{ block.settings.y9d0835d9 | escape }}{% raw %}</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>{% endraw %}{{ block.settings.ycfe7d813 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y021b1b06 | escape }}{% raw %}</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="{% endraw %}{%- if block.settings.r9010bb17 -%}{{ block.settings.r9010bb17 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.r8468b87b -%}{{ block.settings.r8468b87b | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt=""></span></span><span><b>{% endraw %}{{ block.settings.yaf59f5de | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y5d75fd97 | escape }}{% raw %} {% endraw %}{% raw %}<u>{% endraw %}{{ block.settings.y4a56fd6e | escape }}{% raw %}</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>{% endraw %}{{ block.settings.y210e938d | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y375520bf | escape }}{% raw %}</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>{% endraw %}{{ block.settings.y581647a1 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.yebf0dcdc | escape }}{% raw %}</span></span></div></div>
+    <p class="ozb">{% endraw %}{{ block.settings.y5269ae5e | escape }}{% raw %}</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>{% endraw %}{{ block.settings.ycfe7d813 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y021b1b06 | escape }}{% raw %}</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="{% endraw %}{%- if block.settings.r9010bb17 -%}{{ block.settings.r9010bb17 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.r8468b87b -%}{{ block.settings.r8468b87b | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt=""></span></span><span><b>{% endraw %}{{ block.settings.yaf59f5de | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y5d75fd97 | escape }}{% raw %} {% endraw %}{% raw %}<u>{% endraw %}{{ block.settings.y4a56fd6e | escape }}{% raw %}</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>{% endraw %}{{ block.settings.y210e938d | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y375520bf | escape }}{% raw %}</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>{% endraw %}{{ block.settings.y581647a1 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.yebf0dcdc | escape }}{% raw %}</span></span></div></div>
     <div class="pk-bas"><span>{% endraw %}{{ block.settings.y2b0a1a8d | escape }}{% raw %}</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
       <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.y81517dc0 | escape }}{% raw %}</span></sc-if><span class="pk-g"><img src="{% endraw %}{%- if block.settings.r393f9fd9 -%}{{ block.settings.r393f9fd9 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span><span class="nokta"><i></i></span></button>
@@ -114,15 +113,9 @@
       "settings": [
         {
           "type": "text",
-          "id": "ycaade6ed",
-          "label": "Yazı: Yılbaşı Ağacı Projektör Lamba",
-          "default": "Yılbaşı Ağacı Projektör Lamba"
-        },
-        {
-          "type": "text",
-          "id": "yac5081da",
-          "label": "Yazı: Kendin süsle, USB’ye tak; tavan yılbaşı olsun",
-          "default": "Kendin süsle, USB’ye tak; tavan yılbaşı olsun."
+          "id": "ye0b5f42d",
+          "label": "Yazı: Yılbaşı Projektör",
+          "default": "Yılbaşı Projektör"
         },
         {
           "type": "text",
@@ -144,9 +137,9 @@
         },
         {
           "type": "text",
-          "id": "y9d0835d9",
-          "label": "Yazı: Yılbaşı ağacının özellikleri",
-          "default": "Yılbaşı ağacının özellikleri"
+          "id": "y5269ae5e",
+          "label": "Yazı: Yılbaşı Projektör özellikleri",
+          "default": "Yılbaşı Projektör özellikleri"
         },
         {
           "type": "text",
@@ -303,6 +296,21 @@
         {
           "type": "header",
           "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "ycaade6ed",
+          "label": "Eski ayar ycaade6ed (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "yac5081da",
+          "label": "Eski ayar yac5081da (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y9d0835d9",
+          "label": "Eski ayar y9d0835d9 (kullanılmıyor)"
         },
         {
           "type": "text",
@@ -591,6 +599,41 @@
           "type": "text",
           "id": "m1",
           "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y93ac0193",
+          "label": "Eski ayar y93ac0193 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y00e290a9",
+          "label": "Eski ayar y00e290a9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y3d03a4f0",
+          "label": "Eski ayar y3d03a4f0 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y12dc1c63",
+          "label": "Eski ayar y12dc1c63 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "y7aca5ec6",
+          "label": "Eski ayar y7aca5ec6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "yc2aaed03",
+          "label": "Eski ayar yc2aaed03 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "yaed4ed9a",
+          "label": "Eski ayar yaed4ed9a (kullanılmıyor)"
         }
       ]
     },
