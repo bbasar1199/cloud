@@ -189,7 +189,7 @@ class Component extends DCLogic {
     sp.satirlar.forEach(function (x) { urun += x.birim * x.adet; adetT += x.adet; });
     T.forEach(function (t) { if (ekler[t.k]) { ek += t.p; ekSay++; } });
     var kargo = sp.hizli ? HIZLI : 0;
-    var indirim = Math.round((urun + ek) * 0.05 * 100) / 100;
+    var indirim = 0;  // 28 Eki: sepette kartla %5 indirim yok (kullanıcı: "ödemeye geçince normal fiyatta görünüyor")
     var toplam = Math.round((urun + ek - indirim + kargo) * 100) / 100;
     var cek = !!(window.Ayluna && window.Ayluna.cekmecede());
     return {
