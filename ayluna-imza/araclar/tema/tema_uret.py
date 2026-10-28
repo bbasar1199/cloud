@@ -11,7 +11,7 @@ import site_uret as S
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.35'
+SURUM = '1.0.36'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
 # Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
@@ -351,6 +351,12 @@ window.AYLUNA_SEPET = {{ cart | json }};
              'info': 'Ürün sayfası galerisi ürünün görsellerinden, ürün kartları (ana sayfa, koleksiyon, öneriler) ürünün ana görselinden gelir. Kapalıysa tasarımdaki görseller kullanılır.'}]}], ensure_ascii=False, indent=2) + '\n')
     yaz('config/settings_data.json', json.dumps({'current': {'kargo_takip_url': '/apps/track123', 'galeri_urun': True}}, indent=2) + '\n')
     yaz('locales/tr.default.json', json.dumps({'genel': {'marka': 'Ayluna'}}, ensure_ascii=False, indent=2) + '\n')
+
+    # 7b) Shopify yükleme kuralları (boş varsayılan, varsayılan almayan ayar, tanımsız blok/ayar…): bozuksa zip oluşmaz
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import sema_denetim
+    hatalar = sema_denetim.denetle(CIKTI)
+    if hatalar: sys.exit('Şema denetimi başarısız (Shopify bu temayı ya da bölümü reddeder):\n' + '\n'.join(hatalar))
 
     # 8) Zip
     zyol = os.environ.get('TEMA_ZIP') or os.path.join(KOK, 'tema-zip', 'ayluna-SHOPIFY-TEMA-%s.zip' % SURUM)

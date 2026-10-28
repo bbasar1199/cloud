@@ -1,14 +1,14 @@
-# Ayluna teması 1.0.35 · kurulum
+# Ayluna teması 1.0.36 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.35.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.36.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme kartla ya da EasySell ile kapıda.
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.35.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.36.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
    Yayınlanmamış temayı denemek satışı etkilemez: müşteriler eski temayı görür, sipariş kaçmaz. Uygulamaları da (3. madde) yayınlamadan bu temanın düzenleyicisinde açıp önizlemede denersin.
 
-## 1b. Bölümler ve bloklar (1.0.35; şablon ataması gerekmez)
+## 1b. Bölümler ve bloklar (1.0.36; şablon ataması gerekmez)
 - Bütün ürünler **Varsayılan ürün** şablonunda kalır. Önceki sürümde anlatılan şablon atamasını yaptıysan geri al (ürün → Tema şablonu → Varsayılan ürün).
 - Özelleştir → üstten Ürünler → Varsayılan ürün → önizlemede ürünü seç (LunaDream, Galaxy USB, …). Solda o ürünün bölümü açılır:
   **LunaDream sayfası**, **Galaxy USB sayfası**, **AyFeneri sayfası**, **Galaksi Night sayfası**, **Diğer ürünler sayfası**. Her bölüm yalnız kendi

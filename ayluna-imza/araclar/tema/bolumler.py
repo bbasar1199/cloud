@@ -279,12 +279,96 @@ VIDEO_SAYI = 4
 VIDEO_AYAR = [{'type': 'paragraph', 'content': 'Videoyu seç; başlık videonun altında yazar. Video seçilmezse ürünün medyasındaki videolar gösterilir. Hiç video yoksa bu bölüm sayfada görünmez.'}]
 for _k in range(1, VIDEO_SAYI + 1):
     VIDEO_AYAR += [{'type': 'video', 'id': 'v%d' % _k, 'label': 'Video %d' % _k},
-                   {'type': 'text', 'id': 'v%d_baslik' % _k, 'label': 'Video %d başlığı' % _k, 'default': ''}]
+                   {'type': 'text', 'id': 'v%d_baslik' % _k, 'label': 'Video %d başlığı' % _k}]  # boş varsayılan yazılmaz: Shopify bölümü reddeder (28 Eki, 1.0.35 ürün sayfaları 404)
 VIDEO_VERI = ('<script type="application/json" class="ay-vid-veri">[' + ','.join(
     "{%%- if block.settings.v%d -%%}{%%- assign ay_k = block.settings.v%d.sources | where: 'format', 'mp4' | last -%%}"
     "{\"src\": {{ ay_k.url | json }}, \"poster\": {{ block.settings.v%d.preview_image | image_url: width: 600 | json }}, \"alt\": {{ block.settings.v%d_baslik | json }}}"
     "{%%- else -%%}null{%%- endif -%%}" % (k, k, k, k) for k in range(1, VIDEO_SAYI + 1)) + ']</script>'
     '{%- if request.design_mode -%}<p class="ay-vid-not ay-vid-ipucu">Videolar: bu bloğa tıkla, sağda "Video 1…4" seç. Ürünün medyasına yüklediğin videolar da burada çıkar. Video yoksa bu bölüm müşteriye görünmez.</p>{%- endif -%}')
+
+
+# Videolar bölümü (28 Eki, kullanıcı: "hala videolar görünmüyor, orayı section olarak ekle, ben içeriden seçebileyim görselleri de
+# videoları da; bu özellik hep olmalı"): tasarımın "Işık kapanınca ne oluyor?" şeridi bağımsız, Liquid ile çizilen bir bölüm. Her kart bir
+# blok: video (İçerik → Dosyalar ya da yükle), kapak görseli, başlık, alt yazı. Kart ekle/sil/sırala düzenleyiciden. Video yoksa kapak
+# görseli görünür (oynat işareti yok). Bölüm istenen sayfaya eklenir; "Yalnız bu üründe" seçilirse yalnız o ürünün sayfasında çizilir.
+# Görünüş tasarımdaki sınıflarla (.pg > section.bolum > .noscroll > .vid); ayluna.js ekrandaki videoyu sessiz döndürür, dokununca sesli tam ekran.
+VIDEO_BOLUMU = """{%- comment -%} Ayluna · Videolar bölümü (araclar/tema/bolumler.py üretir). Kartlar blok: video, kapak görseli, başlık. {%- endcomment -%}
+{%- liquid
+  assign ay_goster = true
+  if section.settings.urun != blank
+    if product == blank or product.handle != section.settings.urun.handle
+      assign ay_goster = false
+    endif
+  endif
+  assign ay_tasarim = section.settings.tasarim_gorsel | split: ','
+  assign ay_kart = 0
+  for block in section.blocks
+    if block.settings.video != blank or block.settings.gorsel != blank
+      assign ay_kart = ay_kart | plus: 1
+    elsif section.settings.tasarim and ay_tasarim[forloop.index0] != blank
+      assign ay_kart = ay_kart | plus: 1
+    endif
+  endfor
+-%}
+{%- if ay_goster -%}
+{%- if ay_kart > 0 or request.design_mode -%}
+<div class="pg ay-vb"><section class="bolum" id="videolar">
+  {%- if section.settings.baslik != blank -%}<div class="px"><h2 class="h2">{{ section.settings.baslik | escape }}<span class="n">?</span></h2></div>{%- endif -%}
+  {%- if section.settings.alt != blank -%}<div class="px"><p class="ay-vb-alt">{{ section.settings.alt | escape }}</p></div>{%- endif -%}
+  <div class="noscroll ay-vb-serit">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign ay_v = block.settings.video
+        assign ay_g = block.settings.gorsel
+        assign ay_d = ''
+        if ay_g == blank and section.settings.tasarim and ay_tasarim[forloop.index0] != blank
+          assign ay_d = ay_tasarim[forloop.index0] | strip | asset_url
+        endif
+      -%}
+      {%- if ay_v != blank -%}
+        <button class="vid ay-vid" type="button" aria-label="{{ block.settings.baslik | default: 'Video' | escape }}: videoyu oynat" {{ block.shopify_attributes }}>
+          <video muted loop playsinline preload="metadata" poster="{% if ay_g != blank %}{{ ay_g | image_url: width: 600 }}{% elsif ay_v.preview_image %}{{ ay_v.preview_image | image_url: width: 600 }}{% endif %}">
+            {%- for s in ay_v.sources -%}{%- if s.format == 'mp4' -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endif -%}{%- endfor -%}
+          </video>
+          <span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span>
+          <span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span>
+        </button>
+      {%- elsif ay_g != blank or ay_d != '' -%}
+        <div class="vid ay-vb-foto" {{ block.shopify_attributes }}>
+          {%- if ay_g != blank -%}{{ ay_g | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.baslik }}{%- else -%}<img src="{{ ay_d }}" alt="{{ block.settings.baslik | escape }}" loading="lazy" width="600" height="1067">{%- endif -%}
+          <span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span>
+        </div>
+      {%- elsif request.design_mode -%}
+        <div class="vid ay-vb-bos" {{ block.shopify_attributes }}><span class="vid-alt"><b>{{ block.settings.baslik | default: 'Yeni kart' | escape }}</b><span>Video ya da görsel seç</span></span></div>
+      {%- endif -%}
+    {%- endfor -%}
+    <span aria-hidden="true" style="flex: 0 0 6px"></span>
+  </div>
+  {%- if request.design_mode -%}<p class="ay-vid-not">Videolar: soldan bu bölümdeki bir karta tıkla, sağda Video ve Kapak görseli seç. "Kart ekle" ile yeni video eklenir. Videosu ve görseli olmayan kart müşteriye görünmez.</p>{%- endif -%}
+</section></div>
+{%- endif -%}
+{%- endif -%}
+"""
+VIDEO_SEMA = {
+    'name': 'Videolar', 'class': 'ay-bolum ay-vb-bolum',
+    'settings': [
+        {'type': 'text', 'id': 'baslik', 'label': 'Başlık', 'default': 'Işık kapanınca ne oluyor'},
+        {'type': 'text', 'id': 'alt', 'label': 'Alt yazı'},
+        {'type': 'product', 'id': 'urun', 'label': 'Yalnız bu ürünün sayfasında göster', 'info': 'Boş bırakırsan bölüm eklendiği her sayfada görünür.'},
+        {'type': 'checkbox', 'id': 'tasarim', 'label': 'Görsel seçilmeyen kartlarda tasarım fotoğrafı', 'default': False},
+        {'type': 'text', 'id': 'tasarim_gorsel', 'label': 'Tasarım fotoğrafları (tema dosyası, virgülle)',
+         'info': 'Temanın kendi fotoğrafları; elle değiştirmen gerekmez. Kapak görseli seçince onun yerine geçer.'}],
+    'blocks': [{'type': 'video', 'name': 'Video', 'settings': [
+        {'type': 'video', 'id': 'video', 'label': 'Video', 'info': 'Dosya seç ya da yükle. Ekrandayken sessiz döner, dokununca sesli açılır.'},
+        {'type': 'image_picker', 'id': 'gorsel', 'label': 'Kapak görseli', 'info': 'Video yoksa bu görsel görünür.'},
+        {'type': 'text', 'id': 'baslik', 'label': 'Başlık', 'default': 'Video'},
+        {'type': 'text', 'id': 'alt', 'label': 'Alt yazı', 'default': 'Dokun, sesli izle'}]}],
+    'max_blocks': 12,
+    'presets': [{'name': 'Videolar', 'blocks': [{'type': 'video', 'settings': {'baslik': 'Video 1'}}, {'type': 'video', 'settings': {'baslik': 'Video 2'}}]}]}
+
+
+def video_bolumu():
+    return VIDEO_BOLUMU + '\n{% schema %}\n' + json.dumps(VIDEO_SEMA, ensure_ascii=False, indent=2) + '\n{% endschema %}\n'
 
 
 def urun_sayfasi(kod, pano, handle, ad_bolum, parcala):
