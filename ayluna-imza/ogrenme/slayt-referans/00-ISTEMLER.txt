@@ -1,0 +1,12 @@
+AYLUNA ANA SAYFA SLAYTI · 3 GÖRSEL (ChatGPT)
+Her görsel için YENİ sohbet aç, söylenen görseli ekle, istemi yapıştır. Çıkan görseli indirip Claude'a gönder.
+Kural: ürünün şekli, rengi, detayı değişmez. Görselde yazı olmaz.
+
+1) LunaDream  · Ekle: 1-lunadream.jpg ve 1b-lunadream-urun.jpg
+Use the attached photos. The lamp must stay exactly the same product (same shape, dome, bunnies, colors, gold feet). Vertical 4:5 image, 1600x2000. A cozy child's bedroom at night: the lamp sits on a bedside table in the UPPER half of the frame, glowing warm amber, projecting soft moon and star shapes on the ceiling. The lower third of the image is calm, dark navy bedding/shadow with no objects, so text can be placed there. Realistic photo, soft warm light, navy #10182B and amber #F3B562 tones. No text, no logos, no people.
+
+2) Galaxy USB · Ekle: 2-galaxy-usb.jpg
+Use the attached photo. The white USB projector must stay exactly the same product (same shape, lens, power icon, flexible neck). Vertical 4:5 image, 1600x2000. The projector plugged into a laptop on a desk in a dark room, projecting a colorful galaxy onto the ceiling. Keep the product and the galaxy in the UPPER half; the lower third is dark and empty for text. Realistic photo, deep navy and soft purple night tones. No text, no logos, no people.
+
+3) AyFeneri · Ekle: 3-ayfeneri.jpg
+Use the attached photo. The lighthouse lamp must stay exactly the same product (same white tower, gold top, window). Vertical 4:5 image, 1600x2000. The lamp on a shelf in a dark bedroom, projecting a large glowing full moon onto the wall behind it. Keep the lamp and the moon in the UPPER half; the lower third is dark and empty for text. Realistic photo, warm amber and navy tones. No text, no logos, no people.
