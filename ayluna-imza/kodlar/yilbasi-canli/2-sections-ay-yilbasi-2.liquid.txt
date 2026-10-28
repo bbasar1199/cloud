@@ -6,54 +6,54 @@
 {%- for block in section.blocks -%}{%- case block.type -%}
   {%- when 'p07' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Dergi kapağı (LunaDream "Neler yapabiliyor?" dili, kullanıcı 22 Eki seçti): dev tek kelime, arkada o adımın gerçek karesi -->
 <section class="bolum px" id="nasil">
-    <h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>yılbaşı<span class="n">.</span></h2>
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.yaa9db787 | escape }}{% raw %} {% endraw %}{% raw %}<br>yılbaşı<span class="n">.</span></h2>
     <div class="dg"><sc-for list="{{dg}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for>
       <p class="dg-k" aria-live="polite"><span>{{dgK}}<em>.</em></span></p><p class="dg-t">{{dgT}}</p></div>
     <div class="dg-s" role="tablist"><sc-for list="{{dg}}" as="d" hint-placeholder-count="4"><button class="{{d.bcls}}" type="button" role="tab" aria-selected="{{d.on}}" onClick="{{d.pick}}">{{d.k}}</button></sc-for></div>
-    <p class="alt-b" style="margin-top: 12px; font-size: 13px">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</p>
+    <p class="alt-b" style="margin-top: 12px; font-size: 13px">{% endraw %}{{ block.settings.y300e5cb3 | escape }}{% raw %}</p>
   </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p08' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Kime hediye? (hediye rehberi; ürün bilgisine dayalı, iddia yok) -->
 <section class="bolum" id="hediye">
-    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>hediye<span class="n">?</span></h2><p class="alt-b">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</p></div>
+    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.yf50cd69d | escape }}{% raw %} {% endraw %}{% raw %}<br>hediye<span class="n">?</span></h2><p class="alt-b">{% endraw %}{{ block.settings.y4f79f2e5 | escape }}{% raw %}</p></div>
     <div class="hd noscroll">
-      <div class="hd-k y"><span class="hd-g" style="background-image: url(/_blob/29f34f185f858518e19adeb0a09ce92e)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</span></span></div>
-      <div class="hd-k k"><span class="hd-g" style="background-image: url(/_blob/b9ca1f3036b0d671cec2c053a491141c)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m6 | escape }}{% raw %}</span></span></div>
-      <div class="hd-k a"><span class="hd-g" style="background-image: url(/_blob/08a867b1ecb484b2ebd40b863bde844d)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.m7 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m8 | escape }}{% raw %}</span></span></div>
-      <div class="hd-k l"><span class="hd-g" style="background-image: url(/_blob/7a2ab002ed463caf8f2ec81db098e551)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.m9 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m10 | escape }}{% raw %}</span></span></div>
+      <div class="hd-k y"><span class="hd-g" style="background-image: url(/_blob/29f34f185f858518e19adeb0a09ce92e)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.y40a64983 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y6f7a0795 | escape }}{% raw %}</span></span></div>
+      <div class="hd-k k"><span class="hd-g" style="background-image: url(/_blob/b9ca1f3036b0d671cec2c053a491141c)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.y7ea7fb40 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y678bf3da | escape }}{% raw %}</span></span></div>
+      <div class="hd-k a"><span class="hd-g" style="background-image: url(/_blob/08a867b1ecb484b2ebd40b863bde844d)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.yd2010f5b | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.yd2141647 | escape }}{% raw %}</span></span></div>
+      <div class="hd-k l"><span class="hd-g" style="background-image: url(/_blob/7a2ab002ed463caf8f2ec81db098e551)" aria-hidden="true"></span><span class="hd-y"><b>{% endraw %}{{ block.settings.ycd760728 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y0dc2808e | escape }}{% raw %}</span></span></div>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
   </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p09' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<section class="bolum px">
-    <h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>olsun<span class="n">.</span></h2>
-    <ul class="gv-l"><li><b>{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</span></li><li><b>{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</span></li></ul>
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.ybff837ac | escape }}{% raw %} {% endraw %}{% raw %}<br>olsun<span class="n">.</span></h2>
+    <ul class="gv-l"><li><b>{% endraw %}{{ block.settings.y262c2d52 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.yd92f727f | escape }}{% raw %}</span></li><li><b>{% endraw %}{{ block.settings.y4bb600ad | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y1887b150 | escape }}{% raw %}</span></li></ul>
   </section><!-- Yorumlar: yalnız bu ürünün Loox yorumları, hepsi (m.28/B); olumsuzlar da görünür. Afişteki uydurma yorum kartları yok. -->
 <div class="px" id="yorumlar" style="padding-top: 44px; padding-bottom: 44px">
-    <h2 class="bas-y h2">{% endraw %}{{ block.settings.m6 | escape }}{% raw %} {% endraw %}{% raw %}<br>diyor<span class="n">?</span></h2>
-    <p class="yer">{% endraw %}{{ block.settings.m7 | escape }}{% raw %}</p>
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.y1691094e | escape }}{% raw %} {% endraw %}{% raw %}<br>diyor<span class="n">?</span></h2>
+    <p class="yer">{% endraw %}{{ block.settings.yf57fceff | escape }}{% raw %}</p>
   </div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 <div class="ay-uyg ay-loox"><div id="looxReviews" data-product-id="{{ product.id }}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div></div>
 </div>
   {%- when 'p10' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Sizden gelen mesajlar (ortak.mesaj_bolum, 19 Eki) -->
 <section class="bolum mesaj-bol" id="mesajlar">
-    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>yazıyor<span class="n">.</span></h2><p class="m-alt">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}<span class="dokun"> {% endraw %}{{ block.settings.m3 | escape }}{% raw %}</span></p><span class="serit-ok"><button type="button" aria-label="Önceki mesajlar" onClick="{{mGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki mesajlar" onClick="{{mIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></div>
+    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.yffa3fd8f | escape }}{% raw %} {% endraw %}{% raw %}<br>yazıyor<span class="n">.</span></h2><p class="m-alt">{% endraw %}{{ block.settings.y93fa7817 | escape }}{% raw %}<span class="dokun"> {% endraw %}{{ block.settings.y3f8a7739 | escape }}{% raw %}</span></p><span class="serit-ok"><button type="button" aria-label="Önceki mesajlar" onClick="{{mGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki mesajlar" onClick="{{mIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></div>
     <div class="noscroll mkarma"><sc-for list="{{mesajlar}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.ac}}" aria-label="{{m.n}}, büyüt"><img src="{{m.src}}" alt="{{m.n}}" loading="lazy"></button></sc-for><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
   </section><sc-if value="{{buyukVar}}" hint-placeholder-val="{{false}}"><div class="mbuyuk" role="dialog" aria-modal="true" aria-label="{{buyukAd}}" onClick="{{buyukKapat}}"><img src="{{buyuk}}" alt="{{buyukAd}}"><button class="mb-x" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p11' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<section class="px">
-    <div class="otuz"><span class="ot-h" aria-hidden="true"><i style="transform: rotate(0deg); animation-delay: 0.00s"></i><i style="transform: rotate(12deg); animation-delay: 0.10s"></i><i style="transform: rotate(24deg); animation-delay: 0.20s"></i><i style="transform: rotate(36deg); animation-delay: 0.30s"></i><i style="transform: rotate(48deg); animation-delay: 0.40s"></i><i style="transform: rotate(60deg); animation-delay: 0.50s"></i><i style="transform: rotate(72deg); animation-delay: 0.60s"></i><i style="transform: rotate(84deg); animation-delay: 0.70s"></i><i style="transform: rotate(96deg); animation-delay: 0.80s"></i><i style="transform: rotate(108deg); animation-delay: 0.90s"></i><i style="transform: rotate(120deg); animation-delay: 1.00s"></i><i style="transform: rotate(132deg); animation-delay: 1.10s"></i><i style="transform: rotate(144deg); animation-delay: 1.20s"></i><i style="transform: rotate(156deg); animation-delay: 1.30s"></i><i style="transform: rotate(168deg); animation-delay: 1.40s"></i><i style="transform: rotate(180deg); animation-delay: 1.50s"></i><i style="transform: rotate(192deg); animation-delay: 1.60s"></i><i style="transform: rotate(204deg); animation-delay: 1.70s"></i><i style="transform: rotate(216deg); animation-delay: 1.80s"></i><i style="transform: rotate(228deg); animation-delay: 1.90s"></i><i style="transform: rotate(240deg); animation-delay: 2.00s"></i><i style="transform: rotate(252deg); animation-delay: 2.10s"></i><i style="transform: rotate(264deg); animation-delay: 2.20s"></i><i style="transform: rotate(276deg); animation-delay: 2.30s"></i><i style="transform: rotate(288deg); animation-delay: 2.40s"></i><i style="transform: rotate(300deg); animation-delay: 2.50s"></i><i style="transform: rotate(312deg); animation-delay: 2.60s"></i><i style="transform: rotate(324deg); animation-delay: 2.70s"></i><i style="transform: rotate(336deg); animation-delay: 2.80s"></i><i style="transform: rotate(348deg); animation-delay: 2.90s"></i><b>30</b><small>{% endraw %}{{ block.settings.m1 | escape }}{% raw %}</small></span><span><b>{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</span></span></div>
+    <div class="otuz"><span class="ot-h" aria-hidden="true"><i style="transform: rotate(0deg); animation-delay: 0.00s"></i><i style="transform: rotate(12deg); animation-delay: 0.10s"></i><i style="transform: rotate(24deg); animation-delay: 0.20s"></i><i style="transform: rotate(36deg); animation-delay: 0.30s"></i><i style="transform: rotate(48deg); animation-delay: 0.40s"></i><i style="transform: rotate(60deg); animation-delay: 0.50s"></i><i style="transform: rotate(72deg); animation-delay: 0.60s"></i><i style="transform: rotate(84deg); animation-delay: 0.70s"></i><i style="transform: rotate(96deg); animation-delay: 0.80s"></i><i style="transform: rotate(108deg); animation-delay: 0.90s"></i><i style="transform: rotate(120deg); animation-delay: 1.00s"></i><i style="transform: rotate(132deg); animation-delay: 1.10s"></i><i style="transform: rotate(144deg); animation-delay: 1.20s"></i><i style="transform: rotate(156deg); animation-delay: 1.30s"></i><i style="transform: rotate(168deg); animation-delay: 1.40s"></i><i style="transform: rotate(180deg); animation-delay: 1.50s"></i><i style="transform: rotate(192deg); animation-delay: 1.60s"></i><i style="transform: rotate(204deg); animation-delay: 1.70s"></i><i style="transform: rotate(216deg); animation-delay: 1.80s"></i><i style="transform: rotate(228deg); animation-delay: 1.90s"></i><i style="transform: rotate(240deg); animation-delay: 2.00s"></i><i style="transform: rotate(252deg); animation-delay: 2.10s"></i><i style="transform: rotate(264deg); animation-delay: 2.20s"></i><i style="transform: rotate(276deg); animation-delay: 2.30s"></i><i style="transform: rotate(288deg); animation-delay: 2.40s"></i><i style="transform: rotate(300deg); animation-delay: 2.50s"></i><i style="transform: rotate(312deg); animation-delay: 2.60s"></i><i style="transform: rotate(324deg); animation-delay: 2.70s"></i><i style="transform: rotate(336deg); animation-delay: 2.80s"></i><i style="transform: rotate(348deg); animation-delay: 2.90s"></i><b>30</b><small>{% endraw %}{{ block.settings.y54e78d4e | escape }}{% raw %}</small></span><span><b>{% endraw %}{{ block.settings.yf64f4726 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.ybe94edc9 | escape }}{% raw %}</span></span></div>
   </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p12' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<section class="bolum px" id="sss">
-    <h2 class="bas-y h2">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>edilenler<span class="n">.</span></h2>
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.y28eb3e4a | escape }}{% raw %} {% endraw %}{% raw %}<br>edilenler<span class="n">.</span></h2>
     <div style="margin-top: 14px; border-top: 1px solid var(--cizgi)">
       <sc-for list="{{faq}}" as="f" hint-placeholder-count="6"><details class="sss"><summary>{{f.q}}<span class="arti" aria-hidden="true">+</span></summary><p>{{f.a}}</p></details></sc-for>
     </div>
   </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p13' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<section>
-    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
+    <div class="px" style="display: flex; align-items: flex-end; justify-content: space-between"><h2 class="bas-y" style="font-size: 24px">{% endraw %}{{ block.settings.y695ef33f | escape }}{% raw %} {% endraw %}{% raw %}<br>kalanı için<span class="n">.</span></h2><span class="serit-sag"><span style="font-size: 13px; color: var(--soluk)">{{shopCount}} ürün</span><span class="serit-ok"><button type="button" aria-label="Önceki ürünler" onClick="{{kayGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button type="button" aria-label="Sonraki ürünler" onClick="{{kayIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button></span></span></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 4px">
       <sc-for list="{{shop}}" as="u" hint-placeholder-count="4"><a class="kart" href="#"><span><img src="{{u.src}}" alt="{{u.n}}"><sc-if value="{{u.pct}}" hint-placeholder-val="{{true}}"><i>{{u.pct}}</i></sc-if></span><span><b>{{u.n}}</b><span style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums"><b style="min-height: 0">{{u.price}}</b><s style="font-size: 12px; color: var(--soluk)">{{u.old}}</s></span></span></a></sc-for>
     </div>
@@ -61,19 +61,19 @@
 </div>
   {%- when 'p14' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<footer class="alt-bilgi">
     <div class="px">
-      <h2 class="bas-y" style="font-size: 28px; color: #fff">{% endraw %}{{ block.settings.m1 | escape }}{% raw %} {% endraw %}{% raw %}<br>tavana bak<span class="n" style="color: var(--v)">.</span></h2>
+      <h2 class="bas-y" style="font-size: 28px; color: #fff">{% endraw %}{{ block.settings.y30a649d8 | escape }}{% raw %} {% endraw %}{% raw %}<br>tavana bak<span class="n" style="color: var(--v)">.</span></h2>
       <button class="btn1 btn-b" type="button" style="margin-top: 18px"><span class="b-ic"><span>{{onLabel}}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.m3 | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.m4 | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.m5 | escape }}{% raw %}</a></div>
-      <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">{% endraw %}{{ block.settings.m6 | escape }}{% raw %}</span></div>
-      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">{% endraw %}{{ block.settings.m7 | escape }}{% raw %}</p>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-top: 24px; font-size: 14px"><a href="#">{% endraw %}{{ block.settings.y8af17540 | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.yfed93558 | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.ya147472a | escape }}{% raw %}</a><a href="#">{% endraw %}{{ block.settings.y6cdb7124 | escape }}{% raw %}</a></div>
+      <div aria-label="Ayluna" style="margin-top: 24px; display: flex; align-items: center; gap: 12px; color: #fff"><svg class="isaret" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,253,249,.55)" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><span aria-hidden="true" style="font-family: 'Young Serif', Georgia, serif; font-size: 56px; line-height: .8; letter-spacing: -.045em">{% endraw %}{{ block.settings.y17921f90 | escape }}{% raw %}</span></div>
+      <p style="margin: 14px 0 0; padding-top: 14px; border-top: 1px solid rgba(238,242,250,.12); font-size: 12px">{% endraw %}{{ block.settings.y2a578ef1 | escape }}{% raw %}</p>
     </div>
   </footer>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when 'p15' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
 <div class="yapis">
-    <span class="karo"><img src="{% endraw %}{%- if block.settings.g1 -%}{{ block.settings.g1 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0"></span>
-    <span class="y-yazi"><b>{% endraw %}{{ block.settings.m1 | escape }}{% raw %}</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
-    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">{% endraw %}{{ block.settings.m2 | escape }}{% raw %}</button>
+    <span class="karo"><img src="{% endraw %}{%- if block.settings.r393f9fd9 -%}{{ block.settings.r393f9fd9 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0"></span>
+    <span class="y-yazi"><b>{% endraw %}{{ block.settings.yee96b7d3 | escape }}{% raw %}</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">{% endraw %}{{ block.settings.yafd94a9a | escape }}{% raw %}</button>
   </div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
 </div>
   {%- when '@app' -%}<div class="ay-uyg" {{ block.shopify_attributes }}>{% render block %}</div>
@@ -94,13 +94,13 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "yaa9db787",
           "label": "Yazı: Dört kelimede",
           "default": "Dört kelimede"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "y300e5cb3",
           "label": "Yazı: Kurulum videosu kutudaki QR kodda",
           "default": "Kurulum videosu kutudaki QR kodda."
         }
@@ -113,61 +113,61 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "yf50cd69d",
           "label": "Yazı: Kime",
           "default": "Kime"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "y4f79f2e5",
           "label": "Yazı: Kutusuyla hazır; açması da kurması da hediye",
           "default": "Kutusuyla hazır; açması da kurması da hediye."
         },
         {
           "type": "text",
-          "id": "m3",
+          "id": "y40a64983",
           "label": "Yazı: Çocuğuna",
           "default": "Çocuğuna"
         },
         {
           "type": "text",
-          "id": "m4",
+          "id": "y6f7a0795",
           "label": "Yazı: Ağacı birlikte kurun; yatmadan tavana kar taneleri",
           "default": "Ağacı birlikte kurun; yatmadan tavana kar taneleri."
         },
         {
           "type": "text",
-          "id": "m5",
+          "id": "y7ea7fb40",
           "label": "Yazı: Sevdiğine",
           "default": "Sevdiğine"
         },
         {
           "type": "text",
-          "id": "m6",
+          "id": "y678bf3da",
           "label": "Yazı: Yeni yıl mesajlı diskle tavana \"Merry Christmas\"",
           "default": "Yeni yıl mesajlı diskle tavana \"Merry Christmas\"."
         },
         {
           "type": "text",
-          "id": "m7",
+          "id": "yd2010f5b",
           "label": "Yazı: Anneannene",
           "default": "Anneannene"
         },
         {
           "type": "text",
-          "id": "m8",
+          "id": "yd2141647",
           "label": "Yazı: Torunla bir akşam etkinliği; sonra komodinde süs",
           "default": "Torunla bir akşam etkinliği; sonra komodinde süs."
         },
         {
           "type": "text",
-          "id": "m9",
+          "id": "ycd760728",
           "label": "Yazı: Kendine",
           "default": "Kendine"
         },
         {
           "type": "text",
-          "id": "m10",
+          "id": "y0dc2808e",
           "label": "Yazı: Masanda minik ağaç; USB’ye tak, oda yılbaşı olsun",
           "default": "Masanda minik ağaç; USB’ye tak, oda yılbaşı olsun."
         }
@@ -180,43 +180,43 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "ybff837ac",
           "label": "Yazı: İçin rahat",
           "default": "İçin rahat"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "y262c2d52",
           "label": "Yazı: Ücretsiz kargo",
           "default": "Ücretsiz kargo"
         },
         {
           "type": "text",
-          "id": "m3",
+          "id": "yd92f727f",
           "label": "Yazı: 1 iş gününde kargoda, adım adım takip",
           "default": "1 iş gününde kargoda, adım adım takip."
         },
         {
           "type": "text",
-          "id": "m4",
+          "id": "y4bb600ad",
           "label": "Yazı: Güvenli ödeme",
           "default": "Güvenli ödeme"
         },
         {
           "type": "text",
-          "id": "m5",
+          "id": "y1887b150",
           "label": "Yazı: Kart bilgin bize gelmez; kapıda ödeme de var",
           "default": "Kart bilgin bize gelmez; kapıda ödeme de var."
         },
         {
           "type": "text",
-          "id": "m6",
+          "id": "y1691094e",
           "label": "Yazı: Alanlar ne",
           "default": "Alanlar ne"
         },
         {
           "type": "text",
-          "id": "m7",
+          "id": "yf57fceff",
           "label": "Yazı: [Loox: bu ürünün tüm yorumları, fotoğraflı olanlar ba…",
           "default": "[Loox: bu ürünün tüm yorumları, fotoğraflı olanlar başta; puan dağılımı ve sayı otomatik]"
         }
@@ -229,19 +229,19 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "yffa3fd8f",
           "label": "Yazı: Ayluna’dan alanlar",
           "default": "Ayluna’dan alanlar"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "y93fa7817",
           "label": "Yazı: Diğer lambalarımızı alan müşterilerimizden, izinleriy…",
           "default": "Diğer lambalarımızı alan müşterilerimizden, izinleriyle."
         },
         {
           "type": "text",
-          "id": "m3",
+          "id": "y3f8a7739",
           "label": "Yazı: Dokun, büyüsün",
           "default": "Dokun, büyüsün."
         }
@@ -254,19 +254,19 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "y54e78d4e",
           "label": "Yazı: gün",
           "default": "gün"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "yf64f4726",
           "label": "Yazı: Beğenmezsen iade et",
           "default": "Beğenmezsen iade et"
         },
         {
           "type": "text",
-          "id": "m3",
+          "id": "ybe94edc9",
           "label": "Yazı: Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz",
           "default": "Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz."
         }
@@ -279,7 +279,7 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "y28eb3e4a",
           "label": "Yazı: Merak",
           "default": "Merak"
         }
@@ -292,7 +292,7 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "y695ef33f",
           "label": "Yazı: Odanın geri",
           "default": "Odanın geri"
         }
@@ -305,43 +305,43 @@
       "settings": [
         {
           "type": "text",
-          "id": "m1",
+          "id": "y30a649d8",
           "label": "Yazı: Bu yılbaşı",
           "default": "Bu yılbaşı"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "y8af17540",
           "label": "Yazı: Mesafeli Satış Sözleşmesi",
           "default": "Mesafeli Satış Sözleşmesi"
         },
         {
           "type": "text",
-          "id": "m3",
+          "id": "yfed93558",
           "label": "Yazı: KVKK",
           "default": "KVKK"
         },
         {
           "type": "text",
-          "id": "m4",
+          "id": "ya147472a",
           "label": "Yazı: İade Politikası",
           "default": "İade Politikası"
         },
         {
           "type": "text",
-          "id": "m5",
+          "id": "y6cdb7124",
           "label": "Yazı: İletişim",
           "default": "İletişim"
         },
         {
           "type": "text",
-          "id": "m6",
+          "id": "y17921f90",
           "label": "Yazı: Ayluna",
           "default": "Ayluna"
         },
         {
           "type": "text",
-          "id": "m7",
+          "id": "y2a578ef1",
           "label": "Yazı: Fiyatlara KDV dahildir. © 2026 Ayluna",
           "default": "Fiyatlara KDV dahildir. © 2026 Ayluna"
         }
@@ -354,18 +354,18 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "g1",
+          "id": "r393f9fd9",
           "label": "Görsel 1"
         },
         {
           "type": "text",
-          "id": "m1",
+          "id": "yee96b7d3",
           "label": "Yazı: Yılbaşı Ağacı",
           "default": "Yılbaşı Ağacı"
         },
         {
           "type": "text",
-          "id": "m2",
+          "id": "yafd94a9a",
           "label": "Yazı: Satın al",
           "default": "Satın al"
         }

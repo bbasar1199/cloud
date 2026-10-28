@@ -1063,5 +1063,34 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
 .ua-b>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142}
 .ua-b .ikon:focus-visible,.ua-b .marka:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:12px}
 
+/* 29 Eki (kullanıcı: "çok fazla yeşil boğuyor; kötü ve sıkıcı; özenilmiş ve satış odaklı görünmüyor"): ana buton ve rozet yılbaşı
+   kırmızısı, stok kurdelesi altın, yapışkan çubuk beyaz; paket satırı LunaDream gibi sade; Işığı kapat kaydırmalı karşılaştırma. */
+.pg .al .btn1{background:#B3362B;color:#fff;box-shadow:0 4px 0 #7A1F17}
+.pg .al .btn1 .b-ic>span{color:#fff}.pg .al .btn1 svg{stroke:#F6D58C}
+.pg .fy-rozet,.pg .fiyat .rozet{background:#B3362B;color:#fff}
+.pg .stk{background:#E3B65A;color:#3A2A08;box-shadow:0 0 0 3px #fff}.pg .stk i{background:#B3362B}
+.pg .yapis{background:#fff;box-shadow:0 -1px 0 #ECE7E1,0 -8px 24px rgba(13,38,28,.08)}
+.pg .yapis .y-yazi{color:#123A2A}.pg .yapis .y-yazi span{color:#5C6078}.pg .yapis .y-yazi .sayac-ay circle{stroke:#C9CED8}
+.pg .yapis .btn1{background:#B3362B;color:#fff;box-shadow:0 3px 0 #7A1F17}
+.pg .yapis .karo{background:#F6F3EE}
+.pg .pk-bas::after{display:none}
+.pg .pk-bas .ays-k{color:#5C6078;font-weight:600}.pg .pk-bas .ays-k svg{display:none}
+.ka{position:relative;margin-top:14px;height:420px;border-radius:20px;overflow:hidden;background:#05100B;isolation:isolate}
+.ka:focus-within{box-shadow:0 0 0 3px #E3B65A}
+.ka img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.ka-off{position:absolute;inset:0;overflow:hidden;z-index:1;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka-off img{filter:brightness(.16) saturate(.2);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka-cz{position:absolute;inset:0;z-index:2;pointer-events:none;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka.el .ka-off,.ka.el .ka-off img,.ka.el .ka-cz{transition:none}
+.ka-cz::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:#F3D58C;box-shadow:0 0 12px rgba(243,213,140,.7)}
+.ka-cz i{position:absolute;left:-22px;top:50%;display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.ka-cz svg{width:22px;height:22px;fill:none;stroke:#123A2A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ka-et{position:absolute;top:14px;z-index:3;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;pointer-events:none}
+.ka-et1{left:14px;background:rgba(0,0,0,.6);color:#fff}.ka-et2{right:14px;background:#F3D58C;color:#3A2A08}
+.ka-in{position:absolute;inset:0;z-index:4;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y;-webkit-appearance:none;appearance:none}
+.ka-alt{display:flex;gap:8px;margin-top:12px}
+.ka-alt span{flex:1;padding:10px 4px;border-radius:12px;background:#F6F3EE;font-size:12.5px;white-space:nowrap;text-align:center;color:#123A2A}
+@media (prefers-reduced-motion:reduce){.ka-off,.ka-off img,.ka-cz{transition:none}}
+
 
 body{--ay-zemin:#FFFFFF}

@@ -1075,6 +1075,35 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
 .ua-b>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142}
 .ua-b .ikon:focus-visible,.ua-b .marka:focus-visible{outline:2px solid #F2A65A;outline-offset:-2px;border-radius:12px}
 
+/* 29 Eki (kullanıcı: "çok fazla yeşil boğuyor; kötü ve sıkıcı; özenilmiş ve satış odaklı görünmüyor"): ana buton ve rozet yılbaşı
+   kırmızısı, stok kurdelesi altın, yapışkan çubuk beyaz; paket satırı LunaDream gibi sade; Işığı kapat kaydırmalı karşılaştırma. */
+.pg .al .btn1{background:#B3362B;color:#fff;box-shadow:0 4px 0 #7A1F17}
+.pg .al .btn1 .b-ic>span{color:#fff}.pg .al .btn1 svg{stroke:#F6D58C}
+.pg .fy-rozet,.pg .fiyat .rozet{background:#B3362B;color:#fff}
+.pg .stk{background:#E3B65A;color:#3A2A08;box-shadow:0 0 0 3px #fff}.pg .stk i{background:#B3362B}
+.pg .yapis{background:#fff;box-shadow:0 -1px 0 #ECE7E1,0 -8px 24px rgba(13,38,28,.08)}
+.pg .yapis .y-yazi{color:#123A2A}.pg .yapis .y-yazi span{color:#5C6078}.pg .yapis .y-yazi .sayac-ay circle{stroke:#C9CED8}
+.pg .yapis .btn1{background:#B3362B;color:#fff;box-shadow:0 3px 0 #7A1F17}
+.pg .yapis .karo{background:#F6F3EE}
+.pg .pk-bas::after{display:none}
+.pg .pk-bas .ays-k{color:#5C6078;font-weight:600}.pg .pk-bas .ays-k svg{display:none}
+.ka{position:relative;margin-top:14px;height:420px;border-radius:20px;overflow:hidden;background:#05100B;isolation:isolate}
+.ka:focus-within{box-shadow:0 0 0 3px #E3B65A}
+.ka img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.ka-off{position:absolute;inset:0;overflow:hidden;z-index:1;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka-off img{filter:brightness(.16) saturate(.2);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka-cz{position:absolute;inset:0;z-index:2;pointer-events:none;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ka.el .ka-off,.ka.el .ka-off img,.ka.el .ka-cz{transition:none}
+.ka-cz::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:#F3D58C;box-shadow:0 0 12px rgba(243,213,140,.7)}
+.ka-cz i{position:absolute;left:-22px;top:50%;display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.ka-cz svg{width:22px;height:22px;fill:none;stroke:#123A2A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ka-et{position:absolute;top:14px;z-index:3;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;pointer-events:none}
+.ka-et1{left:14px;background:rgba(0,0,0,.6);color:#fff}.ka-et2{right:14px;background:#F3D58C;color:#3A2A08}
+.ka-in{position:absolute;inset:0;z-index:4;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y;-webkit-appearance:none;appearance:none}
+.ka-alt{display:flex;gap:8px;margin-top:12px}
+.ka-alt span{flex:1;padding:10px 4px;border-radius:12px;background:#F6F3EE;font-size:12.5px;white-space:nowrap;text-align:center;color:#123A2A}
+@media (prefers-reduced-motion:reduce){.ka-off,.ka-off img,.ka-cz{transition:none}}
+
 </style>
 </helmet>
 <div class="pg">
@@ -1107,13 +1136,19 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
     <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Bu ürün ne işe yarıyor?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Kendin süsleyip kurduğun minik bir yılbaşı ağacı lambası: USB’ye takınca tavana yılbaşı desenleri yansıtır.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Nasıl kurulur?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Tüylü çubukları kabloya sarıp ağaç şekli verirsin, desenli çıkartmayı altın abajura yapıştırıp takarsın, istersen altın şerit ve inci çıkartmalarla süslersin. Kutudaki kartın QR kodunda montaj videosu var. USB ucunu ve projektör lensini kapatma.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Prize takılır mı?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>USB ile çalışır: telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; USB adaptör kutuda yok.</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">Kutu içeriğinde neler var?</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, "Merry Christmas" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok.</p></details></div>
   </section></div>
 
-  <!-- Ağacı yak (imza anı, AyFeneri'ndeki "Feneri yak" gibi): oda karanlık; ışık lambadan (alttan) tavana yayılır -->
+  <!-- Işığı kapat, ağacı yak (29 Eki, kullanıcı: "bu tasarım kötü ve sıkıcı"): parmakla kaydırılan karşılaştırma. Sol karanlık oda,
+       sağ ağaç yanınca tavan; kendiliğinden gidip gelir, dokununca durur. Hareket yalnız transform. -->
   <section class="bolum px" id="yak">
-    <div class="{{yakCls}}">
-      <div class="yak-g"><img class="k0" src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt=""><img class="k1" src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt="Tavana yansıyan yılbaşı desenleri"><span class="kor" aria-hidden="true"></span><span class="yak-ic"><img src="/_blob/e99d81de13ab7ed59f13efed5ebaced2" alt="Kurulan yılbaşı ağacı lambası"><small>Kutudan çıkan</small></span>
-        <div class="yak-y"><p class="bas-y">{{yakYazi}}</p></div></div>
-      <div class="yak-alt"><span>{{yakAlt}}</span><button class="anah" type="button" onClick="{{yakSw}}" aria-pressed="{{yakOn}}">{{yakEt}}<i></i></button></div>
+    <h2 class="bas-y h2">Işığı kapat,<br>ağacı yak<span class="n">.</span></h2>
+    <p class="alt-b">Parmağınla kaydır: aynı oda, ağaç yanınca.</p>
+    <div class="{{kaCls}}">
+      <img class="ka-on" src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt="Ağaç yanınca tavandaki yılbaşı desenleri">
+      <div class="ka-off" style="transform: translateX({{kaA}}%)"><img src="/_blob/ce7dadd85b37a8089d0df5ce000d6f54" alt="" style="transform: translateX({{kaB}}%)"></div>
+      <span class="ka-et ka-et1">Işık kapalı</span><span class="ka-et ka-et2">Ağaç yanınca</span>
+      <span class="ka-cz" style="transform: translateX({{kaX}}%)" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg></i></span>
+      <input class="ka-in" type="range" min="0" max="100" step="1" value="{{kaX}}" onInput="{{kaKay}}" aria-label="Karanlık oda ile yanan ağacı karşılaştır">
     </div>
+    <div class="ka-alt"><span><b>USB</b> ile yanar</span><span><b>Diski</b> değişir</span><span><b>Kutusuyla</b> hediye</span></div>
   </section>
 
   <!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
@@ -1223,7 +1258,7 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6200}}'>
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, kaX: 50, kaOto: true, kaEl: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -1238,6 +1273,7 @@ class Component extends DCLogic {
       if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
       if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
       var azH = self.azHareket;
+      if (S.kaOto && !azH && t % 3 === 0) o.kaX = S.kaX > 50 ? 22 : 78;
       if (!azH) { var tkd = t - (S.tkT === undefined ? 1 : S.tkT);
         if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = t - 1; o.tkAn = true; }
         else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = t; o.tkAn = false; } }
@@ -1341,6 +1377,8 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
       ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       disk: disk, dAd: DISK[S.disk][0],
+      kaCls: 'ka' + (S.kaEl ? ' el' : ''), kaX: S.kaX, kaA: S.kaX - 100, kaB: 100 - S.kaX,
+      kaKay: function (e) { var el = e && (e.currentTarget || e.target), v = el ? +el.value : NaN; if (!isNaN(v)) self.setState({ kaX: v, kaOto: false, kaEl: true }); },
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Tavan yılbaşı oldu.' : 'Işığı kapat, ağacı yak.',
       yakAlt: S.yak ? 'Desenler tavanda; diski değiştirince değişir.' : 'Lamba kapalı. Dokun, yansısın.', yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       dg: DG.map(function (d, i) { var on = i === S.dg; return { k: d[0], src: d[2], cls: on ? 'on' : '', bcls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ dg: i, dgOto: false }); } }; }),

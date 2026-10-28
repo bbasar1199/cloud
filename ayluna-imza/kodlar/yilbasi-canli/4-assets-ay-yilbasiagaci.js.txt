@@ -2,7 +2,7 @@
 (window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {
 
 class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, kaX: 50, kaOto: true, kaEl: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -17,6 +17,7 @@ class Component extends DCLogic {
       if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
       if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
       var azH = self.azHareket;
+      if (S.kaOto && !azH && t % 3 === 0) o.kaX = S.kaX > 50 ? 22 : 78;
       if (!azH) { var tkd = t - (S.tkT === undefined ? 1 : S.tkT);
         if (S.tk === 4 && tkd >= 1) { o.tk = 0; o.tkT = t - 1; o.tkAn = true; }
         else if (tkd >= 3) { o.tk = (S.tk || 0) + 1; o.tkT = t; o.tkAn = false; } }
@@ -120,6 +121,8 @@ function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.tar
       ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       disk: disk, dAd: DISK[S.disk][0],
+      kaCls: 'ka' + (S.kaEl ? ' el' : ''), kaX: S.kaX, kaA: S.kaX - 100, kaB: 100 - S.kaX,
+      kaKay: function (e) { var el = e && (e.currentTarget || e.target), v = el ? +el.value : NaN; if (!isNaN(v)) self.setState({ kaX: v, kaOto: false, kaEl: true }); },
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Tavan yılbaşı oldu.' : 'Işığı kapat, ağacı yak.',
       yakAlt: S.yak ? 'Desenler tavanda; diski değiştirince değişir.' : 'Lamba kapalı. Dokun, yansısın.', yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       dg: DG.map(function (d, i) { var on = i === S.dg; return { k: d[0], src: d[2], cls: on ? 'on' : '', bcls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ dg: i, dgOto: false }); } }; }),

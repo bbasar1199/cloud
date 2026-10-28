@@ -1203,3 +1203,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: canlı denetim (tema 1.0.40 yayında). Yılbaşı: canlı fiyat + indirim, dönen kargo şeridi, yapışkan sayaç, beyaz zemin. Yapıştırmalık 4 dosya `kodlar/yilbasi-canli/`. Shopify'da ürüne karşılaştırma fiyatı, görsel ve ayluna.stok_kurdele girilmeli.
 - 29 Eki: yılbaşı satın alma kısmı ana iskelete çekildi, Loox yorumları geri, Ağacı yak boşluğu. Yapıştırmalık 4 dosya güncellendi (`kodlar/yilbasi-canli/`). Karşılaştırma fiyatı hâlâ Shopify'da boş.
 - 29 Eki: yılbaşı stok 12 (kullanıcı), dönen satır ilk sıra stok. Yapıştırmalık 5 dosya (ayluna.js dahil).
+- 29 Eki: canlıda yazı kayması (sıra numaralı ayar kimliği) → yılbaşında kararlı kimlik (bolumler.ayarla kararli). Kırmızı CTA, beyaz yapışkan çubuk, kaydırmalı Işığı kapat. Yapıştırmalık 4 dosya güncel.

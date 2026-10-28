@@ -487,13 +487,19 @@ def gerisi():
 
 
 YAK = """
-  <!-- Ağacı yak (imza anı, AyFeneri'ndeki "Feneri yak" gibi): oda karanlık; ışık lambadan (alttan) tavana yayılır -->
+  <!-- Işığı kapat, ağacı yak (29 Eki, kullanıcı: "bu tasarım kötü ve sıkıcı"): parmakla kaydırılan karşılaştırma. Sol karanlık oda,
+       sağ ağaç yanınca tavan; kendiliğinden gidip gelir, dokununca durur. Hareket yalnız transform. -->
   <section class="bolum px" id="yak">
-    <div class="{{yakCls}}">
-      <div class="yak-g"><img class="k0" src="@@yb-tavan@@" alt=""><img class="k1" src="@@yb-tavan@@" alt="Tavana yansıyan yılbaşı desenleri"><span class="kor" aria-hidden="true"></span><span class="yak-ic"><img src="@@yb-adim4@@" alt="Kurulan yılbaşı ağacı lambası"><small>Kutudan çıkan</small></span>
-        <div class="yak-y"><p class="bas-y">{{yakYazi}}</p></div></div>
-      <div class="yak-alt"><span>{{yakAlt}}</span><button class="anah" type="button" onClick="{{yakSw}}" aria-pressed="{{yakOn}}">{{yakEt}}<i></i></button></div>
+    <h2 class="bas-y h2">Işığı kapat,<br>ağacı yak<span class="n">.</span></h2>
+    <p class="alt-b">Parmağınla kaydır: aynı oda, ağaç yanınca.</p>
+    <div class="{{kaCls}}">
+      <img class="ka-on" src="@@yb-tavan@@" alt="Ağaç yanınca tavandaki yılbaşı desenleri">
+      <div class="ka-off" style="transform: translateX({{kaA}}%)"><img src="@@yb-tavan@@" alt="" style="transform: translateX({{kaB}}%)"></div>
+      <span class="ka-et ka-et1">Işık kapalı</span><span class="ka-et ka-et2">Ağaç yanınca</span>
+      <span class="ka-cz" style="transform: translateX({{kaX}}%)" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg></i></span>
+      <input class="ka-in" type="range" min="0" max="100" step="1" value="{{kaX}}" onInput="{{kaKay}}" aria-label="Karanlık oda ile yanan ağacı karşılaştır">
     </div>
+    <div class="ka-alt"><span><b>USB</b> ile yanar</span><span><b>Diski</b> değişir</span><span><b>Kutusuyla</b> hediye</span></div>
   </section>
 """
 
@@ -570,7 +576,7 @@ def js():
     shop = [[n, p, c, B + BA['u-%s.jpg' % h]] for h, n, p, c in PR]
     nk = ''.join("nk%d: S.nk === %d ? 'on' : '', nkOn%d: S.nk === %d ? 'true' : 'false', nkSec%d: function () { self.setState({ nk: %d }); },\n      " % (i, i, i, i, i, i) for i in range(len(PARCA)))
     return """class Component extends DCLogic {
-  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
+  constructor(p) { super(p); this.state = { ser: 0, g: 0, gOto: true, adet: null, disk: 0, dOto: true, nk: 1, yak: true, kaX: 50, kaOto: true, kaEl: false, yOto: true, yBas: 0, dg: 0, dgOto: true, t: 0, dn: 0, dnT: 0, now: Date.now() }; }
   componentDidMount() {
     var self = this;
     this.azHareket = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -585,6 +591,7 @@ def js():
       if (!self.azHareket && t % 3 === 0) o.ser = S.ser + 1;
       if (!self.azHareket && t - S.dnT >= (S.dn ? 6 : 4)) { o.dn = 1 - S.dn; o.dnT = t; }
       var azH = self.azHareket;
+      if (S.kaOto && !azH && t % 3 === 0) o.kaX = S.kaX > 50 ? 22 : 78;
 """ + tk_adim('t', 1) + """
       self.setState(o);
     }, 1000);
@@ -655,6 +662,8 @@ def js():
       ybCls: ybCls, ybGun: ybGun, ybGunEt: ybGunEt, ybBas: ybBas, ybAlt: ybAlt,
       hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
       disk: disk, dAd: DISK[S.disk][0],
+      kaCls: 'ka' + (S.kaEl ? ' el' : ''), kaX: S.kaX, kaA: S.kaX - 100, kaB: 100 - S.kaX,
+      kaKay: function (e) { var el = e && (e.currentTarget || e.target), v = el ? +el.value : NaN; if (!isNaN(v)) self.setState({ kaX: v, kaOto: false, kaEl: true }); },
       yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Tavan yılbaşı oldu.' : 'Işığı kapat, ağacı yak.',
       yakAlt: S.yak ? 'Desenler tavanda; diski değiştirince değişir.' : 'Lamba kapalı. Dokun, yansısın.', yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
       dg: DG.map(function (d, i) { var on = i === S.dg; return { k: d[0], src: d[2], cls: on ? 'on' : '', bcls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ dg: i, dgOto: false }); } }; }),
@@ -671,11 +680,13 @@ def js():
 }"""
 
 
+CSS2 = '\n/* 29 Eki (kullanıcı: "çok fazla yeşil boğuyor; kötü ve sıkıcı; özenilmiş ve satış odaklı görünmüyor"): ana buton ve rozet yılbaşı\n   kırmızısı, stok kurdelesi altın, yapışkan çubuk beyaz; paket satırı LunaDream gibi sade; Işığı kapat kaydırmalı karşılaştırma. */\n.pg .al .btn1{background:#B3362B;color:#fff;box-shadow:0 4px 0 #7A1F17}\n.pg .al .btn1 .b-ic>span{color:#fff}.pg .al .btn1 svg{stroke:#F6D58C}\n.pg .fy-rozet,.pg .fiyat .rozet{background:#B3362B;color:#fff}\n.pg .stk{background:#E3B65A;color:#3A2A08;box-shadow:0 0 0 3px #fff}.pg .stk i{background:#B3362B}\n.pg .yapis{background:#fff;box-shadow:0 -1px 0 #ECE7E1,0 -8px 24px rgba(13,38,28,.08)}\n.pg .yapis .y-yazi{color:#123A2A}.pg .yapis .y-yazi span{color:#5C6078}.pg .yapis .y-yazi .sayac-ay circle{stroke:#C9CED8}\n.pg .yapis .btn1{background:#B3362B;color:#fff;box-shadow:0 3px 0 #7A1F17}\n.pg .yapis .karo{background:#F6F3EE}\n.pg .pk-bas::after{display:none}\n.pg .pk-bas .ays-k{color:#5C6078;font-weight:600}.pg .pk-bas .ays-k svg{display:none}\n.ka{position:relative;margin-top:14px;height:420px;border-radius:20px;overflow:hidden;background:#05100B;isolation:isolate}\n.ka:focus-within{box-shadow:0 0 0 3px #E3B65A}\n.ka img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}\n.ka-off{position:absolute;inset:0;overflow:hidden;z-index:1;transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka-off img{filter:brightness(.16) saturate(.2);transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka-cz{position:absolute;inset:0;z-index:2;pointer-events:none;transition:transform .9s cubic-bezier(.2,.7,.2,1)}\n.ka.el .ka-off,.ka.el .ka-off img,.ka.el .ka-cz{transition:none}\n.ka-cz::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:#F3D58C;box-shadow:0 0 12px rgba(243,213,140,.7)}\n.ka-cz i{position:absolute;left:-22px;top:50%;display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}\n.ka-cz svg{width:22px;height:22px;fill:none;stroke:#123A2A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}\n.ka-et{position:absolute;top:14px;z-index:3;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;pointer-events:none}\n.ka-et1{left:14px;background:rgba(0,0,0,.6);color:#fff}.ka-et2{right:14px;background:#F3D58C;color:#3A2A08}\n.ka-in{position:absolute;inset:0;z-index:4;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y;-webkit-appearance:none;appearance:none}\n.ka-alt{display:flex;gap:8px;margin-top:12px}\n.ka-alt span{flex:1;padding:10px 4px;border-radius:12px;background:#F6F3EE;font-size:12.5px;white-space:nowrap;text-align:center;color:#123A2A}\n@media (prefers-reduced-motion:reduce){.ka-off,.ka-off img,.ka-cz{transition:none}}\n'
+
 DOSYA = 'YilbasiAgaci.dc.html'
 
 
 def sayfa():
-    css = O.tema_css(dict(TEMA, ek='')) + U.CSS + O.CSS + '\n' + OS.CSS + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('#123A2A', '#2F6B45', '#2E9E62', '1.2s') + UST_CSS
+    css = O.tema_css(dict(TEMA, ek='')) + U.CSS + O.CSS + '\n' + OS.CSS + CSS + US.URS_CSS + SERIT_OK_CSS + MESAJ_CSS + tk_css('#123A2A', '#2F6B45', '#2E9E62', '1.2s') + UST_CSS + CSS2
     return U.head(AD, css, TEMA['font']) + govde()
 
 

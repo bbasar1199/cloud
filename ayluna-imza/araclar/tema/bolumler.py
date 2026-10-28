@@ -101,8 +101,12 @@ GORSEL = re.compile(r'(<img\b[^>]*?\bsrc=")(/_blob/[0-9a-f]{32})(")')
 ATLA = re.compile(r'<(svg|style|script)\b.*?</\1>', re.S)
 
 
-def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20, kaynak='section'):
-    """Parça html'i → (Liquid parçaları [(ham_mi, metin)], ayarlar). Aynı yazı tek ayara bağlanır (masaüstü kopyası, gece kopyası)."""
+def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20, kaynak='section', kararli=False):
+    """Parça html'i → (Liquid parçaları [(ham_mi, metin)], ayarlar). Aynı yazı tek ayara bağlanır (masaüstü kopyası, gece kopyası).
+    kararli (29 Eki, yılbaşı canlıda yazılar kaydı: tasarımda yazı sırası değişince şablonda kayıtlı eski değerler başka yerlere düştü):
+    ayar kimliği sıra numarası değil yazının/görselin özeti; sıra değişse de kayıtlı değer kendi yazısında kalır."""
+    import hashlib
+    oz = lambda x: hashlib.md5(x.encode('utf-8')).hexdigest()[:8]
     yasak = [(m.start(), m.end()) for m in ATLA.finditer(h)]
     def yasakta(i): return any(a <= i < b for a, b in yasak)
     bul = []
@@ -122,7 +126,7 @@ def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20, kaynak='section'):
         if tur == 'm':
             if deger not in kim:
                 if ny >= en_cok_yazi: continue
-                ny += 1; kim[deger] = 'm%d' % ny
+                ny += 1; kim[deger] = ('y' + oz(deger)) if kararli else 'm%d' % ny
                 tip = 'text' if len(deger) <= 90 else 'textarea'
                 ayar.append({'type': tip, 'id': kim[deger], 'label': kisalt('Yazı: ' + deger, 60), 'default': deger})
             sol = re.match(r'\s*', ek).group(0); sag = ek[len(ek.rstrip()):]
@@ -131,7 +135,7 @@ def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20, kaynak='section'):
             anahtar = 'img:' + deger
             if anahtar not in kim:
                 if ng >= en_cok_gorsel: continue
-                ng += 1; kim[anahtar] = 'g%d' % ng
+                ng += 1; kim[anahtar] = ('r' + oz(deger)) if kararli else 'g%d' % ng
                 ayar.append({'type': 'image_picker', 'id': kim[anahtar], 'label': kisalt('Görsel %d%s' % (ng, (': ' + ek) if ek else ''), 60)})
             g = kim[anahtar]
             parca += [(True, h[i:bas]), (False, '{%%- if %s.settings.%s -%%}{{ %s.settings.%s | image_url: width: 1600 }}{%%- else -%%}%s{%%- endif -%%}' % (kaynak, g, kaynak, g, deger))]
@@ -377,7 +381,7 @@ def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
         bloklar, vakalar, satin = [], '', False
         for n, (gt, et, h) in kume:
             tip = 'p%02d' % (n + 1)
-            p, ayar = ayarla(h, kaynak='block')
+            p, ayar = ayarla(h, kaynak='block', kararli=(pano == 'YilbasiAgaci'))
             tpl = '<template class="ay-parca">' + liquid([(True, acilis)] + p + [(True, '</div>')]) + '</template>'
             sinif, ek = 'ay-tb', ''  # tema bloğu sarmalayıcısı; tasarımdaki sınıflarla çakışmayan ad (28 Eki: 'ay-blok' ana sayfa tasarımının sınıfıydı, sade sayfaları bozuyordu)
             if gt == 'satin': satin = True
