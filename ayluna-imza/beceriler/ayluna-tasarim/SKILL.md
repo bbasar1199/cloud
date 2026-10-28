@@ -322,3 +322,4 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Ürüne özel sayfanın paleti ürünün kendi kutusundan/ambalajından alınır (28 Eki, yılbaşı ağacı: pudra + çam yeşili + yaldız + kozalak kırmızısı). Hazır Noel şablonu (pastel kırmızı-yeşil, serpiştirilmiş altın noktalar) yok.
 - Özellik ve güven kartlarında ikon dizisi kullanma (28 Eki: "emoji gibi, beğenmedim"); yerine fotoğraflı kart ya da ikonsuz düz liste. Baskı öğeleri yalnız gerçek veriden: ay sonu fiyatı, ürün alanındaki stok, alan doluysa "Dün N kişi".
 - "Emoji benefit" = LunaDream "Sihirli özellikler" kartları (2×2, solda 28 px ürüne özel çalışan gösterge, başlık + tek satır). Her imza sayfada ürüne özel uyarlanır. Baskı öğeleri küçük: satır ya da kurdele, büyük kart değil (28 Eki).
+- Her imza ürün sayfasında video bölümü olur (28 Eki: "videosuz güven unsuru azalıyor"): temada ay-videolar, kart başına video seçici, video yoksa kapak fotoğrafı.

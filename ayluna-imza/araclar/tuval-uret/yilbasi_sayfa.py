@@ -96,6 +96,13 @@ CSS = r"""
 .adm figcaption b i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lac);color:#fff;font-style:normal;font-size:12px}
 .qr{margin:12px 16px 0;padding:12px 14px;border-radius:14px;background:#F6F7F9;color:var(--lac);font-size:13px}
 .pg{--lac:#123A2A;--kirmizi:#8E2A22}
+.vid{position:relative;flex:0 0 172px;height:306px;scroll-snap-align:start;padding:0;border:0;border-radius:20px;overflow:hidden;background:#0D261C;cursor:pointer;color:#fff;text-align:left;font:inherit}
+.vid img,.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,24,17,.88) 0,rgba(8,24,17,0) 52%)}
+.vid-oyna{position:absolute;left:50%;top:42%;z-index:1;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,251,.94);box-shadow:0 6px 16px rgba(8,24,17,.35)}
+.vid-oyna svg{width:22px;height:22px;fill:#123A2A;margin-left:3px}
+.vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
+.vid-alt b{font-size:14px}.vid-alt span{font-size:13px;color:#E9DDBF}
 /* 6. tur (28 Eki, kullanıcı: "emoji benefit kısmını LunaDream'den al, bu ürüne özel yap"): LunaDream "Sihirli özellikler" kurumsal kart dili
    (2×2 beyaz kart, solda 28 px çalışan gösterge, başlık + tek satır). Göstergeler ürüne özel; yalnız transform/opacity. */
 .ozb{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B5246}
@@ -442,11 +449,15 @@ DIZI = '''<div class="dizi" aria-hidden="true"><svg viewBox="0 0 390 34" preserv
 
 
 VIDEO = """
-  <!-- Videolar: temada ayrı bölüm (ay-videolar; ürünün Shopify'daki videoları, ör. montaj videosu). Tasarımda kurulum karesi. -->
-  <section class="bolum px" id="videolar">
-    <h2 class="bas-y h2">Videoda<br>gör<span class="n">.</span></h2>
-    <p class="alt-b">Kutudan çıkıp tavanda yanana kadar.</p>
-    <figure class="vd"><img src="@@yb-adim3@@" alt="Kurulum videosu karesi"><span class="oy" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"></path></svg></span><figcaption>Kurulum videosu</figcaption></figure>
+  <!-- Videolar (28 Eki, kullanıcı: "ürün videolarını da koyalım, videosuz güven unsuru azalıyor"): LunaDream'deki video şeridi.
+       Temada ayrı bölüm (ay-videolar): her kartın video seçicisi var; video seçilmemişse kapak fotoğrafı görünür (bölüm hep görünür).
+       Ürünün Shopify videoları da buraya gelir. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
+  <section class="bolum" id="videolar">
+    <div class="px"><h2 class="bas-y h2">Kutudan tavana<br>nasıl görünüyor<span class="n">?</span></h2><p class="alt-b">Kurulumu da ışığı da kendi gözünle gör.</p></div>
+    <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
+      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid ay-vid" type="button" aria-label="{{v.al}}"><sc-if value="{{v.gercek}}" hint-placeholder-val="{{false}}"><video src="{{v.vsrc}}" poster="{{v.src}}" muted loop playsinline preload="metadata"></video></sc-if><sc-if value="{{v.kapak}}" hint-placeholder-val="{{true}}"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"></sc-if><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
+      <span aria-hidden="true" style="flex: 0 0 6px"></span>
+    </div>
   </section>
 """
 
@@ -508,6 +519,12 @@ def js():
     ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
+    var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
+    var vids = VID && VID.length ? VID.map(function (v) { return { t: v.alt || 'Yılbaşı Ağacı videosu', k: 'Dokun, sesli izle', al: (v.alt || 'Yılbaşı Ağacı videosu') + ': videoyu oynat', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; }) : [
+      { t: 'Kutudan çıkanlar', al: 'Kutudan çıkanlar', k: 'Kutu açılışı', src: B + '""" + OS.BL['yb-kutu'] + """', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Ağacı sarmak', al: 'Ağacı sarmak', k: 'Kurulum', src: B + '""" + OS.BL['yb-adim1'] + """', pos: '50% 50%', gercek: false, kapak: true },
+      { t: 'Abajuru giydirmek', al: 'Abajuru giydirmek', k: 'Süsleme', src: B + '""" + OS.BL['yb-adim3'] + """', pos: '50% 50%', gercek: false, kapak: true },
+      { t: 'Işık kapanınca tavan', al: 'Işık kapanınca tavan', k: 'Tavanda yılbaşı', src: B + '""" + OS.BL['yb-tavan'] + """', pos: '50% 30%', gercek: false, kapak: true }];
     var PARCA = """ + json.dumps(parca, ensure_ascii=False) + """;
     var DG = """ + json.dumps(dg, ensure_ascii=False) + """, GUNA = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
     var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'], AYU = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
@@ -549,7 +566,7 @@ def js():
       tkBas: yetisir ? 'Yılbaşından önce kapında olması için son sipariş günü.' : 'Bu yıl yılbaşına yetişmeyebilir.', tkAlt: yetisir ? ('Yılbaşına ' + gunYil + ' gün var. Bugün verirsen ' + kd.getDate() + ' ' + AYU[kd.getMonth()] + ' kargoda.') : ('Tahmini teslim: ' + teslim + '.'),
       ser: SER.concat([SER[0]]).map(function (t) { return { t: t }; }), serY: -24 * serI, serCls: serI === 0 ? 'ser-iz anlik' : 'ser-iz',
       aysYol: AYY(1 - aysOran), aysBas: AYU[now.getMonth()] + ' fiyatı bitiyor', aysAlt: 'Fiyatlar her ay güncelleniyor; bu fiyat ay sonuna kadar.', aysG: String(aysGun), aysS: String(aysSa), aysAria: AYU[now.getMonth()] + ' fiyatının bitmesine ' + aysGun + ' gün ' + aysSa + ' saat',
-      aysAy: AYU[now.getMonth()], stokVar: stokN > 0, stokN: stokN,
+      vids: vids, aysAy: AYU[now.getMonth()], stokVar: stokN > 0, stokN: stokN,
       nkNo: S.nk + 1, nkAd: PARCA[S.nk][0], nkAlt: PARCA[S.nk][1],
       """ + nk + """alaGit: alaGit, faq: """ + json.dumps(faq(), ensure_ascii=False) + """, kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
     };

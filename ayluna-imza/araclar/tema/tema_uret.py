@@ -96,7 +96,7 @@ def main():
         kart = re.findall(r"\{ t: '([^']+)', al: '[^']*', k: '([^']*)', src: B \+ '([0-9a-f]{32})'", js)
         bl = [('v%d' % (n + 1), 'video', {'baslik': t, 'alt': k}) for n, (t, k, _) in enumerate(kart)]
         ayar = {'baslik': 'Işık kapanınca ne oluyor', 'urun': h, 'tasarim': True, 'tasarim_gorsel': ','.join(b + '.jpg' for _, _, b in kart)}
-        if pano == 'YilbasiAgaci': ayar.update(baslik='Kutudan tavana, videoda gör', tasarim=False)  # 28 Eki: ürünün videosu (montaj) yüklenince görünür
+        if pano == 'YilbasiAgaci': ayar.update(baslik='Kutudan tavana nasıl görünüyor')  # 28 Eki: video seçilmemiş kartta kapak fotoğrafı; bölüm hep görünür
         return ('%s-video' % SONEK[pano][0], 'ay-videolar', bl, ayar)
     OZEL = dict((h, p) for h, p in URUN_PANO if p in SONEK)
     URUN_BOLUMLERI = []
