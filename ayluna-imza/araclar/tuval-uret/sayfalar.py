@@ -144,7 +144,7 @@ ILETISIM = ("""
 # ——— Tüm ürünler ———
 KAT = {'lunadream-gece-lambasi': 'Gece lambaları', 'lamba': 'Gece lambaları', 'ayluna-cocuk-gece-feneri': 'Gece lambaları', 'ask-saati': 'Gece lambaları',
        'sunset-lamba': 'Gece lambaları', 'dokunmatik-ambiyans-lamba': 'Gece lambaları', 'lunadream-gece-lambasi-v2': 'Gece lambaları',
-       'galayx-usb-projektor': 'Projektörler', 'ayluna-galaksi-night-projektor': 'Projektörler', 'galaksiambiyanisigi': 'Projektörler',
+       'galayx-usb-projektor': 'Projektörler', 'ayluna-galaksi-night-projektor': 'Projektörler', 'galaksiambiyanisigi': 'Projektörler', 'yilbasi-agaci-projektor-lamba': 'Projektörler',
        'yildiz-isigi-nemlendirici': 'Nemlendiriciler', 'astronot-oda-nemlendirici-aroma-difuzor': 'Nemlendiriciler', 'aroma-terapi-nemlendirici': 'Nemlendiriciler',
        'ayluna-retro-mini-pikap': 'Diğer', 'egitici-akilli-cizim-tahtasi': 'Diğer'}
 URUNLER = [dict(h=h, ad=ad, p=p, c=(c if c and c > p else None), var=v, kat=KAT[h], src=B + A.U(h)) for h, ad, p, c, v in A.URUN]

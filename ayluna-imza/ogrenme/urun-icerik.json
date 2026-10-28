@@ -1871,5 +1871,107 @@
       "Doğrulanmış bir yorumda 'kumandası çalışmıyor' şikâyeti var; kumanda kalitesi kontrol edilmeli.",
       "Ortak: sabit '4.7 (2467)' puanı, rastgele 'X kişi inceliyor' sayısı, her açılışta baştan başlayan sayaç, '90 Gün Para İade' ve başka ürünlere ait WhatsApp kaydırıcısı kaldırıldı."
     ]
+  },
+  {
+    "handle": "yilbasi-agaci-projektor-lamba",
+    "ad": "Yılbaşı Ağacı Projektör Lamba",
+    "kisa": "Kendin yaptığın minik yılbaşı ağacı; USB’ye takınca tavana yılbaşı desenleri yansıtır.",
+    "fiyat": 999.0,
+    "eski": null,
+    "stokta": true,
+    "renk": {
+      "vurgu": "#2E7D4F",
+      "aciklama": "Tüylü süs çubuklarının yılbaşı yeşili."
+    },
+    "gorseller": [
+      {
+        "dosya": "urunler/yilbasi-agaci-projektor-lamba/01.jpg",
+        "tur": "yasam",
+        "not": ""
+      },
+      {
+        "dosya": "urunler/yilbasi-agaci-projektor-lamba/02.jpg",
+        "tur": "kutu",
+        "not": ""
+      },
+      {
+        "dosya": "urunler/yilbasi-agaci-projektor-lamba/03.jpg",
+        "tur": "kurulum",
+        "not": ""
+      },
+      {
+        "dosya": "urunler/yilbasi-agaci-projektor-lamba/04.jpg",
+        "tur": "kurulum",
+        "not": ""
+      }
+    ],
+    "ozellikler": [
+      {
+        "baslik": "Kendin yap yılbaşı ağacı",
+        "aciklama": "Yeşil tüylü çubukları USB kablonun etrafına sarıp ağaç şekli verirsin; altın şeritler ve inci çıkartmalarla süslersin."
+      },
+      {
+        "baslik": "Tavana yılbaşı desenleri",
+        "aciklama": "Değiştirilebilir desen diskleri: klasik yılbaşı, kar taneleri, ren geyikleri, kardan adam, çanlar ve yeni yıl mesajı."
+      },
+      {
+        "baslik": "USB ile çalışır",
+        "aciklama": "Telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; adaptör kutuda yok."
+      },
+      {
+        "baslik": "Hediye kutusunda gelir",
+        "aciklama": "Yılbaşı baskılı kutu, kağıt dolgu ve montaj kartıyla; açması da kurması da hediyenin parçası."
+      }
+    ],
+    "paket": [],
+    "ek_teklif": [],
+    "secenek": [],
+    "kutuda": "USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, \"Merry Christmas\" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok.",
+    "sss": [
+      {
+        "s": "Kargo ücretli mi, ne zaman gelir?",
+        "c": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."
+      },
+      {
+        "s": "Beğenmezsem iade edebilir miyim?",
+        "c": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."
+      },
+      {
+        "s": "Nasıl ödeyebilirim?",
+        "c": "Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez."
+      },
+      {
+        "s": "Garantisi var mı, sorun olursa ne yapacağım?",
+        "c": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."
+      },
+      {
+        "s": "Nasıl kurulur?",
+        "c": "Tüylü çubukları kabloya sarıp ağaç şekli verirsin, desenli çıkartmayı altın abajura yapıştırıp takarsın, istersen altın şerit ve inci çıkartmalarla süslersin. Kutudaki kartın QR kodunda montaj videosu var. USB ucunu ve projektör lensini kapatma."
+      },
+      {
+        "s": "Kutu içeriğinde neler var?",
+        "c": "USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, \"Merry Christmas\" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok."
+      },
+      {
+        "s": "Diski nasıl değiştiririm?",
+        "c": "Fişi çek, abajuru kaldır, diski çıkar, yenisini tak ve abajuru geri koy. Sonra lambayı tavana çevir."
+      },
+      {
+        "s": "Çocuklar yapabilir mi?",
+        "c": "İnci çıkartmalar gibi küçük parçalar var; küçük çocuklar bir yetişkinle birlikte yapsın."
+      }
+    ],
+    "loox": {
+      "sayi": 0,
+      "ortalama": null,
+      "yorum_teyit": false,
+      "not": "Yeni ürün, yorum yok."
+    },
+    "duyuru": "Kendin yap yılbaşı ağacı · tavana yılbaşı desenleri · USB ile çalışır",
+    "sorunlar": [
+      "Ürün Shopify’da henüz yok; handle önerisi yilbasi-agaci-projektor-lamba, fiyat geçici (999).",
+      "Desen diski sayısı teyitsiz (afiş \"6+\").",
+      "Tavan görseli satıcı afişinden (yazısız kısım)."
+    ]
   }
 ]

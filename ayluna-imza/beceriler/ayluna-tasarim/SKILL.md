@@ -317,3 +317,4 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Teyitli (mağaza sayfası, 22 Eki): LunaDream hareket sensörlü değil; şarj olurken de kullanılabilir.
 - Sepet (28 Eki): karşılaştırma fiyatından düşüş her zaman görünür (satırda −%X + üstü çizili; özette Ürünler → İndirim → Kargo → Toplam). Sepetteki baskı yalnız gerçeğe bağlı: ay sonu fiyat bitişi ("Ekim fiyatı X gün Y sa sonra bitiyor") + ürün alanındaki gerçek stok kurdelesi. Sepet yazıları ürün sayfası ölçeğinde: başlık 20, satır 14, özet 13, Toplam 22.
 - Sepet zemini beyaz (28 Eki: "hafif sarı boğuyor"); krem yalnız vitrin sayfalarında.
+- Yeni ürün ekleme (28 Eki): sade sayfa kalıbıyla, ürün listelerinin sonuna (ana sayfa görsel seçicileri kaymaz). Kullanıcıya tam tema değil, yalnız yeni/değişen dosyalar verilir; görseller Shopify ürününe yüklenir.

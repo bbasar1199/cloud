@@ -11,6 +11,8 @@ import tema_uret as T
 TEMA = os.path.join(KOK, 'tema')
 
 ham = json.load(open(os.path.join(KOK, 'ogrenme', 'canli-urunler.json')))
+# Mağazada henüz olmayan yeni ürün denemesi: BENZETIM_EK_URUN='[{products.json ürünü}]' (28 Eki, yılbaşı ağacı)
+ham['products'] += json.loads(os.environ.get('BENZETIM_EK_URUN', '[]'))
 URUNLER = ham['products'] if isinstance(ham, dict) else ham
 FIYAT_DEGIS = json.loads(os.environ.get('BENZETIM_FIYAT', '{}'))  # {"handle": kuruş} → canlı fiyat farkı denemesi
 ELLE = json.loads(os.environ.get('BENZETIM_ELLE', '{}'))  # {"handle": {"dun": n, "kd": n}} → ürün alanları ayluna.dun_satis / stok_kurdele

@@ -1,0 +1,98 @@
+{%- comment -%} Ayluna · diğer ürünler sayfası (sade panolu ürünler). Parçalar bu bölümün blokları; içerik ürünün kendi panosundan.
+  Panosu olmayan yeni ürün sade Shopify düzeniyle açılır. araclar/tema/tema_uret.py üretir. {%- endcomment -%}
+{%- case product.handle -%}
+{%- when 'galaksiambiyanisigi', 'ayluna-cocuk-gece-feneri', 'ask-saati', 'yildiz-isigi-nemlendirici', 'astronot-oda-nemlendirici-aroma-difuzor', 'sunset-lamba', 'ayluna-retro-mini-pikap', 'egitici-akilli-cizim-tahtasi', 'aroma-terapi-nemlendirici', 'dokunmatik-ambiyans-lamba', 'lunadream-gece-lambasi-v2', 'yilbasi-agaci-projektor-lamba' -%}
+{%- case product.handle -%}{%- when 'galaksiambiyanisigi' -%}{%- render 'ay-u-galaksiambiyanisigi', parca: 'varlik', urun: product -%}{%- when 'ayluna-cocuk-gece-feneri' -%}{%- render 'ay-u-ayluna-cocuk-gece-feneri', parca: 'varlik', urun: product -%}{%- when 'ask-saati' -%}{%- render 'ay-u-ask-saati', parca: 'varlik', urun: product -%}{%- when 'yildiz-isigi-nemlendirici' -%}{%- render 'ay-u-yildiz-isigi-nemlendirici', parca: 'varlik', urun: product -%}{%- when 'astronot-oda-nemlendirici-aroma-difuzor' -%}{%- render 'ay-u-astronot-oda-nemlendirici-aroma-difuzor', parca: 'varlik', urun: product -%}{%- when 'sunset-lamba' -%}{%- render 'ay-u-sunset-lamba', parca: 'varlik', urun: product -%}{%- when 'ayluna-retro-mini-pikap' -%}{%- render 'ay-u-ayluna-retro-mini-pikap', parca: 'varlik', urun: product -%}{%- when 'egitici-akilli-cizim-tahtasi' -%}{%- render 'ay-u-egitici-akilli-cizim-tahtasi', parca: 'varlik', urun: product -%}{%- when 'aroma-terapi-nemlendirici' -%}{%- render 'ay-u-aroma-terapi-nemlendirici', parca: 'varlik', urun: product -%}{%- when 'dokunmatik-ambiyans-lamba' -%}{%- render 'ay-u-dokunmatik-ambiyans-lamba', parca: 'varlik', urun: product -%}{%- when 'lunadream-gece-lambasi-v2' -%}{%- render 'ay-u-lunadream-gece-lambasi-v2', parca: 'varlik', urun: product -%}{%- when 'yilbasi-agaci-projektor-lamba' -%}{%- render 'ay-u-yilbasi-agaci-projektor-lamba', parca: 'varlik', urun: product -%}{%- endcase -%}
+{%- for block in section.blocks -%}{%- case block.type -%}
+  {%- when '@app' -%}<div class="ay-uyg" {{ block.shopify_attributes }}>{% render block %}</div>
+  {%- else -%}<div class="ay-tb" {{ block.shopify_attributes }}>{%- case product.handle -%}{%- when 'galaksiambiyanisigi' -%}{%- render 'ay-u-galaksiambiyanisigi', parca: block.type, urun: product -%}{%- when 'ayluna-cocuk-gece-feneri' -%}{%- render 'ay-u-ayluna-cocuk-gece-feneri', parca: block.type, urun: product -%}{%- when 'ask-saati' -%}{%- render 'ay-u-ask-saati', parca: block.type, urun: product -%}{%- when 'yildiz-isigi-nemlendirici' -%}{%- render 'ay-u-yildiz-isigi-nemlendirici', parca: block.type, urun: product -%}{%- when 'astronot-oda-nemlendirici-aroma-difuzor' -%}{%- render 'ay-u-astronot-oda-nemlendirici-aroma-difuzor', parca: block.type, urun: product -%}{%- when 'sunset-lamba' -%}{%- render 'ay-u-sunset-lamba', parca: block.type, urun: product -%}{%- when 'ayluna-retro-mini-pikap' -%}{%- render 'ay-u-ayluna-retro-mini-pikap', parca: block.type, urun: product -%}{%- when 'egitici-akilli-cizim-tahtasi' -%}{%- render 'ay-u-egitici-akilli-cizim-tahtasi', parca: block.type, urun: product -%}{%- when 'aroma-terapi-nemlendirici' -%}{%- render 'ay-u-aroma-terapi-nemlendirici', parca: block.type, urun: product -%}{%- when 'dokunmatik-ambiyans-lamba' -%}{%- render 'ay-u-dokunmatik-ambiyans-lamba', parca: block.type, urun: product -%}{%- when 'lunadream-gece-lambasi-v2' -%}{%- render 'ay-u-lunadream-gece-lambasi-v2', parca: block.type, urun: product -%}{%- when 'yilbasi-agaci-projektor-lamba' -%}{%- render 'ay-u-yilbasi-agaci-projektor-lamba', parca: block.type, urun: product -%}{%- endcase -%}</div>
+{%- endcase -%}{%- endfor -%}
+{%- form 'product', product, data-ay-urun-formu: '', data-ay-shopify: '', hidden: 'hidden', class: 'ay-urun-formu' -%}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+  <input type="hidden" name="quantity" value="1">
+{%- endform -%}
+<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="{{ product.id }}"></kaching-bundle></div>
+{%- case product.handle -%}{%- when 'galaksiambiyanisigi' -%}{%- render 'ay-u-galaksiambiyanisigi', parca: 'betik', urun: product -%}{%- when 'ayluna-cocuk-gece-feneri' -%}{%- render 'ay-u-ayluna-cocuk-gece-feneri', parca: 'betik', urun: product -%}{%- when 'ask-saati' -%}{%- render 'ay-u-ask-saati', parca: 'betik', urun: product -%}{%- when 'yildiz-isigi-nemlendirici' -%}{%- render 'ay-u-yildiz-isigi-nemlendirici', parca: 'betik', urun: product -%}{%- when 'astronot-oda-nemlendirici-aroma-difuzor' -%}{%- render 'ay-u-astronot-oda-nemlendirici-aroma-difuzor', parca: 'betik', urun: product -%}{%- when 'sunset-lamba' -%}{%- render 'ay-u-sunset-lamba', parca: 'betik', urun: product -%}{%- when 'ayluna-retro-mini-pikap' -%}{%- render 'ay-u-ayluna-retro-mini-pikap', parca: 'betik', urun: product -%}{%- when 'egitici-akilli-cizim-tahtasi' -%}{%- render 'ay-u-egitici-akilli-cizim-tahtasi', parca: 'betik', urun: product -%}{%- when 'aroma-terapi-nemlendirici' -%}{%- render 'ay-u-aroma-terapi-nemlendirici', parca: 'betik', urun: product -%}{%- when 'dokunmatik-ambiyans-lamba' -%}{%- render 'ay-u-dokunmatik-ambiyans-lamba', parca: 'betik', urun: product -%}{%- when 'lunadream-gece-lambasi-v2' -%}{%- render 'ay-u-lunadream-gece-lambasi-v2', parca: 'betik', urun: product -%}{%- when 'yilbasi-agaci-projektor-lamba' -%}{%- render 'ay-u-yilbasi-agaci-projektor-lamba', parca: 'betik', urun: product -%}{%- endcase -%}
+{%- when 'lunadream-gece-lambasi', 'galayx-usb-projektor', 'lamba', 'ayluna-galaksi-night-projektor' -%}
+{%- else -%}
+    <style>
+    .ay-g-ust{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1136px;margin:0 auto;padding:16px;font-family:"Onest",system-ui,sans-serif}
+    .ay-g-logo{display:flex;align-items:center;gap:8px;color:#1A2142;text-decoration:none}.ay-g-logo b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px}
+    .ay-g-ust nav{display:flex;gap:18px}.ay-g-ust nav a{color:#1A2142;font-weight:600;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+    .ay-g{max-width:760px;margin:0 auto;padding:24px 16px 64px;font-family:"Onest",system-ui,sans-serif;color:#1A2142;line-height:1.6}
+    .ay-g h1{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:34px;line-height:1.1;margin:8px 0 18px}
+    .ay-g a{color:#1A2142}.ay-g input,.ay-g textarea,.ay-g select{width:100%;box-sizing:border-box;min-height:50px;padding:12px 14px;margin:6px 0 12px;border:0;border-radius:12px;background:#FFFDF9;box-shadow:inset 0 0 0 1.5px #E3D8C7;font:inherit;font-size:16px}
+    .ay-g button,.ay-g .ay-g-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;border:0;border-radius:14px;background:#1A2142;color:#fff;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+    .ay-g-urun{display:grid;gap:24px}.ay-g-urun img{width:100%;height:auto;border-radius:20px;background:#EFE6D8}
+    .ay-g-fiyat{font-size:22px;font-weight:700}.ay-g-fiyat s{font-size:15px;font-weight:500;color:#5C6078;margin-left:8px}
+    .ay-g-alt{max-width:1136px;margin:0 auto;padding:24px 16px 40px;color:#5C6078;font:13px "Onest",system-ui,sans-serif}
+    @media (min-width:1024px){.ay-g-urun{grid-template-columns:minmax(0,1fr) 420px;align-items:start}}
+    </style>
+    {%- comment -%} Pano olmayan sayfalar (blog, hesap, yeni ürün) için sade üst ve alt bilgi {%- endcomment -%}
+<header class="ay-g-ust"><a href="{{ routes.root_url }}" class="ay-g-logo" aria-label="Ayluna ana sayfa"><svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24"><circle cx="12" cy="12" r="10" fill="none" stroke="rgba(26,33,66,.45)" stroke-width="1.6"></circle><path d="M12 2a10 10 0 0 1 0 20a7 10 0 0 0 0-20Z" fill="#F2A65A"></path></svg><b>Ayluna</b></a>
+<nav aria-label="Ana menü"><a href="{{ routes.all_products_collection_url }}">Tüm ürünler</a><a href="{{ routes.cart_url }}">Sepet ({{ cart.item_count }})</a></nav></header>
+    <main class="ay-g"><div class="ay-g-urun">
+      <div>{%- for m in product.media limit: 6 -%}{{ m.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.title }}{%- endfor -%}</div>
+      <div>
+        <h1>{{ product.title }}</h1>
+        <p class="ay-g-fiyat">{{ product.price | money }}{%- if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</p>
+        {%- form 'product', product, data-ay-shopify: '' -%}
+          {%- if product.has_only_default_variant -%}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- else -%}<label>Seçenek<select name="id">{%- for v in product.variants -%}<option value="{{ v.id }}"{% unless v.available %} disabled{% endunless %}>{{ v.title }}</option>{%- endfor -%}</select></label>{%- endif -%}
+          <button type="submit"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Sepete ekle{% else %}Tükendi{% endif %}</button>
+        {%- endform -%}
+        {%- for block in section.blocks -%}{%- case block.type -%}{%- when '@app' -%}<div {{ block.shopify_attributes }}>{% render block %}</div>{%- endcase -%}{%- endfor -%}
+        <div class="rte">{{ product.description }}</div>
+      </div>
+    </div></main>
+    <footer class="ay-g-alt"><p>Fiyatlara KDV dahildir. © {{ 'now' | date: '%Y' }} Ayluna</p></footer>
+{%- endcase -%}
+
+{% schema %}
+{
+  "name": "Diğer ürünler sayfası",
+  "class": "ay-bolum",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "p01",
+      "name": "Üst kısım",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "p02",
+      "name": "Galeri ve satın alma",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "p03",
+      "name": "Merak edilenler",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "p04",
+      "name": "Alanlar ne diyor?",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "p05",
+      "name": "Sizden gelen mesajlar",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "p06",
+      "name": "Alt bilgi",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

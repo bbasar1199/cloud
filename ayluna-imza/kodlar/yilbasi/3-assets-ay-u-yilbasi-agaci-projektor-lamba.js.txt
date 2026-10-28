@@ -1,0 +1,52 @@
+/* Ayluna · U-yilbasi-agaci-projektor-lamba bileşeni (araclar/tema/tema_uret.py). Her bölüm bu dosyayı yükler; bileşen bir kez kurulur. */
+(window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {
+
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = Object.assign({ now: Date.now() }, { g: 0, gOto: true, pk: 1, sec: 0 }); }
+  componentDidMount() { var self = this;
+    this.tik = 0; this.iv = setInterval(function () { self.tik++; if (self.state.gOto && self.tik % 5 === 0) self.git((self.state.g + 1) % 4); self.setState({ now: Date.now() }); }, 1000); }
+  git(i) { var el = document.querySelector('.g-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentDidUpdate() { var el = document.querySelector('.g-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    var self = this, S = this.state, B = '/_blob/';
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    function AYE(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return f >= 1 ? 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18Z' : 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    function IKI(n) { return n < 10 ? '0' + n : String(n); }
+    var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
+    var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    var R = { cd: IKI(hh) + ':' + IKI(mi) + ':' + IKI(ss), cdAy: AYE(Math.max(.02, Math.min(1, kalan / 86400000))), cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika',
+      dur: function (e) { if (e && e.preventDefault) e.preventDefault(); } };
+    
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return m.src; }) : ["/_blob/403192141ff415de19d7f08114a1bd74", "/_blob/487093d37ccb10be7cb78ab98f19dc84", "/_blob/d059329bb1316bb397f9b92644998065", "/_blob/1e70f03680e23baed50aea084c92b03e"], AD = "Yılbaşı Ağacı Projektör Lamba";
+    var gal = GAL.map(function (s, i) { return { src: s, alt: AD + ' görseli ' + (i + 1), ay: AYE((i + 1) / GAL.length), acls: i < S.g ? 'lit' : (i === S.g ? 'lit on' : '') }; });
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
+    var PK = [];
+    var paket = PK.map(function (b) { var on = S.pk === b.n; return { t: b.t, alt: b.alt, p: b.p, e: b.e, rib: b.rib, on: on ? 'true' : 'false', cls: on ? 'on' : '', pick: function () { self.setState({ pk: b.n }); } }; });
+    var SEC = [];
+    var secenek = SEC.map(function (n, i) { var on = S.sec === i; return { n: n, on: on ? 'true' : 'false', cls: on ? 'on' : '', pick: function () { self.setState({ sec: i }); } }; });
+    var sp = PK.filter(function (b) { return b.n === S.pk; })[0], tutar = sp ? sp.f : 999.0;
+
+    var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
+    return Object.assign(R, { mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),gal: gal, gKay: gKay, paket: paket, secenek: secenek, kart: TL(Math.round(tutar * 0.95 * 100) / 100, true)});
+  }
+}
+
+Ayluna.baslat(Component);
+});

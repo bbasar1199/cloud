@@ -1182,3 +1182,10 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - Sepet zemini beyaz; site krem kalır.
 - Baskı: C2 son hâl ("Ekim fiyatı X gün Y sa sonra bitiyor" + stok kurdelesi düğmeye yarı biner). B teslim çizelgesi kaldırıldı.
 - Kullanıcıya verilen: `kodlar/nihai/ay-sepet.liquid` (snippets/ay-sepet.liquid tamamı) + ayluna.css/ayluna.js sonundaki baskı blokları.
+
+## Yeni ürün: Yılbaşı Ağacı Projektör Lamba (28 Ekim)
+- Handle: `yilbasi-agaci-projektor-lamba` (kullanıcı Shopify'da bu adresle açmalı). Fiyat geçici 999; canlıda Shopify'dan.
+- Sade sayfa: `canvas/U-yilbasi-agaci-projektor-lamba.dc.html`; görseller `canvas/urunler/yilbasi-agaci-projektor-lamba/` (01 tavan, 02 kutu, 03–04 kurulum).
+- Kullanıcıya verilen: `kodlar/yilbasi/` (+ `kodlar/yilbasi-dosyalar.zip`). Tema 1.0.38 zip'i de hazır (yalnız gerekirse).
+- Simülatör: `BENZETIM_EK_URUN` ile mağazada olmayan ürün denenir.
+- Yeni ürünü sonra eklemek için yol: urun-icerik.json + urun_soru.SORU + anasayfa.URUN (sona) + sayfalar.KAT + site_uret.ADLAR + bloblar (görsel) → urun_sade.py, site_uret, tema_uret.

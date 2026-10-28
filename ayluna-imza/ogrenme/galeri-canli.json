@@ -352,5 +352,23 @@
    "id": "b564e6465b39d2f6ef4f344f8a4f2c49",
    "not": ""
   }
+ ],
+ "yilbasi-agaci-projektor-lamba": [
+  {
+   "id": "403192141ff415de19d7f08114a1bd74",
+   "not": "tavan yansıması: ürün afişinin yazısız sol kısmı"
+  },
+  {
+   "id": "487093d37ccb10be7cb78ab98f19dc84",
+   "not": "kutu içeriği (kullanıcının fotoğrafı)"
+  },
+  {
+   "id": "d059329bb1316bb397f9b92644998065",
+   "not": "kurulum: abajur çıkartması (kullanıcının videosu)"
+  },
+  {
+   "id": "1e70f03680e23baed50aea084c92b03e",
+   "not": "kurulum: abajur takılıyor (kullanıcının videosu)"
+  }
  ]
 }

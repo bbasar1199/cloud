@@ -99,6 +99,13 @@ SORU = {
              ('Şarjlı mı?', 'Evet, USB ile şarj edilip kablosuz kullanılır. Tam şarjla kullanım süresi [teyit].'),
              ('Kutu içeriğinde neler var?', 'Gece feneri, tema diskleri [teyit: 6 mı, 9 mu?], USB şarj kablosu ve kullanım kılavuzu.')],
         sss=['Bluetooth ya da hoparlör var mı?']),
+    # 28 Eki: yeni ürün (kullanıcının kutu fotoğrafı, montaj kartı ve videosu; internette ürüne özel kaynak yok)
+    'yilbasi-agaci-projektor-lamba': dict(
+        urs=[('Bu ürün ne işe yarıyor?', 'Kendin süsleyip kurduğun minik bir yılbaşı ağacı lambası: USB’ye takınca tavana yılbaşı desenleri yansıtır.'),
+             ('Nasıl kurulur?', None),
+             ('Prize takılır mı?', 'USB ile çalışır: telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; USB adaptör kutuda yok.'),
+             ('Kutu içeriğinde neler var?', None)],
+        sss=['Diski nasıl değiştiririm?', 'Çocuklar yapabilir mi?']),
     'galaksiambiyanisigi': dict(
         urs=[('Bu ürün ne işe yarıyor?', 'Tavana ve duvara yıldızlı nebula deseni yansıtan ambiyans ışığı; Bluetooth hoparlörüyle müzik de çalar.'),
              ('Kumandayla neler yapılır?', '14 renk arasında geçiş, desenin hareket hızı (4 kademe) ve açma-kapama.'),

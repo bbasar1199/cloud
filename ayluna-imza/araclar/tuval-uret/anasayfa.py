@@ -35,6 +35,7 @@ URUN = [
     ('aroma-terapi-nemlendirici', 'Aroma Terapi Nemlendirici', 1499, 1999, False),
     ('dokunmatik-ambiyans-lamba', 'Dokunmatik Ambiyans Lamba', 1299.99, None, False),  # canlıda eski fiyat (1.299) yeni fiyattan düşük: gösterilmez
     ('lunadream-gece-lambasi-v2', 'LunaDream Gece Lambası V2', 1449, 1999, False),
+    ('yilbasi-agaci-projektor-lamba', 'Yılbaşı Ağacı Projektör Lamba', 999, None, True),  # 28 Eki yeni ürün; sonda ki ana sayfadaki ilk 8 ve görsel seçicileri kaymasın; fiyat GEÇİCİ (canlıda Shopify'dan)
 ]
 ANA_SAY = 8  # ana sayfada ilk 8 ürün, gerisi "Tüm ürünler"
 
