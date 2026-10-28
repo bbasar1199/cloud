@@ -33,18 +33,20 @@ body{background:#FFFFFF}
 .kargo-serit{display:flex;align-items:center;gap:8px;margin:10px 16px 0;padding:8px 12px;border-radius:10px;background:var(--acik);font-size:12px;font-weight:600}
 .kargo-serit svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--lac);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 /* Ürün satırı */
-.urun{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;margin:12px 16px 0;padding-bottom:10px;border-bottom:1px solid var(--cizgi)}
+.urun{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start;margin:12px 16px 0;padding-bottom:12px;border-bottom:1px solid var(--cizgi)}
 .urun img{width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--acik)}
 .urun b{display:block;font-size:14px;line-height:1.3}
 .urun small{display:block;margin-top:1px;font-size:12px;color:var(--soluk)}
-.urun-alt{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-.adet{display:inline-flex;align-items:center;height:36px;margin:6px 0;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
-.adet button{position:relative;width:36px;height:36px;border:0;background:transparent;font-size:16px}
-.adet button::after{content:"";position:absolute;inset:-6px}
+.u-bas{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.u-bas>span{min-width:0}
+.urun-alt{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-top:8px}
+.adet{display:inline-flex;align-items:center;flex:none;height:32px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.adet button{position:relative;width:32px;height:32px;border:0;background:transparent;font-size:16px}
+.adet button::after{content:"";position:absolute;inset:-8px}
 .adet span{min-width:18px;text-align:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-.urun-fiyat{text-align:right;font-variant-numeric:tabular-nums}
+.urun-fiyat{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right;font-variant-numeric:tabular-nums}
 .urun-fiyat b{display:inline;font-size:14px}
-.sil{position:relative;display:inline-flex;align-items:center;min-height:24px;margin-top:0;padding:0;border:0;background:transparent;font-size:12px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
+.sil{position:relative;flex:none;display:inline-flex;align-items:center;min-height:20px;margin-top:0;padding:0;border:0;background:transparent;font-size:12px;color:var(--soluk);text-decoration:underline;text-underline-offset:3px}
 .sil::after{content:"";position:absolute;inset:-12px -8px}
 /* Siparişine özel: dokununca eklenir, ay dolar */
 .blok-bas{display:flex;align-items:baseline;justify-content:space-between;margin:16px 16px 8px}
@@ -93,7 +95,7 @@ body{background:#FFFFFF}
 .guven span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--soluk);line-height:1.3}
 .guven svg{width:18px;height:18px;fill:none;stroke:var(--lac);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .s-not{margin:0 16px 20px;font-size:12px;color:var(--soluk)}
-.urun-fiyat s{display:block;font-size:12px;color:var(--soluk)}
+.urun-fiyat s{display:block;margin-bottom:1px;font-size:12px;color:var(--soluk)}
 .urun-fiyat i{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:999px;background:#E3EFE7;color:#2E6B4F;font-size:12px;font-style:normal;font-weight:700;vertical-align:1px}
 .bos-s{margin:28px 16px 28px;padding:28px 18px 20px;border-radius:20px;background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--cizgi);text-align:center}
 .bos-s>svg{display:block;margin:0 auto 10px}
@@ -115,9 +117,9 @@ body{background:#FFFFFF}
   <sc-if value="{{dolu}}" hint-placeholder-val="{{true}}"><div class="s-govde"><div class="s-sol">
   <p class="kargo-serit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span>{{kargoSerit}}</span></p>
   <sc-for list="{{satirlar}}" as="u" hint-placeholder-count="1"><div class="urun"><img src="{{u.img}}" alt="{{u.ad}}">
-    <div><b>{{u.ad}}</b><small>{{u.varyant}}</small>
+    <div class="u-sag"><div class="u-bas"><span><b>{{u.ad}}</b><small>{{u.varyant}}</small></span><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></div>
       <div class="urun-alt"><span class="adet"><button type="button" onClick="{{u.azalt}}" aria-label="Azalt">−</button><span aria-live="polite">{{u.adet}}</span><button type="button" onClick="{{u.arttir}}" aria-label="Arttır">+</button></span>
-        <span class="urun-fiyat"><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><i>−%{{u.yuzde}}</i></sc-if><b>{{u.tutar}}</b><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><br><button class="sil" type="button" onClick="{{u.sil}}">Kaldır</button></span></div></div></div></sc-for>
+        <span class="urun-fiyat"><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><s>{{u.eski}}</s></sc-if><span><sc-if value="{{u.eskiVar}}" hint-placeholder-val="{{false}}"><i>−%{{u.yuzde}}</i></sc-if><b>{{u.tutar}}</b></span></span></div></div></div></sc-for>
 
   <!-- Siparişine özel: canlı sepetteki üç teklif. Dokununca eklenir; ay dolar. Mağaza fiyatı düz yazı (üstü çizili değil). -->
   <sc-if value="{{teklifVar}}" hint-placeholder-val="{{true}}"><div class="blok-bas"><b>Siparişine özel</b><span>{{teklifNot}}</span></div>

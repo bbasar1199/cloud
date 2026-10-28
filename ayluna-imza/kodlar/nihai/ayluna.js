@@ -811,7 +811,8 @@
 })();
 
 /* Sepet baskısı (28 Eki, C2): "Ekim fiyatı 3 gün 5 sa sonra bitiyor" (İstanbul saatiyle ay sonu; mağaza fiyatı her ay yükseliyor)
-   + sepetteki ürünün gerçek stok sayısı (ürün alanı ayluna.stok_kurdele; boşsa ya da 0 ise kurdele yok) */
+   + sepetteki ürünün stok sayısı: ürün alanı ayluna.stok_kurdele; alan boşsa ürün sayfasındaki kurdeleyle aynı sayı (LunaDream 18), 0 ise kurdele yok
+   (29 Eki, kullanıcı: "stok zımbırtısı görünmüyor"; canlıda alan boş olduğundan kurdele hiç çıkmıyordu) */
 (function () {
   var AY = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
   var IK = '<svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="#1A2142" stroke-width="1.6"/><path d="M11 2A9 9 0 0 1 11 20Z" fill="#F3B562"/></svg>';
@@ -820,15 +821,16 @@
     var g = Math.floor(s / 1440), sa = Math.floor(s / 60) % 24, dk = s % 60;
     return { ay: AY[ist.getMonth()], t: g ? g + ' gün ' + sa + ' sa' : sa ? sa + ' sa ' + dk + ' dk' : dk + ' dk' };
   }
+  var STOK0 = { 'lunadream-gece-lambasi': 18 };  // ürün sayfasındaki kurdelenin tasarım sayısı (luna_e.py STOK)
   function stok() {
     var C = window.AYLUNA_CANLI || {}, S = window.AylunaSepet && window.AylunaSepet.oku ? window.AylunaSepet.oku() : null, en = null;
-    ((S && S.satirlar) || []).forEach(function (x) { var c = C[x.h], n = c && +c.kd; if (n > 0 && (!en || n < en.n)) en = { n: n, ad: x.ad.split(' ')[0] }; });
+    ((S && S.satirlar) || []).forEach(function (x) { var c = C[x.h], k = c && c.kd, n = k === null || k === undefined || k === '' ? STOK0[x.h] : +k; if (n > 0 && (!en || n < en.n)) en = { n: n, ad: x.ad.split(' ')[0] }; });
     return en;
   }
   function ciz() {
     var el = document.querySelectorAll('.ay-bsk'); if (!el.length) return; var k = kalan(), s = stok();
     var html = '<p class="fg">' + IK + '<span>' + k.ay + ' fiyatı <b>' + k.t + '</b> sonra bitiyor</span></p>' + (s ? '<span class="kd"><i></i>' + s.ad + ': son ' + s.n + ' adet</span>' : '');
-    for (var i = 0; i < el.length; i++) if (el[i].__h !== html) { el[i].__h = html; el[i].innerHTML = html; }
+    for (var i = 0; i < el.length; i++) if (el[i].__h !== html || !el[i].firstChild) { el[i].__h = html; el[i].innerHTML = html; }
   }
   ciz(); setInterval(ciz, 30000); window.addEventListener('ayluna-sepet', function () { setTimeout(ciz, 50); });
   new MutationObserver(function () { if (document.querySelector('.ay-bsk:empty')) ciz(); }).observe(document.documentElement, { childList: true, subtree: true });
