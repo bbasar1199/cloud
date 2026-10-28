@@ -355,7 +355,16 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .kart{flex:0 0 168px;scroll-snap-align:start;background:#FFFDF9;border-radius:20px;border:1.5px solid #E3D8C7;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#1A2142}
 .alt-bilgi{background:#1A2142;color:#B9BED6;margin-top:36px;padding:32px 0 100px;border-radius:28px 28px 0 0}
 .alt-bilgi a{color:#FFFDF9;text-decoration:none;display:flex;align-items:center;min-height:48px}
-.yapis{position:sticky;bottom:0;z-index:5;margin-top:-76px;height:76px;padding:0 12px;background:#1A2142;display:flex;align-items:center;gap:10px;border-radius:20px 20px 0 0}
+.yapis{position:sticky;bottom:0;z-index:5;margin-top:calc(-60px - env(safe-area-inset-bottom,0px));height:calc(60px + env(safe-area-inset-bottom,0px));padding:0 10px env(safe-area-inset-bottom,0px) 12px;background:#1A2142;display:flex;align-items:center;gap:10px;border-radius:20px 20px 0 0;transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s cubic-bezier(.2,.7,.2,1)}
+.yapis[data-ay-cekil]{transform:translateY(calc(100% + 8px));opacity:0;pointer-events:none}
+.y-karo{position:relative;flex:none;width:36px;height:36px;border-radius:10px;overflow:hidden;background:#2A3260}
+.y-karo img{position:absolute;left:50%;bottom:2px;height:32px;width:auto;transform:translateX(-50%)}
+.y-yazi{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2;color:#FFFDF9;font-variant-numeric:tabular-nums}
+.y-yazi b{font-size:14px;font-weight:600}
+.y-yazi>span{display:flex;align-items:center;gap:4px;font-size:12px;color:#B9BED6;white-space:nowrap}
+.y-yazi svg{width:12px;height:12px;flex:none}
+.pg .y-btn{flex:none;width:auto;min-height:48px;height:48px;margin:0;padding:0 22px;border-radius:14px;font-size:15px;box-shadow:0 3px 0 #0C1027}
+@media (prefers-reduced-motion:reduce){.yapis{transition:none}}
 /* Baskı unsurları (Tur 9, kullanıcı: "baskılayıcıları arttıralım"): yalnız gerçek veriyle, veri yoksa gizlenir.
    Sayaç: kampanya bitiş tarihi (tema ayarı). Stok: Shopify envanteri eşik altındaysa. Dün: Shopify Flow'un yazdığı metafield. */
 .canli{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#1A2142}
@@ -364,7 +373,8 @@ button.kt:active,.kt>button:active,.lcip:active{transform:scale(.985)}
 .canli i{flex:none;width:8px;height:8px;border-radius:50%;animation:nabiz 1.8s ease-in-out 3}
 /* Videolar: canlıda blok başına bir Shopify videosu; ekrandayken sessiz döner, dokununca sesli tam ekran */
 .vid{position:relative;flex:0 0 172px;height:306px;scroll-snap-align:start;padding:0;border:0;border-radius:20px;overflow:hidden;background:#1A2142;cursor:pointer;color:#FFFDF9;text-align:left;font:inherit}
-.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid img,.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ay-yok{display:none!important}
 .vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,16,39,.88) 0,rgba(12,16,39,0) 52%)}
 .vid-oyna{position:absolute;left:50%;top:42%;z-index:1;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,249,.94);box-shadow:0 6px 16px rgba(12,16,39,.35)}
 .vid-oyna svg{width:22px;height:22px;fill:#1A2142;margin-left:3px}
@@ -515,10 +525,10 @@ HTML = """<div class="pg" style="padding-bottom: 0">
 
   <!-- Videolar: gerçek ürün videoları; kalır (kullanıcı, 23 Eki: "gerçek ürün videoları olan kısım gitmiş oldu ama"; sadeleştirmede yanlışlıkla kaldırılmıştı).
        Canlıda bloklar = Shopify videoları (kapak = videonun kendi ilk karesi). Video yoksa bölüm hiç görünmez. Ekrandayken sessiz döner; dokununca sesli, tam ekran. -->
-  <section class="bolum gir" id="videolar">
+  <section class="{{vidCls}}" id="videolar">
     <div class="px"><h2 class="h2">Işık kapanınca<br>ne oluyor<span class="n">?</span></h2></div>
     <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">
-      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid" type="button" aria-label="{{v.t}}: videoyu oynat"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
+      <sc-for list="{{vids}}" as="v" hint-placeholder-count="4"><button class="vid ay-vid" type="button" aria-label="{{v.t}}: videoyu oynat"><sc-if value="{{v.gercek}}" hint-placeholder-val="{{false}}"><video src="{{v.vsrc}}" poster="{{v.src}}" muted loop playsinline preload="metadata"></video></sc-if><sc-if value="{{v.kapak}}" hint-placeholder-val="{{true}}"><img src="{{v.src}}" alt="" style="object-position: {{v.pos}}"></sc-if><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span><span class="vid-alt"><b>{{v.t}}</b><span>{{v.k}}</span></span></button></sc-for>
       <span aria-hidden="true" style="flex: 0 0 6px"></span>
     </div>
   </section>
@@ -597,10 +607,12 @@ HTML = """<div class="pg" style="padding-bottom: 0">
   </footer>
 
   <!-- Yapışkan çubuk: canlıda sayfa başından görünür, paket ve buton alanı ekrandayken gizlenir (IntersectionObserver); padding-bottom: env(safe-area-inset-bottom) -->
+  <!-- Yapışkan çubuk (28 Eki, kullanıcı: "burası yapışık kalıp çok fazla alan kaplıyor"; eleştirmenin 1. önerisi): 60 px ince şerit,
+       ürün karosu, ad ve seçim + sayaç tek satırda, 48 px düğme. Paketler ve ana düğme ekrandayken aşağı çekilir (ayluna.js). -->
   <div class="yapis">
-    <span style="position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; overflow: hidden; background: #2A3260"><img class="kesim" src="{{modelSrc}}" alt="" style="height: 38px; bottom: 4px"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; color: #FFFDF9; font-variant-numeric: tabular-nums"><b style="font-size: 15px; font-weight: 600">LunaDream</b><span style="font-size: 12px; color: #B9BED6">{{adetName}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #B9BED6"><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
-    <button class="btn-on" type="button" style="flex: 0 0 150px; width: 150px; min-height: 52px; margin: 0; font-size: 16px; box-shadow: 0 3px 0 rgba(12,16,39,.6)">Satın al</button>
+    <span class="y-karo"><img class="kesim" src="{{modelSrc}}" alt=""></span>
+    <span class="y-yazi"><b>LunaDream</b><span>{{adetName}} · <svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg>{{cdTiny}}</span></span>
+    <button class="btn-on y-btn" type="button">Satın al</button>
   </div>
 </div>
 """
@@ -692,12 +704,15 @@ JS = """class Component extends DCLogic {
     function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
     var cdAy = AYY(Math.round(kalan / 864000) / 100);
     var cdAria = 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika';
-    // Videolar: kapaklar mevcut görsellerden; canlıda gerçek videolar (başlıklar düzenlenebilir)
-    var vids = [
-      { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%' },
-      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%' },
-      { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%' },
-      { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%' }
+    // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): Shopify'da ürünün medyasındaki videolar oynar; video yoksa bölüm görünmez.
+    // Önizlemede tasarımdaki kapaklar.
+    var VID = (window.Ayluna && Ayluna.videolar) ? Ayluna.videolar() : null;
+    var vids = VID ? VID.map(function (v) { return { t: v.alt || 'LunaDream videosu', k: 'Dokun, sesli izle', src: v.poster || '', vsrc: v.src, pos: '50% 50%', gercek: true, kapak: false }; })
+      : [
+      { t: 'Işık kapanınca tavanda masal', k: 'Kız modeli', src: B + '5ce96d9e6f38e8d571ac1cb9e529ec22', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Bir müşterimizin akşamı', k: 'Müşteri videosu', src: B + '7ad3cbbe71680f4ed3027dbd056e391f', pos: '50% 40%', gercek: false, kapak: true },
+      { t: 'Uzay Kaşifi tavanda', k: 'Erkek modeli', src: B + 'b2c8d9b92ad3541b532e3aa108a74735', pos: '50% 45%', gercek: false, kapak: true },
+      { t: 'Disk nasıl takılır', k: 'Kurulum', src: B + '5b284c77c252b08a2974bde8e43de126', pos: '50% 50%', gercek: false, kapak: true }
     ];
     // Müşteri fotoğrafları (Loox foto yorumları)
     // Gerçek müşteri içeriği. Eski sitedeki "mutlu kullanıcı" fotoğraflarının 5'i Higgsfield üretimi (hf_): müşteri diye konmaz; yalnız IMG_4145 (minikesnaftr hikâyesi) alındı.
@@ -805,7 +820,7 @@ JS = """class Component extends DCLogic {
       dnA: 'dn-s' + (S.dn === 0 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''), dnB: 'dn-s' + (S.dn === 1 ? ' on' : self.tik - S.dnT < 1 ? ' ust' : ''),
       // Puan ve sayı canlıda Loox'tan (teyit bekliyor)
       rating: '4,7', reviews: 62, starPct: 94,
-      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, mfoto: mfoto, mesajlar: mesajlar,
+      yolCls: S.yolAc ? 'yol on' : 'yol', sihKiz: S.model !== 'erkek', sihErkek: S.model === 'erkek', stokCls: S.stokAc ? 'stok-kd on' : 'stok-kd', vids: vids, vidCls: 'bolum gir' + (vids.length ? '' : ' ay-yok'), mfoto: mfoto, mesajlar: mesajlar,
       oneQ: oneQ, revRest: revRest, fsira: fsira,
       buyuk: S.buyuk || '', buyukAd: S.buyukAd || '', buyukVar: !!S.buyuk, buyukKapat: function () { self.setState({ buyuk: null }); }, cdLine: cdLine, cdShort: cdShort, cdTiny: cdTiny, cubukAlt: S.adet === 2 ? (l1 !== l2 ? 'Kız + Erkek' : (l1 === 'kiz' ? '2 Kız' : '2 Erkek')) : '1 Adet · ' + (kiz ? 'Kız' : 'Erkek'), cdAy: cdAy, cdAria: cdAria, discs: discs, proj: proj, discName: DISCS[S.disc].n,
       odalar: odalar, odaKay: odaKay, shop: shop, shopCount: PR.length, kayGeri: KAY(-1), kayIleri: KAY(1), galGeri: GALOK(-1), galIleri: GALOK(1), faq: faq,

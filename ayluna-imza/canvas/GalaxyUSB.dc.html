@@ -383,7 +383,7 @@ body{margin:0;background:#F2F4F8}
 .yorum-bas+.mesaj-bol{padding-top:12px;padding-bottom:0}
 .m-etiket{margin:0;font-size:15px;font-weight:700}
 .alt-bilgi a:focus-visible,.yapis button:focus-visible{outline-color:var(--v)}
-html:has(.pg .yapis){scroll-padding-bottom:88px}
+html:has(.pg .yapis){scroll-padding-bottom:72px}
 .yer{margin:16px 0 0;padding:20px 16px;border:1.5px dashed #B8C0D2;border-radius:18px;font-size:14px;color:var(--soluk);text-align:center}
 
 /* 30 gün: 30 çentik sırayla yanar */
@@ -412,9 +412,16 @@ html:has(.pg .yapis){scroll-padding-bottom:88px}
 
 .alt-bilgi{margin-top:44px;padding:36px 0 112px;border-radius:28px 28px 0 0;background:var(--lac);color:var(--acik)}
 .alt-bilgi a{display:flex;align-items:center;min-height:48px;color:#fff;text-decoration:none}
-.yapis{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;height:76px;margin-top:-76px;padding:0 12px;border-radius:20px 20px 0 0;background:var(--koyu)}
-.yapis .karo{width:46px;height:46px;background:#2A3466}
-.yapis .karo img{height:48px;margin-left:-10px}
+/* Yapışkan çubuk (28 Eki, kullanıcı: "çok fazla alan kaplıyor"; eleştirmenin 1. önerisi): 60 px ince şerit, 36 px karo, 48 px düğme;
+   paketler ve ana düğme ekrandayken aşağı çekilir (ayluna.js, data-ay-cekil) */
+.yapis{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;height:calc(60px + env(safe-area-inset-bottom,0px));margin-top:calc(-60px - env(safe-area-inset-bottom,0px));padding:0 10px env(safe-area-inset-bottom,0px) 12px;border-radius:20px 20px 0 0;background:var(--koyu);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.yapis[data-ay-cekil]{transform:translateY(calc(100% + 8px));opacity:0;pointer-events:none}
+.yapis .karo{width:36px;height:36px;border-radius:10px;background:#2A3466}
+.yapis .karo img{height:34px;margin-left:-8px}
+.yapis .y-yazi{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2;color:#fff;font-variant-numeric:tabular-nums}
+.yapis .y-yazi b{font-size:14px;font-weight:600}.yapis .y-yazi span{font-size:12px;color:var(--acik)}
+.pg .yapis .btn1{flex:none;width:auto;min-height:48px;height:48px;margin:0;padding:0 22px;border-radius:14px;font-size:15px;box-shadow:0 3px 0 #0C1027}
+@media (prefers-reduced-motion:reduce){.yapis{transition:none}}
 
 /* Seçenek panosu etiketi */
 .secenek{padding:16px 16px 14px;background:#fff;border-bottom:1px solid var(--cizgi)}
@@ -644,8 +651,8 @@ header.ua-b>.gk{background:#1A2142;color:#FFFFFF}
   <!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
   <div class="yapis">
     <span class="karo"><img src="/_blob/5782766948fef68b7273c061529d6324" alt=""></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; color: #fff; font-variant-numeric: tabular-nums"><b style="font-size: 15px; font-weight: 600">Galaxy USB</b><span style="font-size: 13px; color: var(--acik)">{{adetName}}</span></span>
-    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}" style="flex: 0 0 140px; width: 140px; min-height: 52px; margin: 0">Satın al</button>
+    <span class="y-yazi"><b>Galaxy USB</b><span>{{adetName}}</span></span>
+    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">Satın al</button>
   </div>
 </div>
 </x-dc>

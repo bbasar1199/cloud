@@ -101,7 +101,7 @@ GORSEL = re.compile(r'(<img\b[^>]*?\bsrc=")(/_blob/[0-9a-f]{32})(")')
 ATLA = re.compile(r'<(svg|style|script)\b.*?</\1>', re.S)
 
 
-def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20):
+def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20, kaynak='section'):
     """Parça html'i → (Liquid parçaları [(ham_mi, metin)], ayarlar). Aynı yazı tek ayara bağlanır (masaüstü kopyası, gece kopyası)."""
     yasak = [(m.start(), m.end()) for m in ATLA.finditer(h)]
     def yasakta(i): return any(a <= i < b for a, b in yasak)
@@ -126,7 +126,7 @@ def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20):
                 tip = 'text' if len(deger) <= 90 else 'textarea'
                 ayar.append({'type': tip, 'id': kim[deger], 'label': kisalt('Yazı: ' + deger, 60), 'default': deger})
             sol = re.match(r'\s*', ek).group(0); sag = ek[len(ek.rstrip()):]
-            parca += [(True, h[i:bas] + sol), (False, '{{ section.settings.%s | escape }}' % kim[deger]), (True, sag)]
+            parca += [(True, h[i:bas] + sol), (False, '{{ %s.settings.%s | escape }}' % (kaynak, kim[deger])), (True, sag)]
         else:
             anahtar = 'img:' + deger
             if anahtar not in kim:
@@ -134,7 +134,7 @@ def ayarla(h, en_cok_yazi=40, en_cok_gorsel=20):
                 ng += 1; kim[anahtar] = 'g%d' % ng
                 ayar.append({'type': 'image_picker', 'id': kim[anahtar], 'label': kisalt('Görsel %d%s' % (ng, (': ' + ek) if ek else ''), 60)})
             g = kim[anahtar]
-            parca += [(True, h[i:bas]), (False, '{%%- if section.settings.%s -%%}{{ section.settings.%s | image_url: width: 1600 }}{%%- else -%%}%s{%%- endif -%%}' % (g, g, deger))]
+            parca += [(True, h[i:bas]), (False, '{%%- if %s.settings.%s -%%}{{ %s.settings.%s | image_url: width: 1600 }}{%%- else -%%}%s{%%- endif -%%}' % (kaynak, g, kaynak, g, deger))]
         i = son
     parca.append((True, h[i:]))
     return parca, ayar
@@ -159,7 +159,6 @@ URUN_FORMU = '''{%- form 'product', product, data-ay-urun-formu: '', data-ay-sho
 {%- endform -%}
 <div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="{{ product.id }}"></kaching-bundle></div>
 '''
-OYNA = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg>'
 
 
 def parca_html(acilis, h, ayarli):
@@ -199,40 +198,13 @@ def sema(ad, ayar, bloklar=None):
     return '\n{% schema %}\n' + json.dumps(s, ensure_ascii=False, indent=2) + '\n{% endschema %}\n'
 
 
-def video_bolumu(kod, fontlar, acilis, h):
-    """LunaDream videoları: bloklarla seçilen Shopify videoları (canlıda gerçek oynatma). Video yoksa bölüm görünmez."""
-    b = re.search(r'<h2\b[^>]*>(.*?)</h2>', h, re.S)
-    baslik = duz(b.group(1)) + ('?' if b and '?' in b.group(1) and not duz(b.group(1)).endswith('?') else '') if b else 'Videolar'
-    govde = ('{%- comment -%} Ayluna · videolar. Blok ekle → Video: Shopify\'a (İçerik → Dosyalar) yüklenen video seçilir. {%- endcomment -%}\n'
-             + varliklar(kod, fontlar)
-             + '{%- assign ay_vid = 0 -%}{%- for block in section.blocks -%}{%- if block.type == \'video\' and block.settings.video != blank -%}{%- assign ay_vid = ay_vid | plus: 1 -%}{%- endif -%}{%- endfor -%}\n'
-             + '{%- if ay_vid > 0 -%}\n<div class="ay-statik">' + acilis + '<section class="bolum" id="videolar">\n'
-             + '  <div class="px"><h2 class="h2">{{ section.settings.baslik | escape }}</h2></div>\n'
-             + '  <div class="noscroll" style="display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; padding: 16px 16px 0">\n'
-             + '  {%- for block in section.blocks -%}{%- if block.type == \'video\' and block.settings.video != blank -%}\n'
-             + '    <button class="vid ay-vid" type="button" aria-label="{{ block.settings.baslik | escape }}: videoyu oynat" {{ block.shopify_attributes }}>'
-             + '{{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, preload: \'metadata\', image_size: \'600x\' }}'
-             + '<span class="vid-oyna" aria-hidden="true">' + OYNA + '</span><span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span></button>\n'
-             + '  {%- endif -%}{%- endfor -%}\n  <span aria-hidden="true" style="flex: 0 0 6px"></span></div>\n</section></div></div>\n'
-             + '{%- elsif request.design_mode -%}\n<p class="ay-vid-not">Videolar: soldan "Blok ekle → Video" ile Shopify\'a yüklediğin videoları seç. Video seçilmezse bu bölüm sayfada görünmez.</p>\n{%- endif -%}\n'
-             + UYGULAMA)
-    ayar = [{'type': 'text', 'id': 'baslik', 'label': 'Başlık', 'default': baslik}]
-    blok = [{'type': 'video', 'name': 'Video', 'settings': [
-        {'type': 'video', 'id': 'video', 'label': 'Video'},
-        {'type': 'text', 'id': 'baslik', 'label': 'Başlık', 'default': 'Müşteri videosu'},
-        {'type': 'text', 'id': 'alt', 'label': 'Alt yazı', 'default': ''}]}]
-    return govde + sema('Videolar', ayar, blok)
-
-
 def pano_bolumleri(kod, pano, parcala, tur, urun):
-    """Kendi şablonu olan pano (özel ürün, ana sayfa): [(dosya_adi, etiket, liquid)]. kod: varlık adı (ay-galaxyusb)."""
+    """Parça başına bir bölüm (ana sayfa): [(dosya_adi, etiket, liquid)]. kod: varlık adı (ay-ana)."""
     fontlar, css, govde, js = parcala(pano)
     acilis, ogeler = ust_cocuklar(govde)
     cikti = []
     for n, (gt, et, h) in enumerate(grupla(ogeler), 1):
         dosya = '%s-%02d' % (kod, n)
-        if gt == 'video':
-            cikti.append((dosya, et, video_bolumu(kod, fontlar, acilis, h))); continue
         tpl, ayar = parca_html(acilis, h, True)
         govdeL = ('{%- comment -%} Ayluna · ' + pano + ' · ' + et + '. araclar/tema/tema_uret.py üretir; elle düzenlenmez (yazı ve görseller bölüm ayarından). {%- endcomment -%}\n'
                   + varliklar(kod, fontlar) + yorum_sar(h, tpl + '\n' + kok(tur, urun)))
@@ -254,40 +226,6 @@ def varlik_js(js, pano):
             '(window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {\n' + js + '\nAyluna.baslat(Component);\n});\n')
 
 
-def sade_bolumleri(sade, parcala, ad, ozel, genel):
-    """Varsayılan ürün şablonu (product.json): sade panolu ürünler aynı 6 bölümü paylaşır; her bölüm ürüne göre kendi panosunun
-    parçasını çizer (ayarsız: şablon ortak). Kendi şablonuna geçmemiş özel ürün ilk bölümde tek parça panosuyla, panosuz ürün
-    sade Shopify düzeniyle açılır. sade: [(handle, pano)], ozel: {handle: pano}. → ([(dosya, etiket, liquid)], {pano: (css, js)})"""
-    parcalar, varlik = {}, {}
-    for h, pano in sade:
-        fontlar, css, govde, js = parcala(pano)
-        acilis, ogeler = ust_cocuklar(govde)
-        parcalar[h] = (pano, fontlar, acilis, grupla(ogeler)); varlik[pano] = (css, js)
-    ornek = parcalar[sade[0][0]][3]
-    turler = [t for t, _, _ in ornek]
-    for h, (_, _, _, g) in parcalar.items():
-        assert [t for t, _, _ in g] == turler, 'sade panoların bölüm sırası aynı olmalı: ' + h
-    etiket = [et for _, et, _ in parcalar['lamba' if 'lamba' in parcalar else sade[0][0]][3]]
-    cikti = []
-    for n, tur in enumerate(turler):
-        l = ('{%- comment -%} Ayluna · ürün sayfası (varsayılan şablon) · ' + etiket[n] + '. Her ürün kendi panosunun bu parçasını çizer;\n'
-             '  araclar/tema/tema_uret.py üretir, elle düzenlenmez. {%- endcomment -%}\n{%- case product.handle -%}\n')
-        for h, (pano, fontlar, acilis, g) in parcalar.items():
-            kod = ad(pano)
-            tpl, _ = parca_html(acilis, g[n][2], False)
-            l += ("{%- when '" + h + "' -%}\n" + varliklar(kod, fontlar) + yorum_sar(g[n][2], tpl + '\n' + kok('urun', h))
-                  + ((URUN_FORMU + UYGULAMA_GIZLI) if tur == 'satin' else UYGULAMA) + betik(kod))
-        if n == 0:
-            l += ("{%- when " + ', '.join("'%s'" % h for h in ozel) + " -%}\n"
-                  "  {%- comment -%} Özel ürün henüz kendi şablonunda değilse (KURULUM): tek parça panosu {%- endcomment -%}\n"
-                  "  {%- case product.handle -%}\n" + ''.join("    {%%- when '%s' -%%}{%% render '%s' %%}\n" % (h, ad(p)) for h, p in ozel.items())
-                  + "  {%- endcase -%}\n" + URUN_FORMU + UYGULAMA_GIZLI
-                  + '{%- else -%}\n' + genel)
-        l += '{%- endcase -%}\n'
-        cikti.append(('ay-sade-%02d' % (n + 1), etiket[n], l + sema(etiket[n], [])))
-    return cikti, varlik
-
-
 def sablon_json(dosyalar):
     kim = ['b%02d' % (k + 1) for k in range(len(dosyalar))]
     return json.dumps({'sections': {k: {'type': d} for k, d in zip(kim, dosyalar)}, 'order': kim}, ensure_ascii=False, indent=2) + '\n'
@@ -307,3 +245,88 @@ UYGULAMA_BOLUMU = '''{%- comment -%} Ayluna · uygulama bloğu. Şablonun istedi
 }
 {% endschema %}
 '''
+
+
+# --- Ürün sayfaları: varsayılan şablonda, şablon ataması gerekmez (28 Eki, kullanıcı: "hala sectionlar çalışmıyor … tüm sectionlar
+# erişilebilir değil"; dört ürünün şablonu atanmamıştı, sayfalar tek parça açılıyordu). Her özel ürünün bir "sayfa" bölümü var, tasarımın
+# parçaları o bölümün blokları: düzenleyicide tek tek görünür, yazı/görsel ayarı bloğun içinde, sürüklenir, gizlenir, silinse "Blok ekle"
+# ile geri gelir. Bölüm yalnız kendi ürününde çizilir. Uygulama blokları (Kaching, Loox vb.) blokların arasına konabilir.
+# Loox (kullanıcı: "looxu yüklüyorum direkt senin yaptığın yorum kısmında olması gerekiyor"): yorum parçasına Loox'un kendi kutusu
+# (#looxReviews) gömülü; Loox yerleştirmesi açıkken yorumlar kendiliğinden orada çıkar, blok eklemek gerekmez.
+LOOX = ('<div class="ay-uyg ay-loox"><div id="looxReviews" data-product-id="{{ %s.id }}" class="loox-reviews-default">'
+        '{{ %s.metafields.loox.reviews }}</div></div>\n')
+
+
+def yorum_parcasi(gruplar):
+    """Loox kutusunun gireceği parçanın sırası: tasarımda "[Loox …]" yer tutucusu olan parça; yoksa "… ne diyor?" başlıklı parça."""
+    for k, (_, _, h) in enumerate(gruplar):
+        if 'class="yer"' in h: return k
+    for k, (_, et, _) in enumerate(gruplar):
+        if 'ne diyor' in et: return k
+    return -1
+
+
+def urun_sayfasi(kod, pano, handle, ad_bolum, parcala):
+    """Özel ürünün sayfa bölümü: (liquid, css, js, blok_turleri)."""
+    fontlar, css, govde, js = parcala(pano)
+    acilis, ogeler = ust_cocuklar(govde)
+    gruplar = grupla(ogeler); ly = yorum_parcasi(gruplar)
+    bloklar, vakalar = [], ''
+    for n, (gt, et, h) in enumerate(gruplar):
+        tip = 'p%02d' % (n + 1)
+        p, ayar = ayarla(h, kaynak='block')
+        tpl = '<template class="ay-parca">' + liquid([(True, acilis)] + p + [(True, '</div>')]) + '</template>'
+        vakalar += ("  {%- when '" + tip + "' -%}<div class=\"ay-blok\" {{ block.shopify_attributes }}>" + tpl + kok('urun', handle)
+                    + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
+        bloklar.append({'type': tip, 'name': et, 'limit': 1, 'settings': ayar})
+    l = ('{%- comment -%} Ayluna · ' + ad_bolum + '. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.\n'
+         '  araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız ' + handle + ' ürününde çizilir. {%- endcomment -%}\n'
+         "{%- if product.handle == '" + handle + "' -%}\n" + varliklar(kod, fontlar)
+         + '{%- for block in section.blocks -%}{%- case block.type -%}\n' + vakalar
+         + "  {%- when '@app' -%}<div class=\"ay-uyg\" {{ block.shopify_attributes }}>{% render block %}</div>\n{%- endcase -%}{%- endfor -%}\n"
+         + URUN_FORMU + betik(kod) + '{%- endif -%}\n')
+    s = {'name': ad_bolum, 'class': 'ay-bolum', 'settings': [], 'blocks': bloklar + [{'type': '@app'}]}
+    return l + '\n{% schema %}\n' + json.dumps(s, ensure_ascii=False, indent=2) + '\n{% endschema %}\n', css, js, [b['type'] for b in bloklar]
+
+
+def sade_snippet(kod, pano, handle, parcala):
+    """Sade ürünün parçaları tek snippet'te (parca: 'p01'…); ortak bölüm ürüne göre bunu çizer. → (liquid, css, js, gruplar)"""
+    fontlar, css, govde, js = parcala(pano)
+    acilis, ogeler = ust_cocuklar(govde)
+    gruplar = grupla(ogeler); ly = yorum_parcasi(gruplar)
+    l = ('{%- comment -%} Ayluna · ' + pano + ' parçaları (Diğer ürünler sayfası bölümü çizer). araclar/tema/tema_uret.py üretir. {%- endcomment -%}\n'
+         '{%- if parca == \'varlik\' -%}\n' + varliklar(kod, fontlar) + '{%- elsif parca == \'betik\' -%}\n' + betik(kod) + '{%- else -%}\n{%- case parca -%}\n')
+    for n, (gt, et, h) in enumerate(gruplar):
+        tpl = '<template class="ay-parca">' + liquid([(True, acilis), (True, h), (True, '</div>')]) + '</template>'
+        l += "{%%- when 'p%02d' -%%}" % (n + 1) + tpl + kok('urun', handle) + (LOOX % ('urun', 'urun') if n == ly else '') + '\n'
+    return l + '{%- endcase -%}\n{%- endif -%}\n', css, js, gruplar
+
+
+def sade_sayfasi(sade, ozel, genel):
+    """Diğer ürünler sayfası: sade panolu ürünler aynı blokları paylaşır (ayarsız; içerik ürünün kendi panosundan).
+    sade: [(handle, snippet_adi, gruplar)], ozel: özel ürünlerin handle'ları (kendi bölümleri çizer), genel: panosuz ürün düzeni."""
+    etiket = [et for _, et, _ in sade[0][2]]
+    for h, _, g in sade: assert [t for t, _, _ in g] == [t for t, _, _ in sade[0][2]], 'sade panoların parça sırası aynı olmalı: ' + h
+    cagir = lambda parca: ('{%- case product.handle -%}' + ''.join("{%%- when '%s' -%%}{%%- render '%s', parca: %s, urun: product -%%}" % (h, sn, parca) for h, sn, _ in sade)
+                           + '{%- endcase -%}')
+    l = ('{%- comment -%} Ayluna · diğer ürünler sayfası (sade panolu ürünler). Parçalar bu bölümün blokları; içerik ürünün kendi panosundan.\n'
+         '  Panosu olmayan yeni ürün sade Shopify düzeniyle açılır. araclar/tema/tema_uret.py üretir. {%- endcomment -%}\n'
+         "{%- case product.handle -%}\n{%- when " + ', '.join("'%s'" % h for h, _, _ in sade) + " -%}\n"
+         + cagir("'varlik'") + '\n'
+         + '{%- for block in section.blocks -%}{%- case block.type -%}\n'
+         + "  {%- when '@app' -%}<div class=\"ay-uyg\" {{ block.shopify_attributes }}>{% render block %}</div>\n"
+         + '  {%- else -%}<div class="ay-blok" {{ block.shopify_attributes }}>' + cagir('block.type') + '</div>\n'
+         + '{%- endcase -%}{%- endfor -%}\n' + URUN_FORMU + cagir("'betik'") + '\n'
+         + "{%- when " + ', '.join("'%s'" % h for h in ozel) + " -%}\n"
+         + '{%- else -%}\n' + genel + '{%- endcase -%}\n')
+    bloklar = [{'type': 'p%02d' % (n + 1), 'name': et, 'limit': 1, 'settings': []} for n, et in enumerate(etiket)]
+    s = {'name': 'Diğer ürünler sayfası', 'class': 'ay-bolum', 'settings': [], 'blocks': bloklar + [{'type': '@app'}]}
+    return l + '\n{% schema %}\n' + json.dumps(s, ensure_ascii=False, indent=2) + '\n{% endschema %}\n', [b['type'] for b in bloklar]
+
+
+def urun_sablonu(bolumler):
+    """product.json: [(kimlik, bölüm türü, blok türleri)] → bölümler ve blokları sırasıyla."""
+    s = {}
+    for kim, tur, bl in bolumler:
+        s[kim] = {'type': tur, 'blocks': {b: {'type': b} for b in bl}, 'block_order': list(bl)}
+    return json.dumps({'sections': s, 'order': [k for k, _, _ in bolumler]}, ensure_ascii=False, indent=2) + '\n'

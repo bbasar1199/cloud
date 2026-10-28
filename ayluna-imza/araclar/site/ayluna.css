@@ -435,8 +435,8 @@ html.ay-shop [data-ay-yorum]:not([data-ay-dolu]),html.ay-shop [data-ay-gizli]{di
 
 /* Shopify bölümleri (28 Eki): sayfa bölüm bölüm çizilir (html.ay-coklu). Yapışkan çubuk bölümün içinde kalamayacağı için
    ekrana sabitlenir; uygulama blokları (Loox vb.) bulundukları bölümün altında, sayfa sütununda durur. */
-html.ay-coklu .yapis{position:fixed!important;left:0;right:0;bottom:0;z-index:20;margin:0!important;padding-bottom:env(safe-area-inset-bottom)}
-@media (max-width:1023px){html.ay-coklu body{padding-bottom:76px}}
+html.ay-coklu .yapis{position:fixed!important;left:0;right:0;bottom:0;z-index:20;margin:0!important}
+@media (max-width:1023px){html.ay-coklu body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}}
 .ay-uyg{max-width:760px;margin:0 auto;padding:8px 16px 28px;background:var(--ay-zemin,#fff)}
 .ay-uyg:empty{display:none}
 html.ay-shop .yer:not([data-ay-dolu]){display:none!important}

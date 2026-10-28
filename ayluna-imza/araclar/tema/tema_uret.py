@@ -11,11 +11,12 @@ import site_uret as S
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bolumler as B
 CIKTI = os.path.join(KOK, 'tema')
-SURUM = '1.0.33'
+SURUM = '1.0.34'
 
 # Pano → kullanıldığı yer. Ödeme, sipariş alındı, hesap ve kargo takip Shopify'ın (ve Track123'ün) kendi sayfaları.
-# Kendi ürün şablonu olan özel panolar (28 Eki): bölüm bölüm düzenlenir; ürün Shopify'da bu şablona atanır (KURULUM)
-SONEK = {'LunaDreamE': 'lunadream', 'GalaxyUSB': 'galaxy-usb', 'AyFeneri': 'ayfeneri', 'GalaksiNight': 'galaksi-night'}
+# Özel panolar (28 Eki): varsayılan ürün şablonunda her birinin kendi sayfa bölümü (parçalar blok); şablon ataması gerekmez
+SONEK = {'LunaDreamE': ('lunadream', 'LunaDream sayfası'), 'GalaxyUSB': ('galaxy-usb', 'Galaxy USB sayfası'), 'AyFeneri': ('ayfeneri', 'AyFeneri sayfası'),
+         'GalaksiNight': ('galaksi-night', 'Galaksi Night sayfası')}
 SAYFA_PANO = [('ana', 'Ayluna-Anasayfa', 'ana', 'Ana sayfa'), ('koleksiyon', 'Koleksiyon', 'koleksiyon', 'Koleksiyon'), ('sepet', 'Sepet', 'sepet', 'Sepet'),
               ('arama', 'Arama', 'arama', 'Arama'), ('404', 'Sayfa404', '404', 'Bulunamadı')]
 URUN_PANO = [(h, S.OZEL_SAYFA.get(h, 'U-' + h)) for h, *_ in S.A.URUN]
@@ -78,27 +79,33 @@ def main():
     # 1) Pano snippet'leri
     for _, pano, tur, _ in SAYFA_PANO:
         sn, ham = pano_snippet(pano, tur); yaz('snippets/%s.liquid' % ad(pano), sn); ids(ham)
-    for h, pano in URUN_PANO:  # tek parça snippet yalnız özel ürünlere (kendi şablonuna atanmadan önceki yedek); sade ürünler bölüm bölüm
+    for h, pano in URUN_PANO:  # ürün sayfaları bölüm/blok olarak (1b); burada yalnız kullanılan görseller toplanır
         sn, ham = pano_snippet(pano, 'urun', h); ids(ham)
-        if pano in SONEK: yaz('snippets/%s.liquid' % ad(pano), sn)
     for _, pano, tur in ICERIK_PANO:
         sn, ham = pano_snippet(pano, tur); yaz('snippets/%s.liquid' % ad(pano), sn); ids(ham)
 
-    # 1b) Bölüm bölüm sayfalar (28 Eki): özel ürünler kendi şablonunda, sade ürünler varsayılan ürün şablonunda, ana sayfa
+    # 1b) Bölüm bölüm sayfalar (28 Eki). Ürünler: varsayılan şablonda özel ürün başına bir sayfa bölümü + diğer ürünler bölümü,
+    # tasarımın parçaları blok (şablon ataması gerekmez). Ana sayfa: parça başına bir bölüm.
     def zemin(css):
         z = re.search(r'--zemin:(#[0-9A-Fa-f]{6})', css); return z.group(1) if z else '#F6F1E9'
     def bolum_yaz(liste):
         for dosya, _, l in liste: yaz('sections/%s.liquid' % dosya, l)
     OZEL = dict((h, p) for h, p in URUN_PANO if p in SONEK)
+    URUN_BOLUMLERI = []
     for h, pano in OZEL.items():
-        kod = ad(pano); liste, css, js = B.pano_bolumleri(kod, pano, S.parcala, 'urun', h); bolum_yaz(liste)
+        kod = ad(pano); kisa, isim = SONEK[pano]
+        l, css, js, bl = B.urun_sayfasi(kod, pano, h, isim, S.parcala)
+        yaz('sections/ay-%s.liquid' % kisa, l); URUN_BOLUMLERI.append((kisa, 'ay-' + kisa, bl))
         yaz('assets/%s.css' % kod, B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % kod, B.varlik_js(js, pano))
-        yaz('templates/product.%s.json' % SONEK[pano], B.sablon_json([d for d, _, _ in liste]))
+    SADE = []
+    for h, pano in URUN_PANO:
+        if h in OZEL: continue
+        kod = ad(pano); l, css, js, g = B.sade_snippet(kod, pano, h, S.parcala)
+        yaz('snippets/%s.liquid' % kod, l); SADE.append((h, kod, g))
+        yaz('assets/%s.css' % kod, B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % kod, B.varlik_js(js, pano))
     liste, css, js = B.pano_bolumleri('ay-ana', 'Ayluna-Anasayfa', S.parcala, 'ana', ''); bolum_yaz(liste)
     yaz('assets/ay-ana.css', B.varlik_css(css, zemin(css))); yaz('assets/ay-ana.js', B.varlik_js(js, 'Ayluna-Anasayfa'))
     ANA_SABLON = B.sablon_json([d for d, _, _ in liste])
-    SADE = [(h, p) for h, p in URUN_PANO if h not in OZEL]
-    SADE_LISTE, SADE_VARLIK = None, None
     yaz('sections/ayluna-uygulama.liquid', B.UYGULAMA_BOLUMU)
 
     # 2) Veri ve görseller
@@ -150,8 +157,14 @@ window.AYLUNA_SEPET = {{ cart | json }};
   {{ 'ayluna.css' | asset_url | stylesheet_tag }}
   {% render 'ay-gorseller' %}
   {% render 'ay-canli' %}
-  {%- if template.name == 'product' and settings.galeri_urun -%}
-  <script type="application/json" id="ay-medya">[{%- for i in product.images -%}{"src": {{ i | image_url: width: 1200 | json }}, "alt": {{ i.alt | default: product.title | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+  {%- if template.name == 'product' -%}
+  {%- comment -%} Ürünün Shopify medyası: galeri görselleri (tema ayarı açıksa) ve videolar (sayfadaki video bölümü bunları oynatır) {%- endcomment -%}
+  {%- assign ay_v = '' -%}
+  {%- for m in product.media -%}{%- if m.media_type == 'video' -%}{%- assign ay_k = m.sources | where: 'format', 'mp4' | last -%}
+    {%- capture ay_p -%}{"src": {{ ay_k.url | json }}, "poster": {{ m.preview_image | image_url: width: 600 | json }}, "alt": {{ m.alt | default: '' | json }}}{%- endcapture -%}
+    {%- if ay_v != '' -%}{%- assign ay_v = ay_v | append: ',' -%}{%- endif -%}{%- assign ay_v = ay_v | append: ay_p -%}
+  {%- endif -%}{%- endfor -%}
+  <script type="application/json" id="ay-medya">{"g": [{%- if settings.galeri_urun -%}{%- for i in product.images -%}{"src": {{ i | image_url: width: 1200 | json }}, "alt": {{ i.alt | default: product.title | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}{%- endif -%}], "v": [{{ ay_v }}]}</script>
   {%- endif -%}
   <script>
     window.AYLUNA_SHOPIFY = true;
@@ -202,10 +215,8 @@ window.AYLUNA_SEPET = {{ cart | json }};
       </div>
     </div></main>
     ''' + GENEL_ALT)
-    SADE_LISTE, SADE_VARLIK = B.sade_bolumleri(SADE, S.parcala, ad, OZEL, GENEL_URUN)
-    bolum_yaz(SADE_LISTE)
-    for pano, (css, js) in SADE_VARLIK.items():
-        yaz('assets/%s.css' % ad(pano), B.varlik_css(css, zemin(css))); yaz('assets/%s.js' % ad(pano), B.varlik_js(js, pano))
+    l, bl = B.sade_sayfasi(SADE, list(OZEL), GENEL_URUN)
+    yaz('sections/ay-urun-diger.liquid', l); URUN_BOLUMLERI.append(('diger', 'ay-urun-diger', bl))
     vakalar = ''.join("  {%%- when %s -%%}{%% render '%s' %%}\n" % (', '.join("'%s'" % x for x in el), ad(p)) for el, p, _ in ICERIK_PANO)
     yaz('sections/ayluna-icerik.liquid', '''{%- comment -%} Ayluna · sayfalar. İletişim ve yasal metinlerin tasarım panosu sayfa adresine (handle) göre seçilir;
   diğer sayfalar, blog ve yazılar sade düzenle açılır. {%- endcomment -%}
@@ -266,7 +277,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
     yaz('templates/cart.json', sablon('ayluna-sayfa', {'sayfa': 'sepet'}))
     yaz('templates/search.json', sablon('ayluna-sayfa', {'sayfa': 'arama'}))
     yaz('templates/404.json', sablon('ayluna-sayfa', {'sayfa': '404'}))
-    yaz('templates/product.json', B.sablon_json([d for d, _, _ in SADE_LISTE]))
+    yaz('templates/product.json', B.urun_sablonu(URUN_BOLUMLERI))
     for t in ('page', 'blog', 'article'):
         yaz('templates/%s.json' % t, sablon('ayluna-icerik', bolum='icerik'))
     yaz('templates/password.json', json.dumps({'layout': 'password', 'sections': {'sifre': {'type': 'ayluna-sifre'}}, 'order': ['sifre']}, indent=2) + '\n')

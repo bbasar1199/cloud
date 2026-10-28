@@ -116,21 +116,23 @@ def sablon_ciz(ad, h):
     t = json.load(open(os.path.join(TEMA, 'templates', ad + '.json'), encoding='utf-8'))
     urun = urun_baglam(h) if h else None
     out = []
-    if urun and h in MEDYA:
-        out.append('<script type="application/json" id="ay-medya">%s</script>' % json.dumps([dict(src=i['src'], alt=urun['title']) for i in urun['images']], ensure_ascii=False))
+    if urun:  # layout'taki #ay-medya: galeri görselleri (BENZETIM_MEDYA) ve ürün videoları (BENZETIM_VIDEO)
+        out.append('<script type="application/json" id="ay-medya">%s</script>' % json.dumps(dict(
+            g=[dict(src=i['src'], alt=urun['title']) for i in urun['images']] if h in MEDYA else [],
+            v=[dict(src='/assets/benzetim.mp4', poster='', alt='Bir müşterimizin akşamı')] if h in VIDEO else []), ensure_ascii=False))
+    if urun and h in LOOX:  # Loox yerleştirmesinin betiği gibi: sayfadaki #looxReviews kutusunu biraz sonra doldurur
+        out.append('<script>setTimeout(function () { var l = document.getElementById("looxReviews"); if (l) l.innerHTML = \'<div class="loox-benzetim">Loox yorumları (benzetim)</div>\'; }, 900);</script>')
     for kim in t['order']:
         b = t['sections'][kim]
         if b.get('disabled'): continue
         kaynak, sema = bolum_sema(b['type'])
         ayar = dict((x['id'], x.get('default')) for x in sema.get('settings', []) if 'id' in x); ayar.update(b.get('settings') or {})
-        bloklar = []
+        bloklar, bsema = [], dict((x['type'], x) for x in sema.get('blocks', []))
         for bk in (b.get('block_order') or []):
-            bb = b['blocks'][bk]; bloklar.append(dict(type=bb['type'], settings=bb.get('settings') or {}, shopify_attributes='', html=bb.get('html', '')))
-        if h in VIDEO and sema.get('name') == 'Videolar':
-            bloklar.append(dict(type='video', settings=dict(video=dict(src='/assets/benzetim.mp4'), baslik='Bir müşterimizin akşamı', alt='Müşteri videosu'), shopify_attributes='', html=''))
-        # Loox benzetimi: yorum bölümüne eklenmiş uygulama bloğu
-        if h in LOOX and ('Alanlar ne diyor' in sema.get('name', '') or 'Aileler ne diyor' in sema.get('name', '')):
-            bloklar.append(dict(type='@app', settings={}, shopify_attributes='', html='<div id="looxReviews" class="loox-benzetim">Loox yorumları (benzetim)</div>'))
+            bb = b['blocks'][bk]
+            if bb.get('disabled'): continue
+            ba = dict((x['id'], x.get('default')) for x in bsema.get(bb['type'], {}).get('settings', []) if 'id' in x); ba.update(bb.get('settings') or {})
+            bloklar.append(dict(id=bk, type=bb['type'], settings=ba, shopify_attributes='data-blok="%s"' % bk, html=bb.get('html', '')))
         html = LQ.from_string(lq_hazirla(kaynak)).render(section=dict(id=kim, settings=ayar, blocks=bloklar), product=urun, request=dict(design_mode=False),
                                                          settings=dict(galeri_urun=True))
         out.append('<div id="shopify-section-template--1__%s" class="shopify-section">%s</div>' % (kim, html))
@@ -162,10 +164,7 @@ def rota(yol):
     if m:
         h = m.group(1)
         if h not in CANLI: return None
-        # Özel ürün kendi şablonunda (Shopify'da atanmış gibi); BENZETIM_VARSAYILAN'daki ürünler varsayılan şablonda (atanmamış hâl)
-        pano = dict(T.URUN_PANO).get(h)
-        sonek = T.SONEK.get(pano) if h not in VARSAYILAN else None
-        govde = sablon_ciz('product' + ('.' + sonek if sonek else ''), h)
+        govde = sablon_ciz('product', h)  # bütün ürünler varsayılan şablonda (her ürünün kendi sayfa bölümü, 28 Eki)
         pk = [b for b in (V_URUN.get(h) or {}).get('paket') or []]
         if len(pk) > 1:  # paketli ürün: Kaching ayarı (gizli kutu satın alma bölümünde, <kaching-bundle>)
             bars = [dict(id='bar-%d' % b['n'], title='%d Adet' % b['n'], quantity=b['n']) for b in pk]

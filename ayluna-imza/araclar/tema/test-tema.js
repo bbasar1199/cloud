@@ -94,44 +94,57 @@ let hata = 0; const not = (ok, m) => { console.log((ok ? 'TAMAM ' : 'HATA  ') + 
   await pg.goto(K + '/products/lamba'); await pg.waitForTimeout(2200);
   not(await pg.evaluate(() => document.querySelectorAll('#siparis .btn2').length === 0 && !document.querySelector('#siparis [aria-pressed="true"]')), 'AyFeneri: Kapıda yok, paket seçili değil');
 
-  // 7b) Bölüm bölüm sayfa (28 Eki): Loox bloğu yorum bölümünde ("Alanlar ne diyor?" başlığının altında) görünür, yer tutucu yazı yok;
-  // Dün sayısı ürün alanından, 0 olan stok kurdelesi gizli; bölüm sırası ve sayısı şablondaki gibi
-  await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1800);
-  const yk = await pg.evaluate(() => { const l = document.querySelector('.ay-uyg .loox-benzetim'), s = document.querySelector('.ay-kok .stok-kd');
+  // 7b) Ürün sayfası blok blok (28 Eki): bütün ürünler varsayılan şablonda, her özel ürünün kendi sayfa bölümü, parçalar blok.
+  // Loox kendi kutusunda (#looxReviews) tasarımın yorum bölümünde, blok eklemeden; yer tutucu yazı yok; kutu yeniden çizimde silinmez.
+  // Dün sayısı ürün alanından, 0 olan stok kurdelesi gizli.
+  await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(2200);
+  const yk = await pg.evaluate(() => { const l = document.querySelector('#looxReviews .loox-benzetim'), s = document.querySelector('.ay-kok .stok-kd');
     const b = [...document.querySelectorAll('.ay-kok h2')].find(h => /Alanlar ne diyor/.test(h.textContent));
     return { loox: !!l && l.getBoundingClientRect().height > 0, sira: !!(l && b && (b.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING)),
-      yer: /\[Loox/.test(document.body.innerText), bolum: document.querySelectorAll('.shopify-section').length, kok: document.querySelectorAll('.ay-kok').length,
-      dun: /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
-  await pg.waitForTimeout(1200);
-  const yk2 = await pg.evaluate(() => !!document.querySelector('.ay-uyg .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent));
-  not(yk.loox && yk.sira && !yk.yer && yk.bolum === 16 && yk.kok === 15 && yk.dun && yk.kd && yk2, 'USB: 16 bölüm (bloksuz Loox yer tutucusu gizli), Loox yorum bölümünde, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
-  // LunaDream: video bölümü bloktaki Shopify videosuyla çıkar, dokununca sesli oynar; ürün alanı boşsa tasarımdaki Dün sayısı kalır
-  await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(1500);
+      yer: /\[Loox/.test(document.body.innerText), blok: document.querySelectorAll('.ay-blok').length, kok: [...document.querySelectorAll('.ay-kok')].filter(k => k.childElementCount).length,
+      bolum: document.querySelectorAll('.shopify-section').length, dun: /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent), kd: !!s && getComputedStyle(s).display === 'none' }; });
+  await pg.waitForTimeout(1500);
+  const yk2 = await pg.evaluate(() => !!document.querySelector('#looxReviews .loox-benzetim') && /Dün 7 kişi/.test(document.querySelector('.ay-kok .dun').textContent));
+  not(yk.loox && yk.sira && !yk.yer && yk.blok === 16 && yk.kok === 16 && yk.bolum === 5 && yk.dun && yk.kd && yk2, 'USB: 16 blok, Loox yorum bölümünde kendiliğinden, yer tutucu yok, Dün ürün alanından, 0 stok gizli ' + JSON.stringify(yk) + ' ' + yk2);
+  // Yapışkan çubuk: paketler ve ana düğme ekrandayken çekilir, sonra geri gelir; 60 px
+  const yp = await pg.evaluate(async () => { const y = document.querySelector('.ay-kok .yapis'), d = () => y.hasAttribute('data-ay-cekil');
+    scrollTo(0, 0); await new Promise(r => setTimeout(r, 300)); const ust = d();
+    const p = document.querySelector('.ay-kok .urun-ust .pk'); scrollTo(0, p.getBoundingClientRect().top + scrollY - 200); await new Promise(r => setTimeout(r, 400)); const paket = d();
+    scrollTo(0, document.documentElement.scrollHeight * .6); await new Promise(r => setTimeout(r, 400)); const asagi = d();
+    return { ust, paket, asagi, h: Math.round(y.getBoundingClientRect().height) }; });
+  not(!yp.ust && yp.paket && !yp.asagi && yp.h === 60, 'yapışkan çubuk 60 px, paket alanında çekilir ' + JSON.stringify(yp));
+  // LunaDream: video bölümü ürünün Shopify videosuyla çıkar, dokununca sesli oynar; [video] etiketi yok; Loox "Aileler ne diyor?" altında
+  await pg.goto(K + '/products/lunadream-gece-lambasi'); await pg.waitForTimeout(2200);
   not(await pg.evaluate(() => /Dün 62 kişi/.test(document.querySelector('.ay-kok .dun').textContent)), 'LunaDream: ürün alanı boşsa tasarımdaki Dün sayısı kalır');
-  const vd = await pg.evaluate(() => ({ n: document.querySelectorAll('#videolar .ay-vid video').length, etiket: /\[video\]/.test(document.body.innerText) }));
+  const vd = await pg.evaluate(() => { const s = document.getElementById('videolar'), b = [...document.querySelectorAll('.ay-kok h2')].find(h => /Aileler/.test(h.textContent)), l = document.getElementById('looxReviews');
+    return { n: document.querySelectorAll('#videolar .ay-vid video').length, gor: !!s && getComputedStyle(s).display !== 'none', etiket: /\[video\]/.test(document.body.innerText),
+      loox: !!(l && b && (b.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING)), blok: document.querySelectorAll('.ay-blok').length }; });
   await pg.locator('#videolar .ay-vid').first().click({ force: true }).catch(() => {}); await pg.waitForTimeout(300);
-  const ses = await pg.evaluate(() => { const v = document.querySelector('#videolar .ay-vid video'); return !!v && v.muted === false && v.controls === true; });
-  not(vd.n === 1 && !vd.etiket && ses, 'LunaDream: video bloğu oynar (sesli, denetimli), [video] etiketi yok ' + JSON.stringify(vd) + ' ' + ses);
-  // Tema düzenleyici taklidi: bölüm ayarı değişince Shopify bölümü yeniden gönderir (shopify:section:load); sayfa yeni yazıyı çizer,
-  // diğer bölümler ve sayfanın durumu bozulmaz. Bölüm gizlenince (unload) kalan bölümler çizilmeye devam eder.
+  const ses = await pg.evaluate(() => { const v = document.querySelector('#videolar .ay-vid video'); return !!v && v.muted === false && v.hasAttribute('data-ay-oynuyor'); });
+  not(vd.n === 1 && vd.gor && !vd.etiket && ses && vd.loox && vd.blok === 12, 'LunaDream: 12 blok, ürün videosu oynar (sesli), [video] etiketi yok, Loox yorumlarda ' + JSON.stringify(vd) + ' ' + ses);
+  // Videosu olmayan ürün: video bölümü yok (sahte kapak gösterilmez) — AyFeneri'de video bölümü tasarımda yok; LunaDream'i medyasız denemek için
+  // Galaksi Night ve sade ürün de kendi bloklarıyla açılır
+  await pg.goto(K + '/products/ayluna-galaksi-night-projektor'); await pg.waitForTimeout(1500);
+  not(await pg.evaluate(() => document.querySelectorAll('.ay-blok').length === 15 && !!document.querySelector('.ay-kok .urun-ust .btn1') && !document.getElementById('kok')), 'Galaksi Night: varsayılan şablonda kendi 15 bloğu');
+  // Tema düzenleyici taklidi: blok ayarı değişince Shopify bölümü yeniden gönderir (shopify:section:load); sayfa yeni yazıyı çizer,
+  // diğer bloklar ve sayfanın durumu bozulmaz. Blok silinince kalanlar çizilmeye devam eder.
   await pg.goto(K + '/products/galayx-usb-projektor'); await pg.waitForTimeout(1500);
   const duz = await pg.evaluate(async () => {
-    const s = [...document.querySelectorAll('.shopify-section')].find(x => /İçin rahat olsun/.test(x.textContent));
-    const t = document.createElement('div'); t.innerHTML = s.innerHTML; const tpl = t.querySelector('template.ay-parca');
-    tpl.innerHTML = tpl.innerHTML.replace('İçin rahat olsun', 'Gönül rahatlığıyla al'); t.querySelector('.ay-kok').innerHTML = '';
+    const s = [...document.querySelectorAll('.shopify-section')].find(x => x.querySelector('.ay-blok'));
+    const t = document.createElement('div'); t.innerHTML = s.innerHTML;
+    const tpl = [...t.querySelectorAll('template.ay-parca')].find(x => /İçin rahat olsun/.test(x.innerHTML));
+    tpl.innerHTML = tpl.innerHTML.replace('İçin rahat olsun', 'Gönül rahatlığıyla al'); t.querySelectorAll('.ay-kok').forEach(k => { k.innerHTML = ''; });
     s.innerHTML = t.innerHTML; s.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true, detail: { sectionId: s.id } }));
     await new Promise(r => setTimeout(r, 400));
-    const h = s.querySelector('.ay-kok h2'); const b = [...document.querySelectorAll('.shopify-section')].find(x => /Bu gece tavanda/.test(x.textContent));
-    b.remove(); document.dispatchEvent(new CustomEvent('shopify:section:unload', { detail: {} })); await new Promise(r => setTimeout(r, 1300));
-    return { yazi: h ? h.textContent : '', dolu: [...document.querySelectorAll('.ay-kok')].every(k => k.childElementCount > 0), fiyat: !!document.querySelector('.ay-kok .fiyat-satir'), disk: !!document.querySelector('#diskler .dk-iz button') };
+    const h = [...s.querySelectorAll('.ay-kok h2')].find(x => /Gönül rahatlığıyla/.test(x.textContent));
+    const b = [...document.querySelectorAll('.ay-blok')].find(x => /Bu gece tavanda/.test(x.textContent));
+    b.remove(); document.dispatchEvent(new CustomEvent('shopify:section:load', { detail: {} })); await new Promise(r => setTimeout(r, 1300));
+    return { yazi: !!h, dolu: [...document.querySelectorAll('.ay-kok')].every(k => k.childElementCount > 0), fiyat: !!document.querySelector('.ay-kok .fiyat-satir'), disk: !!document.querySelector('#diskler .dk-iz button') };
   });
-  not(/Gönül rahatlığıyla al/.test(duz.yazi) && duz.dolu && duz.fiyat && duz.disk, 'düzenleyici: değişen bölüm yeniden çizilir, kalanlar sağlam ' + JSON.stringify(duz));
-  // Kendi şablonuna atanmamış özel ürün (Galaksi Night varsayılan şablonda): tek parça panosuyla eksiksiz açılır
-  await pg.goto(K + '/products/ayluna-galaksi-night-projektor'); await pg.waitForTimeout(1500);
-  not(await pg.evaluate(() => !!document.getElementById('kok') && document.getElementById('kok').childElementCount > 0 && !!document.querySelector('.ay-kok .urun-ust .btn1')), 'Galaksi Night varsayılan şablonda: tek parça panosu');
+  not(duz.yazi && duz.dolu && duz.fiyat && duz.disk, 'düzenleyici: değişen blok yeniden çizilir, kalanlar sağlam ' + JSON.stringify(duz));
   // Galeri Shopify ürün görsellerinden (Sunset: benzetimde #ay-medya)
   await pg.goto(K + '/products/sunset-lamba'); await pg.waitForTimeout(1200);
-  not(await pg.evaluate(() => { const m = JSON.parse(document.getElementById('ay-medya').textContent); const i = [...document.querySelectorAll('.ay-kok img')].map(x => x.getAttribute('src')); return m.length > 0 && m.every(x => i.includes(x.src)); }), 'Sunset: galeri ürünün Shopify görsellerinden');
+  not(await pg.evaluate(() => { const m = JSON.parse(document.getElementById('ay-medya').textContent).g; const i = [...document.querySelectorAll('.ay-kok img')].map(x => x.getAttribute('src')); return m.length > 0 && m.every(x => i.includes(x.src)) && document.querySelectorAll('.ay-blok').length === 6; }), 'Sunset: 6 blok, galeri ürünün Shopify görsellerinden');
 
   // 8) Koleksiyonda Sepete ekle
   await pg.goto(K + '/collections/all'); await pg.waitForTimeout(600);

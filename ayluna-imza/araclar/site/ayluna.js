@@ -613,8 +613,21 @@
     for (var i = 0; i < b.length; i++) { if (b[i].closest('.ay-katman') || !sepetDugmesi(b[i].getAttribute('aria-label'))) continue; if (b[i].getAttribute('data-ay-adet') !== String(n)) b[i].setAttribute('data-ay-adet', String(n)); }
     var gs = document.querySelectorAll('.gk-sepet'); for (var j = 0; j < gs.length; j++) if (gs[j].getAttribute('data-ay-adet') !== String(n)) gs[j].setAttribute('data-ay-adet', String(n));
     document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400);
+    yapisBak();
   }
-  window.addEventListener('scroll', function () { document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400); }, { passive: true });
+  // Telefondaki yapışkan çubuk (28 Eki, kullanıcı: "çok fazla alan kaplıyor"; eleştirmenin önerisi): paketler ve ana satın al düğmesi
+  // ekrandayken çubuk aşağı çekilir (data-ay-cekil; yalnız transform/opacity), ekrandan çıkınca geri gelir. Aynı anda iki düğme görünmez.
+  function yapisBak() {
+    var y = document.querySelectorAll('.ay-kok .yapis'); if (!y.length) return;
+    var b = anaBtn(), p = document.querySelector('.ay-kok .urun-ust .pk-liste, .ay-kok .urun-ust .pk'), cek = false;
+    if (b) { var ust = (p || b).getBoundingClientRect().top, alt = b.getBoundingClientRect().bottom; cek = ust < window.innerHeight - 60 && alt > 0; }
+    for (var i = 0; i < y.length; i++) if (cek !== y[i].hasAttribute('data-ay-cekil')) { if (cek) y[i].setAttribute('data-ay-cekil', ''); else y[i].removeAttribute('data-ay-cekil'); }
+  }
+  var yapisKare = false;
+  window.addEventListener('scroll', function () {
+    document.documentElement.classList.toggle('ay-asagi', (window.scrollY || 0) > 400);
+    if (!yapisKare) { yapisKare = true; (window.requestAnimationFrame || setTimeout)(function () { yapisKare = false; yapisBak(); }); }
+  }, { passive: true });
 
   function rota() {
     var h = location.hash.slice(1), ad = decodeURIComponent(h.split('?')[0] || 'index'), T = window.AYLUNA_SAYFALAR || {};
@@ -657,18 +670,22 @@
       if (!SHOP) return l;
       return l.map(function (x) { var u = V.urun[x.h]; if (!u || u.yok) return x; var c = u.c && u.c > u.p ? u.c : null; return Object.assign({}, x, { p: u.p, c: c, var: !!u.stok }); });
     },
-    shopify: SHOP, adres: adres, medya: medya,
+    shopify: SHOP, adres: adres, medya: medya, videolar: videolar,
     cekmeceAc: cekmeceAc, cekmeceKapat: cekmeceKapat, cekmecede: function () { return !!ust(); }, kapidaAc: kapidaAc, kapidaKapat: kapidaKapat, menuAc: menuAc, git: git, siparisVer: siparisVer, bildir: bildir, TL: TL, satir: satir, urunBul: urunBul,
     odemeyeGec: function () { if (!Sepet.oku().satirlar.length) { bildir('Sepetin boş'); return; } git('odeme.html'); }
   };
   document.addEventListener('DOMContentLoaded', suslen);
   // Ürün galerisi (28 Eki, kullanıcı: "görsel olarak senin içine koyduklarını çekiyor"): Shopify'da ürünün kendi görselleri
   // (layout'taki #ay-medya; tema ayarından kapatılabilir). Boşsa panodaki tasarım galerisi kalır.
-  function medya() {
+  function medyaOku() {
     if (!SHOP) return null;
     var e = document.getElementById('ay-medya'); if (!e) return null;
-    try { var l = JSON.parse(e.textContent); return l && l.length ? l : null; } catch (x) { return null; }
+    try { var l = JSON.parse(e.textContent); return Array.isArray(l) ? { g: l, v: [] } : l; } catch (x) { return null; }
   }
+  function medya() { var m = medyaOku(); return m && m.g && m.g.length ? m.g : null; }
+  // Ürün videoları (28 Eki): ürünün Shopify medyasındaki videolar. Shopify'da video yoksa boş liste (video bölümü görünmez);
+  // önizlemede null (tasarımdaki kapaklar kalır)
+  function videolar() { var m = medyaOku(); return m ? (m.v || []).filter(function (v) { return v && v.src; }) : null; }
   // Videolar (28 Eki, kullanıcı: "videolar açılmıyor"): bölüm bloklarındaki Shopify videoları. Ekrandayken sessiz döner,
   // dokununca sesli ve tam ekran. Hareket azaltılmışsa kendiliğinden dönmez.
   var vidIO = null;
@@ -684,7 +701,7 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.ay-vid'); if (!b) return;
     var v = b.querySelector('video'); if (!v) return;
-    v.muted = false; v.controls = true; v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {});
+    v.muted = false; v.currentTime = 0; v.setAttribute('data-ay-oynuyor', ''); var p = v.play(); if (p && p.catch) p.catch(function () {});
     var f = v.requestFullscreen || v.webkitRequestFullscreen || v.webkitEnterFullscreen; if (f) try { f.call(v); } catch (x) {}
   });
   // Shopify temasında betik defer ile yüklenir; panolar kendilerini kuyruğa koyar (window.AYLUNA_KUYRUK), burada çalışır

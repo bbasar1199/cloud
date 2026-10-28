@@ -1,35 +1,25 @@
-# Ayluna teması 1.0.33 · kurulum
+# Ayluna teması 1.0.34 · kurulum
 
-Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.33.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
+Zip: `tema-zip/ayluna-SHOPIFY-TEMA-1.0.34.zip` (üretmek için: `python3 araclar/tema/tema_uret.py`).
 Tasarım, önizleme sitesindekiyle aynı. Sepet ve ödeme Shopify'ın kendisi. Ödeme yalnız kartla; kapıda ödeme yok (27 Eki).
 
 ## 1. Yükle (yayınlamadan)
-1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.33.zip`.
+1. Shopify yönetici → Online Mağaza → Temalar → Tema ekle → **Zip dosyası yükle** → `ayluna-SHOPIFY-TEMA-1.0.34.zip`.
 2. Tema "Tema kitaplığı"na düşer. **Yayınla'ya basma.** Önce "…" → **Önizleme** ile gez.
    Yayınlanmamış temayı denemek satışı etkilemez: müşteriler eski temayı görür, sipariş kaçmaz. Uygulamaları da (3. madde) yayınlamadan bu temanın düzenleyicisinde açıp önizlemede denersin.
 
-## 1b. Ürün şablonlarını ata (1.0.33, bir kez)
-Dört ürünün kendi şablonu var; her bölümü ayrı düzenlenebilsin diye. Ürünler → ürünü aç → sağda **Tema şablonu**:
-
-| Ürün | Tema şablonu |
-|---|---|
-| LunaDream Gece Lambası (`lunadream-gece-lambasi`) | `lunadream` |
-| Galaxy USB Projektör (`galayx-usb-projektor`) | `galaxy-usb` |
-| AyFeneri (`lamba`) | `ayfeneri` |
-| Galaksi Night Projektör (`ayluna-galaksi-night-projektor`) | `galaksi-night` |
-
-Diğer bütün ürünler **Varsayılan ürün** şablonunda kalır (ortak 6 bölüm, her ürün kendi tasarımıyla). Atamayı yapmasan da sayfa açılır
-(tek parça hâliyle), ama bölümler ayrı görünmez.
-
-## 1c. Bölümler (1.0.33)
-- Özelleştir'de ana sayfa ve her ürün şablonu bölüm bölüm görünür (Üst kısım, Galeri ve satın alma, İçin rahat olsun, …).
-  Bölümün yazıları ve görselleri sağdaki ayarlarda; görsel seçmezsen tasarımdaki görsel kalır.
-- **Bölümü silme, gizle** (göz simgesi): silinen bölüm "Bölüm ekle" listesinde yok, geri eklenemez. Sürükleyerek sırası değişir.
-- **Loox:** yorum bölümünde ("Alanlar ne diyor?" / "Aileler ne diyor?") → **Blok ekle → Uygulamalar → Loox**. Loox o başlığın altında görünür.
-  İstersen herhangi bir yere **Bölüm ekle → Uygulama bloğu** ekleyip Loox'u oraya koy. LunaDream'deki tasarım yorum kartlarını istemezsen
-  "Aileler ne diyor?" bölümünü gizle, yerine Uygulama bloğu ekle. Loox bloğu eklenmeyen yorum yer tutucusu sayfada görünmez.
-- **Videolar (LunaDream):** önce İçerik → Dosyalar'a videoları yükle. Sonra LunaDream şablonu → **Videolar** bölümü → **Blok ekle → Video** →
-  videoyu seç, başlık ve alt yazıyı yaz. Video eklenmezse bölüm görünmez. Sayfada ekrandayken sessiz döner, dokununca sesli ve tam ekran açılır.
+## 1b. Bölümler ve bloklar (1.0.34; şablon ataması gerekmez)
+- Bütün ürünler **Varsayılan ürün** şablonunda kalır. Önceki sürümde anlatılan şablon atamasını yaptıysan geri al (ürün → Tema şablonu → Varsayılan ürün).
+- Özelleştir → üstten Ürünler → Varsayılan ürün → önizlemede ürünü seç (LunaDream, Galaxy USB, …). Solda o ürünün bölümü açılır:
+  **LunaDream sayfası**, **Galaxy USB sayfası**, **AyFeneri sayfası**, **Galaksi Night sayfası**, **Diğer ürünler sayfası**. Her bölüm yalnız kendi
+  ürününde görünür (diğerleri o üründe boş durur, dokunma).
+- Bölümün içindeki **bloklar** sayfanın parçalarıdır (Üst kısım, Galeri ve satın alma, İçin rahat olsun, …). Bloğa tıkla: yazılar ve görseller
+  sağda. Sürükle: sıra değişir. Göz simgesi: gizlenir. Silersen **Blok ekle** listesinden geri eklenir. Görsel seçmezsen tasarımdaki kalır.
+- Ana sayfa (Özelleştir → Ana sayfa) parça parça bölüm.
+- **Loox:** Loox'un uygulama yerleştirmesi (App embeds → Loox) açıkken yorumlar kendiliğinden tasarımın yorum bölümünde çıkar
+  (LunaDream'de "Aileler ne diyor?", diğerlerinde "Alanlar ne diyor?" altında). Blok eklemen gerekmez; **ürün bölümüne ayrıca Loox bloğu ekleme**, iki kez görünür.
+- **Videolar (LunaDream):** ürünün kendi sayfasında (Ürünler → LunaDream → Medya) video yükle. Sayfadaki video bölümü ürünün videolarını gösterir:
+  ekrandayken sessiz döner, dokununca sesli ve tam ekran açılır. Ürünün videosu yoksa video bölümü görünmez. Videonun "alternatif metni" başlık olur.
 - **Galeri:** ürün galerileri Shopify'daki ürün görsellerinden gelir (ürüne görsel ekle/sırala, sayfa aynen gösterir).
   Tema ayarları → Ayluna → "Ürün galerisi Shopify'daki ürün görsellerinden gelsin" kapatılırsa tasarımdaki galeri kullanılır.
 
@@ -55,7 +45,7 @@ Yeni temada uygulama yerleştirmeleri kapalı gelir. Özelleştir → sol altta 
   - Paket fiyatları Kaching'tekiyle aynı (19 Eki'de karşılaştırıldı). Kaching'te fiyat değişirse bana yaz, kartları güncellerim.
 - **Kapıda ödeme yok (27 Eki).** Temada kapıda düğmesi, formu ya da yazısı yok. **EasySell'in yerleştirmesini kapat** (Uygulama yerleştirmeleri) ya da uygulamayı kaldır; açık kalırsa kendi "Kapıda Ödeme" düğmesini sayfaya ekler. Shopify ödeme ayarlarında "Kapıda ödeme (COD)" yöntemi açıksa onu da kapat.
 - **Loox, Track123:** yerleştirmelerini aç. Yorum kartları tasarımda (gerçek yorumlardan); "Kargo takip" `/apps/track123`'e gider (tema ayarından değişir).
-- **Loox yorumları:** 1c'deki gibi yorum bölümüne blok olarak eklenir.
+- **Loox yorumları:** Loox yerleştirmesini açman yeter (1b).
 - **Dün satılan ve "Son N adet" (27 Eki):** Ayarlar → Özel veriler → Ürünler → Tanım ekle: `ayluna.dun_satis` ("Dün satılan", tam sayı) ve `ayluna.stok_kurdele` ("Stok kurdelesi", tam sayı). Her ürünün sayfasında sayıyı elle yaz. Boş bırakırsan tasarımdaki sayı kalır (LunaDream: Dün 62, Son 18; Galaxy USB: Dün 62, Son 23); **0** yazarsan satır hiç görünmez.
 - **Kartla %5 indirim:** Sepette "Kartla toplam" %5 düşük gösterilir. Ödeme sayfasında da bu indirimin uygulandığını denetle (otomatik indirim ya da ödeme sağlayıcısı). Uygulanmıyorsa yayınlama.
 

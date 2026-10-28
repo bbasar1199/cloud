@@ -309,8 +309,8 @@ def gerisi(u):
   <!-- Yapışkan çubuk: ürün adı, seçim ve buton (fiyat yok, kullanıcı 19 Eki); sayaç yalnız üst şeritte (tek sayaç) -->
   <div class="yapis">
     <span class="karo"><img src="@@""" + karo + """@@" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0"></span>
-    <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; color: #fff; font-variant-numeric: tabular-nums"><b style="font-size: 15px; font-weight: 600">""" + {'af': 'AyFeneri', 'gn': 'Galaksi Night'}[u] + """</b><span style="font-size: 13px; color: var(--acik)">{{adetName}}</span></span>
-    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}" style="flex: 0 0 140px; width: 140px; min-height: 52px; margin: 0">Satın al</button>
+    <span class="y-yazi"><b>""" + {'af': 'AyFeneri', 'gn': 'Galaksi Night'}[u] + """</b><span>{{adetName}}</span></span>
+    <button class="btn1 btn-b" type="button" onClick="{{alaGit}}">Satın al</button>
   </div>
 """)
 
