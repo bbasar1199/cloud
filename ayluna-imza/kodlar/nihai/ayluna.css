@@ -528,5 +528,14 @@ html:has(.shopify-policy__container) body{margin:0;background:#F6F1E9;color:#1A2
 .ay-pol-kart i{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#F3B562;color:#1A2142;font-style:normal;font-size:20px;font-weight:700}
 .ay-pol-diger{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:18px;font-size:14px}
 .ay-pol-diger a{color:#5C6078;min-height:44px;display:inline-flex;align-items:center}
+/* Ana sayfa slaytı (28 Eki, son hali): kenardan kenara ve uzun; alt köşeler yuvarlak, ay noktaları solda, düğme hap şeklinde (telefon ve tablet) */
+@media (max-width:1023px){
+  html[data-ay-tur=ana] .slayt{margin:0!important;height:min(78svh,620px)!important;border-radius:0 0 24px 24px!important}
+  html[data-ay-tur=ana] .slayt .sl::after{background:linear-gradient(180deg,rgba(12,16,39,0) 38%,rgba(12,16,39,.9) 88%)!important}
+  html[data-ay-tur=ana] .slayt .sl-y{left:20px!important;right:20px!important;bottom:64px!important}
+  html[data-ay-tur=ana] .slayt .sl-y h2{font-size:36px}
+  html[data-ay-tur=ana] .slayt .sl-y a{display:inline-flex!important;width:auto!important;min-height:48px;border-radius:999px!important}
+  html[data-ay-tur=ana] .slayt .ay-iz{left:20px!important;bottom:24px!important;transform:none!important}
+}
 
 body{background:var(--ay-zemin,#F6F1E9)}

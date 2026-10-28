@@ -6,7 +6,7 @@
 # Mağaza karşılıkları: Astronot Oda Nemlendirici Aroma Difüzör (₺799), Ayluna Kum Saati Lamba (₺799), Yıldız Işığı Nemlendirici (₺849,99).
 # "Hava temizleyici" yazılmaz: ürün nemlendirici (teyitsiz işlev iddiası). Özel fiyatın yanında mağaza fiyatı düz yazıyla durur (üstü çizili değil).
 # Marka dili (sepet her ürün sayfasında ortak): lacivert #1A2142 + beyaz, Ayluna işareti; Young Serif başlık + Onest gövde.
-# Ödeme: kartla, %5 indirimli. Kapıda ödeme kaldırıldı (kullanıcı, 27 Eki).
+# Ödeme: kartla ya da EasySell ile kapıda. Sepette kartla %5 indirim gösterilmez (kullanıcı, 28 Eki).
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from ortak import HEAD, TAIL, TL_JS, KARGO_JS
@@ -130,10 +130,9 @@ HTML = """<div class="pg" style="padding-bottom: 0">
     <p><span>Ürünler</span><b>{{araUrun}}</b></p>
     <sc-if value="{{ekVar}}" hint-placeholder-val="{{true}}"><p><span>Siparişine özel</span><b>{{araEk}}</b></p></sc-if>
     <p><span>Kargo</span><b>{{kargoT}}</b></p>
-    <p class="ind"><span>Kartla ödeme indirimi (%5)</span><b>−{{indirim}}</b></p>
-    <div class="top"><span>Kartla toplam</span><b>{{toplam}}</b></div>
+    <div class="top"><span>Toplam</span><b>{{toplam}}</b></div>
   </div>
-  <button class="btn1" type="button" onClick="{{odeme}}"><span class="b-ic"><span>Güvenli Ödeme ile Öde · {{toplam}}</span><small>Kartla %5 indirim dahil</small></span>""" + OK + """</button>
+  <button class="btn1" type="button" onClick="{{odeme}}"><span class="b-ic"><span>Güvenli Ödeme ile Öde · {{toplam}}</span></span>""" + OK + """</button>
   <div class="guven">
     <span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6"></path><path d="M4 4v4h4"></path></svg>30 gün iade</span>
     <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg>Kart bilgin bize gelmez</span>

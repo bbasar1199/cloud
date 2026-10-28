@@ -193,7 +193,7 @@
     temizle: function () { return scIstek('/cart/clear.js', {}).then(scYukle); },
     sayi: function () { return SC.adetS; },
     toplam: function (yolu) {
-      var urun = SC.ham ? SC.ham.total_price / 100 : 0, ind = yolu === 'kapida' ? 0 : Math.round(urun * 0.05 * 100) / 100, kp = yolu === 'kapida' ? KAPIDA : 0;
+      var urun = SC.ham ? SC.ham.total_price / 100 : 0, ind = 0, kp = yolu === 'kapida' ? KAPIDA : 0;
       return { urun: urun, ek: 0, kargo: 0, indirim: ind, kapida: kp, toplam: Math.round((urun - ind + kp) * 100) / 100 };
     },
     yukle: scYukle, EKLER: EKLER, HIZLI: HIZLI, KAPIDA: KAPIDA, TL: TL
@@ -221,7 +221,7 @@
     toplam: function (yolu) {
       var s = oku(), urun = s.satirlar.reduce(function (a, x) { return a + x.birim * x.adet; }, 0);
       var ek = EKLER.reduce(function (a, e) { return a + (s.ekler && s.ekler[e.k] ? e.p : 0); }, 0);
-      var kargo = s.hizli ? HIZLI : 0, ind = yolu === 'kapida' ? 0 : Math.round((urun + ek) * 0.05 * 100) / 100, kp = yolu === 'kapida' ? KAPIDA : 0;
+      var kargo = s.hizli ? HIZLI : 0, ind = 0, kp = yolu === 'kapida' ? KAPIDA : 0;
       return { urun: urun, ek: ek, kargo: kargo, indirim: ind, kapida: kp, toplam: Math.round((urun + ek - ind + kargo + kp) * 100) / 100 };
     },
     EKLER: EKLER, HIZLI: HIZLI, KAPIDA: KAPIDA, TL: TL
