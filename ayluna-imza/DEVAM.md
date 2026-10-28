@@ -475,6 +475,10 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
   - seçince zemin ve görselin değiştiği model seçimi
 - Önerilen sonraki iş: `TASARIM-BILGISI.md`'den kısa bir `DESIGN.md` türetmek (Google biçimi).
 
+## Bekleyen karar: ana sayfa slaytı (28 Eki)
+- Kullanıcı: "şurayı beğenmedim, tam mı oturtsak, görünüşü beğenmedim" (kenarlardan boşluklu, yuvarlak köşeli koyu kart; yazı görselin üstünde).
+- Yönler: A kenardan kenara koyu (6/10), B kenardan kenara görsel + yazı altta krem zeminde (9/10), C kısa + tam genişlik düğme (6/10), D ince kart (3/10). Eleştirmen sırası B, C, A; B için iyileştirme: yazı bloğu sabit yükseklik, görsel-yazı arası 20-24 px, istenirse başlık altına fiyat satırı. Görüntüler scratchpad/hero (CSS denemesi, `anasayfa.py` .slayt). Kullanıcının seçimi bekleniyor.
+
 ## Tema 1.0.36-1.0.37: 404 düzeltmesi, Videolar bölümü, görsel seçiciler (28 Ekim, en güncel)
 - 1.0.35 yüklenince bütün ürün sayfaları 404: video bloğunda 4 ayarın varsayılanı boştu (`"default": ""`), Shopify LunaDream bölümünü reddetti. 1.0.36 düzeltir; `araclar/tema/sema_denetim.py` zip'ten önce yükleme kurallarını denetler.
 - 1.0.37: `sections/ay-videolar.liquid` (Liquid ile çizilen bağımsız bölüm; kart = `video` bloğu: video, kapak görseli, başlık, alt yazı; ayar `urun` ile ürüne sınırlanır, `tasarim`/`tasarim_gorsel` görsel seçilmeyen kartta tasarım fotoğrafı). LunaDream sayfası video noktasında ikiye bölündü: `ay-lunadream` (p01-p02) → `lunadream-video` → `ay-lunadream-2` (p04-p12). `bolumler.urun_sayfasi` artık bölüm listesi döndürür; `urun_sablonu` bölüm/blok ayarı alır.
