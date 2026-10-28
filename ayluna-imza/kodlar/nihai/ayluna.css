@@ -1,0 +1,532 @@
+/* Ayluna site önizlemesi · ortak düzeltmeler ve katmanlar (menü, sepet çekmecesi, kapıda ödeme formu, bildirim) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.ay-kilit,html.ay-kilit body{overflow:hidden}
+body{margin:0;min-height:100vh;background:var(--ay-zemin,#F6F1E9)}
+/* Tuval sayfaları 390px sabitti: telefonda akışkan (320–430px), masaüstünde ortada */
+.pg{width:100%!important;max-width:500px;margin-left:auto!important;margin-right:auto!important;overflow:clip!important}
+@supports not (overflow:clip){.pg{overflow:hidden!important}}
+img{max-width:100%}
+/* Yavaş kayan oda/sahne kartı fotoğrafları kartın %108'i; genel sınır onları kırpınca sağda 16 px siyah şerit kalıyordu (23 Eki) */
+.sk img,.oda-k img{max-width:none}
+/* Sepet rozeti: her başlıktaki sepet düğmesinde gerçek adet */
+[data-ay-adet]{position:relative}
+[data-ay-adet] i{display:none!important}
+[data-ay-adet]::after{content:attr(data-ay-adet);position:absolute;top:6px;right:4px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#1A2142;color:#fff;font:700 11px/18px "Onest",system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px #fff;font-style:normal}
+[data-ay-adet="0"]::after{display:none}
+
+/* Katmanlar */
+.ay-katman{position:fixed;inset:0;z-index:1000;visibility:hidden;font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;color:#1A2142;-webkit-font-smoothing:antialiased}
+.ay-katman.on{visibility:visible}
+.ay-perde{position:absolute;inset:0;background:rgba(12,16,39,.5);opacity:0;transition:opacity .3s cubic-bezier(.2,.7,.2,1)}
+.ay-katman.on .ay-perde{opacity:1}
+.ay-panel{position:absolute;top:0;bottom:0;width:min(100%,430px);background:#F6F1E9;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.ay-panel.sol{left:0;transform:translateX(-102%)}
+.ay-panel.sag{right:0;transform:translateX(102%)}
+.ay-panel.alt{left:0;right:0;top:auto;width:auto;max-width:430px;margin:0 auto;max-height:94vh;max-height:94dvh;border-radius:22px 22px 0 0;transform:translateY(102%);overflow:auto;overscroll-behavior:contain}
+.ay-katman.on .ay-panel{transform:none}
+.ay-panel iframe{flex:1;width:100%;border:0;background:#F6F1E9}
+.ay-p-ust{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 6px 0 18px;border-bottom:1px solid #E3D8C7;position:sticky;top:0;background:#F6F1E9;z-index:1}
+.ay-p-ust b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.02em}
+.ay-x{width:48px;height:48px;display:grid;place-items:center;border:0;background:transparent;color:inherit;cursor:pointer}
+.ay-x svg,.ay-menu li svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ay-menu ul{list-style:none;margin:0;padding:6px 0;overflow:auto}
+.ay-menu li a{display:flex;align-items:center;justify-content:space-between;min-height:54px;padding:0 18px;border-bottom:1px solid #EADFCF;color:#1A2142;text-decoration:none;font-size:16px;font-weight:600}
+.ay-menu li svg{width:18px;height:18px;color:#5C6078}
+.ay-katman a:focus-visible,.ay-katman button:focus-visible,.ay-katman input:focus-visible,.ay-katman select:focus-visible,.ay-katman textarea:focus-visible{outline:2px solid #1A2142;outline-offset:2px}
+
+/* Kapıda ödeme formu */
+.kf-ic{padding:14px 18px 24px}
+.kf-s{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #EADFCF}
+.kf-s img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:#EFE6D8}
+.kf-s b{display:block;font-size:14px;line-height:1.3}
+.kf-s small{display:block;font-size:12px;color:#5C6078}
+.kf-s em{font-style:normal;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.ay-kf label{display:flex;flex-direction:column;gap:6px;margin-top:12px;font-size:13px;font-weight:700}
+.ay-kf input,.ay-kf select,.ay-kf textarea{width:100%;box-sizing:border-box;min-height:50px;padding:12px 14px;border:0;border-radius:12px;background:#FFFDF9;box-shadow:inset 0 0 0 1.5px #E3D8C7;font:inherit;font-size:16px;font-weight:400;color:#1A2142}
+.ay-kf textarea{min-height:72px;resize:vertical}
+.kf-iki{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kf-ek-b{margin:18px 0 6px;font-size:13px;font-weight:700}
+.kf-ekb{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:52px;margin-top:8px;padding:8px 12px;border:0;border-radius:12px;background:#FFFDF9;box-shadow:inset 0 0 0 1.5px #E3D8C7;font:inherit;font-size:14px;color:#1A2142;text-align:left;cursor:pointer}
+.kf-ekb i{width:20px;height:20px;border-radius:6px;box-shadow:inset 0 0 0 1.6px #B8C0D2}
+.kf-ekb.on{box-shadow:inset 0 0 0 2px #1A2142}
+.kf-ekb.on i{background:#1A2142 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12l4 4 8-8' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:none}
+.kf-ekb em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.kf-top{margin-top:16px;padding-top:12px;border-top:1px dashed #E3D8C7;font-variant-numeric:tabular-nums}
+.kf-top p{display:flex;justify-content:space-between;margin:0 0 6px;font-size:14px;color:#5C6078}
+.kf-top p b{color:#1A2142;font-weight:600}
+.kf-top .kf-t{margin-top:8px;color:#1A2142}
+.kf-top .kf-t span{font-weight:700}.kf-top .kf-t b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:24px}
+.kf-hata{min-height:20px;margin:10px 0 0;font-size:13px;font-weight:600;color:#B3261E}
+.kf-not{margin:10px 0 0;font-size:12px;color:#5C6078;text-align:center}
+.ay-btn,.ay-btn2{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:10px;border:0;border-radius:16px;background:#1A2142;color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 3px 0 #0C1027}
+.ay-btn2{background:transparent;color:#1A2142;box-shadow:inset 0 0 0 1.5px #1A2142;font-weight:600}
+.ay-lnk{display:block;margin:12px auto 0;min-height:44px;border:0;background:transparent;color:#5C6078;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer}
+.kf-bekle{position:absolute;inset:0;display:grid;place-items:center;padding:16px;background:rgba(12,16,39,.6);z-index:2}
+.kf-bekle[hidden]{display:none}
+.kf-bekle>div{width:min(100%,360px);padding:22px 18px 16px;border-radius:20px;background:#F6F1E9;text-align:center}
+.kf-bekle b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:28px}
+.kf-bekle p{margin:6px 0 10px;font-size:15px;color:#5C6078}
+
+/* Bildirim */
+.ay-tost{position:fixed;left:50%;bottom:96px;z-index:1100;max-width:min(92vw,400px);padding:12px 16px;border-radius:14px;background:#1A2142;color:#fff;font:600 14px/1.4 "Onest",system-ui,sans-serif;text-align:center;box-shadow:0 8px 24px rgba(12,16,39,.25);opacity:0;transform:translate(-50%,10px);transition:opacity .25s,transform .25s;pointer-events:none}
+.ay-tost.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.ay-panel,.ay-perde,.ay-tost,.ay-al,.ay-al.on{transition:none}}
+.yukari{opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.ay-asagi .yukari{opacity:1;visibility:visible}
+
+/* ---------- Masaüstü (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım") ----------
+   1024px ve üstü: ortak üst menü (ayluna.js masaUst), telefon başlıkları gizli. Ürün sayfası: solda yapışkan kare galeri,
+   sağda satın alma; altındaki bölümler ortada okunur sütunda. Ana sayfa ve koleksiyon geniş ızgara. Telefon düzeni değişmez. */
+.ay-masa{display:none}
+.ay-al{display:none}
+@media (min-width:1024px){
+  .ay-masa{display:block;position:sticky;top:0;z-index:900;background:#1A2142;color:#fff;font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  html[data-ay-tur=odeme] .ay-masa{display:none}
+  .ay-masa-ic{max-width:1200px;margin:0 auto;height:72px;padding:0 32px;display:flex;align-items:center;gap:32px;box-sizing:border-box}
+  .ay-logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;flex:none}
+  .ay-logo svg{width:26px;height:26px}
+  .ay-logo b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:25px;letter-spacing:-.02em}
+  .ay-masa nav{display:flex;gap:26px;margin:0 auto}
+  .ay-masa nav a{color:#C9CFE2;text-decoration:none;font-size:15px;font-weight:500;padding:24px 0 22px;border-bottom:2px solid transparent;white-space:nowrap}
+  .ay-masa nav a:hover{color:#fff}
+  .ay-masa nav a[aria-current]{color:#fff;border-bottom-color:#F2A65A}
+  .ay-masa-sag{display:flex;gap:2px;flex:none}
+  .ay-masa-sag a,.ay-masa-sag button{width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
+  .ay-masa-sag a:hover,.ay-masa-sag button:hover{background:rgba(255,255,255,.09)}
+  .ay-masa .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ay-masa [data-ay-adet]::after{top:3px;right:1px;background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
+  .ay-masa a:focus-visible,.ay-masa button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* Üst blok renk döngüsü (25 Eki): beyaz zemin, lacivert yazı; lacivert kopya (.gk) 16 sn'de bir yumuşakça belirip kaybolur (yalnız opacity) */
+  .ay-masa{background:#FFFFFF;color:#1A2142;box-shadow:inset 0 -1px 0 #E4E6EB}
+  .ay-masa .ay-logo{color:#1A2142}.ay-masa .ay-logo circle{stroke:#C9CED8}
+  .ay-masa nav a{color:#5C6078}.ay-masa nav a:hover{color:#1A2142}.ay-masa nav a[aria-current]{color:#1A2142}
+  .ay-masa-sag a,.ay-masa-sag button{color:#1A2142}
+  .ay-masa-sag a:hover,.ay-masa-sag button:hover{background:rgba(26,33,66,.06)}
+  .ay-masa [data-ay-adet]::after{background:#1A2142;color:#fff;box-shadow:0 0 0 2px #fff}
+  .ay-masa>.gk{position:absolute;inset:0;background:#1A2142;color:#fff;pointer-events:none;opacity:0;animation:rd-gece 16s cubic-bezier(.45,0,.55,1) var(--rd-t,0s) infinite}
+  .ay-masa>.gk .ay-logo{color:#fff}.ay-masa>.gk .ay-logo circle{stroke:rgba(255,255,255,.6)}
+  .ay-masa>.gk nav a{color:#C9CFE2}.ay-masa>.gk nav a[aria-current]{color:#fff}
+  .ay-masa>.gk .ay-masa-sag a,.ay-masa>.gk .ay-masa-sag button{color:#fff}
+  .ay-masa>.gk [data-ay-adet]::after{background:#F2A65A;color:#1A2142;box-shadow:0 0 0 2px #1A2142}
+  /* 1024-1199 px: menü sığsın (1024'te 30 px yana taşıyordu) */
+  @media (max-width:1199px){
+    .ay-masa-ic{gap:20px;padding:0 24px}
+    .ay-masa nav{gap:18px}
+    .ay-masa nav a{font-size:14px}
+  }
+  /* Telefon başlıkları */
+  .ay-kok header.ust,.ay-kok .sahne>header,.ay-kok .u-ust{display:none!important}
+  /* Genel: içerik sayfaları ortada okunur sütun */
+  .pg{max-width:760px;overflow:visible!important}
+  .yapis{display:none!important}
+  body{overflow-x:clip}
+  /* Duyuru şeritleri ve alt bilgi kenardan kenara */
+  .ay-kok .pg>.duyuru,.ay-kok .pg>.serit,.ay-kok .pg>.u-serit{width:100vw;margin-left:calc(50% - 50vw)!important}
+  .ay-kok .pg>.duyuru~.u-serit{margin-top:0!important}
+
+  /* Ürün sayfası: üstte iki sütun (.urun-ust: solda yapışkan kare galeri, sağda satın alma), altta ortada bölümler */
+  html[data-ay-tur=urun] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=urun] .urun-ust{display:grid;grid-template-columns:minmax(0,1fr) 440px;column-gap:56px;align-items:start;margin-top:28px}
+  html[data-ay-tur=urun] .urun-ust>.sahne,html[data-ay-tur=urun] .urun-ust>.hero,html[data-ay-tur=urun] .urun-ust>.ust-sol{grid-column:1;position:sticky;top:96px}
+  html[data-ay-tur=urun] .urun-ust>#siparis,html[data-ay-tur=urun] .urun-ust>.ust-sag{grid-column:2;margin-top:0!important}
+  /* İmza sayfaları: solda galeri + özellik kartları (galerinin altında, yapışkan değil), sağda satın alma */
+  html[data-ay-tur=urun] .urun-ust>.urun-sol{grid-column:1;min-width:0}
+  html[data-ay-tur=urun] .sol-oz{margin-top:36px}
+  html[data-ay-tur=urun] .sol-oz>.ust-yazi{margin-top:0!important}
+  html[data-ay-tur=urun] .sol-oz .ozler{margin-top:0!important}
+  /* Galeri kare, kenarları yuvarlak; telefondaki sabit 390 px ölçüler akışkan */
+  html[data-ay-tur=urun] .sahne{height:auto!important;background:transparent!important;overflow:visible!important}
+  html[data-ay-tur=urun] .sahne .kare-foto{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:1/1;border-radius:24px;overflow-x:auto}
+  html[data-ay-tur=urun] .sahne .kf{flex:0 0 100%!important;height:auto!important}
+  html[data-ay-tur=urun] .sahne .kare-foto img{top:0!important;height:100%!important}
+  /* Galeri göstergesi masaüstünde de fotoğrafın içinde (kullanıcı, 19 Eki: "gömülü olsun"); altında satır yok */
+  html[data-ay-tur=urun] .sahne .seritler{bottom:10px}
+  html[data-ay-tur=urun] .levha{border-radius:0!important;background:transparent!important;padding-top:0!important}
+  html[data-ay-tur=urun] .hero.kare{background:transparent!important;padding-bottom:0!important}
+  html[data-ay-tur=urun] .hero.kare .h-iz{border-radius:24px}
+  html[data-ay-tur=urun] .hero.kare .h-alt{bottom:10px}
+  html[data-ay-tur=urun] .ust-sol .gal{margin:0!important;border-radius:24px}
+  html[data-ay-tur=urun] .ust-sol .g-alt{bottom:10px}
+  html[data-ay-tur=urun] .yol{overflow-x:clip}
+  html[data-ay-tur=urun] .al{padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #siparis.px,html[data-ay-tur=urun] .ust-sag>*{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
+  /* Alttaki bölümler: ortada 760 px; kendi içinde telefon ölçüsüyle kurulu etkileşimli olanlar ortada 430 px */
+  html[data-ay-tur=urun] .pg>section,html[data-ay-tur=urun] .pg>.blk{max-width:760px;margin-left:auto!important;margin-right:auto!important;margin-top:56px}
+  html[data-ay-tur=urun] .pg>section#diskler,html[data-ay-tur=urun] .pg>section#odalar,html[data-ay-tur=urun] .pg>section#neler{max-width:430px}
+  html[data-ay-tur=urun] .pg>footer{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:72px;box-sizing:border-box}
+  html[data-ay-tur=urun]{scroll-padding-top:156px}
+  /* Alt bölümler masaüstüne açılır (19 Eki, kullanıcı eleştirmenin önerisini seçti):
+     koyu bölümler kenardan kenara gece bandı (içerik 1136 px), şeritler ızgara, odalar yan yana */
+  html[data-ay-tur=urun] .pg>section.koyu,html[data-ay-tur=urun] .pg>section.gece,html[data-ay-tur=urun] .pg>section.vitrin{max-width:none!important;width:100vw;margin-left:calc(50% - 50vw)!important;margin-right:0!important;border-radius:0!important;padding:72px max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
+  html[data-ay-tur=urun] .pg>section.koyu .px,html[data-ay-tur=urun] .pg>section.gece .px{padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] .pg>section .h2,html[data-ay-tur=urun] .pg>section h2.bas-y{font-size:30px!important}
+  html[data-ay-tur=urun] .pg>section .h2 br,html[data-ay-tur=urun] .pg>section h2.bas-y br{display:none}
+  /* Uzun SSS (9+ soru; 23 Eki LunaDream 12 soruya döndü): masaüstünde 1136 px, iki sütun, bölüm ekrana sığar */
+  html[data-ay-tur=urun] .pg>section:has(>div>details.sss:nth-child(9)){max-width:1136px!important;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] .pg>section>div:has(>details.sss:nth-child(9)){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:48px;align-items:start}
+  /* Şeritler: masaüstünde kaydırma yok, ızgara */
+  html[data-ay-tur=urun] .pg>section .noscroll,html[data-ay-tur=urun] .pg>section .b-serit,html[data-ay-tur=urun] .pg>section .sahne-serit,html[data-ay-tur=urun] .pg>section .oda-serit,html[data-ay-tur=urun] .pg>section .setler{overflow:visible!important;padding-left:0!important;padding-right:0!important;scroll-snap-type:none!important}
+  html[data-ay-tur=urun] .pg>section .noscroll>span[aria-hidden],html[data-ay-tur=urun] .pg>section .b-serit>span[aria-hidden],html[data-ay-tur=urun] .pg>section .sahne-serit>span[aria-hidden]{display:none}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.yk2){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px!important}
+  html[data-ay-tur=urun] .yk2{min-height:0}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.vid){display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px!important}
+  html[data-ay-tur=urun] .vid{height:auto;aspect-ratio:9/16}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.mf){flex-wrap:wrap}
+  /* Müşteri kanıtı: fotoğraf ve mesaj şeridi masaüstünde de tek satır kayar, kartlar daha uzun */
+  html[data-ay-tur=urun] .pg>section .karma{overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
+  html[data-ay-tur=urun] .karma button{height:400px}
+  html[data-ay-tur=urun] .karma.kucuk button{height:260px}
+  /* Sizden gelen mesajlar (diğer ürünler): masaüstünde de tek satır kayar */
+  html[data-ay-tur=urun] .pg>section .mkarma{overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
+  html[data-ay-tur=urun] .mkarma button{height:400px}
+  /* Diğer ürünler (23 Eki, kullanıcı: "burayı kaydırmalı yap, çok uzun iskelet webde iyi durmuyor"): 1136 px, tek satır kayan şerit + oklar (ızgara değil) */
+  html[data-ay-tur=urun] .pg>section:has(.kart){max-width:1136px!important}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart){display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:16px!important;padding:4px 0 8px!important;scrollbar-width:none}
+  html[data-ay-tur=urun] .pg>section .noscroll:has(>.kart)::-webkit-scrollbar{display:none}
+  html[data-ay-tur=urun] .kart{flex:0 0 204px!important;min-width:0}
+  html[data-ay-tur=urun] .pg>section:has(.kart)>.px{padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] .serit-ok{display:flex;gap:8px}
+  html[data-ay-tur=urun] .serit-ok button{display:grid;place-items:center;width:48px;height:48px;padding:0;border:1.5px solid #1A2142;border-radius:50%;background:transparent;color:#1A2142;cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+  html[data-ay-tur=urun] .serit-ok button:hover{transform:translateY(-1px)}
+  html[data-ay-tur=urun] .serit-ok button:active{transform:scale(.96)}
+  html[data-ay-tur=urun] .serit-ok button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  html[data-ay-tur=urun] .serit-ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  /* Mesaj ve fotoğraf şeritleri: oklar başlık satırının sağında ("Dokun" ipucu masaüstünde yok) */
+  html[data-ay-tur=urun] .yara{justify-content:flex-start;align-items:center;gap:16px}
+  html[data-ay-tur=urun] .yara .dokun{display:none}
+  html[data-ay-tur=urun] .yara .serit-ok{margin-left:auto}
+  html[data-ay-tur=urun] .mesaj-bol>.px{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:end}
+  html[data-ay-tur=urun] .mesaj-bol>.px>:not(.serit-ok){grid-column:1}
+  html[data-ay-tur=urun] .mesaj-bol>.px>.serit-ok{grid-column:2;grid-row:1/span 2}
+  /* Ürün galerisi ve ana sayfa slaytı okları (23 Eki): görselin sol ve sağ kenarının ortasında, yarısı dışarıda. 26 galeri karesine bakıldı:
+     sağ üst, orta ve alt hep bir afiş yazısına biniyordu; kenarın 22 px'i hiçbir yazıya değmiyor. Hep görünür. */
+  html[data-ay-tur=urun] .g-ok,html[data-ay-tur=ana] .slayt .g-ok{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:48px;height:48px;margin-top:-24px;padding:0;border:0;border-radius:50%;background:#FFFDF9;color:#1A2142;box-shadow:0 6px 16px rgba(12,16,39,.2),0 0 0 1px rgba(26,33,66,.08);cursor:pointer;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+  html[data-ay-tur=urun] .g-geri,html[data-ay-tur=ana] .slayt .g-geri{left:-22px}
+  html[data-ay-tur=urun] .g-ileri,html[data-ay-tur=ana] .slayt .g-ileri{right:-22px}
+  html[data-ay-tur=urun] .g-ok:hover,html[data-ay-tur=ana] .slayt .g-ok:hover{transform:scale(1.06)}
+  html[data-ay-tur=urun] .g-ok:active,html[data-ay-tur=ana] .slayt .g-ok:active{transform:scale(.96)}
+  html[data-ay-tur=urun] .g-ok:focus-visible,html[data-ay-tur=ana] .slayt .g-ok:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  html[data-ay-tur=urun] .g-ok svg,html[data-ay-tur=ana] .slayt .g-ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  /* Oklar kenardan taşsın diye galeri kapları kırpmaz; köşeyi kaydırılan şeridin kendisi yuvarlar */
+  html[data-ay-tur=urun] .urun-ust>.hero{overflow:visible!important}
+  html[data-ay-tur=urun] .ust-sol .gal{overflow:visible!important}
+  html[data-ay-tur=urun] .ust-sol .gal .g-iz{border-radius:24px}
+  html[data-ay-tur=ana] .slayt{overflow:visible}
+  html[data-ay-tur=ana] .slayt .s-iz{border-radius:inherit}
+  /* LunaDream · Odası böyle görünecek (Gece vitrini, 21 Eki): şerit kenardan kenara; ortadaki kart 360×480, yanlardakiler ekran kenarına kadar
+     görünür (kesik sütun kenarı yok); yazı ve aylar altta ortada */
+  html[data-ay-tur=urun] .vitrin>.h2{padding:0!important;text-align:center}
+  html[data-ay-tur=urun] .pg>section.vitrin .vt-serit{overflow-x:auto!important;scroll-snap-type:x mandatory!important;margin:36px calc(-1 * max(32px,calc(50vw - 568px))) 0;padding:0 calc(50vw - 180px)!important}
+  html[data-ay-tur=urun] .vitrin .vt-kart{flex-basis:360px;height:480px;border-radius:24px}
+  html[data-ay-tur=urun] .vitrin .vt-metin{padding-top:28px}
+  html[data-ay-tur=urun] .vitrin .vt-bas{font-size:30px}
+  html[data-ay-tur=urun] .vitrin .vt-yazi{max-width:420px;font-size:16px}
+  html[data-ay-tur=urun] .vitrin .vt-aylar{margin-top:14px}
+  /* LunaDream · Diskler: tavan solda büyük, başlık ve diskler sağda */
+  html[data-ay-tur=urun] .pg>section.gece#diskler{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"tavan bas" "tavan disk";column-gap:64px;row-gap:24px;align-items:end}
+  html[data-ay-tur=urun] .gece#diskler>.px:first-child{grid-area:bas}
+  html[data-ay-tur=urun] .gece#diskler>.px:nth-child(2){grid-area:tavan;margin-top:0!important}
+  html[data-ay-tur=urun] .gece#diskler>.noscroll{grid-area:disk;align-self:start;flex-wrap:wrap;gap:10px!important;padding-top:0!important}
+  html[data-ay-tur=urun] .gece#diskler .tavan{height:460px;border-radius:24px}
+  /* Masaüstü sığdırma (23 Eki, kullanıcı: "tüm sectionlar masaüstünde mükemmel çalışsın, tam sığsın"):
+     her bölüm, üst menü + satın alma çubuğu (140 px) düşüldükten sonra 768 px yüksek ekrana sığar; dar telefon sütunu kalmaz */
+  /* LunaDream · Neler yapabiliyor (dergi kapağı): 1136 px geniş yayılım; söz ve yazı solda, lamba sağda */
+  html[data-ay-tur=urun] .pg>section#neler{max-width:1136px!important;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #neler .dg{zoom:1;width:100%;height:500px;margin-top:24px}
+  html[data-ay-tur=urun] #neler .dg-soz{left:52px;top:34px;height:200px;font-size:184px;line-height:200px}
+  html[data-ay-tur=urun] #neler .dg-alt{left:58px;bottom:108px;width:380px;height:96px;font-size:20px}
+  html[data-ay-tur=urun] #neler .dg-urun{right:14%;bottom:36px;width:250px;height:440px}
+  html[data-ay-tur=urun] #neler .dg .ur{--uh:430px}
+  html[data-ay-tur=urun] #neler .dg.erkek .ur{--uh:340px}
+  html[data-ay-tur=urun] #neler .dg.erkek .dg-urun{width:280px;height:350px}
+  html[data-ay-tur=urun] #neler .dg.erkek .dg-alt{width:380px}
+  html[data-ay-tur=urun] #neler .dg-bar{left:40px;right:auto;width:440px;padding:0}
+  /* LunaDream · Odası böyle görünecek: yazı ve aylar solda, kart şeridi sağda (bölüm 592 px; eskiden 928 px, ekrana sığmıyordu) */
+  html[data-ay-tur=urun] .pg>section.vitrin#odalar{display:grid;grid-template-columns:320px minmax(0,1fr);grid-template-rows:1fr auto auto auto 1fr;grid-template-areas:". serit" "bas serit" "metin serit" "aylar serit" ". serit";column-gap:56px;padding:56px max(32px,calc(50vw - 568px))!important}
+  html[data-ay-tur=urun] #odalar.vitrin>.h2{grid-area:bas;text-align:left}
+  html[data-ay-tur=urun] #odalar.vitrin>.h2 br{display:inline}
+  html[data-ay-tur=urun] .pg>section.vitrin#odalar .vt-serit{grid-area:serit;margin:0;padding:0 calc(50% - 180px)!important;border-radius:24px}
+  html[data-ay-tur=urun] #odalar .vt-metin{grid-area:metin;padding:20px 0 0;text-align:left}
+  html[data-ay-tur=urun] #odalar .vt-m{align-items:flex-start}
+  html[data-ay-tur=urun] #odalar .vt-yazi{max-width:320px}
+  html[data-ay-tur=urun] #odalar .vt-sec{padding:0}
+  html[data-ay-tur=urun] #odalar .vt-aylar{grid-area:aylar;justify-content:flex-start;margin-top:12px}
+  html[data-ay-tur=urun] #odalar .vt-aylar::before{left:24px;width:228px;margin-left:0}
+  /* LunaDream · Aileler ne diyor: 1136 px; mesaj şeridi tam genişlik, altta solda fotoğraflar + öne çıkan yorum, sağda yorum listesi (1505 → ~1000 px) */
+  html[data-ay-tur=urun] .pg>section.yorum-b{max-width:1136px!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas bas" "ml ml" "mk mk" "el yl" "ek yl" "yo yl";grid-template-rows:auto auto auto auto auto 1fr;column-gap:56px;align-items:start}
+  html[data-ay-tur=urun] .yorum-b>*{min-width:0}
+  html[data-ay-tur=urun] .yorum-b>.px,html[data-ay-tur=urun] .yorum-b>.noscroll{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(1){grid-area:bas}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(2){grid-area:ml}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(3){grid-area:mk}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(4){grid-area:yo;margin-top:20px!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(5){grid-area:el;margin-top:40px!important}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(6){grid-area:ek}
+  html[data-ay-tur=urun] .yorum-b>:nth-child(7){grid-area:yl;margin-top:40px!important}
+  html[data-ay-tur=urun] .yorum-b .karma button{height:380px}
+  html[data-ay-tur=urun] .yorum-b .karma.kucuk button{height:220px}
+  /* LunaDream · Odası böyle görünecek: iki oda yan yana */
+  /* Galaxy USB · Bu gece tavanda: üç sahne yan yana */
+  html[data-ay-tur=urun] .sahne-serit{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important}
+  html[data-ay-tur=urun] .sahne-serit .sk{height:440px}
+  /* Galaxy USB ve imza sayfaları · Diskler: yansıma solda büyük, başlık ve diskler sağda */
+  html[data-ay-tur=urun] .pg>section.koyu#diskler{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"sahne bas" "sahne iz";column-gap:64px;row-gap:20px;align-items:end}
+  html[data-ay-tur=urun] .koyu#diskler>.px:first-child{grid-area:bas}
+  html[data-ay-tur=urun] .koyu#diskler>.dk-sahne{grid-area:sahne;height:495px}
+  /* Galaksi Night: dönen gök sahnesi (kb-s) iki satıra yayılır; yoksa ilk satıra düşüp bölümü 763 px yapıyordu */
+  html[data-ay-tur=urun] .koyu#diskler>.kb-s{grid-area:sahne;align-self:center}
+  html[data-ay-tur=urun] .koyu#diskler>.px:last-child{grid-area:iz;align-self:start}
+  html[data-ay-tur=urun] .koyu#diskler .dk-yansi{top:6px;width:354px;height:354px;margin-left:-177px}
+  html[data-ay-tur=urun] .koyu#diskler .dk-isik{top:222px;width:375px;height:144px;margin-left:-187px}
+  html[data-ay-tur=urun] .koyu#diskler .dk-urun{bottom:-15px;height:156px;margin-left:-33px}
+  html[data-ay-tur=urun] .koyu#diskler .dk-ad{left:0}
+  /* Galaxy USB · Herkesin odasına: yazı solda, oda kartı sağda */
+  html[data-ay-tur=urun] .pg>section#odalar:has(>.hk){max-width:1136px!important;display:grid;grid-template-columns:minmax(0,1fr) 560px;grid-template-rows:1fr auto auto auto 1fr;grid-template-areas:". hk" "bas hk" "alt hk" "not hk" ". hk";column-gap:64px;align-items:start;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=urun] #odalar:has(>.hk)>h2{grid-area:bas}
+  html[data-ay-tur=urun] .pg>section .hk-sec{padding:0 12px!important}
+  html[data-ay-tur=urun] #odalar:has(>.hk)>.alt-b{grid-area:alt}
+  html[data-ay-tur=urun] #odalar:has(>.hk)>.alt-not{grid-area:not}
+  html[data-ay-tur=urun] #odalar>.hk{grid-area:hk;height:560px;margin-top:0}
+  /* Sizden gelen mesajlar (USB, imza ve sade sayfalar): başlık komşu bölümlerle aynı 760 px sütunda (1136 px'te başlıklar 188 px zıplıyordu);
+     şerit sütunun solundan başlar, sağda ekran kenarına uzanır (sütun kenarında kesilmez) */
+  html[data-ay-tur=urun] .pg>section.mesaj-bol>.mkarma{margin-right:calc(380px - 50vw)!important;padding-left:16px!important;padding-right:32px!important;scroll-padding-left:16px}
+  /* AyFeneri ve Galaksi Night · Hangi odada nasıl durur: dört oda tek satır ızgara (1024'te 158 px yana taşıyordu) */
+  html[data-ay-tur=urun] .pg>section .oda-serit{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px!important}
+  html[data-ay-tur=urun] .oda-serit>span[aria-hidden]{display:none}
+  html[data-ay-tur=urun] .oda-k{height:400px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:0 16px 14px;box-sizing:border-box}
+  /* Başlık ve alt yazı akışta, alt alta (dar kartta iki satıra kırılan alt yazı başlığın üstüne biniyordu) */
+  html[data-ay-tur=urun] .oda-k b,html[data-ay-tur=urun] .oda-k span{position:relative;left:auto;right:auto;bottom:auto}
+
+  /* Ana sayfa: geniş slayt, 5'li yorum, 4 sütun ürün, yan yana bloklar */
+  html[data-ay-tur=ana] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=ana] .slayt{margin:28px 0 0;height:560px}
+  html[data-ay-tur=ana] .sl::after{background:linear-gradient(90deg,rgba(12,16,39,.9) 0%,rgba(12,16,39,.6) 36%,rgba(12,16,39,0) 64%)}
+  html[data-ay-tur=ana] .sl-y{left:64px;right:auto;top:50%;bottom:auto;max-width:440px;transform:translateY(-50%)}
+  html[data-ay-tur=ana] .sl-y small{font-size:14px}
+  html[data-ay-tur=ana] .sl-y h2{font-size:52px}
+  html[data-ay-tur=ana] .sl-y p{margin-top:14px;font-size:17px}
+  html[data-ay-tur=ana] .sl-y a{min-height:52px;margin-top:26px;padding:0 24px}
+  html[data-ay-tur=ana] .ay-iz{left:64px;bottom:36px}
+  html[data-ay-tur=ana] .bb{padding:80px 0 0}
+  html[data-ay-tur=ana] .h2{font-size:32px}
+  html[data-ay-tur=ana] .bb .h2 br,html[data-ay-tur=ana] .bulten .h2 br{display:none}
+  html[data-ay-tur=ana] .yorum-serit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:24px 0 4px;overflow:visible}
+  html[data-ay-tur=ana] .yorum-serit>span{display:none}
+  html[data-ay-tur=ana] .yk{padding:20px}
+  html[data-ay-tur=ana] .yk p{font-size:16px}
+  html[data-ay-tur=ana] .y-not{margin:12px 0 0}
+  html[data-ay-tur=ana] .izgara{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:24px 0 0}
+  html[data-ay-tur=ana] .uk>span:last-child{padding:14px 16px 18px}
+  html[data-ay-tur=ana] .uk b{min-height:0;font-size:15px}
+  html[data-ay-tur=ana] .uk .f strong{font-size:16px}
+  html[data-ay-tur=ana] .tum{width:320px;margin:32px auto 0}
+  html[data-ay-tur=ana] .guven{grid-template-columns:repeat(3,minmax(0,1fr));margin:80px 0 0}
+  html[data-ay-tur=ana] .guven div:last-child:nth-child(odd){grid-column:auto}
+  html[data-ay-tur=ana] .guven div{padding:24px 22px;border:0!important;border-right:1px solid var(--cizgi)!important}
+  html[data-ay-tur=ana] .guven div:last-child{border-right:0!important}
+  html[data-ay-tur=ana] .ay-blok{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);margin:80px 0 0}
+  html[data-ay-tur=ana] .ay-blok img{height:540px}
+  html[data-ay-tur=ana] .ay-blok>div{align-self:center;padding:56px}
+  html[data-ay-tur=ana] .ay-blok h2{font-size:38px}
+  html[data-ay-tur=ana] .ay-blok p{max-width:440px;font-size:16px}
+  html[data-ay-tur=ana] .ay-blok a{display:inline-flex;padding:0 28px}
+  html[data-ay-tur=ana] .bulten{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);column-gap:48px;align-items:center;margin:80px 0 0;padding:40px 48px}
+  html[data-ay-tur=ana] .bulten>h2,html[data-ay-tur=ana] .bulten>p{grid-column:1}
+  html[data-ay-tur=ana] .bulten form{grid-column:2;grid-row:1/3;margin:0}
+  html[data-ay-tur=ana] .bulten .h2{font-size:28px}
+  @media (hover:hover){
+    .uk img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+    .uk:hover img{transform:scale(1.04)}
+  }
+  /* Koleksiyon: 4 sütun */
+  html[data-ay-tur=koleksiyon] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box;overflow:visible!important}
+  html[data-ay-tur=koleksiyon] .sb{padding:48px 0 0}
+  html[data-ay-tur=koleksiyon] .sb h1{font-size:40px}
+  html[data-ay-tur=koleksiyon] .arac{padding:20px 0 0;overflow:visible}
+  html[data-ay-tur=koleksiyon] .sirala{padding:16px 0 0;border-bottom:1px solid var(--cizgi,#E3D8C7)}
+  html[data-ay-tur=koleksiyon] .izgara{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;padding:24px 0 0}
+  html[data-ay-tur=koleksiyon] .uk>span:last-child{padding:14px 16px 16px}
+  html[data-ay-tur=koleksiyon] .uk b{min-height:0;font-size:15px}
+  /* Arama: koleksiyon gibi 4 sütun */
+  html[data-ay-tur=arama] .pg{max-width:1200px!important;padding:0 32px!important;box-sizing:border-box}
+  html[data-ay-tur=arama] .sb{padding:48px 0 0}
+  html[data-ay-tur=arama] .sb h1{font-size:40px}
+  html[data-ay-tur=arama] .ara{max-width:640px;margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=arama] .oneri,html[data-ay-tur=arama] .sonuc{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+  html[data-ay-tur=arama] .izg{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px;margin:20px 0 0}
+  html[data-ay-tur=arama] .izg span{padding:14px 16px 16px;font-size:15px}
+  /* Sepet: solda ürünler ve seçenekler, sağda yapışkan özet */
+  html[data-ay-tur=sepet] .pg{max-width:1080px!important;margin-top:32px!important;margin-bottom:64px!important;border-radius:24px;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .s-ust{height:76px;padding:0 16px 0 32px}
+  html[data-ay-tur=sepet] .s-ust h2{font-size:28px}
+  html[data-ay-tur=sepet] .s-govde{display:grid;grid-template-columns:minmax(0,1fr) 380px;column-gap:48px;align-items:start;padding:12px 32px 32px}
+  html[data-ay-tur=sepet] .s-sol>*,html[data-ay-tur=sepet] .s-sag>*{margin-left:0!important;margin-right:0!important}
+  html[data-ay-tur=sepet] .s-sag{position:sticky;top:96px;margin-top:12px;padding:20px 24px 4px;border-radius:20px;background:#FFFDF9;box-shadow:inset 0 0 0 1px #E3D8C7}
+  html[data-ay-tur=sepet] .s-sag .ozet{border-top:0;padding-top:0;margin-top:0}
+  html[data-ay-tur=sepet] .s-sag .btn1,html[data-ay-tur=sepet] .s-sag .btn2,html[data-ay-tur=sepet] .s-sol>button{width:100%!important}
+  html[data-ay-tur=sepet] .bos-s{max-width:480px;margin:48px auto!important}
+  /* Sepet satırı masaüstünde tek sıra: görsel | ad | adet | fiyat + Kaldır (satır 160 → ~90 px); 1024'te panel ekran kenarına yapışmaz */
+  html[data-ay-tur=sepet] .pg{width:calc(100% - 48px)!important}
+  html[data-ay-tur=sepet] .urun>div{display:grid;grid-template-columns:minmax(0,1fr) auto 150px;grid-template-areas:"ad adet fiyat" "alt adet fiyat";column-gap:24px;align-items:center;align-content:center}
+  html[data-ay-tur=sepet] .urun>div>b{grid-area:ad;align-self:end}
+  html[data-ay-tur=sepet] .urun>div>small{grid-area:alt;align-self:start}
+  html[data-ay-tur=sepet] .urun-alt{display:contents}
+  html[data-ay-tur=sepet] .urun .adet{grid-area:adet}
+  html[data-ay-tur=sepet] .urun-fiyat{grid-area:fiyat;display:flex;flex-direction:column;align-items:flex-end}
+  html[data-ay-tur=sepet] .urun-fiyat br{display:none}
+  html[data-ay-tur=sepet] .urun .sil{min-height:40px}
+  /* Ürün sayfası alt bilgisi (imza sayfaları, footer.alt-bilgi): solda kapanış + buton, sağda bağlantılar ve yasal bilgi */
+  .ay-kok .pg>footer.alt-bilgi{border-radius:0;padding:64px 0 40px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"bas link" "btn link" "imza imza" "telif telif";column-gap:64px;row-gap:0;align-items:start;padding:0 max(32px,calc(50vw - 568px))!important;box-sizing:border-box}
+  /* 5 öğe (23 Eki, masaüstü denetimi: kural 6 öğe varsayıyordu, imza sağa, telif sol yarıya düşüyordu): başlık, buton, bağlantılar, imza, telif */
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(1){grid-area:bas;font-size:34px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(1) br{display:none}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(2){grid-area:btn;justify-self:start;width:440px!important;max-width:100%;margin-top:24px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(3){grid-area:link;margin-top:0!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(4){grid-area:imza;margin-top:48px!important}
+  .ay-kok .pg>footer.alt-bilgi>.px>:nth-child(5){grid-area:telif;margin-top:32px!important}
+  /* Yapışkan satın alma çubuğu (ayluna.js cubukKur) */
+  .ay-al{display:block;position:fixed;left:0;right:0;top:72px;z-index:899;background:#1A2142;color:#fff;font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 10px 24px rgba(12,16,39,.18);transform:translateY(-100%);opacity:0;visibility:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s linear .35s}
+  .ay-al.on{transform:none;opacity:1;visibility:visible;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  html[data-ay-tur=odeme] .ay-al{display:none}
+  .ay-al-ic{max-width:1200px;margin:0 auto;height:68px;padding:0 32px;display:flex;align-items:center;gap:14px;box-sizing:border-box}
+  .ay-al img{width:44px;height:44px;flex:none;border-radius:10px;object-fit:cover;background:#EFE6D8}
+  .ay-al-y{display:flex;flex-direction:column;gap:2px;min-width:0;margin-right:auto}
+  .ay-al-y b{font-size:15px;font-weight:700}
+  .ay-al-y small{font-size:13px;color:#C9CFE2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ay-al-kp{flex:none;min-height:48px;padding:0 14px;border:0;background:transparent;color:#fff;font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.4);cursor:pointer}
+  .ay-al-btn{flex:none;min-height:48px;padding:0 24px;border:0;border-radius:14px;background:#F2A65A;color:#1A2142;font:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1)}
+  .ay-al-btn:active{transform:translateY(2px)}
+  .ay-al button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
+  /* Alt bilgi (ana sayfa ve içerik sayfaları): kenardan kenara, solda imza, sağda bağlantılar */
+  .ay-kok .pg>footer.alt{width:100vw;margin-left:calc(50% - 50vw)!important;margin-top:96px;box-sizing:border-box;padding:56px max(32px,calc(50vw - 568px)) 40px;border-radius:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"imza sut" "yasal sut" "kart sut" "telif telif";grid-template-rows:auto auto 1fr auto;column-gap:64px;align-content:start}
+  .ay-kok .pg>footer.alt .imza{grid-area:imza;margin-top:0}
+  .ay-kok .pg>footer.alt .imza span{font-size:72px}
+  .ay-kok .pg>footer.alt .sut{grid-area:sut}
+  .ay-kok .pg>footer.alt .yasal{grid-area:yasal}
+  /* Sağ sütun uzunsa boşluk kart logolarının altına gider (imza ile logolar arasında 208 px boş satır kalıyordu) */
+  .ay-kok .pg>footer.alt .kart-logo{grid-area:kart;align-self:start}
+  .ay-kok .pg>footer.alt .telif{grid-area:telif;margin-top:40px}
+  /* "Yukarı" düğmesi masaüstünde ekranın sağ alt köşesinde (sütunun içinde kartları ve alt bilgi bağlantılarını örtüyordu) */
+  .yukari{position:fixed!important;right:24px;bottom:24px;margin:0!important;z-index:880}
+  /* Telefon ipucu masaüstünde yok ("Dokun, büyüsün"); Galaksi Night'taki telefon ara boşluğu masaüstünde bölüm aralığına eklenmez */
+  .dokun{display:none}
+  .ay-kok .pg>.ara{display:none}
+  /* İçerik sayfalarında başlıktaki zorunlu satır sonu masaüstünde yok ("Siparişin / nerede?") */
+  html[data-ay-tur=politika] .pg h1 br,html[data-ay-tur=politika] .pg .h2 br,html[data-ay-tur=kargo-takip] .pg h1 br,html[data-ay-tur=kargo-takip] .pg .h2 br,html[data-ay-tur=iletisim] .pg h1 br,html[data-ay-tur=iletisim] .pg .h2 br{display:none}
+}
+/* 768-820 px yüksek masaüstü ekran: koyu bantlar ve oda kartı biraz kısalır ki bölüm 628 px'e sığsın */
+@media (min-width:1024px) and (max-height:820px){
+  html[data-ay-tur=urun] .pg>section.koyu,html[data-ay-tur=urun] .pg>section.gece{padding-top:56px!important;padding-bottom:56px!important}
+  html[data-ay-tur=urun] #odalar>.hk{height:530px}
+}
+
+/* Shopify kipi (19 Eki): kapıda ödeme düğmesini mağaza sahibi EasySell ile koyar; tasarımdaki Kapıda düğmeleri ve sepetteki kapıda notu gizli.
+   Satın al düğmesinin altındaki yuva EasySell düğmesini ve uygulama bloklarını taşır. Kaching paket kutusu görünmez çalışır. */
+html.ay-shop [data-ay-kapida]{display:none!important}
+/* Shopify: Loox bloğu gelmediyse yorum kutusu görünmez; ürün alanında 0 yazan Dün/stok satırı gizli (ayluna.js elleSayi) */
+html.ay-shop [data-ay-yorum]:not([data-ay-dolu]),html.ay-shop [data-ay-gizli]{display:none!important}
+[data-ay-yorum][data-ay-dolu]{padding:0;border:0;text-align:left}
+.ay-dis:not(:empty){margin-top:12px}
+.ay-arka{position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);visibility:hidden;pointer-events:none}
+/* Üst blok renk döngüsü: masaüstü başlığı için ortak anahtar kareler (sayfa CSS'inde de var) */
+@keyframes rd-gece{0%,34%{opacity:0}50%,84%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.ay-masa>.gk{animation:none}}
+
+/* Shopify bölümleri (28 Eki): sayfa bölüm bölüm çizilir (html.ay-coklu). Yapışkan çubuk bölümün içinde kalamayacağı için
+   ekrana sabitlenir; uygulama blokları (Loox vb.) bulundukları bölümün altında, sayfa sütununda durur. */
+html.ay-coklu .yapis{position:fixed!important;left:0;right:0;bottom:0;z-index:20;margin:0!important}
+/* EasySell'in kendi yapışkan düğmesi açıksa bizim çubuk gizli (ikisi üst üste binmesin) */
+html.ay-es-yapis .ay-kok .yapis{display:none!important}
+@media (max-width:1023px){html.ay-coklu body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}}
+.ay-uyg{max-width:760px;margin:0 auto;padding:8px 16px 28px;background:var(--ay-zemin,#fff)}
+.ay-uyg:empty{display:none}
+html.ay-shop .yer:not([data-ay-dolu]){display:none!important}
+/* Videolar (28 Eki): bölüm bloklarındaki Shopify videoları; kapak videonun kendi karesi */
+.ay-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ay-vid-not{margin:12px 16px;padding:14px 16px;border-radius:14px;background:#F3F4F7;color:#5C6078;font:14px/1.5 Onest,system-ui,sans-serif}
+/* Yorum bloğu ayarları (28 Eki): Loox açıkken tasarımdaki yorum kartları, puan ve fotoğraflar kapalı; müşteri mesajları ayrıca kapatılabilir */
+.ay-ytasarimsiz .y-tas,.ay-ytasarimsiz .y-puan{display:none!important}
+.ay-ymsjsiz .y-msj{display:none!important}
+/* Videolar bölümü (28 Eki; Shopify'da bağımsız bölüm, kartlar blok): tasarımdaki video şeridinin görünüşü her sayfada aynı */
+.ay-vb{background:var(--ay-zemin,#fff);color:#1A2142}
+.ay-vb .bolum{padding-top:36px;padding-bottom:8px}
+.ay-vb .px{padding-left:16px;padding-right:16px}
+.ay-vb .h2{margin:0;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.15;letter-spacing:-.02em}
+.ay-vb .h2 .n{color:#F2A65A}
+.ay-vb-alt{margin:6px 0 0;font-size:14px;color:#5C6078}
+.ay-vb-serit{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:16px 16px 0;scrollbar-width:none}
+.ay-vb-serit::-webkit-scrollbar{display:none}
+.ay-vb .vid{position:relative;flex:0 0 172px;height:306px;scroll-snap-align:start;padding:0;border:0;border-radius:20px;overflow:hidden;background:#1A2142;cursor:pointer;color:#FFFDF9;text-align:left;font:inherit}
+.ay-vb .vid img,.ay-vb .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ay-vb .vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,16,39,.88) 0,rgba(12,16,39,0) 52%)}
+.ay-vb .vid-oyna{position:absolute;left:50%;top:42%;z-index:1;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,249,.94);box-shadow:0 6px 16px rgba(12,16,39,.35)}
+.ay-vb .vid-oyna svg{width:22px;height:22px;fill:#1A2142;margin-left:3px}
+.ay-vb .vid[data-ay-oynuyor] .vid-oyna,.ay-vb .vid:has(video[data-ay-oynuyor]) .vid-oyna{opacity:0}
+.ay-vb .vid-alt{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;line-height:1.25}
+.ay-vb .vid-alt b{font-size:14px}
+.ay-vb .vid-alt span{font-size:13px;color:#B9BED6}
+.ay-vb-foto{cursor:default!important}
+.ay-vb-bos{background:repeating-linear-gradient(45deg,#1A2142 0 10px,#232B52 10px 20px)!important}
+@media (min-width:1024px){.ay-vb .bolum{max-width:760px;margin:0 auto;padding-top:56px}.ay-vb .px,.ay-vb-serit{padding-left:0;padding-right:0}.ay-vb .h2{font-size:30px}.ay-vb-serit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;overflow:visible}.ay-vb .vid{height:auto;aspect-ratio:9/16}.ay-vb-serit>span[aria-hidden]{display:none}}
+/* Ana sayfa slaytı (28 Eki, seçim C): kenardan kenara, 500 px, tam genişlik düğme (telefon ve tablet) */
+@media (max-width:1023px){
+  html[data-ay-tur=ana] .slayt{margin:0!important;border-radius:0!important;height:500px!important}
+  html[data-ay-tur=ana] .slayt .sl::after{background:linear-gradient(180deg,rgba(12,16,39,0) 30%,rgba(12,16,39,.55) 52%,rgba(12,16,39,.94) 86%)!important}
+  html[data-ay-tur=ana] .slayt .sl-y{bottom:56px!important}
+  html[data-ay-tur=ana] .slayt .sl-y h2{font-size:34px}
+  html[data-ay-tur=ana] .slayt .sl-y a{display:flex!important;justify-content:center;width:100%;box-sizing:border-box;min-height:52px;border-radius:14px!important}
+  html[data-ay-tur=ana] .slayt .ay-iz{left:50%!important;bottom:20px!important;transform:translateX(-50%)}
+}
+/* Menü (28 Eki, B · yıldızlı gece, 2. tur): dört köşeli parlayan yıldızlar üç katmanda sırayla parıldar (yalnız opacity/transform), soluk yıldız tozu, ışıyan hilal; açılınca satırlar sırayla gelir */
+.ay-menu{--ay-yb:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23F5F3EF' stop-opacity='.45'/%3E%3Cstop offset='1' stop-color='%23F5F3EF' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='20' fill='url%28%23g%29'/%3E%3Cpath d='M20 6C20.9 15.5 24.5 19.1 34 20C24.5 20.9 20.9 24.5 20 34C19.1 24.5 15.5 20.9 6 20C15.5 19.1 19.1 15.5 20 6Z' fill='%23F5F3EF'/%3E%3Ccircle cx='20' cy='20' r='2.2' fill='%23FFFFFF'/%3E%3C/svg%3E");--ay-ya:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23F3B562' stop-opacity='.5'/%3E%3Cstop offset='1' stop-color='%23F3B562' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='20' fill='url%28%23g%29'/%3E%3Cpath d='M20 6C20.9 15.5 24.5 19.1 34 20C24.5 20.9 20.9 24.5 20 34C19.1 24.5 15.5 20.9 6 20C15.5 19.1 19.1 15.5 20 6Z' fill='%23F3B562'/%3E%3Ccircle cx='20' cy='20' r='2.2' fill='%23FFFFFF'/%3E%3C/svg%3E")}
+.ay-menu .ay-panel{background:radial-gradient(120% 60% at 80% 100%,#26305C 0%,rgba(38,48,92,0) 60%),linear-gradient(180deg,#0E1528 0%,#141D38 55%,#1A2142 100%);color:#F5F3EF;isolation:isolate;overflow:hidden}
+.ay-menu .ay-panel::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1.2px 1.2px at 23% 55%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 90% 55%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 83% 38%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 63% 29%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 62% 67%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 25% 66%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 69% 32%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 2% 3%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 49% 76%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 56% 10%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 20% 98%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 31% 31%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 90% 7%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 57% 96%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 54% 80%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 58% 6%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 44% 71%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 65% 90%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 16% 85%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 49% 4%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 21% 96%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 13% 17%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 4% 60%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 22% 72%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 95% 45%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 53% 64%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 21% 25%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 87% 6%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 62% 32%,#F5F3EF 50%,transparent 52%),radial-gradient(1.2px 1.2px at 11% 27%,#F5F3EF 50%,transparent 52%);opacity:.45}
+.ay-menu .ay-p-ust::before,.ay-menu ul::before,.ay-menu ul::after{content:"";position:fixed;top:0;bottom:0;left:0;width:min(100%,430px);z-index:-1;pointer-events:none;will-change:opacity}
+.ay-menu .ay-p-ust::before{background-image:var(--ay-yb),var(--ay-ya),var(--ay-yb),var(--ay-yb),var(--ay-ya),var(--ay-yb),var(--ay-ya);background-position:62% 9%,78% 27%,56% 44%,82% 61%,62% 71%,30% 93%,12% 86%;background-size:23px 23px,18px 18px,29px 29px,16px 16px,21px 21px,26px 26px,16px 16px;background-repeat:no-repeat;animation:ay-parla 2.8s ease-in-out infinite}
+.ay-menu ul::before{background-image:var(--ay-yb),var(--ay-ya),var(--ay-yb),var(--ay-yb),var(--ay-yb),var(--ay-ya),var(--ay-yb);background-position:72% 16%,60% 33%,84% 49%,58% 66%,48% 88%,90% 82%,22% 97%;background-size:16px 16px,21px 21px,26px 26px,16px 16px,21px 21px,16px 16px,18px 18px;background-repeat:no-repeat;animation:ay-parla 3.4s ease-in-out .9s infinite}
+.ay-menu ul::after{background-image:var(--ay-ya),var(--ay-yb),var(--ay-yb),var(--ay-yb),var(--ay-yb),var(--ay-yb);background-position:68% 4%,80% 38%,64% 56%,74% 87%,38% 88%,6% 94%;background-size:16px 16px,21px 21px,16px 16px,29px 29px,16px 16px,21px 21px;background-repeat:no-repeat;animation:ay-parla 4.2s ease-in-out 1.8s infinite}
+@keyframes ay-parla{0%,100%{opacity:.15}45%{opacity:1}60%{opacity:.85}}
+.ay-menu .ay-p-ust{background:transparent;border-bottom:1px solid rgba(245,243,239,.12);color:#F5F3EF}
+.ay-menu .ay-x{color:#F5F3EF}
+.ay-menu li a{position:relative;color:#F5F3EF;border-bottom:1px solid rgba(245,243,239,.08);transition:background-color .2s cubic-bezier(.2,.7,.2,1)}
+.ay-menu li a:active{background:rgba(243,181,98,.12)}
+.ay-menu li a:focus-visible{outline:2px solid #F3B562;outline-offset:-2px}
+.ay-menu li svg{color:#F3B562;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.ay-menu li a:hover svg{transform:translateX(3px)}
+.ay-menu.on li{animation:ay-satir .5s cubic-bezier(.2,.7,.2,1) both}
+.ay-menu.on li:nth-child(2){animation-delay:.04s}.ay-menu.on li:nth-child(3){animation-delay:.08s}.ay-menu.on li:nth-child(4){animation-delay:.12s}.ay-menu.on li:nth-child(5){animation-delay:.16s}.ay-menu.on li:nth-child(6){animation-delay:.2s}.ay-menu.on li:nth-child(7){animation-delay:.24s}.ay-menu.on li:nth-child(8){animation-delay:.28s}.ay-menu.on li:nth-child(9){animation-delay:.32s}.ay-menu.on li:nth-child(10){animation-delay:.36s}
+@keyframes ay-satir{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.ay-menu .ay-panel::after{content:"Kartla %5 indirim · Kapıda ödeme · 30 gün iade";flex:1 0 auto;min-height:180px;padding:24px 20px;box-sizing:border-box;color:#C9CEE2;font-size:14px;font-weight:600;line-height:1.4;background:radial-gradient(circle at calc(78% + 7px) calc(62% + 6px),rgba(243,224,190,.16) 0 30px,rgba(243,224,190,.06) 50px,transparent 76px),radial-gradient(circle at calc(78% - 11px) calc(62% - 9px),#1E2750 0 25px,transparent 26px),radial-gradient(circle at 78% 62%,#FBF4E6 0 28px,transparent 29px)}
+@media (max-height:700px){.ay-menu .ay-panel::after{display:none}}
+@media (prefers-reduced-motion:reduce){.ay-menu .ay-p-ust::before,.ay-menu ul::before,.ay-menu ul::after,.ay-menu.on li{animation:none;opacity:.8}}
+/* Loox yorumları kısa başlar; "Tüm yorumları gör" ile açılır (28 Eki) */
+.ay-loox-kisa{position:relative;max-height:880px;overflow:hidden}
+.ay-loox-kisa::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(180deg,rgba(255,255,255,0),var(--ay-zemin,#fff) 72%);pointer-events:none}
+.ay-loox-ac{position:absolute;left:50%;bottom:18px;z-index:1;transform:translateX(-50%);min-height:48px;padding:0 24px;border:1.5px solid #1A2142;border-radius:999px;background:#FFFDF9;color:#1A2142;font-family:"Figtree",system-ui,sans-serif;font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer}
+.ay-loox-ac:active{transform:translateX(-50%) scale(.97)}
+
+/* Politika sayfaları (28 Eki): İade, Kargo, Gizlilik, Hizmet şartları marka görünüşünde */
+html:has(.shopify-policy__container) body{margin:0;background:#F6F1E9;color:#1A2142;font-family:"Figtree",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.ay-pol-ust{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 8px 0 16px;background:#1A2142;color:#F5F3EF}
+.ay-pol-ust a{display:flex;align-items:center;gap:8px;min-height:48px;color:inherit;text-decoration:none}
+.ay-pol-ust b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.02em}
+.ay-pol-ust .ay-pol-geri{padding:0 12px;border-radius:999px;font-size:14px;font-weight:600;color:#F3B562}
+.shopify-policy__container{max-width:680px!important;margin:0 auto!important;padding:28px 18px 8px!important;box-sizing:border-box}
+.shopify-policy__title h1{margin:0 0 18px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:32px;line-height:1.08;letter-spacing:-.02em;text-align:left;color:#1A2142}
+.shopify-policy__title h1::after{content:".";color:#F2A65A}
+.shopify-policy__body .rte{padding:22px 20px;border-radius:16px;background:#FFFDF9;box-shadow:0 1px 0 #EADFCF,0 10px 30px rgba(26,33,66,.06);font-size:16px;line-height:1.7;color:#3A3F5C}
+.shopify-policy__body .rte strong,.shopify-policy__body .rte b{display:block;margin:22px 0 4px;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px;line-height:1.2;color:#1A2142}
+.shopify-policy__body .rte p:first-child strong:first-child{margin-top:0}
+.shopify-policy__body .rte a{color:#1A2142;text-decoration:underline;text-decoration-color:#F2A65A;text-underline-offset:3px;text-decoration-thickness:2px}
+.ay-pol-alt{max-width:680px;margin:0 auto;padding:16px 18px 40px;box-sizing:border-box}
+.ay-pol-serit{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.ay-pol-serit span{padding:8px 12px;border-radius:999px;background:#EFE7DA;font-size:13px;font-weight:600;color:#1A2142}
+.ay-pol-kart{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-radius:16px;background:#1A2142;color:#F5F3EF;text-decoration:none}
+.ay-pol-kart b{display:block;font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:20px}
+.ay-pol-kart small{display:block;margin-top:2px;font-size:14px;color:#C9CEE2}
+.ay-pol-kart i{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#F3B562;color:#1A2142;font-style:normal;font-size:20px;font-weight:700}
+.ay-pol-diger{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:18px;font-size:14px}
+.ay-pol-diger a{color:#5C6078;min-height:44px;display:inline-flex;align-items:center}
+
+body{background:var(--ay-zemin,#F6F1E9)}
