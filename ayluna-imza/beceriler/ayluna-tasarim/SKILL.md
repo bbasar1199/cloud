@@ -78,6 +78,7 @@ Ayluna, Türkiye'de Meta reklamıyla telefondan gelen annelere ve büyükanneler
 - Tema kurulduktan sonra değişiklik tema zip olarak değil, yalnız değişen dosyalar kopyala-yapıştır olarak verilir (zip yüklenince editör ayarları gider).
 - Satın alma kısmının iskeleti her ürün sayfasında aynıdır (LunaDream / Galaxy USB): ad, fiyat satırı + rozet, tek satır açıklama, dönen güven satırı, özellik kartları, paket (seçim halkalı), kargo şeridi, stok, butonlar, teslim kartı, 4 soru. Yeni ürün bu iskeleti birebir alır; ürüne özgü tasarım yalnız alttaki bölümlerde. Yorum (Loox) bölümü her ürün sayfasında olur.
 - Sayfayı tek renk boğmaz: marka koyu tonu bölümlerde, satın al düğmesi ayrı sıcak renk (LunaDream amber, Yılbaşı kırmızı).
+- Kurulu temaya verilen bölüm dosyası eski ayar kimliklerini silmez (Shopify kaydı reddeder); yazı ayarları içerikten türetilen kararlı kimlik kullanır.
 - İkna için uydurma avantaj yok (indirim yoksa "hediye için/avantajlı" kurdelesi yok); aynı bilgi sayfada bir kez; başka ürünün yorumu/sohbeti kaynağıyla etiketlenir ("Diğer lambalarımızı alanlar").
   - Sayaç = sayfanın en üstünde ince amber şerit "Bugüne özel fiyat 06:26:42", her gece 23:59'da (İstanbul) sıfırlanır. Koşul (yalnız sahibine söylenir): gün içinde zam gelse de o günün fiyatı 23:59'a kadar korunur.
 - **Disk görselleri:** mağaza afişinden kesilip yapay zekâ ile netleştirilmiş diskler (Real-ESRGAN çizim modeli, 512px); sadece büyütmek yetmez. Unicorn ve 2025 kutuda yok.

@@ -1205,3 +1205,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: yılbaşı stok 12 (kullanıcı), dönen satır ilk sıra stok. Yapıştırmalık 5 dosya (ayluna.js dahil).
 - 29 Eki: canlıda yazı kayması (sıra numaralı ayar kimliği) → yılbaşında kararlı kimlik (bolumler.ayarla kararli). Kırmızı CTA, beyaz yapışkan çubuk, kaydırmalı Işığı kapat. Yapıştırmalık 4 dosya güncel.
 - 29 Eki: yılbaşı "Her gece başka bir tavan" 4 kart; disk ve dergi görsel seçicileri. Yapıştırmalık 4 dosya güncel. Bekleyen: 4 lifestyle kare + 6 kaliteli disk görseli (kullanıcı üretecek), karşılaştırma fiyatı.
+- 29 Eki: canlıda bölüm dosyası kaydedilmemişti (silinen ayar kimlikleri). Eski kimlikler şemada tutuluyor (eski-ayar.json). Dönen satır ve kargo şeridi yeşilsiz. Yapıştırmalık 4 dosya güncel.

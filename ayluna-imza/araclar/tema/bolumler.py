@@ -3,7 +3,7 @@
 # Bir panonun gövdesi (.pg'nin çocukları) parçalara bölünür; her parça bir Shopify bölümü olur. Bölüm parçasını
 # <template class="ay-parca"> içinde taşır, ayluna.js hepsini tek bileşenle çizer. Panonun kendi şablonunda (ürünün ya da
 # ana sayfanın şablonu) yazılar ve görseller bölüm ayarı olur; her bölüm uygulama bloğu (Loox vb.) alır.
-import re, json, html as H
+import os, re, json, html as H
 
 VOID = {'img', 'br', 'input', 'meta', 'link', 'source', 'hr', 'wbr', 'area', 'col', 'embed', 'track', 'param'}
 ETIKET = re.compile(r'<!--.*?-->|<(/?)([a-zA-Z][\w:-]*)((?:[^>"\']|"[^"]*"|\'[^\']*\')*)>', re.S)
@@ -364,6 +364,10 @@ def video_bolumu():
     return VIDEO_BOLUMU + '\n{% schema %}\n' + json.dumps(VIDEO_SEMA, ensure_ascii=False, indent=2) + '\n{% endschema %}\n'
 
 
+_EP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'eski-ayar.json')
+ESKI = json.load(open(_EP, encoding='utf-8')) if os.path.exists(_EP) else {}
+
+
 def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
     """Özel ürünün sayfa bölümleri: ([(ek, ad, liquid, blok_turleri)], css, js, video_sirasi).
     Tasarımda video şeridi varsa sayfa orada ikiye bölünür; araya bağımsız Videolar bölümü (ay-videolar) girer (video_sirasi: kaçıncı
@@ -393,6 +397,11 @@ def urun_sayfasi(kod, pano, handle, ad_bolum, parcala, harita=None):
             ayar = ayar + d_ayar; ek += d_esle
             vakalar += ("  {%- when '" + tip + "' -%}<div class=\"" + sinif + "\" {{ block.shopify_attributes }}>" + ek + tpl + kok('urun', handle)
                         + (LOOX % ('product', 'product') if n == ly else '') + '</div>\n')
+            # Eski ayar kimlikleri (29 Eki): kurulu temanın şablonunda bu kimliklerle kayıtlı değerler var; Shopify, kullanılan ayarı silen
+            # bölüm dosyasını kaydetmiyor. Kimlikler şemada kalır (kullanılmaz), yazılar yeni kararlı kimliklerden gelir.
+            eski = [x for x in ESKI.get(pano, {}).get(tip, []) if x[0] not in {a.get('id') for a in ayar}]
+            if eski:
+                ayar = ayar + [{'type': 'header', 'content': 'Eski ayarlar (kullanılmıyor)'}] + [{'type': t, 'id': i, 'label': 'Eski ayar ' + i + ' (kullanılmıyor)'} for i, t in eski]
             bloklar.append({'type': tip, 'name': et, 'limit': 1, 'settings': ayar})
         ad = ad_bolum if ki == 0 else kisalt(ad_bolum + ' (devam)', 25)
         l = ('{%- comment -%} Ayluna · ' + ad + '. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.\n'

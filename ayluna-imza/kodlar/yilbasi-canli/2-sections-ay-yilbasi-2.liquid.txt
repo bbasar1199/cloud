@@ -131,6 +131,20 @@
           "type": "image_picker",
           "id": "dce7dadd8",
           "label": "Görsel 4: Dört kelime: Yansıt"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
         }
       ]
     },
@@ -198,6 +212,60 @@
           "id": "y0dc2808e",
           "label": "Yazı: Masanda minik ağaç; USB’ye tak, oda yılbaşı olsun",
           "default": "Masanda minik ağaç; USB’ye tak, oda yılbaşı olsun."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m8",
+          "label": "Eski ayar m8 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m9",
+          "label": "Eski ayar m9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m10",
+          "label": "Eski ayar m10 (kullanılmıyor)"
         }
       ]
     },
@@ -247,6 +315,45 @@
           "id": "yf57fceff",
           "label": "Yazı: [Loox: bu ürünün tüm yorumları, fotoğraflı olanlar ba…",
           "default": "[Loox: bu ürünün tüm yorumları, fotoğraflı olanlar başta; puan dağılımı ve sayı otomatik]"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
         }
       ]
     },
@@ -272,6 +379,25 @@
           "id": "y3f8a7739",
           "label": "Yazı: Dokun, büyüsün",
           "default": "Dokun, büyüsün."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
         }
       ]
     },
@@ -297,6 +423,25 @@
           "id": "ybe94edc9",
           "label": "Yazı: Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz",
           "default": "Yasal 14 günü 30 güne uzattık. İade kargosu ücretsiz."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
         }
       ]
     },
@@ -310,6 +455,15 @@
           "id": "y28eb3e4a",
           "label": "Yazı: Merak",
           "default": "Merak"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
         }
       ]
     },
@@ -323,6 +477,15 @@
           "id": "y695ef33f",
           "label": "Yazı: Odanın geri",
           "default": "Odanın geri"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
         }
       ]
     },
@@ -372,6 +535,45 @@
           "id": "y2a578ef1",
           "label": "Yazı: Fiyatlara KDV dahildir. © 2026 Ayluna",
           "default": "Fiyatlara KDV dahildir. © 2026 Ayluna"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
         }
       ]
     },
@@ -396,6 +598,25 @@
           "id": "yafd94a9a",
           "label": "Yazı: Satın al",
           "default": "Satın al"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
         }
       ]
     },

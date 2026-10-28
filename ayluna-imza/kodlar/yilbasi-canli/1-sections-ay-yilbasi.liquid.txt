@@ -90,6 +90,20 @@
           "id": "y17921f90",
           "label": "Yazı: Ayluna",
           "default": "Ayluna"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
         }
       ]
     },
@@ -285,6 +299,170 @@
           "id": "ya29ff3ff",
           "label": "Yazı: USB projektör modülü (kablolu, lensli), altın abajur,…",
           "default": "USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, \"Merry Christmas\" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g2",
+          "label": "Eski ayar g2 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g3",
+          "label": "Eski ayar g3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m8",
+          "label": "Eski ayar m8 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m9",
+          "label": "Eski ayar m9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m10",
+          "label": "Eski ayar m10 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m11",
+          "label": "Eski ayar m11 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m12",
+          "label": "Eski ayar m12 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m13",
+          "label": "Eski ayar m13 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m14",
+          "label": "Eski ayar m14 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g4",
+          "label": "Eski ayar g4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m15",
+          "label": "Eski ayar m15 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m16",
+          "label": "Eski ayar m16 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m17",
+          "label": "Eski ayar m17 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m18",
+          "label": "Eski ayar m18 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m19",
+          "label": "Eski ayar m19 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m20",
+          "label": "Eski ayar m20 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m21",
+          "label": "Eski ayar m21 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m22",
+          "label": "Eski ayar m22 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m23",
+          "label": "Eski ayar m23 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m24",
+          "label": "Eski ayar m24 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m25",
+          "label": "Eski ayar m25 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m26",
+          "label": "Eski ayar m26 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m27",
+          "label": "Eski ayar m27 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m28",
+          "label": "Eski ayar m28 (kullanılmıyor)"
         }
       ]
     },
@@ -394,6 +572,25 @@
           "id": "y73990cba",
           "label": "Yazı: Ağacını al",
           "default": "Ağacını al"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g2",
+          "label": "Eski ayar g2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
         }
       ]
     },
@@ -457,6 +654,25 @@
           "type": "image_picker",
           "id": "db6e597a7",
           "label": "Görsel 6: Çanlar diski"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
         }
       ]
     },
@@ -535,6 +751,70 @@
           "id": "y7c186c76",
           "label": "Yazı: USB adaptör kutuda yok: evdeki telefon şarj başlığı,…",
           "default": "USB adaptör kutuda yok: evdeki telefon şarj başlığı, powerbank ya da bilgisayar yeter."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m8",
+          "label": "Eski ayar m8 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m9",
+          "label": "Eski ayar m9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m10",
+          "label": "Eski ayar m10 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m11",
+          "label": "Eski ayar m11 (kullanılmıyor)"
         }
       ]
     },
