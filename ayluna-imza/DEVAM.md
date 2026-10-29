@@ -1210,3 +1210,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: Yılbaşı Projektör ana menüde (telefon + masaüstü). Yapıştırmalık 6-assets-ayluna.js.
 - 29 Eki: yılbaşı üst blok: başlık sabit beyaz, şerit krem ↔ kırmızı. Yapıştırmalık 3-css.
 - 29 Eki: yılbaşı 2 adet ₺3.250 (Kaching), kazanç satırı. Yapıştırmalık 4-js.
+- 29 Eki: yılbaşı şeridi yeşil ↔ kırmızı (kullanıcı).
