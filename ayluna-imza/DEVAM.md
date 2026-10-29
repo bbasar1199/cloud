@@ -1208,3 +1208,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: canlıda bölüm dosyası kaydedilmemişti (silinen ayar kimlikleri). Eski kimlikler şemada tutuluyor (eski-ayar.json). Dönen satır ve kargo şeridi yeşilsiz. Yapıştırmalık 4 dosya güncel.
 - 29 Eki: Yılbaşı Projektör adı, açıklama satırı kalktı, font Bricolage+Figtree (kullanıcı A seçti). Yapıştırmalık 4 dosya güncel.
 - 29 Eki: Yılbaşı Projektör ana menüde (telefon + masaüstü). Yapıştırmalık 6-assets-ayluna.js.
+- 29 Eki: yılbaşı üst blok: başlık sabit beyaz, şerit krem ↔ kırmızı. Yapıştırmalık 3-css.
