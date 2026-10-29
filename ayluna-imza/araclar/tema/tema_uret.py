@@ -184,6 +184,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Onest:wght@400;500;600;700&display=swap">
   {{ 'ayluna.css' | asset_url | stylesheet_tag }}
+  <style>/* 29 Eki: sayfa çizilene kadar sunucudan gelen video ve uygulama kutuları gizli (kayma, CLS 0,51) */html:not(.ay-hazir) .ay-vb,html:not(.ay-hazir) .ay-uyg{display:none}</style>
   {% render 'ay-gorseller' %}
   {% render 'ay-canli' %}
   {%- if template.name == 'product' -%}
@@ -205,7 +206,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
 </head>
 <body>
   {{ content_for_layout }}
-  <script>/* 29 Eki: videolar açılışta inmesin (LunaDream 44 MB); ayluna.js şablonları okumadan önce */document.querySelectorAll('template').forEach(function(t){t.content.querySelectorAll('video[preload]').forEach(function(v){v.setAttribute('preload','none')})});</script>
+  <script>/* 29 Eki: videolar açılışta inmesin (LunaDream 44 MB); ayluna.js şablonları okumadan önce */document.querySelectorAll('template').forEach(function(t){t.content.querySelectorAll('video[preload]').forEach(function(v){v.setAttribute('preload','none')})});(function(){var t=Date.now(),d=document.documentElement;function k(){var a=document.querySelectorAll('.ay-kok'),h=true;for(var i=0;i<a.length;i++)if(!a[i].firstElementChild){h=false;break}if(h||Date.now()-t>4000)d.classList.add('ay-hazir');else requestAnimationFrame(k)}k()})();</script>
 </body>
 </html>
 ''')
