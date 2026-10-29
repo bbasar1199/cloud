@@ -255,8 +255,8 @@
   }
   Sepet.bildir = bildir;
 
-  // Menü
-  var MENU = [['Ana sayfa', './'], ['Ara', 'arama.html'], ['Tüm ürünler', 'tum-urunler.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
+  // Menü (29 Eki, kullanıcı: Yılbaşı Projektör ana menüye; mevsim ürünü, ürünlerin başında)
+  var MENU = [['Ana sayfa', './'], ['Ara', 'arama.html'], ['Tüm ürünler', 'tum-urunler.html'], ['Yılbaşı Projektör', 'yilbasi-agaci-projektor-lamba.html'], ['LunaDream Gece Lambası', 'lunadream-gece-lambasi.html'], ['Galaxy USB Projektör', 'galayx-usb-projektor.html'],
     ['Ayluna AyFeneri', 'lamba.html'], ['Galaksi Night Projektör', 'ayluna-galaksi-night-projektor.html'], ['Kargo takip', 'kargo-takip.html'], ['İade ve değişim', 'iade.html'], ['İletişim', 'iletisim.html']];
   var menu = null;
   function menuAc() {
@@ -279,7 +279,7 @@
 
   /* Masaüstü (kullanıcı, 19 Eki: "mağazanın masaüstü görünüşünü de yapmak lazım"): 1024px ve üstünde ortak üst menü.
      Sayfaların telefon başlıkları o genişlikte gizlenir (ayluna.css); bağlantı ve düğmeler genel yönlendirmeden geçer. */
-  var MASA = [['Tüm ürünler', 'tum-urunler.html', 'koleksiyon'], ['LunaDream', 'lunadream-gece-lambasi.html', 'lunadream-gece-lambasi'], ['Galaxy USB', 'galayx-usb-projektor.html', 'galayx-usb-projektor'],
+  var MASA = [['Tüm ürünler', 'tum-urunler.html', 'koleksiyon'], ['Yılbaşı Projektör', 'yilbasi-agaci-projektor-lamba.html', 'yilbasi-agaci-projektor-lamba'], ['LunaDream', 'lunadream-gece-lambasi.html', 'lunadream-gece-lambasi'], ['Galaxy USB', 'galayx-usb-projektor.html', 'galayx-usb-projektor'],
     ['AyFeneri', 'lamba.html', 'lamba'], ['Galaksi Night', 'ayluna-galaksi-night-projektor.html', 'ayluna-galaksi-night-projektor'], ['Kargo takip', 'kargo-takip.html', 'kargo-takip'], ['İletişim', 'iletisim.html', 'iletisim']];
   var IC = function (d) { return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>'; };
   var masa = null;
