@@ -1212,3 +1212,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: yılbaşı 2 adet ₺3.250 (Kaching), kazanç satırı. Yapıştırmalık 4-js.
 - 29 Eki: yılbaşı şeridi yeşil ↔ kırmızı (kullanıcı).
 - 29 Eki: Shopify bağlantısı açık (okuma; yazma yalnız yayında olmayan temaya). LunaDream 49 MB / 3 video 1080p bulundu; düzeltme kodda (ayluna.js, theme.liquid, ay-videolar). Bekleyen: kullanıcı eski temaları silecek (20 tema sınırı) → canlıyı kopyala (themeDuplicate), dosyaları kopyaya yaz, ölç, kullanıcı yayınlasın.
+- 29 Eki: canlının kopyası 'Ayluna 1.0.41 video hizi test' (id 189639196900) oluşturuldu; yalnız layout/theme.liquid (video preload yaması + 480p seçimi) ve sections/ay-videolar.liquid yazıldı. Ölçüm: LunaDream açılış 49 MB → 5 MB; videolar ekrana gelince oynuyor. LunaDream videolarının Shopify'da yalnız 1080p mp4 kaynağı var. Kullanıcı: 'bozma, sayfalara yeni şey ekleme' → yalnız görünmeyen hız düzeltmesi; yayın kararı kullanıcıda.

@@ -205,6 +205,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
 </head>
 <body>
   {{ content_for_layout }}
+  <script>/* 29 Eki: videolar açılışta inmesin (LunaDream 44 MB); ayluna.js şablonları okumadan önce */document.querySelectorAll('template').forEach(function(t){t.content.querySelectorAll('video[preload]').forEach(function(v){v.setAttribute('preload','none')})});</script>
 </body>
 </html>
 ''')
