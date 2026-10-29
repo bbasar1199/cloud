@@ -80,6 +80,8 @@
       if (deger.indexOf('/_blob/') >= 0) deger = deger.replace(/\/_blob\/([0-9a-f]{32})/g, function (m, i) { return (V.blob && V.blob[i]) || m; });
       d.a[nm] = deger;
     }
+    // 29 Eki (canlı ölçüm: LunaDream sayfası açılışta 3 video, ~44 MB indiriyordu): video ekrana gelince yüklenir (ekranda oynatma videoKur)
+    if (tag === 'video' && 'preload' in d.a) d.a.preload = 'none';
     var kaynak = tag === 'template' ? n.content : n;
     for (var c3 = kaynak.firstChild; c3; c3 = c3.nextSibling) vyap(c3, sc, d.c);
     out.push(d);

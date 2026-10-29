@@ -189,7 +189,7 @@ window.AYLUNA_SEPET = {{ cart | json }};
   {%- if template.name == 'product' -%}
   {%- comment -%} Ürünün Shopify medyası: galeri görselleri (tema ayarı açıksa) ve videolar (sayfadaki video bölümü bunları oynatır) {%- endcomment -%}
   {%- assign ay_v = '' -%}
-  {%- for m in product.media -%}{%- if m.media_type == 'video' -%}{%- assign ay_k = m.sources | where: 'format', 'mp4' | last -%}
+  {%- for m in product.media -%}{%- if m.media_type == 'video' -%}{%- assign ay_ss = m.sources | where: 'format', 'mp4' | sort: 'height' -%}{%- assign ay_k = ay_ss | last -%}{%- for ay_s in ay_ss -%}{%- if ay_s.height >= 480 and ay_s.width >= 480 -%}{%- assign ay_k = ay_s -%}{%- break -%}{%- endif -%}{%- endfor -%}
     {%- capture ay_p -%}{"src": {{ ay_k.url | json }}, "poster": {{ m.preview_image | image_url: width: 600 | json }}, "alt": {{ m.alt | default: '' | json }}}{%- endcapture -%}
     {%- if ay_v != '' -%}{%- assign ay_v = ay_v | append: ',' -%}{%- endif -%}{%- assign ay_v = ay_v | append: ay_p -%}
   {%- endif -%}{%- endfor -%}

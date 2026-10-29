@@ -1211,3 +1211,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: yılbaşı üst blok: başlık sabit beyaz, şerit krem ↔ kırmızı. Yapıştırmalık 3-css.
 - 29 Eki: yılbaşı 2 adet ₺3.250 (Kaching), kazanç satırı. Yapıştırmalık 4-js.
 - 29 Eki: yılbaşı şeridi yeşil ↔ kırmızı (kullanıcı).
+- 29 Eki: Shopify bağlantısı açık (okuma; yazma yalnız yayında olmayan temaya). LunaDream 49 MB / 3 video 1080p bulundu; düzeltme kodda (ayluna.js, theme.liquid, ay-videolar). Bekleyen: kullanıcı eski temaları silecek (20 tema sınırı) → canlıyı kopyala (themeDuplicate), dosyaları kopyaya yaz, ölç, kullanıcı yayınlasın.

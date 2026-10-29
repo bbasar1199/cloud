@@ -320,8 +320,8 @@ VIDEO_BOLUMU = """{%- comment -%} Ayluna · Videolar bölümü (araclar/tema/bol
       -%}
       {%- if ay_v -%}
         <button class="vid ay-vid" type="button" aria-label="{{ block.settings.baslik | default: 'Video' | escape }}: videoyu oynat" {{ block.shopify_attributes }}>
-          <video muted loop playsinline preload="metadata" poster="{% if ay_g %}{{ ay_g | image_url: width: 600 }}{% elsif ay_v.preview_image %}{{ ay_v.preview_image | image_url: width: 600 }}{% endif %}">
-            {%- for s in ay_v.sources -%}{%- if s.format == 'mp4' -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endif -%}{%- endfor -%}
+          <video muted loop playsinline preload="none" poster="{% if ay_g %}{{ ay_g | image_url: width: 600 }}{% elsif ay_v.preview_image %}{{ ay_v.preview_image | image_url: width: 600 }}{% endif %}">
+            {%- assign ay_ss = ay_v.sources | where: 'format', 'mp4' | sort: 'height' -%}{%- assign ay_k = ay_ss | last -%}{%- for ay_s in ay_ss -%}{%- if ay_s.height >= 480 and ay_s.width >= 480 -%}{%- assign ay_k = ay_s -%}{%- break -%}{%- endif -%}{%- endfor -%}<source src="{{ ay_k.url }}" type="{{ ay_k.mime_type }}">
           </video>
           <span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"></path></svg></span>
           <span class="vid-alt"><b>{{ block.settings.baslik | escape }}</b><span>{{ block.settings.alt | escape }}</span></span>
