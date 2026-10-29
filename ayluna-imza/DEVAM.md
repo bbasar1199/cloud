@@ -1209,3 +1209,4 @@ Güncel beceri dosyaları `beceriler/` klasöründe; claude.ai'deki sürümleri 
 - 29 Eki: Yılbaşı Projektör adı, açıklama satırı kalktı, font Bricolage+Figtree (kullanıcı A seçti). Yapıştırmalık 4 dosya güncel.
 - 29 Eki: Yılbaşı Projektör ana menüde (telefon + masaüstü). Yapıştırmalık 6-assets-ayluna.js.
 - 29 Eki: yılbaşı üst blok: başlık sabit beyaz, şerit krem ↔ kırmızı. Yapıştırmalık 3-css.
+- 29 Eki: yılbaşı 2 adet ₺3.250 (Kaching), kazanç satırı. Yapıştırmalık 4-js.

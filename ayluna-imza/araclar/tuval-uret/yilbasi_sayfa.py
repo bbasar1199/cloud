@@ -611,10 +611,11 @@ def js():
       if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
     // Fiyat: Shopify'da canlı fiyat (V.urun), tuvalde geçici fiyat. 2 adette indirim tanımlı değil: tasarruf yazılmaz.
     var VU = ((window.AYLUNA_VERI || {}).urun || {})[""" + json.dumps(H) + """] || {}, P1 = VU.p || """ + str(P1) + """;
+    var P2 = 3250;  // kullanıcı, 29 Eki: 2 adet Kaching'de ₺3.250 (sepette uygulanan fiyat)
     var C1v = VU.c > P1 ? VU.c : null, fyPct = C1v ? Math.round((1 - P1 / C1v) * 100) : 0;
     var paket = [
       { n: 1, t: '1 Adet', p: TL(P1, true), old: C1v ? TL(C1v, true) : '', sub: C1v ? '%' + fyPct + ' indirim' : 'Kendine ya da evine', rib: false },
-      { n: 2, t: '2 Adet', p: TL(2 * P1, true), old: C1v ? TL(2 * C1v, true) : '', sub: 'Biri sana, biri hediye', rib: false }
+      { n: 2, t: '2 Adet', p: TL(P2, true), old: TL(C1v ? 2 * C1v : 2 * P1, true), sub: TL(2 * P1 - P2, true) + ' kazanç', rib: false }
     ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, sub: b.sub, rib: b.rib, two: b.n === 2, on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
     var DISK = """ + json.dumps(disk, ensure_ascii=False) + """;
     var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
