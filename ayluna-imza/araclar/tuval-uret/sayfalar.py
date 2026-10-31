@@ -125,7 +125,6 @@ ILETISIM = ("""
   <!-- Canlıda iki ayrı sayfa (/pages/contact ve "Biz Burdayız" kopyası) yalnız formdu: kanal, saat, adres yoktu. Tek sayfada birleşti. -->
   <section class="sb"><h1>Bize ulaş<span>.</span></h1><p>Sipariş, kargo, iade ve değişim için buradayız.</p></section>
   <div class="kart-k"><h2>İletişim bilgileri</h2><ul class="satirlar">
-    <li><span>E-posta</span><b>ecom11001@gmail.com</b></li>
     <li><span>Kargo takip</span><b><a href="#" style="color: var(--lac)">Siparişin nerede?</a></b></li>
     <li><span>Çalışma saatleri</span><b>Hafta içi 09.00–18.00</b></li>
     <li><span>İade adresi</span><b>Destek ekibi iletir</b></li></ul>
