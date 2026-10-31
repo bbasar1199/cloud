@@ -1,0 +1,842 @@
+{%- comment -%} Ayluna · Yılbaşı Ağacı sayfası. Tasarımın parçaları bu bölümün blokları; yazı ve görseller bloğun ayarında.
+  araclar/tema/tema_uret.py üretir, elle düzenlenmez. Yalnız yilbasi-agaci-projektor-lamba ürününde çizilir. {%- endcomment -%}
+{%- if product.handle == 'yilbasi-agaci-projektor-lamba' -%}
+{{ 'ay-yilbasiagaci.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Onest:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap">
+{%- for block in section.blocks -%}{%- case block.type -%}
+  {%- when 'p01' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<div class="duyuru ua-s rd" role="timer" aria-label="{{cdAria}}"><span>{% endraw %}{{ block.settings.ycb5cd8e3 | escape }}{% raw %}</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b><span class="gk" aria-hidden="true"><span>{% endraw %}{{ block.settings.ycb5cd8e3 | escape }}{% raw %}</span><svg class="sayac-ay" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{cdAy}}"></path></svg><b>{{hh}}:{{mm}}:{{ss}}</b></span></div><header class="ust ua-b rd"><a class="marka" href="#" aria-label="Ayluna ana sayfa"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>{% endraw %}{{ block.settings.y17921f90 | escape }}{% raw %}</b></a><span class="ua-sag"><button class="ikon" type="button" aria-label="Menü"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></button><button class="ikon sepet" type="button" aria-label="Sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></button></span><span class="gk" aria-hidden="true"><span class="marka"><svg class="isaret" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" fill="none" stroke="#C9CED8" stroke-width="1.4"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z" fill="#F2A65A"></path></svg><b>{% endraw %}{{ block.settings.y17921f90 | escape }}{% raw %}</b></span><span class="ua-sag"><span class="ikon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"></path></svg></span><span class="ikon sepet gk-sepet"><svg class="ico" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg></span></span></span></header>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+</div>
+  {%- when 'p02' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Galeri: Shopify'da ürünün kendi görselleri; kaydırılır, 5 sn'de kendiliğinden geçer -->
+<div class="urun-ust"><section class="hero kare" aria-label="Yılbaşı Ağacı Projektör Lamba fotoğrafları">
+    <div class="h-iz noscroll" onScroll="{{gKay}}"><sc-for list="{{gal}}" as="f" hint-placeholder-count="2"><div class="{{f.cls}}"><img src="{{f.src}}" alt="{{f.n}}" style="object-position: {{f.pos}}"></div></sc-for></div><button class="g-ok g-geri" type="button" aria-label="Önceki fotoğraf" onClick="{{galGeri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"></path></svg></button><button class="g-ok g-ileri" type="button" aria-label="Sonraki fotoğraf" onClick="{{galIleri}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"></path></svg></button>
+    <div class="h-alt"><span class="d-iz" aria-hidden="true"><sc-for list="{{gal}}" as="f" hint-placeholder-count="4"><i class="{{f.dcls}}"></i></sc-for></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap" aria-live="polite">Fotoğraf {{gNo}} / {{gCount}}</span></div>
+  </section>
+
+  <section class="al" id="siparis">
+    <h1 class="bas-y">{% endraw %}{{ block.settings.ycaade6ed | escape }}{% raw %}</h1>
+    <p class="fiyat-satir"><span class="sr-m">{{fySr}}</span><b class="fy-yeni" aria-hidden="true">{{fyP}}</b><sc-if value="{{fyInd}}" hint-placeholder-val="{{false}}"><span class="fy-yuva" aria-hidden="true"><s class="fy-eski">{{fyC}}</s><span class="rozet fy-rozet">%{{fyPct}} indirim</span></span></sc-if></p>
+    <p class="alt-b">{% endraw %}{{ block.settings.yac5081da | escape }}{% raw %}</p>
+    <p class="dun dsr"><span class="dsr-sr">{{tkSr}}</span><span class="dsr-pen" aria-hidden="true"><span class="{{tkCls}}" style="transform: translateY({{tkY}}px)"><span class="{{tkC0}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span><span class="{{tkC1}}"><svg viewBox="0 0 24 24"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7"></path><circle cx="7" cy="17" r="1.8"></circle><circle cx="17" cy="17" r="1.8"></circle></svg><span><b>{% endraw %}{{ block.settings.y262c2d52 | escape }}{% raw %}</b> ile kapına</span></span><span class="{{tkC2}}"><svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"></path><path d="M4.5 4.5v3.8h3.8"></path></svg><span><b>{% endraw %}{{ block.settings.y767ad9c2 | escape }}{% raw %}</b> iade hakkı</span></span><span class="{{tkC3}}"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M3 7.5h18v3H3zM12 7.5V20M12 7.5c-1.6-3.4-5.6-4-4.8-.6M12 7.5c1.6-3.4 5.6-4 4.8-.6"></path></svg><span><b>{% endraw %}{{ block.settings.y581647a1 | escape }}{% raw %}</b>, süsleriyle</span></span><span class="{{tkC4}}"><i class="dsr-nokta"></i><span>{{tk0a}}<b>{{tk0b}}</b>{{tk0c}}</span></span></span></span></p>
+    <p class="ozb">{% endraw %}{{ block.settings.y9d0835d9 | escape }}{% raw %}</p><div class="yo"><div class="yo-k"><span class="yg yg-agac" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path><path class="s s1" d="M9.5 11.5 Q12 13.5 14.8 10.8"></path><path class="s s2" d="M7.5 16.5 Q12 19.5 16.8 15.6"></path><path class="s s3" d="M5.4 21.4 Q12 24.4 18.8 20.6"></path><circle class="yz" cx="12" cy="3.4" r="2.6"></circle></svg><span class="adm"><i></i><i></i><i></i><i></i></span></span><span><b>{% endraw %}{{ block.settings.ycfe7d813 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y021b1b06 | escape }}{% raw %}</span></span></div><a class="yo-k" href="#diskler"><span class="yg yg-disk" aria-hidden="true"><span><img src="{% endraw %}{%- if block.settings.r9010bb17 -%}{{ block.settings.r9010bb17 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt=""></span><span><img src="{% endraw %}{%- if block.settings.r8468b87b -%}{{ block.settings.r8468b87b | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt=""></span></span><span><b>{% endraw %}{{ block.settings.yaf59f5de | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y5d75fd97 | escape }}{% raw %} {% endraw %}{% raw %}<u>{% endraw %}{{ block.settings.y4a56fd6e | escape }}{% raw %}</u></span></span></a><div class="yo-k"><span class="yg yg-usb" aria-hidden="true"><svg viewBox="0 0 18 28"><g class="fis"><rect x="1" y="10" width="11" height="8" rx="1.5"></rect><path d="M12 12h4.5v4H12"></path></g></svg><span class="akis2"><i></i><i></i><i></i></span><svg viewBox="0 0 24 28"><circle class="hal" cx="12" cy="15" r="11"></circle><path class="dol" d="M12 4 L21 24 H3 Z"></path><g class="ag"><path d="M12 4 L21 24 H3 Z"></path><path d="M12 24v3"></path></g><circle class="ic" cx="10" cy="14" r="1.6"></circle><circle class="ic" cx="14.5" cy="18.5" r="1.6"></circle><circle class="ic" cx="8" cy="20.5" r="1.6"></circle><circle class="ic" cx="12" cy="9" r="1.4"></circle></svg></span><span><b>{% endraw %}{{ block.settings.y210e938d | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.y375520bf | escape }}{% raw %}</span></span></div><div class="yo-k"><span class="yg yg-kutu" aria-hidden="true"><svg viewBox="0 0 28 28"><rect x="5" y="13" width="18" height="13" rx="1.5"></rect><path d="M14 13v13"></path><g class="kap"><rect x="3" y="9" width="22" height="4.5" rx="1.2"></rect><path d="M14 9c-2-4-6.5-4.6-5.6-1M14 9c2-4 6.5-4.6 5.6-1"></path></g></svg><span class="cik"><i class="c-y"></i><i class="c-d"></i><i class="c-c"></i></span></span><span><b>{% endraw %}{{ block.settings.y581647a1 | escape }}{% raw %}</b><span class="t">{% endraw %}{{ block.settings.yebf0dcdc | escape }}{% raw %}</span></span></div></div>
+    <div class="pk-bas"><span>{% endraw %}{{ block.settings.y2b0a1a8d | escape }}{% raw %}</span><span class="ays-k" aria-label="{{aysAria}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="{{aysYol}}"></path></svg>{{aysAy}} fiyatı · {{aysG}} gün {{aysS}} sa</span></div>
+    <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
+      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.y81517dc0 | escape }}{% raw %}</span></sc-if><span class="pk-g"><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img class="y2" src="https://cdn.shopify.com/s/files/1/0792/3571/1204/files/generated-1793448172535.png?width=300" alt=""></sc-if><img class="y1" src="https://cdn.shopify.com/s/files/1/0792/3571/1204/files/generated-1793448152312.png?width=300" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="x2">×2</span></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-f"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{false}}"><s>{{b.old}}</s></sc-if></span><span class="nokta"><i></i></span><span class="pk-hed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"></path></svg><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="h2">2 hediye kutusunda gelir</span></sc-if><span class="h1">Hediye kutusunda gelir</span></span></button>
+    </sc-for></div>
+    <!-- Dönen kargo şeridi (29 Eki, LunaDream'deki gibi): hediye kutusu 4 sn ↔ 16.00 aynı gün kargo + sayaç 6 sn -->
+    <p class="donen"><span class="dn-sr">Yılbaşı baskılı hediye kutusunda. {{kgMetin}}.</span><span class="{{dnA}}" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.4 3.9 13.6l.9-4.6L1.4 5.8 6 5.2z"></path></svg>Yılbaşı baskılı hediye kutusunda</span><span class="{{dnB}}" aria-hidden="true"><svg viewBox="0 0 24 24" class="dn-kt"><rect x="3" y="7" width="13" height="10" rx="1.5"></rect><path d="M16 10h3l2 3v4h-5"></path><circle cx="7" cy="18" r="1.6"></circle><circle cx="18" cy="18" r="1.6"></circle></svg><span class="dn-m">{{kgMetin}}</span><sc-if value="{{kgBugun}}" hint-placeholder-val="{{true}}"><b class="dn-sy">{{kgSayac}}</b></sc-if></span></p>
+    <!-- Stok kurdelesi: sayı ürün alanı ayluna.stok_kurdele'den (canlı); boşsa ya da 0 ise kurdele yok -->
+    <div class="al-on"><sc-if value="{{stokVar}}" hint-placeholder-val="{{false}}"><span class="stk"><i aria-hidden="true"></i>Son {{stokN}} adet</span></sc-if>
+    <button class="btn1" type="button"><span class="b-ic"><span>{{onLabel}}</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div>
+    <div class="ay-dis" data-ay-dis></div>
+    <div class="teslim"><ol class="yol" aria-label="Siparişten teslime"><span class="yol-iz" aria-hidden="true"><i></i><i></i><em></em></span><li class="y1"><span class="yd"></span><b>{% endraw %}{{ block.settings.y01475fc8 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.ycc0a4980 | escape }}{% raw %}</span></li><li class="y2"><span class="yd"></span><b>{{kargo}}</b><span>{% endraw %}{{ block.settings.y57a903b5 | escape }}{% raw %}</span></li><li class="y3"><span class="yd"></span><b>{{teslim}}</b><span>{% endraw %}{{ block.settings.y68579773 | escape }}{% raw %}</span></li></ol></div>
+    <div class="urs" role="group" aria-label="Ürün hakkında sorular"><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.yc01aba9e | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.y4da41ae7 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.y95890173 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.y29a8de57 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.yfe304372 | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.yb70d5da1 | escape }}{% raw %}</p></details><details class="urs-s"><summary><span class="urs-ay" aria-hidden="true"><svg class="evre hilal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A5.04 9 0 0 0 12 3Z"></path></svg><svg class="evre dolu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3A9 9 0 0 1 12 21A9.00 9 0 0 1 12 3Z"></path></svg></span><span class="urs-q">{% endraw %}{{ block.settings.y7ce9daea | escape }}{% raw %}</span><svg class="urs-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>{% endraw %}{{ block.settings.ya29ff3ff | escape }}{% raw %}</p></details></div>
+  </section></div>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+</div>
+  {%- when 'p03' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Her gece başka bir tavan: 4'lü kaydırmalı oda kartları (lifestyle) + satın al -->
+<section class="bolum" id="tavanlar">
+    <div class="px"><h2 class="bas-y h2">{% endraw %}{{ block.settings.yc7542629 | escape }}{% raw %} {% endraw %}{% raw %}<br>başka bir tavan<span class="n">.</span></h2><p class="alt-b">{% endraw %}{{ block.settings.yc6e2dbd5 | escape }}{% raw %}</p></div>
+    <div class="ls noscroll"><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r613c7ca4 -%}{{ block.settings.r613c7ca4 | image_url: width: 1600 }}{%- else -%}/_blob/ce7dadd85b37a8089d0df5ce000d6f54{%- endif -%}{% raw %}" alt="Çocuk odasında: Klasik yılbaşı diski" loading="lazy" style="object-position: 50% 20%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r9010bb17 -%}{{ block.settings.r9010bb17 | image_url: width: 1600 }}{%- else -%}/_blob/0143de9991a1bc82ff5a2fcafd262ce8{%- endif -%}{% raw %}" alt="">Klasik yılbaşı</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y912ead72 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y7009182d | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r393f9fd9 -%}{{ block.settings.r393f9fd9 | image_url: width: 1600 }}{%- else -%}/_blob/7a2ab002ed463caf8f2ec81db098e551{%- endif -%}{% raw %}" alt="Salonda: Kar taneleri diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r8468b87b -%}{{ block.settings.r8468b87b | image_url: width: 1600 }}{%- else -%}/_blob/29f34f185f858518e19adeb0a09ce92e{%- endif -%}{% raw %}" alt="">Kar taneleri</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y865c14fb | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.ya70a1fe0 | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt="Yatak odasında: Yeni yıl mesajı diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.re3c790f3 -%}{{ block.settings.re3c790f3 | image_url: width: 1600 }}{%- else -%}/_blob/b9ca1f3036b0d671cec2c053a491141c{%- endif -%}{% raw %}" alt="">Yeni yıl mesajı</span><span class="ls-y"><b>{% endraw %}{{ block.settings.ydab49de3 | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y606f81bf | escape }}{% raw %}</span></span></figcaption></figure><figure class="ls-k"><img class="ls-f" src="{% endraw %}{%- if block.settings.r581ad20c -%}{{ block.settings.r581ad20c | image_url: width: 1600 }}{%- else -%}/_blob/a67e07583769ee524096661940ef6093{%- endif -%}{% raw %}" alt="Çalışma masanda: Ren geyikleri diski" loading="lazy" style="object-position: 50% 50%"><figcaption><span class="ls-c"><img src="{% endraw %}{%- if block.settings.r581ad20c -%}{{ block.settings.r581ad20c | image_url: width: 1600 }}{%- else -%}/_blob/a67e07583769ee524096661940ef6093{%- endif -%}{% raw %}" alt="">Ren geyikleri</span><span class="ls-y"><b>{% endraw %}{{ block.settings.y61ff810e | escape }}{% raw %}</b><span>{% endraw %}{{ block.settings.y7cba7bef | escape }}{% raw %}</span></span></figcaption></figure><span aria-hidden="true" style="flex: 0 0 6px"></span></div>
+    <div class="ls-al"><p>{% endraw %}{{ block.settings.y430740e5 | escape }}{% raw %}</p><button class="ls-b" type="button" onClick="{{alaGit}}">{% endraw %}{{ block.settings.y73990cba | escape }}{% raw %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button></div>
+  </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+</div>
+  {%- when 'p04' -%}<div class="ay-tb" {{ block.shopify_attributes }}><script type="application/json" class="ay-gorsel-esle">{"_":0{%- if block.settings.d0143de99 -%},"0143de9991a1bc82ff5a2fcafd262ce8":{{ block.settings.d0143de99 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.db9ca1f30 -%},"b9ca1f3036b0d671cec2c053a491141c":{{ block.settings.db9ca1f30 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.d29f34f18 -%},"29f34f185f858518e19adeb0a09ce92e":{{ block.settings.d29f34f18 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.da67e0758 -%},"a67e07583769ee524096661940ef6093":{{ block.settings.da67e0758 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.dd54bbc54 -%},"d54bbc54da481894b03a90633027d408":{{ block.settings.dd54bbc54 | image_url: width: 1600 | json }}{%- endif -%}{%- if block.settings.db6e597a7 -%},"b6e597a7824d07a8917cc638f657ba46":{{ block.settings.db6e597a7 | image_url: width: 1600 | json }}{%- endif -%}}</script><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Bu gece hangisi? (eleştirmen 2. fikir): sayfadaki tek koyu bant; 4 sn'de kendiliğinden geçer, dokununca durur -->
+<section class="koyu bolum" id="diskler">
+    <div class="px"><h2 class="bas-y h2" style="color: #fff">{% endraw %}{{ block.settings.y6af5f89c | escape }}{% raw %} {% endraw %}{% raw %}<br>hangisi<span class="n">?</span></h2><p class="alt-b" style="color: #C9D6CE">{% endraw %}{{ block.settings.y835e5fc2 | escape }}{% raw %}</p>
+    <div class="tav" aria-hidden="true"><div class="tav-d"><sc-for list="{{disk}}" as="d" hint-placeholder-count="2"><img class="{{d.cls}}" src="{{d.src}}" alt=""></sc-for></div></div>
+    <span class="tav-ad" aria-live="polite">{{dAd}}</span>
+    <div class="dk"><sc-for list="{{disk}}" as="d" hint-placeholder-count="6"><button class="{{d.bcls}}" type="button" onClick="{{d.pick}}" aria-pressed="{{d.on}}"><img src="{{d.src}}" alt="">{{d.n}}</button></sc-for></div>
+    <p class="alt-not">{% endraw %}{{ block.settings.y36975a5d | escape }}{% raw %}</p></div>
+  </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+</div>
+  {%- when 'p05' -%}<div class="ay-tb" {{ block.shopify_attributes }}><template class="ay-parca">{% raw %}<div class="pg">{% endraw %}{% raw %}<!-- Kutuda ne var? (eleştirmen 1. fikir): gerçek kutu fotoğrafında numaralı noktalar; dokununca parça adı. Altta düz liste. -->
+<section class="bolum px" id="kutu">
+    <h2 class="bas-y h2">{% endraw %}{{ block.settings.y2c0608e8 | escape }}{% raw %} {% endraw %}{% raw %}<br>ne var<span class="n">?</span></h2>
+    <p class="alt-b">{% endraw %}{{ block.settings.y269cb0a1 | escape }}{% raw %}</p>
+    <div class="kut"><img src="{% endraw %}{%- if block.settings.r19c3cb31 -%}{{ block.settings.r19c3cb31 | image_url: width: 1600 }}{%- else -%}/_blob/4d01f14032ee55720b5baa41900bfc8b{%- endif -%}{% raw %}" alt="Kutudan çıkan parçalar"><button style="left: 52%; top: 18%" class="{{nk0}}" type="button" onClick="{{nkSec0}}" aria-label="Hediye kutusu" aria-pressed="{{nkOn0}}">1</button><button style="left: 36%; top: 43%" class="{{nk1}}" type="button" onClick="{{nkSec1}}" aria-label="Altın abajur" aria-pressed="{{nkOn1}}">2</button><button style="left: 77%; top: 48%" class="{{nk2}}" type="button" onClick="{{nkSec2}}" aria-label="Desenli çıkartma" aria-pressed="{{nkOn2}}">3</button><button style="left: 60%; top: 60%" class="{{nk3}}" type="button" onClick="{{nkSec3}}" aria-label="İnci çıkartmalar" aria-pressed="{{nkOn3}}">4</button><button style="left: 63%; top: 70%" class="{{nk4}}" type="button" onClick="{{nkSec4}}" aria-label=""Merry Christmas" çıkartması" aria-pressed="{{nkOn4}}">5</button><button style="left: 83%; top: 77%" class="{{nk5}}" type="button" onClick="{{nkSec5}}" aria-label="Tüylü süs çubukları" aria-pressed="{{nkOn5}}">6</button><button style="left: 36%; top: 85%" class="{{nk6}}" type="button" onClick="{{nkSec6}}" aria-label="Projektör ve desen diskleri" aria-pressed="{{nkOn6}}">7</button><button style="left: 22%; top: 52%" class="{{nk7}}" type="button" onClick="{{nkSec7}}" aria-label="Montaj kartı" aria-pressed="{{nkOn7}}">8</button></div>
+    <div class="kl"><em>{{nkNo}}</em><span><b>{{nkAd}}</b><span>{{nkAlt}}</span></span></div>
+    <ul class="kliste"><li>{% endraw %}{{ block.settings.y43f0c8da | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.ye04634c1 | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.y8dbbfd6f | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.y92a62871 | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.yc3b3fc8e | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.ya49bb994 | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.y5510bfb1 | escape }}{% raw %}</li><li>{% endraw %}{{ block.settings.y6f737d79 | escape }}{% raw %}</li></ul>
+    <p class="kyok">{% endraw %}{{ block.settings.y7c186c76 | escape }}{% raw %}</p>
+  </section>{% endraw %}{% raw %}</div>{% endraw %}</template><div class="ay-kok" data-sayfa="urun" data-urun="yilbasi-agaci-projektor-lamba"></div>
+</div>
+  {%- when '@app' -%}<div class="ay-uyg" {{ block.shopify_attributes }}>{% render block %}</div>
+{%- endcase -%}{%- endfor -%}
+{%- form 'product', product, data-ay-urun-formu: '', data-ay-shopify: '', hidden: 'hidden', class: 'ay-urun-formu' -%}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+  <input type="hidden" name="quantity" value="1">
+{%- endform -%}
+<div class="ay-arka" aria-hidden="true"><kaching-bundle product-id="{{ product.id }}"></kaching-bundle></div>
+<script src="{{ 'ay-yilbasiagaci.js' | asset_url }}" defer></script>
+<style>
+/* 31 Eki (kullanıcı: "Kaching'deki gibi, daha canlı; bundle görselleri tek ürün görseli"): paket kartında Kaching paketindeki ürün görseli */
+.pg .pk{display:flex;flex-direction:column;gap:14px!important}
+.pg .pk-k{position:relative;flex-wrap:wrap;background:#F1F7F3!important;border:2px solid #D2E3D9!important;border-radius:18px!important;min-height:80px!important;padding:10px 14px 0 10px!important;box-shadow:none!important;overflow:visible!important}
+.pg .pk-k.on{background:#fff!important;border-color:#B3362B!important;box-shadow:0 8px 22px rgba(179,54,43,.22)!important}
+.pg .pk-g{position:relative;width:64px!important;height:64px!important;border-radius:14px!important;background:#fff!important;box-shadow:inset 0 0 0 1px #E2ECE6}
+.pg .pk-g img{position:absolute;inset:4px;width:calc(100% - 8px)!important;height:calc(100% - 8px)!important;object-fit:contain!important;margin:0!important;transform:none!important}
+.pg .pk-g .x2{display:none!important}
+.pg .pk-o b,.pg .pk-f b{font-size:16px!important;font-weight:800!important;color:#123A2A!important}
+.pg .pk-o span{color:#B3362B!important;font-weight:600!important}
+.pg .pk-k .kurdele{background:#B3362B!important;color:#fff!important;font-weight:800!important;border-radius:999px!important;padding:4px 12px!important;top:-12px!important;right:14px!important;left:auto!important}
+.pk-k .pk-hed{flex-basis:calc(100% + 24px);display:flex;align-items:center;gap:8px;margin:10px -14px 0 -10px;padding:7px 14px;border-radius:0 0 16px 16px;background:#DDEBE2;color:#123A2A;font-size:13px;font-weight:700;text-align:left}
+.pk-k.on .pk-hed{background:#123A2A;color:#fff}
+.pk-k .pk-hed svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2}
+.pk-g .y2+.y1,.pk-hed .h2+.h1{display:none}
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Yılbaşı Ağacı sayfası",
+  "class": "ay-bolum",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "p01",
+      "name": "Üst kısım",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "ycb5cd8e3",
+          "label": "Yazı: Bugünkü fiyat garantisi",
+          "default": "Bugünkü fiyat garantisi"
+        },
+        {
+          "type": "text",
+          "id": "y17921f90",
+          "label": "Yazı: Ayluna",
+          "default": "Ayluna"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        }
+      ]
+    },
+    {
+      "type": "p02",
+      "name": "Galeri ve satın alma",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "ycaade6ed",
+          "label": "Yazı: Yılbaşı Ağacı Projektör Lamba",
+          "default": "Yılbaşı Ağacı Projektör Lamba"
+        },
+        {
+          "type": "text",
+          "id": "yac5081da",
+          "label": "Yazı: Kendin süsle, USB’ye tak; tavan yılbaşı olsun",
+          "default": "Kendin süsle, USB’ye tak; tavan yılbaşı olsun."
+        },
+        {
+          "type": "text",
+          "id": "y262c2d52",
+          "label": "Yazı: Ücretsiz kargo",
+          "default": "Ücretsiz kargo"
+        },
+        {
+          "type": "text",
+          "id": "y767ad9c2",
+          "label": "Yazı: 30 gün",
+          "default": "30 gün"
+        },
+        {
+          "type": "text",
+          "id": "y581647a1",
+          "label": "Yazı: Hediye kutusunda",
+          "default": "Hediye kutusunda"
+        },
+        {
+          "type": "text",
+          "id": "y9d0835d9",
+          "label": "Yazı: Yılbaşı ağacının özellikleri",
+          "default": "Yılbaşı ağacının özellikleri"
+        },
+        {
+          "type": "text",
+          "id": "ycfe7d813",
+          "label": "Yazı: Kendin kur",
+          "default": "Kendin kur"
+        },
+        {
+          "type": "text",
+          "id": "y021b1b06",
+          "label": "Yazı: Çubukları sar, ağacını sen şekillendir",
+          "default": "Çubukları sar, ağacını sen şekillendir."
+        },
+        {
+          "type": "image_picker",
+          "id": "r9010bb17",
+          "label": "Görsel 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "re3c790f3",
+          "label": "Görsel 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "r8468b87b",
+          "label": "Görsel 3"
+        },
+        {
+          "type": "text",
+          "id": "yaf59f5de",
+          "label": "Yazı: Değişen desenler",
+          "default": "Değişen desenler"
+        },
+        {
+          "type": "text",
+          "id": "y5d75fd97",
+          "label": "Yazı: Diski değiştir, tavan değişsin",
+          "default": "Diski değiştir, tavan değişsin."
+        },
+        {
+          "type": "text",
+          "id": "y4a56fd6e",
+          "label": "Yazı: Desenleri gör",
+          "default": "Desenleri gör"
+        },
+        {
+          "type": "text",
+          "id": "y210e938d",
+          "label": "Yazı: USB ile yanar",
+          "default": "USB ile yanar"
+        },
+        {
+          "type": "text",
+          "id": "y375520bf",
+          "label": "Yazı: Şarj başlığı ya da powerbank yeter",
+          "default": "Şarj başlığı ya da powerbank yeter."
+        },
+        {
+          "type": "text",
+          "id": "yebf0dcdc",
+          "label": "Yazı: Baskılı kutusu ve süsleriyle gelir",
+          "default": "Baskılı kutusu ve süsleriyle gelir."
+        },
+        {
+          "type": "text",
+          "id": "y2b0a1a8d",
+          "label": "Yazı: Paket",
+          "default": "Paket"
+        },
+        {
+          "type": "text",
+          "id": "y81517dc0",
+          "label": "Yazı: Hediye için",
+          "default": "Hediye için"
+        },
+        {
+          "type": "image_picker",
+          "id": "r393f9fd9",
+          "label": "Görsel 4"
+        },
+        {
+          "type": "text",
+          "id": "y01475fc8",
+          "label": "Yazı: Bugün",
+          "default": "Bugün"
+        },
+        {
+          "type": "text",
+          "id": "ycc0a4980",
+          "label": "Yazı: Sipariş verildi",
+          "default": "Sipariş verildi"
+        },
+        {
+          "type": "text",
+          "id": "y57a903b5",
+          "label": "Yazı: Kargoda",
+          "default": "Kargoda"
+        },
+        {
+          "type": "text",
+          "id": "y68579773",
+          "label": "Yazı: Kapında",
+          "default": "Kapında"
+        },
+        {
+          "type": "text",
+          "id": "yc01aba9e",
+          "label": "Yazı: Bu ürün ne işe yarıyor?",
+          "default": "Bu ürün ne işe yarıyor?"
+        },
+        {
+          "type": "textarea",
+          "id": "y4da41ae7",
+          "label": "Yazı: Kendin süsleyip kurduğun minik bir yılbaşı ağacı lamb…",
+          "default": "Kendin süsleyip kurduğun minik bir yılbaşı ağacı lambası: USB’ye takınca tavana yılbaşı desenleri yansıtır."
+        },
+        {
+          "type": "text",
+          "id": "y95890173",
+          "label": "Yazı: Nasıl kurulur?",
+          "default": "Nasıl kurulur?"
+        },
+        {
+          "type": "textarea",
+          "id": "y29a8de57",
+          "label": "Yazı: Tüylü çubukları kabloya sarıp ağaç şekli verirsin, de…",
+          "default": "Tüylü çubukları kabloya sarıp ağaç şekli verirsin, desenli çıkartmayı altın abajura yapıştırıp takarsın, istersen altın şerit ve inci çıkartmalarla süslersin. Kutudaki kartın QR kodunda montaj videosu var. USB ucunu ve projektör lensini kapatma."
+        },
+        {
+          "type": "text",
+          "id": "yfe304372",
+          "label": "Yazı: Prize takılır mı?",
+          "default": "Prize takılır mı?"
+        },
+        {
+          "type": "textarea",
+          "id": "yb70d5da1",
+          "label": "Yazı: USB ile çalışır: telefon şarj adaptörüne, powerbank’e…",
+          "default": "USB ile çalışır: telefon şarj adaptörüne, powerbank’e ya da bilgisayara takılır. Pil yok; USB adaptör kutuda yok."
+        },
+        {
+          "type": "text",
+          "id": "y7ce9daea",
+          "label": "Yazı: Kutu içeriğinde neler var?",
+          "default": "Kutu içeriğinde neler var?"
+        },
+        {
+          "type": "textarea",
+          "id": "ya29ff3ff",
+          "label": "Yazı: USB projektör modülü (kablolu, lensli), altın abajur,…",
+          "default": "USB projektör modülü (kablolu, lensli), altın abajur, yılbaşı desenli abajur çıkartması, değiştirilebilir desen diskleri, yeşil tüylü süs çubukları, bükülebilir altın alüminyum şeritler, kırmızı ve altın inci çıkartmalar, \"Merry Christmas\" çıkartması ve QR kodlu montaj kartı. USB adaptör kutuda yok."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g2",
+          "label": "Eski ayar g2 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g3",
+          "label": "Eski ayar g3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m8",
+          "label": "Eski ayar m8 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m9",
+          "label": "Eski ayar m9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m10",
+          "label": "Eski ayar m10 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m11",
+          "label": "Eski ayar m11 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m12",
+          "label": "Eski ayar m12 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m13",
+          "label": "Eski ayar m13 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m14",
+          "label": "Eski ayar m14 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g4",
+          "label": "Eski ayar g4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m15",
+          "label": "Eski ayar m15 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m16",
+          "label": "Eski ayar m16 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m17",
+          "label": "Eski ayar m17 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m18",
+          "label": "Eski ayar m18 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m19",
+          "label": "Eski ayar m19 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m20",
+          "label": "Eski ayar m20 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m21",
+          "label": "Eski ayar m21 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m22",
+          "label": "Eski ayar m22 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m23",
+          "label": "Eski ayar m23 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m24",
+          "label": "Eski ayar m24 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m25",
+          "label": "Eski ayar m25 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m26",
+          "label": "Eski ayar m26 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m27",
+          "label": "Eski ayar m27 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m28",
+          "label": "Eski ayar m28 (kullanılmıyor)"
+        }
+      ]
+    },
+    {
+      "type": "p03",
+      "name": "Her gece başka bir tavan",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "yc7542629",
+          "label": "Yazı: Her gece",
+          "default": "Her gece"
+        },
+        {
+          "type": "text",
+          "id": "yc6e2dbd5",
+          "label": "Yazı: Diski değiştir; odanın havası değişsin",
+          "default": "Diski değiştir; odanın havası değişsin."
+        },
+        {
+          "type": "image_picker",
+          "id": "r613c7ca4",
+          "label": "Görsel 1: Çocuk odasında: Klasik yılbaşı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "r9010bb17",
+          "label": "Görsel 2"
+        },
+        {
+          "type": "text",
+          "id": "y912ead72",
+          "label": "Yazı: Çocuk odasında",
+          "default": "Çocuk odasında"
+        },
+        {
+          "type": "text",
+          "id": "y7009182d",
+          "label": "Yazı: Yatmadan önce tavan Noel Baba’yla dolar",
+          "default": "Yatmadan önce tavan Noel Baba’yla dolar."
+        },
+        {
+          "type": "image_picker",
+          "id": "r393f9fd9",
+          "label": "Görsel 3: Salonda: Kar taneleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "r8468b87b",
+          "label": "Görsel 4"
+        },
+        {
+          "type": "text",
+          "id": "y865c14fb",
+          "label": "Yazı: Salonda",
+          "default": "Salonda"
+        },
+        {
+          "type": "text",
+          "id": "ya70a1fe0",
+          "label": "Yazı: Işıkları kapat; tavana kar yağsın",
+          "default": "Işıkları kapat; tavana kar yağsın."
+        },
+        {
+          "type": "image_picker",
+          "id": "re3c790f3",
+          "label": "Görsel 5: Yatak odasında: Yeni yıl mesajı diski"
+        },
+        {
+          "type": "text",
+          "id": "ydab49de3",
+          "label": "Yazı: Yatak odasında",
+          "default": "Yatak odasında"
+        },
+        {
+          "type": "text",
+          "id": "y606f81bf",
+          "label": "Yazı: Tavanda “Merry Christmas”, yanında sevdiğin",
+          "default": "Tavanda “Merry Christmas”, yanında sevdiğin."
+        },
+        {
+          "type": "image_picker",
+          "id": "r581ad20c",
+          "label": "Görsel 6: Çalışma masanda: Ren geyikleri diski"
+        },
+        {
+          "type": "text",
+          "id": "y61ff810e",
+          "label": "Yazı: Çalışma masanda",
+          "default": "Çalışma masanda"
+        },
+        {
+          "type": "text",
+          "id": "y7cba7bef",
+          "label": "Yazı: USB’ye tak; masan bile yılbaşı olsun",
+          "default": "USB’ye tak; masan bile yılbaşı olsun."
+        },
+        {
+          "type": "text",
+          "id": "y430740e5",
+          "label": "Yazı: Desenlerin hepsi tek kutuda",
+          "default": "Desenlerin hepsi tek kutuda."
+        },
+        {
+          "type": "text",
+          "id": "y73990cba",
+          "label": "Yazı: Ağacını al",
+          "default": "Ağacını al"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g2",
+          "label": "Eski ayar g2 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        }
+      ]
+    },
+    {
+      "type": "p04",
+      "name": "Bu gece hangisi?",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "y6af5f89c",
+          "label": "Yazı: Bu gece",
+          "default": "Bu gece"
+        },
+        {
+          "type": "text",
+          "id": "y835e5fc2",
+          "label": "Yazı: Diski değiştir; desen tavanda ağır ağır dönsün",
+          "default": "Diski değiştir; desen tavanda ağır ağır dönsün."
+        },
+        {
+          "type": "textarea",
+          "id": "y36975a5d",
+          "label": "Yazı: Disk değiştirmek: fişi çek, abajuru kaldır, diski değ…",
+          "default": "Disk değiştirmek: fişi çek, abajuru kaldır, diski değiştir, abajuru tak. Desen görselleri ürün afişinden; tavanda daha yumuşak görünür."
+        },
+        {
+          "type": "header",
+          "content": "Bölümdeki görseller"
+        },
+        {
+          "type": "paragraph",
+          "content": "Değiştirmek istediğin görseli seç; boş bırakırsan tasarımdaki görsel kalır."
+        },
+        {
+          "type": "image_picker",
+          "id": "d0143de99",
+          "label": "Görsel 1: Klasik yılbaşı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "db9ca1f30",
+          "label": "Görsel 2: Yeni yıl mesajı diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "d29f34f18",
+          "label": "Görsel 3: Kar taneleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "da67e0758",
+          "label": "Görsel 4: Ren geyikleri diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "dd54bbc54",
+          "label": "Görsel 5: Kardan adam diski"
+        },
+        {
+          "type": "image_picker",
+          "id": "db6e597a7",
+          "label": "Görsel 6: Çanlar diski"
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "textarea",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        }
+      ]
+    },
+    {
+      "type": "p05",
+      "name": "Kutuda ne var?",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "y2c0608e8",
+          "label": "Yazı: Kutuda",
+          "default": "Kutuda"
+        },
+        {
+          "type": "text",
+          "id": "y269cb0a1",
+          "label": "Yazı: Fotoğraftaki numaralara dokun",
+          "default": "Fotoğraftaki numaralara dokun."
+        },
+        {
+          "type": "image_picker",
+          "id": "r19c3cb31",
+          "label": "Görsel 1: Kutudan çıkan parçalar"
+        },
+        {
+          "type": "text",
+          "id": "y43f0c8da",
+          "label": "Yazı: Hediye kutusu",
+          "default": "Hediye kutusu"
+        },
+        {
+          "type": "text",
+          "id": "ye04634c1",
+          "label": "Yazı: Altın abajur",
+          "default": "Altın abajur"
+        },
+        {
+          "type": "text",
+          "id": "y8dbbfd6f",
+          "label": "Yazı: Desenli çıkartma",
+          "default": "Desenli çıkartma"
+        },
+        {
+          "type": "text",
+          "id": "y92a62871",
+          "label": "Yazı: İnci çıkartmalar",
+          "default": "İnci çıkartmalar"
+        },
+        {
+          "type": "text",
+          "id": "yc3b3fc8e",
+          "label": "Yazı: \"Merry Christmas\" çıkartması",
+          "default": "\"Merry Christmas\" çıkartması"
+        },
+        {
+          "type": "text",
+          "id": "ya49bb994",
+          "label": "Yazı: Tüylü süs çubukları",
+          "default": "Tüylü süs çubukları"
+        },
+        {
+          "type": "text",
+          "id": "y5510bfb1",
+          "label": "Yazı: Projektör ve desen diskleri",
+          "default": "Projektör ve desen diskleri"
+        },
+        {
+          "type": "text",
+          "id": "y6f737d79",
+          "label": "Yazı: Montaj kartı",
+          "default": "Montaj kartı"
+        },
+        {
+          "type": "text",
+          "id": "y7c186c76",
+          "label": "Yazı: USB adaptör kutuda yok: evdeki telefon şarj başlığı,…",
+          "default": "USB adaptör kutuda yok: evdeki telefon şarj başlığı, powerbank ya da bilgisayar yeter."
+        },
+        {
+          "type": "header",
+          "content": "Eski ayarlar (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m1",
+          "label": "Eski ayar m1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m2",
+          "label": "Eski ayar m2 (kullanılmıyor)"
+        },
+        {
+          "type": "image_picker",
+          "id": "g1",
+          "label": "Eski ayar g1 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m3",
+          "label": "Eski ayar m3 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m4",
+          "label": "Eski ayar m4 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m5",
+          "label": "Eski ayar m5 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m6",
+          "label": "Eski ayar m6 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m7",
+          "label": "Eski ayar m7 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m8",
+          "label": "Eski ayar m8 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m9",
+          "label": "Eski ayar m9 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m10",
+          "label": "Eski ayar m10 (kullanılmıyor)"
+        },
+        {
+          "type": "text",
+          "id": "m11",
+          "label": "Eski ayar m11 (kullanılmıyor)"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
