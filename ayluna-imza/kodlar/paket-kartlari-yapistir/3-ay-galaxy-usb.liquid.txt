@@ -31,7 +31,7 @@
 
     <div class="pk-bas">Çok al, az öde</div>
     <div class="pk"><sc-for list="{{paket}}" as="b" hint-placeholder-count="2">
-      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.m22 | escape }}{% raw %}</span></sc-if><span class="{{b.gCls}}"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/5782766948fef68b7273c061529d6324{%- endif -%}{% raw %}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/5782766948fef68b7273c061529d6324{%- endif -%}{% raw %}" alt=""></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-s"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if><span>{{b.unit}}</span></span><span class="nokta"><i></i></span></button>
+      <button class="{{b.cls}}" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.m22 | escape }}{% raw %}</span></sc-if><span class="{{b.gCls}}"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/5782766948fef68b7273c061529d6324{%- endif -%}{% raw %}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src="{% endraw %}{%- if block.settings.g4 -%}{{ block.settings.g4 | image_url: width: 1600 }}{%- else -%}/_blob/5782766948fef68b7273c061529d6324{%- endif -%}{% raw %}" alt=""></sc-if></span><span class="pk-o"><b>{{b.t}}</b><span>{{b.sub}}</span></span><span class="pk-s"><b>{{b.p}}</b><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if><span>{{b.unit}}</span></span><span class="nokta"><i></i></span><span class="pk-hed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle></svg><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="pk-t2">+ 24 disk hediye · kutu başı 12</span></sc-if><span class="pk-t1">+ 12 disk hediye</span></span></button>
     </sc-for></div>
     <!-- Dönen satır (kullanıcı, 18 Eki: LunaDream'deki baskı USB'de de): önce disk, sonra aynı gün kargo + 16.00 sayacı (4 sn / 6 sn).
          16.00'dan sonra ve hafta sonu sayaç yok: "Bugün verilen siparişler yarın / Pazartesi kargoda". -->
@@ -162,6 +162,11 @@
 .pg .pk-o b,.pg .pk-s b{font-size:16px;font-weight:800;color:#10182B}
 .pg .pk-o span{color:#2E6FB0;font-weight:600;white-space:nowrap}
 .pg .pk-k .kurdele{top:-11px;padding:3px 11px;background:#E4AB63;color:#fff;font-weight:800;box-shadow:0 3px 8px rgba(228,171,99,.4)}
+.pg .pk-k{flex-wrap:wrap;padding-bottom:0}
+.pk-k .pk-hed{flex-basis:calc(100% + 20px);display:flex;align-items:center;gap:8px;margin:8px -12px 0 -8px;padding:6px 12px;border-radius:0 0 14px 14px;background:#B3DAFF;color:#10182B;font-size:12.5px;font-weight:700;line-height:1.25;text-align:left}
+.pk-k.on .pk-hed{background:#E4AB63;color:#fff}
+.pk-k .pk-hed svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2}
+.pk-hed .pk-t2+.pk-t1{display:none}
 </style>
 {%- endif -%}
 
