@@ -50,7 +50,7 @@
           <sc-if value="{{b.rib}}" hint-placeholder-val="{{false}}"><span class="kurdele">{% endraw %}{{ block.settings.m21 | replace: 'En avantajlı', 'En Çok Tercih Edilen' | escape }}{% raw %}</span></sc-if>
           <button class="sat" onClick="{{b.pick}}" aria-pressed="{{b.on}}"><span class="{{b.tlCls}}"><img src="{{b.src1}}" alt=""><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><img src="{{b.src2}}" alt=""></sc-if></span><span class="sat-orta"><span class="ad">{{b.t}}</span><span class="alt">{{b.sub}}</span></span><span class="sat-sag"><span class="fiyat">{{b.p}}</span><span class="eski"><sc-if value="{{b.hasOld}}" hint-placeholder-val="{{true}}"><s>{{b.old}}</s></sc-if>{{b.unit}}</span></span><svg class="ayr" viewBox="0 0 24 24" aria-hidden="true"><circle class="h" cx="12" cy="12" r="9"></circle><circle class="d" cx="12" cy="12" r="5"></circle></svg></button>
           <sc-if value="{{b.ac}}" hint-placeholder-val="{{false}}"><div class="ek" role="group" aria-label="2. lambanın modeli"><span class="ek-ad">{% endraw %}{{ block.settings.m22 | escape }}{% raw %}</span><span class="cipler"><sc-for list="{{ikinci}}" as="c" hint-placeholder-count="2"><button class="{{c.cls}}" onClick="{{c.pick}}" aria-pressed="{{c.on}}"><span class="cip-y"><img src="{{c.src}}" alt=""></span>{{c.n}}<svg class="ayr" viewBox="0 0 24 24" aria-hidden="true"><circle class="h" cx="12" cy="12" r="9"></circle><circle class="d" cx="12" cy="12" r="5"></circle></svg></button></sc-for></span></div></sc-if>
-          <span class="pk-hed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle></svg><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="h2">+ 12 masal diski hediye · kutu başı 6</span></sc-if><span class="h1">+ 6 masal diski hediye</span></span>
+          <span class="pk-hed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle></svg><sc-if value="{{b.two}}" hint-placeholder-val="{{false}}"><span class="pk-t2">+ 12 masal diski hediye · kutu başı 6</span></sc-if><span class="pk-t1">+ 6 masal diski hediye</span></span>
         </div>
       </sc-for>
     </div>
@@ -86,20 +86,20 @@
 .ay-kok .pk-liste{gap:14px!important}
 .ay-kok .pk-liste>div{position:relative;background:#EDF6FF!important;border:2px solid #D3E6F8!important;border-radius:18px!important;box-shadow:none!important;overflow:visible}
 .ay-kok .pk-liste>div.on{background:#fff!important;border-color:#E4AB63!important;box-shadow:0 8px 22px rgba(228,171,99,.30)!important}
-.ay-kok .pk-liste .sat{min-height:80px!important;padding:10px 12px 10px 10px!important;gap:10px!important}
-.ay-kok .pk-liste .tl{width:64px!important;height:64px!important;border-radius:14px!important;background:#fff!important;box-shadow:inset 0 0 0 1px #E3EEF9}
-.ay-kok .pk-liste .tl img{height:54px!important;bottom:6px!important}
-.ay-kok .pk-liste .tl.cift img{height:46px!important}
+.ay-kok .pk-liste .sat{min-height:72px!important;padding:10px 12px 10px 10px!important;gap:10px!important}
+.ay-kok .pk-liste .tl{width:56px!important;height:56px!important;border-radius:14px!important;background:#fff!important;box-shadow:inset 0 0 0 1px #E3EEF9}
+.ay-kok .pk-liste .tl img{height:48px!important;bottom:6px!important}
+.ay-kok .pk-liste .tl.cift img{height:40px!important}
 .ay-kok .pk-liste .tl.cift img:nth-child(1){left:31%!important}.ay-kok .pk-liste .tl.cift img:nth-child(2){left:69%!important}
 .ay-kok .pk-liste .ad{font-size:16px!important;font-weight:800!important;color:#10182B!important}
 .ay-kok .pk-liste .fiyat{font-size:16px!important;font-weight:800!important;color:#10182B!important}
 .ay-kok .pk-liste .alt{color:#2E6FB0!important;font-weight:600!important;font-size:13px!important;white-space:nowrap}
 .ay-kok .pk-liste .eski{font-size:12.5px!important;white-space:nowrap}
 .ay-kok .pk-liste .kurdele{background:#E4AB63!important;color:#fff!important;font-weight:800!important;border-radius:999px!important;padding:4px 12px!important;right:14px!important;left:auto!important;top:-12px!important;box-shadow:0 3px 8px rgba(228,171,99,.4)}
-.pk-hed{display:flex;align-items:center;gap:8px;margin:0 -2px -2px;padding:7px 14px;border-radius:0 0 18px 18px;background:#B3DAFF;color:#10182B;font-size:13px;font-weight:700;line-height:1.25}
+.pk-hed{display:flex;align-items:center;gap:8px;margin:0 -2px -2px;padding:6px 12px;border-radius:0 0 18px 18px;background:#B3DAFF;color:#10182B;font-size:12.5px;font-weight:700;line-height:1.25}
 .pk-liste>div.on .pk-hed{background:#E4AB63;color:#fff}
 .pk-hed svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2}
-.pk-hed .h2+.h1{display:none}
+.pk-hed .pk-t2+.pk-t1{display:none}
 </style>
 {%- endif -%}
 
