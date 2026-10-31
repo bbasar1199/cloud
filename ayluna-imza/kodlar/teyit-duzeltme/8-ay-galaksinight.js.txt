@@ -1,0 +1,89 @@
+/* Ayluna · GalaksiNight bileşeni (araclar/tema/tema_uret.py). Her bölüm bu dosyayı yükler; bileşen bir kez kurulur. */
+(window.AYLUNA_KUYRUK = window.AYLUNA_KUYRUK || []).push(function () {
+
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { g: 0, gOto: true, adet: null, yak: false, yOto: true, yBas: 0, hz: 0, hOto: true, disk: 2, dOto: true, t: 0, now: Date.now() }; }
+  componentDidMount() {
+    var self = this;
+    // Hareket azaltılmışsa fener, huzme ve disk durur; galeri yine 5 sn'de geçer ama kaymadan, anında (galGit)
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ yOto: false, hOto: false, dOto: false, yak: true });
+    // Tek saat: sayaç, galeri (5 sn), fener (2 sn kapalı → 7 sn açık), huzme (3 sn), disk (4 sn)
+    this.iv = setInterval(function () {
+      var S = self.state, t = S.t + 1, o = { now: Date.now(), t: t };
+      if (S.gOto && t % 5 === 0) self.galGit((S.g + 1) % (self.galN || 7));
+      if (S.yOto && t - S.yBas >= (S.yak ? 7 : 2)) { o.yak = !S.yak; o.yBas = t; }
+      if (S.hOto && t % 3 === 0) o.hz = (S.hz + 1) % 4;
+      if (S.dOto && t % 4 === 0) o.disk = (S.disk + 1) % 12;
+      self.setState(o);
+    }, 1000);
+  }
+  galGit(i) { var el = document.querySelector('.h-iz'); if (el && el.scrollTo && el.clientWidth) { this.otoKay = Date.now(); el.scrollTo({ left: i * el.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); } else this.setState({ g: i }); }
+  componentDidUpdate() { var el = document.querySelector('.h-iz'); if (el && el.clientWidth && Math.abs(el.scrollLeft - this.state.g * el.clientWidth) > el.clientWidth / 2) { this.otoKay = Date.now(); el.scrollLeft = this.state.g * el.clientWidth; } }
+  componentWillUnmount() { clearInterval(this.iv); }
+  renderVals() {
+    var self = this, S = this.state, B = '/_blob/';
+    function TL(n, kurus) { var s = (kurus ? n.toFixed(2) : String(Math.round(n))).split('.'); return '₺' + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (kurus ? ',' + s[1] : ''); }
+    // Shopify'da galeri ürünün kendi görsellerinden (28 Eki); yoksa tasarım galerisi
+    var MEDYA = (window.Ayluna && Ayluna.medya) ? Ayluna.medya() : null, GAL = MEDYA ? MEDYA.map(function (m) { return [m.src, m.alt, '50% 50%']; }) : [["/_blob/db433bcba7fc92bdc1db618ae86f6a2f", "Ayluna Galaksi Night Projektör görseli 1", "50% 50%"], ["/_blob/99072d288859abecc11e64d202db0907", "Ayluna Galaksi Night Projektör görseli 2", "50% 50%"], ["/_blob/eefd5c7bfd1af9008e633b4dac12de71", "Ayluna Galaksi Night Projektör görseli 3", "50% 50%"], ["/_blob/157029fec84dc37ce0d893ddc3a11e3c", "Ayluna Galaksi Night Projektör görseli 4", "50% 50%"], ["/_blob/0d7bd95f814f808de1bfb35244337030", "Ayluna Galaksi Night Projektör görseli 5", "50% 50%"], ["/_blob/3245dcee1a702bb740a24ab347213bb4", "Ayluna Galaksi Night Projektör görseli 6", "50% 50%"], ["/_blob/1ed7be4368e185515c37a6a297a8ba2e", "Ayluna Galaksi Night Projektör görseli 7", "50% 50%"]];
+    self.galN = GAL.length;
+    var gal = GAL.map(function (g, i) { var on = i === S.g; return { src: g[0], n: g[1], pos: g[2], ilk: i === 0, cls: 'hs' + (on ? ' on' : ''), dcls: i < S.g ? 'lit' : (on ? 'lit on' : '') }; });
+    function gKay(e) { var el = e && (e.currentTarget || e.target); if (!el || !el.clientWidth) return; var i = Math.round(el.scrollLeft / el.clientWidth), o = {};
+      if (i !== self.state.g) o.g = i; if (self.state.gOto && Date.now() - (self.otoKay || 0) > 900) o.gOto = false; if (o.g !== undefined || o.gOto === false) self.setState(o); }
+    var P1 = 2199, C1 = 2999, P2 = 3499.99;
+    var paket = [
+      { n: 1, t: '1 Adet', p: TL(P1, true), old: TL(C1, true), unit: '', sub: '%' + Math.round((1 - P1 / C1) * 100) + ' indirim', rib: false },
+      { n: 2, t: '2 Adet', p: TL(P2, true), old: '', unit: 'tanesi ' + TL(Math.floor(P2 / 2 * 100) / 100, true), sub: '2 ayrı almaya göre ' + TL(Math.round((2 * P1 - P2) * 100) / 100, true) + ' daha az', rib: true }
+    ].map(function (b) { var on = S.adet === b.n; return { t: b.t, p: b.p, old: b.old, hasOld: !!b.old, unit: b.unit, sub: b.sub, rib: b.rib, two: b.n === 2,
+      on: on ? 'true' : 'false', cls: on ? 'pk-k on' : 'pk-k', pick: function () { self.setState({ adet: b.n }); } }; });
+    var total = S.adet === 2 ? P2 : P1, online = Math.round(total * 0.95 * 100) / 100, onPrice = TL(online, true);
+    var HZ = [["Duvara ay", "Fenerin tepesinden ay yansır."], ["Müzik çalar", "Bluetooth ile telefondan."], ["Deniz sesi", "Dahili ses modu."], ["Kumandalı", "Işığı ve modu uzaktan seç."]];
+    var hz = HZ.map(function (h, i) { var on = i === S.hz; return { n: h[0], t: h[1], cls: on ? 'on' : '', on: on ? 'true' : 'false', pick: function () { self.setState({ hz: i, hOto: false }); } }; });
+    var DISK = [["Pembe bulutsu", "/_blob/af85a0b9f67a29494869b9dcb7006598"], ["Halka bulutsu", "/_blob/17946c333e16a82b67143a857e366169"], ["Sarmal galaksi", "/_blob/6e7f770fcf89c1de06d0afeea9771198"], ["Orion bulutsusu", "/_blob/d903bdede6e1a2d8ea1e2c815900fa1f"], ["Kızıl gezegenler", "/_blob/56ffe2e6a3bfa20e175d6d64612f0860"], ["Yıldız kümesi", "/_blob/49577c71bb5fe6677ad97de1290e12d1"], ["Kuyruklu yıldız", "/_blob/0d547e1e56277e42fb41ef104e5203eb"], ["Kuzey ışığı", "/_blob/60ce6e0301ca87c19640e13d8f96b622"], ["Dolunay", "/_blob/7ec4a5ce5f748c69e7cc7c83938ffa8c"], ["Samanyolu", "/_blob/bf82e0112ef2ed17399435e6f83778e4"], ["Samanyolu kıyısı", "/_blob/93eb9a3acf2506e43ddfc86647210f68"], ["Yıldızlı gece", "/_blob/151924bdd1a3acf707c3c26184d36e51"]];
+    var disk = DISK.map(function (d, i) { var on = i === S.disk; return { n: d[0], src: d[1], on: on ? 'true' : 'false', cls: on ? 'on' : '', bcls: on ? 'on' : '', pick: function () { self.setState({ disk: i, dOto: false }); } }; });
+    var AY = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kd = new Date(now); do { kd.setDate(kd.getDate() + 1); } while (kd.getDay() === 0 || kd.getDay() === 6);
+    var t1 = new Date(kd); t1.setDate(t1.getDate() + 3); var t2 = new Date(kd); t2.setDate(t2.getDate() + 7);
+    var teslim = t1.getMonth() === t2.getMonth() ? t1.getDate() + '–' + t2.getDate() + ' ' + AY[t2.getMonth()] : t1.getDate() + ' ' + AY[t1.getMonth()] + '–' + t2.getDate() + ' ' + AY[t2.getMonth()];
+    function IKI(n) { return n < 10 ? '0' + n : String(n); }
+    var ist = new Date(new Date(S.now || Date.now()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    var kalan = Math.max(0, new Date(ist.getFullYear(), ist.getMonth(), ist.getDate(), 23, 59, 59, 999).getTime() - ist.getTime());
+    var hh = Math.floor(kalan / 3600000), mi = Math.floor(kalan / 60000) % 60, ss = Math.floor(kalan / 1000) % 60;
+    function AYY(f) { var r = 9, c = 12, rx = Math.abs(1 - 2 * f) * r; return 'M' + c + ' ' + (c - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + c + ' ' + (c + r) + 'A' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + (f < .5 ? 0 : 1) + ' ' + c + ' ' + (c - r) + 'Z'; }
+    function alaGit() { var h = document.getElementById('siparis'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); }
+function KAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    var PR = [["LunaDream Gece Lambası", 1699.99, 1999, "/_blob/f4f724c3d02ba1e40788a962f9e3fe77"], ["Galaxy USB Projektör", 1599, 1999, "/_blob/88c17ac1f221cab147f23e1a46b7f55e"], ["Ayluna AyFeneri", 1649.99, 2499, "/_blob/d326933d74a22adce90d7f6ac3eabf43"], ["Galaksi Ambiyans Işığı", 1499, 2898, "/_blob/9e6102bb76acbfeb101fca8e2fc1024e"], ["Yıldız Işığı Nemlendirici", 849.99, 1099, "/_blob/c91c0730a3e7924eb99ad263ae4ea6df"], ["Ayluna Kum Saati Lamba", 799, 999, "/_blob/0307a2c24e8297579b82099467f001d9"]];
+    var shop = PR.map(function (x) { var d = x[2] > x[1]; return { n: x[0], src: x[3], price: TL(x[1], true), old: d ? TL(x[2], true) : '', pct: d ? '%' + Math.round((1 - x[1] / x[2]) * 100) : '' }; });
+    var _mk = this;
+    function _mKAY(y) { return function (e) { var t = e && (e.currentTarget || e.target), r = t && t.closest && t.closest('.serit-ok'), s = null;
+      while (r && !s && r.tagName !== 'SECTION') { var n = r.nextElementSibling; if (n && n.classList.contains('noscroll')) s = n; r = r.parentElement; }
+      if (!s) { var b = t && t.closest && t.closest('section'); s = b && b.querySelector('.noscroll'); }
+      if (s) s.scrollBy({ left: y * Math.max(220, s.clientWidth * .8), behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+function GALOK(y) { return function (e) { var t = e && (e.currentTarget || e.target), k = t && t.closest && t.closest('.sahne, .hero, .gal, .slayt'), s = k && k.querySelector('.kare-foto, .h-iz, .g-iz, .s-iz');
+      if (!s || !s.clientWidth) return; var m = Math.max(1, Math.round(s.scrollWidth / s.clientWidth)), n = (Math.round(s.scrollLeft / s.clientWidth) + y + m) % m;
+      s.scrollTo({ left: n * s.clientWidth, behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }; }
+    // Büyük görünüm (27 Eki denetim): açılınca odak Kapat'a geçer, Tab pencerede kalır, kapanınca odak açan mesaja döner
+    function _mX() { var x = document.querySelector('.mbuyuk .mb-x'); if (x) x.focus(); }
+    function _mKapat() { _mk.setState({ buyuk: null }); document.documentElement.style.overflow = ''; var o = _mk._mAcan; _mk._mAcan = null; if (o && o.focus) setTimeout(function () { o.focus(); }, 0); }
+    if (!_mk._mEsc) { _mk._mEsc = function (e) { if (!_mk.state.buyuk) return; if (e.key === 'Escape') _mKapat(); else if (e.key === 'Tab') { e.preventDefault(); _mX(); } }; document.addEventListener('keydown', _mk._mEsc); }
+    var mesajlar = ['bfa2c1457ff701500133bafa4a53605c', '32cce494ace36080ef05c6fda3dddcab', 'dd91892546cddf3d9e1b066b51659996', 'f588a714a98cbc77c1ea79dbd24d8f2e', '9f72b52adc531fbbc2c19b68852ac418', '3389d58e6756cdaf84214ee47c529234'].map(function (id, i) { var src = '/_blob/' + id, n = 'Müşteri mesajı ' + (i + 1);
+      return { src: src, n: n, ac: function () { _mk._mAcan = document.activeElement; _mk.setState({ buyuk: src, buyukAd: n }); document.documentElement.style.overflow = 'hidden'; setTimeout(_mX, 30); } }; });
+    var MASA = !!(window.Ayluna && window.matchMedia && matchMedia('(min-width: 1024px)').matches);  // yalnız sitede; tuval hep telefon
+    return { masa: MASA, tel: !MASA, mesajlar: mesajlar, buyuk: this.state.buyuk || '', buyukAd: this.state.buyukAd || '', buyukVar: !!this.state.buyuk, buyukKapat: _mKapat, mGeri: _mKAY(-1), mIleri: _mKAY(1), galGeri: GALOK(-1), galIleri: GALOK(1),
+      gal: gal, gNo: S.g + 1, gCount: GAL.length, gKay: gKay, paket: paket, adetName: S.adet === 2 ? '2 Adet' : '1 Adet',
+      onLabel: 'Güvenli Ödeme ile Al', onPrice: onPrice,  // düğmede fiyat yok (kullanıcı, 19 Eki)
+      kargo: kd.getDate() + ' ' + AY[kd.getMonth()], teslim: teslim,
+      hh: IKI(hh), mm: IKI(mi), ss: IKI(ss), snCls: ss % 2 ? 'sn tA' : 'sn tB', cdAria: 'Bugünkü fiyat garantisinin bitmesine ' + hh + ' saat ' + mi + ' dakika', cdAy: AYY(Math.round(kalan / 864000) / 100),
+      yakCls: S.yak ? 'yak on' : 'yak', yakOn: S.yak ? 'true' : 'false', yakEt: S.yak ? 'Açık' : 'Kapalı', yakYazi: S.yak ? 'Duvarda ay.' : 'Feneri yak.',
+      yakSw: function () { self.setState({ yak: !self.state.yak, yOto: false }); },
+      hz: hz, hzCls: 'hzm k' + S.hz, disk: disk, dAd: DISK[S.disk][0],
+      alaGit: alaGit, faq: [{"q": "Kutudan ne çıkıyor?", "a": "Projektör, 12 gökyüzü diski, USB-C güç kablosu, kullanım kılavuzu."}, {"q": "Görüntü bulanık, ne yapmalıyım?", "a": "Netlik halkasını yavaşça çevir, cihazın duvara uzaklığını değiştir ve diskin yuvaya tam oturduğundan emin ol. Oda ne kadar karanlıksa görüntü o kadar net olur."}, {"q": "Kargo ücretli mi, ne zaman gelir?", "a": "Kargo ücretsiz. Siparişin 1 iş günü içinde kargoya verilir, Türkiye genelinde 3–7 günde ulaşır. Kargonu Track123 ile takip edersin."}, {"q": "Beğenmezsem iade edebilir miyim?", "a": "Evet, teslimden sonraki 30 gün içinde: 14 günlük yasal cayma hakkına Ayluna 16 gün ekliyor. İade kargosu ücretsiz; iade kodunu Ayluna verir."}, {"q": "Nasıl ödeyebilirim?", "a": "Tüm kredi ve banka kartlarıyla ödeyebilirsin; kartla öderken %5 indirim alırsın, kart bilgin bize gelmez."}, {"q": "Garantisi var mı, sorun olursa ne yapacağım?", "a": "Garanti süresi: [garanti]. Bir sorun olursa bize yaz."}], kayGeri: KAY(-1), kayIleri: KAY(1), shop: shop, shopCount: PR.length
+    };
+  }
+}
+
+Ayluna.baslat(Component);
+});
